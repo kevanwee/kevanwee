@@ -9,7 +9,26 @@ footer {
 }
 
 .mdl-layout__header-row {
-  text-align: center;
-  width: 10%;
-  height: auto;
+    grid-template-columns: repeat(4, 20%);
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.mdl-layout__header-row .mdl-layout-title {
+    width: 100%;
+
+}
+
+.mdl-layout__header-row .mdl-layout-title img {
+    width: 240px;
+    height: auto;
+    transform: scale(1.1);
+	
+}
+
+img {
+	display: block;
+	margin-top: 5px;
+	margin-left: -55px;
+	
 }
