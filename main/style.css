@@ -1,32 +1,32 @@
 body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
-	margin-top: auto;
+  margin-top: auto;
 }
 
 .mdl-layout__header-row {
-	display: block;
-	vertical-align: center;
-	grid-template-columns: repeat(4, 20%);
-	overflow: hidden;
-	object-fit: cover;
+    grid-template-columns: repeat(4, 20%);
+    overflow: hidden;
+    object-fit: cover;
 }
 
 .mdl-layout__header-row .mdl-layout-title {
-	width: 100%;
+    width: 100%;
+
 }
 
 .mdl-layout__header-row .mdl-layout-title img {
-	width: 240px;
-	height: auto;
-	transform: scale(1.1);	
+    width: 240px;
+    height: auto;
+    transform: scale(1.1);
 }
 
 img {
+	display: block;
 	margin-top: 5px;
-	margin-left: -55px;	
+	margin-left: -55px;
 }
