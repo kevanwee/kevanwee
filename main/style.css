@@ -1,11 +1,7 @@
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 footer {
-  margin-top: auto;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .mdl-layout__header-row {
