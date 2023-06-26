@@ -10,4 +10,6 @@ footer {
 
 .mdl-layout__header-row {
   text-align: center;
+  width: 10%;
+  height: auto;
 }
