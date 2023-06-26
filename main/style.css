@@ -1,13 +1,11 @@
-.page-content {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    display: table;
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
-    display: table-row;
-    height: 0;
+  margin-top: auto;
 }
 
 .mdl-layout__header-row {
