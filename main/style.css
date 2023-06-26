@@ -74,7 +74,9 @@ img {
   color: rgba(0, 0, 0, 0.54);
 }
 
+
 .demo-card-wide.mdl-card {
+  padding: 8px 8px 8px 8px;
   width: 512px;
 }
 .demo-card-wide > .mdl-card__title {
