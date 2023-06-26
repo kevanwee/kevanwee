@@ -7,3 +7,7 @@ body {
 footer {
   margin-top: auto;
 }
+
+mdl-layout-title {
+  text-align: center;
+}
