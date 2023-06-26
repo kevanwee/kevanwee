@@ -27,6 +27,9 @@ img {
 	margin-left: -60px;
 }
 
+.dialog {
+	width: 600px;
+}
 
 .mdl-dialog {
   border: none;
