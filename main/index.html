@@ -48,7 +48,7 @@
     <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo">© Conceptual Math Modelling Tuition Centre 2023</div>
     <ul class="mdl-mini-footer__link-list">
-      <li><a href="#">Privacy & Terms</a></li>
+        <li><button id="show-modal-example" type="button" class="mdl-button mdl-button--raised">Show Modal</button></li>
     </ul>
     </div>
 
@@ -60,5 +60,19 @@
     </footer>    
     
 </body>
+
+
+<dialog class="mdl-dialog" id="modal-example">
+    <div class="mdl-dialog__content">
+        <p>
+            This is an example of the MDL Dialog being used as a modal.
+            It is using the full width action design intended for use with buttons
+            that do not fit within the specified <a href="https://www.google.com/design/spec/components/dialogs.html#dialogs-specs">length metrics</a>
+        </p>
+    </div>
+    <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+        <button type="button" class="mdl-button">Close</button>
+    </div>
+</dialog>
 
 </html>
