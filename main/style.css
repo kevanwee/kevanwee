@@ -8,6 +8,6 @@ footer {
   margin-top: auto;
 }
 
-mdl-layout-title {
+.mdl-layout__header-row {
   text-align: center;
 }
