@@ -1,6 +1,6 @@
 .portfolio-header {
   position: relative;
-  background-image: url(images/conceptualmathsmodellinglogo.jpg);
+  background-image: url(images/header-bg.jpg);
 }
 
 .portfolio-header .mdl-layout__header-row {
@@ -98,6 +98,11 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
+img.article-image {
+  width: 100%;
+  height: auto;
+}
+
 .portfolio-max-width {
   max-width: 900px;
   margin: auto;
@@ -121,6 +126,12 @@
 
 .padding-top {
   padding: 10px 0 0;
+}
+
+.portfolio-share-btn {
+  position: relative;
+  float: right;
+  top: -4px;
 }
 
 .portfolio-contact .mdl-textfield {
