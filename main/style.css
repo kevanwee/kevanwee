@@ -1,6 +1,6 @@
 .portfolio-header {
   position: relative;
-  background-image: url(images/header-bg.jpg);
+  background-image: url(image/banner.jpg);
 }
 
 .portfolio-header .mdl-layout__header-row {
@@ -30,7 +30,7 @@
 }
 
 .portfolio-logo {
-  background: url(images/logo.jpg) 50% no-repeat;
+  background: url(images/conceptualmathmodellinglogo.jpg) 50% no-repeat;
   background-size: cover;
   height: 50px;
   width: 240px;
@@ -89,15 +89,15 @@
 }
 
 .portfolio-blog-card-full-bg {
-  background: url(images/placeholder.png) center / cover;
+  background: url(image/placeholder.png) center / cover;
 }
 
 .portfolio-blog-card-event-bg {
-  background: url(images/placeholder.png) center / cover;
+  background: url(image/placeholder.png) center / cover;
 }
 
 .portfolio-blog-card-strip-bg {
-  background: url(images/placeholder.png) center / cover;
+  background: url(image/placeholder.png) center / cover;
 }
 
 .portfolio-blog-card-compact .mdl-card__title {
@@ -163,11 +163,6 @@ img.article-image {
 .portfolio-contact form {
   max-width: 550px;
   margin: auto;
-}
-
-footer {
-  background-image: url(images/footer-background.png);
-  background-size: cover;
 }
 
 .mdl-dialog {
