@@ -1,6 +1,6 @@
 .portfolio-header {
   position: relative;
-  background-image: url(images/header-bg.jpg);
+  background-image: url(image/banner.jpg);
 }
 
 .portfolio-header .mdl-layout__header-row {
@@ -30,7 +30,7 @@
 }
 
 .portfolio-logo {
-  background: url(images/logo.jpg) 50% no-repeat;
+  background: url(image/conceptualmathsmodellinglogo.jpg) 50% no-repeat;
   background-size: cover;
   height: 100px;
   width: 420px;
@@ -144,7 +144,6 @@ img.article-image {
 }
 
 footer {
-  background-image: url(images/footer-background.png);
   background-size: cover;
 }
 
