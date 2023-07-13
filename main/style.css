@@ -1,30 +1,140 @@
-footer {
-  position: absolute;
-  bottom: 0;
+.portfolio-header {
+  position: relative;
+  background-image: url(images/header-bg.jpg);
+}
+
+.portfolio-header .mdl-layout__header-row {
+  padding: 0;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mdl-layout__title {
+  font-size: 14px;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: 1px 1px #000000;
+}
+
+.is-compact .mdl-layout__title span {
+  display: none;
+}
+
+.portfolio-logo-row {
+  min-height: 200px;
+}
+
+.is-compact .portfolio-logo-row {
+  min-height: auto;
+}
+
+.portfolio-logo {
+  background: url(images/logo.jpg) 50% no-repeat;
+  background-size: cover;
+  height: 100px;
+  width: 420px;
+  margin: auto auto 10px;
+}
+
+.is-compact .portfolio-logo {
+  height: 50px;
+  width: 210px;
+  margin-top: 7px;
+}
+
+.portfolio-navigation-row {
+  background-color: rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  text-shadow: 1px 1px #000000;
+  height: 45px;
+}
+
+.portfolio-navigation-row  .mdl-navigation {
+  text-align: center;
+  max-width: 900px;
   width: 100%;
 }
 
-.mdl-layout__header-row {
-    grid-template-columns: repeat(4, 20%);
-    overflow: hidden;
-    object-fit: cover;
+.portfolio-navigation-row .mdl-navigation__link {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  line-height: 42px;
 }
 
-.mdl-layout__header-row .mdl-layout-title {
-    width: 100%;
-
+.portfolio-header .mdl-layout__drawer-button {
+    background-color: rgba(197, 197, 197, 0.44);
 }
 
-.mdl-layout__header-row .mdl-layout-title img {
-    width: 240px;
-    height: auto;
-    transform: scale(1.1);
+.portfolio-navigation-row .is-active {
+  position: relative;
+  font-weight: bold;
 }
 
-img {
-	display: block;
-	margin-top: 10px;
-	margin-left: -60px;
+.portfolio-navigation-row .is-active:after {
+  content: "";
+  width: 70%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(87,167,179);
+  left: 15%;
+}
+
+.portfolio-card .mdl-card__title {
+  padding-bottom: 0;
+}
+
+.portfolio-blog-card-compact .mdl-card__title {
+  padding-bottom: 0;
+}
+
+.portfolio-blog-card-bg > .mdl-card__actions {
+  height: 52px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-max-width {
+  max-width: 900px;
+  margin: auto;
+}
+
+.portfolio-copy {
+  max-width: 700px;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-left-padding{
+  padding-left: 0;
+}
+
+.no-bottom-padding {
+  padding-bottom: 0;
+}
+
+.padding-top {
+  padding: 10px 0 0;
+}
+
+.portfolio-contact .mdl-textfield {
+  width: 100%;
+}
+
+.portfolio-contact form {
+  max-width: 550px;
+  margin: auto;
+}
+
+footer {
+  background-image: url(images/footer-background.png);
+  background-size: cover;
 }
 
 .mdl-dialog {
@@ -33,11 +143,6 @@ img {
   width: 60%;
 }
 
-.mdl-dialog__title {
-  padding: 24px 24px 0;
-  margin: 0;
-  font-size: 2rem;
-}
 .mdl-dialog__actions {
   padding: 8px 8px 8px 24px;
   display: -webkit-flex;
@@ -72,20 +177,6 @@ img {
 .mdl-dialog__content {
   padding: 20px 24px 24px 24px;
   color: rgba(0, 0, 0, 0.54);
+  text-align: justify;
+  text-justify: inter-word;
 }
-
-
-.demo-card-wide.mdl-card {
-  margin-right: 16px;
-	margin-top: 16px;
-  width: 512px;
-}
-.demo-card-wide > .mdl-card__title {
-  color: #fff;
-  height: 176px;
-  background: url('http://www.osdla.com/wp-content/uploads/2014/10/placeholder-1-768x485.png') center / cover;
-}
-.demo-card-wide > .mdl-card__menu {
-  color: #fff;
-}
-
