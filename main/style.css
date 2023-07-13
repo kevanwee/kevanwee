@@ -10,6 +10,10 @@
           justify-content: center;
 }
 
+.mdl-layout_content {
+  background-image: url(image/background.jpg);
+}
+
 .mdl-layout__title {
   font-size: 14px;
   text-align: center;
@@ -73,7 +77,7 @@
 }
 
 .portfolio-navigation-row .is-active:after {
-  content: "";
+  : "";
   width: 70%;
   height: 2px;
   display: block;
