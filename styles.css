@@ -172,6 +172,13 @@ footer {
   background-image: url(images/linkedin.png);
 }
 
+.social-btn__instagramblack {
+  background-image: url(images/instagramblack.png);
+}
+.social-btn__linkedinblack {
+  background-image: url(images/linkedinblack.png);
+}
+
 .social-btn {
   background-position: center;
   background-size: contain;
