@@ -23,7 +23,7 @@ You can also explore my [other site](https://kevanwee.github.io/kevanwee/index.h
 
 ![Contact Icon](https://github.com/user-attachments/assets/c19d6e4a-1699-4611-a3c3-57f2e72dc489)
 
-I'm always open to new opportunities and engaging conversations about anything related to **tech** or **law**. 
+I'm always open to new opportunities and engaging conversations about anything related to technology or the law. 
 
 📧 Email me at **kevan.wee.2023@scis.smu.edu.sg** 
 
