@@ -192,3 +192,54 @@ footer {
   border-radius: 2px;
 }
 
+.threedbt {
+  position: fixed;
+  display: flex;
+  opacity: 0;
+  top: 40px;
+  left: 24px;
+  z-index: 9999999999;
+}
+
+.mybutton {
+  border-radius: 2px;
+  background: #967259;
+  border: none;
+  color: #333332;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px;
+  width: auto;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.mybutton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.mybutton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.mybutton:hover span {
+  padding-right: 25px;
+}
+
+.mybutton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+
