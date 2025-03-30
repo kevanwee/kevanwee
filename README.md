@@ -39,7 +39,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
 
   <p align="center">
     as someone studying both computing and law, i suffer from every conceivable "jack of all trades" stereotype but i primarily specialise in legaltech product management and digital transformation 👨‍💻<br>
-(think video game where you refuse to pick a class and unlock skills in every class 🗡)
+(think video game where you refuse to pick a class and unlock skills in every tree 🗡)
   </p>
 
   <div align="center">
@@ -47,7 +47,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   </div>
 
   <p align="center">
-    so what trades does this jack have?<br>
+    so what other trades does this jack have?<br><br>
 - legaltech (e-discovery, aml/kyc-ctf, doc management, practice management)<br>
 - law (both civil and criminal)<br>
 - ai (rag)<br>
