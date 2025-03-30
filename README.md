@@ -27,12 +27,43 @@
 
   <p align="center">
     jokes aside.. a wise man once said "anyone can cook" 👨‍🍳<br>
-i build everything and anything of interest! (drop me a msg if you want to work together on a new project) 
+i build everything and anything of interest! (see the next section for my areas of interest :D) 
 <br><br>
 my recent projects involve a discord chatbot for singapore tort law doctrines and a webscraper to find prices from popular sites 📖
   </p>
 </details>
+<details>
+  <summary align="center">
+    <h2>what cuisines do you specialise in? 🥐</h2>
+  </summary>
 
+  <p align="center">
+    as someone studying both computing and law, i suffer from every conceivable "jack of all trades" stereotype but i primarily specialise in legaltech product management and digital transformation 👨‍💻<br>
+(think video game where you refuse to pick a class and unlock skills in every class 🗡)
+  </p>
+
+  <div align="center">
+    <img src="./readme/cooking.gif"></img>
+  </div>
+
+  <p align="center">
+    so what trades does this jack have?<br>
+- legaltech (e-discovery, aml/kyc-ctf, doc management, practice management)<br>
+- law (both civil and criminal)<br>
+- ai (rag)<br>
+- web dev (html, css)<br>
+- scripting (python, js, php)<br>
+- network administration<br>
+- 3d design<br>
+- intelligence analysis (imint, geoint, osint)<br>
+- geographic info sys (arc products, qgis, global mapper)<br>
+- geospatial data production<br>
+- cartography<br>
+- stereophotogrammetry<br>
+- geomatics (georect, orthorect, mosaicing)<br>
+- game dev (unity)<br>
+  </p>
+</details>
 
 <h2 align="center">contacts! 📬</h2>
 <div align="center">
