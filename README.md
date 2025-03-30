@@ -45,7 +45,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   <div align="center">
     <img src="./readme/cooking.gif"></img>
   </div>
-  
+  <br>
   <table align="center", monospace; border-collapse: collapse; width: 80%;">
   <tbody>
   <tr>
