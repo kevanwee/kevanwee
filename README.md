@@ -47,12 +47,6 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   </div>
   
   <table align="center", monospace; border-collapse: collapse; width: 80%;">
-  <thead>
-  <tr>
-  <th align="left">area</th>
-  <th align="left">details</th>
-  </tr>
-  </thead>
   <tbody>
   <tr>
   <td>🛠 legaltech</td>
@@ -75,8 +69,12 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   <td>python, js, php</td>
   </tr>
   <tr>
+  <td>🛢️ dbms</td>
+  <td>mysql</td>
+  </tr>
+  <tr>
   <td>📡 network administration</td>
-  <td>server setup</td>
+  <td>server setup, ztna</td>
   </tr>
   <tr>
   <td>🎨 3d design</td>
@@ -84,7 +82,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   </tr>
   <tr>
   <td>🔍 intelligence analysis</td>
-  <td>imint, geoint, osint techniques</td>
+  <td>imint, geoint, osint</td>
   </tr>
   <tr>
   <td>🗺️ gis & cartography</td>
@@ -104,7 +102,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   <img src="./readme/totorosmile.gif"></img>
 </div>
 <p align="center">
-  want to talk about anything ranging from tech, law and art?
+  want to talk about anything across tech, law and art?
   <br>
   <br>
   📧 email me at <a href="kevan.wee.2023@scis.smu.edu.sg">kevan.wee.2023@scis.smu.edu.sg</a>
