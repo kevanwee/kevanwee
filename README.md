@@ -9,7 +9,7 @@
 </div>
 
 <p align="center">
-    want to find out what goes on in the mind of a rat? <a href="https://kevanweeportfolio.vercel.app/">find out!</a>.
+    want to find out what goes on in the mind of a rat? <a href="https://kevanweeportfolio.vercel.app/">check this out!</a>
 </p>
 
 <h2 align="center">contacts!📬</h2>
