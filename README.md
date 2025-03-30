@@ -20,9 +20,11 @@
   <br>
   🔗 connect with me:
   <br>
-  <a href="https://www.linkedin.com/in/kevanwee/">- linkedin</a>
+  -<a href="https://www.linkedin.com/in/kevanwee/">linkedin</a>
   <br>
-  <a href="https://www.instagram.com/kwjw30/">- instagram</a>
+  -<a href="https://www.instagram.com/kwjw30/">instagram</a>
+  <br>
+  -art accounts: <a href="https://www.instagram.com/van.fullofkebabs/">instagram</a>,<a href="https://www.tiktok.com/@seofon30">tiktok</a>
   <br>
   feel free to reach out!
 </p>
