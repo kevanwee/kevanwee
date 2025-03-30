@@ -13,8 +13,8 @@
 </p>
 
 <details>
-  <summary>
-    <h2 align="center">what's cooking? 🍳</h2>
+  <summary align="center">
+    <h2>what's cooking? 🍳</h2>
   </summary>
 
   <p align="center">
