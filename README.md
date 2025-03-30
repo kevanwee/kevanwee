@@ -1,4 +1,4 @@
-<h2 align="center">greetings!🐀</h2>
+<h2 align="center">greetings! 🐀</h2>
 
 <p align="center">
   welcome to the rat den~ home to a lost computing & law major, aspiring legal technologist, failing artist, and coffee addict.
@@ -12,7 +12,7 @@
     want to find out what goes on in the mind of a rat? <a href="https://kevanweeportfolio.vercel.app/">check this out!</a>
 </p>
 
-<h2 align="center">contacts!📬</h2>
+<h2 align="center">contacts! 📬</h2>
 <div align="center">
   <img src="./readme/totorosmile.gif"></img>
 </div>
@@ -24,11 +24,11 @@
   <br>
   🔗 connect with me:
   <br>
-  -<a href="https://www.linkedin.com/in/kevanwee/">linkedin</a>
+  -<a href="https://www.linkedin.com/in/kevanwee/"> linkedin</a>
   <br>
-  -<a href="https://www.instagram.com/kwjw30/">instagram</a>
+  -<a href="https://www.instagram.com/kwjw30/"> instagram</a>
   <br>
-  -art accounts: <a href="https://www.instagram.com/van.fullofkebabs/">instagram</a>,<a href="https://www.tiktok.com/@seofon30">tiktok</a>
+  -art accounts: <a href="https://www.instagram.com/van.fullofkebabs/">instagram</a>, <a href="https://www.tiktok.com/@seofon30">tiktok</a>
   <br>
   feel free to reach out!
 </p>
