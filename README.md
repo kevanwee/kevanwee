@@ -16,7 +16,9 @@
 <p align="center">
   want to talk about anything ranging from tech, law and art?
   <br>
-  📧 email me at **kevan.wee.2023@scis.smu.edu.sg** 
+  <img src="./readme/totorosmile.gif"></img>
+  <br>
+  📧 email me at <a href="kevan.wee.2023@scis.smu.edu.sg">kevan.wee.2023@scis.smu.edu.sg</a>
   <br>
   🔗 connect with me:
   <br>
