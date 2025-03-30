@@ -27,7 +27,7 @@
 
   <p align="center">
     jokes aside.. a wise man once said "anyone can cook" 👨‍🍳<br>
-i build everything and anything of interest! (see the next section for my areas of interest :D) 
+i build everything and anything! (see the next section for my areas of interest :D) 
 <br><br>
 my recent projects involve a discord chatbot for singapore tort law doctrines and a webscraper to find prices from popular sites 📖
   </p>
