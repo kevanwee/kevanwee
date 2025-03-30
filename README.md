@@ -13,7 +13,7 @@
 </p>
 
 <h2 align="center">contacts!📬</h2>
-<img src="./readme/totorosmile.gif"></img>
+<img src="./readme/totorosmile.gif" align="center"></img>
 <p align="center">
   want to talk about anything ranging from tech, law and art?
   <br>
