@@ -1,4 +1,4 @@
-<h2 align="center">greetings! <img src="./readme/bard.gif"></img></h2>
+<h2 align="center"><img src="./readme/pyke.gif"></img> greetings! <img src="./readme/bard.gif"></img></h2>
 
 <p align="center">
   welcome to the rat den 🐀 ~ home to a lost computing & law major, aspiring legal technologist, failing artist, and coffee addict.
