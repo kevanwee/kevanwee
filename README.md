@@ -83,9 +83,13 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
         <td>🎮 game dev</td>
         <td>unity-based development (but it’s been a decade 😭)</td>
       </tr>
+    </tbody>
+  </table>
   
+  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+    <tbody>
       <tr>
-        <th colspan="2" style="text-align: left;">📚 other areas</th>
+        <th colspan="2" style="text-align: left;">📚 others</th>
       </tr>
       <tr>
         <td>🛠 legaltech</td>
