@@ -1,7 +1,7 @@
-<h2 align="center">greetings! 🐀</h2>
+<h2 align="center">greetings! <img src="./readme/bard.gif"></img></h2>
 
 <p align="center">
-  welcome to the rat den~ home to a lost computing & law major, aspiring legal technologist, failing artist, and coffee addict.
+  welcome to the rat den 🐀 ~ home to a lost computing & law major, aspiring legal technologist, failing artist, and coffee addict.
 </p>
 
 <div align="center">
