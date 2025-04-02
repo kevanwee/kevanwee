@@ -14,7 +14,7 @@
 
 <details>
   <summary align="center">
-    <h2>what's cooking? 🍳</h2>
+    <h2>what's cooking? <img src="./readme/charc.gif"></img></h2>
   </summary>
 
   <p align="center">
