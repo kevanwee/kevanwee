@@ -34,7 +34,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
 </details>
 <details>
   <summary align="center">
-    <h2>what cuisines do you specialise in? 🥐</h2>
+    <h2>what cuisines do you specialise in?<img src="./readme/itsgood.gif"></h2>
   </summary>
 
   <p align="center">
