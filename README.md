@@ -115,8 +115,8 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   </table>
 
 </details>
-<br>
-<h2 align="center"><img src="./readme/xdd.avif"><img src="./readme/xdd.avif"><img src="./readme/xdd.avif"> contacts! <img src="./readme/xdd.avif"><img src="./readme/xdd.avif"><img src="./readme/xdd.avif"></h2>
+
+<h2 align="center"><img src="./readme/ruancreation.gif"> contacts! <img src="./readme/ruancreation.gif"></h2>
 <div align="center">
   <img src="./readme/totorosmile.gif"></img>
 </div>
@@ -134,5 +134,6 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   <br>
   - art accounts: <a href="https://www.instagram.com/van.fullofkebabs/">instagram</a>, <a href="https://www.tiktok.com/@seofon30">tiktok</a>
   <br>
-  feel free to reach out!
+  <br>
+  <img src="./readme/xdd.avif"><img src="./readme/xdd.avif"><img src="./readme/xdd.avif">   feel free to reach out!   <img src="./readme/xdd.avif"><img src="./readme/xdd.avif"><img src="./readme/xdd.avif">
 </p>
