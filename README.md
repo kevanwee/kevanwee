@@ -115,7 +115,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   </table>
 
 </details>
-
+<br>
 <h2 align="center"><img src="./readme/xdd.avif"><img src="./readme/xdd.avif"><img src="./readme/xdd.avif"> contacts! <img src="./readme/xdd.avif"><img src="./readme/xdd.avif"><img src="./readme/xdd.avif"></h2>
 <div align="center">
   <img src="./readme/totorosmile.gif"></img>
