@@ -1,4 +1,3 @@
-<h2 align="center"><img src="./readme/banner.gif"></img></h2>
 
 <p align="center">
   welcome to the rat den 🐀 ~ home to a lost computing & law major, aspiring legal technologist, failing artist, and coffee addict.
@@ -115,7 +114,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   </table>
 
 </details>
-
+<br>
 <h2 align="center">contacts! <img src="./readme/xdd.avif"></h2>
 <div align="center">
   <img src="./readme/totorosmile.gif"></img>
