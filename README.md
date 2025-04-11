@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-  welcome to the rat den 🐀 ~ home to a lost computing & law major, aspiring legal technologist, failing artist, and coffee addict.
+  welcome to the rat den 🐀 ~ home to a lost computing & law major, aspiring legal technologist, ex cartographer/ intelligence practitioner, failing artist, and coffee addict.
 </p>
 
 <div align="center">
