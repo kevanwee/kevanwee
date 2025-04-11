@@ -1,3 +1,6 @@
+<div align="center">
+  <img src="./readme/bardnner.gif"></img>
+</div>
 
 <p align="center">
   welcome to the rat den 🐀 ~ home to a lost computing & law major, aspiring legal technologist, failing artist, and coffee addict.
