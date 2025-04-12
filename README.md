@@ -158,7 +158,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
       </tr>
       <tr>
         <td><a href="https://github.com/kevanwee/crimewatch">crimewatch (wip)</a></td>
-        <td>discord chatbot for sg tort law 👀🚓</td>
+        <td>heatmap analysis on locations mentioned in sg criminal law judgments 👀🚓</td>
       </tr>
     </tbody>
   </table>
@@ -198,7 +198,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
       </tr>
       <tr>
         <td><a href="https://github.com/kevanwee/kevanwee">static portfolio</a></td>
-        <td>heatmap analysis on locations mentioned in sg criminal law judgments 🌐</td>
+        <td>my original portfolio made using google's mat design lite 🌐🤖</td>
       </tr>
       <tr>
         <td><a href="https://github.com/kevanwee/kevanweeportfolio">3d portfolio</a></td>
