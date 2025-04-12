@@ -117,6 +117,106 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   </table>
 
 </details>
+
+<details>
+  <summary align="center">
+    <h2>what recipes have you made?<img src="./readme/seox.gif"></h2>
+  </summary>
+
+  <p align="center">
+    here's some of the dishes i've made recently! (and some works in progress) 🍽️🛠️
+  </p>
+  <br>
+  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+    <tbody>
+      <tr>
+        <th colspan="2" style="text-align: left;">🛠 legal technology ⚖️</th>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/sal-citation-generator">sal citation generator (wip)</a></td>
+        <td>footnote generator using the sal style guide 📝</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/elitiscraper">eliti scraper</a></td>
+        <td>elitigation sghc/sgca judgment scraper using beautifulsoup4 🧹</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/sgstatutescraper">sg statute scraper</a></td>
+        <td>singapore statutes online (https://sso.agc.gov.sg/) scraper using beautifulsoup 📜</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/lexlynx">lex lynx</a></td>
+        <td>openai wrapper that summarizes case law 🦁📚</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/tortrat">tort rat</a></td>
+        <td>discord chatbot for sg tort law 🐀💬</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/codeoflaw">codeoflaw (wip)</a></td>
+        <td>statistical analysis on all reported sghc and sgca judgments 📊⚖️</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/crimewatch">crimewatch (wip)</a></td>
+        <td>discord chatbot for sg tort law 👀🚓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+    <tbody>
+      <tr>
+        <th colspan="2" style="text-align: left;">🗺️ intelligence analysis tools 🧠</th>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/hawkshot">hawk shot</a></td>
+        <td>line-of-sight / viewshed analysis tool 🦅🔭</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/mapmole">map mole</a></td>
+        <td>satellite imagery change detection 🗺️👀</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+    <tbody>
+      <tr>
+        <th colspan="2" style="text-align: left;">🎨 art </th>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/lolpixelart">lol pixel art</a></td>
+        <td>pixel art for league of legends skins 🖌️🧱</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+    <tbody>
+      <tr>
+        <th colspan="2" style="text-align: left;">✨ others </th>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/kevanwee">static portfolio</a></td>
+        <td>heatmap analysis on locations mentioned in sg criminal law judgments 🌐</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/kevanweeportfolio">3d portfolio</a></td>
+        <td>javascript based website that displays 3d objects 🖥️📦</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/bookworm">book worm</a></td>
+        <td>book price scraper - amazon, kinokuniya, thryft 📚🪱</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/kevanwee/HUHH">huhh</a></td>
+        <td>an april fools joke 😂🎭</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+
 <br>
 <h2 align="center">contacts! <img src="./readme/xdd.avif"></h2>
 <div align="center">
