@@ -120,7 +120,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
 
 <details>
   <summary align="center">
-    <h2>what recipes have you made?<img src="./readme/seox.gif"></h2>
+    <h2>what recipes have you come up with?<img src="./readme/seox.gif"></h2>
   </summary>
 
   <p align="center">
