@@ -120,7 +120,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
 
 <details>
   <summary align="center">
-    <h2>what recipes have you come up with?<img src="./readme/seox.gif"></h2>
+    <h2>what recipes have you come up with?<img src="./readme/ruanmei.gif" width=50px><img src="./readme/ruancreation.gif" width=50px> </h2>
   </summary>
 
   <p align="center">
@@ -239,5 +239,5 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
   <br>
   feel free to reach out!
   <br>
-  <img src="./readme/ruancreation.gif"> 
+  <img src="./readme/seox.gif" width=75px> 
 </p>
