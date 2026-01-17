@@ -59,7 +59,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
       </tr>
       <tr>
         <td>🐍 scripting</td>
-        <td>python, js, php</td>
+        <td>python, java, js, php</td>
       </tr>
       <tr>
         <td>🛢️ dbms</td>
@@ -99,7 +99,7 @@ my recent projects involve a discord chatbot for singapore tort law doctrines an
       </tr>
       <tr>
         <td>⚖️ law</td>
-        <td>both civil (contract, torts, family, ip) and criminal</td>
+        <td>both civil (contract, torts, family, ip, corporate) and criminal but leaning more towards tech related matters across ip and data privacy</td>
       </tr>
       <tr>
         <td>🔍 intelligence analysis</td>
