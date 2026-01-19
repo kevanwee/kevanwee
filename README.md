@@ -1,9 +1,17 @@
 <div align="center">
+  <h1>🐀 THE RAT DEN</h1>
   <img src="./readme/bardnner.gif"></img>
+  
+  ```
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  Computing & Law | LegalTech | GIS | Intelligence Analysis   ║
+  ╚══════════════════════════════════════════════════════════════╝
+  ```
 </div>
 
 <p align="center">
-  welcome to the rat den 🐀 ~ home to a lost computing & law major, aspiring legal technologist, ex cartographer/ intelligence practitioner, failing artist, and coffee addict.
+  <strong>Welcome to the rat den 🐀</strong><br>
+  <em>Home to a lost computing & law major, aspiring legal technologist, ex cartographer/intelligence practitioner, failing artist, and coffee addict.</em>
 </p>
 
 <div align="center">
@@ -11,16 +19,19 @@
 </div>
 
 <p align="center">
-    want to find out what goes on in the mind of a rat? <a href="https://kevanweeportfolio.vercel.app/">check this out!</a>
+  <strong>Want to peek into the neural network of a rat?</strong><br>
+  <a href="https://kevanweeportfolio.vercel.app/">→ Explore the 3D Portfolio</a>
 </p>
 
-<details>
+---
+
+<details open>
   <summary align="center">
-    <h2>what's cooking? <img src="./readme/charc.gif"></img></h2>
+    <h2>🍜 What's Cooking?</h2>
   </summary>
 
   <p align="center">
-    probably some nissin laksa and a cup of instant coffee...
+    <code>Probably some nissin laksa && a cup of instant coffee...</code>
   </p>
 
   <div align="center">
@@ -28,216 +39,241 @@
   </div>
 
   <p align="center">
-    a wise man once said "anyone can cook" 👨‍🍳<br>
-i build everything and anything! (see the next section for my areas of interest :D) 
-<br><br>
-my recent projects involve a discord chatbot for singapore tort law doctrines and a webscraper to find prices from popular sites 📖
+    <em>A wise man once said "anyone can cook" 👨‍🍳</em><br><br>
+    I build <strong>everything and anything</strong>! (See the next section for my areas of interest :D)<br><br>
+    <strong>Recent projects:</strong>
+    <ul style="display: inline-block; text-align: left;">
+      <li>Discord chatbot for Singapore tort law doctrines 📖</li>
+      <li>Web scraper for price aggregation across popular e-commerce sites 🛒</li>
+    </ul>
   </p>
 </details>
+
+---
+
 <details>
   <summary align="center">
-    <h2>what cuisines do you specialise in?<img src="./readme/slowitsgood.gif"></h2>
+    <h2>🎯 Technical Stack & Specializations</h2>
   </summary>
 
   <p align="center">
-    as someone studying both computing and law, i suffer from every conceivable "jack of all trades" stereotype but i primarily specialise in legaltech product management and digital transformation 👨‍💻<br>
-(think video game where you refuse to pick a class and unlock skills in every tree 🗡)
+    <strong>The "Jack of All Trades" Approach</strong><br>
+    As someone studying both computing and law, I specialize in <code>LegalTech Product Management</code> and <code>Digital Transformation</code>.<br>
+    <em>(Think: video game where you refuse to pick a class and unlock skills in every tree 🗡)</em>
   </p>
 
   <div align="center">
     <img src="./readme/cooking.gif"></img>
   </div>
+  
   <br>
-  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+  
+  <table align="center" style="border-collapse: collapse; width: 85%; font-family: monospace; border: 2px solid #333;">
     <tbody>
-      <tr>
-        <th colspan="2" style="text-align: left;">🖥️ tech</th>
+      <tr style="background-color: #f0f0f0;">
+        <th colspan="2" style="text-align: left; padding: 10px;">🖥️ TECH STACK</th>
       </tr>
       <tr>
-        <td>🌐 web dev</td>
-        <td>html, css</td>
+        <td style="padding: 8px;">🌐 Web Dev</td>
+        <td style="padding: 8px;"><code>HTML</code>, <code>CSS</code></td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td style="padding: 8px;">🐍 Scripting</td>
+        <td style="padding: 8px;"><code>Python</code>, <code>Java</code>, <code>JavaScript</code>, <code>PHP</code></td>
       </tr>
       <tr>
-        <td>🐍 scripting</td>
-        <td>python, java, js, php</td>
+        <td style="padding: 8px;">🛢️ Database Systems</td>
+        <td style="padding: 8px;"><code>MySQL</code></td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td style="padding: 8px;">📡 Network Administration</td>
+        <td style="padding: 8px;"><code>Server Setup</code>, <code>ZTNA</code></td>
       </tr>
       <tr>
-        <td>🛢️ dbms</td>
-        <td>mysql</td>
+        <td style="padding: 8px;">🤖 AI/ML</td>
+        <td style="padding: 8px;"><code>RAG</code>, <code>OpenAI API</code></td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td style="padding: 8px;">🎨 3D Design</td>
+        <td style="padding: 8px;"><code>Blender</code></td>
       </tr>
       <tr>
-        <td>📡 network administration</td>
-        <td>server setup, ztna</td>
+        <td style="padding: 8px;">🌎 GIS & Geospatial</td>
+        <td style="padding: 8px;"><code>ArcGIS</code>, <code>QGIS</code>, <code>Global Mapper</code>, Geospatial Data Production</td>
       </tr>
-      <tr>
-        <td>🤖 ai</td>
-        <td>rag, openai api</td>
-      </tr>
-      <tr>
-        <td>🎨 3d design</td>
-        <td>blender</td>
-      </tr>
-      <tr>
-        <td>🌎 gis</td>
-        <td>arcgis products, qgis, global mapper, geospatial data production</td>
-      </tr>
-      <tr>
-        <td>🎮 game dev</td>
-        <td>unity-based development (but it’s been a decade 😭)</td>
+      <tr style="background-color: #f9f9f9;">
+        <td style="padding: 8px;">🎮 Game Development</td>
+        <td style="padding: 8px;"><code>Unity</code> (it's been a decade 😭)</td>
       </tr>
     </tbody>
   </table>
   
-  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+  <br>
+  
+  <table align="center" style="border-collapse: collapse; width: 85%; font-family: monospace; border: 2px solid #333;">
     <tbody>
-      <tr>
-        <th colspan="2" style="text-align: left;">📚 others</th>
+      <tr style="background-color: #f0f0f0;">
+        <th colspan="2" style="text-align: left; padding: 10px;">📚 DOMAINS & EXPERTISE</th>
       </tr>
       <tr>
-        <td>🛠 legaltech</td>
-        <td>e-discovery, aml/kyc-ctf, doc management, practice management</td>
+        <td style="padding: 8px;">🛠 LegalTech</td>
+        <td style="padding: 8px;">E-Discovery, AML/KYC-CTF, Document Management, Practice Management</td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td style="padding: 8px;">⚖️ Law</td>
+        <td style="padding: 8px;">Civil (Contract, Torts, Family, IP, Corporate) & Criminal; Focus: Tech, IP, Data Privacy</td>
       </tr>
       <tr>
-        <td>⚖️ law</td>
-        <td>both civil (contract, torts, family, ip, corporate) and criminal but leaning more towards tech related matters across ip and data privacy</td>
+        <td style="padding: 8px;">🔍 Intelligence Analysis</td>
+        <td style="padding: 8px;"><code>IMINT</code>, <code>GEOINT</code>, <code>OSINT</code></td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td style="padding: 8px;">🗺️ Cartography</td>
+        <td style="padding: 8px;">Topographic Maps, Orthoimage Maps, Situation Maps (Disaster Relief/Change Assessment)</td>
       </tr>
       <tr>
-        <td>🔍 intelligence analysis</td>
-        <td>imint, geoint, osint</td>
-      </tr>
-      <tr>
-        <td>🗺️ cartography</td>
-        <td>topographic maps, orthoimage maps, situation maps (disaster relief/change assessment)</td>
-      </tr>
-      <tr>
-        <td>📷 geomatics</td>
-        <td>georectification, orthorectification, mosaicing, stereophotogrammetry</td>
+        <td style="padding: 8px;">📷 Geomatics</td>
+        <td style="padding: 8px;">Georectification, Orthorectification, Mosaicing, Stereophotogrammetry</td>
       </tr>
     </tbody>
   </table>
 
 </details>
+
+---
 
 <details>
   <summary align="center">
-    <h2>what recipes have you come up with?<img src="./readme/ruanmei.gif" width=50px><img src="./readme/ruancreation.gif" width=50px> </h2>
+    <h2>🍽️ Project Portfolio</h2>
   </summary>
 
   <p align="center">
-    here's some of the dishes i've made recently! (and some works in progress) 🍽️🛠️
+    <strong>Recent Works & Ongoing Experiments</strong> 🛠️
   </p>
+  
   <br>
-  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+  
+  <h3 align="center">⚖️ Legal Technology Suite</h3>
+  <table align="center" style="border-collapse: collapse; width: 85%; font-family: monospace;">
     <tbody>
       <tr>
-        <th colspan="2" style="text-align: left;">🛠 legal technology ⚖️</th>
+        <td><a href="https://github.com/kevanwee/sal-citation-generator"><code>sal-citation-generator</code></a> <em>[WIP]</em></td>
+        <td>Footnote generator using the SAL style guide 📝</td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td><a href="https://github.com/kevanwee/elitiscraper"><code>eliti-scraper</code></a></td>
+        <td>eLitigation SGHC/SGCA judgment scraper (BeautifulSoup4) 🧹</td>
       </tr>
       <tr>
-        <td><a href="https://github.com/kevanwee/sal-citation-generator">sal citation generator (wip)</a></td>
-        <td>footnote generator using the sal style guide 📝</td>
+        <td><a href="https://github.com/kevanwee/sgstatutescraper"><code>sg-statute-scraper</code></a></td>
+        <td>Singapore Statutes Online (SSO) scraper (BeautifulSoup) 📜</td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td><a href="https://github.com/kevanwee/lexlynx"><code>lex-lynx</code></a></td>
+        <td>OpenAI wrapper for case law summarization 🦁📚</td>
       </tr>
       <tr>
-        <td><a href="https://github.com/kevanwee/elitiscraper">eliti scraper</a></td>
-        <td>elitigation sghc/sgca judgment scraper using beautifulsoup4 🧹</td>
+        <td><a href="https://github.com/kevanwee/tortrat"><code>tort-rat</code></a></td>
+        <td>Discord chatbot for Singapore tort law doctrine 🐀💬</td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td><a href="https://github.com/kevanwee/codeoflaw"><code>code-of-law</code></a> <em>[WIP]</em></td>
+        <td>Statistical analysis on SGHC & SGCA judgments 📊⚖️</td>
       </tr>
       <tr>
-        <td><a href="https://github.com/kevanwee/sgstatutescraper">sg statute scraper</a></td>
-        <td>singapore statutes online (https://sso.agc.gov.sg/) scraper using beautifulsoup 📜</td>
-      </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/lexlynx">lex lynx</a></td>
-        <td>openai wrapper that summarizes case law 🦁📚</td>
-      </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/tortrat">tort rat</a></td>
-        <td>discord chatbot for sg tort law 🐀💬</td>
-      </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/codeoflaw">codeoflaw (wip)</a></td>
-        <td>statistical analysis on all reported sghc and sgca judgments 📊⚖️</td>
-      </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/crimewatch">crimewatch (wip)</a></td>
-        <td>heatmap analysis on locations mentioned in sg criminal law judgments 👀🚓</td>
+        <td><a href="https://github.com/kevanwee/crimewatch"><code>crimewatch</code></a> <em>[WIP]</em></td>
+        <td>Heatmap analysis on locations in SG criminal law judgments 👀🚓</td>
       </tr>
     </tbody>
   </table>
 
-  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+  <br>
+  
+  <h3 align="center">🧠 Intelligence Analysis & Geospatial Tools</h3>
+  <table align="center" style="border-collapse: collapse; width: 85%; font-family: monospace;">
     <tbody>
       <tr>
-        <th colspan="2" style="text-align: left;">🗺️ intelligence analysis tools 🧠</th>
+        <td><a href="https://github.com/kevanwee/hawkshot"><code>hawk-shot</code></a></td>
+        <td>Line-of-sight / Viewshed analysis tool 🦅🔭</td>
       </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/hawkshot">hawk shot</a></td>
-        <td>line-of-sight / viewshed analysis tool 🦅🔭</td>
-      </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/mapmole">map mole</a></td>
-        <td>satellite imagery change detection 🗺️👀</td>
+      <tr style="background-color: #f9f9f9;">
+        <td><a href="https://github.com/kevanwee/mapmole"><code>map-mole</code></a></td>
+        <td>Satellite imagery change detection 🗺️👀</td>
       </tr>
     </tbody>
   </table>
 
-  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+  <br>
+  
+  <h3 align="center">🎨 Creative Projects</h3>
+  <table align="center" style="border-collapse: collapse; width: 85%; font-family: monospace;">
     <tbody>
       <tr>
-        <th colspan="2" style="text-align: left;">🎨 art </th>
-      </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/lolpixelart">lol pixel art</a></td>
-        <td>pixel art for league of legends skins 🖌️🧱</td>
+        <td><a href="https://github.com/kevanwee/lolpixelart"><code>lol-pixel-art</code></a></td>
+        <td>Pixel art for League of Legends skins 🖌️🧱</td>
       </tr>
     </tbody>
   </table>
 
-  <table align="center" style="border-collapse: collapse; width: 80%; font-family: monospace;">
+  <br>
+  
+  <h3 align="center">✨ Miscellaneous & Experiments</h3>
+  <table align="center" style="border-collapse: collapse; width: 85%; font-family: monospace;">
     <tbody>
       <tr>
-        <th colspan="2" style="text-align: left;">✨ others </th>
+        <td><a href="https://github.com/kevanwee/kevanwee"><code>static-portfolio</code></a></td>
+        <td>Original portfolio (Google Material Design Lite) 🌐🤖</td>
+      </tr>
+      <tr style="background-color: #f9f9f9;">
+        <td><a href="https://github.com/kevanwee/kevanweeportfolio"><code>3d-portfolio</code></a></td>
+        <td>JavaScript-based website with 3D object rendering 🖥️📦</td>
       </tr>
       <tr>
-        <td><a href="https://github.com/kevanwee/kevanwee">static portfolio</a></td>
-        <td>my original portfolio made using google's mat design lite 🌐🤖</td>
+        <td><a href="https://github.com/kevanwee/bookworm"><code>book-worm</code></a></td>
+        <td>Book price scraper (Amazon, Kinokuniya, ThryftBooks) 📚🪱</td>
       </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/kevanweeportfolio">3d portfolio</a></td>
-        <td>javascript based website that displays 3d objects 🖥️📦</td>
-      </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/bookworm">book worm</a></td>
-        <td>book price scraper - amazon, kinokuniya, thryft 📚🪱</td>
-      </tr>
-      <tr>
-        <td><a href="https://github.com/kevanwee/HUHH">huhh</a></td>
-        <td>an april fools joke 😂🎭</td>
+      <tr style="background-color: #f9f9f9;">
+        <td><a href="https://github.com/kevanwee/HUHH"><code>huhh</code></a></td>
+        <td>An April Fools' joke 😂🎭</td>
       </tr>
     </tbody>
   </table>
 
 </details>
 
-<br>
-<h2 align="center">contacts! <img src="./readme/xdd.avif"></h2>
+---
+
 <div align="center">
+  <h2>📡 Contact & Connect</h2>
+  <img src="./readme/xdd.avif"></img>
   <img src="./readme/totorosmile.gif"></img>
 </div>
+
 <p align="center">
-  want to talk about anything across tech, law and art?
-  <br>
-  <br>
-  📧 email me at <a href="kevan.wee.2023@scis.smu.edu.sg">kevan.wee.2023@scis.smu.edu.sg</a>
-  <br>
-  🔗 connect with me:
-  <br>
-  -<a href="https://www.linkedin.com/in/kevanwee/"> linkedin</a>
-  <br>
-  -<a href="https://www.instagram.com/kwjw30/"> instagram</a>
-  <br>
-  - art accounts: <a href="https://www.instagram.com/van.fullofkebabs/">instagram</a>, <a href="https://www.tiktok.com/@seofon30">tiktok</a>
-  <br>
-  <br>
-  feel free to reach out!
-  <br>
-  <img src="./readme/seox.gif" width=75px> 
+  <strong>Interested in discussing tech, law, and art?</strong><br>
+  Let's connect and collaborate! 🚀
 </p>
+
+<p align="center">
+  <strong>Email:</strong> <a href="mailto:kevan.wee.2023@scis.smu.edu.sg"><code>kevan.wee.2023@scis.smu.edu.sg</code></a>
+  <br><br>
+  <strong>Connect With Me:</strong>
+  <br>
+  <a href="https://www.linkedin.com/in/kevanwee/">🔗 LinkedIn</a> | 
+  <a href="https://www.instagram.com/kwjw30/">📸 Instagram</a>
+  <br><br>
+  <strong>Art Accounts:</strong>
+  <br>
+  <a href="https://www.instagram.com/van.fullofkebabs/">📸 Instagram</a> | 
+  <a href="https://www.tiktok.com/@seofon30">🎬 TikTok</a>
+  <br><br>
+  <em>Feel free to reach out!</em>
+  <br>
+  <img src="./readme/seox.gif" width="75px"> 
+</p>
+
+---
+
+<div align="center">
+  <p><em>Built with ☕ and 🐀 energy</em></p>
+</div>
