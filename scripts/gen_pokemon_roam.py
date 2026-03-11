@@ -445,13 +445,14 @@ def main():
         dp_val = pk["dp"]
         clips += f'    <clipPath id="pk{i}clip"><rect width="{dp_val}" height="{dp_val}"/></clipPath>\n'
 
-    # Sort by average Y so Pokemon lower on screen render on top (painter's order)
+    # Sort by t=0 Y so initial render depth matches the visible start frame.
+    # (The animation starts at wps[-1], not an average route position.)
     indexed = list(range(len(pokemon)))
-    def avg_y(i):
+    def z_y(i):
         wps = plans[i]
         if not wps: return 0
-        return sum(wp["y"] for wp in wps) / len(wps)
-    indexed.sort(key=avg_y)
+        return wps[-1]["y"]
+    indexed.sort(key=z_y)
 
     psvgs = "".join(
         pokemon_svg(pokemon[i], i, b64[pokemon[i]["key"]], plans[i])
