@@ -461,7 +461,7 @@ def main():
 
     pokemon = [
         dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=56, is_shiny=False, n_legs=3),
-        dict(key="ceruledge", label="Ceruledge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="ceruledge", label="Ceruledge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="armarouge", label="Armarouge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
         dict(key="charcadet", label="Charcadet", sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=4),
         dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=128, is_shiny=True, n_legs=3),
@@ -477,6 +477,7 @@ def main():
     best = None
     for attempt in range(80):
         plans = [None] * len(pokemon)
+        step_counts = [0] * len(pokemon)
         used_starts = []
         all_reserved = set()   # tiles reserved by previously-planned Pokemon
         total_steps = 0
@@ -491,6 +492,7 @@ def main():
                                               used_starts, all_reserved)
             n_steps = sum(1 for s in wps if not s.get("idle"))
             plans[pid] = wps
+            step_counts[pid] = n_steps
             used_starts.append(start)
             all_reserved |= reserved
             total_steps += n_steps
@@ -500,8 +502,15 @@ def main():
 
         phases = build_phase_offsets(plans)
         clash_count, closest2 = collision_score(pokemon, plans, phases)
+        # Keep routes from looking stuck in corners.
+        # Slightly lower target for giant Yveltal due higher footprint.
+        deficits = 0
+        for pk, steps in zip(pokemon, step_counts):
+            target = 16 if pk["key"] == "yveltal" else 20
+            if steps < target:
+                deficits += (target - steps)
         # Lower is better for clashes; higher is better for path richness.
-        score = (clash_count, -(nonzero_count), -(min_steps or 0), -total_steps, -closest2)
+        score = (deficits, clash_count, -(nonzero_count), -(min_steps or 0), -total_steps, -closest2)
         if best is None or score < best["score"]:
             best = {
                 "score": score,
@@ -510,8 +519,9 @@ def main():
                 "clashes": clash_count,
                 "nonzero": nonzero_count,
                 "phases": phases,
+                "deficits": deficits,
             }
-        if clash_count == 0 and nonzero_count == len(pokemon) and min_steps is not None and min_steps >= 20:
+        if deficits == 0 and clash_count == 0 and nonzero_count == len(pokemon):
             break
 
     plans = best["plans"]
@@ -524,6 +534,7 @@ def main():
         print(f"  {pk['label']}: {n_steps} steps, walk={walk_s:.1f}s idle={idle_s:.1f}s total={walk_s+idle_s:.1f}s")
     print(f"  Reserved {len(all_reserved)}/{wk} walkable tiles")
     print(f"  Collision score: {best['clashes']} (active={best['nonzero']}/{len(pokemon)})")
+    print(f"  Route deficits: {best['deficits']}")
 
     clips = ""
     for i, pk in enumerate(pokemon):
