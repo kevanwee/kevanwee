@@ -130,8 +130,21 @@ def build_grid(w, h, rows):
 # ═══════════════════════════════════════════════════════════════════════
 DIRS4 = [(1,0),(-1,0),(0,1),(0,-1)]
 
-def bfs(grid, gc, gr, sc, sr, ec, er):
+def expand_tiles(tiles, radius, gc, gr):
+    """Expand a set of tile positions by the given radius."""
+    expanded = set()
+    for c, r in tiles:
+        for dc in range(-radius, radius + 1):
+            for dr in range(-radius, radius + 1):
+                nc, nr = c + dc, r + dr
+                if 0 <= nc < gc and 0 <= nr < gr:
+                    expanded.add((nc, nr))
+    return expanded
+
+def bfs(grid, gc, gr, sc, sr, ec, er, avoid=None):
+    """BFS pathfinding. If avoid is given, treat those tiles as walls."""
     if grid[sr][sc] or grid[er][ec]: return None
+    if avoid and (ec, er) in avoid: return None
     vis = [[False]*gc for _ in range(gr)]
     prev = [[None]*gc for _ in range(gr)]
     vis[sr][sc] = True; q = deque([(sc,sr)])
@@ -144,6 +157,8 @@ def bfs(grid, gc, gr, sc, sr, ec, er):
         for dc,dr in DIRS4:
             nc,nr = c+dc,r+dr
             if 0<=nc<gc and 0<=nr<gr and not grid[nr][nc] and not vis[nr][nc]:
+                if avoid and (nc, nr) in avoid and not (nc == ec and nr == er):
+                    continue
                 vis[nr][nc]=True; prev[nr][nc]=(c,r); q.append((nc,nr))
     return None
 
@@ -160,8 +175,11 @@ def tile_dir(fc, fr, tc, tr):
 # ═══════════════════════════════════════════════════════════════════════
 # Tile picking (free roam, well-separated starts)
 # ═══════════════════════════════════════════════════════════════════════
-def pick(grid, gc, gr, rng, excl=None, min_dist=3):
+def pick(grid, gc, gr, rng, excl=None, min_dist=3, reserved=None):
     tiles = [(c,r) for r in range(gr) for c in range(gc) if not grid[r][c]]
+    if reserved:
+        free = [t for t in tiles if t not in reserved]
+        if free: tiles = free
     if excl and len(tiles) > 5:
         far = [t for t in tiles if min(abs(t[0]-e[0])+abs(t[1]-e[1]) for e in excl) > min_dist]
         if far: tiles = far
@@ -178,14 +196,23 @@ def pick(grid, gc, gr, rng, excl=None, min_dist=3):
 def tile_xy(c, r):
     return ((c + 0.5) * TILE, (r + 0.5) * TILE)
 
-def build_plan(grid, gc, gr, rng, n_legs, used_starts):
-    """Build a walk plan with start position well-separated from others."""
+def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
+    """Build a walk plan with collision avoidance.
+
+    Only idle/destination tiles are reserved (not entire paths) so the
+    limited walkable area isn't exhausted.  Paths may cross, which looks
+    fine because the different loop durations naturally de-sync Pokemon.
+    """
+    if reserved is None:
+        reserved = set()
     wps = []
-    start = pick(grid, gc, gr, rng, used_starts if used_starts else None, min_dist=6)
+    start = pick(grid, gc, gr, rng, used_starts if used_starts else None,
+                 min_dist=8, reserved=reserved)
     cur = start
+    stop_tiles = {start}   # only idle/destination positions
 
     for leg in range(n_legs):
-        dest = pick(grid, gc, gr, rng, [cur])
+        dest = pick(grid, gc, gr, rng, [cur], reserved=reserved)
         path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
         if not path or len(path) < 2:
             continue
@@ -200,6 +227,7 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts):
         pause = rng.uniform(WANDER_PAUSE_MIN, WANDER_PAUSE_MAX)
         lx, ly = tile_xy(dest[0], dest[1])
         wps.append({"x": lx, "y": ly, "dir": "DOWN", "dur": pause, "idle": True})
+        stop_tiles.add(dest)
         cur = dest
 
     # Close loop back to start
@@ -210,7 +238,10 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts):
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-    return wps, start
+
+    # Only expand idle/stop positions so later Pokemon avoid standing nearby
+    expanded = expand_tiles(stop_tiles, buffer, gc, gr)
+    return wps, start, expanded
 
 # ═══════════════════════════════════════════════════════════════════════
 # SVG generation
@@ -327,7 +358,7 @@ def main():
         dict(key="ceruledge", label="Ceruledge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="armarouge", label="Armarouge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="charcadet", label="Charcadet", sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
-        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=80, is_shiny=True,  n_legs=4),
+        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=128, is_shiny=True,  n_legs=4),
         dict(key="greninja",  label="Greninja",  sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="dragonair", label="Dragonair", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="dragonite", label="Dragonite", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
@@ -337,10 +368,19 @@ def main():
     print("Planning routes...")
     plans = []
     used_starts = []
+    all_reserved = set()   # tiles reserved by previously-planned Pokemon
     for pid, pk in enumerate(pokemon):
-        wps, start = build_plan(grid, gc, gr, rng, pk["n_legs"], used_starts)
+        # Buffer of 1 tile keeps idle positions apart without exhausting
+        # the limited walkable area (890 tiles for 9 Pokemon)
+        wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
+                                          used_starts, all_reserved, buffer=1)
+        # If the Pokemon got no path, retry with relaxed constraints
+        if not any(not s.get("idle") for s in wps):
+            wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
+                                              used_starts, reserved=None, buffer=1)
         plans.append(wps)
         used_starts.append(start)
+        all_reserved |= reserved
         walk_s = sum(s["dur"] for s in wps if not s.get("idle"))
         idle_s = sum(s["dur"] for s in wps if s.get("idle"))
         n_steps = sum(1 for s in wps if not s.get("idle"))
