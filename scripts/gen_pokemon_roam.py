@@ -187,6 +187,24 @@ def pick(grid, gc, gr, rng, excl=None, min_dist=3, reserved=None):
         if far: tiles = far
     return rng.choice(tiles)
 
+def pick_reachable_path(grid, gc, gr, rng, cur, reserved, min_leg_dist=6, tries=30):
+    """Pick a random reachable destination and return its BFS path."""
+    tiles = [(c, r) for r in range(gr) for c in range(gc)
+             if not grid[r][c] and (c, r) not in reserved]
+    if not tiles:
+        return None
+
+    far = [t for t in tiles if abs(t[0] - cur[0]) + abs(t[1] - cur[1]) >= min_leg_dist]
+    if far:
+        tiles = far
+
+    for _ in range(tries):
+        dest = rng.choice(tiles)
+        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1], avoid=reserved)
+        if path and len(path) > 1:
+            return path
+    return None
+
 # ═══════════════════════════════════════════════════════════════════════
 # Walk plan builder  — per-tile waypoints (faithful to theoffice)
 #
@@ -212,14 +230,12 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
                  min_dist=5, reserved=reserved)
     cur = start
     path_tiles = {start}   # every tile this Pokemon visits
+    stop_tiles = {start}   # idle/destination tiles
 
     for leg in range(n_legs):
-        dest = pick(grid, gc, gr, rng, [cur], reserved=reserved)
-        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1], avoid=reserved)
-        if not path or len(path) < 2:
-            path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
-            if not path or len(path) < 2:
-                continue
+        path = pick_reachable_path(grid, gc, gr, rng, cur, reserved, min_leg_dist=5, tries=40)
+        if not path:
+            continue
 
         dest = path[-1]
         for i in range(len(path)-1):
@@ -227,28 +243,34 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-            path_tiles.add((tc, tr))
+            # Reserving every step is too restrictive with 11 Pokemon on this map.
+            # Keep a sparse centerline reservation to avoid direct clashes while
+            # preserving enough free space for random routes.
+            if i % 2 == 0:
+                path_tiles.add((tc, tr))
         # Pause between legs (idle, face down)
         pause = rng.uniform(WANDER_PAUSE_MIN, WANDER_PAUSE_MAX)
         lx, ly = tile_xy(dest[0], dest[1])
         wps.append({"x": lx, "y": ly, "dir": "DOWN", "dur": pause, "idle": True})
+        stop_tiles.add(dest)
         cur = dest
 
     # Close loop back to start
     path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1], avoid=reserved)
-    if not path:
-        path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1])
     if path and len(path) > 1:
         for i in range(len(path)-1):
             fc,fr = path[i]; tc,tr = path[i+1]
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-            path_tiles.add((tc, tr))
+            if i % 2 == 0:
+                path_tiles.add((tc, tr))
 
-    # Reserve walked tiles expanded by 1 to prevent sprite overlap
-    expanded = expand_tiles(path_tiles, 1, gc, gr)
-    return wps, start, expanded
+    # Reserve centerline path tiles and exact idle stops.
+    # With 11 Pokemon on this map, expanding stop buffers starves later routes.
+    reserved_tiles = set(path_tiles)
+    reserved_tiles |= stop_tiles
+    return wps, start, reserved_tiles
 
 # ═══════════════════════════════════════════════════════════════════════
 # SVG generation
@@ -361,33 +383,57 @@ def main():
         w, h = png_dims(d); print(f"  {name}: {w}x{h}")
 
     pokemon = [
-        dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=56, is_shiny=False, n_legs=5),
-        dict(key="ceruledge", label="Ceruledge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="armarouge", label="Armarouge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="charcadet", label="Charcadet", sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
-        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=128, is_shiny=True,  n_legs=4),
-        dict(key="greninja",  label="Greninja",  sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="dragonair", label="Dragonair", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="dragonite", label="Dragonite", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="eevee",     label="Eevee",     sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
-        dict(key="fuecoco",   label="Fuecoco",   sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
-        dict(key="latios",    label="Latios",    sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
+        dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=56, is_shiny=False, n_legs=3),
+        dict(key="ceruledge", label="Ceruledge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="armarouge", label="Armarouge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="charcadet", label="Charcadet", sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=4),
+        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=128, is_shiny=True, n_legs=3),
+        dict(key="greninja",  label="Greninja",  sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="dragonair", label="Dragonair", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="dragonite", label="Dragonite", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="eevee",     label="Eevee",     sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=4),
+        dict(key="fuecoco",   label="Fuecoco",   sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=4),
+        dict(key="latios",    label="Latios",    sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
     ]
 
     print("Planning routes...")
-    plans = []
-    used_starts = []
-    all_reserved = set()   # tiles reserved by previously-planned Pokemon
-    for pid, pk in enumerate(pokemon):
-        wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
-                                          used_starts, all_reserved)
-        # If the Pokemon got no path, retry with relaxed constraints
-        if not any(not s.get("idle") for s in wps):
+    best = None
+    for attempt in range(20):
+        plans = [None] * len(pokemon)
+        used_starts = []
+        all_reserved = set()   # tiles reserved by previously-planned Pokemon
+        total_steps = 0
+        min_steps = None
+        nonzero_count = 0
+        order = list(range(len(pokemon)))
+        rng.shuffle(order)
+
+        for pid in order:
+            pk = pokemon[pid]
             wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
-                                              used_starts, reserved=None)
-        plans.append(wps)
-        used_starts.append(start)
-        all_reserved |= reserved
+                                              used_starts, all_reserved)
+            n_steps = sum(1 for s in wps if not s.get("idle"))
+            plans[pid] = wps
+            used_starts.append(start)
+            all_reserved |= reserved
+            total_steps += n_steps
+            if n_steps > 0:
+                nonzero_count += 1
+            min_steps = n_steps if min_steps is None else min(min_steps, n_steps)
+
+        score = (nonzero_count, min_steps or 0, total_steps)
+        if best is None or score > best["score"]:
+            best = {
+                "score": score,
+                "plans": plans,
+                "reserved": set(all_reserved),
+            }
+        if nonzero_count == len(pokemon) and min_steps is not None and min_steps >= 20:
+            break
+
+    plans = best["plans"]
+    all_reserved = best["reserved"]
+    for pk, wps in zip(pokemon, plans):
         walk_s = sum(s["dur"] for s in wps if not s.get("idle"))
         idle_s = sum(s["dur"] for s in wps if s.get("idle"))
         n_steps = sum(1 for s in wps if not s.get("idle"))
