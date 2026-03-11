@@ -388,6 +388,7 @@ main {
 }
 .project-name a { color: inherit; }
 .project-name a:hover { color: var(--accent-2); }
+.project-info { flex: 1; min-width: 0; }
 .project-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
 .project-link {
   flex-shrink: 0;
@@ -422,25 +423,28 @@ main {
 /* =============================================================
    CONTACT (contact.html)
    ============================================================= */
-.contact-wrap { max-width: 520px; margin: 0 auto; text-align: center; }
-.contact-wrap h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
-.contact-wrap .lead { color: var(--muted); margin-bottom: 36px; line-height: 1.7; }
-.contact-items { display: flex; flex-direction: column; gap: 14px; align-items: center; margin-bottom: 32px; }
-.contact-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 0.875rem;
-  padding: 10px 18px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  transition: all var(--ease);
-  min-width: 260px;
-  justify-content: center;
+.contact-wrap { max-width: 640px; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
 }
-.contact-item:hover { color: var(--text); border-color: var(--accent); background: var(--accent-glow); }
-.contact-divider { color: var(--muted); font-size: 0.78rem; margin-bottom: 16px; letter-spacing: 0.06em; text-transform: uppercase; }
+.contact-card-link { text-decoration: none; }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--ease), background var(--ease);
+}
+.contact-card-link:hover .contact-item { border-color: var(--accent); background: var(--surface-2); }
+.contact-icon { font-size: 1.4rem; flex-shrink: 0; }
+.contact-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 2px; }
+.contact-value { font-size: 0.875rem; color: var(--text); }
 
 /* =============================================================
    BACK LINK
