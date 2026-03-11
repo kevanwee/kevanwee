@@ -35,6 +35,8 @@ SPRITES = {
     "dragonair": os.path.join(OFFICE, "Pokemon Shiny", "DRAGONAIR.png"),
     "dragonite": os.path.join(OFFICE, "Pokemon Shiny", "DRAGONITE.png"),
     "eevee":     os.path.join(OFFICE, "Pokemon Shiny", "EEVEE.png"),
+    "fuecoco":   os.path.join(OFFICE, "Pokemon Shiny", "FUECOCO.png"),
+    "latios":    os.path.join(OFFICE, "Pokemon Shiny", "LATIOS.png"),
 }
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -199,14 +201,15 @@ def tile_xy(c, r):
 def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
     """Build a walk plan with collision avoidance.
 
-    All walked tiles are reserved so later Pokemon route around them.
-    BFS avoids reserved tiles; falls back to unreserved BFS if stuck.
+    All walked tiles are reserved (expanded by 1 tile buffer) so later
+    Pokemon route around them.  BFS avoids reserved tiles; falls back
+    to unreserved BFS if stuck.
     """
     if reserved is None:
         reserved = set()
     wps = []
     start = pick(grid, gc, gr, rng, used_starts if used_starts else None,
-                 min_dist=6, reserved=reserved)
+                 min_dist=5, reserved=reserved)
     cur = start
     path_tiles = {start}   # every tile this Pokemon visits
 
@@ -243,8 +246,9 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
             path_tiles.add((tc, tr))
 
-    # Reserve walked tiles directly (no buffer expansion) to keep space
-    return wps, start, path_tiles
+    # Reserve walked tiles expanded by 1 to prevent sprite overlap
+    expanded = expand_tiles(path_tiles, 1, gc, gr)
+    return wps, start, expanded
 
 # ═══════════════════════════════════════════════════════════════════════
 # SVG generation
@@ -366,6 +370,8 @@ def main():
         dict(key="dragonair", label="Dragonair", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="dragonite", label="Dragonite", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="eevee",     label="Eevee",     sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
+        dict(key="fuecoco",   label="Fuecoco",   sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
+        dict(key="latios",    label="Latios",    sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
     ]
 
     print("Planning routes...")
