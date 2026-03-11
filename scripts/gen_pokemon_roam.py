@@ -158,12 +158,12 @@ def tile_dir(fc, fr, tc, tr):
     return "UP"
 
 # ═══════════════════════════════════════════════════════════════════════
-# Tile picking (free roam, collision-aware)
+# Tile picking (free roam, well-separated starts)
 # ═══════════════════════════════════════════════════════════════════════
-def pick(grid, gc, gr, rng, excl=None):
+def pick(grid, gc, gr, rng, excl=None, min_dist=3):
     tiles = [(c,r) for r in range(gr) for c in range(gc) if not grid[r][c]]
     if excl and len(tiles) > 5:
-        far = [t for t in tiles if min(abs(t[0]-e[0])+abs(t[1]-e[1]) for e in excl) > 3]
+        far = [t for t in tiles if min(abs(t[0]-e[0])+abs(t[1]-e[1]) for e in excl) > min_dist]
         if far: tiles = far
     return rng.choice(tiles)
 
@@ -178,96 +178,28 @@ def pick(grid, gc, gr, rng, excl=None):
 def tile_xy(c, r):
     return ((c + 0.5) * TILE, (r + 0.5) * TILE)
 
-def get_tile_at_time(wps, t):
-    """Return (col, row) tile a Pokemon occupies at time t in its plan."""
-    if not wps:
-        return None
-    elapsed = 0.0
-    prev_c, prev_r = None, None
-    for wp in wps:
-        c = int(wp["x"] / TILE)
-        r = int(wp["y"] / TILE)
-        if elapsed + wp["dur"] > t:
-            # Currently moving from prev tile to this tile (or idling)
-            return (c, r) if prev_c is None else (prev_c, prev_r) if t < elapsed else (c, r)
-        prev_c, prev_r = c, r
-        elapsed += wp["dur"]
-    # Past the end — return last tile
-    return (prev_c, prev_r)
-
-def build_occupancy(plans):
-    """Build a dict mapping (time_slot, col, row) -> True for all existing plans.
-    Time is quantised to TILE_DUR steps for efficient lookup."""
-    occ = set()
-    for wps in plans:
-        t = 0.0
-        for wp in wps:
-            c = int(wp["x"] / TILE)
-            r = int(wp["y"] / TILE)
-            # Mark all time slots this tile is occupied during this waypoint
-            slot_start = int(t / TILE_DUR)
-            slot_end = int((t + wp["dur"]) / TILE_DUR) + 1
-            for s in range(slot_start, slot_end):
-                occ.add((s, c, r))
-            t += wp["dur"]
-    return occ
-
-def path_collides(path, t_start, occ):
-    """Check if a BFS path starting at t_start would collide with occupied tiles."""
-    t = t_start
-    for i in range(1, len(path)):
-        t += TILE_DUR
-        slot = int(t / TILE_DUR)
-        c, r = path[i]
-        # Check this slot and adjacent slots for safety margin
-        if (slot, c, r) in occ or (slot-1, c, r) in occ or (slot+1, c, r) in occ:
-            return True
-    return False
-
-def build_plan(grid, gc, gr, rng, n_legs, existing_plans):
-    """Build a walk plan that avoids collisions with existing plans."""
-    occ = build_occupancy(existing_plans)
+def build_plan(grid, gc, gr, rng, n_legs, used_starts):
+    """Build a walk plan with start position well-separated from others."""
     wps = []
-    # Pick start that doesn't overlap with other Pokemon starting positions
-    start_excl = []
-    for p in existing_plans:
-        if p:
-            start_excl.append((int(p[0]["x"]/TILE), int(p[0]["y"]/TILE)))
-    start = pick(grid, gc, gr, rng, start_excl if start_excl else None)
+    start = pick(grid, gc, gr, rng, used_starts if used_starts else None, min_dist=6)
     cur = start
-    cur_time = 0.0
 
     for leg in range(n_legs):
-        # Try several destinations, pick the one whose path doesn't collide
-        best_path = None
-        for attempt in range(8):
-            dest = pick(grid, gc, gr, rng, [cur])
-            path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
-            if not path or len(path) < 2:
-                continue
-            if not path_collides(path, cur_time, occ):
-                best_path = path
-                break
-            if best_path is None:
-                best_path = path  # fallback: use first valid path even if it collides
-
-        if not best_path:
-            cur = pick(grid, gc, gr, rng)
+        dest = pick(grid, gc, gr, rng, [cur])
+        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
+        if not path or len(path) < 2:
             continue
 
-        path = best_path
         dest = path[-1]
         for i in range(len(path)-1):
             fc,fr = path[i]; tc,tr = path[i+1]
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
-            wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR, "tile": (tc, tr)})
-            cur_time += TILE_DUR
+            wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
         # Pause between legs (idle, face down)
         pause = rng.uniform(WANDER_PAUSE_MIN, WANDER_PAUSE_MAX)
         lx, ly = tile_xy(dest[0], dest[1])
-        wps.append({"x": lx, "y": ly, "dir": "DOWN", "dur": pause, "idle": True, "tile": dest})
-        cur_time += pause
+        wps.append({"x": lx, "y": ly, "dir": "DOWN", "dur": pause, "idle": True})
         cur = dest
 
     # Close loop back to start
@@ -277,8 +209,8 @@ def build_plan(grid, gc, gr, rng, n_legs, existing_plans):
             fc,fr = path[i]; tc,tr = path[i+1]
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
-            wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR, "tile": (tc, tr)})
-    return wps
+            wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
+    return wps, start
 
 # ═══════════════════════════════════════════════════════════════════════
 # SVG generation
@@ -395,7 +327,7 @@ def main():
         dict(key="ceruledge", label="Ceruledge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="armarouge", label="Armarouge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="charcadet", label="Charcadet", sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
-        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=80, is_shiny=True,  n_legs=3),
+        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=80, is_shiny=True,  n_legs=4),
         dict(key="greninja",  label="Greninja",  sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="dragonair", label="Dragonair", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="dragonite", label="Dragonite", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
@@ -404,9 +336,11 @@ def main():
 
     print("Planning routes...")
     plans = []
+    used_starts = []
     for pid, pk in enumerate(pokemon):
-        wps = build_plan(grid, gc, gr, rng, pk["n_legs"], plans)
+        wps, start = build_plan(grid, gc, gr, rng, pk["n_legs"], used_starts)
         plans.append(wps)
+        used_starts.append(start)
         walk_s = sum(s["dur"] for s in wps if not s.get("idle"))
         idle_s = sum(s["dur"] for s in wps if s.get("idle"))
         n_steps = sum(1 for s in wps if not s.get("idle"))
