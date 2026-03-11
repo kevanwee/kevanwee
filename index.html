@@ -1,167 +1,131 @@
-<!doctype html>
-<!--
-  Material Design Lite
-  Copyright 2015 Google Inc. All rights reserved.
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      https://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License
--->
+﻿<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Kevan Wee's Portfolio</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-pink.min.css" />
-    <link rel="stylesheet" href="styles.css" />
-	<link rel="icon" type="image/x-icon" href="images/favicon.ico">
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-GH4JGHW6MB"></script>
-	<link rel="canonical" href="https://https://kevanwee.github.io/kevanwee/about.html" />
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-GH4JGHW6MB');
-	</script>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <style>
-        .portfolio-max-width {
-            display: flex;
-            justify-content: center;
-        }
-
-        .portfolio-card {
-            margin: 20px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kevan Wee &mdash; Portfolio</title>
+  <meta name="description" content="Computing & Law major, aspiring legal technologist, ex cartographer, intelligence practitioner, artist.">
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="canonical" href="https://kevanwee.github.io/kevanwee/">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GH4JGHW6MB"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GH4JGHW6MB');</script>
 </head>
-
 <body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
-			           <div class "threedbt">
-		                <br>
-		                <a href="https://kevanweeportfolio.vercel.app/">
-											<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-											  My 3D Portfolio!
-											</button>
-		                </a>
-	              </div>
-		
-            <div class="mdl-layout__header-row portfolio-logo-row">
-                <span class="mdl-layout__title">
-                    <div class="portfolio-logo"></div>
-                    <span class="mdl-layout__title">Kevan Wee</span>
-                </span>
-            </div>
-            <div class="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
-                <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-					<a class="mdl-navigation__link" href="about.html">About</a>
-					<a class="mdl-navigation__link" href="skills.html">Skills</a> 
-                    <a class="mdl-navigation__link is-active" href="index.html">Portfolio</a>
-                    <a class="mdl-navigation__link" href="gallery.html">Art Gallery</a>                    
-                    <a class="mdl-navigation__link" href="contact.html">Contact</a>
-                </nav>
-            </div>
-        </header>
-        <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-            <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-                <a class="mdl-navigation__link" href="about.html">About</a>
-				<a class="mdl-navigation__link" href="skills.html">Skills</a> 
-				<a class="mdl-navigation__link is-active" href="index.html">Portfolio</a>
-                <a class="mdl-navigation__link" href="gallery.html">Art Gallery</a>
-                <a class="mdl-navigation__link" href="contact.html">Contact</a>
-            </nav>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html">Kevan Wee</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="nav-links" id="navLinks">
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="index.html" class="active">Portfolio</a>
+        <a href="gallery.html">Art Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://kevanweeportfolio.vercel.app/" class="nav-cta" target="_blank" rel="noopener">3D Portfolio &#x2197;</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <p class="hero-eyebrow">Computing &amp; Law @ SMU</p>
+      <h1>Hi, I&apos;m <span>Kevan Wee</span></h1>
+      <p class="hero-desc">Aspiring legal technologist, ex cartographer and intelligence practitioner, failing artist, and coffee addict. I build things at the intersection of law and technology.</p>
+      <div class="hero-tags">
+        <span class="tag tag-accent">LegalTech</span>
+        <span class="tag">Law</span>
+        <span class="tag">AI / RAG</span>
+        <span class="tag">GIS</span>
+        <span class="tag">Python</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Art</span>
+      </div>
+      <div class="hero-actions">
+        <a href="contact.html" class="btn btn-primary">Get in touch</a>
+        <a href="about.html" class="btn btn-outline">About me</a>
+      </div>
+    </section>
+
+    <div class="page-divider"></div>
+    <h2 class="section-title">Explore</h2>
+
+    <div class="feature-grid">
+      <a href="about.html" class="card">
+        <img class="card-img" src="images/header.jpg" alt="About Me">
+        <div class="card-body">
+          <div class="card-title">About Me</div>
+          <div class="card-text">Background, interests, and a little about the hippo guy.</div>
         </div>
-        <main class="mdl-layout__content">
-            <div class="mdl-grid portfolio-max-width">
-                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-                    <div class="mdl-card__media">
-                        <img class="article-image" src="images/lawsch.jpg" border="0" alt="">
-                    </div>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Academic Background</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        Currently a sophomore at Singapore Management University pursuing a Bachelor of Science (Computing & Law)!
-                    </div>
-					<br>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="acad.html">See more</a>
-                    </div>
-                </div>
-                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-                    <div class="mdl-card__media">
-                        <img class="article-image" src="images/work.png" border="0" alt="">
-                    </div>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Working Experience</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-						Exploring the intersection of the technological and legal fields. Strongly interested in LegalTech and optimization of workflow in legal processes.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="work.html">See more</a>
-                    </div>
-                </div>
-				
-				<div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-                    <div class="mdl-card__media">
-                        <img class="article-image" src="images/gallery.jpg" border="0" alt="">
-                    </div>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Art</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-						Some of my drawings across the years!
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="gallery.html">See more</a>
-                    </div>
-                </div>
+        <div class="card-footer"><span class="btn btn-outline" style="width:100%;justify-content:center;display:flex">Read more &#8594;</span></div>
+      </a>
 
-				<div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-                    <div class="mdl-card__media">
-                        <img class="article-image" src="images/projects.jpg" border="0" alt="">
-                    </div>
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Projects</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-						Some of my projects! (Some computing, some legal and more!)
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="projects.html">See more</a>
-                    </div>
-                </div>
-            </div>
-			<footer class="mdl-mini-footer">
-                <div class="mdl-mini-footer__left-section">
-                    <div class="mdl-logo">© Kevan Wee</div>
-                </div>
-				<div class="mdl-mini-footer--right-section">
-					<a href="https://www.linkedin.com/in/kevanwee/" style="text-decoration:none">
-						<button class="mdl-mini-footer--social-btn social-btn social-btn__linkedin"></button>					    
-					</a>
-					<a href="https://www.instagram.com/kwjw30/" style="text-decoration:none">
-						<button class="mdl-mini-footer--social-btn social-btn social-btn__instagram"></button>					    
-					</a>
-				</div>
-            </footer>
-    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+      <a href="work.html" class="card">
+        <img class="card-img" src="images/work.png" alt="Work Experience">
+        <div class="card-body">
+          <div class="card-title">Work Experience</div>
+          <div class="card-text">LegalTech internships, military service, and more.</div>
+        </div>
+        <div class="card-footer"><span class="btn btn-outline" style="width:100%;justify-content:center;display:flex">Read more &#8594;</span></div>
+      </a>
+
+      <a href="acad.html" class="card">
+        <img class="card-img" src="images/lawsch.jpg" alt="Academic Background">
+        <div class="card-body">
+          <div class="card-title">Academic Background</div>
+          <div class="card-text">SMU Computing &amp; Law, Dunman High School, and beyond.</div>
+        </div>
+        <div class="card-footer"><span class="btn btn-outline" style="width:100%;justify-content:center;display:flex">Read more &#8594;</span></div>
+      </a>
+
+      <a href="projects.html" class="card">
+        <img class="card-img" src="images/projects.jpg" alt="Projects">
+        <div class="card-body">
+          <div class="card-title">Projects</div>
+          <div class="card-text">LegalTech tools, GIS analysis, chatbots, and web scrapers.</div>
+        </div>
+        <div class="card-footer"><span class="btn btn-outline" style="width:100%;justify-content:center;display:flex">Read more &#8594;</span></div>
+      </a>
+
+      <a href="gallery.html" class="card">
+        <img class="card-img" src="images/gallery.jpg" alt="Art Gallery">
+        <div class="card-body">
+          <div class="card-title">Art Gallery</div>
+          <div class="card-text">A collection of drawings and illustrations.</div>
+        </div>
+        <div class="card-footer"><span class="btn btn-outline" style="width:100%;justify-content:center;display:flex">Read more &#8594;</span></div>
+      </a>
+
+      <a href="skills.html" class="card">
+        <div class="card-body" style="padding-top:28px">
+          <div class="card-title">Skills &amp; Proficiencies</div>
+          <div class="card-text">Tech, legal, GIS, intelligence analysis, and more.</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:14px">
+            <span class="tag">Python</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">RAG / AI</span>
+            <span class="tag">ArcGIS</span>
+            <span class="tag">LegalTech</span>
+          </div>
+        </div>
+        <div class="card-footer"><span class="btn btn-outline" style="width:100%;justify-content:center;display:flex">Read more &#8594;</span></div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&#169; 2026 Kevan Wee</span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/kevanwee/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/kwjw30/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://kevanweeportfolio.vercel.app/" target="_blank" rel="noopener">3D Portfolio</a>
+      </div>
+    </div>
+  </footer>
+  <script>const t=document.getElementById('navToggle'),l=document.getElementById('navLinks');if(t)t.addEventListener('click',()=>l.classList.toggle('open'));</script>
 </body>
-
 </html>
