@@ -196,26 +196,27 @@ def pick(grid, gc, gr, rng, excl=None, min_dist=3, reserved=None):
 def tile_xy(c, r):
     return ((c + 0.5) * TILE, (r + 0.5) * TILE)
 
-def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
+def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
     """Build a walk plan with collision avoidance.
 
-    Only idle/destination tiles are reserved (not entire paths) so the
-    limited walkable area isn't exhausted.  Paths may cross, which looks
-    fine because the different loop durations naturally de-sync Pokemon.
+    All walked tiles are reserved so later Pokemon route around them.
+    BFS avoids reserved tiles; falls back to unreserved BFS if stuck.
     """
     if reserved is None:
         reserved = set()
     wps = []
     start = pick(grid, gc, gr, rng, used_starts if used_starts else None,
-                 min_dist=8, reserved=reserved)
+                 min_dist=6, reserved=reserved)
     cur = start
-    stop_tiles = {start}   # only idle/destination positions
+    path_tiles = {start}   # every tile this Pokemon visits
 
     for leg in range(n_legs):
         dest = pick(grid, gc, gr, rng, [cur], reserved=reserved)
-        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
+        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1], avoid=reserved)
         if not path or len(path) < 2:
-            continue
+            path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
+            if not path or len(path) < 2:
+                continue
 
         dest = path[-1]
         for i in range(len(path)-1):
@@ -223,25 +224,27 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
+            path_tiles.add((tc, tr))
         # Pause between legs (idle, face down)
         pause = rng.uniform(WANDER_PAUSE_MIN, WANDER_PAUSE_MAX)
         lx, ly = tile_xy(dest[0], dest[1])
         wps.append({"x": lx, "y": ly, "dir": "DOWN", "dur": pause, "idle": True})
-        stop_tiles.add(dest)
         cur = dest
 
     # Close loop back to start
-    path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1])
+    path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1], avoid=reserved)
+    if not path:
+        path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1])
     if path and len(path) > 1:
         for i in range(len(path)-1):
             fc,fr = path[i]; tc,tr = path[i+1]
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
+            path_tiles.add((tc, tr))
 
-    # Only expand idle/stop positions so later Pokemon avoid standing nearby
-    expanded = expand_tiles(stop_tiles, buffer, gc, gr)
-    return wps, start, expanded
+    # Reserve walked tiles directly (no buffer expansion) to keep space
+    return wps, start, path_tiles
 
 # ═══════════════════════════════════════════════════════════════════════
 # SVG generation
@@ -370,14 +373,12 @@ def main():
     used_starts = []
     all_reserved = set()   # tiles reserved by previously-planned Pokemon
     for pid, pk in enumerate(pokemon):
-        # Buffer of 1 tile keeps idle positions apart without exhausting
-        # the limited walkable area (890 tiles for 9 Pokemon)
         wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
-                                          used_starts, all_reserved, buffer=1)
+                                          used_starts, all_reserved)
         # If the Pokemon got no path, retry with relaxed constraints
         if not any(not s.get("idle") for s in wps):
             wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
-                                              used_starts, reserved=None, buffer=1)
+                                              used_starts, reserved=None)
         plans.append(wps)
         used_starts.append(start)
         all_reserved |= reserved
@@ -385,15 +386,24 @@ def main():
         idle_s = sum(s["dur"] for s in wps if s.get("idle"))
         n_steps = sum(1 for s in wps if not s.get("idle"))
         print(f"  {pk['label']}: {n_steps} steps, walk={walk_s:.1f}s idle={idle_s:.1f}s total={walk_s+idle_s:.1f}s")
+    print(f"  Reserved {len(all_reserved)}/{wk} walkable tiles")
 
     clips = ""
     for i, pk in enumerate(pokemon):
         dp_val = pk["dp"]
         clips += f'    <clipPath id="pk{i}clip"><rect width="{dp_val}" height="{dp_val}"/></clipPath>\n'
 
+    # Sort by average Y so Pokemon lower on screen render on top (painter's order)
+    indexed = list(range(len(pokemon)))
+    def avg_y(i):
+        wps = plans[i]
+        if not wps: return 0
+        return sum(wp["y"] for wp in wps) / len(wps)
+    indexed.sort(key=avg_y)
+
     psvgs = "".join(
-        pokemon_svg(pk, pid, b64[pk["key"]], wps)
-        for pid, (pk, wps) in enumerate(zip(pokemon, plans)))
+        pokemon_svg(pokemon[i], i, b64[pokemon[i]["key"]], plans[i])
+        for i in indexed)
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 {bg_w} {bg_h}" width="{bg_w}" height="{bg_h}">
