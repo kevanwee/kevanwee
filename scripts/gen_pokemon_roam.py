@@ -250,10 +250,13 @@ def pokemon_svg(pk, pid, b64img, wps):
     # First direction = first waypoint's dir (set BEFORE moving)
     dir_vals.append(ROW[wps[0]["dir"]])
 
-    for wp in wps:
+    for i, wp in enumerate(wps):
         t += wp["dur"]
         pos_vals.append(f"{F(wp['x'])},{F(wp['y'])}")
-        dir_vals.append(ROW[wp["dir"]])
+        # discrete: value[i] applies from kt[i] to kt[i+1], so at
+        # the END of this segment we need the NEXT segment's direction
+        nxt = wps[(i + 1) % len(wps)]
+        dir_vals.append(ROW[nxt["dir"]])
         kt.append(t)
 
     total = kt[-1] or 10.0
