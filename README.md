@@ -48,6 +48,14 @@
     a parliamentary debate scraper, and too many other wip experiments 🛠️
   </p>
 
+  <p align="center">
+    <a href="https://www.legalquants.com/lawyers/kevan-wee"><img src="https://img.shields.io/badge/LegalQuants-Member-163355?style=flat-square" /></a>
+    &nbsp;
+    <a href="https://www.legalbenchmarks.ai/framework"><img src="https://img.shields.io/badge/LegalBenchmarks.ai-Steering_Committee-5B2D8E?style=flat-square&logo=openai&logoColor=white" /></a>
+    &nbsp;
+    <a href="https://www.mensa.org.sg/"><img src="https://img.shields.io/badge/Mensa-Member-CC0000?style=flat-square" /></a>
+  </p>
+
   <br>
 
 </details>
@@ -188,6 +196,16 @@
   <br>
 
 </details>
+
+---
+
+<br>
+
+<div align="center">
+  <img src="./readme/pokemon-roam.svg" alt="pokemon roaming" />
+</div>
+
+<br>
 
 ---
 
