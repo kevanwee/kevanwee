@@ -201,12 +201,6 @@
 
 <br>
 
-<h2 align="center">roaming around 🌿</h2>
-
-<p align="center">
-  <em>some favourites from <a href="https://github.com/kevanwee/theoffice">the office</a> enjoying the field ✦ = shiny</em>
-</p>
-
 <div align="center">
   <img src="./readme/pokemon-roam.svg" alt="pokemon roaming" />
 </div>
