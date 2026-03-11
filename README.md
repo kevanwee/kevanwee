@@ -193,6 +193,44 @@
 
 <br>
 
+<h2 align="center">roaming around 🌿</h2>
+
+<p align="center">
+  <em>some favourites from <a href="https://github.com/kevanwee/theoffice">the office</a> enjoying the field ✦ = shiny</em>
+</p>
+
+<div align="center">
+  <img src="./readme/pokemon-roam.svg" alt="pokemon roaming" />
+</div>
+
+<br>
+
+---
+
+<br>
+
+<h2 align="center">memberships</h2>
+
+<p align="center">
+  <a href="https://www.legalquants.com/lawyers/kevan-wee">
+    <img src="https://img.shields.io/badge/LegalQuants-Member-163355?style=for-the-badge" alt="LegalQuants Member" />
+  </a>
+  &nbsp;
+  <a href="https://www.legalbenchmarks.ai/framework">
+    <img src="https://img.shields.io/badge/LegalBenchmarks.ai-Steering_Committee-5B2D8E?style=for-the-badge&logo=openai&logoColor=white" alt="LegalBenchmarks.ai Steering Committee" />
+  </a>
+  &nbsp;
+  <a href="https://www.mensa.org.sg/">
+    <img src="https://img.shields.io/badge/Mensa-Singapore-CC0000?style=for-the-badge" alt="Mensa Singapore" />
+  </a>
+</p>
+
+<br>
+
+---
+
+<br>
+
 <h2 align="center">contacts! &nbsp;<img src="./readme/xdd.avif" width="28" /></h2>
 
 <div align="center">
