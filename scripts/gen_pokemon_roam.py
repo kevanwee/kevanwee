@@ -199,9 +199,9 @@ def tile_xy(c, r):
 def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
     """Build a walk plan with collision avoidance.
 
-    reserved: set of (col, row) tiles claimed by other Pokemon (expanded).
-    buffer:   radius (in tiles) to expand this Pokemon's path tiles by
-              before adding them to the global reservation.
+    Only idle/destination tiles are reserved (not entire paths) so the
+    limited walkable area isn't exhausted.  Paths may cross, which looks
+    fine because the different loop durations naturally de-sync Pokemon.
     """
     if reserved is None:
         reserved = set()
@@ -209,16 +209,13 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
     start = pick(grid, gc, gr, rng, used_starts if used_starts else None,
                  min_dist=8, reserved=reserved)
     cur = start
-    my_tiles = {start}   # raw tiles visited by this Pokemon
+    stop_tiles = {start}   # only idle/destination positions
 
     for leg in range(n_legs):
         dest = pick(grid, gc, gr, rng, [cur], reserved=reserved)
-        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1], avoid=reserved)
+        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
         if not path or len(path) < 2:
-            # Fallback: try without reserved tiles
-            path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
-            if not path or len(path) < 2:
-                continue
+            continue
 
         dest = path[-1]
         for i in range(len(path)-1):
@@ -226,27 +223,24 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-            my_tiles.add((tc, tr))
         # Pause between legs (idle, face down)
         pause = rng.uniform(WANDER_PAUSE_MIN, WANDER_PAUSE_MAX)
         lx, ly = tile_xy(dest[0], dest[1])
         wps.append({"x": lx, "y": ly, "dir": "DOWN", "dur": pause, "idle": True})
+        stop_tiles.add(dest)
         cur = dest
 
     # Close loop back to start
-    path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1], avoid=reserved)
-    if not path:
-        path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1])
+    path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1])
     if path and len(path) > 1:
         for i in range(len(path)-1):
             fc,fr = path[i]; tc,tr = path[i+1]
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-            my_tiles.add((tc, tr))
 
-    # Expand visited tiles by buffer so later Pokemon keep their distance
-    expanded = expand_tiles(my_tiles, buffer, gc, gr)
+    # Only expand idle/stop positions so later Pokemon avoid standing nearby
+    expanded = expand_tiles(stop_tiles, buffer, gc, gr)
     return wps, start, expanded
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -376,10 +370,14 @@ def main():
     used_starts = []
     all_reserved = set()   # tiles reserved by previously-planned Pokemon
     for pid, pk in enumerate(pokemon):
-        # Buffer radius scales with sprite display size
-        buf = max(2, (pk["dp"] + TILE - 1) // (2 * TILE))
+        # Buffer of 1 tile keeps idle positions apart without exhausting
+        # the limited walkable area (890 tiles for 9 Pokemon)
         wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
-                                          used_starts, all_reserved, buf)
+                                          used_starts, all_reserved, buffer=1)
+        # If the Pokemon got no path, retry with relaxed constraints
+        if not any(not s.get("idle") for s in wps):
+            wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
+                                              used_starts, reserved=None, buffer=1)
         plans.append(wps)
         used_starts.append(start)
         all_reserved |= reserved
