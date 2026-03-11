@@ -35,6 +35,8 @@ SPRITES = {
     "dragonair": os.path.join(OFFICE, "Pokemon Shiny", "DRAGONAIR.png"),
     "dragonite": os.path.join(OFFICE, "Pokemon Shiny", "DRAGONITE.png"),
     "eevee":     os.path.join(OFFICE, "Pokemon Shiny", "EEVEE.png"),
+    "fuecoco":   os.path.join(OFFICE, "Pokemon Shiny", "FUECOCO.png"),
+    "latios":    os.path.join(OFFICE, "Pokemon Shiny", "LATIOS.png"),
 }
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -185,6 +187,24 @@ def pick(grid, gc, gr, rng, excl=None, min_dist=3, reserved=None):
         if far: tiles = far
     return rng.choice(tiles)
 
+def pick_reachable_path(grid, gc, gr, rng, cur, reserved, min_leg_dist=6, tries=30):
+    """Pick a random reachable destination and return its BFS path."""
+    tiles = [(c, r) for r in range(gr) for c in range(gc)
+             if not grid[r][c] and (c, r) not in reserved]
+    if not tiles:
+        return None
+
+    far = [t for t in tiles if abs(t[0] - cur[0]) + abs(t[1] - cur[1]) >= min_leg_dist]
+    if far:
+        tiles = far
+
+    for _ in range(tries):
+        dest = rng.choice(tiles)
+        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1], avoid=reserved)
+        if path and len(path) > 1:
+            return path
+    return None
+
 # ═══════════════════════════════════════════════════════════════════════
 # Walk plan builder  — per-tile waypoints (faithful to theoffice)
 #
@@ -196,25 +216,101 @@ def pick(grid, gc, gr, rng, excl=None, min_dist=3, reserved=None):
 def tile_xy(c, r):
     return ((c + 0.5) * TILE, (r + 0.5) * TILE)
 
-def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
+def plan_total_duration(wps):
+    return sum(wp["dur"] for wp in wps) if wps else 0.0
+
+def plan_position_at(wps, t):
+    """Interpolate position at time t for a looping waypoint plan."""
+    if not wps:
+        return (0.0, 0.0)
+    total = plan_total_duration(wps)
+    if total <= 0:
+        return (wps[-1]["x"], wps[-1]["y"])
+    tt = t % total
+    prev_x, prev_y = wps[-1]["x"], wps[-1]["y"]
+    acc = 0.0
+    for wp in wps:
+        dur = wp["dur"]
+        if dur <= 0:
+            prev_x, prev_y = wp["x"], wp["y"]
+            continue
+        if acc + dur >= tt:
+            a = (tt - acc) / dur
+            x = prev_x + (wp["x"] - prev_x) * a
+            y = prev_y + (wp["y"] - prev_y) * a
+            return (x, y)
+        acc += dur
+        prev_x, prev_y = wp["x"], wp["y"]
+    return (wps[-1]["x"], wps[-1]["y"])
+
+def build_phase_offsets(plans):
+    """Deterministic per-plan phase offsets to de-sync movement timelines."""
+    phases = []
+    for i, wps in enumerate(plans):
+        total = plan_total_duration(wps)
+        if total <= 0:
+            phases.append(0.0)
+            continue
+        frac = ((i + 1) * 0.61803398875) % 1.0
+        phases.append(frac * total)
+    return phases
+
+def collision_score(pokemon, plans, phases=None, horizon=120.0, step=0.25):
+    """Sample animated positions and count close-encounter collisions."""
+    if not plans:
+        return (10**9, 10**9)
+
+    active = [i for i, wps in enumerate(plans) if wps and plan_total_duration(wps) > 0]
+    if len(active) < len(pokemon):
+        # Heavily penalize plans with stationary Pokemon.
+        return (10**8, len(pokemon) - len(active))
+
+    collisions = 0
+    closest = 10**9
+    if phases is None:
+        phases = [0.0] * len(plans)
+    t = 0.0
+    while t <= horizon:
+        pos = {i: plan_position_at(plans[i], t + phases[i]) for i in active}
+        for ai in range(len(active)):
+            i = active[ai]
+            xi, yi = pos[i]
+            dpi = pokemon[i]["dp"]
+            for aj in range(ai + 1, len(active)):
+                j = active[aj]
+                xj, yj = pos[j]
+                dpj = pokemon[j]["dp"]
+                dx = xi - xj
+                dy = yi - yj
+                dist2 = dx*dx + dy*dy
+                # Keep separation by sprite footprint with small slack.
+                min_sep = (dpi + dpj) * 0.28
+                if dist2 < min_sep * min_sep:
+                    collisions += 1
+                if dist2 < closest:
+                    closest = dist2
+        t += step
+    return (collisions, int(closest))
+
+def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
     """Build a walk plan with collision avoidance.
 
-    Only idle/destination tiles are reserved (not entire paths) so the
-    limited walkable area isn't exhausted.  Paths may cross, which looks
-    fine because the different loop durations naturally de-sync Pokemon.
+    All walked tiles are reserved (expanded by 1 tile buffer) so later
+    Pokemon route around them.  BFS avoids reserved tiles; falls back
+    to unreserved BFS if stuck.
     """
     if reserved is None:
         reserved = set()
     wps = []
     start = pick(grid, gc, gr, rng, used_starts if used_starts else None,
-                 min_dist=8, reserved=reserved)
+                 min_dist=5, reserved=reserved)
     cur = start
-    stop_tiles = {start}   # only idle/destination positions
+    path_tiles = {start}   # every tile this Pokemon visits
+    stop_tiles = {start}   # idle/destination tiles
 
     for leg in range(n_legs):
-        dest = pick(grid, gc, gr, rng, [cur], reserved=reserved)
-        path = bfs(grid, gc, gr, cur[0], cur[1], dest[0], dest[1])
-        if not path or len(path) < 2:
+        path = pick_reachable_path(grid, gc, gr, rng, cur, reserved, min_leg_dist=5, tries=40)
+        if not path:
             continue
 
         dest = path[-1]
@@ -223,6 +319,11 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
+            # Reserving every step is too restrictive with 11 Pokemon on this map.
+            # Keep a sparse centerline reservation to avoid direct clashes while
+            # preserving enough free space for random routes.
+            if i % 2 == 0:
+                path_tiles.add((tc, tr))
         # Pause between legs (idle, face down)
         pause = rng.uniform(WANDER_PAUSE_MIN, WANDER_PAUSE_MAX)
         lx, ly = tile_xy(dest[0], dest[1])
@@ -231,17 +332,21 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
         cur = dest
 
     # Close loop back to start
-    path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1])
+    path = bfs(grid, gc, gr, cur[0], cur[1], start[0], start[1], avoid=reserved)
     if path and len(path) > 1:
         for i in range(len(path)-1):
             fc,fr = path[i]; tc,tr = path[i+1]
             x,y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
+            if i % 2 == 0:
+                path_tiles.add((tc, tr))
 
-    # Only expand idle/stop positions so later Pokemon avoid standing nearby
-    expanded = expand_tiles(stop_tiles, buffer, gc, gr)
-    return wps, start, expanded
+    # Reserve centerline path tiles and exact idle stops.
+    # With 11 Pokemon on this map, expanding stop buffers starves later routes.
+    reserved_tiles = set(path_tiles)
+    reserved_tiles |= stop_tiles
+    return wps, start, reserved_tiles
 
 # ═══════════════════════════════════════════════════════════════════════
 # SVG generation
@@ -255,7 +360,7 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, buffer=2):
 def F(v, d=2):
     return f"{v:.{d}f}".rstrip("0").rstrip(".")
 
-def pokemon_svg(pk, pid, b64img, wps):
+def pokemon_svg(pk, pid, b64img, wps, phase=0.0):
     if not wps: return ""
     dp = pk["dp"]; scale = dp / pk["frame_w"]
     sdisp = int(pk["sheet_w"] * scale); hw = dp // 2
@@ -301,12 +406,13 @@ def pokemon_svg(pk, pid, b64img, wps):
         sparkle = (f'\n    <animate attributeName="opacity"'
                    f' values="0.88;1;0.88" dur="{2.0+pid*0.3:.1f}s" repeatCount="indefinite"/>')
 
+    phase_str = F(phase)
     return f"""
   <!-- {pk["label"]} -->
   <g>{sparkle}
     <animateTransform attributeName="transform" type="translate"
       values="{pos_str}" keyTimes="{kt_str}"
-      dur="{F(total)}s" repeatCount="indefinite" calcMode="linear"/>
+            dur="{F(total)}s" begin="-{phase_str}s" repeatCount="indefinite" calcMode="linear"/>
     <animateTransform attributeName="transform" type="translate"
       values="0,0; 0,-2; 0,0" dur="0.6s" repeatCount="indefinite"
       additive="sum" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"/>
@@ -314,7 +420,7 @@ def pokemon_svg(pk, pid, b64img, wps):
       <g>
         <animateTransform attributeName="transform" type="translate"
           values="{dir_y_str}" keyTimes="{kt_str}"
-          dur="{F(total)}s" repeatCount="indefinite" calcMode="discrete"/>
+                    dur="{F(total)}s" begin="-{phase_str}s" repeatCount="indefinite" calcMode="discrete"/>
         <g>
           <animateTransform attributeName="transform" type="translate"
             values="{frame_vals}" keyTimes="{frame_kts}"
@@ -354,46 +460,99 @@ def main():
         w, h = png_dims(d); print(f"  {name}: {w}x{h}")
 
     pokemon = [
-        dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=56, is_shiny=False, n_legs=5),
+        dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=56, is_shiny=False, n_legs=3),
         dict(key="ceruledge", label="Ceruledge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="armarouge", label="Armarouge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="charcadet", label="Charcadet", sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
-        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=128, is_shiny=True,  n_legs=4),
-        dict(key="greninja",  label="Greninja",  sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="dragonair", label="Dragonair", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="dragonite", label="Dragonite", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
-        dict(key="eevee",     label="Eevee",     sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
+        dict(key="armarouge", label="Armarouge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="charcadet", label="Charcadet", sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=4),
+        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=128, is_shiny=True, n_legs=3),
+        dict(key="greninja",  label="Greninja",  sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="dragonair", label="Dragonair", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="dragonite", label="Dragonite", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
+        dict(key="eevee",     label="Eevee",     sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=4),
+        dict(key="fuecoco",   label="Fuecoco",   sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=4),
+        dict(key="latios",    label="Latios",    sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=3),
     ]
 
     print("Planning routes...")
-    plans = []
-    used_starts = []
-    all_reserved = set()   # tiles reserved by previously-planned Pokemon
-    for pid, pk in enumerate(pokemon):
-        # Buffer of 1 tile keeps idle positions apart without exhausting
-        # the limited walkable area (890 tiles for 9 Pokemon)
-        wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
-                                          used_starts, all_reserved, buffer=1)
-        # If the Pokemon got no path, retry with relaxed constraints
-        if not any(not s.get("idle") for s in wps):
+    best = None
+    for attempt in range(80):
+        plans = [None] * len(pokemon)
+        step_counts = [0] * len(pokemon)
+        used_starts = []
+        all_reserved = set()   # tiles reserved by previously-planned Pokemon
+        total_steps = 0
+        min_steps = None
+        nonzero_count = 0
+        order = list(range(len(pokemon)))
+        rng.shuffle(order)
+
+        for pid in order:
+            pk = pokemon[pid]
             wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
-                                              used_starts, reserved=None, buffer=1)
-        plans.append(wps)
-        used_starts.append(start)
-        all_reserved |= reserved
+                                              used_starts, all_reserved)
+            n_steps = sum(1 for s in wps if not s.get("idle"))
+            plans[pid] = wps
+            step_counts[pid] = n_steps
+            used_starts.append(start)
+            all_reserved |= reserved
+            total_steps += n_steps
+            if n_steps > 0:
+                nonzero_count += 1
+            min_steps = n_steps if min_steps is None else min(min_steps, n_steps)
+
+        phases = build_phase_offsets(plans)
+        clash_count, closest2 = collision_score(pokemon, plans, phases)
+        # Keep routes from looking stuck in corners.
+        # Slightly lower target for giant Yveltal due higher footprint.
+        deficits = 0
+        for pk, steps in zip(pokemon, step_counts):
+            target = 16 if pk["key"] == "yveltal" else 20
+            if steps < target:
+                deficits += (target - steps)
+        # Lower is better for clashes; higher is better for path richness.
+        score = (deficits, clash_count, -(nonzero_count), -(min_steps or 0), -total_steps, -closest2)
+        if best is None or score < best["score"]:
+            best = {
+                "score": score,
+                "plans": plans,
+                "reserved": set(all_reserved),
+                "clashes": clash_count,
+                "nonzero": nonzero_count,
+                "phases": phases,
+                "deficits": deficits,
+            }
+        if deficits == 0 and clash_count == 0 and nonzero_count == len(pokemon):
+            break
+
+    plans = best["plans"]
+    all_reserved = best["reserved"]
+    phases = best["phases"]
+    for pk, wps in zip(pokemon, plans):
         walk_s = sum(s["dur"] for s in wps if not s.get("idle"))
         idle_s = sum(s["dur"] for s in wps if s.get("idle"))
         n_steps = sum(1 for s in wps if not s.get("idle"))
         print(f"  {pk['label']}: {n_steps} steps, walk={walk_s:.1f}s idle={idle_s:.1f}s total={walk_s+idle_s:.1f}s")
+    print(f"  Reserved {len(all_reserved)}/{wk} walkable tiles")
+    print(f"  Collision score: {best['clashes']} (active={best['nonzero']}/{len(pokemon)})")
+    print(f"  Route deficits: {best['deficits']}")
 
     clips = ""
     for i, pk in enumerate(pokemon):
         dp_val = pk["dp"]
         clips += f'    <clipPath id="pk{i}clip"><rect width="{dp_val}" height="{dp_val}"/></clipPath>\n'
 
+    # Sort by t=0 Y so initial render depth matches the visible start frame.
+    # (The animation starts at wps[-1], not an average route position.)
+    indexed = list(range(len(pokemon)))
+    def z_y(i):
+        wps = plans[i]
+        if not wps: return 0
+        return wps[-1]["y"]
+    indexed.sort(key=z_y)
+
     psvgs = "".join(
-        pokemon_svg(pk, pid, b64[pk["key"]], wps)
-        for pid, (pk, wps) in enumerate(zip(pokemon, plans)))
+        pokemon_svg(pokemon[i], i, b64[pokemon[i]["key"]], plans[i], phases[i])
+        for i in indexed)
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 {bg_w} {bg_h}" width="{bg_w}" height="{bg_h}">
