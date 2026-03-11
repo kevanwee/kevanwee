@@ -358,7 +358,7 @@ def main():
         dict(key="ceruledge", label="Ceruledge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="armarouge", label="Armarouge", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="charcadet", label="Charcadet", sheet_w=256, frame_w=64,  dp=44, is_shiny=True,  n_legs=5),
-        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=80, is_shiny=True,  n_legs=4),
+        dict(key="yveltal",   label="Yveltal",   sheet_w=512, frame_w=128, dp=128, is_shiny=True,  n_legs=4),
         dict(key="greninja",  label="Greninja",  sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="dragonair", label="Dragonair", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
         dict(key="dragonite", label="Dragonite", sheet_w=256, frame_w=64,  dp=56, is_shiny=True,  n_legs=4),
