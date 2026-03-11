@@ -29,7 +29,7 @@
 ---
 
 <details>
-  <summary align="center"><h2>🍜 &nbsp;what's cooking? &nbsp;<img src="./readme/charc.gif" width="28" /></h2></summary>
+  <summary align="center"><h2>🍜 &nbsp;what's cooking? &nbsp;<img src="./readme/charc.gif" width="55" /></h2></summary>
 
   <br>
 
@@ -55,7 +55,7 @@
 ---
 
 <details>
-  <summary align="center"><h2>🍳 &nbsp;what cuisines do you specialise in? &nbsp;<img src="./readme/slowitsgood.gif" width="28" /></h2></summary>
+  <summary align="center"><h2>🍳 &nbsp;what cuisines do you specialise in? &nbsp;<img src="./readme/slowitsgood.gif" width="55" /></h2></summary>
 
   <br>
 
@@ -177,6 +177,7 @@
 
   | project | description |
   |:---|:---|
+  | [the office](https://github.com/kevanwee/theoffice) | 🏢 vs code extension — animated pokémon characters that follow your ai agents as they code |
   | [kevanwee portfolio](https://github.com/kevanwee/kevanwee) | 🌐 this static portfolio site |
   | [3d portfolio](https://github.com/kevanwee/kevanweeportfolio) | 📦 javascript-based website that displays 3d objects |
   | [book worm](https://github.com/kevanwee/bookworm) | 📚 book price scraper — amazon, kinokuniya, thryft |
