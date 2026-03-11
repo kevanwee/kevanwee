@@ -29,7 +29,7 @@
 ---
 
 <details>
-  <summary align="center"><h2>🍜 &nbsp;what's cooking? &nbsp;<img src="./readme/charc.gif" width="55" /></h2></summary>
+  <summary align="center"><h2>🍜 &nbsp;what's cooking? &nbsp;<img src="./readme/charc.gif" width="80" /></h2></summary>
 
   <br>
 
@@ -42,7 +42,7 @@
   <p align="center">
     probably some nissin laksa and a cup of instant coffee...
     <br><br>
-    a wise man once said <em>"anyone can cook"</em> 👨‍🍳 — i build everything and anything!
+    a wise rat once said <em>"anyone can cook"</em> 👨‍🍳 — i build everything and anything!
     <br><br>
     recent brews: a copyright infringement triage tool, a contract harmonisation tool,<br>
     a parliamentary debate scraper, and too many other wip experiments 🛠️
@@ -55,7 +55,7 @@
 ---
 
 <details>
-  <summary align="center"><h2>🍳 &nbsp;what cuisines do you specialise in? &nbsp;<img src="./readme/slowitsgood.gif" width="55" /></h2></summary>
+  <summary align="center"><h2>🍳 &nbsp;what cuisines do you specialise in? &nbsp;<img src="./readme/slowitsgood.gif" width="80" /></h2></summary>
 
   <br>
 
