@@ -21,7 +21,7 @@
 </p>
 
 <div align="center">
-  <img src="./readme/totoro.gif" alt="totoro" />
+  <img src="./readme/pokemon-roam.svg" alt="pokemon roaming" />
 </div>
 
 <br>
@@ -202,7 +202,7 @@
 <br>
 
 <div align="center">
-  <img src="./readme/pokemon-roam.svg" alt="pokemon roaming" />
+  <img src="./readme/totoro.gif" alt="totoro" />
 </div>
 
 <br>
