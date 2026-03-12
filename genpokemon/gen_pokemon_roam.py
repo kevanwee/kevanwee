@@ -35,15 +35,21 @@ SPRITES = {
     "eevee":     OFFICE / "Pokemon Shiny" / "EEVEE.png",
     "fuecoco":   OFFICE / "Pokemon Shiny" / "FUECOCO.png",
     "latios":    OFFICE / "Pokemon Shiny" / "LATIOS.png",
+    "kyogre":    OFFICE / "Pokemon Shiny" / "KYOGRE.png",
 }
 
 # ===================================================================
-# Map config - Mauville City with border padding
+# Map config - Mauville City stitched with adjacent routes
 # ===================================================================
-INNER_W, INNER_H = 40, 20          # Original map dimensions
-PAD = 5                             # Border padding in metatiles
-MAP_W = INNER_W + 2 * PAD          # 50
-MAP_H = INNER_H + 2 * PAD          # 30
+MAUV_W, MAUV_H = 40, 20            # Mauville City dimensions
+RT117_W, RT117_H = 60, 20          # Route 117 (left)
+RT118_W, RT118_H = 80, 20          # Route 118 (right)
+RT110_W, RT110_H = 40, 100         # Route 110 (down)
+RT111_W, RT111_H = 40, 140         # Route 111 (up)
+SLICE_LR = 20                      # Columns to take from left/right routes
+SLICE_TB = 0                       # No top/bottom route strips
+MAP_W = SLICE_LR + MAUV_W + SLICE_LR   # 80
+MAP_H = MAUV_H                         # 20
 META = 16
 TILE = META
 SCALE = 2
@@ -84,6 +90,9 @@ ANIM_DEFS = {
 ANIM_TOTAL_STEPS = 8
 ANIM_STEP_DUR = 0.35
 ANIM_TOTAL_DUR = ANIM_TOTAL_STEPS * ANIM_STEP_DUR
+
+# Primary animated water tile ranges from pokeemerald tileset anims.
+WATER_TILE_RANGES = [(432, 462), (480, 490)]
 
 # ===================================================================
 # PNG decoder - handles 4-bit indexed (ct=3) and 8-bit RGBA (ct=6)
@@ -249,6 +258,101 @@ def load_map_data(path, w, h):
     count = w * h
     return list(struct.unpack_from(f"<{count}H", data))
 
+def lookup_metatile(meta_id, metatiles_pri, metatiles_sec, attrs_pri, attrs_sec):
+    if meta_id < 512:
+        if meta_id >= len(metatiles_pri):
+            return None, 0
+        refs = metatiles_pri[meta_id]
+        attr = attrs_pri[meta_id] if meta_id < len(attrs_pri) else 0
+        return refs, attr
+    sec_id = meta_id - 512
+    if sec_id >= len(metatiles_sec):
+        return None, 0
+    refs = metatiles_sec[sec_id]
+    attr = attrs_sec[sec_id] if sec_id < len(attrs_sec) else 0
+    return refs, attr
+
+def tile_is_water(tile_num):
+    for lo, hi in WATER_TILE_RANGES:
+        if lo <= tile_num < hi:
+            return True
+    return False
+
+def build_terrain_masks(map_data, map_w, map_h, metatiles_pri, metatiles_sec, attrs_pri, attrs_sec):
+    water = [[False] * map_w for _ in range(map_h)]
+    covered = [[False] * map_w for _ in range(map_h)]
+    for my in range(map_h):
+        for mx in range(map_w):
+            entry = map_data[my * map_w + mx]
+            meta_id = entry & 0x3FF
+            refs, attr = lookup_metatile(meta_id, metatiles_pri, metatiles_sec, attrs_pri, attrs_sec)
+            if refs is None:
+                continue
+            layer_type = (attr >> 12) & 0x3
+            covered[my][mx] = (layer_type >= 1)
+            for ref in refs:
+                t = ref & 0x3FF
+                if tile_is_water(t):
+                    water[my][mx] = True
+                    break
+    return water, covered
+
+def inflate_blocked(grid, radius):
+    if radius <= 0:
+        return [row[:] for row in grid]
+    gr = len(grid)
+    gc = len(grid[0]) if gr else 0
+    out = [row[:] for row in grid]
+    for r in range(gr):
+        for c in range(gc):
+            if not grid[r][c]:
+                continue
+            for dr in range(-radius, radius + 1):
+                for dc in range(-radius, radius + 1):
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < gr and 0 <= nc < gc:
+                        out[nr][nc] = True
+    return out
+
+def build_nav_grid(base_blocked, water_mask, covered_mask, water_mode="land", clearance=0, sprite_height=0):
+    gr = len(base_blocked)
+    gc = len(base_blocked[0]) if gr else 0
+    if water_mode == "water":
+        # Water roamers should be able to traverse water even when water tiles are
+        # collision-blocked for regular movement.
+        nav = [[True] * gc for _ in range(gr)]
+        for r in range(gr):
+            for c in range(gc):
+                if water_mask[r][c]:
+                    nav[r][c] = False
+        # Keep water sprites away from land edges so they don't clip into ground.
+        if clearance > 0:
+            nav = inflate_blocked(nav, clearance)
+        return nav
+
+    nav = [row[:] for row in base_blocked]
+    # Inflate COVERED (layer_type>=1) tiles DOWNWARD so tall sprites don't
+    # walk under building eaves / tree canopies that overhang them.
+    # Using covered_mask only (not all blocked tiles) so solid wall tiles don't
+    # create excessive clearance below them.
+    # Formula: sprite extends (dp - 8) px above tile top -> ceil((dp-8)/16) rows.
+    rows_below = max(0, (sprite_height + 7) // META) if sprite_height > 0 else 0
+    if rows_below > 0:
+        for r in range(gr):
+            for c in range(gc):
+                if covered_mask[r][c]:
+                    for dr in range(1, rows_below + 1):
+                        nr = r + dr
+                        if 0 <= nr < gr:
+                            nav[nr][c] = True
+    for r in range(gr):
+        for c in range(gc):
+            if water_mask[r][c]:
+                nav[r][c] = True
+    if clearance > 0:
+        nav = inflate_blocked(nav, clearance)
+    return nav
+
 # ===================================================================
 # Tile extraction from indexed PNG tile sheets
 # ===================================================================
@@ -277,8 +381,8 @@ def render_map(map_data, map_w, map_h, metatiles_pri, metatiles_sec,
                attrs_pri, attrs_sec, tiles_pri, tiles_sec, palettes,
                only_top_split=False, tile_overrides=None):
     """Render map to RGBA pixel buffer.
-    only_top_split=False: bottom layer + top layer of non-split metatiles.
-    only_top_split=True: ONLY top layer of split metatiles (layer_type==2).
+    only_top_split=False: bottom layer + top layer of non-foreground metatiles.
+    only_top_split=True: top layer of collision-blocked metatiles (drawn above sprites).
     tile_overrides: dict mapping tile_id -> tile_data for animation frames.
     """
     img_w, img_h = map_w * META, map_h * META
@@ -289,28 +393,28 @@ def render_map(map_data, map_w, map_h, metatiles_pri, metatiles_sec,
             entry = map_data[my * map_w + mx]
             meta_id = entry & 0x3FF
 
-            if meta_id < 512:
-                if meta_id >= len(metatiles_pri):
-                    continue
-                meta_refs = metatiles_pri[meta_id]
-                attr = attrs_pri[meta_id] if meta_id < len(attrs_pri) else 0
-            else:
-                sec_id = meta_id - 512
-                if sec_id >= len(metatiles_sec):
-                    continue
-                meta_refs = metatiles_sec[sec_id]
-                attr = attrs_sec[sec_id] if sec_id < len(attrs_sec) else 0
+            meta_refs, attr = lookup_metatile(meta_id, metatiles_pri, metatiles_sec, attrs_pri, attrs_sec)
+            if meta_refs is None:
+                continue
 
-            layer_type = (attr >> 8) & 0xF
-            is_split = (layer_type == 2)
+            layer_type = (attr >> 12) & 0x3
+            is_split = (layer_type >= 1)
+            collision = (entry >> 10) & 3
+            # Foreground: only COVERED/SPLIT (layer_type>=1) AND collision-blocked
+            # metatiles have their top layer rendered above sprites.
+            # This matches pokeemerald's layer_type semantics:
+            #   0 = NORMAL  -> both layers behind sprites always
+            #   1 = COVERED -> top layer above sprites when player is on/north of tile
+            #   2 = SPLIT   -> top layer always above sprites
+            is_foreground = is_split and (collision != 0)
 
             if only_top_split:
-                if not is_split:
+                if not is_foreground:
                     continue
                 layers = [1]
             else:
                 layers = [0]
-                if not is_split:
+                if not is_foreground:
                     layers.append(1)
 
             for layer in layers:
@@ -348,6 +452,74 @@ def render_map(map_data, map_w, map_h, metatiles_pri, metatiles_sec,
                             pixels[sy + py][off+1] = g
                             pixels[sy + py][off+2] = b
                             pixels[sy + py][off+3] = 255
+    return img_w, img_h, pixels
+
+def render_roof_caps(map_data, map_w, map_h, metatiles_pri, metatiles_sec,
+                     attrs_pri, attrs_sec, tiles_pri, tiles_sec, palettes,
+                     tile_overrides=None):
+    """Render split top-layer tiles with collision=0 as roof-cap overlay.
+    Excludes animated water/flower tiles to avoid water and flower artifacts.
+    """
+    img_w, img_h = map_w * META, map_h * META
+    pixels = [bytearray(img_w * 4) for _ in range(img_h)]
+    flower_tile_min = ANIM_DEFS["flower"]["tile_start"]
+    flower_tile_max = flower_tile_min + ANIM_DEFS["flower"]["tile_count"]
+
+    for my in range(map_h):
+        for mx in range(map_w):
+            entry = map_data[my * map_w + mx]
+            meta_id = entry & 0x3FF
+            refs, attr = lookup_metatile(meta_id, metatiles_pri, metatiles_sec, attrs_pri, attrs_sec)
+            if refs is None:
+                continue
+
+            layer_type = (attr >> 12) & 0x3
+            collision = (entry >> 10) & 3
+            if layer_type < 1 or collision != 0:
+                continue
+
+            top_refs = refs[4:8]
+            skip = False
+            for ref in top_refs:
+                tile_num = ref & 0x3FF
+                if tile_is_water(tile_num) or (flower_tile_min <= tile_num < flower_tile_max):
+                    skip = True
+                    break
+            if skip:
+                continue
+
+            for slot in range(4):
+                ref = top_refs[slot]
+                tile_num = ref & 0x3FF
+                xflip = bool(ref & 0x400)
+                yflip = bool(ref & 0x800)
+                pal_num = (ref >> 12) & 0xF
+
+                pal = palettes[pal_num] if pal_num < len(palettes) and palettes[pal_num] else [(0,0,0)] * 16
+
+                if tile_overrides and tile_num in tile_overrides:
+                    td = tile_overrides[tile_num]
+                elif tile_num < 512:
+                    td = tiles_pri[tile_num] if tile_num < len(tiles_pri) else [[0]*8]*8
+                else:
+                    sn = tile_num - 512
+                    td = tiles_sec[sn] if sn < len(tiles_sec) else [[0]*8]*8
+
+                sx = mx * META + (slot % 2) * 8
+                sy = my * META + (slot // 2) * 8
+                for py in range(8):
+                    ry = 7 - py if yflip else py
+                    for px in range(8):
+                        rx = 7 - px if xflip else px
+                        idx = td[ry][rx]
+                        if idx == 0:
+                            continue
+                        r, g, b = pal[idx] if idx < len(pal) else (0, 0, 0)
+                        off = (sx + px) * 4
+                        pixels[sy + py][off]   = r
+                        pixels[sy + py][off+1] = g
+                        pixels[sy + py][off+2] = b
+                        pixels[sy + py][off+3] = 255
     return img_w, img_h, pixels
 
 # ===================================================================
@@ -445,11 +617,34 @@ def build_phase_offsets(plans):
         phases.append(frac * total)
     return phases
 
+def optimize_phase_offsets(pokemon, plans, rng, tries=50):
+    phases = build_phase_offsets(plans)
+    best_collisions, _ = collision_score(pokemon, plans, phases, horizon=60.0, step=2.0)
+    active = [i for i, wps in enumerate(plans) if wps and plan_total_duration(wps) > 0]
+    if not active:
+        return phases
+    for _ in range(tries):
+        pid = rng.choice(active)
+        total = plan_total_duration(plans[pid])
+        if total <= 0:
+            continue
+        old_phase = phases[pid]
+        phases[pid] = rng.random() * total
+        col, _ = collision_score(pokemon, plans, phases, horizon=60.0, step=2.0)
+        if col <= best_collisions:
+            best_collisions = col
+        else:
+            phases[pid] = old_phase
+    return phases
+
 # ===================================================================
 # Tile picking
 # ===================================================================
-def pick(grid, gc, gr, rng, excl=None, min_dist=3, reserved=None):
-    tiles = [(c, r) for r in range(gr) for c in range(gc) if not grid[r][c]]
+def pick(grid, gc, gr, rng, excl=None, min_dist=3, reserved=None, bounds=None):
+    x0, y0, x1, y1 = (0, 0, gc, gr) if bounds is None else bounds
+    tiles = [(c, r) for r in range(y0, y1) for c in range(x0, x1) if not grid[r][c]]
+    if not tiles:
+        return None
     if reserved:
         free = [t for t in tiles if t not in reserved]
         if free:
@@ -460,8 +655,9 @@ def pick(grid, gc, gr, rng, excl=None, min_dist=3, reserved=None):
             tiles = far
     return rng.choice(tiles)
 
-def pick_reachable_path(grid, gc, gr, rng, cur, reserved, min_leg_dist=6, tries=30):
-    tiles = [(c, r) for r in range(gr) for c in range(gc)
+def pick_reachable_path(grid, gc, gr, rng, cur, reserved, min_leg_dist=10, tries=30, bounds=None):
+    x0, y0, x1, y1 = (0, 0, gc, gr) if bounds is None else bounds
+    tiles = [(c, r) for r in range(y0, y1) for c in range(x0, x1)
              if not grid[r][c] and (c, r) not in reserved]
     if not tiles:
         return None
@@ -502,7 +698,7 @@ def collision_score(pokemon, plans, phases=None, horizon=120.0, step=0.25):
                 dx = xi - xj
                 dy = yi - yj
                 dist2 = dx*dx + dy*dy
-                min_sep = (dpi + dpj) * 0.28
+                min_sep = (dpi + dpj) * 0.50
                 if dist2 < min_sep * min_sep:
                     collisions += 1
                 if dist2 < closest:
@@ -510,18 +706,21 @@ def collision_score(pokemon, plans, phases=None, horizon=120.0, step=0.25):
         t += step
     return (collisions, int(closest))
 
-def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
+def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, bounds=None):
     if reserved is None:
         reserved = set()
     wps = []
     start = pick(grid, gc, gr, rng, used_starts if used_starts else None,
-                 min_dist=5, reserved=reserved)
+                 min_dist=6, reserved=reserved, bounds=bounds)
+    if start is None:
+        return [], (0, 0), set()
     cur = start
-    path_tiles = {start}
     stop_tiles = {start}
+    sampled_path_tiles = {start}
 
     for leg in range(n_legs):
-        path = pick_reachable_path(grid, gc, gr, rng, cur, reserved, min_leg_dist=5, tries=40)
+        path = pick_reachable_path(grid, gc, gr, rng, cur, reserved,
+                       min_leg_dist=12, tries=40, bounds=bounds)
         if not path:
             continue
         dest = path[-1]
@@ -531,8 +730,8 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
             x, y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-            if i % 2 == 0:
-                path_tiles.add((tc, tr))
+            if i % 3 == 0:
+                sampled_path_tiles.add((tc, tr))
         pause = rng.uniform(WANDER_PAUSE_MIN, WANDER_PAUSE_MAX)
         lx, ly = tile_xy(dest[0], dest[1])
         wps.append({"x": lx, "y": ly, "dir": "DOWN", "dur": pause, "idle": True})
@@ -547,11 +746,70 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None):
             x, y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-            if i % 2 == 0:
-                path_tiles.add((tc, tr))
+            if i % 3 == 0:
+                sampled_path_tiles.add((tc, tr))
 
-    reserved_tiles = set(path_tiles) | stop_tiles
-    return wps, start, reserved_tiles
+    return wps, start, stop_tiles | sampled_path_tiles
+
+def apply_collision_dodges(pokemon, plans, phases, blocked, gc, gr, rounds=8):
+    """Insert sidestep dodges at idle waypoints near collision events."""
+    for _ in range(rounds):
+        active = [i for i, wps in enumerate(plans) if wps and plan_total_duration(wps) > 0]
+        max_dur = max((plan_total_duration(plans[i]) for i in active), default=0)
+        if max_dur <= 0:
+            break
+        first = None
+        t = 0.0
+        while t <= max_dur and first is None:
+            pos = {i: plan_position_at(plans[i], t + phases[i]) for i in active}
+            for ai in range(len(active)):
+                i = active[ai]
+                xi, yi = pos[i]
+                for aj in range(ai + 1, len(active)):
+                    j = active[aj]
+                    xj, yj = pos[j]
+                    sep = (pokemon[i]["dp"] + pokemon[j]["dp"]) * 0.4
+                    if (xi - xj) ** 2 + (yi - yj) ** 2 < sep * sep:
+                        first = (t, i, j)
+                        break
+                if first:
+                    break
+            t += 0.5
+        if not first:
+            break
+        t_col, pi, pj = first
+        vi = pi if plan_total_duration(plans[pi]) <= plan_total_duration(plans[pj]) else pj
+        wps = plans[vi]
+        total = plan_total_duration(wps)
+        t_plan = (t_col + phases[vi]) % total
+        acc, best_wi, best_d = 0.0, None, 1e9
+        for wi, wp in enumerate(wps):
+            if wp.get("idle"):
+                d = min(abs(acc - t_plan), total - abs(acc - t_plan))
+                if d < best_d:
+                    best_d, best_wi = d, wi
+            acc += wp["dur"]
+        if best_wi is None:
+            break
+        iwp = wps[best_wi]
+        cx, cr = int(iwp["x"] / TILE), int(iwp["y"] / TILE)
+        dodged = False
+        for dc, dr in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+            nc, nr = cx + dc, cr + dr
+            if 0 <= nc < gc and 0 <= nr < gr and not blocked[nr][nc]:
+                nx, ny = (nc + 0.5) * TILE, (nr + 0.5) * TILE
+                h = max(0.3, iwp["dur"] * 0.35)
+                wps[best_wi:best_wi + 1] = [
+                    {"x": iwp["x"], "y": iwp["y"], "dir": "DOWN", "dur": h, "idle": True},
+                    {"x": nx, "y": ny, "dir": tile_dir(cx, cr, nc, nr), "dur": TILE_DUR},
+                    {"x": nx, "y": ny, "dir": "DOWN", "dur": 0.4, "idle": True},
+                    {"x": iwp["x"], "y": iwp["y"], "dir": tile_dir(nc, nr, cx, cr), "dur": TILE_DUR},
+                    {"x": iwp["x"], "y": iwp["y"], "dir": "DOWN", "dur": h, "idle": True},
+                ]
+                dodged = True
+                break
+        if not dodged:
+            wps[best_wi]["dur"] += 1.5
 
 # ===================================================================
 # SVG generation
@@ -656,25 +914,47 @@ def main():
     attrs_sec = load_attributes(DATA_DIR / "secondary" / "mauville" / "metatile_attributes.bin")
     print(f"  {len(metatiles_pri)} primary, {len(metatiles_sec)} secondary metatiles")
 
-    # -- Load inner map data + extend with border --
+    # -- Load all map data and stitch together --
     print("Loading map data...")
-    inner_map = load_map_data(DATA_DIR / "map" / "MauvilleCity" / "map.bin", INNER_W, INNER_H)
-    print(f"  Inner: {INNER_W}x{INNER_H} = {len(inner_map)} entries")
+    mauv_map = load_map_data(DATA_DIR / "map" / "MauvilleCity" / "map.bin", MAUV_W, MAUV_H)
+    rt117_map = load_map_data(DATA_DIR / "map" / "Route117" / "map.bin", RT117_W, RT117_H)
+    rt118_map = load_map_data(DATA_DIR / "map" / "Route118" / "map.bin", RT118_W, RT118_H)
+    print(f"  Mauville: {MAUV_W}x{MAUV_H}, Route117: {RT117_W}x{RT117_H}")
+    print(f"  Route118: {RT118_W}x{RT118_H}")
 
-    border_data = (DATA_DIR / "map" / "MauvilleCity" / "border.bin").read_bytes()
-    border_entries = list(struct.unpack_from("<4H", border_data))
-    print(f"  Border pattern: {[hex(e) for e in border_entries]}")
-
+    # Stitch composite map: Route117(left) | Mauville(center) | Route118(right)
     ext_map = []
     for dy in range(MAP_H):
         for dx in range(MAP_W):
-            ix, iy = dx - PAD, dy - PAD
-            if 0 <= ix < INNER_W and 0 <= iy < INNER_H:
-                ext_map.append(inner_map[iy * INNER_W + ix])
+            cx_mauv = dx - SLICE_LR
+            cx_right = dx - SLICE_LR - MAUV_W
+            if dx < SLICE_LR:
+                src_x = RT117_W - SLICE_LR + dx
+                ext_map.append(rt117_map[dy * RT117_W + src_x])
+            elif dx < SLICE_LR + MAUV_W:
+                ext_map.append(mauv_map[dy * MAUV_W + cx_mauv])
             else:
-                bx, by = dx % 2, dy % 2
-                ext_map.append(border_entries[by * 2 + bx])
-    print(f"  Extended: {MAP_W}x{MAP_H} = {len(ext_map)} entries")
+                ext_map.append(rt118_map[dy * RT118_W + cx_right])
+    print(f"  Stitched: {MAP_W}x{MAP_H} = {len(ext_map)} entries")
+
+    # Patch rock-in-water tiles with plain deep water (meta 368).
+    WATER_ENTRY = 0x1170   # meta=368 (tiles 454,455 water, top layer transparent)
+    patched = 0
+    for y in range(MAP_H):
+        for x in range(MAP_W):
+            idx = y * MAP_W + x
+            entry = ext_map[idx]
+            mid = entry & 0x3FF
+            coll = (entry >> 10) & 3
+            if coll == 0:
+                continue
+            refs, attr = lookup_metatile(mid, metatiles_pri, metatiles_sec, attrs_pri, attrs_sec)
+            if refs is None:
+                continue
+            if any(tile_is_water(r & 0x3FF) for r in refs):
+                ext_map[idx] = WATER_ENTRY
+                patched += 1
+    print(f"  Patched {patched} rock-in-water tiles")
 
     # -- Load animation frames --
     print("Loading animation frames...")
@@ -717,6 +997,24 @@ def main():
     bg_png = encode_png(bg_w, bg_h, bg_pixels)
     bg_b64 = base64.b64encode(bg_png).decode()
     print(f"  {bg_w}x{bg_h}, PNG={len(bg_png):,} bytes")
+
+    # -- Build roof-cap overlay for walkable covered tiles (layer_type>=1, collision==0) --
+    # These tiles have their top layer above sprites per game logic, but aren't
+    # in the foreground (which requires collision!=0).  Excludes water/flower.
+    print("Rendering roof-cap overlay...")
+    rc_w, rc_h, rc_pixels = render_roof_caps(
+        ext_map, MAP_W, MAP_H, metatiles_pri, metatiles_sec,
+        attrs_pri, attrs_sec, tiles_pri, tiles_sec, palettes,
+        tile_overrides=base_overrides)
+    roof_cap_has_content = any(rc_pixels[y][x*4+3] > 0
+                               for y in range(rc_h) for x in range(rc_w))
+    if roof_cap_has_content:
+        rc_png = encode_png(rc_w, rc_h, rc_pixels)
+        roof_cap_b64 = base64.b64encode(rc_png).decode()
+        print(f"  Roof-cap: PNG={len(rc_png):,} bytes")
+    else:
+        roof_cap_b64 = None
+        print("  Roof-cap: no content")
 
     # -- Render animation overlay frames (steps 1-7) --
     print("Rendering animation overlays...")
@@ -764,21 +1062,86 @@ def main():
 
     # -- Build collision grid --
     print("Building collision grid...")
-    grid = build_collision_grid(ext_map, MAP_W, MAP_H)
+    raw_collision = build_collision_grid(ext_map, MAP_W, MAP_H)
+    water_mask, covered_mask = build_terrain_masks(
+        ext_map, MAP_W, MAP_H, metatiles_pri, metatiles_sec, attrs_pri, attrs_sec)
     gc, gr = MAP_W, MAP_H
-    # Force border cells impassable
-    for r in range(gr):
-        for c in range(gc):
-            if c < PAD or c >= INNER_W + PAD or r < PAD or r >= INNER_H + PAD:
-                grid[r][c] = True
-    wk = sum(1 for r in range(gr) for c in range(gc) if not grid[r][c])
-    print(f"  {gc}x{gr} tiles, {wk} walkable / {gc*gr} total")
+    # Covered/split tiles are foreground roof/canopy space and should be non-walkable.
+    base_blocked = [[raw_collision[r][c] or covered_mask[r][c] for c in range(gc)] for r in range(gr)]
 
+    # Block building-top zone: Mauville rows 0-5 (stitched cols SLICE_LR..SLICE_LR+MAUV_W).
+    # These rows visually sit at rooftop height in the perspective art.
+    # Also block any tile whose metatile ID is a rooftop/facade-specific ID:
+    #   304, 426-428 = balcony rail caps (only on building surfaces)
+    #   256-258      = red decorative stripe band (building facade row 8)
+    #   272-274      = gray stone stripe band (building facade row 9)
+    # None of these IDs appear on Routes 117/118, so blocking globally is safe.
+    ROOFTOP_META_IDS = {304, 426, 427, 428, 256, 257, 258, 272, 273, 274}
     for r in range(gr):
-        line = ""
         for c in range(gc):
-            line += "#" if grid[r][c] else "."
-        print(f"  {line}")
+            mid = ext_map[r * gc + c] & 0x3FF
+            if mid in ROOFTOP_META_IDS:
+                base_blocked[r][c] = True
+
+    # Apply manual overrides from walkable_edit.png if present.
+    # Green-dominant pixel  → force walkable; red/orange-dominant → force blocked.
+    _edit_png = Path(__file__).resolve().parent.parent / 'debug_tiles' / 'walkable_edit.png'
+    if _edit_png.exists():
+        def _decode_rgb(path):
+            d = path.read_bytes()
+            if d[:8] != b'\x89PNG\r\n\x1a\n': return None
+            w, h = struct.unpack_from('>II', d, 16)
+            ct = d[25]; ch = 3 if ct == 2 else (4 if ct == 6 else None)
+            if d[24] != 8 or ch is None: return None
+            idat_parts = []
+            pos = 8
+            while pos + 12 <= len(d):
+                length = struct.unpack_from('>I', d, pos)[0]
+                if d[pos+4:pos+8] == b'IDAT':
+                    idat_parts.append(d[pos+8:pos+8+length])
+                elif d[pos+4:pos+8] == b'IEND':
+                    break
+                pos += 12 + length
+            raw = bytearray(zlib.decompress(b''.join(idat_parts))); s = w * ch
+            rows = []; prev = bytearray(s); idx = 0
+            for _ in range(h):
+                ft = raw[idx]; idx += 1
+                sl = bytearray(raw[idx:idx+s]); idx += s
+                if ft == 1:
+                    for i in range(ch, s): sl[i] = (sl[i]+sl[i-ch])&255
+                elif ft == 2:
+                    for i in range(s): sl[i] = (sl[i]+prev[i])&255
+                elif ft == 3:
+                    for i in range(s): sl[i] = (sl[i]+(( sl[i-ch] if i>=ch else 0)+prev[i])//2)&255
+                elif ft == 4:
+                    for i in range(s):
+                        a=sl[i-ch] if i>=ch else 0; b=prev[i]; c2=prev[i-ch] if i>=ch else 0
+                        pa,pb,pc=abs(b-c2),abs(a-c2),abs(a+b-2*c2)
+                        pr=a if pa<=pb and pa<=pc else(b if pb<=pc else c2)
+                        sl[i]=(sl[i]+pr)&255
+                prev=sl; rows.append([(sl[i*ch],sl[i*ch+1],sl[i*ch+2]) for i in range(w)])
+            return rows
+        _rows = _decode_rgb(_edit_png)
+        EDIT_CELL = 32
+        if _rows:
+            ph, pw = len(_rows), len(_rows[0]) if _rows else 0
+            _n_w = _n_b = 0
+            for _r in range(gr):
+                for _c in range(gc):
+                    cy = _r * EDIT_CELL + EDIT_CELL // 2
+                    cx = _c * EDIT_CELL + EDIT_CELL // 2
+                    if cy < ph and cx < pw:
+                        pr, pg, pb2 = _rows[cy][cx]
+                        if   pg > max(pr, pb2) * 1.25 and pg > 100:
+                            if base_blocked[_r][_c]: _n_w += 1
+                            base_blocked[_r][_c] = False
+                        elif pr > max(pg, pb2) * 1.25 and pr > 100:
+                            if not base_blocked[_r][_c]: _n_b += 1
+                            base_blocked[_r][_c] = True
+            print(f"  walkable_edit.png: +{_n_w} forced walkable, +{_n_b} forced blocked")
+
+    wk = sum(1 for r in range(gr) for c in range(gc) if not base_blocked[r][c])
+    print(f"  {gc}x{gr} tiles, {wk} walkable / {gc*gr} total")
 
     # -- Load pokemon sprites --
     print("Loading sprites...")
@@ -790,17 +1153,21 @@ def main():
         print(f"  {name}: {w}x{h}")
 
     pokemon = [
-        dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=28, is_shiny=False, n_legs=3),
-        dict(key="ceruledge", label="Ceruledge",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=4),
-        dict(key="armarouge", label="Armarouge",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=3),
-        dict(key="charcadet", label="Charcadet",  sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=4),
-        dict(key="yveltal",   label="Yveltal",    sheet_w=512, frame_w=128, dp=48, is_shiny=True,  n_legs=3),
-        dict(key="greninja",  label="Greninja",   sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=3),
-        dict(key="dragonair", label="Dragonair",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=3),
-        dict(key="dragonite", label="Dragonite",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=3),
-        dict(key="eevee",     label="Eevee",      sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=4),
-        dict(key="fuecoco",   label="Fuecoco",    sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=4),
-        dict(key="latios",    label="Latios",     sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=3),
+        dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=28, is_shiny=False, n_legs=6, water_mode="land",  bounds=None),
+        dict(key="ceruledge", label="Ceruledge",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=7, water_mode="land",  bounds=None),
+        dict(key="armarouge", label="Armarouge",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=None),
+        dict(key="charcadet", label="Charcadet",  sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=None),
+        # Yveltal + Dragonite roam left side (Route117 + left Mauville fringe)
+        dict(key="yveltal",   label="Yveltal",    sheet_w=512, frame_w=128, dp=48, is_shiny=True,  n_legs=4, water_mode="land",  clearance=0, bounds=(0, 0, SLICE_LR + MAUV_W // 2, MAP_H)),
+        dict(key="greninja",  label="Greninja",   sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=None),
+        dict(key="dragonair", label="Dragonair",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=None),
+        # Dragonite roams only Route117 (left grass) — frees Mauville center
+        dict(key="dragonite", label="Dragonite",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=5, water_mode="land",  bounds=None),
+        dict(key="eevee",     label="Eevee",      sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=None),
+        dict(key="fuecoco",   label="Fuecoco",    sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=None),
+        # Latios + Dragonair right side (Route118 + right Mauville fringe)
+        dict(key="latios",    label="Latios",     sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(SLICE_LR + MAUV_W // 2, 0, MAP_W, MAP_H)),
+        dict(key="kyogre",    label="Kyogre",     sheet_w=512, frame_w=128, dp=48, is_shiny=True,  n_legs=7, water_mode="water", bounds=None),
     ]
 
     # -- Plan pokemon routes --
@@ -819,8 +1186,26 @@ def main():
 
         for pid in order:
             pk = pokemon[pid]
-            wps, start, reserved = build_plan(grid, gc, gr, rng, pk["n_legs"],
-                                              used_starts, all_reserved)
+            if pk.get("water_mode") == "water":
+                clearance = pk.get("clearance", 2)
+                sp_height = 0
+            else:
+                clearance = pk.get("clearance", 0)
+                sp_height = pk["dp"]
+            nav_grid = build_nav_grid(base_blocked, water_mask, covered_mask,
+                                      pk.get("water_mode", "land"), clearance,
+                                      sprite_height=sp_height)
+            bounds = pk.get("bounds")
+            wps, start, reserved = build_plan(nav_grid, gc, gr, rng, pk["n_legs"],
+                                              used_starts, all_reserved, bounds=bounds)
+            if not wps and bounds is not None:
+                # Fallback if region is over-constrained.
+                wps, start, reserved = build_plan(nav_grid, gc, gr, rng, pk["n_legs"],
+                                                  used_starts, all_reserved, bounds=None)
+            if not wps:
+                # Last resort: ignore spacing reservation for this pokemon.
+                wps, start, reserved = build_plan(nav_grid, gc, gr, rng, pk["n_legs"],
+                                                  used_starts, set(), bounds=None)
             n_steps = sum(1 for s in wps if not s.get("idle"))
             plans[pid] = wps
             step_counts[pid] = n_steps
@@ -831,11 +1216,16 @@ def main():
                 nonzero_count += 1
             min_steps = n_steps if min_steps is None else min(min_steps, n_steps)
 
-        phases = build_phase_offsets(plans)
-        clash_count, closest2 = collision_score(pokemon, plans, phases)
+        phases = optimize_phase_offsets(pokemon, plans, rng)
+        clash_count, closest2 = collision_score(pokemon, plans, phases, horizon=60.0, step=1.0)
         deficits = 0
         for pk, steps in zip(pokemon, step_counts):
-            target = 16 if pk["key"] == "yveltal" else 20
+            if pk["key"] == "yveltal":
+                target = 30
+            elif pk["key"] == "kyogre":
+                target = 24
+            else:
+                target = 40
             if steps < target:
                 deficits += (target - steps)
         score = (deficits, clash_count, -(nonzero_count), -(min_steps or 0), -total_steps, -closest2)
@@ -853,6 +1243,7 @@ def main():
 
     plans = best["plans"]
     phases = best["phases"]
+    apply_collision_dodges(pokemon, plans, phases, base_blocked, gc, gr)
     for pk, wps in zip(pokemon, plans):
         walk_s = sum(s["dur"] for s in wps if not s.get("idle"))
         idle_s = sum(s["dur"] for s in wps if s.get("idle"))
@@ -870,6 +1261,7 @@ def main():
         dp_val = pk["dp"]
         clips += f'    <clipPath id="pk{i}clip"><rect width="{dp_val}" height="{dp_val}"/></clipPath>\n'
 
+    # Sort Pokemon by starting Y so lower-on-screen sprites render later
     indexed = list(range(len(pokemon)))
     indexed.sort(key=lambda i: plans[i][-1]["y"] if plans[i] else 0)
 
@@ -898,8 +1290,15 @@ def main():
     fg_layer = ""
     if fg_has_content:
         fg_layer = f"""
-  <!-- Top layer: tree canopies, building roofs -->
+  <!-- Foreground: building roofs, tree canopies (always on top of sprites) -->
   <image href="data:image/png;base64,{fg_b64}"
+         x="0" y="0" width="{bg_w}" height="{bg_h}" style="image-rendering:pixelated"/>"""
+
+    roof_cap_layer = ""
+    if roof_cap_has_content:
+        roof_cap_layer = f"""
+  <!-- Roof-cap overlay from full-map.png -->
+  <image href="data:image/png;base64,{roof_cap_b64}"
          x="0" y="0" width="{bg_w}" height="{bg_h}" style="image-rendering:pixelated"/>"""
 
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg"
@@ -919,6 +1318,7 @@ def main():
 {anim_overlays}
   <!-- Pokemon sprites -->
 {psvgs}
+{roof_cap_layer}
 {fg_layer}
 </svg>"""
 
