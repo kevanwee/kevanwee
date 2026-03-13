@@ -25,51 +25,31 @@ OFFICE = ROOT_DIR.parent / "theoffice"
 
 SPRITES = {
     "diancie":   OFFICE / "Pokemon"       / "DIANCIE.png",
-    "carbink":   OFFICE / "Pokemon Shiny" / "CARBINK.png",
     "ceruledge": OFFICE / "Pokemon Shiny" / "CERULEDGE.png",
     "armarouge": OFFICE / "Pokemon Shiny" / "ARMAROUGE.png",
     "charcadet": OFFICE / "Pokemon Shiny" / "CHARCADET.png",
     "yveltal":   OFFICE / "Pokemon Shiny" / "YVELTAL.png",
     "greninja":  OFFICE / "Pokemon Shiny" / "GRENINJA.png",
-    "froakie":   OFFICE / "Pokemon Shiny" / "FROAKIE.png",
-    "skarmory":  OFFICE / "Pokemon Shiny" / "SKARMORY.png",
-    "gardevoir": OFFICE / "Pokemon Shiny" / "GARDEVOIR.png",
     "dragonair": OFFICE / "Pokemon Shiny" / "DRAGONAIR.png",
     "dragonite": OFFICE / "Pokemon Shiny" / "DRAGONITE.png",
     "eevee":     OFFICE / "Pokemon Shiny" / "EEVEE.png",
-    "gengar":    OFFICE / "Pokemon Shiny" / "GENGAR.png",
-    "charizard": OFFICE / "Pokemon Shiny" / "CHARIZARD.png",
-    "fidough":   OFFICE / "Pokemon Shiny" / "FIDOUGH.png",
     "fuecoco":   OFFICE / "Pokemon Shiny" / "FUECOCO.png",
     "latios":    OFFICE / "Pokemon Shiny" / "LATIOS.png",
-    "latias":    OFFICE / "Pokemon Shiny" / "LATIAS.png",
-    "appletun":  OFFICE / "Pokemon"       / "APPLETUN.png",
-    "blaziken":  OFFICE / "Pokemon Shiny" / "BLAZIKEN.png",
-    "sceptile":  OFFICE / "Pokemon Shiny" / "SCEPTILE.png",
-    "flareon":   OFFICE / "Pokemon"       / "FLAREON.png",
-    "umbreon":   OFFICE / "Pokemon Shiny" / "UMBREON.png",
-    "sylveon":   OFFICE / "Pokemon Shiny" / "SYLVEON.png",
-    "glaceon":   OFFICE / "Pokemon Shiny" / "GLACEON.png",
-    "blastoise": OFFICE / "Pokemon Shiny" / "BLASTOISE.png",
-    "squirtle":  OFFICE / "Pokemon Shiny" / "SQUIRTLE.png",
-    "garchomp":  OFFICE / "Pokemon Shiny" / "GARCHOMP.png",
-    "mewtwo":    OFFICE / "Pokemon Shiny" / "MEWTWO.png",
-    "goodra":    OFFICE / "Pokemon Shiny" / "GOODRA.png",
     "kyogre":    OFFICE / "Pokemon Shiny" / "KYOGRE.png",
 }
 
 # ===================================================================
-# Map config - Route 111 (vertical, river area)
+# Map config - Mauville City stitched with adjacent routes
 # ===================================================================
-MAUV_W, MAUV_H = 40, 20            # Mauville City dimensions (unused)
-RT117_W, RT117_H = 60, 20          # Route 117 (unused)
-RT118_W, RT118_H = 80, 20          # Route 118 (unused)
-RT110_W, RT110_H = 40, 100         # Route 110 (unused)
-RT111_W, RT111_H = 40, 140         # Route 111 (active scene)
-SLICE_LR = 20                      # Unused (kept for reference)
-SLICE_TB = 0                       # Unused
-MAP_W = RT111_W                         # 40
-MAP_H = RT111_H                         # 140
+MAUV_W, MAUV_H = 40, 20            # Mauville City dimensions
+RT117_W, RT117_H = 60, 20          # Route 117 (left)
+RT118_W, RT118_H = 80, 20          # Route 118 (right)
+RT110_W, RT110_H = 40, 100         # Route 110 (down)
+RT111_W, RT111_H = 40, 140         # Route 111 (up)
+SLICE_LR = 20                      # Columns to take from left/right routes
+SLICE_TB = 0                       # No top/bottom route strips
+MAP_W = SLICE_LR + MAUV_W + SLICE_LR   # 80
+MAP_H = MAUV_H                         # 20
 META = 16
 TILE = META
 SCALE = 2
@@ -905,7 +885,7 @@ def pokemon_svg(pk, pid, b64img, wps, phase=0.0):
 # Main
 # ===================================================================
 def main():
-    out = ROOT_DIR / "readme" / "pokemon-roam-rt111.svg"
+    out = ROOT_DIR / "readme" / "pokemon-roam.svg"
     out.parent.mkdir(parents=True, exist_ok=True)
     rng = random.Random(42)
 
@@ -934,12 +914,28 @@ def main():
     attrs_sec = load_attributes(DATA_DIR / "secondary" / "mauville" / "metatile_attributes.bin")
     print(f"  {len(metatiles_pri)} primary, {len(metatiles_sec)} secondary metatiles")
 
-    # -- Load map data -- Route 111 (single vertical map) --
+    # -- Load all map data and stitch together --
     print("Loading map data...")
-    rt111_map = load_map_data(DATA_DIR / "map" / "Route111" / "map.bin", RT111_W, RT111_H)
-    print(f"  Route111: {RT111_W}x{RT111_H}")
-    ext_map = list(rt111_map)
-    print(f"  Map: {MAP_W}x{MAP_H} = {len(ext_map)} entries")
+    mauv_map = load_map_data(DATA_DIR / "map" / "MauvilleCity" / "map.bin", MAUV_W, MAUV_H)
+    rt117_map = load_map_data(DATA_DIR / "map" / "Route117" / "map.bin", RT117_W, RT117_H)
+    rt118_map = load_map_data(DATA_DIR / "map" / "Route118" / "map.bin", RT118_W, RT118_H)
+    print(f"  Mauville: {MAUV_W}x{MAUV_H}, Route117: {RT117_W}x{RT117_H}")
+    print(f"  Route118: {RT118_W}x{RT118_H}")
+
+    # Stitch composite map: Route117(left) | Mauville(center) | Route118(right)
+    ext_map = []
+    for dy in range(MAP_H):
+        for dx in range(MAP_W):
+            cx_mauv = dx - SLICE_LR
+            cx_right = dx - SLICE_LR - MAUV_W
+            if dx < SLICE_LR:
+                src_x = RT117_W - SLICE_LR + dx
+                ext_map.append(rt117_map[dy * RT117_W + src_x])
+            elif dx < SLICE_LR + MAUV_W:
+                ext_map.append(mauv_map[dy * MAUV_W + cx_mauv])
+            else:
+                ext_map.append(rt118_map[dy * RT118_W + cx_right])
+    print(f"  Stitched: {MAP_W}x{MAP_H} = {len(ext_map)} entries")
 
     # Patch rock-in-water tiles with plain deep water (meta 368).
     WATER_ENTRY = 0x1170   # meta=368 (tiles 454,455 water, top layer transparent)
@@ -1073,8 +1069,14 @@ def main():
     # Covered/split tiles are foreground roof/canopy space and should be non-walkable.
     base_blocked = [[raw_collision[r][c] or covered_mask[r][c] for c in range(gc)] for r in range(gr)]
 
-    # Route 111 has no building facades; ROOFTOP_META_IDS is empty.
-    ROOFTOP_META_IDS = set()
+    # Block building-top zone: Mauville rows 0-5 (stitched cols SLICE_LR..SLICE_LR+MAUV_W).
+    # These rows visually sit at rooftop height in the perspective art.
+    # Also block any tile whose metatile ID is a rooftop/facade-specific ID:
+    #   304, 426-428 = balcony rail caps (only on building surfaces)
+    #   256-258      = red decorative stripe band (building facade row 8)
+    #   272-274      = gray stone stripe band (building facade row 9)
+    # None of these IDs appear on Routes 117/118, so blocking globally is safe.
+    ROOFTOP_META_IDS = {304, 426, 427, 428, 256, 257, 258, 272, 273, 274}
     for r in range(gr):
         for c in range(gc):
             mid = ext_map[r * gc + c] & 0x3FF
@@ -1083,10 +1085,7 @@ def main():
 
     # Apply manual overrides from walkable_edit.png if present.
     # Green-dominant pixel  → force walkable; red/orange-dominant → force blocked.
-    # Sets are also applied to water-mode pokemon nav grids (for Kyogre-style routing).
-    _water_force_walkable = set()
-    _water_force_blocked  = set()
-    _edit_png = Path(__file__).resolve().parent.parent / 'debug_tiles' / 'walkable_edit_rt111.png'
+    _edit_png = Path(__file__).resolve().parent.parent / 'debug_tiles' / 'walkable_edit.png'
     if _edit_png.exists():
         def _decode_rgb(path):
             d = path.read_bytes()
@@ -1136,11 +1135,9 @@ def main():
                         if   pg > max(pr, pb2) * 1.25 and pg > 100:
                             if base_blocked[_r][_c]: _n_w += 1
                             base_blocked[_r][_c] = False
-                            _water_force_walkable.add((_r, _c))
                         elif pr > max(pg, pb2) * 1.25 and pr > 100:
                             if not base_blocked[_r][_c]: _n_b += 1
                             base_blocked[_r][_c] = True
-                            _water_force_blocked.add((_r, _c))
             print(f"  walkable_edit.png: +{_n_w} forced walkable, +{_n_b} forced blocked")
 
     wk = sum(1 for r in range(gr) for c in range(gc) if not base_blocked[r][c])
@@ -1156,44 +1153,21 @@ def main():
         print(f"  {name}: {w}x{h}")
 
     pokemon = [
-        # Zone 0 (rows 0-35): Carbink+Diancie, Charcadet+Armarouge+Ceruledge
-        dict(key="carbink",   label="Carbink",   sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0,  0,  40,  36)),
-        dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=28, is_shiny=False, n_legs=6, water_mode="land",  bounds=(0,  0,  40,  36)),
-        dict(key="charcadet", label="Charcadet",  sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=(0,  0,  40,  36)),
-        dict(key="armarouge", label="Armarouge",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0,  0,  40,  36)),
-        dict(key="ceruledge", label="Ceruledge",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=7, water_mode="land",  bounds=(0,  0,  40,  36)),
-        # Zone 1 (rows 36-70): Froakie+Greninja, Skarmory, Gardevoir, Yveltal
-        dict(key="froakie",   label="Froakie",    sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=(0, 36,  40,  70)),
-        dict(key="greninja",  label="Greninja",   sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0, 36,  40,  70)),
-        dict(key="skarmory",  label="Skarmory",   sheet_w=256, frame_w=64,  dp=32, is_shiny=True,  n_legs=5, water_mode="land",  bounds=(0, 36,  40,  70)),
-        dict(key="gardevoir", label="Gardevoir",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0, 36,  40,  70)),
-        dict(key="yveltal",   label="Yveltal",    sheet_w=512, frame_w=128, dp=48, is_shiny=True,  n_legs=4, water_mode="land",  clearance=0, bounds=(0, 36,  40,  70)),
-        # Zone 2 (rows 70-100): Dragonair+Dragonite, Gengar, Charizard, Fidough, Goodra
-        dict(key="dragonair", label="Dragonair",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0, 70,  40, 100)),
-        dict(key="dragonite", label="Dragonite",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=5, water_mode="land",  bounds=(0, 70,  40, 100)),
-        dict(key="gengar",    label="Gengar",     sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0, 70,  40, 100)),
-        dict(key="charizard", label="Charizard",  sheet_w=256, frame_w=64,  dp=32, is_shiny=True,  n_legs=5, water_mode="land",  bounds=(0, 70,  40, 100)),
-        dict(key="fidough",   label="Fidough",    sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=7, water_mode="land",  bounds=(0, 70,  40, 100)),
-        dict(key="goodra",    label="Goodra",     sheet_w=256, frame_w=64,  dp=32, is_shiny=True,  n_legs=5, water_mode="land",  bounds=(0, 70,  40, 100)),
-        # Zone 3 (rows 100-120): Latios+Latias, Fuecoco, Appletun, Blaziken, Sceptile, Garchomp, Mewtwo
-        dict(key="latios",    label="Latios",     sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0,100,  40, 120)),
-        dict(key="latias",    label="Latias",     sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0,100,  40, 120)),
-        dict(key="fuecoco",   label="Fuecoco",    sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=(0,100,  40, 120)),
-        dict(key="appletun",  label="Appletun",   sheet_w=256, frame_w=64,  dp=28, is_shiny=False, n_legs=6, water_mode="land",  bounds=(0,100,  40, 120)),
-        dict(key="blaziken",  label="Blaziken",   sheet_w=256, frame_w=64,  dp=32, is_shiny=True,  n_legs=5, water_mode="land",  bounds=(0,100,  40, 120)),
-        dict(key="sceptile",  label="Sceptile",   sheet_w=256, frame_w=64,  dp=32, is_shiny=True,  n_legs=5, water_mode="land",  bounds=(0,100,  40, 120)),
-        dict(key="garchomp",  label="Garchomp",   sheet_w=256, frame_w=64,  dp=32, is_shiny=True,  n_legs=5, water_mode="land",  bounds=(0,100,  40, 120)),
-        dict(key="mewtwo",    label="Mewtwo",     sheet_w=256, frame_w=64,  dp=32, is_shiny=True,  n_legs=4, water_mode="land",  bounds=(0,100,  40, 120)),
-        # Zone 4 (rows 120-140): Sylveon+Eevee+Umbreon+Flareon+Glaceon, Blastoise+Squirtle
-        dict(key="sylveon",   label="Sylveon",    sheet_w=256, frame_w=64,  dp=24, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0,120,  40, 140)),
-        dict(key="eevee",     label="Eevee",      sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=(0,120,  40, 140)),
-        dict(key="umbreon",   label="Umbreon",    sheet_w=256, frame_w=64,  dp=24, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0,120,  40, 140)),
-        dict(key="flareon",   label="Flareon",    sheet_w=256, frame_w=64,  dp=24, is_shiny=False, n_legs=6, water_mode="land",  bounds=(0,120,  40, 140)),
-        dict(key="glaceon",   label="Glaceon",    sheet_w=256, frame_w=64,  dp=24, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(0,120,  40, 140)),
-        dict(key="blastoise", label="Blastoise",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=5, water_mode="land",  bounds=(0,120,  40, 140)),
-        dict(key="squirtle",  label="Squirtle",   sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=7, water_mode="land",  bounds=(0,120,  40, 140)),
-        # Water (full map)
-        dict(key="kyogre",    label="Kyogre",     sheet_w=512, frame_w=128, dp=48, is_shiny=True,  n_legs=4, water_mode="water", clearance=0, bounds=None),
+        dict(key="diancie",   label="Diancie",   sheet_w=256, frame_w=64,  dp=28, is_shiny=False, n_legs=6, water_mode="land",  bounds=None),
+        dict(key="ceruledge", label="Ceruledge",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=7, water_mode="land",  bounds=None),
+        dict(key="armarouge", label="Armarouge",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=None),
+        dict(key="charcadet", label="Charcadet",  sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=None),
+        # Yveltal + Dragonite roam left side (Route117 + left Mauville fringe)
+        dict(key="yveltal",   label="Yveltal",    sheet_w=512, frame_w=128, dp=48, is_shiny=True,  n_legs=4, water_mode="land",  clearance=0, bounds=(0, 0, SLICE_LR + MAUV_W // 2, MAP_H)),
+        dict(key="greninja",  label="Greninja",   sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=None),
+        dict(key="dragonair", label="Dragonair",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=None),
+        # Dragonite roams only Route117 (left grass) — frees Mauville center
+        dict(key="dragonite", label="Dragonite",  sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=5, water_mode="land",  bounds=None),
+        dict(key="eevee",     label="Eevee",      sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=None),
+        dict(key="fuecoco",   label="Fuecoco",    sheet_w=256, frame_w=64,  dp=22, is_shiny=True,  n_legs=8, water_mode="land",  bounds=None),
+        # Latios + Dragonair right side (Route118 + right Mauville fringe)
+        dict(key="latios",    label="Latios",     sheet_w=256, frame_w=64,  dp=28, is_shiny=True,  n_legs=6, water_mode="land",  bounds=(SLICE_LR + MAUV_W // 2, 0, MAP_W, MAP_H)),
+        dict(key="kyogre",    label="Kyogre",     sheet_w=512, frame_w=128, dp=48, is_shiny=True,  n_legs=7, water_mode="water", bounds=None),
     ]
 
     # -- Plan pokemon routes --
@@ -1221,12 +1195,6 @@ def main():
             nav_grid = build_nav_grid(base_blocked, water_mask, covered_mask,
                                       pk.get("water_mode", "land"), clearance,
                                       sprite_height=sp_height)
-            # Apply walkable_edit overrides to water-mode nav grids too.
-            if pk.get("water_mode") == "water":
-                for _wr, _wc in _water_force_walkable:
-                    nav_grid[_wr][_wc] = False
-                for _wr, _wc in _water_force_blocked:
-                    nav_grid[_wr][_wc] = True
             bounds = pk.get("bounds")
             wps, start, reserved = build_plan(nav_grid, gc, gr, rng, pk["n_legs"],
                                               used_starts, all_reserved, bounds=bounds)
@@ -1348,10 +1316,10 @@ def main():
   <image href="data:image/png;base64,{bg_b64}"
          x="0" y="0" width="{bg_w}" height="{bg_h}" style="image-rendering:pixelated"/>
 {anim_overlays}
+  <!-- Pokemon sprites -->
+{psvgs}
 {roof_cap_layer}
 {fg_layer}
-  <!-- Pokemon sprites (above all terrain) -->
-{psvgs}
 </svg>"""
 
     with open(out, "w", encoding="utf-8") as fh:
