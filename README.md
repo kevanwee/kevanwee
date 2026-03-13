@@ -21,7 +21,7 @@
 </p>
 
 <div align="center">
-  <img src="./readme/pokemon-roam.svg" alt="pokemon roaming" />
+  <img src="./readme/pokemon-roam-mauville.svg" alt="pokemon roaming" />
 </div>
 
 <br>
@@ -137,6 +137,10 @@
 
   <p align="center">here's some of the dishes i've made recently! (and some works in progress) 🍽️🛠️</p>
 
+  <div align="center">
+    <img src="./readme/seox.gif" width="75" />
+  </div>
+
   <br>
 
   <div align="center">
@@ -228,5 +232,5 @@
   <br><br>
   feel free to reach out!
   <br><br>
-  <img src="./readme/seox.gif" width="75" />
+  <img src="./readme/pokemon-roam-rt111.svg" alt="pokemon roaming rt111" />
 </p>
