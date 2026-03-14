@@ -62,10 +62,17 @@ TILE_DUR         = TILE / WALK_PX_SEC
 WALK_FRAME_DUR   = 0.15
 WALK_FRAMES      = 4
 WALK_CYCLE       = WALK_FRAME_DUR * WALK_FRAMES
-WANDER_PAUSE_MIN = 0.5
-WANDER_PAUSE_MAX = 4.0
+WANDER_PAUSE_MIN = 0.8
+WANDER_PAUSE_MAX = 2.6
+TURN_PAUSE_MIN   = 0.08
+TURN_PAUSE_MAX   = 0.18
+LOOK_PAUSE_MIN   = 0.16
+LOOK_PAUSE_MAX   = 0.42
+LOOK_CHANCE      = 0.55
+COLLISION_BODY_RATIO = 0.34
 ROW = {"DOWN": 0, "LEFT": 1, "RIGHT": 2, "UP": 3}
 DIRS4 = [(1,0),(-1,0),(0,1),(0,-1)]
+CARDINAL_DIRS = ("DOWN", "LEFT", "RIGHT", "UP")
 
 # ===================================================================
 # Tile animation definitions (from pokeemerald tileset_anims.c)
@@ -580,6 +587,18 @@ def tile_dir(fc, fr, tc, tr):
 def tile_xy(c, r):
     return ((c + 0.5) * TILE, (r + 0.5) * TILE)
 
+def append_idle_with_look(wps, x, y, facing, pause, rng):
+    facing = facing if facing in ROW else "DOWN"
+    pause = max(0.08, pause)
+    if pause >= 1.0 and rng.random() < LOOK_CHANCE:
+        look = rng.choice([d for d in CARDINAL_DIRS if d != facing])
+        look_dur = min(rng.uniform(LOOK_PAUSE_MIN, LOOK_PAUSE_MAX), pause * 0.45)
+        base_dur = max(0.08, pause - look_dur)
+        wps.append({"x": x, "y": y, "dir": facing, "dur": base_dur, "idle": True})
+        wps.append({"x": x, "y": y, "dir": look, "dur": look_dur, "idle": True})
+    else:
+        wps.append({"x": x, "y": y, "dir": facing, "dur": pause, "idle": True})
+
 def plan_total_duration(wps):
     return sum(wp["dur"] for wp in wps) if wps else 0.0
 
@@ -617,24 +636,30 @@ def build_phase_offsets(plans):
         phases.append(frac * total)
     return phases
 
-def optimize_phase_offsets(pokemon, plans, rng, tries=50):
+def optimize_phase_offsets(pokemon, plans, rng, tries=50, horizon=60.0, step=2.0):
     phases = build_phase_offsets(plans)
-    best_collisions, _ = collision_score(pokemon, plans, phases, horizon=60.0, step=2.0)
+    best_collisions, best_closest = collision_score(pokemon, plans, phases, horizon=horizon, step=step)
     active = [i for i, wps in enumerate(plans) if wps and plan_total_duration(wps) > 0]
     if not active:
         return phases
+    candidate_fracs = (0.5,)
     for _ in range(tries):
         pid = rng.choice(active)
         total = plan_total_duration(plans[pid])
         if total <= 0:
             continue
         old_phase = phases[pid]
-        phases[pid] = rng.random() * total
-        col, _ = collision_score(pokemon, plans, phases, horizon=60.0, step=2.0)
-        if col <= best_collisions:
-            best_collisions = col
-        else:
-            phases[pid] = old_phase
+        best_phase = old_phase
+        trial_phases = [rng.random() * total] + [((old_phase + total * frac) % total) for frac in candidate_fracs]
+        for candidate in trial_phases:
+            phases[pid] = candidate
+            col, close = collision_score(pokemon, plans, phases, horizon=horizon, step=step)
+            if col < best_collisions or (col == best_collisions and close > best_closest):
+                best_collisions, best_closest = col, close
+                best_phase = candidate
+        phases[pid] = best_phase
+        if best_collisions == 0 and best_closest > TILE * TILE:
+            break
     return phases
 
 # ===================================================================
@@ -678,10 +703,12 @@ def collision_score(pokemon, plans, phases=None, horizon=120.0, step=0.25):
     if not plans:
         return (10**9, 10**9)
     active = [i for i, wps in enumerate(plans) if wps and plan_total_duration(wps) > 0]
-    if len(active) < len(pokemon):
-        return (10**8, len(pokemon) - len(active))
+    if len(active) < 2:
+        return (0, 10**9)
+    if horizon is None:
+        horizon = min(180.0, max(60.0, max(plan_total_duration(plans[i]) for i in active)))
     collisions = 0
-    closest = 10**9
+    closest = float("inf")
     if phases is None:
         phases = [0.0] * len(plans)
     t = 0.0
@@ -698,12 +725,17 @@ def collision_score(pokemon, plans, phases=None, horizon=120.0, step=0.25):
                 dx = xi - xj
                 dy = yi - yj
                 dist2 = dx*dx + dy*dy
-                min_sep = (dpi + dpj) * 0.50
+                min_sep = (dpi + dpj) * COLLISION_BODY_RATIO
                 if dist2 < min_sep * min_sep:
                     collisions += 1
+                    # Heavily penalize near-exact overlap so search avoids "stacking".
+                    if dist2 < (min_sep * 0.65) ** 2:
+                        collisions += 1
                 if dist2 < closest:
                     closest = dist2
         t += step
+    if closest == float("inf"):
+        closest = 10**9
     return (collisions, int(closest))
 
 def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, bounds=None):
@@ -713,10 +745,11 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, bounds=Non
     start = pick(grid, gc, gr, rng, used_starts if used_starts else None,
                  min_dist=6, reserved=reserved, bounds=bounds)
     if start is None:
-        return [], (0, 0), set()
+        return [], None, set()
     cur = start
     stop_tiles = {start}
-    sampled_path_tiles = {start}
+    reserved_path_tiles = {start}
+    last_dir = "DOWN"
 
     for leg in range(n_legs):
         path = pick_reachable_path(grid, gc, gr, rng, cur, reserved,
@@ -729,12 +762,18 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, bounds=Non
             tc, tr = path[i+1]
             x, y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
+            if wps and d != last_dir:
+                tx, ty = tile_xy(fc, fr)
+                wps.append({
+                    "x": tx, "y": ty, "dir": d,
+                    "dur": rng.uniform(TURN_PAUSE_MIN, TURN_PAUSE_MAX), "idle": True
+                })
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-            if i % 3 == 0:
-                sampled_path_tiles.add((tc, tr))
+            reserved_path_tiles.add((tc, tr))
+            last_dir = d
         pause = rng.uniform(WANDER_PAUSE_MIN, WANDER_PAUSE_MAX)
         lx, ly = tile_xy(dest[0], dest[1])
-        wps.append({"x": lx, "y": ly, "dir": "DOWN", "dur": pause, "idle": True})
+        append_idle_with_look(wps, lx, ly, last_dir, pause, rng)
         stop_tiles.add(dest)
         cur = dest
 
@@ -745,13 +784,19 @@ def build_plan(grid, gc, gr, rng, n_legs, used_starts, reserved=None, bounds=Non
             tc, tr = path[i+1]
             x, y = tile_xy(tc, tr)
             d = tile_dir(fc, fr, tc, tr)
+            if wps and d != last_dir:
+                tx, ty = tile_xy(fc, fr)
+                wps.append({
+                    "x": tx, "y": ty, "dir": d,
+                    "dur": rng.uniform(TURN_PAUSE_MIN, TURN_PAUSE_MAX), "idle": True
+                })
             wps.append({"x": x, "y": y, "dir": d, "dur": TILE_DUR})
-            if i % 3 == 0:
-                sampled_path_tiles.add((tc, tr))
+            reserved_path_tiles.add((tc, tr))
+            last_dir = d
 
-    return wps, start, stop_tiles | sampled_path_tiles
+    return wps, start, stop_tiles | reserved_path_tiles
 
-def apply_collision_dodges(pokemon, plans, phases, blocked, gc, gr, rounds=8):
+def apply_collision_dodges(pokemon, plans, phases, blocked, gc, gr, rounds=12):
     """Insert sidestep dodges at idle waypoints near collision events."""
     for _ in range(rounds):
         active = [i for i, wps in enumerate(plans) if wps and plan_total_duration(wps) > 0]
@@ -768,17 +813,18 @@ def apply_collision_dodges(pokemon, plans, phases, blocked, gc, gr, rounds=8):
                 for aj in range(ai + 1, len(active)):
                     j = active[aj]
                     xj, yj = pos[j]
-                    sep = (pokemon[i]["dp"] + pokemon[j]["dp"]) * 0.4
+                    sep = (pokemon[i]["dp"] + pokemon[j]["dp"]) * COLLISION_BODY_RATIO
                     if (xi - xj) ** 2 + (yi - yj) ** 2 < sep * sep:
                         first = (t, i, j)
                         break
                 if first:
                     break
-            t += 0.5
+            t += 0.25
         if not first:
             break
         t_col, pi, pj = first
         vi = pi if plan_total_duration(plans[pi]) <= plan_total_duration(plans[pj]) else pj
+        oi = pj if vi == pi else pi
         wps = plans[vi]
         total = plan_total_duration(wps)
         t_plan = (t_col + phases[vi]) % total
@@ -790,26 +836,33 @@ def apply_collision_dodges(pokemon, plans, phases, blocked, gc, gr, rounds=8):
                     best_d, best_wi = d, wi
             acc += wp["dur"]
         if best_wi is None:
-            break
+            phases[vi] = (phases[vi] + total * 0.2) % total
+            continue
         iwp = wps[best_wi]
         cx, cr = int(iwp["x"] / TILE), int(iwp["y"] / TILE)
-        dodged = False
+        ox, oy = plan_position_at(plans[oi], t_col + phases[oi])
+        move_opts = []
         for dc, dr in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
             nc, nr = cx + dc, cr + dr
             if 0 <= nc < gc and 0 <= nr < gr and not blocked[nr][nc]:
                 nx, ny = (nc + 0.5) * TILE, (nr + 0.5) * TILE
-                h = max(0.3, iwp["dur"] * 0.35)
-                wps[best_wi:best_wi + 1] = [
-                    {"x": iwp["x"], "y": iwp["y"], "dir": "DOWN", "dur": h, "idle": True},
-                    {"x": nx, "y": ny, "dir": tile_dir(cx, cr, nc, nr), "dur": TILE_DUR},
-                    {"x": nx, "y": ny, "dir": "DOWN", "dur": 0.4, "idle": True},
-                    {"x": iwp["x"], "y": iwp["y"], "dir": tile_dir(nc, nr, cx, cr), "dur": TILE_DUR},
-                    {"x": iwp["x"], "y": iwp["y"], "dir": "DOWN", "dur": h, "idle": True},
-                ]
-                dodged = True
-                break
+                sep2 = (nx - ox) ** 2 + (ny - oy) ** 2
+                move_opts.append((sep2, nc, nr, nx, ny))
+        move_opts.sort(key=lambda v: v[0], reverse=True)
+        dodged = False
+        for _, nc, nr, nx, ny in move_opts:
+            h = max(0.25, min(0.8, iwp["dur"] * 0.45))
+            wps[best_wi:best_wi + 1] = [
+                {"x": iwp["x"], "y": iwp["y"], "dir": "DOWN", "dur": h, "idle": True},
+                {"x": nx, "y": ny, "dir": tile_dir(cx, cr, nc, nr), "dur": TILE_DUR},
+                {"x": nx, "y": ny, "dir": "DOWN", "dur": 0.35, "idle": True},
+                {"x": iwp["x"], "y": iwp["y"], "dir": tile_dir(nc, nr, cx, cr), "dur": TILE_DUR},
+                {"x": iwp["x"], "y": iwp["y"], "dir": "DOWN", "dur": h, "idle": True},
+            ]
+            dodged = True
+            break
         if not dodged:
-            wps[best_wi]["dur"] += 1.5
+            wps[best_wi]["dur"] += 0.9
 
 # ===================================================================
 # SVG generation
@@ -1173,7 +1226,7 @@ def main():
     # -- Plan pokemon routes --
     print("Planning routes...")
     best = None
-    for attempt in range(80):
+    for attempt in range(30):
         plans = [None] * len(pokemon)
         step_counts = [0] * len(pokemon)
         used_starts = []
@@ -1196,27 +1249,41 @@ def main():
                                       pk.get("water_mode", "land"), clearance,
                                       sprite_height=sp_height)
             bounds = pk.get("bounds")
-            wps, start, reserved = build_plan(nav_grid, gc, gr, rng, pk["n_legs"],
-                                              used_starts, all_reserved, bounds=bounds)
-            if not wps and bounds is not None:
-                # Fallback if region is over-constrained.
-                wps, start, reserved = build_plan(nav_grid, gc, gr, rng, pk["n_legs"],
-                                                  used_starts, all_reserved, bounds=None)
+            leg_candidates = []
+            for legs in (pk["n_legs"], max(3, pk["n_legs"] - 2), max(2, pk["n_legs"] // 2)):
+                if legs not in leg_candidates:
+                    leg_candidates.append(legs)
+            bound_candidates = [bounds]
+            if bounds is not None:
+                bound_candidates.append(None)
+            wps, start, reserved = [], None, set()
+            for b in bound_candidates:
+                for legs in leg_candidates:
+                    wps, start, reserved = build_plan(nav_grid, gc, gr, rng, legs,
+                                                      used_starts, all_reserved, bounds=b)
+                    if wps:
+                        break
+                if wps:
+                    break
             if not wps:
-                # Last resort: ignore spacing reservation for this pokemon.
-                wps, start, reserved = build_plan(nav_grid, gc, gr, rng, pk["n_legs"],
-                                                  used_starts, set(), bounds=None)
+                for legs in leg_candidates:
+                    wps, start, reserved = build_plan(nav_grid, gc, gr, rng, legs,
+                                                      used_starts, set(), bounds=None)
+                    if wps:
+                        break
             n_steps = sum(1 for s in wps if not s.get("idle"))
             plans[pid] = wps
             step_counts[pid] = n_steps
-            used_starts.append(start)
-            all_reserved |= reserved
+            if start is not None:
+                used_starts.append(start)
+            if reserved:
+                all_reserved |= reserved
             total_steps += n_steps
             if n_steps > 0:
                 nonzero_count += 1
             min_steps = n_steps if min_steps is None else min(min_steps, n_steps)
 
-        phases = optimize_phase_offsets(pokemon, plans, rng)
+        phases = optimize_phase_offsets(pokemon, plans, rng, tries=32, horizon=60.0, step=2.0)
         clash_count, closest2 = collision_score(pokemon, plans, phases, horizon=60.0, step=1.0)
         deficits = 0
         for pk, steps in zip(pokemon, step_counts):
@@ -1228,7 +1295,8 @@ def main():
                 target = 40
             if steps < target:
                 deficits += (target - steps)
-        score = (deficits, clash_count, -(nonzero_count), -(min_steps or 0), -total_steps, -closest2)
+        inactive = len(pokemon) - nonzero_count
+        score = (inactive, deficits, clash_count, -(min_steps or 0), -total_steps, -closest2)
         if best is None or score < best["score"]:
             best = {
                 "score": score,
@@ -1238,18 +1306,25 @@ def main():
                 "nonzero": nonzero_count,
                 "deficits": deficits,
             }
-        if deficits == 0 and clash_count == 0 and nonzero_count == len(pokemon):
+        if inactive == 0 and deficits == 0 and clash_count == 0:
             break
 
     plans = best["plans"]
-    phases = best["phases"]
-    apply_collision_dodges(pokemon, plans, phases, base_blocked, gc, gr)
+    phases = optimize_phase_offsets(pokemon, plans, rng, tries=70, horizon=80.0, step=0.5)
+    apply_collision_dodges(pokemon, plans, phases, base_blocked, gc, gr, rounds=14)
+    phases = optimize_phase_offsets(pokemon, plans, rng, tries=60, horizon=80.0, step=0.33)
+    strict_clashes, _strict_closest = collision_score(pokemon, plans, phases, horizon=80.0, step=0.25)
+    if strict_clashes > 0:
+        apply_collision_dodges(pokemon, plans, phases, base_blocked, gc, gr, rounds=18)
+        phases = optimize_phase_offsets(pokemon, plans, rng, tries=60, horizon=80.0, step=0.33)
+        strict_clashes, _strict_closest = collision_score(pokemon, plans, phases, horizon=80.0, step=0.25)
     for pk, wps in zip(pokemon, plans):
         walk_s = sum(s["dur"] for s in wps if not s.get("idle"))
         idle_s = sum(s["dur"] for s in wps if s.get("idle"))
         n_steps = sum(1 for s in wps if not s.get("idle"))
         print(f"  {pk['label']}: {n_steps} steps, walk={walk_s:.1f}s idle={idle_s:.1f}s")
-    print(f"  Collision score: {best['clashes']} (active={best['nonzero']}/{len(pokemon)})")
+    active_now = sum(1 for wps in plans if wps and plan_total_duration(wps) > 0)
+    print(f"  Collision score: {strict_clashes} (active={active_now}/{len(pokemon)})")
     print(f"  Route deficits: {best['deficits']}")
 
     # -- Generate SVG --
