@@ -6,8 +6,6 @@ import Projects from "@/components/Projects";
 import MediaAppearances from "@/components/MediaAppearances";
 import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
-import { IcaFloatClient } from "@/components/ClientWidgets";
-
 export default function Home() {
   return (
     <div className="bg-cream-50 min-h-screen">
@@ -36,7 +34,6 @@ export default function Home() {
         </main>
       </div>
 
-      <IcaFloatClient />
     </div>
   );
 }

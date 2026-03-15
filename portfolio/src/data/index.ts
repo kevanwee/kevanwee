@@ -4,7 +4,7 @@ export const personal = {
   title: "Computing & Law",
   institution: "Singapore Management University",
   description:
-    "I build systems at the intersection of law and technology –translating legal rules into intelligent, scalable software.",
+    "Building systems at the intersection of law and technology. Translating legal rules into intelligent, scalable software.",
   email: "kevan.wee.2023@scis.smu.edu.sg",
   linkedin: "https://www.linkedin.com/in/kevanwee/",
   github: "https://github.com/kevanwee",

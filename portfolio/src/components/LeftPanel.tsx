@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { personal } from "@/data";
 import dynamic from "next/dynamic";
 
@@ -16,10 +17,10 @@ const NAV_ITEMS = [
 ];
 
 export default function LeftPanel() {
-  const [activeId,   setActiveId]   = useState("about");
-  const [showModal,  setShowModal]  = useState(false);
+  const [activeId,  setActiveId]  = useState("about");
+  const [showModal, setShowModal] = useState(false);
+  const [icaLoaded, setIcaLoaded] = useState(false);
 
-  // active section detection
   useEffect(() => {
     const observers = NAV_ITEMS.map(({ id }) => {
       const el = document.getElementById(id);
@@ -39,98 +40,163 @@ export default function LeftPanel() {
   }, []);
 
   return (
-    <div className="flex h-full flex-col justify-between p-10 xl:p-14">
-      {/* Top: name + description */}
-      <div>
-        {/* Eyebrow */}
-        <p className="mb-5 flex items-center gap-3 text-xs font-medium uppercase tracking-widest text-warm-400">
-          <span className="h-px w-6 bg-warm-300" />
-          {personal.institution}
-        </p>
+    <div className="relative flex h-full flex-col overflow-hidden">
+      {/* Subtle side gradient accent */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(160deg, rgba(240,245,242,0.4) 0%, transparent 55%)",
+        }}
+      />
 
-        {/* Name */}
-        <h1 className="font-serif text-5xl font-bold leading-tight tracking-tight text-warm-900 xl:text-6xl">
-          {personal.name.split(" ")[0]}
-          <br />
-          <span className="italic text-sage-600">{personal.name.split(" ")[1]}</span>
-          <span className="text-warm-300">.</span>
-        </h1>
+      <div className="relative flex h-full flex-col justify-between px-10 py-12 xl:px-14 xl:py-14">
 
-        <p className="mt-3 text-sm font-semibold tracking-wide text-warm-600">
-          {personal.title}
-        </p>
+        {/* ── TOP ── */}
+        <div>
+          {/* Institution eyebrow */}
+          <p className="mb-8 flex items-center gap-2.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-warm-300">
+            <span className="h-px w-5 bg-warm-200" />
+            {personal.institution}
+          </p>
 
-        <p className="mt-5 max-w-xs text-sm leading-relaxed text-warm-400">
-          {personal.description}
-        </p>
+          {/* Name + Ica chibi */}
+          <div className="relative">
+            {/* Chibi — floats top-right of name block */}
+            {icaLoaded && (
+              <div
+                className="pointer-events-none absolute -right-2 -top-10 select-none"
+                style={{ width: 88, height: 88 }}
+              >
+                <Image
+                  src="/ica-chibi.png"
+                  alt="Ica"
+                  width={88}
+                  height={88}
+                  className="h-full w-full object-contain"
+                  style={{ mixBlendMode: "multiply" }}
+                  unoptimized
+                />
+              </div>
+            )}
+            {/* Preload check (invisible) */}
+            <img
+              src="/ica-chibi.png"
+              alt=""
+              className="hidden"
+              onLoad={() => setIcaLoaded(true)}
+            />
 
-        {/* Section nav */}
-        <nav className="mt-12" aria-label="Page sections">
-          <ul className="space-y-4">
-            {NAV_ITEMS.map(({ id, label }) => {
-              const active = activeId === id;
-              return (
-                <li key={id}>
-                  <button
-                    onClick={() => scrollTo(id)}
-                    className={`group flex items-center gap-4 text-xs font-medium uppercase tracking-widest transition-all duration-200 ${
-                      active ? "text-warm-900" : "text-warm-400 hover:text-warm-700"
-                    }`}
-                  >
-                    <span
-                      className={`h-px flex-shrink-0 transition-all duration-300 ${
+            <h1 className="font-serif text-5xl font-bold leading-[1.05] tracking-tight text-warm-900 xl:text-[3.5rem]">
+              {personal.name.split(" ")[0]}
+              <br />
+              <span className="italic text-sage-600">
+                {personal.name.split(" ")[1]}
+              </span>
+              <span className="text-warm-200">.</span>
+            </h1>
+
+            <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-warm-500">
+              {personal.title}
+            </p>
+          </div>
+
+          {/* Divider */}
+          <div className="my-6 h-px w-10 bg-cream-200" />
+
+          {/* Description */}
+          <p className="max-w-[220px] text-sm leading-relaxed text-warm-400">
+            {personal.description}
+          </p>
+
+          {/* ── Navigation ── */}
+          <nav className="mt-10" aria-label="Page sections">
+            <ul className="space-y-3.5">
+              {NAV_ITEMS.map(({ id, label }) => {
+                const active = activeId === id;
+                return (
+                  <li key={id}>
+                    <button
+                      onClick={() => scrollTo(id)}
+                      className={`group flex items-center gap-3.5 transition-all duration-200 ${
                         active
-                          ? "w-14 bg-warm-900"
-                          : "w-6 bg-warm-300 group-hover:w-10 group-hover:bg-warm-500"
+                          ? "text-warm-900"
+                          : "text-warm-300 hover:text-warm-700"
                       }`}
-                    />
-                    {label}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
-
-      {/* Bottom: CTAs + socials */}
-      <div className="space-y-6">
-        {/* Pokemon strip */}
-        <div className="w-full">
-          <PokemonWalker />
+                    >
+                      {/* Line indicator */}
+                      <span
+                        className={`block h-px flex-shrink-0 transition-all duration-300 ease-out ${
+                          active
+                            ? "w-12 bg-sage-500"
+                            : "w-5 bg-warm-200 group-hover:w-9 group-hover:bg-warm-400"
+                        }`}
+                      />
+                      {/* Label */}
+                      <span
+                        className={`text-[10px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 ${
+                          active ? "text-warm-900" : ""
+                        }`}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
 
-        {/* 3D portfolio button */}
-        <button
-          onClick={() => setShowModal(true)}
-          className="inline-flex items-center gap-2 rounded-sm border border-sage-200 bg-sage-50 px-4 py-2 text-xs font-medium text-sage-700 transition-all duration-200 hover:border-sage-400 hover:bg-sage-100 hover:shadow-md hover:-translate-y-px active:translate-y-0"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5" aria-hidden="true">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-            <line x1="8" y1="21" x2="16" y2="21" />
-            <line x1="12" y1="17" x2="12" y2="21" />
-          </svg>
-          3D Portfolio
-        </button>
+        {/* ── BOTTOM ── */}
+        <div>
+          {/* Pokemon strip — sits flush above socials */}
+          <div className="mb-5 w-full">
+            <PokemonWalker />
+          </div>
 
-        {/* Social icons */}
-        <div className="flex items-center gap-4">
-          <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-warm-400 transition-colors duration-200 hover:text-sage-600">
-            <LinkedInIcon />
-          </a>
-          <a href={personal.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-warm-400 transition-colors duration-200 hover:text-sage-600">
-            <GitHubIcon />
-          </a>
-          <a href={personal.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-warm-400 transition-colors duration-200 hover:text-sage-600">
-            <InstagramIcon />
-          </a>
-          <a href={`mailto:${personal.email}`} aria-label="Email" className="text-warm-400 transition-colors duration-200 hover:text-sage-600">
-            <EmailIcon />
-          </a>
+          {/* Social row + 3D button */}
+          <div className="flex items-center gap-5">
+            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+              className="text-warm-300 transition-all duration-200 hover:text-sage-600 hover:-translate-y-px">
+              <LinkedInIcon />
+            </a>
+            <a href={personal.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+              className="text-warm-300 transition-all duration-200 hover:text-sage-600 hover:-translate-y-px">
+              <GitHubIcon />
+            </a>
+            <a href={personal.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+              className="text-warm-300 transition-all duration-200 hover:text-sage-600 hover:-translate-y-px">
+              <InstagramIcon />
+            </a>
+            <a href={`mailto:${personal.email}`} aria-label="Email"
+              className="text-warm-300 transition-all duration-200 hover:text-sage-600 hover:-translate-y-px">
+              <EmailIcon />
+            </a>
+
+            {/* Separator */}
+            <span className="h-3 w-px bg-cream-200" />
+
+            {/* 3D portfolio */}
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-warm-300 transition-all duration-200 hover:text-sage-600"
+              title="View 3D portfolio"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5" aria-hidden="true">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+              3D
+            </button>
+          </div>
+
+          <p className="mt-4 text-[10px] text-warm-200">
+            © {new Date().getFullYear()} Kevan Wee
+          </p>
         </div>
-
-        {/* Copyright */}
-        <p className="text-xs text-warm-300">© {new Date().getFullYear()} Kevan Wee</p>
       </div>
 
       {showModal && (
