@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { personal } from "@/data";
 
@@ -13,35 +13,13 @@ const NAV_ITEMS = [
 ];
 
 interface LeftPanelProps {
+  activeSection: string;
+  onNavClick: (id: string) => void;
   onOpenModal: () => void;
 }
 
-export default function LeftPanel({ onOpenModal }: LeftPanelProps) {
-  const [activeId, setActiveId] = useState("about");
+export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: LeftPanelProps) {
   const [icaLoaded, setIcaLoaded] = useState(false);
-
-  useEffect(() => {
-    const observers = NAV_ITEMS.map(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveId(id);
-        },
-        { threshold: 0.25, rootMargin: "-10% 0px -60% 0px" }
-      );
-
-      obs.observe(el);
-      return obs;
-    });
-
-    return () => observers.forEach((o) => o?.disconnect());
-  }, []);
-
-  const scrollTo = useCallback((id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  }, []);
 
   return (
     <aside className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:flex-col lg:justify-between lg:py-20 xl:py-24">
@@ -88,14 +66,14 @@ export default function LeftPanel({ onOpenModal }: LeftPanelProps) {
           {personal.description}
         </p>
 
-        <nav className="mt-12" aria-label="Page sections">
+        <nav className="mt-12 hidden lg:block" aria-label="Page sections">
           <ul className="space-y-4">
             {NAV_ITEMS.map(({ id, label }) => {
-              const active = activeId === id;
+              const active = activeSection === id;
               return (
                 <li key={id}>
                   <button
-                    onClick={() => scrollTo(id)}
+                    onClick={() => onNavClick(id)}
                     className={`group flex items-center gap-4 transition-all duration-200 ${
                       active ? "text-warm-900" : "text-warm-300 hover:text-warm-700"
                     }`}

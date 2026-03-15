@@ -2,8 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
-import Nav from "@/components/Nav";
-import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
@@ -12,11 +10,16 @@ import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
 import { personal } from "@/data";
 
-const PortfolioModal = dynamic(() => import("@/components/PortfolioModal"), { ssr: false });
+const PortfolioModal = dynamic(() => import("@/components/PortfolioModal"), {
+  ssr: false,
+});
+
+const SECTIONS = ["about", "experience", "projects", "media", "contact"] as const;
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [activeSection, setActiveSection] = useState<string>("about");
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     setMousePos({ x: e.clientX, y: e.clientY });
@@ -27,9 +30,33 @@ export default function Home() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
 
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    SECTIONS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        { rootMargin: "-30% 0px -60% 0px", threshold: 0 }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const scrollToSection = useCallback((id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   return (
     <div className="min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900">
-      {/* Subtle sage mouse-follow gradient */}
       <div
         className="pointer-events-none fixed inset-0 z-0 transition-all duration-500"
         aria-hidden="true"
@@ -38,27 +65,16 @@ export default function Home() {
         }}
       />
 
-      {/* Mobile nav */}
-      <div className="relative z-10 lg:hidden">
-        <Nav />
-      </div>
-
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
-
-          {/* Left panel */}
           <div className="pt-16 pb-8 lg:pt-0 lg:pb-0 lg:w-[45%]">
-            {/* Mobile hero */}
-            <div className="lg:hidden">
-              <Hero />
-            </div>
-            {/* Desktop sticky panel */}
-            <div className="hidden lg:block">
-              <LeftPanel onOpenModal={() => setShowModal(true)} />
-            </div>
+            <LeftPanel
+              activeSection={activeSection}
+              onNavClick={scrollToSection}
+              onOpenModal={() => setShowModal(true)}
+            />
           </div>
 
-          {/* Right — scrollable sections */}
           <main className="lg:w-[55%] lg:py-24">
             <About />
             <Experience />
@@ -66,7 +82,6 @@ export default function Home() {
             <MediaAppearances />
             <Contact />
           </main>
-
         </div>
       </div>
 
