@@ -59,7 +59,18 @@ export default function ExperienceSection() {
                       : "font-medium text-warm-400 hover:bg-cream-100 hover:text-warm-700"
                   }`}
                 >
-                  {TAB_LABELS[exp.id] ?? exp.company.split(" ")[0]}
+                  <span className="flex items-center gap-2">
+                    {exp.logo && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={exp.logo}
+                        alt=""
+                        aria-hidden="true"
+                        className="h-4 w-4 rounded-sm object-contain flex-shrink-0"
+                      />
+                    )}
+                    {TAB_LABELS[exp.id] ?? exp.company.split(" ")[0]}
+                  </span>
                 </button>
               );
             })}

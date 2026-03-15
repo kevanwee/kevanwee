@@ -33,12 +33,22 @@ export default function Projects() {
                     )}
                   </div>
                   {project.collab && (
-                    <p className="mb-3 text-xs text-warm-400">
-                      In collaboration with{" "}
-                      <span className="font-medium text-warm-600">
-                        {project.collab}
-                      </span>
-                    </p>
+                    <div className="mb-3 flex items-center gap-2">
+                      <p className="text-xs text-warm-400">
+                        In collaboration with{" "}
+                        <span className="font-medium text-warm-600">
+                          {project.collab}
+                        </span>
+                      </p>
+                      {project.collabLogo && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={project.collabLogo}
+                          alt={project.collab}
+                          className="h-5 w-auto rounded object-contain opacity-80"
+                        />
+                      )}
+                    </div>
                   )}
                   <p className="text-sm leading-relaxed text-warm-500">
                     {project.description}

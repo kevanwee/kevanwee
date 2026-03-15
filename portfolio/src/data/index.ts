@@ -42,11 +42,13 @@ export interface Experience {
   url: string;
   bullets: string[];
   proSono?: boolean;
+  logo?: string;
 }
 
 export const experiences: Experience[] = [
   {
     id: "smu-scis",
+    logo: "/logos/smu.jpg",
     company: "SMU School of Computing & Information Systems",
     role: "Research Assistant",
     subtitle: "DeFi Security & Software Supply Chain Security",
@@ -60,6 +62,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "osborne",
+    logo: "/logos/osborneclarke.png",
     company: "Osborne Clarke",
     role: "Legal Intern",
     subtitle: "Corporate + Technology, Media, and Telecom",
@@ -74,6 +77,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "pwc",
+    logo: "/logos/pwc.jpg",
     company: "PricewaterhouseCoopers LLP",
     role: "NewLaw Intern",
     subtitle: "Legal Management Consulting",
@@ -89,6 +93,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "imda",
+    logo: "/logos/imda.png",
     company: "Infocomm Media Development Authority",
     role: "Data Analyst",
     subtitle: "",
@@ -102,6 +107,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "smu-law",
+    logo: "/logos/smu.jpg",
     company: "SMU Yong Pung How School of Law",
     role: "Research Assistant",
     subtitle: "Centre for Digital Law",
@@ -129,6 +135,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "rnt",
+    logo: "/logos/rajah_tann_technologies_logo.jpg",
     company: "Rajah & Tann Technologies",
     role: "LegalTech Intern",
     subtitle: "",
@@ -143,6 +150,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "tito",
+    logo: "/logos/titoisaac.jpg",
     company: "Tito Isaac & Co LLP",
     role: "Legal Intern",
     subtitle: "Litigation & Dispute Resolution",
@@ -155,6 +163,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "dis",
+    logo: "/logos/dis.jpg",
     company: "The Digital & Intelligence Service",
     role: "Senior Geospatial Mapper",
     subtitle: "Operations Specialist",
@@ -176,6 +185,7 @@ export interface FeaturedProject {
   external: string | null;
   isPrivate: boolean;
   collab: string | null;
+  collabLogo?: string;
 }
 
 export interface OtherProject {
@@ -249,6 +259,7 @@ export const featuredProjects: FeaturedProject[] = [
     external: null,
     isPrivate: true,
     collab: "Allen & Overy Shearman",
+    collabLogo: "/logos/allenandoveryshearman.png",
   },
   {
     id: "copycat",
