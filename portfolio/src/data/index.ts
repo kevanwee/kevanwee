@@ -121,6 +121,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "cjc",
+    logo: "/logos/state-courts.png",
     company: "State Courts · The Community Justice Centre",
     role: "Legal Technologist & OSLAS Volunteer",
     subtitle: "On-site Legal Advice Scheme",

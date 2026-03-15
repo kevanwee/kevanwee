@@ -41,12 +41,14 @@ export default function Projects() {
                         </span>
                       </p>
                       {project.collabLogo && (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={project.collabLogo}
-                          alt={project.collab}
-                          className="h-5 w-auto rounded object-contain opacity-80"
-                        />
+                        <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-cream-200 bg-white p-0.5">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={project.collabLogo}
+                            alt={project.collab ?? ""}
+                            className="h-full w-full object-contain"
+                          />
+                        </span>
                       )}
                     </div>
                   )}
