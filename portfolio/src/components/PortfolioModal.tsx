@@ -27,7 +27,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
   return (
     /* Backdrop */
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-warm-900/70 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-warm-900/70 backdrop-blur-sm p-2 sm:p-4"
       onClick={onClose}
       aria-modal="true"
       role="dialog"
@@ -35,7 +35,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
     >
       {/* Laptop shell — stop clicks propagating */}
       <div
-        className="relative w-full max-w-3xl"
+        className="relative w-full max-w-[90vw] xl:max-w-5xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Lid / screen bezel */}
@@ -43,7 +43,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
           {/* Camera dot */}
           <div className="mx-auto mb-3 h-1.5 w-1.5 rounded-full bg-warm-600" />
           {/* Screen area */}
-          <div className="overflow-hidden rounded-t-lg bg-black" style={{ aspectRatio: "16/10" }}>
+          <div className="overflow-hidden rounded-t-lg bg-black" style={{ aspectRatio: "16/10", maxHeight: "70vh" }}>
             <iframe
               src={url}
               className="h-full w-full border-0"
