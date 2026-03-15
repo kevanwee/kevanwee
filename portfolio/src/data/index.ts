@@ -13,7 +13,7 @@ export const personal = {
 };
 
 export const aboutParagraphs = [
-  "I'm a penultimate-year undergraduate at Singapore Management University reading Computing & Law, with a second major in Cybersecurity. My GPA is 3.6/4.0 (magna cum laude).",
+  "I'm a penultimate-year undergraduate at Singapore Management University reading Computing & Law, with a second major in Cybersecurity.",
   "My work spans the intersection of law and software — I design and build tools that translate legal rules into automated systems. This covers platform regulation, IP enforcement, data protection compliance, contract lifecycle management, and court document automation.",
   "I volunteer with Singapore's Community Justice Centre automating court documents with Thomson Reuters, and assist at the State Courts' On-Site Legal Advice Scheme, triaging and routing cases for unrepresented litigants.",
   "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital & Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
