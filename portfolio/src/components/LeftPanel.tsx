@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { personal } from "@/data";
 
@@ -19,40 +18,24 @@ interface LeftPanelProps {
 }
 
 export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: LeftPanelProps) {
-  const [icaLoaded, setIcaLoaded] = useState(false);
-
   return (
     <aside className="lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
       <div>
-        <div className="relative">
-          {icaLoaded && (
-            <div
-              className="pointer-events-none absolute -right-3 -top-10 select-none"
-              style={{ width: 108, height: 108 }}
-            >
+        <div>
+          <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">
+            <span className="block">{personal.name.split(" ")[0]}</span>
+            <span className="inline-flex items-end gap-1">
+              <span className="italic text-sage-600">{personal.name.split(" ")[1]}</span>
+              <span className="text-warm-200">.</span>
               <Image
                 src="/cloud-chibi.png"
                 alt=""
-                width={108}
-                height={108}
-                className="h-full w-full object-contain"
+                width={82}
+                height={84}
+                className="-ml-1.5 mb-1 h-[84px] w-auto select-none object-contain"
                 unoptimized
               />
-            </div>
-          )}
-
-          <img
-            src="/cloud-chibi.png"
-            alt=""
-            className="hidden"
-            onLoad={() => setIcaLoaded(true)}
-          />
-
-          <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">
-            {personal.name.split(" ")[0]}
-            <br />
-            <span className="italic text-sage-600">{personal.name.split(" ")[1]}</span>
-            <span className="text-warm-200">.</span>
+            </span>
           </h1>
 
           <p className="mt-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-500">

@@ -12,6 +12,13 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  @media (pointer: fine) {
+    html.diancie-cursor,
+    html.diancie-cursor * {
+      cursor: none !important;
+    }
+  }
+
   ::selection {
     background-color: rgb(107 159 137 / 0.25);
     color: #2c5244;

@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import MediaAppearances from "@/components/MediaAppearances";
 import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
+import DiancieCursor from "@/components/DiancieCursor";
 import { personal } from "@/data";
 
 const PortfolioModal = dynamic(() => import("@/components/PortfolioModal"), {
@@ -67,6 +68,7 @@ export default function Home() {
           background: `radial-gradient(600px at ${mousePos.x}px ${mousePos.y}px, rgba(132,169,140,0.07), transparent 80%)`,
         }}
       />
+      <DiancieCursor />
 
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
