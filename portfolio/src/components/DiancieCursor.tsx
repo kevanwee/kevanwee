@@ -64,22 +64,22 @@ function directionFromDelta(dx: number, dy: number, fallback: number) {
   const oct = Math.round(Math.atan2(dy, dx) / (Math.PI / 4));
   switch (oct) {
     case 0:
-      return DIR_E;
+      return DIR_W;
     case 1:
-      return DIR_SE;
+      return DIR_SW;
     case 2:
       return DIR_S;
     case 3:
-      return DIR_SW;
+      return DIR_SE;
     case 4:
     case -4:
-      return DIR_W;
+      return DIR_E;
     case -3:
-      return DIR_NW;
+      return DIR_NE;
     case -2:
       return DIR_N;
     case -1:
-      return DIR_NE;
+      return DIR_NW;
     default:
       return fallback;
   }
@@ -108,6 +108,7 @@ export default function DiancieCursor() {
   const lastMoveAtRef = useRef(0);
   const lastMouseRef = useRef({ x: 0, y: 0 });
   const strikeUntilRef = useRef(0);
+  const dirRowRef = useRef(DIR_S);
   const rafRef = useRef(0);
 
   useEffect(() => {
@@ -124,8 +125,8 @@ export default function DiancieCursor() {
     const now = performance.now();
     lastMoveAtRef.current = now;
 
-    const setModeWithReset = (next: Mode) => {
-      if (modeRef.current === next) return;
+    const setModeWithReset = (next: Mode, force = false) => {
+      if (!force && modeRef.current === next) return;
       modeRef.current = next;
       frameRef.current = 0;
       frameElapsedRef.current = 0;
@@ -143,7 +144,11 @@ export default function DiancieCursor() {
       lastMoveAtRef.current = performance.now();
       setPos(nextPos);
       setReady(true);
-      setDirRow((prev) => directionFromDelta(dx, dy, prev));
+      const nextDir = directionFromDelta(dx, dy, dirRowRef.current);
+      if (nextDir !== dirRowRef.current) {
+        dirRowRef.current = nextDir;
+        setDirRow(nextDir);
+      }
 
       if (modeRef.current !== "strike") {
         setModeWithReset("walk");
@@ -152,7 +157,7 @@ export default function DiancieCursor() {
 
     const onMouseDown = () => {
       strikeUntilRef.current = performance.now() + strikeLengthMs;
-      setModeWithReset("strike");
+      setModeWithReset("strike", true);
     };
 
     const tick = (ts: number) => {
@@ -223,22 +228,46 @@ export default function DiancieCursor() {
   const bgY = -(row * anim.frameHeight * SPRITE_SCALE);
 
   return (
-    <div
-      aria-hidden="true"
-      style={{
-        position: "fixed",
-        left: pos.x - width * 0.45,
-        top: pos.y - height * 0.72,
-        width,
-        height,
-        pointerEvents: "none",
-        zIndex: 80,
-        backgroundImage: `url(${anim.src})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: `${anim.frameWidth * anim.durations.length * SPRITE_SCALE}px ${anim.frameHeight * anim.rows * SPRITE_SCALE}px`,
-        backgroundPosition: `${bgX}px ${bgY}px`,
-        imageRendering: "pixelated",
-      }}
-    />
+    <>
+      <svg
+        aria-hidden="true"
+        width="18"
+        height="24"
+        viewBox="0 0 18 24"
+        style={{
+          position: "fixed",
+          left: pos.x - 1,
+          top: pos.y - 1,
+          pointerEvents: "none",
+          zIndex: 79,
+          filter: "drop-shadow(0 1px 1px rgba(0,0,0,0.22))",
+        }}
+      >
+        <path
+          d="M2 1L2 20L7 15L10 22L13 20L10 13L17 13Z"
+          fill="#FFFFFF"
+          stroke="#1F2937"
+          strokeWidth="1.2"
+          strokeLinejoin="round"
+        />
+      </svg>
+      <div
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          left: pos.x - width * 0.45,
+          top: pos.y - height * 0.72,
+          width,
+          height,
+          pointerEvents: "none",
+          zIndex: 80,
+          backgroundImage: `url(${anim.src})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: `${anim.frameWidth * anim.durations.length * SPRITE_SCALE}px ${anim.frameHeight * anim.rows * SPRITE_SCALE}px`,
+          backgroundPosition: `${bgX}px ${bgY}px`,
+          imageRendering: "pixelated",
+        }}
+      />
+    </>
   );
 }
