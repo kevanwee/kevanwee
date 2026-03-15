@@ -27,7 +27,7 @@ export default function About() {
 
       {/* Education card */}
       <div className="mt-10">
-        <div className="inline-flex items-start gap-4 rounded-sm border border-cream-200 bg-white p-4 transition-colors hover:border-sage-200">
+        <div className="inline-flex items-start gap-4 rounded-2xl border border-cream-200 bg-white p-4 transition-colors hover:border-sage-200">
           <div className="mt-0.5 flex-shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-sage-400" fill="none"
               viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">

@@ -27,7 +27,7 @@ export const achievements = [
 
 export const education = {
   institution: "Singapore Management University",
-  degree: "B.Sc. (Hons) Computing & Law",
+  degree: "B.Sc. Computing & Law",
   secondMajor: "2nd Major in Cybersecurity",
   expected: "Aug 2023 – May 2027",
 };
