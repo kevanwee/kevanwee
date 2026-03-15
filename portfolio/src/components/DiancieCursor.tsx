@@ -16,8 +16,8 @@ const TICK_MS = 16;
 const SLEEP_AFTER_MS = 2600;
 const IDLE_AFTER_MS = 320;
 const SPRITE_SCALE = 1.15;
-const CURSOR_ANCHOR_X = 0.5;
-const CURSOR_ANCHOR_Y = 0.34;
+const CURSOR_ANCHOR_X = 0.46;
+const CURSOR_ANCHOR_Y = 0.22;
 
 const DIR_S = 0;
 const DIR_SW = 1;
@@ -96,7 +96,6 @@ export default function DiancieCursor() {
   const [mode, setMode] = useState<Mode>("idle");
   const [frame, setFrame] = useState(0);
   const [dirRow, setDirRow] = useState(DIR_S);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [spritePos, setSpritePos] = useState({ x: 0, y: 0 });
 
   const strikeLengthMs = useMemo(
@@ -111,7 +110,6 @@ export default function DiancieCursor() {
   const lastMoveAtRef = useRef(0);
   const lastMouseRef = useRef({ x: 0, y: 0 });
   const targetPosRef = useRef({ x: 0, y: 0 });
-  const cursorPosRef = useRef({ x: 0, y: 0 });
   const spritePosRef = useRef({ x: 0, y: 0 });
   const velocityRef = useRef({ x: 0, y: 0 });
   const strikeUntilRef = useRef(0);
@@ -153,9 +151,7 @@ export default function DiancieCursor() {
       lastMoveAtRef.current = performance.now();
       if (!readyRef.current) {
         readyRef.current = true;
-        cursorPosRef.current = nextPos;
         spritePosRef.current = nextPos;
-        setCursorPos(nextPos);
         setSpritePos(nextPos);
         setReady(true);
       }
@@ -193,14 +189,8 @@ export default function DiancieCursor() {
       const nowMs = performance.now();
       const inactiveFor = nowMs - lastMoveAtRef.current;
       const target = targetPosRef.current;
-      const cursor = cursorPosRef.current;
       const sprite = spritePosRef.current;
       const followAlpha = 1 - Math.exp(-dt / 40);
-
-      if (Math.abs(target.x - cursor.x) > 0.01 || Math.abs(target.y - cursor.y) > 0.01) {
-        cursorPosRef.current = target;
-        setCursorPos(target);
-      }
 
       const nextSprite = {
         x: sprite.x + (target.x - sprite.x) * followAlpha,
@@ -273,48 +263,23 @@ export default function DiancieCursor() {
   const bgY = -(row * anim.frameHeight * SPRITE_SCALE);
 
   return (
-    <>
-      <svg
-        aria-hidden="true"
-        width="18"
-        height="24"
-        viewBox="0 0 18 24"
-        style={{
-          position: "fixed",
-          left: 0,
-          top: 0,
-          transform: `translate3d(${cursorPos.x - 1}px, ${cursorPos.y - 1}px, 0)`,
-          pointerEvents: "none",
-          zIndex: 79,
-          filter: "drop-shadow(0 1px 1px rgba(0,0,0,0.22))",
-        }}
-      >
-        <path
-          d="M2 1L2 20L7 15L10 22L13 20L10 13L17 13Z"
-          fill="#FFFFFF"
-          stroke="#1F2937"
-          strokeWidth="1.2"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <div
-        aria-hidden="true"
-        style={{
-          position: "fixed",
-          left: 0,
-          top: 0,
-          transform: `translate3d(${spritePos.x - width * CURSOR_ANCHOR_X}px, ${spritePos.y - height * CURSOR_ANCHOR_Y}px, 0)`,
-          width,
-          height,
-          pointerEvents: "none",
-          zIndex: 80,
-          backgroundImage: `url(${anim.src})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: `${anim.frameWidth * anim.durations.length * SPRITE_SCALE}px ${anim.frameHeight * anim.rows * SPRITE_SCALE}px`,
-          backgroundPosition: `${bgX}px ${bgY}px`,
-          imageRendering: "pixelated",
-        }}
-      />
-    </>
+    <div
+      aria-hidden="true"
+      style={{
+        position: "fixed",
+        left: 0,
+        top: 0,
+        transform: `translate3d(${spritePos.x - width * CURSOR_ANCHOR_X}px, ${spritePos.y - height * CURSOR_ANCHOR_Y}px, 0)`,
+        width,
+        height,
+        pointerEvents: "none",
+        zIndex: 80,
+        backgroundImage: `url(${anim.src})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: `${anim.frameWidth * anim.durations.length * SPRITE_SCALE}px ${anim.frameHeight * anim.rows * SPRITE_SCALE}px`,
+        backgroundPosition: `${bgX}px ${bgY}px`,
+        imageRendering: "pixelated",
+      }}
+    />
   );
 }
