@@ -4,10 +4,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="border-t border-cream-200 px-6 py-24 md:px-10"
+      className="scroll-mt-24 border-t border-cream-200 pt-24 pb-24"
       aria-label="Contact"
     >
-      <div className="mx-auto max-w-4xl">
+      <div>
         <div className="max-w-lg">
           <h2 className="mb-4 font-serif text-3xl font-bold text-warm-900">
             Get in touch

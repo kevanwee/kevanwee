@@ -30,10 +30,10 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="scroll-mt-20 border-t border-cream-200 px-6 py-24 md:px-10"
+      className="mb-24 scroll-mt-24 border-t border-cream-200 pt-24 lg:mb-36"
       aria-label="Work Experience"
     >
-      <div className="mx-auto max-w-4xl">
+      <div>
         <h2 className="mb-12 font-serif text-3xl font-bold text-warm-900">
           Experience
         </h2>

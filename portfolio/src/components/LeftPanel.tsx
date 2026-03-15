@@ -39,26 +39,10 @@ export default function LeftPanel({ onOpenModal }: LeftPanelProps) {
   }, []);
 
   return (
-    <div className="relative flex h-full flex-col overflow-hidden">
-      {/* Subtle side gradient accent */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(160deg, rgba(240,245,242,0.4) 0%, transparent 55%)",
-        }}
-      />
+    <aside className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:flex-col lg:justify-between lg:py-24">
 
-      <div className="relative flex h-full flex-col justify-between px-10 py-12 xl:px-14 xl:py-14">
-
-        {/* ── TOP ── */}
-        <div>
-          {/* Institution eyebrow */}
-          <p className="mb-8 flex items-center gap-2.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-warm-300">
-            <span className="h-px w-5 bg-warm-200" />
-            {personal.institution}
-          </p>
-
+      {/* ── TOP ── */}
+      <div>
           {/* Name + chibi */}
           <div className="relative">
             {/* Cloud chibi — floats top-right of name block */}
@@ -190,9 +174,8 @@ export default function LeftPanel({ onOpenModal }: LeftPanelProps) {
             © {new Date().getFullYear()} Kevan Wee
           </p>
         </div>
-      </div>
 
-    </div>
+    </aside>
   );
 }
 
