@@ -1,6 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import { personal } from "@/data";
+import dynamic from "next/dynamic";
+
+const PortfolioModal = dynamic(() => import("@/components/PortfolioModal"), { ssr: false });
 
 export default function Hero() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <section className="flex min-h-screen flex-col justify-center px-6 pt-24 pb-16 md:px-10">
       <div className="mx-auto w-full max-w-4xl">
@@ -55,13 +63,10 @@ export default function Hero() {
             View résumé
           </a>
 
-          <a
-            href={personal.funPortfolio}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-warm-400 underline underline-offset-4 decoration-warm-200 transition-colors hover:text-sage-600 hover:decoration-sage-300"
+          <button
+            onClick={() => setShowModal(true)}
+            className="inline-flex items-center gap-2 rounded-sm border border-sage-200 bg-sage-50 px-4 py-2.5 text-sm font-medium text-sage-700 transition-all hover:border-sage-400 hover:bg-sage-100 hover:shadow-sm"
           >
-            3D portfolio
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -70,14 +75,18 @@ export default function Hero() {
               strokeWidth={1.5}
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="h-3 w-3"
+              className="h-3.5 w-3.5"
               aria-hidden="true"
             >
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
             </svg>
-          </a>
+            3D Portfolio
+          </button>
+          {showModal && (
+            <PortfolioModal url={personal.funPortfolio} onClose={() => setShowModal(false)} />
+          )}
 
           <div className="flex items-center gap-3 pl-1">
             <a

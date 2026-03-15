@@ -4,7 +4,7 @@ export const personal = {
   title: "Computing & Law",
   institution: "Singapore Management University",
   description:
-    "I build systems at the intersection of law and technology — translating legal rules into intelligent, scalable software.",
+    "I build systems at the intersection of law and technology –translating legal rules into intelligent, scalable software.",
   email: "kevan.wee.2023@scis.smu.edu.sg",
   linkedin: "https://www.linkedin.com/in/kevanwee/",
   github: "https://github.com/kevanwee",
@@ -14,25 +14,22 @@ export const personal = {
 
 export const aboutParagraphs = [
   "I'm a penultimate-year undergraduate at Singapore Management University reading Computing & Law, with a second major in Cybersecurity.",
-  "My work spans the intersection of law and software — I design and build tools that translate legal rules into automated systems. This covers platform regulation, IP enforcement, data protection compliance, contract lifecycle management, and court document automation.",
-  "I volunteer with Singapore's Community Justice Centre automating court documents with Thomson Reuters, and assist at the State Courts' On-Site Legal Advice Scheme, triaging and routing cases for unrepresented litigants.",
-  "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital & Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
+  "My work spans the intersection of law and software. I design and build tools that translate legal rules into automated systems, covering platform regulation, IP enforcement, data protection compliance, contract lifecycle management, and court document automation.",
+  "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital and Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
 ];
 
 export const achievements = [
-  "SMU Legal Innovation & Technology Hackathon 2025 — Ministry of Law Track Winner & Finalist",
-  "DBS × SG Courts Hackathon for a Better World 2024 — Most Innovative",
+  "SMU Legal Innovation & Technology Hackathon 2025 –Ministry of Law Track Winner & Finalist",
+  "DBS × SG Courts Hackathon for a Better World 2024 –Most Innovative",
   "RelativityOne Certified Professional",
-  "Teaching Assistant — IS210 Business Process Analysis & Solutioning; IS215 Digital Business: Technologies & Transformation",
+  "Teaching Assistant –IS210 Business Process Analysis & Solutioning; IS215 Digital Business: Technologies & Transformation",
 ];
 
 export const education = {
   institution: "Singapore Management University",
   degree: "B.Sc. (Hons) Computing & Law",
   secondMajor: "2nd Major in Cybersecurity",
-  gpa: "3.6 / 4.0",
-  honour: "Magna Cum Laude",
-  expected: "Aug 2023 — May 2027",
+  expected: "Aug 2023 – May 2027",
 };
 
 export interface Experience {
@@ -53,7 +50,7 @@ export const experiences: Experience[] = [
     company: "SMU School of Computing & Information Systems",
     role: "Research Assistant",
     subtitle: "DeFi Security & Software Supply Chain Security",
-    period: "Jan 2026 — Present",
+    period: "Jan 2026 – Present",
     type: "Part-time",
     url: "https://scis.smu.edu.sg/",
     bullets: [
@@ -66,7 +63,7 @@ export const experiences: Experience[] = [
     company: "Osborne Clarke",
     role: "Legal Intern",
     subtitle: "Corporate + Technology, Media, and Telecom",
-    period: "Dec 2025 — Jan 2026",
+    period: "Dec 2025 – Jan 2026",
     type: "Internship",
     url: "https://www.osborneclarke.com/",
     bullets: [
@@ -80,7 +77,7 @@ export const experiences: Experience[] = [
     company: "PricewaterhouseCoopers LLP",
     role: "NewLaw Intern",
     subtitle: "Legal Management Consulting",
-    period: "May 2025 — Aug 2025",
+    period: "May 2025 – Aug 2025",
     type: "Internship",
     url: "https://www.pwc.com/sg/",
     bullets: [
@@ -95,7 +92,7 @@ export const experiences: Experience[] = [
     company: "Infocomm Media Development Authority",
     role: "Data Analyst",
     subtitle: "",
-    period: "May 2025 — Jun 2025",
+    period: "May 2025 – Jun 2025",
     type: "Freelance",
     url: "https://www.imda.gov.sg/",
     bullets: [
@@ -107,7 +104,7 @@ export const experiences: Experience[] = [
     company: "SMU Yong Pung How School of Law",
     role: "Research Assistant",
     subtitle: "Centre for Digital Law",
-    period: "Dec 2024 — Aug 2025",
+    period: "Dec 2024 – Aug 2025",
     type: "Part-time",
     url: "https://law.smu.edu.sg/",
     bullets: [
@@ -120,7 +117,7 @@ export const experiences: Experience[] = [
     company: "State Courts · The Community Justice Centre",
     role: "Legal Technologist & OSLAS Volunteer",
     subtitle: "On-site Legal Advice Scheme",
-    period: "Oct 2024 — Jan 2026",
+    period: "Oct 2024 – Jan 2026",
     type: "Pro Bono",
     url: "https://cjc.org.sg/",
     proSono: true,
@@ -134,7 +131,7 @@ export const experiences: Experience[] = [
     company: "Rajah & Tann Technologies",
     role: "LegalTech Intern",
     subtitle: "",
-    period: "Jun 2024 — Nov 2024",
+    period: "Jun 2024 – Nov 2024",
     type: "Internship",
     url: "https://www.rajahtanntech.com/",
     bullets: [
@@ -148,7 +145,7 @@ export const experiences: Experience[] = [
     company: "Tito Isaac & Co LLP",
     role: "Legal Intern",
     subtitle: "Litigation & Dispute Resolution",
-    period: "Apr 2023 — May 2023",
+    period: "Apr 2023 – May 2023",
     type: "Internship",
     url: "#",
     bullets: [
@@ -160,7 +157,7 @@ export const experiences: Experience[] = [
     company: "The Digital & Intelligence Service",
     role: "Senior Geospatial Mapper",
     subtitle: "Operations Specialist",
-    period: "Jan 2021 — Apr 2023",
+    period: "Jan 2021 – Apr 2023",
     type: "Full-time (NS)",
     url: "https://www.mindef.gov.sg/",
     bullets: [
@@ -207,7 +204,7 @@ export const mediaAppearances: MediaAppearance[] = [
     type: "Feature",
   },
   {
-    outlet: "SMU — School of Computing and Information Systems",
+    outlet: "SMU –School of Computing and Information Systems",
     title: "As the new semester approaches, it also marks the bittersweet end of internship with PwC Singapore for BSc (Computing and Law) student...",
     description: "",
     date: "2025",
@@ -215,7 +212,7 @@ export const mediaAppearances: MediaAppearance[] = [
     type: "Feature",
   },
   {
-    outlet: "SMU — School of Computing and Information Systems",
+    outlet: "SMU –School of Computing and Information Systems",
     title: "BSc (Computing and Law) student Kevan Wee's internship with Rajah & Tann Technologies...",
     description: "",
     date: "2024",
@@ -223,7 +220,7 @@ export const mediaAppearances: MediaAppearance[] = [
     type: "Feature",
   },
   {
-    outlet: "SMU — School of Computing and Information Systems",
+    outlet: "SMU –School of Computing and Information Systems",
     title: "The end of internship doesn't always mean the end of your time there. BSc (Computing and Law) student...",
     description: "",
     date: "2024",

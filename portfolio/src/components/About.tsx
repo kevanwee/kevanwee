@@ -35,16 +35,7 @@ export default function About() {
               </p>
               <p className="mt-0.5 text-xs text-warm-600">{education.degree}</p>
               <p className="text-xs text-warm-500">{education.secondMajor}</p>
-              <div className="mt-3 flex items-center gap-3">
-                <span className="text-xs font-medium text-sage-600">
-                  GPA {education.gpa}
-                </span>
-                <span className="text-warm-300">·</span>
-                <span className="text-xs italic text-warm-500">
-                  {education.honour}
-                </span>
-              </div>
-              <p className="mt-1 text-xs text-warm-400">{education.expected}</p>
+              <p className="mt-3 text-xs text-warm-400">{education.expected}</p>
             </div>
 
             {/* Recognition */}
