@@ -7,7 +7,7 @@ const memberships = [
   {
     org: "LegalQuants",
     role: "Member",
-    url: null,
+    url: "https://www.legalquants.com/lawyers/kevan-wee",
   },
 ];
 

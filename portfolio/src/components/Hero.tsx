@@ -55,6 +55,30 @@ export default function Hero() {
             View résumé
           </a>
 
+          <a
+            href={personal.funPortfolio}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-warm-400 underline underline-offset-4 decoration-warm-200 transition-colors hover:text-sage-600 hover:decoration-sage-300"
+          >
+            3D portfolio
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-3 w-3"
+              aria-hidden="true"
+            >
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+
           <div className="flex items-center gap-3 pl-1">
             <a
               href={personal.linkedin}

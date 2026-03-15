@@ -188,6 +188,27 @@ export interface OtherProject {
   external: string | null;
 }
 
+export interface MediaAppearance {
+  outlet: string;
+  title: string;
+  description: string;
+  date: string;
+  url: string;
+  type: "Profile" | "Interview" | "Article" | "Feature";
+}
+
+export const mediaAppearances: MediaAppearance[] = [
+  {
+    outlet: "LegalQuants",
+    title: "Lawyer Profile — Kevan Wee",
+    description:
+      "Featured profile on LegalQuants, a community platform for lawyers at the intersection of law, technology, and quantitative methods.",
+    date: "2025",
+    url: "https://www.legalquants.com/lawyers/kevan-wee",
+    type: "Profile",
+  },
+];
+
 export const featuredProjects: FeaturedProject[] = [
   {
     id: "bart",
