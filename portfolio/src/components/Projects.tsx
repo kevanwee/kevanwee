@@ -40,8 +40,8 @@ export default function Projects() {
                           {project.collab}
                         </span>
                       </p>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       {project.collabLogo && (
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={project.collabLogo}
                           alt={project.collab ?? ""}
