@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,7 +17,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Kevan Wee",
   description:
-    "Kevan Wee — Computing & Law at SMU. Building technology at the intersection of law and software.",
+    "Kevan Wee - Computing & Law at SMU. Building technology at the intersection of law and software.",
   keywords: ["Kevan Wee", "Computing Law", "SMU", "LegalTech", "Singapore"],
   authors: [{ name: "Kevan Wee" }],
   openGraph: {
@@ -27,6 +28,14 @@ export const metadata: Metadata = {
     locale: "en_SG",
     type: "website",
   },
+  icons: {
+    icon: "/cloud-chibi.png",
+    shortcut: "/cloud-chibi.png",
+    apple: "/cloud-chibi.png",
+  },
+  verification: {
+    google: "google7f96513fc0efb233",
+  },
 };
 
 export default function RootLayout({
@@ -36,7 +45,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="bg-cream-50 text-warm-800 font-sans">{children}</body>
+      <body className="bg-cream-50 text-warm-800 font-sans">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

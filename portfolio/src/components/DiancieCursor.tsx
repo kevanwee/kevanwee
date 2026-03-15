@@ -301,7 +301,7 @@ export default function DiancieCursor() {
           position: "fixed",
           left: 0,
           top: 0,
-          transform: `translate3d(${spritePos.x - width * 0.45}px, ${spritePos.y - height * 0.49}px, 0)`,
+          transform: `translate3d(${spritePos.x - width * 0.5}px, ${spritePos.y - height * 0.25}px, 0)`,
           width,
           height,
           pointerEvents: "none",
