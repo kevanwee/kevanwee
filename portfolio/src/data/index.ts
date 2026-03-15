@@ -22,7 +22,7 @@ export const achievements = [
   "SMU Legal Innovation & Technology Hackathon 2025 – Ministry of Law Track Winner & Finalist",
   "DBS × SG Courts Hackathon for a Better World 2024 – Most Innovative",
   "RelativityOne Certified Professional",
-  "Teaching Assistant –IS210 Business Process Analysis & Solutioning; IS215 Digital Business: Technologies & Transformation",
+  "Teaching Assistant – IS210 Business Process Analysis & Solutioning; IS215 Digital Business: Technologies & Transformation",
 ];
 
 export const education = {

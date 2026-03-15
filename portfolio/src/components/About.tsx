@@ -45,10 +45,10 @@ export default function About() {
         </div>
       </div>
 
-      {/* Recognition */}
+      {/* Misc */}
       <div className="mt-8">
         <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-400">
-          Recognition
+          Misc
         </p>
         <ul className="space-y-2.5">
           {achievements.map((a, i) => (
