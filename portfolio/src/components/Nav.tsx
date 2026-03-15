@@ -36,7 +36,7 @@ export default function Nav() {
         <a
           href="#"
           onClick={handleClick("#")}
-          className="font-serif text-sm font-semibold tracking-wide text-warm-800 hover:text-sage-600 transition-colors"
+          className="font-serif text-sm font-semibold tracking-wide text-warm-800 hover:text-sage-600 transition-colors duration-200"
         >
           KW
         </a>
@@ -49,7 +49,7 @@ export default function Nav() {
                 <a
                   href={href}
                   onClick={handleClick(href)}
-                  className="text-xs font-medium uppercase tracking-widest text-warm-500 transition-colors hover:text-sage-600"
+                  className="text-xs font-medium uppercase tracking-widest text-warm-500 transition-colors duration-200 hover:text-sage-600"
                 >
                   {label}
                 </a>
@@ -60,7 +60,7 @@ export default function Nav() {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-sm border border-sage-300 px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-sage-600 transition-colors hover:bg-sage-50"
+                className="inline-flex items-center gap-1.5 rounded-sm border border-sage-300 px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-sage-600 transition-all duration-200 hover:bg-sage-50 hover:border-sage-400 hover:scale-[1.03] active:scale-[0.97]"
               >
                 Résumé
                 <svg

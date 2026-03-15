@@ -53,7 +53,7 @@ export default function ExperienceSection() {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveId(exp.id)}
-                  className={`relative shrink-0 whitespace-nowrap px-4 py-3 text-left text-xs transition-all duration-150 sm:w-44 sm:-ml-0.5 ${
+                  className={`relative shrink-0 whitespace-nowrap px-4 py-3 text-left text-xs transition-all duration-200 ease-in-out sm:w-44 sm:-ml-0.5 ${
                     isActive
                       ? "border-b-2 border-sage-500 font-semibold text-sage-700 sm:border-b-0 sm:border-l-2 sm:border-sage-500 sm:bg-sage-50 sm:text-sage-700"
                       : "font-medium text-warm-400 hover:bg-cream-100 hover:text-warm-700"

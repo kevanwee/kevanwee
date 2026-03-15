@@ -18,7 +18,7 @@ export default function Contact() {
           </p>
           <a
             href={`mailto:${personal.email}`}
-            className="inline-flex items-center gap-2 text-sm font-medium text-sage-600 underline underline-offset-4 decoration-sage-300 hover:text-sage-700 hover:decoration-sage-500 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-sage-600 underline underline-offset-4 decoration-sage-300 hover:text-sage-700 hover:decoration-sage-500 transition-all duration-200"
           >
             {personal.email}
             <svg
@@ -41,9 +41,9 @@ export default function Contact() {
         <footer className="mt-24 border-t border-cream-200 pt-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-warm-400">© {new Date().getFullYear()} Kevan Wee</p>
           <div className="flex items-center gap-4">
-            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors">LinkedIn</a>
-            <a href={personal.github} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors">GitHub</a>
-            <a href={personal.funPortfolio} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors">3D Portfolio</a>
+            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">LinkedIn</a>
+            <a href={personal.github} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">GitHub</a>
+            <a href={personal.funPortfolio} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">3D Portfolio</a>
           </div>
         </footer>
       </div>

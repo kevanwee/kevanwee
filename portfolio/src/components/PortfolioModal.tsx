@@ -66,7 +66,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
         <div className="mt-4 flex items-center justify-between">
           <button
             onClick={onClose}
-            className="rounded-sm border border-cream-200/20 px-3 py-1.5 text-xs text-cream-200 transition-colors hover:bg-cream-200/10"
+            className="rounded-sm border border-cream-200/20 px-3 py-1.5 text-xs text-cream-200 transition-all duration-200 hover:bg-cream-200/10 hover:scale-[1.03] active:scale-[0.97]"
           >
             ✕ Close
           </button>
@@ -74,7 +74,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-sm border border-cream-200/20 px-3 py-1.5 text-xs text-cream-200 transition-colors hover:bg-cream-200/10"
+            className="rounded-sm border border-cream-200/20 px-3 py-1.5 text-xs text-cream-200 transition-all duration-200 hover:bg-cream-200/10 hover:scale-[1.03] active:scale-[0.97]"
           >
             Open in new tab ↗
           </a>

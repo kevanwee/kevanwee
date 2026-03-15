@@ -2,177 +2,142 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* ── Sprite definitions ────────────────────────────────────────────── */
-const SPRITES = {
+/* ── Sprite configs ─────────────────────────────────────────────────
+   PMD direction rows: 0=S 1=SW 2=W 3=NW 4=N 5=NE 6=E 7=SE
+   East (right-facing) = row 6, West (left-facing) = row 2
+ ───────────────────────────────────────────────────────────────────── */
+const BASE =
+  "https://raw.githubusercontent.com/kevanwee/pmdsvgworld/main/assets/sprites";
+
+const CONFIGS = {
   diancie: {
-    walk: "https://raw.githubusercontent.com/kevanwee/pmdsvgworld/main/assets/sprites/0719/0001/Walk-Anim.png",
-    frameW: 56,
-    frameH: 88,
-    frames: 4,
+    src: `${BASE}/0719/0001/Strike-Anim.png`,
+    frameW: 88,
+    frameH: 144,
+    frames: 14,
     scale: 2,
+    dirRow: 6, // faces east (right)
+    fps: 120,  // ms per frame
     label: "Mega Diancie",
   },
   ceruledge: {
-    walk: "https://raw.githubusercontent.com/kevanwee/pmdsvgworld/main/assets/sprites/0937/Walk-Anim.png",
-    frameW: 32,
-    frameH: 56,
-    frames: 4,
+    src: `${BASE}/0937/0000/0001/Strike-Anim.png`,
+    frameW: 72,
+    frameH: 88,
+    frames: 9,
     scale: 2,
+    dirRow: 2, // faces west (left)
+    fps: 120,
     label: "Shiny Ceruledge",
   },
 } as const;
 
-type SpriteKey = keyof typeof SPRITES;
+type SpriteKey = keyof typeof CONFIGS;
 
-interface WalkerProps {
+const NUM_DIRECTIONS = 8;
+
+/* ── Single battler ─────────────────────────────────────────────────── */
+interface BattlerProps {
   spriteKey: SpriteKey;
-  containerWidth: number;
-  startX?: number;
-  speed?: number; // px per second
-  /** delay before first walk (ms) */
-  delay?: number;
+  /** offset from respective edge in px (diancie from left, ceruledge from right) */
+  edgeOffset: number;
+  /** stagger starting frame */
+  frameOffset?: number;
 }
 
-function Walker({ spriteKey, containerWidth, startX = 0, speed = 60, delay = 0 }: WalkerProps) {
-  const sp = SPRITES[spriteKey];
-  const displayW = sp.frameW * sp.scale;
-  const displayH = sp.frameH * sp.scale;
-  const sheetW = sp.frameW * sp.frames * sp.scale;
+function Battler({ spriteKey, edgeOffset, frameOffset = 0 }: BattlerProps) {
+  const cfg = CONFIGS[spriteKey];
+  const displayW = cfg.frameW * cfg.scale;
+  const displayH = cfg.frameH * cfg.scale;
+  const totalSheetW = cfg.frameW * cfg.frames * cfg.scale;
+  const totalSheetH = cfg.frameH * NUM_DIRECTIONS * cfg.scale;
 
-  const [x, setX] = useState(startX);
-  const [facingRight, setFacingRight] = useState(true);
-  const [frame, setFrame] = useState(0);
-  const rafRef = useRef<number>(0);
-  const lastRef = useRef<number>(0);
-  const startedRef = useRef(false);
+  const [frameIdx, setFrameIdx] = useState(frameOffset % cfg.frames);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      startedRef.current = true;
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [delay]);
+    const id = setInterval(() => {
+      setFrameIdx((f) => (f + 1) % cfg.frames);
+    }, cfg.fps);
+    return () => clearInterval(id);
+  }, [cfg.frames, cfg.fps]);
 
-  useEffect(() => {
-    let direction = 1; // 1 = right, -1 = left
-    let posX = startX;
-    let frameIdx = 0;
-    const frameInterval = 150; // ms per frame
-    let lastFrameTime = 0;
+  const bgX = -(frameIdx * cfg.frameW * cfg.scale);
+  const bgY = -(cfg.dirRow * cfg.frameH * cfg.scale);
 
-    const tick = (ts: number) => {
-      if (!startedRef.current) {
-        rafRef.current = requestAnimationFrame(tick);
-        return;
-      }
-      const dt = lastRef.current ? Math.min(ts - lastRef.current, 50) : 0;
-      lastRef.current = ts;
-
-      posX += (speed * dt) / 1000 * direction;
-
-      if (posX + displayW >= containerWidth) {
-        posX = containerWidth - displayW;
-        direction = -1;
-        setFacingRight(false);
-      } else if (posX <= 0) {
-        posX = 0;
-        direction = 1;
-        setFacingRight(true);
-      }
-
-      if (ts - lastFrameTime >= frameInterval) {
-        frameIdx = (frameIdx + 1) % sp.frames;
-        lastFrameTime = ts;
-        setFrame(frameIdx);
-      }
-
-      setX(posX);
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerWidth, speed, displayW, delay]);
-
-  const sheetX = -(frame * sp.frameW * sp.scale);
-  // Row 0 = south (toward viewer) = walking down; use row 6 = east (right-facing)
-  // PMD spritesheet rows: 0=S,1=SE,2=E,3=NE,4=N,5=NW,6=W,7=SW
-  // We'll use row 2 (east) when walking right, row 6 (west) when walking left
-  const rowIndex = facingRight ? 2 : 6;
-  const sheetY = -(rowIndex * sp.frameH * sp.scale);
+  const posStyle =
+    spriteKey === "diancie"
+      ? { left: edgeOffset }
+      : { right: edgeOffset };
 
   return (
     <div
       style={{
         position: "absolute",
-        left: x,
         bottom: 0,
+        ...posStyle,
         width: displayW,
         height: displayH,
+        backgroundImage: `url(${cfg.src})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: `${totalSheetW}px ${totalSheetH}px`,
+        backgroundPosition: `${bgX}px ${bgY}px`,
         imageRendering: "pixelated",
-        overflow: "hidden",
-        flexShrink: 0,
       }}
-      title={sp.label}
-    >
-      <div
-        style={{
-          width: sheetW,
-          height: displayH,
-          backgroundImage: `url(${sp.walk})`,
-          backgroundSize: `${sheetW}px auto`,
-          backgroundPosition: `${sheetX}px ${sheetY}px`,
-          imageRendering: "pixelated",
-        }}
-      />
-    </div>
+      title={cfg.label}
+    />
   );
 }
 
-/* ── Container ─────────────────────────────────────────────────────── */
+/* ── Battle stage ───────────────────────────────────────────────────── */
 export default function PokemonWalker() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
+  const maxH = Math.max(
+    CONFIGS.diancie.frameH * CONFIGS.diancie.scale,
+    CONFIGS.ceruledge.frameH * CONFIGS.ceruledge.scale
+  );
+
+  /* VS label fades in once */
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(() => setWidth(el.clientWidth));
-    ro.observe(el);
-    setWidth(el.clientWidth);
-    return () => ro.disconnect();
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.4 }
+    );
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
   }, []);
-
-  const maxH = Math.max(
-    SPRITES.diancie.frameH * SPRITES.diancie.scale,
-    SPRITES.ceruledge.frameH * SPRITES.ceruledge.scale
-  );
 
   return (
     <div
-      ref={containerRef}
-      style={{ position: "relative", width: "100%", height: maxH, overflow: "hidden" }}
+      ref={ref}
+      style={{ position: "relative", width: "100%", height: maxH, overflow: "visible" }}
       aria-hidden="true"
     >
-      {width > 0 && (
-        <>
-          <Walker
-            spriteKey="diancie"
-            containerWidth={width}
-            startX={Math.floor(width * 0.2)}
-            speed={55}
-            delay={0}
-          />
-          <Walker
-            spriteKey="ceruledge"
-            containerWidth={width}
-            startX={Math.floor(width * 0.6)}
-            speed={75}
-            delay={400}
-          />
-        </>
-      )}
+      <Battler spriteKey="diancie" edgeOffset={32} frameOffset={0} />
+      <Battler spriteKey="ceruledge" edgeOffset={32} frameOffset={5} />
+
+      {/* VS badge */}
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          bottom: 16,
+          transform: `translateX(-50%) scale(${visible ? 1 : 0.6})`,
+          opacity: visible ? 1 : 0,
+          transition: "opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)",
+          fontFamily: "serif",
+          fontStyle: "italic",
+          fontWeight: 700,
+          fontSize: 13,
+          color: "#a5968a",
+          letterSpacing: "0.1em",
+          pointerEvents: "none",
+          whiteSpace: "nowrap",
+        }}
+      >
+        ✦ vs ✦
+      </div>
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function Hero() {
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <a
             href={`mailto:${personal.email}`}
-            className="inline-flex items-center gap-2 rounded-sm bg-warm-900 px-5 py-2.5 text-sm font-medium text-cream-50 transition-colors hover:bg-warm-700"
+            className="inline-flex items-center gap-2 rounded-sm bg-warm-900 px-5 py-2.5 text-sm font-medium text-cream-50 transition-all duration-200 hover:bg-warm-700 hover:-translate-y-px hover:shadow-md active:translate-y-0 active:shadow-sm"
           >
             Say hello
             <svg
@@ -58,14 +58,14 @@ export default function Hero() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-sm border border-warm-300 px-5 py-2.5 text-sm font-medium text-warm-700 transition-colors hover:border-warm-400 hover:bg-cream-100"
+            className="inline-flex items-center gap-2 rounded-sm border border-warm-300 px-5 py-2.5 text-sm font-medium text-warm-700 transition-all duration-200 hover:border-warm-400 hover:bg-cream-100 hover:-translate-y-px active:translate-y-0"
           >
             View résumé
           </a>
 
           <button
             onClick={() => setShowModal(true)}
-            className="inline-flex items-center gap-2 rounded-sm border border-sage-200 bg-sage-50 px-4 py-2.5 text-sm font-medium text-sage-700 transition-all hover:border-sage-400 hover:bg-sage-100 hover:shadow-sm"
+            className="inline-flex items-center gap-2 rounded-sm border border-sage-200 bg-sage-50 px-4 py-2.5 text-sm font-medium text-sage-700 transition-all duration-200 hover:border-sage-400 hover:bg-sage-100 hover:shadow-md hover:-translate-y-px active:translate-y-0 active:shadow-sm"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

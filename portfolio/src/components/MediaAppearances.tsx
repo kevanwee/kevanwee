@@ -20,7 +20,7 @@ export default function MediaAppearances() {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-start justify-between gap-4 rounded-sm border border-cream-200 bg-white px-5 py-4 transition-all hover:border-sage-200 hover:shadow-sm"
+                className="group flex items-start justify-between gap-4 rounded-sm border border-cream-200 bg-white px-5 py-4 transition-all duration-200 ease-in-out hover:border-sage-200 hover:shadow-md hover:-translate-y-0.5"
               >
                 <div className="min-w-0">
                   <p className="text-sm font-medium leading-snug text-warm-800 group-hover:text-sage-700 transition-colors">

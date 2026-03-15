@@ -17,7 +17,7 @@ export default function Projects() {
           {featuredProjects.map((project) => (
             <li
               key={project.id}
-              className="group rounded-sm border border-cream-200 bg-white p-6 transition-all duration-200 hover:border-sage-200 hover:shadow-sm"
+              className="group rounded-sm border border-cream-200 bg-white p-6 transition-all duration-200 ease-in-out hover:border-sage-200 hover:shadow-md hover:-translate-y-0.5"
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex-1">
@@ -91,7 +91,7 @@ export default function Projects() {
             {otherProjects.map((project) => (
               <li
                 key={project.title}
-                className="group flex flex-col justify-between rounded-sm border border-cream-200 bg-white p-5 transition-all duration-200 hover:border-sage-200 hover:shadow-sm"
+                className="group flex flex-col justify-between rounded-sm border border-cream-200 bg-white p-5 transition-all duration-200 ease-in-out hover:border-sage-200 hover:shadow-md hover:-translate-y-0.5"
               >
                 <div>
                   <div className="mb-4 flex items-center justify-between">
