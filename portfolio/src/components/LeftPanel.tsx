@@ -55,7 +55,40 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             {personal.description}
           </p>
 
-          <nav className="mt-12 hidden lg:block" aria-label="Page sections">
+          <div className="mt-5 flex items-center gap-2">
+            <button
+              onClick={() => setShowResume(true)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
+              title="View resume"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
+                className="h-3.5 w-3.5" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9" />
+              </svg>
+              CV
+            </button>
+            <button
+              onClick={onOpenModal}
+              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
+              title="View 3D portfolio"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
+                className="h-3.5 w-3.5" aria-hidden="true">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+              3D
+            </button>
+          </div>
+
+          <nav className="mt-10 hidden lg:block" aria-label="Page sections">
             <ul className="space-y-4">
               {NAV_ITEMS.map(({ id, label }) => {
                 const active = activeSection === id;
@@ -127,40 +160,6 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             </a>
 
             <MusicPlayer />
-
-            <span className="mx-0.5 h-5 w-px bg-cream-200" />
-
-            <button
-              onClick={() => setShowResume(true)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
-              title="View resume"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
-                className="h-3.5 w-3.5" aria-hidden="true">
-                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="16" y1="13" x2="8" y2="13" />
-                <line x1="16" y1="17" x2="8" y2="17" />
-                <polyline points="10 9 9 9 8 9" />
-              </svg>
-              CV
-            </button>
-
-            <button
-              onClick={onOpenModal}
-              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
-              title="View 3D portfolio"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
-                className="h-3.5 w-3.5" aria-hidden="true">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
-              3D
-            </button>
           </div>
 
           <p className="mt-4 text-[11px] text-warm-200">
