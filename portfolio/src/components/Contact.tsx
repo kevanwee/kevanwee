@@ -1,4 +1,5 @@
 import { personal } from "@/data";
+import MauvilleBanner from "@/components/MauvilleBanner";
 
 export default function Contact() {
   return (
@@ -38,6 +39,8 @@ export default function Contact() {
             </svg>
           </a>
         </div>
+
+        <MauvilleBanner />
 
         <footer className="mt-24 border-t border-cream-200 pt-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-warm-400">© {new Date().getFullYear()} Kevan Wee</p>

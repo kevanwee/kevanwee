@@ -14,6 +14,8 @@ export default function About() {
         About
       </h2>
 
+      <PokemonBanner />
+
       {/* Bio */}
       <div className="space-y-4">
         {aboutParagraphs.map((p, i) => (
@@ -62,8 +64,6 @@ export default function About() {
       <div className="mt-8">
         <Memberships />
       </div>
-
-      <PokemonBanner />
     </section>
   );
 }

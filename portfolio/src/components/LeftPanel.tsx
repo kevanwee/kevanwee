@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { personal } from "@/data";
+import MusicPlayer from "@/components/MusicPlayer";
 
 const NAV_ITEMS = [
   { id: "about", label: "About" },
@@ -119,6 +120,8 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
           >
             <EmailIcon />
           </a>
+
+          <MusicPlayer />
 
           <span className="mx-1 h-5 w-px bg-cream-200" />
 

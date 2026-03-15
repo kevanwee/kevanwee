@@ -54,9 +54,18 @@
   .route-scroll {
     animation: route-scroll 90s ease-in-out infinite alternate;
   }
+
+  .route-marquee-x {
+    animation: route-marquee-x 40s linear infinite;
+  }
 }
 
 @keyframes route-scroll {
   0%, 3%   { transform: translateY(0); }
   97%, 100% { transform: translateY(calc(-100% + 180px)); }
+}
+
+@keyframes route-marquee-x {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
