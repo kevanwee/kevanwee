@@ -212,7 +212,7 @@ export const mediaAppearances: MediaAppearance[] = [
     title: "Rajah & Tann wins Most Innovative award at the DBS x SG Courts Hackathon for a Better World 2024",
     description: "",
     date: "2024",
-    url: "https://www.judiciary.gov.sg/news-and-resources/news/news-details/joint-media-release--hackathon-for-a-better-world-2024-winners-devise-innovative-solutions-that-strengthen-access-to-justice-and-fortify-community-trust",
+    url: "https://www.linkedin.com/posts/rajah-%26-tann_technology-digitaltransformation-legalclinic-activity-7259376381191479299-xrQx?utm_source=li_share&utm_content=feedcontent&utm_medium=g_dt_web&utm_campaign=copy",
     type: "Feature",
   },
   {
@@ -220,7 +220,7 @@ export const mediaAppearances: MediaAppearance[] = [
     title: "As the new semester approaches, it also marks the bittersweet end of internship with PwC Singapore for BSc (Computing and Law) student...",
     description: "",
     date: "2025",
-    url: "https://computing.smu.edu.sg/news",
+    url: "https://www.instagram.com/p/DNR2Nr7P-Ni/",
     type: "Feature",
   },
   {
@@ -228,7 +228,7 @@ export const mediaAppearances: MediaAppearance[] = [
     title: "BSc (Computing and Law) student Kevan Wee's internship with Rajah & Tann Technologies...",
     description: "",
     date: "2024",
-    url: "https://computing.smu.edu.sg/news",
+    url: "https://www.instagram.com/p/DB7tIbtTl3_/",
     type: "Feature",
   },
   {
@@ -236,7 +236,7 @@ export const mediaAppearances: MediaAppearance[] = [
     title: "The end of internship doesn't always mean the end of your time there. BSc (Computing and Law) student...",
     description: "",
     date: "2024",
-    url: "https://computing.smu.edu.sg/news",
+    url: "https://www.instagram.com/p/C_cFPGryaLW/",
     type: "Feature",
   },
   {
@@ -244,7 +244,7 @@ export const mediaAppearances: MediaAppearance[] = [
     title: "Which SMU Tech Degree Is Right for You? What to Consider Before Choosing",
     description: "",
     date: "2024",
-    url: "https://www.smu.edu.sg/",
+    url: "https://blog.smu.edu.sg/story/which-smu-tech-degree-consider-before-choosing",
     type: "Feature",
   },
 ];
