@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, type CSSProperties } from "react";
 import dynamic from "next/dynamic";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
@@ -56,7 +56,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900">
+    <div
+      className="min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
+      style={{ "--viewport-offset": "clamp(4rem, 12vh, 9rem)" } as CSSProperties}
+    >
       <div
         className="pointer-events-none fixed inset-0 z-0 transition-all duration-500"
         aria-hidden="true"
@@ -65,7 +68,7 @@ export default function Home() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[clamp(2.5rem,8vh,6rem)] md:px-12 lg:px-24">
+      <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
           <div className="pb-8 lg:w-[45%]">
             <LeftPanel

@@ -22,7 +22,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
   const [icaLoaded, setIcaLoaded] = useState(false);
 
   return (
-    <aside className="lg:sticky lg:top-[clamp(2.5rem,8vh,6rem)] lg:flex lg:max-h-[calc(100vh-clamp(2.5rem,8vh,6rem))] lg:flex-col lg:justify-between lg:pb-24">
+    <aside className="lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
       <div>
         <div className="relative">
           {icaLoaded && (
