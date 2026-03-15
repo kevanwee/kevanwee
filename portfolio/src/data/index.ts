@@ -19,8 +19,8 @@ export const aboutParagraphs = [
 ];
 
 export const achievements = [
-  "SMU Legal Innovation & Technology Hackathon 2025 –Ministry of Law Track Winner & Finalist",
-  "DBS × SG Courts Hackathon for a Better World 2024 –Most Innovative",
+  "SMU Legal Innovation & Technology Hackathon 2025 – Ministry of Law Track Winner & Finalist",
+  "DBS × SG Courts Hackathon for a Better World 2024 – Most Innovative",
   "RelativityOne Certified Professional",
   "Teaching Assistant –IS210 Business Process Analysis & Solutioning; IS215 Digital Business: Technologies & Transformation",
 ];
@@ -204,7 +204,7 @@ export const mediaAppearances: MediaAppearance[] = [
     type: "Feature",
   },
   {
-    outlet: "SMU –School of Computing and Information Systems",
+    outlet: "SMU – School of Computing and Information Systems",
     title: "As the new semester approaches, it also marks the bittersweet end of internship with PwC Singapore for BSc (Computing and Law) student...",
     description: "",
     date: "2025",
@@ -212,7 +212,7 @@ export const mediaAppearances: MediaAppearance[] = [
     type: "Feature",
   },
   {
-    outlet: "SMU –School of Computing and Information Systems",
+    outlet: "SMU – School of Computing and Information Systems",
     title: "BSc (Computing and Law) student Kevan Wee's internship with Rajah & Tann Technologies...",
     description: "",
     date: "2024",
@@ -220,7 +220,7 @@ export const mediaAppearances: MediaAppearance[] = [
     type: "Feature",
   },
   {
-    outlet: "SMU –School of Computing and Information Systems",
+    outlet: "SMU – School of Computing and Information Systems",
     title: "The end of internship doesn't always mean the end of your time there. BSc (Computing and Law) student...",
     description: "",
     date: "2024",
