@@ -3,10 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { personal } from "@/data";
-import dynamic from "next/dynamic";
-
-const PortfolioModal = dynamic(() => import("@/components/PortfolioModal"), { ssr: false });
-const PokemonWalker  = dynamic(() => import("@/components/PokemonWalker"),  { ssr: false });
 
 const NAV_ITEMS = [
   { id: "about",      label: "About"      },
@@ -16,9 +12,12 @@ const NAV_ITEMS = [
   { id: "contact",    label: "Contact"    },
 ];
 
-export default function LeftPanel() {
+interface LeftPanelProps {
+  onOpenModal: () => void;
+}
+
+export default function LeftPanel({ onOpenModal }: LeftPanelProps) {
   const [activeId,  setActiveId]  = useState("about");
-  const [showModal, setShowModal] = useState(false);
   const [icaLoaded, setIcaLoaded] = useState(false);
 
   useEffect(() => {
@@ -60,28 +59,27 @@ export default function LeftPanel() {
             {personal.institution}
           </p>
 
-          {/* Name + Ica chibi */}
+          {/* Name + chibi */}
           <div className="relative">
-            {/* Chibi — floats top-right of name block */}
+            {/* Cloud chibi — floats top-right of name block */}
             {icaLoaded && (
               <div
-                className="pointer-events-none absolute -right-2 -top-10 select-none"
-                style={{ width: 88, height: 88 }}
+                className="pointer-events-none absolute -right-2 -top-8 select-none"
+                style={{ width: 100, height: 100 }}
               >
                 <Image
-                  src="/ica-chibi.png"
-                  alt="Ica"
-                  width={88}
-                  height={88}
+                  src="/cloud-chibi.png"
+                  alt=""
+                  width={100}
+                  height={100}
                   className="h-full w-full object-contain"
-                  style={{ mixBlendMode: "multiply" }}
                   unoptimized
                 />
               </div>
             )}
             {/* Preload check (invisible) */}
             <img
-              src="/ica-chibi.png"
+              src="/cloud-chibi.png"
               alt=""
               className="hidden"
               onLoad={() => setIcaLoaded(true)}
@@ -150,11 +148,6 @@ export default function LeftPanel() {
 
         {/* ── BOTTOM ── */}
         <div>
-          {/* Pokemon strip — sits flush above socials */}
-          <div className="mb-5 w-full">
-            <PokemonWalker />
-          </div>
-
           {/* Social row + 3D button */}
           <div className="flex items-center gap-5">
             <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
@@ -179,7 +172,7 @@ export default function LeftPanel() {
 
             {/* 3D portfolio */}
             <button
-              onClick={() => setShowModal(true)}
+              onClick={onOpenModal}
               className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-warm-300 transition-all duration-200 hover:text-sage-600"
               title="View 3D portfolio"
             >
@@ -199,9 +192,6 @@ export default function LeftPanel() {
         </div>
       </div>
 
-      {showModal && (
-        <PortfolioModal url={personal.funPortfolio} onClose={() => setShowModal(false)} />
-      )}
     </div>
   );
 }
