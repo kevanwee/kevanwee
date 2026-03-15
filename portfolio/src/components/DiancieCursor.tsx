@@ -16,6 +16,8 @@ const TICK_MS = 16;
 const SLEEP_AFTER_MS = 2600;
 const IDLE_AFTER_MS = 320;
 const SPRITE_SCALE = 1.15;
+const CURSOR_ANCHOR_X = 0.5;
+const CURSOR_ANCHOR_Y = 0.4;
 
 const DIR_S = 0;
 const DIR_SW = 1;
@@ -301,7 +303,7 @@ export default function DiancieCursor() {
           position: "fixed",
           left: 0,
           top: 0,
-          transform: `translate3d(${spritePos.x - width * 0.5}px, ${spritePos.y - height * 0.5}px, 0)`,
+          transform: `translate3d(${spritePos.x - width * CURSOR_ANCHOR_X}px, ${spritePos.y - height * CURSOR_ANCHOR_Y}px, 0)`,
           width,
           height,
           pointerEvents: "none",
