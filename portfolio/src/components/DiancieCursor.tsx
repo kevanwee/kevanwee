@@ -17,7 +17,7 @@ const SLEEP_AFTER_MS = 2600;
 const IDLE_AFTER_MS = 320;
 const SPRITE_SCALE = 1.15;
 const CURSOR_ANCHOR_X = 0.5;
-const CURSOR_ANCHOR_Y = 0.4;
+const CURSOR_ANCHOR_Y = 0.34;
 
 const DIR_S = 0;
 const DIR_SW = 1;
