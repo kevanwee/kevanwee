@@ -65,9 +65,9 @@ export default function Home() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-screen-xl px-6 md:px-12 lg:px-24">
+      <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[clamp(2.5rem,8vh,6rem)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
-          <div className="pt-16 pb-8 lg:pt-0 lg:pb-0 lg:w-[45%]">
+          <div className="pb-8 lg:w-[45%]">
             <LeftPanel
               activeSection={activeSection}
               onNavClick={scrollToSection}
@@ -75,7 +75,7 @@ export default function Home() {
             />
           </div>
 
-          <main className="lg:w-[55%] lg:py-24">
+          <main className="lg:w-[55%] lg:pb-24">
             <About />
             <Experience />
             <Projects />
