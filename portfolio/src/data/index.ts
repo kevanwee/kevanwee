@@ -1,5 +1,6 @@
 export const personal = {
   name: "Kevan Wee",
+  fullName: "Kevan Wee Jia Wei",
   title: "Computing & Law",
   institution: "Singapore Management University",
   description:
@@ -12,146 +13,158 @@ export const personal = {
 };
 
 export const aboutParagraphs = [
-  "I'm a penultimate-year undergraduate at Singapore Management University reading Computing & Law, with a second major in Cybersecurity.",
-  "My work spans the intersection of law and software — I design and build tools that translate legal rules into automated systems. This covers platform regulation, intellectual property enforcement, data protection compliance, and court document automation.",
-  "I volunteer with Singapore's Community Justice Centre automating court documents with AI, and assist at the State Courts' On-Site Legal Advice Scheme, helping members of the public navigate civil matters.",
-  "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital & Intelligence Service, specialising in GEOINT, cartography, and satellite imagery analysis.",
+  "I'm a penultimate-year undergraduate at Singapore Management University reading Computing & Law, with a second major in Cybersecurity. My GPA is 3.6/4.0 (magna cum laude).",
+  "My work spans the intersection of law and software — I design and build tools that translate legal rules into automated systems. This covers platform regulation, IP enforcement, data protection compliance, contract lifecycle management, and court document automation.",
+  "I volunteer with Singapore's Community Justice Centre automating court documents with Thomson Reuters, and assist at the State Courts' On-Site Legal Advice Scheme, triaging and routing cases for unrepresented litigants.",
+  "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital & Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
 ];
 
 export const achievements = [
-  "SMU Legal Innovation & Technology Hackathon — Track Winner (2025)",
-  "DBS × SG Courts Hackathon — Most Innovative (2024)",
-  "RelativityOne Certified Professional (2025)",
-  "LegalBenchmarks.ai Steering Committee",
-  "LegalQuants",
-  "Mensa International",
+  "SMU Legal Innovation & Technology Hackathon 2025 — Ministry of Law Track Winner & Finalist",
+  "DBS × SG Courts Hackathon for a Better World 2024 — Most Innovative",
+  "RelativityOne Certified Professional",
+  "Teaching Assistant — IS210 Business Process Analysis & Solutioning; IS215 Digital Business: Technologies & Transformation",
 ];
 
 export const education = {
   institution: "Singapore Management University",
   degree: "B.Sc. (Hons) Computing & Law",
   secondMajor: "2nd Major in Cybersecurity",
-  expected: "Class of 2027",
+  gpa: "3.6 / 4.0",
+  honour: "Magna Cum Laude",
+  expected: "Aug 2023 — May 2027",
 };
 
 export interface Experience {
   id: string;
   company: string;
   role: string;
+  subtitle: string;
   period: string;
   type: string;
   url: string;
   bullets: string[];
+  proSono?: boolean;
 }
 
 export const experiences: Experience[] = [
   {
-    id: "smu-ra",
-    company: "SMU",
+    id: "smu-scis",
+    company: "SMU School of Computing & Information Systems",
     role: "Research Assistant",
+    subtitle: "DeFi Security & Software Supply Chain Security",
     period: "Jan 2026 — Present",
     type: "Part-time",
-    url: "https://www.smu.edu.sg/",
+    url: "https://scis.smu.edu.sg/",
     bullets: [
-      "Conducting academic research at the intersection of law and technology at Singapore Management University.",
+      "Authoring a research paper on DeFi software supply-chain risks, analysing Web3 bug bounty ecosystems to identify exploit patterns, remediation timelines, and gaps in security integration across product lifecycles and CI/CD workflows.",
+      "Building Python data pipelines and NLP-based classification models to structure Immunefi and Sherlock vulnerability disclosures, generating insights on risk trends across smart contracts, oracles, and infrastructure.",
     ],
   },
   {
     id: "osborne",
     company: "Osborne Clarke",
     role: "Legal Intern",
+    subtitle: "Corporate + Technology, Media, and Telecom",
     period: "Dec 2025 — Jan 2026",
     type: "Internship",
     url: "https://www.osborneclarke.com/",
     bullets: [
-      "Legal internship at international law firm specialising in technology, digital business, and innovation-driven sectors.",
+      "Examined content-platform liability and IP enforcement risks, translating regulation into operational governance decisions for digital marketplaces.",
+      "Evaluated product-compliance trade-offs (content reuse, scraping), balancing platform growth with regulatory risk.",
+      "Contributed to structured playbooks for early-stage ventures, formalising governance, escalation and decision-rights mechanisms.",
     ],
   },
   {
     id: "pwc",
-    company: "PwC",
-    role: "Tax NewLaw Intern",
+    company: "PricewaterhouseCoopers LLP",
+    role: "NewLaw Intern",
+    subtitle: "Legal Management Consulting",
     period: "May 2025 — Aug 2025",
     type: "Internship",
     url: "https://www.pwc.com/sg/",
     bullets: [
-      "Worked within PwC Singapore's Tax NewLaw practice at the crossroads of legal services and emerging technology.",
+      "Supported APAC legal digital transformation initiatives for law firms and in-house legal teams.",
+      "Developed structured comparison datasets for 30 NDAs and Tax LOEs, standardising clause equivalencies to support contract harmonisation and CLM implementation.",
+      "Applied data analysis on 3,000+ law-firm partnership and headcount records to uncover structural trends and performance indicators.",
+      "Performed cross-jurisdictional analysis of GenAI regulatory frameworks, translating legal requirements into operational constraints.",
     ],
   },
   {
     id: "imda",
-    company: "IMDA",
+    company: "Infocomm Media Development Authority",
     role: "Data Analyst",
+    subtitle: "",
     period: "May 2025 — Jun 2025",
     type: "Internship",
     url: "https://www.imda.gov.sg/",
     bullets: [
-      "Data analysis at Singapore's national regulatory authority for the infocomm and media sectors.",
+      "Analysed 500 annual contract reviews and clearance records across IMDA divisions to surface process milestones, bottlenecks, and root causes of delays.",
     ],
   },
   {
-    id: "rnt",
-    company: "Rajah & Tann",
-    role: "LegalTech Intern",
-    period: "Jun 2024 — Nov 2024",
-    type: "Internship",
-    url: "https://www.rajahtanntech.com/",
+    id: "smu-law",
+    company: "SMU Yong Pung How School of Law",
+    role: "Research Assistant",
+    subtitle: "Centre for Digital Law",
+    period: "Dec 2024 — Aug 2025",
+    type: "Part-time",
+    url: "https://law.smu.edu.sg/",
     bullets: [
-      "Implemented digital risk management, AML-CTF, and LegalTech solutions for the firm.",
-      "Evaluated emerging technologies including Zero Trust Network Access (ZTNA), AI-powered document management, and e-Discovery automation for due diligence.",
-      "Conducted legal research to identify industries requiring enhanced Customer Due Diligence.",
-      "Configured a Linux server for remote desktop access to forensic workstations.",
-      "Represented Rajah & Tann Asia at the DBS × SG Courts Hackathon 2024, winning Most Innovative.",
+      "Built a structured dataset of 500 Legal NLP papers, reviewing proceedings of general NLP conferences (ROCLING, RANLP) and specialised Legal NLP gatherings (Jurix, ICAIL, ISAIL).",
+      "Conducted an in-depth literature review supporting the paper \"Natural Language Processing in the Legal Domain\".",
     ],
   },
   {
     id: "cjc",
-    company: "Community Justice Centre",
-    role: "Pro Bono LegalTech",
+    company: "State Courts · The Community Justice Centre",
+    role: "Legal Technologist & OSLAS Volunteer",
+    subtitle: "On-site Legal Advice Scheme",
     period: "Oct 2024 — Jan 2026",
     type: "Pro Bono",
     url: "https://cjc.org.sg/",
+    proSono: true,
     bullets: [
-      "Automating court document preparation using AI to support unrepresented litigants.",
+      "Automated retrieval of court documents in collaboration with Thomson Reuters to streamline access to relevant court forms.",
+      "Performed on-site triage, intake assessment and referral routing for unrepresented litigants.",
     ],
   },
   {
-    id: "scolas",
-    company: "State Courts",
-    role: "On-Site Legal Advice Scheme",
-    period: "Mar 2025 — Jan 2026",
-    type: "Pro Bono",
-    url: "https://www.statecourts.gov.sg/",
+    id: "rnt",
+    company: "Rajah & Tann Technologies",
+    role: "LegalTech Intern",
+    subtitle: "",
+    period: "Jun 2024 — Nov 2024",
+    type: "Internship",
+    url: "https://www.rajahtanntech.com/",
     bullets: [
-      "Assisted members of the public with civil legal matters at the State Courts of Singapore.",
+      "Executed PoC projects evaluating emerging technologies including ZTNA solutions and AI-powered legal document management.",
+      "Performed data preprocessing for eDiscovery and production of documents in ongoing legal cases.",
+      "Configured a Linux server to enable RDP login for Rajah & Tann's forensic workstations.",
     ],
   },
   {
     id: "tito",
-    company: "Tito Isaac & Co",
+    company: "Tito Isaac & Co LLP",
     role: "Legal Intern",
+    subtitle: "Litigation & Dispute Resolution",
     period: "Apr 2023 — May 2023",
     type: "Internship",
     url: "#",
     bullets: [
-      "Conducted legal research in Civil Litigation, Dispute Resolution, Criminal Law, and Family Law.",
-      "Drafted affidavits and prepared deputyship applications.",
-      "Prepared verbatim attendance notes for pre-trial conferences and court hearings.",
+      "Conducted legal research and assisted in litigation involving SOPA claims, drafted affidavits, and assisted in deputyship and family law proceedings.",
     ],
   },
   {
     id: "dis",
-    company: "Digital & Intelligence Service",
+    company: "The Digital & Intelligence Service",
     role: "Senior Geospatial Mapper",
+    subtitle: "Operations Specialist",
     period: "Jan 2021 — Apr 2023",
     type: "Full-time (NS)",
     url: "https://www.mindef.gov.sg/",
     bullets: [
-      "Led and supervised a team of 10 full-time National Servicemen within the SAF Mapping Unit, Imagery Support Group.",
-      "Managed provision of geospatial products and services to MINDEF/SAF and Whole-of-Government agencies, supporting operations, training, and mission planning.",
-      "Streamlined Imagery Support Group manpower reporting by building a unified tracking platform.",
-      "Evaluated and optimised HADR and Peace Support Operations procedures and map production workflows.",
-      "Awarded Best Soldier of the Month (November 2021) and Commander of the Quarter (Q2 2022).",
+      "Led geospatial intelligence operations, managing 150 personnel and coordinating cross-agency stakeholders to deliver large-scale GIS support for MINDEF/SAF and Whole-of-Government agencies.",
     ],
   },
 ];
@@ -182,7 +195,7 @@ export const featuredProjects: FeaturedProject[] = [
     description:
       "Final Year Project in collaboration with Allen & Overy Shearman. A Microsoft Word add-in that scans and verifies statutory citations in legal documents against Singapore Statutes Online. Features hybrid retrieval (BM25 + Qwen3 dense embeddings, cross-encoder reranking via ChromaDB) and fuzzy act/section matching for version-accurate citation checking.",
     tags: ["Next.js", "Python", "FastAPI", "ChromaDB", "Office.js", "LegalTech"],
-    github: "https://github.com/kevanwee/bart",
+    github: null,
     external: null,
     isPrivate: true,
     collab: "Allen & Overy Shearman",
@@ -202,7 +215,7 @@ export const featuredProjects: FeaturedProject[] = [
     id: "legalbenchmarks",
     title: "LegalBenchmarks.ai",
     description:
-      "An independent open-access benchmarking platform for legal AI tools, built by the global legal community. Provides structured evaluation frameworks with 100+ assessment factors across contract drafting, information extraction, and other legal workflows. Contributing as a Steering Committee member alongside legal technology leaders from Google, PayPal, Netflix, and Stripe.",
+      "An independent open-access benchmarking platform for legal AI tools built by the global legal community. Provides structured evaluation frameworks with 100+ assessment factors across contract drafting, information extraction, and legal workflows. Contributing as a Steering Committee member alongside practitioners from Google, PayPal, Netflix, and Stripe.",
     tags: ["Legal AI", "Evaluation", "LegalTech", "Research"],
     github: null,
     external: "https://www.legalbenchmarks.ai/",
@@ -215,7 +228,7 @@ export const otherProjects: OtherProject[] = [
   {
     title: "sightstone",
     description:
-      "Contract playbook harmonisation tool that identifies and reconciles conflicting clauses across multiple contract versions for M&A due diligence workflows.",
+      "Contract playbook harmonisation tool that identifies and reconciles conflicting clauses across multiple contract versions for M&A due diligence.",
     tags: ["Python", "NLP", "Contract Law"],
     github: "https://github.com/kevanwee/sightstone",
     external: null,
@@ -231,7 +244,7 @@ export const otherProjects: OtherProject[] = [
   {
     title: "eliti scraper",
     description:
-      "eLitigation scraper using BeautifulSoup4 to extract Singapore court case data from the eLitigation portal.",
+      "BeautifulSoup4 scraper extracting Singapore court case data from the eLitigation portal.",
     tags: ["Python", "BeautifulSoup", "Legal Data"],
     github: "https://github.com/kevanwee/elitiscraper",
     external: null,
@@ -239,7 +252,7 @@ export const otherProjects: OtherProject[] = [
   {
     title: "sg statute scraper",
     description:
-      "Scraper for Singapore Statutes Online (sso.agc.gov.sg) to extract and structure legislative text for downstream NLP pipelines. (WIP)",
+      "Scraper for Singapore Statutes Online (sso.agc.gov.sg) extracting legislative text for NLP pipelines. (WIP)",
     tags: ["Python", "BeautifulSoup", "Legal Data"],
     github: "https://github.com/kevanwee/sgstatutescraper",
     external: null,
@@ -247,7 +260,7 @@ export const otherProjects: OtherProject[] = [
   {
     title: "hansard scraper",
     description:
-      "Singapore parliamentary debate scraper that extracts Hansard records for legislative history research. (WIP)",
+      "Parliamentary debate scraper extracting Singapore Hansard records for legislative history research. (WIP)",
     tags: ["Python", "BeautifulSoup", "Legal Data"],
     github: "https://github.com/kevanwee/hansardscraper",
     external: null,

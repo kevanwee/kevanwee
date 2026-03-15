@@ -7,36 +7,40 @@
     scroll-behavior: smooth;
   }
 
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   ::selection {
-    background-color: rgb(99 102 241 / 0.25);
-    color: rgb(199 210 254);
+    background-color: rgb(107 159 137 / 0.25);
+    color: #2c5244;
   }
 
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #020617;
+    background: #f4ede2;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
+    background: #c4b8aa;
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: #a5968a;
   }
 }
 
 @layer utilities {
-  .section-heading {
-    @apply mb-10 flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-slate-200;
+  .section-divider {
+    @apply border-t border-cream-200;
   }
 
-  .section-heading::after {
-    content: "";
-    @apply flex-1 border-t border-slate-700 lg:hidden;
+  .tag {
+    @apply inline-block rounded-sm bg-sage-50 px-2.5 py-0.5 text-xs text-sage-600 ring-1 ring-sage-100;
   }
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,37 +7,25 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
   title: "Kevan Wee",
   description:
-    "Kevan Wee — Computing & Law student at SMU building technology at the intersection of law and software.",
-  keywords: [
-    "Kevan Wee",
-    "Computing Law",
-    "SMU",
-    "LegalTech",
-    "Singapore",
-    "Portfolio",
-  ],
+    "Kevan Wee — Computing & Law at SMU. Building technology at the intersection of law and software.",
+  keywords: ["Kevan Wee", "Computing Law", "SMU", "LegalTech", "Singapore"],
   authors: [{ name: "Kevan Wee" }],
   openGraph: {
     title: "Kevan Wee",
     description:
-      "Computing & Law student at SMU. Building technology at the intersection of law and software.",
-    url: "https://kevanwee.vercel.app",
+      "Computing & Law at SMU. Building technology at the intersection of law and software.",
     siteName: "Kevan Wee",
     locale: "en_SG",
     type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "Kevan Wee",
-    description:
-      "Computing & Law student at SMU. Building technology at the intersection of law and software.",
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
 };
 
@@ -47,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-slate-950 text-slate-400 antialiased">{children}</body>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="bg-cream-50 text-warm-800 font-sans">{children}</body>
     </html>
   );
 }

@@ -13,18 +13,17 @@ const memberships = [
 
 export default function Memberships() {
   return (
-    <div className="mt-10">
-      <p className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-500">
+    <div>
+      <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-400">
         Memberships
       </p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-2">
         {memberships.map(({ org, role, url }) => {
           const inner = (
-            <>
-              <span className="text-slate-200">{org}</span>
-              <span className="text-slate-600">·</span>
-              <span className="text-slate-500">{role}</span>
-            </>
+            <span className="flex items-center justify-between w-full">
+              <span className="text-xs font-medium text-warm-800">{org}</span>
+              <span className="text-xs text-warm-400">{role}</span>
+            </span>
           );
 
           return url ? (
@@ -33,32 +32,17 @@ export default function Memberships() {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-800 bg-slate-900/50 px-3 py-1.5 text-xs transition-colors hover:border-slate-700 hover:bg-slate-800/60"
+              className="flex items-center rounded-sm border border-cream-200 bg-white px-3 py-2.5 transition-colors hover:border-sage-200 hover:bg-sage-50"
             >
               {inner}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-3 w-3 text-slate-600"
-                aria-hidden="true"
-              >
-                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
             </a>
           ) : (
-            <span
+            <div
               key={org}
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-800 bg-slate-900/50 px-3 py-1.5 text-xs"
+              className="flex items-center rounded-sm border border-cream-200 bg-white px-3 py-2.5"
             >
               {inner}
-            </span>
+            </div>
           );
         })}
       </div>
