@@ -54,8 +54,8 @@ export const experiences: Experience[] = [
     type: "Part-time",
     url: "https://scis.smu.edu.sg/",
     bullets: [
-      "Authoring a research paper on DeFi software supply-chain risks, analysing Web3 bug bounty ecosystems to identify exploit patterns, remediation timelines, and gaps in security integration across product lifecycles and CI/CD workflows.",
-      "Building Python data pipelines and NLP-based classification models to structure Immunefi and Sherlock vulnerability disclosures, generating insights on risk trends across smart contracts, oracles, and infrastructure.",
+      "Researching DeFi vulnerabilities and Web3 bug bounties/audit competitions to analyse exploit trends and remediation data, exploring how audits, disclosures, and governance can be integrated into product lifecycles and CI/CD for more resilient platforms.",
+      "Built NLP pipelines using SetFit (few-shot sentence-transformer classification) and engineered ETL + labeling workflows to classify root-cause patterns and severity across Immunefi and Sherlock vulnerability disclosures.",
     ],
   },
   {
@@ -97,6 +97,7 @@ export const experiences: Experience[] = [
     url: "https://www.imda.gov.sg/",
     bullets: [
       "Analysed 500 annual contract reviews and clearance records across IMDA divisions to surface process milestones, bottlenecks, and root causes of delays.",
+      "Built a Python ETL/reporting pipeline (pandas, openpyxl, python-docx, PyYAML, OpenXML) to automate legal contract-clearance analytics and generate division-level Excel and Word reports, surfacing delay bottlenecks, root causes, and process inefficiencies.",
     ],
   },
   {

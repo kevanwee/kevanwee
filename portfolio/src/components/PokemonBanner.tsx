@@ -1,9 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 export default function PokemonBanner() {
   const [expanded, setExpanded] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
+  const [zoomOrigin, setZoomOrigin] = useState("50% 50%");
+  const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const didZoom = useRef(false);
 
   const close = useCallback(() => setExpanded(false), []);
 
@@ -18,6 +22,28 @@ export default function PokemonBanner() {
     };
   }, [expanded, close]);
 
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setZoomOrigin(`${x}% ${y}%`);
+    didZoom.current = false;
+    holdTimer.current = setTimeout(() => {
+      didZoom.current = true;
+      setZoomed(true);
+    }, 120);
+  };
+
+  const onPointerUp = () => {
+    if (holdTimer.current) clearTimeout(holdTimer.current);
+    setZoomed(false);
+  };
+
+  const onClick = () => {
+    if (didZoom.current) return; // hold gesture — don't expand
+    setExpanded(true);
+  };
+
   return (
     <>
       <div className="mb-10">
@@ -25,15 +51,17 @@ export default function PokemonBanner() {
           Currently roaming · Route 111
         </p>
 
-        {/* Windowed banner — click to expand */}
         <div
-          className="relative overflow-hidden rounded-2xl border border-cream-200 bg-white cursor-pointer group"
+          className="relative overflow-hidden rounded-2xl border border-cream-200 bg-white cursor-pointer group select-none"
           style={{ height: "180px" }}
-          onClick={() => setExpanded(true)}
+          onClick={onClick}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerUp}
           role="button"
           tabIndex={0}
           onKeyDown={(e) => e.key === "Enter" && setExpanded(true)}
-          aria-label="Expand Route 111 Pokémon map"
+          aria-label="Hold to zoom · Click to explore Route 111"
         >
           {/* Fade top & bottom */}
           <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-gradient-to-b from-white to-transparent" />
@@ -42,18 +70,29 @@ export default function PokemonBanner() {
           {/* Hover tint */}
           <div className="absolute inset-0 z-20 rounded-2xl bg-black/0 transition-colors duration-200 group-hover:bg-black/[0.03]" />
 
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/pokemon-roam-rt111.svg"
-            alt="Animated Pokémon roaming Route 111"
-            className="w-full route-scroll"
-            style={{ display: "block", height: "auto" }}
-          />
+          {/* Zoom wrapper — sits between the overflow container and the animated img */}
+          <div
+            style={{
+              transform: zoomed ? "scale(2.5)" : "scale(1)",
+              transformOrigin: zoomOrigin,
+              transition: "transform 0.2s ease",
+              willChange: "transform",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/pokemon-roam-rt111.svg"
+              alt="Animated Pokémon roaming Route 111"
+              className="w-full route-scroll"
+              style={{ display: "block", height: "auto" }}
+              draggable={false}
+            />
+          </div>
 
-          {/* Tooltip — appears on hover */}
+          {/* Tooltip */}
           <div className="absolute bottom-3 left-1/2 z-30 -translate-x-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
             <span className="whitespace-nowrap rounded-full bg-warm-800/65 px-3 py-1 text-[10px] text-white backdrop-blur-sm">
-              ↕ Click to explore the route
+              Hold to zoom · Click to explore
             </span>
           </div>
         </div>
@@ -72,21 +111,10 @@ export default function PokemonBanner() {
             className="relative flex max-h-[88vh] w-64 flex-col overflow-hidden rounded-2xl border border-cream-200 bg-white shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Sticky header */}
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-cream-200 bg-white/90 px-4 py-3 backdrop-blur-sm">
-              <p className="text-xs font-bold uppercase tracking-widest text-warm-400">
-                Route 111
-              </p>
-              <button
-                onClick={close}
-                className="text-warm-300 transition-colors hover:text-warm-700"
-                aria-label="Close"
-              >
-                ✕
-              </button>
+              <p className="text-xs font-bold uppercase tracking-widest text-warm-400">Route 111</p>
+              <button onClick={close} className="text-warm-300 transition-colors hover:text-warm-700" aria-label="Close">✕</button>
             </div>
-
-            {/* Scrollable route */}
             <div className="overflow-y-auto">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
