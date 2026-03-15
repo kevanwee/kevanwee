@@ -1,10 +1,17 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function MusicPlayer() {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = 0.5;
+    audio.play().then(() => setPlaying(true)).catch(() => {/* blocked by browser — user must click */});
+  }, []);
 
   const toggle = () => {
     const audio = audioRef.current;
@@ -19,7 +26,7 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/littleroot-town.mp3" loop preload="none" />
+      <audio ref={audioRef} src="/littleroot-town.mp3" loop preload="auto" />
       <button
         onClick={toggle}
         className="inline-flex h-9 w-9 items-center justify-center rounded-full text-warm-300 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
