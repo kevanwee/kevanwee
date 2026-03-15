@@ -17,7 +17,7 @@ export default function Projects() {
           {featuredProjects.map((project) => (
             <li
               key={project.id}
-              className="group rounded-sm border border-cream-200 bg-white p-6 transition-all duration-200 ease-in-out hover:border-sage-200 hover:shadow-md hover:-translate-y-0.5"
+              className="group rounded-2xl border border-cream-200 bg-white p-6 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5"
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex-1">
@@ -91,7 +91,7 @@ export default function Projects() {
             {otherProjects.map((project) => (
               <li
                 key={project.title}
-                className="group flex flex-col justify-between rounded-sm border border-cream-200 bg-white p-5 transition-all duration-200 ease-in-out hover:border-sage-200 hover:shadow-md hover:-translate-y-0.5"
+                className="group flex flex-col justify-between rounded-2xl border border-cream-200 border-t-2 border-t-sage-100 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:border-t-sage-300 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-1"
               >
                 <div>
                   <div className="mb-4 flex items-center justify-between">
@@ -146,7 +146,7 @@ export default function Projects() {
                   {project.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="rounded-sm bg-cream-100 px-2 py-0.5 text-xs text-warm-500"
+                      className="rounded-full bg-cream-100 px-2.5 py-0.5 text-xs text-warm-500"
                     >
                       {tag}
                     </li>
