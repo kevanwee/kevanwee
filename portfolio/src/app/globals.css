@@ -50,4 +50,13 @@
   .tag {
     @apply inline-block rounded-full bg-sage-50 px-2.5 py-0.5 text-xs text-sage-600 ring-1 ring-sage-100;
   }
+
+  .route-scroll {
+    animation: route-scroll 90s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes route-scroll {
+  0%, 3%   { transform: translateY(0); }
+  97%, 100% { transform: translateY(calc(-100% + 180px)); }
 }

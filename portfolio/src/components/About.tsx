@@ -1,5 +1,6 @@
 import { aboutParagraphs, achievements, education } from "@/data";
 import Memberships from "@/components/Memberships";
+import PokemonBanner from "@/components/PokemonBanner";
 
 export default function About() {
   return (
@@ -61,6 +62,8 @@ export default function About() {
       <div className="mt-8">
         <Memberships />
       </div>
+
+      <PokemonBanner />
     </section>
   );
 }
