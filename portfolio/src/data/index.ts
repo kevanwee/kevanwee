@@ -96,7 +96,7 @@ export const experiences: Experience[] = [
     role: "Data Analyst",
     subtitle: "",
     period: "May 2025 — Jun 2025",
-    type: "Internship",
+    type: "Freelance",
     url: "https://www.imda.gov.sg/",
     bullets: [
       "Analysed 500 annual contract reviews and clearance records across IMDA divisions to surface process milestones, bottlenecks, and root causes of delays.",
@@ -199,13 +199,44 @@ export interface MediaAppearance {
 
 export const mediaAppearances: MediaAppearance[] = [
   {
-    outlet: "LegalQuants",
-    title: "Lawyer Profile — Kevan Wee",
-    description:
-      "Featured profile on LegalQuants, a community platform for lawyers at the intersection of law, technology, and quantitative methods.",
+    outlet: "Rajah & Tann Asia",
+    title: "Rajah & Tann wins Most Innovative award at the DBS x SG Courts Hackathon for a Better World 2024",
+    description: "",
+    date: "2024",
+    url: "https://www.judiciary.gov.sg/news-and-resources/news/news-details/joint-media-release--hackathon-for-a-better-world-2024-winners-devise-innovative-solutions-that-strengthen-access-to-justice-and-fortify-community-trust",
+    type: "Feature",
+  },
+  {
+    outlet: "SMU — School of Computing and Information Systems",
+    title: "As the new semester approaches, it also marks the bittersweet end of internship with PwC Singapore for BSc (Computing and Law) student...",
+    description: "",
     date: "2025",
-    url: "https://www.legalquants.com/lawyers/kevan-wee",
-    type: "Profile",
+    url: "https://computing.smu.edu.sg/news",
+    type: "Feature",
+  },
+  {
+    outlet: "SMU — School of Computing and Information Systems",
+    title: "BSc (Computing and Law) student Kevan Wee's internship with Rajah & Tann Technologies...",
+    description: "",
+    date: "2024",
+    url: "https://computing.smu.edu.sg/news",
+    type: "Feature",
+  },
+  {
+    outlet: "SMU — School of Computing and Information Systems",
+    title: "The end of internship doesn't always mean the end of your time there. BSc (Computing and Law) student...",
+    description: "",
+    date: "2024",
+    url: "https://computing.smu.edu.sg/news",
+    type: "Feature",
+  },
+  {
+    outlet: "Singapore Management University",
+    title: "Which SMU Tech Degree Is Right for You? What to Consider Before Choosing",
+    description: "",
+    date: "2024",
+    url: "https://www.smu.edu.sg/",
+    type: "Feature",
   },
 ];
 
