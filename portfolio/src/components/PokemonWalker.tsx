@@ -1,143 +1,256 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
-/* ── Sprite configs ─────────────────────────────────────────────────
-   PMD direction rows: 0=S 1=SW 2=W 3=NW 4=N 5=NE 6=E 7=SE
-   East (right-facing) = row 6, West (left-facing) = row 2
- ───────────────────────────────────────────────────────────────────── */
-const BASE =
-  "https://raw.githubusercontent.com/kevanwee/pmdsvgworld/main/assets/sprites";
+const BASE = "https://raw.githubusercontent.com/kevanwee/pmdsvgworld/main/assets/sprites";
 
-const CONFIGS = {
-  diancie: {
-    src: `${BASE}/0719/0001/Strike-Anim.png`,
-    frameW: 88,
-    frameH: 144,
-    frames: 14,
-    scale: 2,
-    dirRow: 6, // faces east (right)
-    fps: 120,  // ms per frame
-    label: "Mega Diancie",
-  },
-  ceruledge: {
-    src: `${BASE}/0937/0000/0001/Strike-Anim.png`,
-    frameW: 72,
-    frameH: 88,
-    frames: 9,
-    scale: 2,
-    dirRow: 2, // faces west (left)
-    fps: 120,
-    label: "Shiny Ceruledge",
-  },
-} as const;
+// PMD direction rows: S=0 SW=1 W=2 NW=3 N=4 NE=5 E=6 SE=7
+const DIR_EAST = 6;
+const DIR_WEST = 2;
+const NUM_DIR  = 8;
 
-type SpriteKey = keyof typeof CONFIGS;
+const DIANCIE = {
+  walk:   { src: `${BASE}/0719/0001/Walk-Anim.png`,   fw: 56, fh: 88,  frames: 9,  ms: 110 },
+  attack: { src: `${BASE}/0719/0001/Attack-Anim.png`, fw: 80, fh: 104, frames: 14, ms: 90  },
+  strike: { src: `${BASE}/0719/0001/Strike-Anim.png`, fw: 88, fh: 144, frames: 14, ms: 90  },
+  sleep:  { src: `${BASE}/0719/0001/Sleep-Anim.png`,  fw: 48, fh: 80,  frames: 8,  ms: 200 },
+};
 
-const NUM_DIRECTIONS = 8;
+const CERULEDGE = {
+  walk:   { src: `${BASE}/0937/0000/0001/Walk-Anim.png`,   fw: 32, fh: 56, frames: 4,  ms: 110 },
+  attack: { src: `${BASE}/0937/0000/0001/Attack-Anim.png`, fw: 64, fh: 80, frames: 14, ms: 90  },
+  strike: { src: `${BASE}/0937/0000/0001/Strike-Anim.png`, fw: 72, fh: 88, frames: 9,  ms: 90  },
+  sleep:  { src: `${BASE}/0937/0000/0001/Sleep-Anim.png`,  fw: 24, fh: 48, frames: 2,  ms: 400 },
+};
 
-/* ── Single battler ─────────────────────────────────────────────────── */
-interface BattlerProps {
-  spriteKey: SpriteKey;
-  /** offset from respective edge in px (diancie from left, ceruledge from right) */
-  edgeOffset: number;
-  /** stagger starting frame */
-  frameOffset?: number;
+type AnimKey = keyof typeof DIANCIE;
+type ScenePhase = "roam" | "spar" | "sleep";
+
+function isNight() {
+  const h = new Date().getHours();
+  return h >= 21 || h < 7;
 }
 
-function Battler({ spriteKey, edgeOffset, frameOffset = 0 }: BattlerProps) {
-  const cfg = CONFIGS[spriteKey];
-  const displayW = cfg.frameW * cfg.scale;
-  const displayH = cfg.frameH * cfg.scale;
-  const totalSheetW = cfg.frameW * cfg.frames * cfg.scale;
-  const totalSheetH = cfg.frameH * NUM_DIRECTIONS * cfg.scale;
-
-  const [frameIdx, setFrameIdx] = useState(frameOffset % cfg.frames);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setFrameIdx((f) => (f + 1) % cfg.frames);
-    }, cfg.fps);
-    return () => clearInterval(id);
-  }, [cfg.frames, cfg.fps]);
-
-  const bgX = -(frameIdx * cfg.frameW * cfg.scale);
-  const bgY = -(cfg.dirRow * cfg.frameH * cfg.scale);
-
-  const posStyle =
-    spriteKey === "diancie"
-      ? { left: edgeOffset }
-      : { right: edgeOffset };
-
-  return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: 0,
-        ...posStyle,
-        width: displayW,
-        height: displayH,
-        backgroundImage: `url(${cfg.src})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: `${totalSheetW}px ${totalSheetH}px`,
-        backgroundPosition: `${bgX}px ${bgY}px`,
-        imageRendering: "pixelated",
-      }}
-      title={cfg.label}
-    />
-  );
+interface SpriteVisual {
+  x: number;
+  frame: number;
+  dirRow: number;
+  anim: AnimKey;
 }
 
-/* ── Battle stage ───────────────────────────────────────────────────── */
+interface SpriteRef {
+  x: number;
+  vx: number; // velocity px/ms
+}
+
+const SCALE = 2;
+const WALK_SPEED = 0.035; // px/ms
+const SPAR_DURATION = 3000; // ms
+const SPAR_GAP = 40; // px gap triggering spar
+const MARGIN = 20;
+
+function spriteW(anim: AnimKey, cfg: typeof DIANCIE) {
+  return cfg[anim].fw * SCALE;
+}
+
 export default function PokemonWalker() {
-  const maxH = Math.max(
-    CONFIGS.diancie.frameH * CONFIGS.diancie.scale,
-    CONFIGS.ceruledge.frameH * CONFIGS.ceruledge.scale
-  );
-
-  /* VS label fades in once */
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [cw, setCw] = useState(0);
 
   useEffect(() => {
-    const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.4 }
-    );
-    if (ref.current) io.observe(ref.current);
-    return () => io.disconnect();
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setCw(el.clientWidth));
+    ro.observe(el);
+    setCw(el.clientWidth);
+    return () => ro.disconnect();
   }, []);
 
-  return (
-    <div
-      ref={ref}
-      style={{ position: "relative", width: "100%", height: maxH, overflow: "visible" }}
-      aria-hidden="true"
-    >
-      <Battler spriteKey="diancie" edgeOffset={32} frameOffset={0} />
-      <Battler spriteKey="ceruledge" edgeOffset={32} frameOffset={5} />
+  const night = isNight();
+  const phase = useRef<ScenePhase>(night ? "sleep" : "roam");
+  const sparTimer = useRef(0);
+  const lastTs = useRef(0);
+  const rafId = useRef(0);
 
-      {/* VS badge */}
+  // physics refs (no re-render on change)
+  const dRef = useRef<SpriteRef>({ x: MARGIN, vx: WALK_SPEED });
+  const cRef = useRef<SpriteRef>({ x: 0, vx: -WALK_SPEED });
+
+  // visual state (causes re-renders at frame-tick rate)
+  const initAnim: AnimKey = night ? "sleep" : "walk";
+  const [dVisual, setDVisual] = useState<SpriteVisual>({ x: MARGIN, frame: 0, dirRow: DIR_EAST, anim: initAnim });
+  const [cVisual, setCVisual] = useState<SpriteVisual>({ x: 0,      frame: 0, dirRow: DIR_WEST, anim: initAnim });
+
+  const dFrameTs = useRef(0);
+  const cFrameTs = useRef(0);
+  const dFrame = useRef(0);
+  const cFrame = useRef(0);
+
+  const dLastX = useRef(0);
+  const cLastX = useRef(0);
+
+  const tick = useCallback((ts: number) => {
+    if (!lastTs.current) lastTs.current = ts;
+    const dt = Math.min(ts - lastTs.current, 50);
+    lastTs.current = ts;
+
+    if (!containerRef.current) {
+      rafId.current = requestAnimationFrame(tick);
+      return;
+    }
+
+    const width = containerRef.current.clientWidth;
+    const dw = spriteW("walk", DIANCIE);
+    const cw = spriteW("walk", CERULEDGE);
+
+    const d = dRef.current;
+    const c = cRef.current;
+    const p = phase.current;
+
+    // advance sprite frames
+    const advanceFrame = (
+      ref: React.MutableRefObject<number>,
+      tsRef: React.MutableRefObject<number>,
+      anim: AnimKey,
+      cfg: typeof DIANCIE
+    ) => {
+      if (ts - tsRef.current >= cfg[anim].ms) {
+        tsRef.current = ts;
+        ref.current = (ref.current + 1) % cfg[anim].frames;
+        return true;
+      }
+      return false;
+    };
+
+    let dChanged = false, cChanged = false;
+
+    if (p === "sleep") {
+      dChanged = advanceFrame(dFrame, dFrameTs, "sleep", DIANCIE);
+      cChanged = advanceFrame(cFrame, cFrameTs, "sleep", CERULEDGE);
+      if (dChanged) setDVisual(v => ({ ...v, frame: dFrame.current, anim: "sleep", dirRow: DIR_EAST }));
+      if (cChanged) setCVisual(v => ({ ...v, frame: cFrame.current, anim: "sleep", dirRow: DIR_EAST }));
+      rafId.current = requestAnimationFrame(tick);
+      return;
+    }
+
+    if (p === "spar") {
+      sparTimer.current += dt;
+      // alternate between attack and strike every 14/9 frames
+      const dAnim: AnimKey = (Math.floor(sparTimer.current / 1200) % 2 === 0) ? "attack" : "strike";
+      const cAnim: AnimKey = (Math.floor(sparTimer.current / 1100) % 2 === 0) ? "strike" : "attack";
+
+      dChanged = advanceFrame(dFrame, dFrameTs, dAnim, DIANCIE);
+      cChanged = advanceFrame(cFrame, cFrameTs, cAnim, CERULEDGE);
+
+      if (dChanged) setDVisual(v => ({ ...v, frame: dFrame.current, anim: dAnim, dirRow: DIR_EAST }));
+      if (cChanged) setCVisual(v => ({ ...v, frame: cFrame.current, anim: cAnim, dirRow: DIR_WEST }));
+
+      if (sparTimer.current >= SPAR_DURATION) {
+        phase.current = "roam";
+        sparTimer.current = 0;
+        // send them apart
+        d.vx = -WALK_SPEED;
+        c.vx = WALK_SPEED;
+        dFrame.current = 0;
+        cFrame.current = 0;
+      }
+      rafId.current = requestAnimationFrame(tick);
+      return;
+    }
+
+    // ROAM — move both
+    d.x += d.vx * dt;
+    c.x += c.vx * dt;
+
+    // bounce
+    if (d.x <= MARGIN) { d.x = MARGIN; d.vx = WALK_SPEED; }
+    if (d.x + dw >= width - MARGIN) { d.x = width - MARGIN - dw; d.vx = -WALK_SPEED; }
+    if (c.x <= MARGIN) { c.x = MARGIN; c.vx = WALK_SPEED; }
+    if (c.x + cw >= width - MARGIN) { c.x = width - MARGIN - cw; c.vx = -WALK_SPEED; }
+
+    // proximity check — trigger spar
+    const gap = Math.abs((d.x + dw / 2) - (c.x + cw / 2));
+    if (gap < SPAR_GAP + dw / 2 + cw / 2) {
+      phase.current = "spar";
+      sparTimer.current = 0;
+      dFrame.current = 0;
+      cFrame.current = 0;
+      // snap facing
+      const dOnLeft = d.x < c.x;
+      setDVisual(v => ({ ...v, x: d.x, frame: 0, anim: "attack", dirRow: dOnLeft ? DIR_EAST : DIR_WEST }));
+      setCVisual(v => ({ ...v, x: c.x, frame: 0, anim: "strike", dirRow: dOnLeft ? DIR_WEST : DIR_EAST }));
+      rafId.current = requestAnimationFrame(tick);
+      return;
+    }
+
+    dChanged = advanceFrame(dFrame, dFrameTs, "walk", DIANCIE);
+    cChanged = advanceFrame(cFrame, cFrameTs, "walk", CERULEDGE);
+
+    if (dChanged || Math.abs(d.x - dLastX.current) > 0.5) {
+      dLastX.current = d.x;
+      setDVisual({ x: d.x, frame: dFrame.current, anim: "walk", dirRow: d.vx > 0 ? DIR_EAST : DIR_WEST });
+    }
+    if (cChanged || Math.abs(c.x - cLastX.current) > 0.5) {
+      cLastX.current = c.x;
+      setCVisual({ x: c.x, frame: cFrame.current, anim: "walk", dirRow: c.vx > 0 ? DIR_EAST : DIR_WEST });
+    }
+
+    rafId.current = requestAnimationFrame(tick);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (cw === 0) return;
+    // init ceruledge on far right
+    const cw2 = spriteW("walk", CERULEDGE);
+    cRef.current.x = cw - MARGIN - cw2;
+    rafId.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId.current);
+  }, [cw, tick]);
+
+  function renderSprite(visual: SpriteVisual, cfg: typeof DIANCIE) {
+    const animCfg = cfg[visual.anim];
+    const displayW = animCfg.fw * SCALE;
+    const displayH = animCfg.fh * SCALE;
+    const totalW = animCfg.fw * animCfg.frames * SCALE;
+    const totalH = animCfg.fh * NUM_DIR * SCALE;
+    const bgX = -(visual.frame * animCfg.fw * SCALE);
+    const bgY = -(visual.dirRow * animCfg.fh * SCALE);
+
+    return (
       <div
         style={{
           position: "absolute",
-          left: "50%",
-          bottom: 16,
-          transform: `translateX(-50%) scale(${visible ? 1 : 0.6})`,
-          opacity: visible ? 1 : 0,
-          transition: "opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)",
-          fontFamily: "serif",
-          fontStyle: "italic",
-          fontWeight: 700,
-          fontSize: 13,
-          color: "#a5968a",
-          letterSpacing: "0.1em",
-          pointerEvents: "none",
-          whiteSpace: "nowrap",
+          bottom: 0,
+          left: visual.x,
+          width: displayW,
+          height: displayH,
+          backgroundImage: `url(${animCfg.src})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: `${totalW}px ${totalH}px`,
+          backgroundPosition: `${bgX}px ${bgY}px`,
+          imageRendering: "pixelated",
         }}
-      >
-        ✦ vs ✦
-      </div>
+      />
+    );
+  }
+
+  const maxH = Math.max(
+    DIANCIE.attack.fh * SCALE,
+    CERULEDGE.attack.fh * SCALE
+  );
+
+  return (
+    <div
+      ref={containerRef}
+      style={{ position: "relative", width: "100%", height: maxH, overflow: "visible" }}
+      aria-hidden="true"
+    >
+      {cw > 0 && (
+        <>
+          {renderSprite(dVisual, DIANCIE)}
+          {renderSprite(cVisual, CERULEDGE)}
+        </>
+      )}
     </div>
   );
 }

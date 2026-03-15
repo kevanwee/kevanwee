@@ -5,24 +5,37 @@ import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import MediaAppearances from "@/components/MediaAppearances";
 import Contact from "@/components/Contact";
-import { PokemonWalkerClient, IcaFloatClient } from "@/components/ClientWidgets";
+import LeftPanel from "@/components/LeftPanel";
+import { IcaFloatClient } from "@/components/ClientWidgets";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-cream-50">
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <MediaAppearances />
-        {/* Pokemon walker strip */}
-        <div className="mx-auto max-w-4xl px-6 py-4 md:px-10">
-          <PokemonWalkerClient />
-        </div>
-        <Contact />
-      </main>
+    <div className="bg-cream-50 min-h-screen">
+      {/* Mobile-only sticky nav */}
+      <div className="lg:hidden">
+        <Nav />
+      </div>
+
+      <div className="lg:flex">
+        {/* Left sidebar — fixed, desktop only */}
+        <aside className="hidden lg:block lg:fixed lg:inset-y-0 lg:left-0 lg:w-[44%] lg:border-r lg:border-cream-200 lg:overflow-hidden">
+          <LeftPanel />
+        </aside>
+
+        {/* Right — scrollable content */}
+        <main className="lg:ml-[44%]">
+          {/* Mobile hero (hidden on desktop since LeftPanel shows it) */}
+          <div className="lg:hidden">
+            <Hero />
+          </div>
+          <About />
+          <Experience />
+          <Projects />
+          <MediaAppearances />
+          <Contact />
+        </main>
+      </div>
+
       <IcaFloatClient />
     </div>
   );

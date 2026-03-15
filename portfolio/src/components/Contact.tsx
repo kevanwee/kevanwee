@@ -3,6 +3,7 @@ import { personal } from "@/data";
 export default function Contact() {
   return (
     <section
+      id="contact"
       className="border-t border-cream-200 px-6 py-24 md:px-10"
       aria-label="Contact"
     >

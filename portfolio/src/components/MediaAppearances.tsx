@@ -5,6 +5,7 @@ export default function MediaAppearances() {
 
   return (
     <section
+      id="media"
       className="scroll-mt-20 border-t border-cream-200 px-6 py-24 md:px-10"
       aria-label="Media & Appearances"
     >
