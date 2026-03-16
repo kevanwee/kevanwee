@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (pointer: fine) {
+    html.diancie-cursor,
+    html.diancie-cursor *,
+    html.pokemon-cursor,
+    html.pokemon-cursor * {
+      cursor: none !important;
+    }
+  }
+
+  ::selection {
+    background-color: rgb(107 159 137 / 0.25);
+    color: #2c5244;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f4ede2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c4b8aa;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a5968a;
+  }
+}
+
+@layer utilities {
+  .section-divider {
+    @apply border-t border-cream-200;
+  }
+
+  .tag {
+    @apply inline-block rounded-full bg-sage-50 px-2.5 py-0.5 text-xs text-sage-600 ring-1 ring-sage-100;
+  }
+
+  .route-scroll {
+    animation: route-scroll 90s ease-in-out infinite alternate;
+  }
+
+  .route-marquee-x {
+    animation: route-marquee-x 40s linear infinite;
+  }
+}
+
+@keyframes route-scroll {
+  0%, 3%   { transform: translateY(0); }
+  97%, 100% { transform: translateY(calc(-100% + 180px)); }
+}
+
+@keyframes route-marquee-x {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pokemon-spawn {
+  0%   { transform: scale(0.15); opacity: 0; filter: brightness(5) saturate(0); }
+  55%  { transform: scale(1.08); opacity: 1; filter: brightness(1.6) saturate(1.5); }
+  100% { transform: scale(1);    opacity: 1; filter: brightness(1) saturate(1); }
+}
+
+.pokemon-spawning {
+  animation: pokemon-spawn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pokeball-shake {
+  0%   { transform: rotate(0deg)   scale(1); }
+  15%  { transform: rotate(-22deg) scale(0.88); }
+  35%  { transform: rotate(22deg)  scale(0.92); }
+  55%  { transform: rotate(-14deg) scale(0.9); }
+  75%  { transform: rotate(14deg)  scale(0.95); }
+  100% { transform: rotate(0deg)   scale(1); }
+}
+
+@keyframes pokeball-flash {
+  0%   { opacity: 0.9; transform: scale(0.6); }
+  60%  { opacity: 0.6; transform: scale(1.4); }
+  100% { opacity: 0;   transform: scale(2.2); }
+}
+
+.pokeball-flash {
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%);
+  animation: pokeball-flash 0.18s ease-out forwards;
+}

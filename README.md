@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://kevanweeportfolio.vercel.app/"><img src="https://img.shields.io/badge/🌐 portfolio-visit-1a1a2e?style=for-the-badge" alt="portfolio" /></a>
+  <a href="https://kevanwee.vercel.app/"><img src="https://img.shields.io/badge/🌐 portfolio-visit-1a1a2e?style=for-the-badge" alt="portfolio" /></a>
   &nbsp;
   <a href="https://www.linkedin.com/in/kevanwee/"><img src="https://img.shields.io/badge/LinkedIn-connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin" /></a>
   &nbsp;
@@ -21,7 +21,7 @@
 </p>
 
 <div align="center">
-  <img src="./readme/totoro.gif" alt="totoro" />
+  <img src="./readme/pokemon-roam-mauville.svg" alt="pokemon roaming" />
 </div>
 
 <br>
@@ -46,6 +46,14 @@
     <br><br>
     recent brews: a copyright infringement triage tool, a contract harmonisation tool,<br>
     a parliamentary debate scraper, and too many other wip experiments 🛠️
+  </p>
+
+  <p align="center">
+    <a href="https://www.legalquants.com/lawyers/kevan-wee"><img src="https://img.shields.io/badge/LegalQuants-Member-163355?style=flat-square" /></a>
+    &nbsp;
+    <a href="https://www.legalbenchmarks.ai/framework"><img src="https://img.shields.io/badge/LegalBenchmarks.ai-Steering_Committee-5B2D8E?style=flat-square&logo=openai&logoColor=white" /></a>
+    &nbsp;
+    <a href="https://www.mensa.org.sg/"><img src="https://img.shields.io/badge/Mensa-Member-CC0000?style=flat-square" /></a>
   </p>
 
   <br>
@@ -129,6 +137,10 @@
 
   <p align="center">here's some of the dishes i've made recently! (and some works in progress) 🍽️🛠️</p>
 
+  <div align="center">
+    <img src="./readme/seox.gif" width="75" />
+  </div>
+
   <br>
 
   <div align="center">
@@ -193,6 +205,16 @@
 
 <br>
 
+<div align="center">
+  <img src="./readme/totoro.gif" alt="totoro" />
+</div>
+
+<br>
+
+---
+
+<br>
+
 <h2 align="center">contacts! &nbsp;<img src="./readme/xdd.avif" width="28" /></h2>
 
 <div align="center">
@@ -210,5 +232,5 @@
   <br><br>
   feel free to reach out!
   <br><br>
-  <img src="./readme/seox.gif" width="75" />
+  <img src="./readme/pokemon-roam-rt111.svg" alt="pokemon roaming rt111" />
 </p>
