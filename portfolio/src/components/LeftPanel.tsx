@@ -5,6 +5,7 @@ import { useState } from "react";
 import { personal } from "@/data";
 import MusicPlayer from "@/components/MusicPlayer";
 import ResumeModal from "@/components/ResumeModal";
+import PokeballRow from "@/components/PokeballRow";
 
 const NAV_ITEMS = [
   { id: "about", label: "About" },
@@ -47,6 +48,10 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             <p className="mt-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-500">
               {personal.title}
             </p>
+          </div>
+
+          <div className="mt-5">
+            <PokeballRow />
           </div>
 
           <div className="my-7 h-px w-12 bg-cream-200" />

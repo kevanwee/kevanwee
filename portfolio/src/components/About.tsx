@@ -1,6 +1,7 @@
 import { aboutParagraphs, achievements, education } from "@/data";
 import Memberships from "@/components/Memberships";
 import PokemonBanner from "@/components/PokemonBanner";
+import SubstituteSandbox from "@/components/SubstituteSandbox";
 
 export default function About() {
   return (
@@ -25,8 +26,8 @@ export default function About() {
         ))}
       </div>
 
-      {/* Education card */}
-      <div className="mt-10">
+      {/* Education card + Substitute sandbox */}
+      <div className="mt-10 flex items-start gap-3">
         <div className="inline-flex items-start gap-4 rounded-2xl border border-cream-200 bg-white p-4 transition-colors hover:border-sage-200">
           <div className="mt-0.5 flex-shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-sage-400" fill="none"
@@ -43,6 +44,7 @@ export default function About() {
             <p className="mt-1 text-xs text-warm-400">{education.expected}</p>
           </div>
         </div>
+        <SubstituteSandbox />
       </div>
 
       {/* Misc */}

@@ -8,7 +8,8 @@ import Projects from "@/components/Projects";
 import MediaAppearances from "@/components/MediaAppearances";
 import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
-import DiancieCursor from "@/components/DiancieCursor";
+import PokemonCursor from "@/components/PokemonCursor";
+import { PokemonCursorProvider } from "@/components/PokemonCursorContext";
 import { personal } from "@/data";
 
 const PortfolioModal = dynamic(() => import("@/components/PortfolioModal"), {
@@ -57,6 +58,7 @@ export default function Home() {
   }, []);
 
   return (
+    <PokemonCursorProvider>
     <div
       className="min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
       style={{ "--viewport-offset": "clamp(4rem, 12vh, 9rem)" } as CSSProperties}
@@ -68,7 +70,7 @@ export default function Home() {
           background: `radial-gradient(600px at ${mousePos.x}px ${mousePos.y}px, rgba(132,169,140,0.07), transparent 80%)`,
         }}
       />
-      <DiancieCursor />
+      <PokemonCursor />
 
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
@@ -94,5 +96,6 @@ export default function Home() {
         <PortfolioModal url={personal.funPortfolio} onClose={() => setShowModal(false)} />
       )}
     </div>
+    </PokemonCursorProvider>
   );
 }

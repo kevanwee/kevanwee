@@ -14,7 +14,9 @@
 
   @media (pointer: fine) {
     html.diancie-cursor,
-    html.diancie-cursor * {
+    html.diancie-cursor *,
+    html.pokemon-cursor,
+    html.pokemon-cursor * {
       cursor: none !important;
     }
   }
@@ -68,4 +70,34 @@
 @keyframes route-marquee-x {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+@keyframes pokemon-spawn {
+  0%   { transform: scale(0.15); opacity: 0; filter: brightness(5) saturate(0); }
+  55%  { transform: scale(1.08); opacity: 1; filter: brightness(1.6) saturate(1.5); }
+  100% { transform: scale(1);    opacity: 1; filter: brightness(1) saturate(1); }
+}
+
+.pokemon-spawning {
+  animation: pokemon-spawn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pokeball-shake {
+  0%   { transform: rotate(0deg)   scale(1); }
+  15%  { transform: rotate(-22deg) scale(0.88); }
+  35%  { transform: rotate(22deg)  scale(0.92); }
+  55%  { transform: rotate(-14deg) scale(0.9); }
+  75%  { transform: rotate(14deg)  scale(0.95); }
+  100% { transform: rotate(0deg)   scale(1); }
+}
+
+@keyframes pokeball-flash {
+  0%   { opacity: 0.9; transform: scale(0.6); }
+  60%  { opacity: 0.6; transform: scale(1.4); }
+  100% { opacity: 0;   transform: scale(2.2); }
+}
+
+.pokeball-flash {
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%);
+  animation: pokeball-flash 0.18s ease-out forwards;
 }
