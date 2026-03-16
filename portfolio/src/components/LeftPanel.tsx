@@ -26,7 +26,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
 
   return (
     <>
-      <aside className="lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
+      <aside className="left-panel-zoom lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
         <div>
           <div>
             <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">
@@ -56,7 +56,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
 
           <div className="my-7 h-px w-12 bg-cream-200" />
 
-          <p className="short-viewport:hidden max-w-xs text-sm leading-7 text-warm-400">
+          <p className="max-w-[238px] text-sm leading-7 text-warm-400">
             {personal.description}
           </p>
 

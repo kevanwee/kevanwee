@@ -49,10 +49,17 @@
     @apply border-t border-cream-200;
   }
 
+  @media (max-height: 860px) {
+    .left-panel-zoom { zoom: 0.9; }
+  }
   @media (max-height: 780px) {
-    .short-viewport\:hidden {
-      display: none;
-    }
+    .left-panel-zoom { zoom: 0.82; }
+  }
+  @media (max-height: 700px) {
+    .left-panel-zoom { zoom: 0.75; }
+  }
+  @media (max-height: 620px) {
+    .left-panel-zoom { zoom: 0.68; }
   }
 
   .tag {
