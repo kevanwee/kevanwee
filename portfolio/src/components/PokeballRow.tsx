@@ -120,12 +120,12 @@ export default function PokeballRow() {
               <img
                 src={ball}
                 alt={label}
-                width={22}
-                height={22}
+                width={28}
+                height={28}
                 style={{
                   imageRendering: "pixelated",
-                  width: 22,
-                  height: 22,
+                  width: 28,
+                  height: 28,
                   display: "block",
                   animation: isShaking ? "pokeball-shake 0.42s ease-in-out" : undefined,
                   filter: isSelected
