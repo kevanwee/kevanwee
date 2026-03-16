@@ -26,10 +26,10 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
 
   return (
     <>
-      <aside className="lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:overflow-y-auto lg:pb-[clamp(1rem,_3vh,_6rem)]">
+      <aside className="left-panel-zoom lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
         <div>
           <div>
-            <h1 className="font-serif text-[clamp(2.25rem,_5vh,_3.35rem)] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[clamp(2.25rem,_5vh,_3.75rem)]">
+            <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">
               <span className="block">{personal.name.split(" ")[0]}</span>
               <span className="inline-flex items-end gap-1">
                 <span className="italic text-sage-600">{personal.name.split(" ")[1]}</span>
@@ -54,7 +54,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             <PokeballRow />
           </div>
 
-          <div className="my-[clamp(0.75rem,_2vh,_1.75rem)] h-px w-12 bg-cream-200" />
+          <div className="my-7 h-px w-12 bg-cream-200" />
 
           <p className="max-w-[238px] text-sm leading-7 text-warm-400">
             {personal.description}
@@ -93,7 +93,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             </button>
           </div>
 
-          <nav className="mt-[clamp(1.25rem,_3vh,_2.5rem)] hidden lg:block" aria-label="Page sections">
+          <nav className="mt-10 hidden lg:block" aria-label="Page sections">
             <ul className="space-y-4">
               {NAV_ITEMS.map(({ id, label }) => {
                 const active = activeSection === id;
