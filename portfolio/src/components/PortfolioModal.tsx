@@ -102,7 +102,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
             {/* Camera dot */}
             <div className="mx-auto mb-3 h-1.5 w-1.5 rounded-full bg-warm-600" />
             {/* Screen area */}
-            <div className="overflow-hidden rounded-t-lg bg-black" style={{ aspectRatio: "16/10", maxHeight: "70vh" }}>
+            <div className="overflow-hidden rounded-t-lg bg-black" style={{ height: "clamp(280px, 60vh, 620px)" }}>
               <iframe
                 src={url}
                 className="h-full w-full border-0"
