@@ -49,6 +49,12 @@
     @apply border-t border-cream-200;
   }
 
+  @media (max-height: 780px) {
+    .short-viewport\:hidden {
+      display: none;
+    }
+  }
+
   .tag {
     @apply inline-block rounded-full bg-sage-50 px-2.5 py-0.5 text-xs text-sage-600 ring-1 ring-sage-100;
   }
