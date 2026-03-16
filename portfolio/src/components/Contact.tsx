@@ -9,6 +9,7 @@ export default function Contact() {
       aria-label="Contact"
     >
       <div>
+        <div className="flex items-start gap-4">
         <div className="max-w-lg">
           <h2 className="mb-4 font-serif text-3xl font-bold text-warm-900">
             Get in touch
@@ -38,6 +39,12 @@ export default function Contact() {
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </a>
+        </div>
+        {/* Charcadet gif — top whitespace cropped via overflow clip */}
+        <div style={{ overflow: "hidden", height: 72, width: 100, flexShrink: 0 }} aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/charc.gif" alt="" width={100} style={{ marginTop: -28, display: "block", imageRendering: "pixelated" }} />
+        </div>
         </div>
 
         <MauvilleBanner />

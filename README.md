@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://kevanweeportfolio.vercel.app/"><img src="https://img.shields.io/badge/🌐 portfolio-visit-1a1a2e?style=for-the-badge" alt="portfolio" /></a>
+  <a href="https://kevanwee.vercel.app/"><img src="https://img.shields.io/badge/🌐 portfolio-visit-1a1a2e?style=for-the-badge" alt="portfolio" /></a>
   &nbsp;
   <a href="https://www.linkedin.com/in/kevanwee/"><img src="https://img.shields.io/badge/LinkedIn-connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin" /></a>
   &nbsp;
