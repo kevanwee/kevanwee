@@ -49,35 +49,40 @@ const POKEMON_CONFIGS: Record<PokemonId, PokemonConfig> = {
     idle:  { src: "/ceruledge/Idle-Anim.png",   frameWidth: 32, frameHeight: 56, rows: 8, durations: [5,5,5,5,5,5,5,5,5,5,2,3,4,3,2] },
     sleep: { src: "/ceruledge/Sleep-Anim.png",  frameWidth: 24, frameHeight: 48, rows: 1, durations: [30,35] },
     click: { src: "/ceruledge/Attack-Anim.png", frameWidth: 64, frameHeight: 80, rows: 8, durations: [2,2,6,1,1,2,2,2,2,2,2,2,1,2] },
-    scale: 2.2, anchorX: 0.46, anchorY: 0.22,
+    // 56px fH × 1.75 ≈ 98px — matches Diancie's ~101px walk height
+    scale: 1.75, anchorX: 0.46, anchorY: 0.22,
   },
   greninja: {
     walk:  { src: "/greninja/Walk-Anim.png",   frameWidth: 32, frameHeight: 48, rows: 8, durations: [8,10,8,10] },
     idle:  { src: "/greninja/Idle-Anim.png",   frameWidth: 32, frameHeight: 56, rows: 8, durations: [40,12,2,3,6,2,4] },
     sleep: { src: "/greninja/Sleep-Anim.png",  frameWidth: 24, frameHeight: 40, rows: 1, durations: [30,35] },
     click: { src: "/greninja/Attack-Anim.png", frameWidth: 64, frameHeight: 72, rows: 8, durations: [2,2,6,1,2,2,2,2,2,2,1,2] },
-    scale: 2.2, anchorX: 0.46, anchorY: 0.22,
+    // 48px fH × 2.0 = 96px
+    scale: 2.0, anchorX: 0.46, anchorY: 0.22,
   },
   latios: {
     walk:  { src: "/latios/Walk-Anim.png",   frameWidth: 64, frameHeight: 80, rows: 8, durations: [4,4,4,4,4,4,4,4,4,4,4,4] },
     idle:  { src: "/latios/Idle-Anim.png",   frameWidth: 64, frameHeight: 80, rows: 8, durations: [8,8,8,8,8,8] },
     sleep: { src: "/latios/Sleep-Anim.png",  frameWidth: 48, frameHeight: 32, rows: 1, durations: [30,35] },
     click: { src: "/latios/Attack-Anim.png", frameWidth: 80, frameHeight: 80, rows: 8, durations: [2,2,6,1,1,1,2,2,2,2,2] },
-    scale: 1.5, anchorX: 0.5, anchorY: 0.3,
+    // 80px fH × 1.25 = 100px
+    scale: 1.25, anchorX: 0.5, anchorY: 0.3,
   },
   latias: {
     walk:  { src: "/latias/Walk-Anim.png",   frameWidth: 48, frameHeight: 64, rows: 8, durations: [4,4,4,4,4,4,4,4,4,4,4,4,4,4] },
     idle:  { src: "/latias/Idle-Anim.png",   frameWidth: 48, frameHeight: 64, rows: 8, durations: [8,8,8,8,8,8] },
     sleep: { src: "/latias/Sleep-Anim.png",  frameWidth: 40, frameHeight: 32, rows: 1, durations: [30,35] },
     click: { src: "/latias/Attack-Anim.png", frameWidth: 72, frameHeight: 72, rows: 8, durations: [2,2,6,1,1,1,2,2,2,2,2] },
-    scale: 1.8, anchorX: 0.5, anchorY: 0.3,
+    // 64px fH × 1.5 = 96px
+    scale: 1.5, anchorX: 0.5, anchorY: 0.3,
   },
   ironvaliant: {
     walk:  { src: "/ironvaliant/Walk-Anim.png",     frameWidth: 24, frameHeight: 48, rows: 8, durations: [12,12,12,12] },
     idle:  { src: "/ironvaliant/Twirl-Anim.png",    frameWidth: 88, frameHeight: 80, rows: 8, durations: [2,2,2,2,2,2,2,2,2,3,3,3,2,2,2,2] },
     sleep: { src: "/ironvaliant/Sleep-Anim.png",    frameWidth: 32, frameHeight: 32, rows: 1, durations: [60,6,35,6] },
     click: { src: "/ironvaliant/SpAttack-Anim.png", frameWidth: 56, frameHeight: 80, rows: 8, durations: [2,6,2,2,2,2,2,2] },
-    scale: 2.2, anchorX: 0.5, anchorY: 0.22,
+    // 48px fH × 2.0 = 96px
+    scale: 2.0, anchorX: 0.5, anchorY: 0.22,
   },
 };
 
