@@ -92,21 +92,31 @@ function SpriteAnim({
 
   const W = Math.round(frameWidth  * scale);
   const H = Math.round(frameHeight * scale);
+  const sheetW = Math.round(frameWidth  * totalFrames * scale);
+  const sheetH = Math.round(frameHeight * totalRows   * scale);
+  const offsetX = -(frame * W);
+  const offsetY = -(row   * H);
 
   return (
     <div
       aria-hidden="true"
-      style={{
-        width:               W,
-        height:              H,
-        flexShrink:          0,
-        backgroundImage:     `url(${src})`,
-        backgroundRepeat:    "no-repeat",
-        backgroundSize:      `${frameWidth * totalFrames * scale}px ${frameHeight * totalRows * scale}px`,
-        backgroundPosition:  `${-(frame * frameWidth * scale)}px ${-(row * frameHeight * scale)}px`,
-        imageRendering:      "pixelated",
-      }}
-    />
+      style={{ width: W, height: H, overflow: "hidden", flexShrink: 0 }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt=""
+        draggable={false}
+        style={{
+          width:           sheetW,
+          height:          sheetH,
+          imageRendering:  "pixelated",
+          display:         "block",
+          transform:       `translate(${offsetX}px, ${offsetY}px)`,
+          userSelect:      "none",
+        }}
+      />
+    </div>
   );
 }
 
