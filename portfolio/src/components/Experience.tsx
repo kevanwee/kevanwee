@@ -132,6 +132,17 @@ const FROAKIE_IDLE: Omit<SpriteAnimProps, "scale"> = {
   durations:   [38, 2, 2, 5, 3, 3, 2],
 };
 
+// Froakie Sleep — 24×24 px/frame, 2 frames, 1 row
+const FROAKIE_SLEEP: Omit<SpriteAnimProps, "scale"> = {
+  src:         "/froakie/Sleep-Anim.png",
+  frameWidth:  24,
+  frameHeight: 24,
+  totalFrames: 2,
+  totalRows:   1,
+  row:         0,
+  durations:   [30, 35],
+};
+
 // Fuecoco Idle — 24×32 px/frame, 4 frames, 8 rows, DIR_S = row 0
 const FUECOCO_IDLE: Omit<SpriteAnimProps, "scale"> = {
   src:         "/fuecoco/Idle-Anim.png",
@@ -143,8 +154,20 @@ const FUECOCO_IDLE: Omit<SpriteAnimProps, "scale"> = {
   durations:   [60, 6, 6, 6],
 };
 
+// Fuecoco Sleep — 24×24 px/frame, 2 frames, 1 row
+const FUECOCO_SLEEP: Omit<SpriteAnimProps, "scale"> = {
+  src:         "/fuecoco/Sleep-Anim.png",
+  frameWidth:  24,
+  frameHeight: 24,
+  totalFrames: 2,
+  totalRows:   1,
+  row:         0,
+  durations:   [30, 35],
+};
+
 // Fixed sprite container height so both buttons are equal size.
-// Froakie scale 1.0 → 24×40px; Fuecoco scale 1.25 → 30×40px.  Both 40px tall.
+// Froakie scale 1.0 → 24×40px idle / 24×24px sleep
+// Fuecoco scale 1.25 → 30×40px idle / 30×30px sleep
 const FROAKIE_SCALE  = 1.0;
 const FUECOCO_SCALE  = 1.25;
 const SPRITE_H       = 40; // px — container height for both
@@ -183,7 +206,9 @@ export default function ExperienceSection() {
             {(["tech", "legal"] as FilterKey[]).map((key) => {
               const isActive = activeFilters.has(key);
               const tokens   = FILTER_TOKENS[key];
-              const sprite   = key === "tech" ? FROAKIE_IDLE : FUECOCO_IDLE;
+              const idle     = key === "tech" ? FROAKIE_IDLE  : FUECOCO_IDLE;
+              const sleep    = key === "tech" ? FROAKIE_SLEEP : FUECOCO_SLEEP;
+              const sprite   = isActive ? idle : sleep;
               const sprScale = key === "tech" ? FROAKIE_SCALE : FUECOCO_SCALE;
               const label    = key === "tech" ? "Tech" : "Legal";
 
@@ -211,7 +236,7 @@ export default function ExperienceSection() {
                       flexShrink:     0,
                     }}
                   >
-                    <SpriteAnim {...sprite} scale={sprScale} />
+                    <SpriteAnim key={isActive ? "idle" : "sleep"} {...sprite} scale={sprScale} />
                   </div>
                   {label}
                 </button>
