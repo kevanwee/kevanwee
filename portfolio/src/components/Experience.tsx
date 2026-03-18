@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { experiences, Experience } from "@/data";
 
+const TICK_MS = 16;
+
 const typeStyle: Record<string, string> = {
   "Part-time":      "text-sage-600 bg-sage-50 ring-sage-100",
   "Internship":     "text-warm-600 bg-warm-50 ring-warm-200",
@@ -41,103 +43,100 @@ const FILTER_TOKENS = {
 type FilterKey = "tech" | "legal";
 
 // ---------------------------------------------------------------------------
-// SpriteAnim — renders one direction of a PMD sprite-sheet on a <canvas>
+// SpriteAnim — renders one direction of a PMD sprite-sheet via CSS background
+// (same technique as SubstituteSandbox — reliable, no canvas quirks)
 // ---------------------------------------------------------------------------
 
 interface SpriteAnimProps {
   src: string;
   frameWidth: number;
   frameHeight: number;
-  row: number;        // sprite-sheet row (direction); DIR_S = 0
-  durations: number[]; // per-frame duration in ticks (1 tick ≈ 16 ms)
+  totalFrames: number; // frames per row (= durations.length)
+  totalRows: number;   // total rows in sheet (8 for 8-directional)
+  row: number;         // which row to show; DIR_S = 0
+  durations: number[]; // per-frame hold in ticks (1 tick = 16 ms)
   scale: number;
 }
 
-function SpriteAnim({ src, frameWidth, frameHeight, row, durations, scale }: SpriteAnimProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imgRef    = useRef<HTMLImageElement | null>(null);
-  const stateRef  = useRef({ frame: 0, tick: 0, loaded: false });
+function SpriteAnim({
+  src, frameWidth, frameHeight, totalFrames, totalRows, row, durations, scale,
+}: SpriteAnimProps) {
+  const [frame, setFrame] = useState(0);
+  const frameRef   = useRef(0);
+  const elapsedRef = useRef(0);
+  const lastTsRef  = useRef(0);
+  const rafRef     = useRef(0);
+
+  useEffect(() => {
+    const tick = (ts: number) => {
+      if (!lastTsRef.current) lastTsRef.current = ts;
+      const dt = Math.min(ts - lastTsRef.current, 40);
+      lastTsRef.current = ts;
+
+      elapsedRef.current += dt;
+      const frameDurMs = durations[frameRef.current] * TICK_MS;
+
+      if (elapsedRef.current >= frameDurMs) {
+        elapsedRef.current -= frameDurMs;
+        frameRef.current = (frameRef.current + 1) % durations.length;
+        setFrame(frameRef.current);
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const W = Math.round(frameWidth  * scale);
   const H = Math.round(frameHeight * scale);
 
-  useEffect(() => {
-    const img = new Image();
-    img.onload = () => {
-      imgRef.current = img;
-      stateRef.current.loaded = true;
-    };
-    img.src = src;
-
-    const TICK_MS = 16;
-    let lastTime = 0;
-    let raf: number;
-
-    function draw() {
-      const canvas = canvasRef.current;
-      if (!canvas || !imgRef.current) return;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-      ctx.clearRect(0, 0, W, H);
-      ctx.imageSmoothingEnabled = false;
-      const { frame } = stateRef.current;
-      ctx.drawImage(
-        imgRef.current,
-        frame * frameWidth,
-        row   * frameHeight,
-        frameWidth,
-        frameHeight,
-        0, 0, W, H,
-      );
-    }
-
-    function tick(now: number) {
-      raf = requestAnimationFrame(tick);
-      if (now - lastTime < TICK_MS) return;
-      lastTime = now;
-      const s = stateRef.current;
-      if (!s.loaded) return;
-      s.tick++;
-      if (s.tick >= durations[s.frame]) {
-        s.tick = 0;
-        s.frame = (s.frame + 1) % durations.length;
-      }
-      draw();
-    }
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src]);
-
   return (
-    <canvas
-      ref={canvasRef}
-      width={W}
-      height={H}
-      style={{ imageRendering: "pixelated" }}
+    <div
       aria-hidden="true"
+      style={{
+        width:               W,
+        height:              H,
+        flexShrink:          0,
+        backgroundImage:     `url(${src})`,
+        backgroundRepeat:    "no-repeat",
+        backgroundSize:      `${frameWidth * totalFrames * scale}px ${frameHeight * totalRows * scale}px`,
+        backgroundPosition:  `${-(frame * frameWidth * scale)}px ${-(row * frameHeight * scale)}px`,
+        imageRendering:      "pixelated",
+      }}
     />
   );
 }
 
-// Froakie Idle  — 24×40 px/frame, 7 frames, DIR_S = row 0
+// Froakie Idle — 24×40 px/frame, 7 frames, 8 rows, DIR_S = row 0
 const FROAKIE_IDLE: Omit<SpriteAnimProps, "scale"> = {
-  src: "/froakie/Idle-Anim.png",
+  src:         "/froakie/Idle-Anim.png",
   frameWidth:  24,
   frameHeight: 40,
+  totalFrames: 7,
+  totalRows:   8,
   row:         0,
   durations:   [38, 2, 2, 5, 3, 3, 2],
 };
 
-// Fuecoco Idle  — 24×32 px/frame, 4 frames, DIR_S = row 0
+// Fuecoco Idle — 24×32 px/frame, 4 frames, 8 rows, DIR_S = row 0
 const FUECOCO_IDLE: Omit<SpriteAnimProps, "scale"> = {
-  src: "/fuecoco/Idle-Anim.png",
+  src:         "/fuecoco/Idle-Anim.png",
   frameWidth:  24,
   frameHeight: 32,
+  totalFrames: 4,
+  totalRows:   8,
   row:         0,
   durations:   [60, 6, 6, 6],
 };
+
+// Fixed sprite container height so both buttons are equal size.
+// Froakie scale 1.0 → 24×40px; Fuecoco scale 1.25 → 30×40px.  Both 40px tall.
+const FROAKIE_SCALE  = 1.0;
+const FUECOCO_SCALE  = 1.25;
+const SPRITE_H       = 40; // px — container height for both
 
 // ---------------------------------------------------------------------------
 // ExperienceSection
@@ -169,36 +168,40 @@ export default function ExperienceSection() {
             Experience
           </h2>
 
-          <div className="flex shrink-0 items-end gap-3">
+          <div className="flex shrink-0 items-center gap-2">
             {(["tech", "legal"] as FilterKey[]).map((key) => {
-              const isActive = key === "tech"
-                ? activeFilters.has("tech")
-                : activeFilters.has("legal");
-              const tokens  = FILTER_TOKENS[key];
-              const sprite  = key === "tech" ? FROAKIE_IDLE : FUECOCO_IDLE;
-              const label   = key === "tech" ? "Tech" : "Legal";
+              const isActive = activeFilters.has(key);
+              const tokens   = FILTER_TOKENS[key];
+              const sprite   = key === "tech" ? FROAKIE_IDLE : FUECOCO_IDLE;
+              const sprScale = key === "tech" ? FROAKIE_SCALE : FUECOCO_SCALE;
+              const label    = key === "tech" ? "Tech" : "Legal";
 
               return (
                 <button
                   key={key}
                   aria-pressed={isActive}
                   onClick={() => toggleFilter(key)}
-                  className="flex flex-col items-center gap-1 rounded-xl px-3 pb-2 pt-3 text-xs font-medium transition-all duration-200 ease-in-out"
-                  style={
-                    isActive
-                      ? {
-                          backgroundColor: tokens.activeBg,
-                          color:           tokens.activeText,
-                          border:          `2px solid ${tokens.active}`,
-                        }
-                      : {
-                          backgroundColor: "transparent",
-                          color:           "#a8a29e",
-                          border:          "2px solid #e7e5e4",
-                        }
-                  }
+                  className="flex items-center gap-2 rounded-lg px-3 text-xs font-medium transition-all duration-200 ease-in-out"
+                  style={{
+                    height:          SPRITE_H + 16,  // sprite height + vertical padding
+                    backgroundColor: isActive ? tokens.activeBg      : "transparent",
+                    color:           isActive ? tokens.activeText     : "#a8a29e",
+                    border:          isActive ? `2px solid ${tokens.active}` : "2px solid #e7e5e4",
+                  }}
                 >
-                  <SpriteAnim {...sprite} scale={2.5} />
+                  {/* Fixed-height wrapper so both sprites occupy the same vertical space */}
+                  <div
+                    style={{
+                      width:          Math.round(sprite.frameWidth * sprScale),
+                      height:         SPRITE_H,
+                      display:        "flex",
+                      alignItems:     "center",
+                      justifyContent: "center",
+                      flexShrink:     0,
+                    }}
+                  >
+                    <SpriteAnim {...sprite} scale={sprScale} />
+                  </div>
                   {label}
                 </button>
               );
