@@ -9,6 +9,7 @@ import MediaAppearances from "@/components/MediaAppearances";
 import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
 import PokemonCursor from "@/components/PokemonCursor";
+import TeddiursaRoamer from "@/components/TeddiursaRoamer";
 import { PokemonCursorProvider } from "@/components/PokemonCursorContext";
 import { personal } from "@/data";
 
@@ -71,6 +72,7 @@ export default function Home() {
         }}
       />
       <PokemonCursor />
+      <TeddiursaRoamer />
 
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
