@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { experiences, Experience } from "@/data";
 
 const typeStyle: Record<string, string> = {
@@ -23,24 +23,125 @@ const TAB_LABELS: Record<string, string> = {
   "dis":      "DIS SAF",
 };
 
-// Design tokens for filter colours — kept here so they're co-located with the
-// filter logic rather than scattered as magic strings throughout JSX.
 const FILTER_TOKENS = {
   tech: {
-    active:        "#F5A623",
-    activeBg:      "#FEF3D6",
-    activeText:    "#C97D10",
-    highlightBg:   "rgba(245, 166, 35, 0.18)",
+    active:      "#93C5FD",
+    activeBg:    "#DBEAFE",
+    activeText:  "#1E40AF",
+    highlightBg: "rgba(147, 197, 253, 0.3)",
   },
   legal: {
-    active:        "#3DC4A0",
-    activeBg:      "#D0F5EC",
-    activeText:    "#0E8A6E",
-    highlightBg:   "rgba(61, 196, 160, 0.18)",
+    active:      "#F9A8D4",
+    activeBg:    "#FCE7F3",
+    activeText:  "#9D174D",
+    highlightBg: "rgba(249, 168, 212, 0.3)",
   },
 } as const;
 
 type FilterKey = "tech" | "legal";
+
+// ---------------------------------------------------------------------------
+// SpriteAnim — renders one direction of a PMD sprite-sheet on a <canvas>
+// ---------------------------------------------------------------------------
+
+interface SpriteAnimProps {
+  src: string;
+  frameWidth: number;
+  frameHeight: number;
+  row: number;        // sprite-sheet row (direction); DIR_S = 0
+  durations: number[]; // per-frame duration in ticks (1 tick ≈ 16 ms)
+  scale: number;
+}
+
+function SpriteAnim({ src, frameWidth, frameHeight, row, durations, scale }: SpriteAnimProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imgRef    = useRef<HTMLImageElement | null>(null);
+  const stateRef  = useRef({ frame: 0, tick: 0, loaded: false });
+
+  const W = Math.round(frameWidth  * scale);
+  const H = Math.round(frameHeight * scale);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      imgRef.current = img;
+      stateRef.current.loaded = true;
+    };
+    img.src = src;
+
+    const TICK_MS = 16;
+    let lastTime = 0;
+    let raf: number;
+
+    function draw() {
+      const canvas = canvasRef.current;
+      if (!canvas || !imgRef.current) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.clearRect(0, 0, W, H);
+      ctx.imageSmoothingEnabled = false;
+      const { frame } = stateRef.current;
+      ctx.drawImage(
+        imgRef.current,
+        frame * frameWidth,
+        row   * frameHeight,
+        frameWidth,
+        frameHeight,
+        0, 0, W, H,
+      );
+    }
+
+    function tick(now: number) {
+      raf = requestAnimationFrame(tick);
+      if (now - lastTime < TICK_MS) return;
+      lastTime = now;
+      const s = stateRef.current;
+      if (!s.loaded) return;
+      s.tick++;
+      if (s.tick >= durations[s.frame]) {
+        s.tick = 0;
+        s.frame = (s.frame + 1) % durations.length;
+      }
+      draw();
+    }
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={W}
+      height={H}
+      style={{ imageRendering: "pixelated" }}
+      aria-hidden="true"
+    />
+  );
+}
+
+// Froakie Idle  — 24×40 px/frame, 7 frames, DIR_S = row 0
+const FROAKIE_IDLE: Omit<SpriteAnimProps, "scale"> = {
+  src: "/froakie/Idle-Anim.png",
+  frameWidth:  24,
+  frameHeight: 40,
+  row:         0,
+  durations:   [38, 2, 2, 5, 3, 3, 2],
+};
+
+// Fuecoco Idle  — 24×32 px/frame, 4 frames, DIR_S = row 0
+const FUECOCO_IDLE: Omit<SpriteAnimProps, "scale"> = {
+  src: "/fuecoco/Idle-Anim.png",
+  frameWidth:  24,
+  frameHeight: 32,
+  row:         0,
+  durations:   [60, 6, 6, 6],
+};
+
+// ---------------------------------------------------------------------------
+// ExperienceSection
+// ---------------------------------------------------------------------------
 
 export default function ExperienceSection() {
   const [activeId, setActiveId] = useState(experiences[0].id);
@@ -62,12 +163,51 @@ export default function ExperienceSection() {
       aria-label="Work Experience"
     >
       <div>
-        <h2 className="mb-12 font-serif text-3xl font-bold text-warm-900">
-          Experience
-        </h2>
+        {/* Heading row — title left, filter buttons right */}
+        <div className="mb-12 flex items-end justify-between gap-4">
+          <h2 className="font-serif text-3xl font-bold text-warm-900">
+            Experience
+          </h2>
+
+          <div className="flex shrink-0 items-end gap-3">
+            {(["tech", "legal"] as FilterKey[]).map((key) => {
+              const isActive = key === "tech"
+                ? activeFilters.has("tech")
+                : activeFilters.has("legal");
+              const tokens  = FILTER_TOKENS[key];
+              const sprite  = key === "tech" ? FROAKIE_IDLE : FUECOCO_IDLE;
+              const label   = key === "tech" ? "Tech" : "Legal";
+
+              return (
+                <button
+                  key={key}
+                  aria-pressed={isActive}
+                  onClick={() => toggleFilter(key)}
+                  className="flex flex-col items-center gap-1 rounded-xl px-3 pb-2 pt-3 text-xs font-medium transition-all duration-200 ease-in-out"
+                  style={
+                    isActive
+                      ? {
+                          backgroundColor: tokens.activeBg,
+                          color:           tokens.activeText,
+                          border:          `2px solid ${tokens.active}`,
+                        }
+                      : {
+                          backgroundColor: "transparent",
+                          color:           "#a8a29e",
+                          border:          "2px solid #e7e5e4",
+                        }
+                  }
+                >
+                  <SpriteAnim {...sprite} scale={2.5} />
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
         <div className="flex flex-col gap-0 sm:flex-row">
-          {/* Tab list — left column */}
+          {/* Tab list */}
           <div
             role="tablist"
             className="flex shrink-0 flex-row overflow-x-auto border-b border-cream-200 sm:flex-col sm:overflow-x-visible sm:border-b-0 sm:border-l-2 sm:border-cream-200"
@@ -104,90 +244,13 @@ export default function ExperienceSection() {
             })}
           </div>
 
-          {/* Panel — centre, fills remaining space */}
+          {/* Panel */}
           <div className="flex-1 px-0 pt-6 sm:pl-8 sm:pt-0">
-            {/* Filter bar — horizontal on mobile (above content), vertical on desktop (tucked to right via parent flex) */}
-            <div className="flex flex-row gap-2 border-b border-cream-200 pb-3 sm:hidden">
-              <FilterBar
-                activeFilters={activeFilters}
-                onToggle={toggleFilter}
-                orientation="horizontal"
-              />
-            </div>
-
             <ExperiencePanel exp={active} activeFilters={activeFilters} />
-          </div>
-
-          {/* Filter bar — desktop only, right column */}
-          <div className="hidden shrink-0 flex-col gap-2 border-l border-cream-200 pl-4 sm:flex">
-            <FilterBar
-              activeFilters={activeFilters}
-              onToggle={toggleFilter}
-              orientation="vertical"
-            />
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// FilterBar
-// ---------------------------------------------------------------------------
-
-interface FilterBarProps {
-  activeFilters: Set<FilterKey>;
-  onToggle: (f: FilterKey) => void;
-  orientation: "horizontal" | "vertical";
-}
-
-function FilterBar({ activeFilters, onToggle, orientation }: FilterBarProps) {
-  const filters: { key: FilterKey; label: string; icon: string }[] = [
-    { key: "tech",  label: "Tech",  icon: "/icons/latias.png" },
-    { key: "legal", label: "Legal", icon: "/icons/latios.png" },
-  ];
-
-  return (
-    <>
-      {filters.map(({ key, label, icon }) => {
-        const isActive = activeFilters.has(key);
-        const tokens = FILTER_TOKENS[key];
-
-        const activeStyle: React.CSSProperties = isActive
-          ? {
-              backgroundColor: tokens.activeBg,
-              color:            tokens.activeText,
-              borderColor:      tokens.active,
-            }
-          : {};
-
-        return (
-          <button
-            key={key}
-            aria-pressed={isActive}
-            onClick={() => onToggle(key)}
-            className={`flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ease-in-out ${
-              orientation === "vertical" ? "w-full" : ""
-            } ${
-              isActive
-                ? "border-2"
-                : "border border-cream-200 text-warm-400 hover:border-cream-300 hover:text-warm-600"
-            }`}
-            style={activeStyle}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={icon}
-              alt=""
-              aria-hidden="true"
-              className="h-4 w-auto flex-shrink-0 object-contain"
-            />
-            {label}
-          </button>
-        );
-      })}
-    </>
   );
 }
 
@@ -238,9 +301,9 @@ function ExperiencePanel({ exp, activeFilters }: ExperiencePanelProps) {
       {/* Bullets */}
       <ul className="mt-4 space-y-2.5">
         {exp.bullets.map((b, i) => {
-          const tags = exp.bulletTags?.[i] ?? [];
+          const tags           = exp.bulletTags?.[i] ?? [];
           const highlightStyle = getBulletHighlight(tags, activeFilters);
-          const isDimmed =
+          const isDimmed       =
             filtersActive &&
             tags.length > 0 &&
             !tags.some((t) => activeFilters.has(t));
@@ -274,12 +337,12 @@ function ExperiencePanel({ exp, activeFilters }: ExperiencePanelProps) {
 }
 
 // ---------------------------------------------------------------------------
-// Highlight resolver — returns the background value to apply, or null if none
+// Highlight resolver
 // ---------------------------------------------------------------------------
 
 function getBulletHighlight(
   tags: ("tech" | "legal")[],
-  activeFilters: Set<FilterKey>
+  activeFilters: Set<FilterKey>,
 ): string | null {
   if (activeFilters.size === 0 || tags.length === 0) return null;
 
@@ -288,22 +351,12 @@ function getBulletHighlight(
   const techOn   = activeFilters.has("tech");
   const legalOn  = activeFilters.has("legal");
 
-  // Both tags AND both filters active → gradient
   if (hasTech && hasLegal && techOn && legalOn) {
-    return "linear-gradient(to right, rgba(245,166,35,0.18), rgba(61,196,160,0.18))";
+    return "linear-gradient(to right, rgba(147,197,253,0.3), rgba(249,168,212,0.3))";
   }
+  if (hasTech && techOn && !hasLegal)  return FILTER_TOKENS.tech.highlightBg;
+  if (hasLegal && legalOn && !hasTech) return FILTER_TOKENS.legal.highlightBg;
 
-  // Only tech tag matched
-  if (hasTech && techOn && !hasLegal) {
-    return FILTER_TOKENS.tech.highlightBg;
-  }
-
-  // Only legal tag matched
-  if (hasLegal && legalOn && !hasTech) {
-    return FILTER_TOKENS.legal.highlightBg;
-  }
-
-  // Mixed bullet (both tags) but only one filter is on — highlight with that filter's colour
   if (hasTech && hasLegal) {
     if (techOn)  return FILTER_TOKENS.tech.highlightBg;
     if (legalOn) return FILTER_TOKENS.legal.highlightBg;
