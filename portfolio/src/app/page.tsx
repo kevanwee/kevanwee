@@ -76,7 +76,7 @@ export default function Home() {
 
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
-          <div className="pb-8 lg:w-[45%]">
+          <div id="teddiursa-panel" className="pb-8 lg:w-[45%]">
             <LeftPanel
               activeSection={activeSection}
               onNavClick={scrollToSection}

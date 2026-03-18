@@ -87,7 +87,8 @@ export default function SubstituteSandbox() {
           // Randomly pick a new direction
           const newVel = Math.random() > 0.5 ? 1 : -1;
           velXRef.current = newVel;
-          const newDir = newVel > 0 ? DIR_E : DIR_W;
+          // DIR_W (row 2) = facing right on screen; DIR_E (row 6) = facing left
+          const newDir = newVel > 0 ? DIR_W : DIR_E;
           dirRef.current = newDir as 0 | 2 | 6;
           setDir(newDir as 0 | 2 | 6);
         } else {
@@ -106,13 +107,13 @@ export default function SubstituteSandbox() {
         if (nx <= 0) {
           nx = 0;
           velXRef.current = 1;
-          dirRef.current = DIR_E as 0 | 2 | 6;
-          setDir(DIR_E);
+          dirRef.current = DIR_W as 0 | 2 | 6; // moving right → face right (DIR_W row)
+          setDir(DIR_W);
         } else if (nx >= maxX) {
           nx = maxX;
           velXRef.current = -1;
-          dirRef.current = DIR_W as 0 | 2 | 6;
-          setDir(DIR_W);
+          dirRef.current = DIR_E as 0 | 2 | 6; // moving left → face left (DIR_E row)
+          setDir(DIR_E);
         }
 
         xRef.current = nx;
