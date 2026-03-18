@@ -1,4 +1,5 @@
 import { featuredProjects, otherProjects } from "@/data";
+import Skills from "@/components/Skills";
 
 export default function Projects() {
   return (
@@ -166,6 +167,8 @@ export default function Projects() {
             ))}
           </ul>
         </div>
+
+        <Skills />
       </div>
     </section>
   );
