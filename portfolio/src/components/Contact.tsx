@@ -1,7 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import { personal } from "@/data";
 import MauvilleBanner from "@/components/MauvilleBanner";
+import CreditsModal from "@/components/CreditsModal";
 
 export default function Contact() {
+  const [showCredits, setShowCredits] = useState(false);
+
   return (
     <section
       id="contact"
@@ -55,9 +61,17 @@ export default function Contact() {
             <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">LinkedIn</a>
             <a href={personal.github} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">GitHub</a>
             <a href={personal.funPortfolio} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">3D Portfolio</a>
+            <button
+              onClick={() => setShowCredits(true)}
+              className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200"
+            >
+              Credits
+            </button>
           </div>
         </footer>
       </div>
+
+      {showCredits && <CreditsModal onClose={() => setShowCredits(false)} />}
     </section>
   );
 }

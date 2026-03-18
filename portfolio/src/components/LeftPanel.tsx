@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { personal } from "@/data";
 import MusicPlayer from "@/components/MusicPlayer";
 import ResumeModal from "@/components/ResumeModal";
@@ -23,12 +23,24 @@ interface LeftPanelProps {
 
 export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: LeftPanelProps) {
   const [showResume, setShowResume] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 60);
+    return () => clearTimeout(t);
+  }, []);
+
+  const fadeUp = (delay: string): React.CSSProperties => ({
+    opacity: mounted ? 1 : 0,
+    transform: mounted ? "none" : "translateY(16px)",
+    transition: `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}`,
+  });
 
   return (
     <>
       <aside className="left-panel-zoom lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
         <div>
-          <div>
+          <div style={fadeUp("0ms")}>
             <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">
               <span className="block">{personal.name.split(" ")[0]}</span>
               <span className="inline-flex items-end gap-1">
@@ -44,23 +56,23 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
                 />
               </span>
             </h1>
-
-            <p className="mt-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-500">
-              {personal.title}
-            </p>
           </div>
 
-          <div className="mt-5">
+          <p className="mt-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-500" style={fadeUp("80ms")}>
+            {personal.title}
+          </p>
+
+          <div className="mt-5" style={fadeUp("160ms")}>
             <PokeballRow />
           </div>
 
-          <div className="my-7 h-px w-12 bg-cream-200" />
+          <div className="my-7 h-px w-12 bg-cream-200" style={fadeUp("210ms")} />
 
-          <p className="max-w-[238px] text-sm leading-7 text-warm-400">
+          <p className="max-w-[238px] text-sm leading-7 text-warm-400" style={fadeUp("260ms")}>
             {personal.description}
           </p>
 
-          <div className="mt-5 flex items-center gap-2">
+          <div className="mt-5 flex items-center gap-2" style={fadeUp("330ms")}>
             <button
               onClick={() => setShowResume(true)}
               className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
@@ -93,7 +105,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             </button>
           </div>
 
-          <nav className="mt-10 hidden lg:block" aria-label="Page sections">
+          <nav className="mt-10 hidden lg:block" aria-label="Page sections" style={fadeUp("410ms")}>
             <ul className="space-y-4">
               {NAV_ITEMS.map(({ id, label }) => {
                 const active = activeSection === id;
@@ -127,7 +139,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
           </nav>
         </div>
 
-        <div className="pt-6">
+        <div className="pt-6" style={fadeUp("510ms")}>
           <div className="flex flex-wrap items-center gap-2">
             <a
               href={personal.linkedin}
