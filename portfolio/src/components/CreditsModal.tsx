@@ -21,7 +21,7 @@ const CREDITS = [
   },
   {
     category: "Music",
-    name: "Pokémon Mystery Dungeon OST",
+    name: "Pokémon Ruby & Sapphire OST",
     href: null,
     description: "Littleroot Town — used for ambient background music",
   },
