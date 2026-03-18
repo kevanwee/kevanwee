@@ -19,7 +19,11 @@ const TECH_SKILLS = [
   },
   {
     category: "AI / ML",
-    skills: ["NLP", "RAG", "PostgresML", "Web3 / DeFi Security"],
+    skills: ["NLP", "RAG", "PostgresML"],
+  },
+  {
+    category: "Security",
+    skills: ["Web3 / DeFi Security", "ZTNA"],
   },
   {
     category: "Geospatial",
@@ -29,7 +33,7 @@ const TECH_SKILLS = [
 
 const LEGAL_SKILLS = [
   {
-    category: "Practice Areas",
+    category: "Areas of Interest",
     skills: ["Contract Law", "Intellectual Property", "Data Privacy (PDPA)", "Corporate / M&A", "Litigation", "Criminal Law", "Tort Law", "Family Law"],
   },
   {
