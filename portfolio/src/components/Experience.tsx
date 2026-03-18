@@ -23,9 +23,37 @@ const TAB_LABELS: Record<string, string> = {
   "dis":      "DIS SAF",
 };
 
+// Design tokens for filter colours — kept here so they're co-located with the
+// filter logic rather than scattered as magic strings throughout JSX.
+const FILTER_TOKENS = {
+  tech: {
+    active:        "#F5A623",
+    activeBg:      "#FEF3D6",
+    activeText:    "#C97D10",
+    highlightBg:   "rgba(245, 166, 35, 0.18)",
+  },
+  legal: {
+    active:        "#3DC4A0",
+    activeBg:      "#D0F5EC",
+    activeText:    "#0E8A6E",
+    highlightBg:   "rgba(61, 196, 160, 0.18)",
+  },
+} as const;
+
+type FilterKey = "tech" | "legal";
+
 export default function ExperienceSection() {
   const [activeId, setActiveId] = useState(experiences[0].id);
+  const [activeFilters, setActiveFilters] = useState<Set<FilterKey>>(new Set());
+
   const active = experiences.find((e) => e.id === activeId) ?? experiences[0];
+
+  const toggleFilter = (f: FilterKey) =>
+    setActiveFilters((prev) => {
+      const next = new Set(prev);
+      next.has(f) ? next.delete(f) : next.add(f);
+      return next;
+    });
 
   return (
     <section
@@ -39,7 +67,7 @@ export default function ExperienceSection() {
         </h2>
 
         <div className="flex flex-col gap-0 sm:flex-row">
-          {/* Tab list */}
+          {/* Tab list — left column */}
           <div
             role="tablist"
             className="flex shrink-0 flex-row overflow-x-auto border-b border-cream-200 sm:flex-col sm:overflow-x-visible sm:border-b-0 sm:border-l-2 sm:border-cream-200"
@@ -76,9 +104,27 @@ export default function ExperienceSection() {
             })}
           </div>
 
-          {/* Panel */}
+          {/* Panel — centre, fills remaining space */}
           <div className="flex-1 px-0 pt-6 sm:pl-8 sm:pt-0">
-            <ExperiencePanel exp={active} />
+            {/* Filter bar — horizontal on mobile (above content), vertical on desktop (tucked to right via parent flex) */}
+            <div className="flex flex-row gap-2 border-b border-cream-200 pb-3 sm:hidden">
+              <FilterBar
+                activeFilters={activeFilters}
+                onToggle={toggleFilter}
+                orientation="horizontal"
+              />
+            </div>
+
+            <ExperiencePanel exp={active} activeFilters={activeFilters} />
+          </div>
+
+          {/* Filter bar — desktop only, right column */}
+          <div className="hidden shrink-0 flex-col gap-2 border-l border-cream-200 pl-4 sm:flex">
+            <FilterBar
+              activeFilters={activeFilters}
+              onToggle={toggleFilter}
+              orientation="vertical"
+            />
           </div>
         </div>
       </div>
@@ -86,7 +132,77 @@ export default function ExperienceSection() {
   );
 }
 
-function ExperiencePanel({ exp }: { exp: Experience }) {
+// ---------------------------------------------------------------------------
+// FilterBar
+// ---------------------------------------------------------------------------
+
+interface FilterBarProps {
+  activeFilters: Set<FilterKey>;
+  onToggle: (f: FilterKey) => void;
+  orientation: "horizontal" | "vertical";
+}
+
+function FilterBar({ activeFilters, onToggle, orientation }: FilterBarProps) {
+  const filters: { key: FilterKey; label: string; icon: string }[] = [
+    { key: "tech",  label: "Tech",  icon: "/icons/latias.png" },
+    { key: "legal", label: "Legal", icon: "/icons/latios.png" },
+  ];
+
+  return (
+    <>
+      {filters.map(({ key, label, icon }) => {
+        const isActive = activeFilters.has(key);
+        const tokens = FILTER_TOKENS[key];
+
+        const activeStyle: React.CSSProperties = isActive
+          ? {
+              backgroundColor: tokens.activeBg,
+              color:            tokens.activeText,
+              borderColor:      tokens.active,
+            }
+          : {};
+
+        return (
+          <button
+            key={key}
+            aria-pressed={isActive}
+            onClick={() => onToggle(key)}
+            className={`flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-medium transition-all duration-200 ease-in-out ${
+              orientation === "vertical" ? "w-full" : ""
+            } ${
+              isActive
+                ? "border-2"
+                : "border border-cream-200 text-warm-400 hover:border-cream-300 hover:text-warm-600"
+            }`}
+            style={activeStyle}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={icon}
+              alt=""
+              aria-hidden="true"
+              className="h-4 w-auto flex-shrink-0 object-contain"
+            />
+            {label}
+          </button>
+        );
+      })}
+    </>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// ExperiencePanel
+// ---------------------------------------------------------------------------
+
+interface ExperiencePanelProps {
+  exp: Experience;
+  activeFilters: Set<FilterKey>;
+}
+
+function ExperiencePanel({ exp, activeFilters }: ExperiencePanelProps) {
+  const filtersActive = activeFilters.size > 0;
+
   return (
     <div>
       {/* Company + period */}
@@ -121,13 +237,77 @@ function ExperiencePanel({ exp }: { exp: Experience }) {
 
       {/* Bullets */}
       <ul className="mt-4 space-y-2.5">
-        {exp.bullets.map((b, i) => (
-          <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-warm-500">
-            <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-sage-400" />
-            {b}
-          </li>
-        ))}
+        {exp.bullets.map((b, i) => {
+          const tags = exp.bulletTags?.[i] ?? [];
+          const highlightStyle = getBulletHighlight(tags, activeFilters);
+          const isDimmed =
+            filtersActive &&
+            tags.length > 0 &&
+            !tags.some((t) => activeFilters.has(t));
+
+          return (
+            <li
+              key={i}
+              className="flex items-start gap-3 text-sm leading-relaxed text-warm-500 transition-opacity duration-200"
+              style={{ opacity: isDimmed ? 0.4 : 1 }}
+            >
+              <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-sage-400" />
+              {highlightStyle ? (
+                <span
+                  style={{
+                    background:   highlightStyle,
+                    borderRadius: "4px",
+                    padding:      "2px 6px",
+                  }}
+                >
+                  {b}
+                </span>
+              ) : (
+                b
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
+}
+
+// ---------------------------------------------------------------------------
+// Highlight resolver — returns the background value to apply, or null if none
+// ---------------------------------------------------------------------------
+
+function getBulletHighlight(
+  tags: ("tech" | "legal")[],
+  activeFilters: Set<FilterKey>
+): string | null {
+  if (activeFilters.size === 0 || tags.length === 0) return null;
+
+  const hasTech  = tags.includes("tech");
+  const hasLegal = tags.includes("legal");
+  const techOn   = activeFilters.has("tech");
+  const legalOn  = activeFilters.has("legal");
+
+  // Both tags AND both filters active → gradient
+  if (hasTech && hasLegal && techOn && legalOn) {
+    return "linear-gradient(to right, rgba(245,166,35,0.18), rgba(61,196,160,0.18))";
+  }
+
+  // Only tech tag matched
+  if (hasTech && techOn && !hasLegal) {
+    return FILTER_TOKENS.tech.highlightBg;
+  }
+
+  // Only legal tag matched
+  if (hasLegal && legalOn && !hasTech) {
+    return FILTER_TOKENS.legal.highlightBg;
+  }
+
+  // Mixed bullet (both tags) but only one filter is on — highlight with that filter's colour
+  if (hasTech && hasLegal) {
+    if (techOn)  return FILTER_TOKENS.tech.highlightBg;
+    if (legalOn) return FILTER_TOKENS.legal.highlightBg;
+  }
+
+  return null;
 }

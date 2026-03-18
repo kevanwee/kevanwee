@@ -41,6 +41,7 @@ export interface Experience {
   type: string;
   url: string;
   bullets: string[];
+  bulletTags?: ("tech" | "legal")[][];
   proSono?: boolean;
   logo?: string;
 }
@@ -59,6 +60,10 @@ export const experiences: Experience[] = [
       "Researching DeFi vulnerabilities and Web3 bug bounties/audit competitions to analyse exploit trends and remediation data, exploring how audits, disclosures, and governance can be integrated into product lifecycles and CI/CD for more resilient platforms.",
       "Built NLP pipelines using SetFit (few-shot sentence-transformer classification) and engineered ETL + labeling workflows to classify root-cause patterns and severity across Immunefi and Sherlock vulnerability disclosures.",
     ],
+    bulletTags: [
+      ["tech"],
+      ["tech"],
+    ],
   },
   {
     id: "osborne",
@@ -73,6 +78,11 @@ export const experiences: Experience[] = [
       "Examined content-platform liability and IP enforcement risks, translating regulation into operational governance decisions for digital marketplaces.",
       "Evaluated product-compliance trade-offs (content reuse, scraping), balancing platform growth with regulatory risk.",
       "Contributed to structured playbooks for early-stage ventures, formalising governance, escalation and decision-rights mechanisms.",
+    ],
+    bulletTags: [
+      ["legal"],
+      ["legal"],
+      ["legal"],
     ],
   },
   {
@@ -90,6 +100,12 @@ export const experiences: Experience[] = [
       "Applied data analysis on 3,000+ law-firm partnership and headcount records to uncover structural trends and performance indicators.",
       "Performed cross-jurisdictional analysis of GenAI regulatory frameworks, translating legal requirements into operational constraints.",
     ],
+    bulletTags: [
+      ["tech", "legal"],
+      ["tech", "legal"],
+      ["tech"],
+      ["tech", "legal"],
+    ],
   },
   {
     id: "imda",
@@ -104,6 +120,10 @@ export const experiences: Experience[] = [
       "Analysed 500 annual contract reviews and clearance records across IMDA divisions to surface process milestones, bottlenecks, and root causes of delays.",
       "Built a Python ETL/reporting pipeline (pandas, openpyxl, python-docx, PyYAML, OpenXML) to automate legal contract-clearance analytics and generate division-level Excel and Word reports, surfacing delay bottlenecks, root causes, and process inefficiencies.",
     ],
+    bulletTags: [
+      ["legal"],
+      ["tech"],
+    ],
   },
   {
     id: "smu-law",
@@ -117,6 +137,10 @@ export const experiences: Experience[] = [
     bullets: [
       "Built a structured dataset of 500 Legal NLP papers, reviewing proceedings of general NLP conferences (ROCLING, RANLP) and specialised Legal NLP gatherings (Jurix, ICAIL, ISAIL).",
       "Conducted an in-depth literature review supporting the paper \"Natural Language Processing in the Legal Domain\".",
+    ],
+    bulletTags: [
+      ["tech", "legal"],
+      ["legal"],
     ],
   },
   {
@@ -133,6 +157,10 @@ export const experiences: Experience[] = [
       "Automated retrieval of court documents in collaboration with Thomson Reuters to streamline access to relevant court forms.",
       "Performed on-site triage, intake assessment and referral routing for unrepresented litigants.",
     ],
+    bulletTags: [
+      ["tech"],
+      ["legal"],
+    ],
   },
   {
     id: "rnt",
@@ -148,6 +176,11 @@ export const experiences: Experience[] = [
       "Performed data preprocessing for eDiscovery and production of documents in ongoing legal cases.",
       "Configured a Linux server to enable RDP login for Rajah & Tann's forensic workstations.",
     ],
+    bulletTags: [
+      ["tech"],
+      ["tech", "legal"],
+      ["tech"],
+    ],
   },
   {
     id: "tito",
@@ -161,6 +194,9 @@ export const experiences: Experience[] = [
     bullets: [
       "Conducted legal research and assisted in litigation involving SOPA claims, drafted affidavits, and assisted in deputyship and family law proceedings.",
     ],
+    bulletTags: [
+      ["legal"],
+    ],
   },
   {
     id: "dis",
@@ -173,6 +209,9 @@ export const experiences: Experience[] = [
     url: "https://www.mindef.gov.sg/",
     bullets: [
       "Led geospatial intelligence operations, managing 150 personnel and coordinating cross-agency stakeholders to deliver large-scale GIS support for MINDEF/SAF and Whole-of-Government agencies.",
+    ],
+    bulletTags: [
+      ["tech"],
     ],
   },
 ];
