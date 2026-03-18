@@ -110,6 +110,7 @@ function SpriteAnim({
         style={{
           width:           sheetW,
           height:          sheetH,
+          maxWidth:        "none",   // override Tailwind preflight max-width: 100%
           imageRendering:  "pixelated",
           display:         "block",
           transform:       `translate(${offsetX}px, ${offsetY}px)`,
