@@ -255,6 +255,14 @@ export const mediaAppearances: MediaAppearance[] = [
     type: "Article",
   },
   {
+    outlet: "Singapore Management University",
+    title: "Which SMU Tech Degree Is Right for You? What to Consider Before Choosing",
+    description: "",
+    date: "2024",
+    url: "https://blog.smu.edu.sg/story/which-smu-tech-degree-consider-before-choosing",
+    type: "Feature",
+  },
+  {
     outlet: "SMU – School of Computing and Information Systems",
     title: "As the new semester approaches, it also marks the bittersweet end of internship with PwC Singapore for BSc (Computing and Law) student...",
     description: "",
@@ -284,14 +292,6 @@ export const mediaAppearances: MediaAppearance[] = [
     description: "",
     date: "2024",
     url: "https://www.instagram.com/p/C_cFPGryaLW/",
-    type: "Feature",
-  },
-  {
-    outlet: "Singapore Management University",
-    title: "Which SMU Tech Degree Is Right for You? What to Consider Before Choosing",
-    description: "",
-    date: "2024",
-    url: "https://blog.smu.edu.sg/story/which-smu-tech-degree-consider-before-choosing",
     type: "Feature",
   },
 ];
