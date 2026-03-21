@@ -247,12 +247,12 @@ export interface MediaAppearance {
 
 export const mediaAppearances: MediaAppearance[] = [
   {
-    outlet: "Rajah & Tann Asia",
-    title: "Rajah & Tann wins Most Innovative award at the DBS x SG Courts Hackathon for a Better World 2024",
+    outlet: "Channel News Asia",
+    title: "The Big Read: With AI doing the grunt work in law firms, where does this leave junior lawyers and fresh grads?",
     description: "",
-    date: "2024",
-    url: "https://www.linkedin.com/posts/rajah-%26-tann_technology-digitaltransformation-legalclinic-activity-7259376381191479299-xrQx?utm_source=li_share&utm_content=feedcontent&utm_medium=g_dt_web&utm_campaign=copy",
-    type: "Feature",
+    date: "2026",
+    url: "https://www.channelnewsasia.com/today/big-read/ai-junior-lawyers-job-relevance-new-skills-6005796",
+    type: "Article",
   },
   {
     outlet: "SMU – School of Computing and Information Systems",
@@ -260,6 +260,14 @@ export const mediaAppearances: MediaAppearance[] = [
     description: "",
     date: "2025",
     url: "https://www.instagram.com/p/DNR2Nr7P-Ni/",
+    type: "Feature",
+  },
+  {
+    outlet: "Rajah & Tann Asia",
+    title: "Rajah & Tann wins Most Innovative award at the DBS x SG Courts Hackathon for a Better World 2024",
+    description: "",
+    date: "2024",
+    url: "https://www.linkedin.com/posts/rajah-%26-tann_technology-digitaltransformation-legalclinic-activity-7259376381191479299-xrQx?utm_source=li_share&utm_content=feedcontent&utm_medium=g_dt_web&utm_campaign=copy",
     type: "Feature",
   },
   {
