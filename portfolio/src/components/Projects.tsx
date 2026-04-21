@@ -60,6 +60,9 @@ export default function Projects() {
                       )}
                     </div>
                   )}
+                  {project.role && (
+                    <p className="mb-3 text-xs text-warm-400">{project.role}</p>
+                  )}
                   <p className="text-sm leading-relaxed text-warm-500">
                     {project.description}
                   </p>

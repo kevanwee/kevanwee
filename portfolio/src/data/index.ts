@@ -306,6 +306,7 @@ export interface FeaturedProject {
   collab: string | null;
   collabLogo?: string;
   hasCaseStudy?: boolean;
+  role?: string;
 }
 
 export interface OtherProject {
@@ -389,6 +390,7 @@ export const featuredProjects: FeaturedProject[] = [
     collab: "Allen & Overy Shearman",
     collabLogo: "/logos/allenandoveryshearman.png",
     hasCaseStudy: true,
+    role: "Team Lead · Scrum Master · Software Developer",
   },
   {
     id: "copycat",
