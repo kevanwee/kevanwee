@@ -80,7 +80,7 @@ export default function Projects() {
                       className="inline-flex items-center gap-1.5 rounded-full border border-sage-200 bg-sage-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-sage-600 transition-all duration-200 hover:border-sage-300 hover:bg-sage-100"
                       aria-label="View BART case study"
                     >
-                      Case study
+                      Details
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
