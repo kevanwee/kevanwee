@@ -14,8 +14,8 @@ export const personal = {
 };
 
 export const aboutParagraphs = [
-  "I design and build software that operationalises legal processes — turning regulatory rules, contract logic, and compliance workflows into automated, auditable systems. My work spans platform regulation, IP enforcement, data protection, contract lifecycle management, and court document automation.",
-  "Currently a penultimate-year undergraduate at Singapore Management University reading Computing & Law, with a second major in Cybersecurity.",
+  "I design and build software that operationalises legal processes, turning regulatory rules, contract logic, and compliance workflows into automated, auditable systems. My work spans platform regulation, IP enforcement, data protection, contract lifecycle management, and court document automation.",
+  "Currently a penultimate-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law, with a second major in Cybersecurity.",
   "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital and Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
 ];
 
@@ -48,21 +48,47 @@ export const educationHistory: EducationEntry[] = [
   {
     institution: "Singapore Management University",
     logo: "/logos/smu.jpg",
-    qualification: "Bachelor of Science — Computing & Law · 2nd Major in Cybersecurity",
+    qualification: "Bachelor of Science (Computing & Law) · 2nd Major in Cybersecurity",
     period: "Aug 2023 – May 2027",
     grade: "Magna Cum Laude",
     activities: [
       "SMU Bowling",
-      "Teaching Assistant — IS210 Business Process Analysis & Solutioning",
-      "Teaching Assistant — IS215 Digital Business: Technologies & Transformation",
+      "Teaching Assistant: IS210 Business Process Analysis & Solutioning",
+      "Teaching Assistant: IS215 Digital Business: Technologies & Transformation",
+      "Research Assistant: DeFi Security",
+      "Research Assistant: Legal NLP",
+      "Student Assistant: Open House AY2026",
     ],
+    achievements: [
+      "DBS × SG Courts Hackathon for a Better World 2024 — Most Innovative",
+      "SMU Legal Innovation & Technology Hackathon — Finalist and Track Winner (Ministry of Law, Legal Technology and Transformation Office)",
+      "A&G YPHSL Writing Competition 2025",
+    ],
+  },
+  {
+    institution: "University of Tokyo (東京大学)",
+    logo: "/logos/utokyo.svg",
+    qualification: "Law in Transnational East Asia",
+    period: "July 2026",
   },
   {
     institution: "Dunman High School",
     logo: "/logos/dhs.jpg",
     qualification: "GCE A Levels · Science Stream (4H2 Physics, Further Mathematics, Mathematics, Economics)",
     period: "2019 – 2020",
-    activities: ["Student Council (2019–2020)"],
+    activities: [
+      "Executive President of Dunman High School (2019–2020)",
+      "Student Council (2019–2020)",
+    ],
+    achievements: [
+      "Awarded the Harvard Prize Book (2021)",
+      "First Runner-up, Lee Kuan Yew Futures Thinking And Scenario Planning Workshop",
+      "First team to represent Dunman High School in the International Mathematical Modelling Competition (IMMC)",
+      "Mentored Dunman High School's Flagship event, Leadership Symposium 2020",
+      "Implemented cashless payment systems in the school canteen in collaboration with the School Management Committee",
+      "Engaged the student body regularly and worked on various initiatives alongside relevant stakeholders in support of reinforcing school identity and bolstering student welfare",
+      "Represented Dunman High School in ceremonial events",
+    ],
   },
   {
     institution: "Dunman High School",
