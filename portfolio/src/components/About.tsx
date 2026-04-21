@@ -28,9 +28,9 @@ export default function About() {
       </div>
 
       {/* Education card + Substitute sandbox */}
-      <div className="mt-10 flex items-start gap-3">
+      <div className="mt-10 flex w-full items-stretch gap-3">
         <EducationCard />
-        <SubstituteSandbox />
+        <SubstituteSandbox className="flex-1" />
       </div>
 
       {/* Misc */}

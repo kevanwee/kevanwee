@@ -20,7 +20,7 @@ const DIR_S = 0;
 const TICK_MS = 16;
 const SCALE = 2;
 
-// Sandbox dimensions
+// Sandbox default dimensions (overridden at runtime by ResizeObserver)
 const BOX_W = 96;
 const BOX_H = 96;
 
@@ -31,7 +31,11 @@ const HURT_SPRITE_W = ANIMS.hurt.frameWidth * SCALE;   // 80
 
 const MOVE_SPEED = 18; // px per second
 
-export default function SubstituteSandbox() {
+interface Props {
+  className?: string;
+}
+
+export default function SubstituteSandbox({ className = "" }: Props) {
   const [animName, setAnimName] = useState<AnimName>("idle");
   const [frame, setFrame] = useState(0);
   const [dir, setDir] = useState<0 | 2 | 6>(DIR_S);
@@ -49,6 +53,11 @@ export default function SubstituteSandbox() {
   const rafRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Live container dimensions, kept in refs so the animation loop always reads current values
+  const boxWRef = useRef(BOX_W);
+  const boxHRef = useRef(BOX_H);
+  const [boxH, setBoxH] = useState(BOX_H);
+
   const setAnimWithReset = (next: AnimName) => {
     if (animRef.current === next) return;
     animRef.current = next;
@@ -57,6 +66,22 @@ export default function SubstituteSandbox() {
     setAnimName(next);
     setFrame(0);
   };
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const w = Math.round(entry.contentRect.width);
+        const h = Math.round(entry.contentRect.height);
+        boxWRef.current = w || BOX_W;
+        boxHRef.current = h || BOX_H;
+        setBoxH(h || BOX_H);
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     // Random initial direction
@@ -101,7 +126,7 @@ export default function SubstituteSandbox() {
 
       // Move X when walking
       if (animRef.current === "walk") {
-        const maxX = BOX_W - WALK_SPRITE_W;
+        const maxX = boxWRef.current - WALK_SPRITE_W;
         let nx = xRef.current + velXRef.current * MOVE_SPEED * (dt / 1000);
 
         if (nx <= 0) {
@@ -178,21 +203,20 @@ export default function SubstituteSandbox() {
   const spriteW = anim.frameWidth * scale;
   const spriteH = anim.frameHeight * scale;
 
-  // Y position: sit at bottom of box
-  const spriteY = BOX_H - spriteH;
+  // Y position: sit at bottom of live container height
+  const spriteY = boxH - spriteH;
 
   // X position: use xRef for walk, center for others
   const spriteX =
     animName === "walk"
       ? x
-      : (BOX_W - spriteW) / 2;
+      : (boxWRef.current - spriteW) / 2;
 
   return (
     <div
       ref={containerRef}
       onClick={handleClick}
-      className="relative flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-cream-200 bg-white transition-colors hover:border-sage-200"
-      style={{ width: BOX_W, height: BOX_H }}
+      className={`relative cursor-pointer overflow-hidden rounded-2xl border border-cream-200 bg-white transition-colors hover:border-sage-200 ${className}`}
       title="Click me!"
       aria-label="Click the substitute!"
     >
