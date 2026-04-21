@@ -5,6 +5,7 @@ export const personal = {
   institution: "Singapore Management University",
   description:
     "Building systems at the intersection of law and technology. Translating legal rules into intelligent, scalable software.",
+  tagline: "LegalTech · LegalOps · Legal AI",
   email: "kevan.wee.2023@scis.smu.edu.sg",
   linkedin: "https://www.linkedin.com/in/kevanwee/",
   github: "https://github.com/kevanwee",
@@ -13,8 +14,8 @@ export const personal = {
 };
 
 export const aboutParagraphs = [
-  "I'm a penultimate-year undergraduate at Singapore Management University reading Computing & Law, with a second major in Cybersecurity.",
-  "My work spans the intersection of law and software. I design and build tools that translate legal rules into automated systems, covering platform regulation, IP enforcement, data protection compliance, contract lifecycle management, and court document automation.",
+  "I design and build software that operationalises legal processes — turning regulatory rules, contract logic, and compliance workflows into automated, auditable systems. My work spans platform regulation, IP enforcement, data protection, contract lifecycle management, and court document automation.",
+  "Currently a penultimate-year undergraduate at Singapore Management University reading Computing & Law, with a second major in Cybersecurity.",
   "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital and Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
 ];
 
@@ -31,6 +32,58 @@ export const education = {
   secondMajor: "2nd Major in Cybersecurity",
   expected: "Aug 2023 – May 2027",
 };
+
+export interface EducationEntry {
+  institution: string;
+  logo: string;
+  qualification: string;
+  period: string;
+  grade?: string;
+  activities?: string[];
+  leadership?: string[];
+  achievements?: string[];
+}
+
+export const educationHistory: EducationEntry[] = [
+  {
+    institution: "Singapore Management University",
+    logo: "/logos/smu.jpg",
+    qualification: "Bachelor of Science — Computing & Law · 2nd Major in Cybersecurity",
+    period: "Aug 2023 – May 2027",
+    grade: "Magna Cum Laude",
+    activities: [
+      "SMU Bowling",
+      "Teaching Assistant — IS210 Business Process Analysis & Solutioning",
+      "Teaching Assistant — IS215 Digital Business: Technologies & Transformation",
+    ],
+  },
+  {
+    institution: "Dunman High School",
+    logo: "/logos/dhs.jpg",
+    qualification: "GCE A Levels · Science Stream (4H2 Physics, Further Mathematics, Mathematics, Economics)",
+    period: "2019 – 2020",
+    activities: ["Student Council (2019–2020)"],
+  },
+  {
+    institution: "Dunman High School",
+    logo: "/logos/dhs.jpg",
+    qualification: "IP Programme",
+    period: "2015 – 2018",
+    activities: ["Infocomm Club (2015–2018)"],
+    leadership: [
+      "Infocomm Club Vice-Chairperson (2017–2018)",
+      "Class Treasurer (2017)",
+      "Class National Education Ambassador (2015–2016)",
+    ],
+    achievements: [
+      "Bebras Computational Thinking Challenge — Gold Award (2018)",
+      "National Software Competition — Bronze Award (2018)",
+      "National Software Competition — Finalist (2017)",
+      "[i.code] Best Presentation (2017)",
+      "Bebras Computational Thinking Challenge — Bronze Award (2017)",
+    ],
+  },
+];
 
 export interface Experience {
   id: string;

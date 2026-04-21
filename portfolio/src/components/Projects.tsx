@@ -9,9 +9,12 @@ export default function Projects() {
       aria-label="Projects"
     >
       <div>
-        <h2 className="mb-12 font-serif text-3xl font-bold text-warm-900">
+        <h2 className="mb-3 font-serif text-3xl font-bold text-warm-900">
           Projects
         </h2>
+        <p className="mb-12 text-xs font-semibold uppercase tracking-widest text-warm-300">
+          LegalTech · Legal AI · LegalOps
+        </p>
 
         {/* Featured */}
         <ol className="space-y-6">

@@ -61,6 +61,9 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
           <p className="mt-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-500" style={fadeUp("80ms")}>
             {personal.title}
           </p>
+          <p className="mt-1 text-[10px] font-medium tracking-[0.12em] text-warm-300" style={fadeUp("110ms")}>
+            {personal.tagline}
+          </p>
 
           <div className="mt-5" style={fadeUp("160ms")}>
             <PokeballRow />

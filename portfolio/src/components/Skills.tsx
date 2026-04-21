@@ -37,7 +37,7 @@ const LEGAL_SKILLS = [
     skills: ["Contract Law", "Intellectual Property", "Data Privacy (PDPA)", "Corporate / M&A", "Litigation", "Criminal Law", "Tort Law", "Family Law"],
   },
   {
-    category: "Specialties",
+    category: "LegalOps & LegalTech",
     skills: ["eDiscovery", "CLM", "Platform Liability", "GenAI Regulation", "Cross-jurisdictional Analysis", "Legal NLP", "SOPA Claims", "Deputyship"],
   },
   {
