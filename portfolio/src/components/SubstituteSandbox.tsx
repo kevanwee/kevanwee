@@ -2,81 +2,61 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Substitute animation data from AnimData.xml
-const ANIMS: Record<string, { src: string; frameWidth: number; frameHeight: number; rows: number; durations: number[] }> = {
-  walk:  { src: "/substitute/Walk-Anim.png",  frameWidth: 24, frameHeight: 40, rows: 8, durations: [6,1,1,3,4,3,1,1,3] },
-  idle:  { src: "/substitute/Idle-Anim.png",  frameWidth: 24, frameHeight: 40, rows: 8, durations: [32,8,1,1,3,4,3,1,1] },
-  hop:   { src: "/substitute/Hop-Anim.png",   frameWidth: 24, frameHeight: 80, rows: 8, durations: [2,1,2,3,4,4,3,2,1,2] },
-  hurt:  { src: "/substitute/Hurt-Anim.png",  frameWidth: 40, frameHeight: 40, rows: 8, durations: [2,8] },
-};
-
-type AnimName = keyof typeof ANIMS;
-
-// Directions
-const DIR_W = 2;
-const DIR_E = 6;
-const DIR_S = 0;
-
 const TICK_MS = 16;
 const SCALE = 2;
+const WALK_SPD = 0.04; // px/ms
+const MARGIN = 8;
 
-// Sandbox default dimensions (overridden at runtime by ResizeObserver)
-const BOX_W = 96;
-const BOX_H = 96;
+const DIR_S = 0;
+const DIR_FACE_RIGHT = 2; // row 2 = sprite faces right on screen
+const DIR_FACE_LEFT = 6;  // row 6 = sprite faces left on screen
 
-const WALK_SPRITE_W = ANIMS.walk.frameWidth * SCALE;   // 48
-const WALK_SPRITE_H = ANIMS.walk.frameHeight * SCALE;  // 80
-const HOP_SPRITE_H  = ANIMS.hop.frameHeight * SCALE;   // 160 (taller frame)
-const HURT_SPRITE_W = ANIMS.hurt.frameWidth * SCALE;   // 80
+const ANIMS = {
+  walk: { src: "/substitute/Walk-Anim.png", fw: 24, fh: 40, frames: 9, rows: 8, durations: [6,1,1,3,4,3,1,1,3] },
+  idle: { src: "/substitute/Idle-Anim.png", fw: 24, fh: 40, frames: 9, rows: 8, durations: [32,8,1,1,3,4,3,1,1] },
+  hurt: { src: "/substitute/Hurt-Anim.png", fw: 40, fh: 40, frames: 2,  rows: 8, durations: [2,8] },
+} as const;
 
-const MOVE_SPEED = 18; // px per second
+type Mode = keyof typeof ANIMS;
 
-interface Props {
-  className?: string;
-}
+interface Visual { x: number; frame: number; dirRow: number; mode: Mode; }
+
+function rand(min: number, max: number) { return min + Math.random() * (max - min); }
+function dirFromVel(v: number) { return v > 0 ? DIR_FACE_RIGHT : DIR_FACE_LEFT; }
+
+interface Props { className?: string; }
 
 export default function SubstituteSandbox({ className = "" }: Props) {
-  const [animName, setAnimName] = useState<AnimName>("idle");
-  const [frame, setFrame] = useState(0);
-  const [dir, setDir] = useState<0 | 2 | 6>(DIR_S);
-  const [x, setX] = useState(20); // px position within sandbox
-
-  const animRef = useRef<AnimName>("idle");
-  const frameRef = useRef(0);
-  const frameElapsedRef = useRef(0);
-  const lastTsRef = useRef(0);
-  const xRef = useRef(20);
-  const velXRef = useRef(0); // -1 or 1 (direction of movement)
-  const dirRef = useRef<0 | 2 | 6>(DIR_S);
-  const hurtUntilRef = useRef(0);
-  const phaseTimerRef = useRef(0); // when to next switch phases
-  const rafRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const boxWRef = useRef(96);
+  const boxHRef = useRef(96);
+  const [boxH, setBoxH] = useState(96);
+  const [visual, setVisual] = useState<Visual>({ x: 20, frame: 0, dirRow: DIR_S, mode: "idle" });
 
-  // Live container dimensions, kept in refs so the animation loop always reads current values
-  const boxWRef = useRef(BOX_W);
-  const boxHRef = useRef(BOX_H);
-  const [boxH, setBoxH] = useState(BOX_H);
+  // All animation state in refs so the loop never has stale closures
+  const modeRef    = useRef<Mode>("idle");
+  const frameRef   = useRef(0);
+  const frameElRef = useRef(0);
+  const lastTsRef  = useRef(0);
+  const xRef       = useRef(20);
+  const velRef     = useRef(1);
+  const targetXRef = useRef(60);
+  const timerRef   = useRef(0);
+  const durRef     = useRef(0);
+  const hurtRef    = useRef(0); // timestamp when hurt ends
+  const rafRef     = useRef(0);
 
-  const setAnimWithReset = (next: AnimName) => {
-    if (animRef.current === next) return;
-    animRef.current = next;
-    frameRef.current = 0;
-    frameElapsedRef.current = 0;
-    setAnimName(next);
-    setFrame(0);
-  };
-
+  // Track actual container size for sprite bounds and Y grounding
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const ro = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const w = Math.round(entry.contentRect.width);
-        const h = Math.round(entry.contentRect.height);
-        boxWRef.current = w || BOX_W;
-        boxHRef.current = h || BOX_H;
-        setBoxH(h || BOX_H);
+    const ro = new ResizeObserver(entries => {
+      for (const e of entries) {
+        const w = Math.round(e.contentRect.width)  || 96;
+        const h = Math.round(e.contentRect.height) || 96;
+        boxWRef.current = w;
+        boxHRef.current = h;
+        setBoxH(h);
       }
     });
     ro.observe(el);
@@ -84,90 +64,87 @@ export default function SubstituteSandbox({ className = "" }: Props) {
   }, []);
 
   useEffect(() => {
-    // Random initial direction
-    velXRef.current = Math.random() > 0.5 ? 1 : -1;
-    phaseTimerRef.current = performance.now() + 2000 + Math.random() * 2000;
+    const SPRITE_W = ANIMS.walk.fw * SCALE; // 48px
+
+    const maxX = () => Math.max(MARGIN, boxWRef.current - SPRITE_W - MARGIN);
+
+    // Bias target toward the opposite half so it traverses the full box
+    const pickTarget = (cx: number) => {
+      const mx = maxX();
+      const mid = (MARGIN + mx) / 2;
+      return cx < mid ? rand(mid, mx) : rand(MARGIN, mid);
+    };
+
+    const switchMode = (next: Mode) => {
+      modeRef.current    = next;
+      frameRef.current   = 0;
+      frameElRef.current = 0;
+      timerRef.current   = 0;
+
+      if (next === "walk") {
+        targetXRef.current = pickTarget(xRef.current);
+        velRef.current     = targetXRef.current > xRef.current ? 1 : -1;
+        setVisual({ x: xRef.current, frame: 0, dirRow: dirFromVel(velRef.current), mode: "walk" });
+      } else {
+        // idle — stay at current position, keep last facing direction
+        durRef.current = rand(1800, 4500);
+        setVisual({ x: xRef.current, frame: 0, dirRow: dirFromVel(velRef.current), mode: "idle" });
+      }
+    };
+
+    // Initialise
+    const startX = rand(MARGIN, Math.max(MARGIN + 1, boxWRef.current * 0.6));
+    xRef.current       = startX;
+    targetXRef.current = pickTarget(startX);
+    velRef.current     = targetXRef.current > startX ? 1 : -1;
+    modeRef.current    = "walk";
+    setVisual({ x: startX, frame: 0, dirRow: dirFromVel(velRef.current), mode: "walk" });
 
     const tick = (ts: number) => {
       if (!lastTsRef.current) lastTsRef.current = ts;
       const dt = Math.min(ts - lastTsRef.current, 40);
       lastTsRef.current = ts;
 
-      const now = ts;
-      const anim = ANIMS[animRef.current];
+      const m   = modeRef.current;
+      const cfg = ANIMS[m];
 
-      // Hurt is a one-shot
-      if (animRef.current === "hurt" && now >= hurtUntilRef.current) {
-        setAnimWithReset("idle");
-        phaseTimerRef.current = now + 1500;
+      // Advance animation frame
+      frameElRef.current += dt;
+      while (frameElRef.current >= cfg.durations[frameRef.current] * TICK_MS) {
+        frameElRef.current -= cfg.durations[frameRef.current] * TICK_MS;
+        frameRef.current    = (frameRef.current + 1) % cfg.frames;
       }
 
-      // Phase transitions (idle ↔ walk ↔ hop)
-      if (animRef.current !== "hurt" && now >= phaseTimerRef.current) {
-        const phases: AnimName[] = ["idle", "walk", "walk", "hop"];
-        const next = phases[Math.floor(Math.random() * phases.length)];
-        setAnimWithReset(next);
-
-        if (next === "walk") {
-          // Randomly pick a new direction
-          const newVel = Math.random() > 0.5 ? 1 : -1;
-          velXRef.current = newVel;
-          // DIR_W (row 2) = facing right on screen; DIR_E (row 6) = facing left
-          const newDir = newVel > 0 ? DIR_W : DIR_E;
-          dirRef.current = newDir as 0 | 2 | 6;
-          setDir(newDir as 0 | 2 | 6);
-        } else {
-          dirRef.current = DIR_S;
-          setDir(DIR_S);
-        }
-
-        phaseTimerRef.current = now + 1500 + Math.random() * 2500;
+      if (m === "hurt") {
+        if (ts >= hurtRef.current) switchMode("idle");
+        setVisual(v => ({ ...v, frame: frameRef.current }));
+        rafRef.current = requestAnimationFrame(tick);
+        return;
       }
 
-      // Move X when walking
-      if (animRef.current === "walk") {
-        const maxX = boxWRef.current - WALK_SPRITE_W;
-        let nx = xRef.current + velXRef.current * MOVE_SPEED * (dt / 1000);
+      if (m === "walk") {
+        const mx = maxX();
+        let nx = xRef.current + velRef.current * WALK_SPD * dt;
 
-        if (nx <= 0) {
-          nx = 0;
-          velXRef.current = 1;
-          dirRef.current = DIR_W as 0 | 2 | 6; // moving right → face right (DIR_W row)
-          setDir(DIR_W);
-        } else if (nx >= maxX) {
-          nx = maxX;
-          velXRef.current = -1;
-          dirRef.current = DIR_E as 0 | 2 | 6; // moving left → face left (DIR_E row)
-          setDir(DIR_E);
+        if (nx <= MARGIN) {
+          nx = MARGIN;
+          velRef.current     = 1;
+          targetXRef.current = pickTarget(nx);
+        } else if (nx >= mx) {
+          nx = mx;
+          velRef.current     = -1;
+          targetXRef.current = pickTarget(nx);
         }
 
         xRef.current = nx;
-        setX(nx);
-      }
+        setVisual({ x: nx, frame: frameRef.current, dirRow: dirFromVel(velRef.current), mode: "walk" });
 
-      // Advance frame
-      frameElapsedRef.current += dt;
-      let nextFrame = frameRef.current;
-      let changed = false;
-
-      while (frameElapsedRef.current >= anim.durations[nextFrame] * TICK_MS) {
-        frameElapsedRef.current -= anim.durations[nextFrame] * TICK_MS;
-
-        if (animRef.current === "hurt") {
-          if (nextFrame < anim.durations.length - 1) {
-            nextFrame += 1;
-            changed = true;
-          }
-          break;
-        }
-
-        nextFrame = (nextFrame + 1) % anim.durations.length;
-        changed = true;
-      }
-
-      if (changed) {
-        frameRef.current = nextFrame;
-        setFrame(nextFrame);
+        if (Math.abs(nx - targetXRef.current) < 2) switchMode("idle");
+      } else {
+        // idle
+        timerRef.current += dt;
+        setVisual(v => ({ ...v, frame: frameRef.current }));
+        if (timerRef.current >= durRef.current) switchMode("walk");
       }
 
       rafRef.current = requestAnimationFrame(tick);
@@ -177,40 +154,25 @@ export default function SubstituteSandbox({ className = "" }: Props) {
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (animRef.current === "hurt") return;
-
-    const now = performance.now();
-    const hurtDur = ANIMS.hurt.durations.reduce((s, d) => s + d * TICK_MS, 0);
-    hurtUntilRef.current = now + hurtDur;
-    setAnimWithReset("hurt");
-    dirRef.current = DIR_S;
-    setDir(DIR_S);
-    // Force frame to 0 for hurt
-    frameRef.current = 0;
-    frameElapsedRef.current = 0;
-    setFrame(0);
-    phaseTimerRef.current = now + hurtDur + 1200;
+  const handleClick = () => {
+    if (modeRef.current === "hurt") return;
+    const now    = performance.now();
+    const hurtMs = ANIMS.hurt.durations.reduce((s, d) => s + d * TICK_MS, 0);
+    hurtRef.current    = now + hurtMs;
+    modeRef.current    = "hurt";
+    frameRef.current   = 0;
+    frameElRef.current = 0;
+    setVisual({ x: xRef.current, frame: 0, dirRow: DIR_S, mode: "hurt" });
   };
 
-  const anim = ANIMS[animName];
-  const scale = SCALE;
-  const row = anim.rows === 1 ? 0 : dir;
-  const bgX = -(frame * anim.frameWidth * scale);
-  const bgY = -(row * anim.frameHeight * scale);
-
-  // For rendering: walk/idle sprites sit at bottom of box
-  const spriteW = anim.frameWidth * scale;
-  const spriteH = anim.frameHeight * scale;
-
-  // Y position: sit at bottom of live container height
-  const spriteY = boxH - spriteH;
-
-  // X position: use xRef for walk, center for others
-  const spriteX =
-    animName === "walk"
-      ? x
-      : (boxWRef.current - spriteW) / 2;
+  const cfg    = ANIMS[visual.mode];
+  const sprW   = Math.round(cfg.fw * SCALE);
+  const sprH   = Math.round(cfg.fh * SCALE);
+  const sheetW = cfg.fw * cfg.frames * SCALE;
+  const sheetH = cfg.fh * cfg.rows   * SCALE;
+  const bgX    = -(visual.frame * cfg.fw   * SCALE);
+  const bgY    = -(visual.dirRow * cfg.fh * SCALE);
+  const spriteY = Math.max(0, boxH - sprH);
 
   return (
     <div
@@ -220,27 +182,21 @@ export default function SubstituteSandbox({ className = "" }: Props) {
       title="Click me!"
       aria-label="Click the substitute!"
     >
-      {/* Subtle ground line */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-px bg-cream-100"
-        aria-hidden="true"
-      />
-
-      {/* Substitute sprite */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-cream-100" aria-hidden="true" />
       <div
         aria-hidden="true"
         style={{
-          position: "absolute",
-          left: spriteX,
-          top: Math.max(0, spriteY),
-          width: spriteW,
-          height: spriteH,
-          backgroundImage: `url(${anim.src})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: `${anim.frameWidth * anim.durations.length * scale}px ${anim.frameHeight * anim.rows * scale}px`,
+          position:           "absolute",
+          left:               visual.x,
+          top:                spriteY,
+          width:              sprW,
+          height:             sprH,
+          backgroundImage:    `url(${cfg.src})`,
+          backgroundRepeat:   "no-repeat",
+          backgroundSize:     `${sheetW}px ${sheetH}px`,
           backgroundPosition: `${bgX}px ${bgY}px`,
-          imageRendering: "pixelated",
-          pointerEvents: "none",
+          imageRendering:     "pixelated",
+          pointerEvents:      "none",
         }}
       />
     </div>

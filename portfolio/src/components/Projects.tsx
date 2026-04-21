@@ -1,7 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import { featuredProjects, otherProjects } from "@/data";
 import Skills from "@/components/Skills";
+import BartCaseStudyModal from "@/components/BartCaseStudyModal";
 
 export default function Projects() {
+  const [showBart, setShowBart] = useState(false);
   return (
     <section
       id="projects"
@@ -21,7 +26,8 @@ export default function Projects() {
           {featuredProjects.map((project) => (
             <li
               key={project.id}
-              className="group rounded-2xl border border-cream-200 bg-white p-6 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5"
+              className={`group rounded-2xl border border-cream-200 bg-white p-6 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5 ${project.hasCaseStudy ? "cursor-pointer" : ""}`}
+              onClick={project.hasCaseStudy ? () => setShowBart(true) : undefined}
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex-1">
@@ -68,6 +74,18 @@ export default function Projects() {
 
                 {/* Links */}
                 <div className="flex shrink-0 items-center gap-3">
+                  {project.hasCaseStudy && (
+                    <button
+                      onClick={e => { e.stopPropagation(); setShowBart(true); }}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-sage-200 bg-sage-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-sage-600 transition-all duration-200 hover:border-sage-300 hover:bg-sage-100"
+                      aria-label="View BART case study"
+                    >
+                      Case study
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  )}
                   {project.github && (
                     <a
                       href={project.github}
@@ -75,6 +93,7 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       aria-label={`${project.title} on GitHub`}
                       className="text-warm-400 transition-colors hover:text-warm-800"
+                      onClick={e => e.stopPropagation()}
                     >
                       <GitHubIcon />
                     </a>
@@ -86,6 +105,7 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       aria-label={`${project.title} external link`}
                       className="text-warm-400 transition-colors hover:text-warm-800"
+                      onClick={e => e.stopPropagation()}
                     >
                       <ExternalIcon />
                     </a>
@@ -95,6 +115,8 @@ export default function Projects() {
             </li>
           ))}
         </ol>
+
+        {showBart && <BartCaseStudyModal onClose={() => setShowBart(false)} />}
 
         {/* Other projects */}
         <div className="mt-16">

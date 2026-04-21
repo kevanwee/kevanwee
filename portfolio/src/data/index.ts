@@ -66,7 +66,7 @@ export const educationHistory: EducationEntry[] = [
     ],
   },
   {
-    institution: "University of Tokyo (東京大学)",
+    institution: "(Incoming) University of Tokyo (東京大学)",
     logo: "/logos/utokyo.svg",
     qualification: "Law in Transnational East Asia",
     period: "July 2026",
@@ -305,6 +305,7 @@ export interface FeaturedProject {
   isPrivate: boolean;
   collab: string | null;
   collabLogo?: string;
+  hasCaseStudy?: boolean;
 }
 
 export interface OtherProject {
@@ -387,6 +388,7 @@ export const featuredProjects: FeaturedProject[] = [
     isPrivate: true,
     collab: "Allen & Overy Shearman",
     collabLogo: "/logos/allenandoveryshearman.png",
+    hasCaseStudy: true,
   },
   {
     id: "copycat",
