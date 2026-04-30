@@ -15,7 +15,7 @@ export const personal = {
 
 export const aboutParagraphs = [
   "I design and build software that operationalises legal processes, turning regulatory rules, contract logic, and compliance workflows into automated, auditable systems. My work spans platform regulation, IP enforcement, data protection, contract lifecycle management, and court document automation.",
-  "Currently a penultimate-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law, with a second major in Cybersecurity.",
+  "Currently a final-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law, with a second major in Cybersecurity.",
   "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital and Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
 ];
 
