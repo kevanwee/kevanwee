@@ -127,6 +127,24 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    id: "shopee",
+    logo: "/logos/shopee.svg",
+    company: "Shopee",
+    role: "Brand Protection Intern",
+    subtitle: "Regional Brand Partnerships",
+    period: "May 2026 – Present",
+    type: "Internship",
+    url: "https://shopee.com/",
+    bullets: [
+      "Managed brand-facing queries from global brand partners on intellectual property rights, Brand IP Portal usage, and listing enforcement issues, coordinating follow-ups across Shopee's regional Brand Protection teams.",
+      "Liaised with country-specific Shopee teams across regional markets to investigate IP registrations, portal records, and escalated listing issues, translating client concerns into operational follow-ups across jurisdictions.",
+    ],
+    bulletTags: [
+      ["legal"],
+      ["legal"],
+    ],
+  },
+  {
     id: "smu-scis",
     logo: "/logos/smu.jpg",
     company: "SMU School of Computing & Information Systems",

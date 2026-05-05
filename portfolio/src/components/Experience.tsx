@@ -14,6 +14,7 @@ const typeStyle: Record<string, string> = {
 };
 
 const TAB_LABELS: Record<string, string> = {
+  "shopee":   "Shopee",
   "smu-scis": "SMU SCIS",
   "osborne":  "Osborne Clarke",
   "pwc":      "PwC",
