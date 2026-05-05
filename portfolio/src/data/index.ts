@@ -139,10 +139,12 @@ export const experiences: Experience[] = [
       "Managed brand-facing queries from global brand partners on intellectual property rights, Brand IP Portal usage, and listing enforcement issues, coordinating follow-ups across Shopee's regional Brand Protection teams.",
       "Analysed SLA and enforcement data across IP-infringing listing removals, comparing proactive and reactive takedown patterns to surface operational gaps and inform brand protection reporting.",
       "Liaised with country-specific Shopee teams across regional markets to investigate IP registrations, portal records, and escalated listing issues, translating client concerns into operational follow-ups across jurisdictions.",
+      "Owned quarterly Brand Protection newsletter production for external brand partners, consolidating regional updates, drafting client-facing copy, and managing stakeholder inputs through to final distribution.",
     ],
     bulletTags: [
       ["legal"],
       ["tech", "legal"],
+      ["legal"],
       ["legal"],
     ],
   },
