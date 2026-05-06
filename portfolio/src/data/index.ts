@@ -136,10 +136,10 @@ export const experiences: Experience[] = [
     type: "Internship",
     url: "https://shopee.com/",
     bullets: [
-      "Managed brand-facing queries from global brand partners on intellectual property rights, Brand IP Portal usage, and listing enforcement issues, coordinating follow-ups across Shopee's regional Brand Protection teams.",
-      "Analysed SLA and enforcement data across IP-infringing listing removals, comparing proactive and reactive takedown patterns to surface operational gaps and inform brand protection reporting.",
+      "Led end-to-end resolution of global brand partner queries on IP rights, Brand IP Portal enforcement, and cross-border listing takedowns, coordinating investigations with Shopee's regional Brand Protection teams across APAC and LATAM markets.",
+      "Owned SLA and enforcement data analysis for infringing listing removals, identifying trends across proactive and reactive takedown mechanisms to surface operational gaps and inform brand protection reporting.",
       "Liaised with country-specific Shopee teams across regional markets to investigate IP registrations, portal records, and escalated listing issues, translating client concerns into operational follow-ups across jurisdictions.",
-      "Owned quarterly Brand Protection newsletter production for external brand partners, consolidating regional updates, drafting client-facing copy, and managing stakeholder inputs through to final distribution.",
+      "Authored quarterly Brand Protection newsletter, consolidating regional IP enforcement updates and stakeholder inputs for external brand partners.",
     ],
     bulletTags: [
       ["legal"],
@@ -158,8 +158,8 @@ export const experiences: Experience[] = [
     type: "Part-time",
     url: "https://scis.smu.edu.sg/",
     bullets: [
-      "Researching DeFi vulnerabilities and Web3 bug bounties/audit competitions to analyse exploit trends and remediation data, exploring how audits, disclosures, and governance can be integrated into product lifecycles and CI/CD for more resilient platforms.",
-      "Built NLP pipelines using SetFit (few-shot sentence-transformer classification) and engineered ETL + labeling workflows to classify root-cause patterns and severity across Immunefi and Sherlock vulnerability disclosures.",
+      "Developed a conceptual framework for systemic risk classification validated against 4,000+ vulnerability disclosures using an LLM-assisted extraction and classification pipeline, surfacing patterns relevant to security governance and platform resilience.",
+      "Built ETL and NLP pipelines (SetFit, few-shot sentence-transformers) to structure and classify large volumes of unstructured disclosure data across Immunefi and Sherlock, enabling analysis of cross-component risk patterns.",
     ],
     bulletTags: [
       ["tech"],
@@ -176,12 +176,10 @@ export const experiences: Experience[] = [
     type: "Internship",
     url: "https://www.osborneclarke.com/",
     bullets: [
-      "Examined content-platform liability and IP enforcement risks, translating regulation into operational governance decisions for digital marketplaces.",
-      "Evaluated product-compliance trade-offs (content reuse, scraping), balancing platform growth with regulatory risk.",
-      "Contributed to structured playbooks for early-stage ventures, formalising governance, escalation and decision-rights mechanisms.",
+      "Led legal analysis on content-platform liability, IP enforcement, and product-compliance trade-offs (content reuse, scraping), translating regulatory risk into governance recommendations for digital marketplaces.",
+      "Developed playbooks for early-stage ventures, structuring governance frameworks, escalation paths, and decision-rights mechanisms.",
     ],
     bulletTags: [
-      ["legal"],
       ["legal"],
       ["legal"],
     ],
@@ -196,13 +194,11 @@ export const experiences: Experience[] = [
     type: "Internship",
     url: "https://www.pwc.com/sg/",
     bullets: [
-      "Supported APAC legal digital transformation initiatives for law firms and in-house legal teams.",
-      "Developed structured comparison datasets for 30 NDAs and Tax LOEs, standardising clause equivalencies to support contract harmonisation and CLM implementation.",
-      "Applied data analysis on 3,000+ law-firm partnership and headcount records to uncover structural trends and performance indicators.",
-      "Performed cross-jurisdictional analysis of GenAI regulatory frameworks, translating legal requirements into operational constraints.",
+      "Developed clause comparison datasets for 30 NDAs and Tax LOEs across client engagements and PwC's internal Tax practice, standardising equivalencies that were adopted for live CLM implementations.",
+      "Analysed 3,000+ law-firm partnership and headcount records, producing insights on structural trends for a strategic deck.",
+      "Conducted cross-jurisdictional analysis of AI regulatory frameworks, translating legal requirements into operational constraints for APAC clients.",
     ],
     bulletTags: [
-      ["tech", "legal"],
       ["tech", "legal"],
       ["tech"],
       ["tech", "legal"],
@@ -218,8 +214,8 @@ export const experiences: Experience[] = [
     type: "Freelance",
     url: "https://www.imda.gov.sg/",
     bullets: [
-      "Analysed 500 annual contract reviews and clearance records across IMDA divisions to surface process milestones, bottlenecks, and root causes of delays.",
-      "Built a Python ETL/reporting pipeline (pandas, openpyxl, python-docx, PyYAML, OpenXML) to automate legal contract-clearance analytics and generate division-level Excel and Word reports, surfacing delay bottlenecks, root causes, and process inefficiencies.",
+      "Scoped and analysed 1,000 contract review and clearance records across IMDA divisions to surface process milestones, bottlenecks, and root causes of delays; presented findings to the General Counsel.",
+      "Built a Python ETL/reporting pipeline (pandas, openpyxl, python-docx, PyYAML, OpenXML) to automate legal contract-clearance analytics and generate division-level Excel and Word reports.",
     ],
     bulletTags: [
       ["legal"],
@@ -236,8 +232,8 @@ export const experiences: Experience[] = [
     type: "Part-time",
     url: "https://law.smu.edu.sg/",
     bullets: [
-      "Built a structured dataset of 500 Legal NLP papers, reviewing proceedings of general NLP conferences (ROCLING, RANLP) and specialised Legal NLP gatherings (Jurix, ICAIL, ISAIL).",
-      "Conducted an in-depth literature review supporting the paper \"Natural Language Processing in the Legal Domain\".",
+      "Built a 500-paper structured dataset on Legal NLP, reviewing proceedings of general NLP conferences (ROCLING, RANLP) and specialised legal NLP gatherings (Jurix, ICAIL, ISAIL).",
+      "Contributed literature review to the published survey \"Natural Language Processing in the Legal Domain\".",
     ],
     bulletTags: [
       ["tech", "legal"],
@@ -255,8 +251,8 @@ export const experiences: Experience[] = [
     url: "https://cjc.org.sg/",
     proSono: true,
     bullets: [
-      "Automated retrieval of court documents in collaboration with Thomson Reuters to streamline access to relevant court forms.",
-      "Performed on-site triage, intake assessment and referral routing for unrepresented litigants.",
+      "Evaluated Thomson Reuters CoCounsel for court user guidance and public-facing procedural use cases.",
+      "Provided weekly on-site legal triage and intake assessment, routing court users to appropriate referral pathways.",
     ],
     bulletTags: [
       ["tech"],
@@ -273,14 +269,12 @@ export const experiences: Experience[] = [
     type: "Internship",
     url: "https://www.rajahtanntech.com/",
     bullets: [
-      "Executed PoC projects evaluating emerging technologies including ZTNA solutions and AI-powered legal document management.",
-      "Performed data preprocessing for eDiscovery and production of documents in ongoing legal cases.",
-      "Configured a Linux server to enable RDP login for Rajah & Tann's forensic workstations.",
+      "Defined evaluation criteria and led PoC assessment for ZTNA, AI-powered document management, and workflow automation products, presenting recommendations to the CEO and COO.",
+      "Supported the forensics team's remote workflow infrastructure, including Linux server configuration for RDP access; built data preprocessing pipelines for eDiscovery and document production in ongoing legal cases.",
     ],
     bulletTags: [
       ["tech"],
       ["tech", "legal"],
-      ["tech"],
     ],
   },
   {
@@ -309,9 +303,13 @@ export const experiences: Experience[] = [
     type: "Full-time (NS)",
     url: "https://www.mindef.gov.sg/",
     bullets: [
-      "Led geospatial intelligence operations, managing 150 personnel and coordinating cross-agency stakeholders to deliver large-scale GIS support for MINDEF/SAF and Whole-of-Government agencies.",
+      "Led geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies, coordinating large-scale production workflows across upwards of 100 personnel and managing cross-agency stakeholder requirements.",
+      "Evaluated and optimised HADR and Peace Support Operations procedures, redesigning map production workflows and coordinating unit-level output for large-scale operational readiness.",
+      "Streamlined Imagery Support Group's manpower status reporting by building a unified tracking platform, reducing process fragmentation across the unit; headed unit administration, security, and NSF welfare.",
     ],
     bulletTags: [
+      ["tech"],
+      ["tech"],
       ["tech"],
     ],
   },
