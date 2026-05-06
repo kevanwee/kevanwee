@@ -233,7 +233,7 @@ export const experiences: Experience[] = [
     url: "https://law.smu.edu.sg/",
     bullets: [
       "Built a 500-paper structured dataset on Legal NLP, reviewing proceedings of general NLP conferences (ROCLING, RANLP) and specialised legal NLP gatherings (Jurix, ICAIL, ISAIL).",
-      "Contributed literature review to the published survey \"Natural Language Processing in the Legal Domain\".",
+      "Conducted an in-depth literature review supporting the paper \"Natural Language Processing in the Legal Domain\".",
     ],
     bulletTags: [
       ["tech", "legal"],
