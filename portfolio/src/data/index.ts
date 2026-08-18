@@ -15,8 +15,8 @@ export const personal = {
 
 export const aboutParagraphs = [
   "I design and build software that operationalises legal processes, turning regulatory rules, contract logic, and compliance workflows into automated, auditable systems. My work spans platform regulation, IP enforcement, data protection, contract lifecycle management, and court document automation.",
-  "Currently a final-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law (magna cum laude), with a second major in Computing Studies (Cybersecurity).",
-  "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital and Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
+  "Currently a final-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law, with a second major in Computing Studies (Cybersecurity).",
+  "Right now I split my time between regional IP enforcement at Shopee — brand protection casework across APAC and LATAM marketplaces — and research engineering at SMU's Centre for Digital Law, where I'm helping build Singapore's first open quantitative legal database in collaboration with the Ministry of Law. Alongside that, I sit on the steering committee at LegalBenchmarks.ai, an open effort to evaluate how legal AI tools actually perform.",
 ];
 
 export const achievements = [
