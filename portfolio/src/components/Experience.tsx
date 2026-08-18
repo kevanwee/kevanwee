@@ -14,16 +14,17 @@ const typeStyle: Record<string, string> = {
 };
 
 const TAB_LABELS: Record<string, string> = {
-  "shopee":   "Shopee",
-  "smu-scis": "SMU SCIS",
-  "osborne":  "Osborne Clarke",
-  "pwc":      "PwC",
-  "imda":     "IMDA",
-  "smu-law":  "SMU YPHSOL",
-  "cjc":      "The State Courts",
-  "rnt":      "Rajah & Tann",
-  "tito":     "Tito Isaac",
-  "dis":      "DIS SAF",
+  "shopee":        "Shopee",
+  "smu-cdl-solid": "SMU YPHSOL",
+  "smu-scis":      "SMU SCIS",
+  "osborne":       "Osborne Clarke",
+  "pwc":           "PwC",
+  "imda":          "IMDA",
+  "smu-law":       "SMU YPHSOL",
+  "cjc":           "The State Courts",
+  "rnt":           "Rajah & Tann",
+  "tito":          "Tito Isaac",
+  "dis":           "DIS SAF",
 };
 
 const FILTER_TOKENS = {
