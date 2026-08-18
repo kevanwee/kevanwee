@@ -16,7 +16,8 @@ export const personal = {
 export const aboutParagraphs = [
   "I design and build software that operationalises legal processes, turning regulatory rules, contract logic, and compliance workflows into automated, auditable systems. My work spans platform regulation, IP enforcement, data protection, contract lifecycle management, and court document automation.",
   "Currently a final-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law, with a second major in Computing Studies (Cybersecurity).",
-  "Right now I split my time between regional IP enforcement at Shopee — brand protection casework across APAC and LATAM marketplaces — and research engineering at SMU's Centre for Digital Law, where I'm helping build Singapore's first open quantitative legal database in collaboration with the Ministry of Law. Alongside that, I sit on the steering committee at LegalBenchmarks.ai, an open effort to evaluate how legal AI tools actually perform.",
+  "Right now I work across three things: regional IP enforcement at Shopee, research engineering on Singapore's first open quantitative legal database at SMU's Centre for Digital Law, and DeFi security research at SMU SCIS.",
+  "The through line is process. I map how legal work actually gets done, isolate the steps worth automating, and translate between the lawyers, engineers, and operations teams who each hold one piece of the requirement. The hard part is rarely the model. It is whether the output gets trusted enough to change how someone works.",
 ];
 
 export const achievements = [
