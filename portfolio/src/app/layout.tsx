@@ -15,18 +15,37 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Kevan Wee",
+  metadataBase: new URL("https://kevanwee.vercel.app"),
+  title: "Kevan Wee — Computing & Law · LegalTech",
   description:
     "Kevan Wee - Computing & Law at SMU. Building technology at the intersection of law and software.",
-  keywords: ["Kevan Wee", "Computing Law", "SMU", "LegalTech", "Singapore"],
+  keywords: [
+    "Kevan Wee",
+    "Computing Law",
+    "SMU",
+    "LegalTech",
+    "LegalOps",
+    "Legal AI",
+    "Singapore",
+  ],
   authors: [{ name: "Kevan Wee" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Kevan Wee",
+    title: "Kevan Wee — Computing & Law · LegalTech",
     description:
       "Computing & Law at SMU. Building technology at the intersection of law and software.",
+    url: "/",
     siteName: "Kevan Wee",
     locale: "en_SG",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kevan Wee — Computing & Law · LegalTech",
+    description:
+      "Computing & Law at SMU. Building technology at the intersection of law and software.",
   },
   icons: {
     icon: "/cloud-chibi.png",

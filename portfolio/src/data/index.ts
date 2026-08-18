@@ -15,7 +15,7 @@ export const personal = {
 
 export const aboutParagraphs = [
   "I design and build software that operationalises legal processes, turning regulatory rules, contract logic, and compliance workflows into automated, auditable systems. My work spans platform regulation, IP enforcement, data protection, contract lifecycle management, and court document automation.",
-  "Currently a final-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law, with a second major in Cybersecurity.",
+  "Currently a final-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law (magna cum laude), with a second major in Computing Studies (Cybersecurity).",
   "Previously, I served as a Senior Geospatial Mapper in the Singapore Armed Forces' Digital and Intelligence Service, leading geospatial intelligence operations across MINDEF/SAF and Whole-of-Government agencies.",
 ];
 
@@ -23,13 +23,14 @@ export const achievements = [
   "SMU Legal Innovation & Technology Hackathon 2025 – Ministry of Law Track Winner & Finalist",
   "DBS × SG Courts Hackathon for a Better World 2024 – Most Innovative",
   "RelativityOne Certified Professional",
-  "Teaching Assistant – IS210 Business Process Analysis & Solutioning; IS215 Digital Business: Technologies & Transformation",
+  "Harvey Academy – Legal Engineering Certification",
+  "Teaching Assistant – IS210 Business Process Analysis & Solutioning; IS212 Software Project Management; IS215 Digital Business: Technologies & Transformation",
 ];
 
 export const education = {
   institution: "Singapore Management University",
   degree: "B.Sc. Computing & Law",
-  secondMajor: "2nd Major in Cybersecurity",
+  secondMajor: "2nd Major in Computing Studies (Cybersecurity)",
   expected: "Aug 2023 – May 2027",
 };
 
@@ -48,12 +49,13 @@ export const educationHistory: EducationEntry[] = [
   {
     institution: "Singapore Management University",
     logo: "/logos/smu.jpg",
-    qualification: "Bachelor of Science (Computing & Law) · 2nd Major in Cybersecurity",
+    qualification: "Bachelor of Science (Computing & Law) · 2nd Major in Computing Studies (Cybersecurity)",
     period: "Aug 2023 – May 2027",
-    grade: "Magna Cum Laude",
+    grade: "GPA 3.62 / 4.00 · Magna Cum Laude",
     activities: [
       "SMU Bowling",
       "Teaching Assistant: IS210 Business Process Analysis & Solutioning",
+      "Teaching Assistant: IS212 Software Project Management",
       "Teaching Assistant: IS215 Digital Business: Technologies & Transformation",
       "Research Assistant: DeFi Security",
       "Research Assistant: Legal NLP",
@@ -66,9 +68,9 @@ export const educationHistory: EducationEntry[] = [
     ],
   },
   {
-    institution: "(Incoming) University of Tokyo (東京大学)",
+    institution: "University of Tokyo (東京大学)",
     logo: "/logos/utokyo.svg",
-    qualification: "Law in Transnational East Asia",
+    qualification: "Summer Exchange (GUC) · Law in Transnational East Asia",
     period: "July 2026",
   },
   {
@@ -130,20 +132,38 @@ export const experiences: Experience[] = [
     id: "shopee",
     logo: "/logos/shopee.svg",
     company: "Shopee",
-    role: "Brand Protection & Risk Data Analyst",
+    role: "Regional Brand Protection Analyst (IPR)",
     subtitle: "Regional Brand Partnerships",
     period: "May 2026 – Present",
     type: "Internship",
     url: "https://shopee.com/",
     bullets: [
-      "Led end-to-end resolution of global brand partner queries on IP rights, Brand IP Portal enforcement, and cross-border listing takedowns, coordinating investigations with Shopee's regional Brand Protection teams across APAC and LATAM markets.",
-      "Owned SLA and enforcement data analysis for infringing listing removals, identifying trends across proactive and reactive takedown mechanisms.",
+      "Managed 400+ e-commerce IPR enforcement cases across 10+ APAC and LATAM markets as direct point of contact for global brand partners, coordinating cross-border takedowns and resolving high-priority trademark and copyright escalations across Operations, Legal, and Product.",
+      "Owned IPR volume and SLA tracking for priority brands across FMCG, Electronics, Beauty, and Fashion & Lifestyle via regional dashboards.",
       "Authored quarterly Brand Protection newsletter, consolidating regional IP enforcement updates and stakeholder inputs for external brand partners.",
     ],
     bulletTags: [
       ["legal"],
       ["tech", "legal"],
       ["legal"],
+    ],
+  },
+  {
+    id: "smu-cdl-solid",
+    logo: "/logos/smu.jpg",
+    company: "SMU Yong Pung How School of Law",
+    role: "Research Engineer",
+    subtitle: "Centre for Digital Law · Singapore Open Legal Informatics Database",
+    period: "Jul 2026 – Present",
+    type: "Part-time",
+    url: "https://cdl.smu.edu.sg/",
+    bullets: [
+      "Contributing to Singapore's first open quantitative legal database, in collaboration with the Ministry of Law to enable data-driven legal research.",
+      "Extracting and verifying structured data from Singapore case law and statutes, with additional contributions to the project's data pipeline codebase.",
+    ],
+    bulletTags: [
+      ["tech", "legal"],
+      ["tech"],
     ],
   },
   {
@@ -156,7 +176,7 @@ export const experiences: Experience[] = [
     type: "Part-time",
     url: "https://scis.smu.edu.sg/",
     bullets: [
-      "Developed a conceptual framework for systemic risk classification validated against 4,000+ vulnerability disclosures using an LLM-assisted extraction and classification pipeline, surfacing patterns relevant to security governance and platform resilience.",
+      "Developed a systemic risk classification framework validated against 4,000+ vulnerability disclosures using an LLM-assisted extraction and classification pipeline, surfacing cross-component risk patterns relevant to security governance.",
       "Built ETL and NLP pipelines to structure and classify large volumes of unstructured disclosure data, enabling analysis of cross-component risk.",
     ],
     bulletTags: [
@@ -169,13 +189,13 @@ export const experiences: Experience[] = [
     logo: "/logos/osborneclarke.png",
     company: "Osborne Clarke",
     role: "Legal Intern",
-    subtitle: "Corporate + Technology, Media, and Telecom",
+    subtitle: "Corporate, Technology, Media & Telecom",
     period: "Dec 2025 – Jan 2026",
     type: "Internship",
     url: "https://www.osborneclarke.com/",
     bullets: [
-      "Led legal analysis on content-platform liability, IP enforcement, and product-compliance trade-offs (content reuse, scraping), translating regulatory risk into governance recommendations for digital marketplaces.",
-      "Developed playbooks for early-stage ventures, structuring governance frameworks, escalation paths, and decision-rights mechanisms.",
+      "Advised on registered design protection and contractual IP ownership transfer, translating regulatory risk into governance recommendations.",
+      "Analysed platform liability for marketplaces hosting third-party seller listings, covering IP infringement risk and product-compliance obligations.",
     ],
     bulletTags: [
       ["legal"],
@@ -187,13 +207,13 @@ export const experiences: Experience[] = [
     logo: "/logos/pwc.jpg",
     company: "PricewaterhouseCoopers LLP",
     role: "NewLaw Intern",
-    subtitle: "Legal Management Consulting",
+    subtitle: "LegalTech / LegalOps Consulting",
     period: "May 2025 – Aug 2025",
     type: "Internship",
     url: "https://www.pwc.com/sg/",
     bullets: [
-      "Developed clause comparison datasets for 30 NDAs and Tax LOEs across client engagements and PwC's internal Tax practice, standardising equivalencies that were adopted for live CLM implementations.",
-      "Analysed 3,000+ law-firm partnership and headcount records, producing insights on structural trends for a strategic deck.",
+      "Produced clause equivalency mappings adopted in live CLM implementations, standardising across 30 NDAs and Tax LOEs for client engagements and PwC's internal Tax practice.",
+      "Analysed 3,000+ law-firm partnership and headcount records, producing insights on structural trends for strategy decks.",
       "Conducted cross-jurisdictional analysis of AI regulatory frameworks, translating legal requirements into operational constraints for APAC clients.",
     ],
     bulletTags: [
@@ -207,12 +227,12 @@ export const experiences: Experience[] = [
     logo: "/logos/imda.png",
     company: "Infocomm Media Development Authority",
     role: "Data Analyst",
-    subtitle: "",
+    subtitle: "Group Legal",
     period: "May 2025 – Jun 2025",
-    type: "Freelance",
+    type: "Contract",
     url: "https://www.imda.gov.sg/",
     bullets: [
-      "Scoped and analysed 1,000 contract review and clearance records across IMDA divisions to surface process milestones, bottlenecks, and root causes of delays; presented findings to the General Counsel.",
+      "Presented workflow remediation findings to the General Counsel, drawn from Python ETL analysis of 1,500 contract review and clearance records across IMDA divisions to identify bottlenecks and handoff delays.",
       "Built a Python ETL/reporting pipeline (pandas, openpyxl, python-docx, PyYAML, OpenXML) to automate legal contract-clearance analytics and generate division-level Excel and Word reports.",
     ],
     bulletTags: [
@@ -231,7 +251,7 @@ export const experiences: Experience[] = [
     url: "https://law.smu.edu.sg/",
     bullets: [
       "Built a 500-paper structured dataset on Legal NLP, reviewing proceedings of general NLP conferences (ROCLING, RANLP) and specialised legal NLP gatherings (Jurix, ICAIL, ISAIL).",
-      "Conducted an in-depth literature review supporting the paper \"Natural Language Processing in the Legal Domain\".",
+      "Conducted an in-depth literature review supporting the paper \"NLP in the Legal Domain\".",
     ],
     bulletTags: [
       ["tech", "legal"],
@@ -267,7 +287,7 @@ export const experiences: Experience[] = [
     type: "Internship",
     url: "https://www.rajahtanntech.com/",
     bullets: [
-      "Defined evaluation criteria and led PoC assessment for ZTNA, AI-powered document management, and workflow automation products, presenting recommendations to the CEO and COO.",
+      "Presented technology deployment recommendations to the CEO and COO after owning the end-to-end PoC lifecycle for ZTNA, AI document management, and workflow automation products, including evaluation criteria and vendor assessments with practice-side stakeholders.",
       "Supported the forensics team's remote workflow infrastructure, including Linux server configuration for RDP access; built data preprocessing pipelines for eDiscovery and document production in ongoing legal cases.",
     ],
     bulletTags: [

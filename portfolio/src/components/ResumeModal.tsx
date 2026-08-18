@@ -1,12 +1,30 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 
 interface Props {
   onClose: () => void;
 }
 
+// Mobile browsers (iOS Safari in particular) don't render PDFs inside an
+// iframe, so small/coarse-pointer viewports get an open/download card instead.
+function useMobileViewport() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 767px), (pointer: coarse)");
+    const update = () => setIsMobile(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+}
+
 export default function ResumeModal({ onClose }: Props) {
+  const isMobile = useMobileViewport();
+
   const handleKey = useCallback(
     (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); },
     [onClose]
@@ -65,11 +83,31 @@ export default function ResumeModal({ onClose }: Props) {
         </div>
 
         {/* PDF viewer */}
-        <iframe
-          src="/resume.pdf"
-          className="h-full w-full border-0"
-          title="Kevan Wee Resume"
-        />
+        {isMobile ? (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-4 px-8 text-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-warm-400">
+              Kevan Wee · Resume
+            </p>
+            <p className="max-w-xs text-sm text-warm-400">
+              PDF preview isn&apos;t available on this device — open or download
+              it instead.
+            </p>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-sage-600 px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] text-white transition-all duration-200 hover:bg-sage-700"
+            >
+              Open resume
+            </a>
+          </div>
+        ) : (
+          <iframe
+            src="/resume.pdf"
+            className="h-full w-full border-0"
+            title="Kevan Wee Resume"
+          />
+        )}
       </div>
     </div>
   );

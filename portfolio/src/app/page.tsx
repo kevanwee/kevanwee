@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import MediaAppearances from "@/components/MediaAppearances";
 import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
+import MouseGradient from "@/components/MouseGradient";
 import PokemonCursor from "@/components/PokemonCursor";
 import TeddiursaRoamer from "@/components/TeddiursaRoamer";
 import { PokemonCursorProvider } from "@/components/PokemonCursorContext";
@@ -21,17 +22,7 @@ const SECTIONS = ["about", "experience", "projects", "media", "contact"] as cons
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeSection, setActiveSection] = useState<string>("about");
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [handleMouseMove]);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -64,13 +55,7 @@ export default function Home() {
       className="min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
       style={{ "--viewport-offset": "clamp(4rem, 12vh, 9rem)" } as CSSProperties}
     >
-      <div
-        className="pointer-events-none fixed inset-0 z-0 transition-all duration-500"
-        aria-hidden="true"
-        style={{
-          background: `radial-gradient(600px at ${mousePos.x}px ${mousePos.y}px, rgba(132,169,140,0.07), transparent 80%)`,
-        }}
-      />
+      <MouseGradient />
       <PokemonCursor />
       <TeddiursaRoamer />
 
