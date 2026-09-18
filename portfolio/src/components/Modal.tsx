@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { usePokemonCursor } from "@/components/PokemonCursorContext";
+import { useWorldPreferences } from "./useWorldPreferences";
 
 /** Native top-layer dialogs make the background inert, including to keyboard users. */
 export default function Modal({ children, onClose, label, describedBy, className = "p-4" }: {
@@ -12,7 +12,7 @@ export default function Modal({ children, onClose, label, describedBy, className
   className?: string;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
-  const { setModalCount } = usePokemonCursor();
+  const { setModalCount } = useWorldPreferences();
   useEffect(() => {
     const dialog = ref.current!;
     const previousFocus = document.activeElement;

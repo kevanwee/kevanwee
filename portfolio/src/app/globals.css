@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Live-map controls are scoped to the playground; portfolio styles stay intact. */
+.portfolio-dialog::backdrop { background: rgb(26 21 18 / .7); backdrop-filter: blur(6px); }
+html.pokemon-cursor .portfolio-dialog, html.pokemon-cursor .portfolio-dialog * { cursor: auto !important; }
+.portfolio-dialog :focus-visible { outline: 2px solid #3a6b59; outline-offset: 3px; }
+.portfolio-dialog .world-control { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; border: 1px solid #b8ac9c; border-radius: 9999px; padding: 6px 12px; font-size: 12px; color: #524539; background: #faf8f4; }
+.portfolio-dialog .world-control:hover { background: #e0ece5; }
+.portfolio-dialog .world-control:disabled { opacity: .55; }
+
 @layer base {
   html {
     scroll-behavior: smooth;
