@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useCallback, useState } from "react";
+import Modal from "@/components/Modal";
+
+import { useEffect, useState } from "react";
 
 interface Props {
   onClose: () => void;
@@ -10,28 +12,12 @@ interface Props {
 export default function PortfolioModal({ onClose, url }: Props) {
   const [isMobile, setIsMobile] = useState(false);
 
-  const handleKey = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    },
-    [onClose]
-  );
-
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = "";
-    };
-  }, [handleKey]);
 
   const controls = (
     <div className="mt-4 flex items-center justify-between">
@@ -53,13 +39,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
   );
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-warm-900/70 backdrop-blur-sm p-2 sm:p-4"
-      onClick={onClose}
-      aria-modal="true"
-      role="dialog"
-      aria-label="3D Portfolio Preview"
-    >
+    <Modal onClose={onClose} label="3D Portfolio Preview">
       {isMobile ? (
         /* ── Phone frame ── */
         <div
@@ -77,6 +57,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
             <div className="overflow-hidden rounded-3xl bg-black"
               style={{ aspectRatio: "9/19.5", maxHeight: "72vh" }}>
               <iframe
+            tabIndex={-1}
                 src={url}
                 className="h-full w-full border-0"
                 title="3D Portfolio"
@@ -104,6 +85,7 @@ export default function PortfolioModal({ onClose, url }: Props) {
             {/* Screen area */}
             <div className="overflow-hidden rounded-t-lg bg-black" style={{ height: "clamp(280px, 60vh, 620px)" }}>
               <iframe
+            tabIndex={-1}
                 src={url}
                 className="h-full w-full border-0"
                 title="3D Portfolio"
@@ -124,6 +106,6 @@ export default function PortfolioModal({ onClose, url }: Props) {
           {controls}
         </div>
       )}
-    </div>
+    </Modal>
   );
 }

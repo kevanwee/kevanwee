@@ -49,14 +49,14 @@ const POKEMON_CONFIGS: Record<PokemonId, PokemonConfig> = {
     idle:  { src: "/ceruledge/Idle-Anim.png",   frameWidth: 32, frameHeight: 56, rows: 8, durations: [5,5,5,5,5,5,5,5,5,5,2,3,4,3,2] },
     sleep: { src: "/ceruledge/Sleep-Anim.png",  frameWidth: 24, frameHeight: 48, rows: 1, durations: [30,35] },
     click: { src: "/ceruledge/Attack-Anim.png", frameWidth: 64, frameHeight: 80, rows: 8, durations: [2,2,6,1,1,2,2,2,2,2,2,2,1,2] },
-    scale: 1.3, anchorX: 0.46, anchorY: 0.22,
+    scale: 100 / 56, anchorX: 0.46, anchorY: 0.22,
   },
   greninja: {
     walk:  { src: "/greninja/Walk-Anim.png",   frameWidth: 32, frameHeight: 48, rows: 8, durations: [8,10,8,10] },
     idle:  { src: "/greninja/Idle-Anim.png",   frameWidth: 32, frameHeight: 56, rows: 8, durations: [40,12,2,3,6,2,4] },
     sleep: { src: "/greninja/Sleep-Anim.png",  frameWidth: 24, frameHeight: 40, rows: 1, durations: [30,35] },
     click: { src: "/greninja/Attack-Anim.png", frameWidth: 64, frameHeight: 72, rows: 8, durations: [2,2,6,1,2,2,2,2,2,2,1,2] },
-    scale: 1.3, anchorX: 0.46, anchorY: 0.22,
+    scale: 100 / 48, anchorX: 0.46, anchorY: 0.22,
   },
   latios: {
     walk:  { src: "/latios/Walk-Anim.png",   frameWidth: 64, frameHeight: 80, rows: 8, durations: [4,4,4,4,4,4,4,4,4,4,4,4] },
@@ -79,7 +79,7 @@ const POKEMON_CONFIGS: Record<PokemonId, PokemonConfig> = {
     idle:  { src: "/ironvaliant/Twirl-Anim.png",    frameWidth: 88, frameHeight: 80, rows: 8, durations: [2,2,2,2,2,2,2,2,2,3,3,3,2,2,2,2] },
     sleep: { src: "/ironvaliant/Sleep-Anim.png",    frameWidth: 32, frameHeight: 32, rows: 1, durations: [60,6,35,6] },
     click: { src: "/ironvaliant/SpAttack-Anim.png", frameWidth: 56, frameHeight: 80, rows: 8, durations: [2,6,2,2,2,2,2,2] },
-    scale: 1.3, anchorX: 0.5, anchorY: 0.22,
+    scale: 100 / 48, anchorX: 0.5, anchorY: 0.22,
   },
 };
 
@@ -107,8 +107,10 @@ function totalDurationMs(durations: number[]) {
 }
 
 export default function PokemonCursor() {
-  const { selectedPokemon } = usePokemonCursor();
+  const { selectedPokemon, paused, companions, modalCount } = usePokemonCursor();
 
+  const [tabVisible, setTabVisible] = useState(true);
+  useEffect(() => { const update = () => setTabVisible(!document.hidden); document.addEventListener("visibilitychange", update); return () => document.removeEventListener("visibilitychange", update); }, []);
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<Mode>("idle");
   const [frame, setFrame] = useState(0);
@@ -162,11 +164,12 @@ export default function PokemonCursor() {
   }, [mode]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || paused || !companions || modalCount || !tabVisible) return;
+    lastTsRef.current = 0;
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
     const root = document.documentElement;
-    root.classList.add("pokemon-cursor");
+
 
     const now = performance.now();
     lastMoveAtRef.current = now;
@@ -181,7 +184,9 @@ export default function PokemonCursor() {
     };
 
     const onMouseMove = (e: MouseEvent) => {
-      const nextPos = { x: e.clientX, y: e.clientY };
+      const reading = (e.target as HTMLElement)?.closest?.("a,button,p,h1,h2,h3,li,input,select,textarea,iframe");
+      const nextPos = reading ? { x: 40, y: window.innerHeight - 85 }
+        : { x: Math.min(window.innerWidth - 90, e.clientX + 40), y: Math.min(window.innerHeight - 100, e.clientY + 35) };
       const prevPos = lastMouseRef.current;
       const dx = nextPos.x - prevPos.x;
       const dy = nextPos.y - prevPos.y;
@@ -302,9 +307,9 @@ export default function PokemonCursor() {
       window.removeEventListener("mousedown", onMouseDown);
       cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [paused, companions, modalCount, tabVisible]);
 
-  if (!ready) return null;
+  if (!ready || paused || !companions || modalCount) return null;
 
   const cfg = POKEMON_CONFIGS[selectedPokemon];
   const animMap: Record<Mode, AnimConfig> = {
@@ -324,7 +329,6 @@ export default function PokemonCursor() {
   return (
     <div
       aria-hidden="true"
-      className={spawning ? "pokemon-spawning" : undefined}
       style={{
         position: "fixed",
         left: 0,
@@ -334,12 +338,16 @@ export default function PokemonCursor() {
         height,
         pointerEvents: "none",
         zIndex: 80,
+      }}
+    >
+      <div className={spawning ? "pokemon-spawning" : undefined} style={{
+        width: "100%", height: "100%",
         backgroundImage: `url(${anim.src})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: `${anim.frameWidth * anim.durations.length * scale}px ${anim.frameHeight * anim.rows * scale}px`,
         backgroundPosition: `${bgX}px ${bgY}px`,
         imageRendering: "pixelated",
-      }}
-    />
+      }} />
+    </div>
   );
 }

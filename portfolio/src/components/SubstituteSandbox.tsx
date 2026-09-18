@@ -1,5 +1,6 @@
 "use client";
 
+import { useAnimationGate } from "@/components/useAnimationGate";
 import { useEffect, useRef, useState } from "react";
 
 const TICK_MS = 16;
@@ -27,7 +28,7 @@ function dirFromVel(v: number) { return v > 0 ? DIR_FACE_RIGHT : DIR_FACE_LEFT; 
 interface Props { className?: string; }
 
 export default function SubstituteSandbox({ className = "" }: Props) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { ref: containerRef, active: animating } = useAnimationGate<HTMLButtonElement>();
   const boxWRef = useRef(96);
   const boxHRef = useRef(96);
   const [boxH, setBoxH] = useState(96);
@@ -64,6 +65,8 @@ export default function SubstituteSandbox({ className = "" }: Props) {
   }, []);
 
   useEffect(() => {
+    if (!animating) return;
+    lastTsRef.current = 0;
     const SPRITE_W = ANIMS.walk.fw * SCALE; // 48px
 
     const maxX = () => Math.max(MARGIN, boxWRef.current - SPRITE_W - MARGIN);
@@ -152,9 +155,10 @@ export default function SubstituteSandbox({ className = "" }: Props) {
 
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, []);
+  }, [animating]);
 
   const handleClick = () => {
+    if (!animating) return;
     if (modeRef.current === "hurt") return;
     const now    = performance.now();
     const hurtMs = ANIMS.hurt.durations.reduce((s, d) => s + d * TICK_MS, 0);
@@ -175,12 +179,13 @@ export default function SubstituteSandbox({ className = "" }: Props) {
   const spriteY = Math.max(0, boxH - sprH);
 
   return (
-    <div
+    <button
+      type="button"
       ref={containerRef}
       onClick={handleClick}
       className={`relative cursor-pointer overflow-hidden rounded-2xl border border-cream-200 bg-white transition-colors hover:border-sage-200 ${className}`}
-      title="Click me!"
-      aria-label="Click the substitute!"
+      title="Play with Substitute"
+      aria-label="Play with Substitute"
     >
       <div className="absolute bottom-0 left-0 right-0 h-px bg-cream-100" aria-hidden="true" />
       <div
@@ -199,6 +204,6 @@ export default function SubstituteSandbox({ className = "" }: Props) {
           pointerEvents:      "none",
         }}
       />
-    </div>
+    </button>
   );
 }

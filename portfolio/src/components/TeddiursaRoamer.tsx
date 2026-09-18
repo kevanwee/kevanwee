@@ -1,5 +1,6 @@
 "use client";
 
+import { usePokemonCursor } from "@/components/PokemonCursorContext";
 import { useEffect, useRef, useState } from "react";
 
 const TICK_MS  = 16;
@@ -33,6 +34,9 @@ function getPanelBounds() {
 }
 
 export default function TeddiursaRoamer() {
+  const { paused, companions, modalCount } = usePokemonCursor();
+  const [tabVisible, setTabVisible] = useState(true);
+  useEffect(() => { const update = () => setTabVisible(!document.hidden); document.addEventListener("visibilitychange", update); return () => document.removeEventListener("visibilitychange", update); }, []);
   const [visual, setVisual] = useState<Visual | null>(null);
 
   const xRef        = useRef(0);
@@ -47,6 +51,8 @@ export default function TeddiursaRoamer() {
   const rafRef      = useRef(0);
 
   useEffect(() => {
+    if (paused || !companions || modalCount || !tabVisible || !matchMedia("(pointer: fine)").matches) return;
+    lastTsRef.current = 0;
     const sprW = () => ANIMS.walk.fw * SCALE;
 
     const pickTarget = (currentX: number): number => {
@@ -147,9 +153,9 @@ export default function TeddiursaRoamer() {
 
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, []);
+  }, [paused, companions, modalCount, tabVisible]);
 
-  if (!visual) return null;
+  if (!visual || !companions || modalCount) return null;
 
   const cfg    = ANIMS[visual.mode];
   const sprW   = Math.round(cfg.fw * SCALE);
@@ -174,7 +180,7 @@ export default function TeddiursaRoamer() {
         backgroundPosition: `${bgX}px ${bgY}px`,
         imageRendering:     "pixelated",
         pointerEvents:      "none",
-        zIndex:             50,
+        zIndex:             20,
       }}
     />
   );

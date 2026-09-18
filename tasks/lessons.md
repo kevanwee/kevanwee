@@ -1,5 +1,9 @@
 # Lessons Learned
 
+## Playground scope
+
+Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when changing renderers; optimize culling and scheduling rather than removing residents. Keep ordinary mouse navigation and the native pointer. Newly introduced Pokémon item art must use authentic game assets with recorded provenance, not approximations or generated art.
+
 ## Lesson 1: Normalize sprite scales by target rendered height, not arbitrary values
 
 **Rule:** When assigning a `scale` to pokemon sprites for the cursor, always compute it so that all pokemon produce a consistent rendered walk-frame height (≈ 96–101px, matching Diancie as the reference).

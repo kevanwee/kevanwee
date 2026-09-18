@@ -1,40 +1,35 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
 export default function MusicPlayer() {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  useEffect(() => {
+  const [error, setError] = useState("");
+  const toggle = async () => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.volume = 0.5;
-    audio.play().then(() => setPlaying(true)).catch(() => {/* blocked by browser — user must click */});
-  }, []);
-
-  const toggle = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (playing) {
-      audio.pause();
-    } else {
-      audio.play();
-    }
-    setPlaying((p) => !p);
+    if (!audio.paused) { audio.pause(); return; }
+    if (!audio.getAttribute("src")) audio.src = "/littleroot-town.mp3";
+    audio.volume = 0.35;
+    try { await audio.play(); setError(""); }
+    catch { setError("Music could not play. Try again."); }
   };
 
   return (
     <>
-      <audio ref={audioRef} src="/littleroot-town.mp3" loop preload="auto" />
+      <audio ref={audioRef} loop preload="none" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
       <button
         onClick={toggle}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-full text-warm-300 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
+        className="inline-flex min-h-11 gap-2 px-3 items-center justify-center rounded-full text-warm-600 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
         aria-label={playing ? "Pause music" : "Play Littleroot Town"}
         title={playing ? "Pause · Littleroot Town" : "Play · Littleroot Town ♪"}
       >
         {playing ? <PauseIcon /> : <MusicIcon />}
+        <span className="text-xs">Music {playing ? "on" : "off"}</span>
       </button>
+      <span role="status" className="text-xs text-warm-700">{error}</span>
     </>
   );
 }

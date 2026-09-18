@@ -26,13 +26,13 @@ export default function EducationCard() {
           <div>
             <p className="text-xs font-semibold text-warm-900">{education.institution}</p>
             <p className="mt-0.5 text-xs text-warm-600">{education.degree}</p>
-            <p className="text-xs text-warm-500">{education.secondMajor}</p>
-            <p className="mt-1 text-xs text-warm-400">{education.expected}</p>
+            <p className="text-xs text-warm-600">{education.secondMajor}</p>
+            <p className="mt-1 text-xs text-warm-600">{education.expected}</p>
           </div>
         </div>
 
         {/* Hint */}
-        <div className="mt-3 flex items-center gap-1 text-[11px] text-warm-300 transition-colors group-hover:text-sage-500">
+        <div className="mt-3 flex items-center gap-1 text-[11px] text-warm-600 transition-colors group-hover:text-sage-500">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none"
             viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />

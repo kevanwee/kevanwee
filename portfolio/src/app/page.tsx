@@ -46,7 +46,7 @@ export default function Home() {
   }, []);
 
   const scrollToSection = useCallback((id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: document.documentElement.dataset.motion === "paused" ? "auto" : "smooth" });
   }, []);
 
   return (
@@ -59,6 +59,11 @@ export default function Home() {
       <PokemonCursor />
       <TeddiursaRoamer />
 
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:p-4">Skip to content</a>
+      <nav className="sticky top-0 z-30 flex gap-1 overflow-x-auto border-b border-cream-200 bg-cream-50/95 px-3 py-2 backdrop-blur-sm lg:hidden" aria-label="Page sections">
+        {SECTIONS.map(id => <a key={id} href={`#${id}`} aria-current={activeSection === id ? "location" : undefined}
+          className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-3 text-xs font-semibold capitalize ${activeSection === id ? "bg-sage-100 text-sage-700" : "text-warm-700"}`}>{id}</a>)}
+      </nav>
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
           <div id="teddiursa-panel" className="pb-8 lg:w-[45%]">
@@ -69,7 +74,7 @@ export default function Home() {
             />
           </div>
 
-          <main className="lg:w-[55%] lg:pb-24">
+          <main id="main-content" className="min-w-0 lg:w-[55%] lg:pb-24">
             <About />
             <Experience />
             <Projects />

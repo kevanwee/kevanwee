@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import Modal from "@/components/Modal";
+
+
 
 interface Props {
   onClose: () => void;
@@ -126,28 +128,9 @@ const SECTIONS: Section[] = [
 ];
 
 export default function BartCaseStudyModal({ onClose }: Props) {
-  const handleKey = useCallback(
-    (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); },
-    [onClose]
-  );
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = "";
-    };
-  }, [handleKey]);
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-warm-900/70 p-4 backdrop-blur-sm"
-      onClick={onClose}
-      aria-modal="true"
-      role="dialog"
-      aria-label="BART details"
-    >
+    <Modal onClose={onClose} label="BART case study">
       <div
         className="relative flex w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-cream-200 bg-white shadow-2xl"
         style={{ maxHeight: "90vh" }}
@@ -157,7 +140,7 @@ export default function BartCaseStudyModal({ onClose }: Props) {
         <div className="flex shrink-0 items-center justify-between border-b border-cream-200 bg-white/95 px-6 py-4 backdrop-blur-sm">
           <div>
             <p className="font-serif text-base font-bold text-warm-900">BART</p>
-            <p className="text-[11px] text-warm-400">
+            <p className="text-[11px] text-warm-600">
               IS483 · Final Year Project · Allen &amp; Overy Shearman
             </p>
           </div>
@@ -167,8 +150,8 @@ export default function BartCaseStudyModal({ onClose }: Props) {
             </span>
             <button
               onClick={onClose}
-              className="text-warm-300 transition-colors hover:text-warm-700"
-              aria-label="Close"
+              className="text-warm-600 transition-colors hover:text-warm-700"
+              aria-label="Close" style={{ minWidth: 44, minHeight: 44 }}
             >
               ✕
             </button>
@@ -182,7 +165,7 @@ export default function BartCaseStudyModal({ onClose }: Props) {
             <h2 className="mb-2 font-serif text-2xl font-bold text-warm-900">
               Statutory Reference Checker
             </h2>
-            <p className="max-w-2xl text-sm leading-relaxed text-warm-500">
+            <p className="max-w-2xl text-sm leading-relaxed text-warm-600">
               A Microsoft Word add-in that scans and verifies statutory citations in legal documents against Singapore Statutes Online, combining hybrid BM25 + dense vector retrieval, cross-encoder reranking, and version-aware verification inside the drafting environment.
             </p>
             <div className="mt-4 flex flex-wrap gap-1.5">
@@ -196,11 +179,11 @@ export default function BartCaseStudyModal({ onClose }: Props) {
           <div className="space-y-14">
             {SECTIONS.map((section, i) => (
               <div key={i}>
-                <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-warm-300">
+                <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-warm-600">
                   {section.heading}
                 </p>
                 {section.body && (
-                  <p className="mb-5 max-w-2xl text-sm leading-relaxed text-warm-500">
+                  <p className="mb-5 max-w-2xl text-sm leading-relaxed text-warm-600">
                     {section.body}
                   </p>
                 )}
@@ -214,7 +197,7 @@ export default function BartCaseStudyModal({ onClose }: Props) {
                         className="w-full object-contain"
                         loading="lazy"
                       />
-                      <figcaption className="border-t border-cream-100 bg-cream-50 px-3 py-2 text-[11px] leading-relaxed text-warm-400">
+                      <figcaption className="border-t border-cream-100 bg-cream-50 px-3 py-2 text-[11px] leading-relaxed text-warm-600">
                         {img.caption}
                       </figcaption>
                     </figure>
@@ -226,12 +209,12 @@ export default function BartCaseStudyModal({ onClose }: Props) {
 
           {/* Footer */}
           <div className="mt-12 border-t border-cream-100 pt-6">
-            <p className="text-[11px] text-warm-300">
+            <p className="text-[11px] text-warm-600">
               BART · IS483 Software Project Management · Singapore Management University · AY2025/2026 Term 2
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }

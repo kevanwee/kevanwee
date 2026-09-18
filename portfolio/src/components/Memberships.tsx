@@ -24,7 +24,7 @@ const memberships = [
 export default function Memberships() {
   return (
     <div>
-      <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-400">
+      <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-600">
         Memberships
       </p>
       <div className="flex flex-wrap gap-2">
@@ -32,8 +32,8 @@ export default function Memberships() {
           const content = (
             <>
               <span className="font-semibold text-warm-700">{org}</span>
-              <span className="text-warm-300 mx-1.5">·</span>
-              <span className="text-warm-400">{role}</span>
+              <span className="text-warm-600 mx-1.5">·</span>
+              <span className="text-warm-600">{role}</span>
             </>
           );
 

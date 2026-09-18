@@ -69,7 +69,7 @@ const TABS: { id: Tab; label: string }[] = [
 
 function tabStyles(tab: Tab, active: boolean) {
   if (!active) {
-    return "rounded-full border border-cream-200 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-300 transition-all duration-200 hover:border-warm-200 hover:text-warm-500";
+    return "rounded-full border border-cream-200 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-600 transition-all duration-200 hover:border-warm-200 hover:text-warm-600";
   }
   if (tab === "tech") {
     return "rounded-full border px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all duration-200 border-blue-200 bg-blue-50 text-blue-800";
@@ -102,7 +102,7 @@ export default function Skills() {
 
   return (
     <div className="mt-16">
-      <p className="mb-6 text-xs font-bold uppercase tracking-widest text-warm-400">
+      <p className="mb-6 text-xs font-bold uppercase tracking-widest text-warm-600">
         Skills
       </p>
 
@@ -113,6 +113,7 @@ export default function Skills() {
             <button
               key={id}
               onClick={() => setActiveTab(id)}
+              aria-pressed={activeTab === id}
               className={tabStyles(id, activeTab === id)}
             >
               {label}
@@ -124,7 +125,7 @@ export default function Skills() {
         <div className="flex flex-col gap-5">
           {groups.map(({ category, skills }) => (
             <div key={category}>
-              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-warm-300">
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-warm-600">
                 {category}
               </p>
               <ul className="flex flex-wrap gap-1.5">

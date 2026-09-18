@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { usePokemonCursor, type PokemonId } from "@/components/PokemonCursorContext";
 
 const POKEBALLS: {
@@ -19,35 +18,26 @@ const POKEBALLS: {
 ];
 
 export default function PokeballRow() {
-  const { selectedPokemon, setSelectedPokemon } = usePokemonCursor();
+  const { selectedPokemon, setSelectedPokemon, paused } = usePokemonCursor();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [shakingIdx, setShakingIdx] = useState<number | null>(null);
   const [flashIdx, setFlashIdx] = useState<number | null>(null);
-  const shakeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
   const handleClick = (idx: number, pokemon: PokemonId) => {
-    if (shakingIdx === idx) return;
-
-    // Shake animation
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setSelectedPokemon(pokemon);
+    if (paused) return;
     setShakingIdx(idx);
-    if (shakeTimerRef.current) clearTimeout(shakeTimerRef.current);
-
-    // Flash mid-shake, then switch pokemon
-    setTimeout(() => {
-      setFlashIdx(idx);
-      setTimeout(() => setFlashIdx(null), 150);
-    }, 200);
-
-    setTimeout(() => {
-      setSelectedPokemon(pokemon);
-      setShakingIdx(null);
-    }, 420);
-
-    shakeTimerRef.current = setTimeout(() => setShakingIdx(null), 500);
+    setFlashIdx(idx);
+    timerRef.current = setTimeout(() => { setShakingIdx(null); setFlashIdx(null); }, 420);
   };
+  const selected = POKEBALLS.find(item => item.pokemon === selectedPokemon)!;
 
   return (
-    <div className="flex items-center gap-2">
+    <div>
+      <p className="mb-2 text-xs font-semibold text-warm-700">Choose your companion</p>
+      <div className="flex flex-wrap items-center gap-1" role="group" aria-label="Choose your Pokémon companion">
       {POKEBALLS.map(({ ball, pokemon, label, icon }, idx) => {
         const isSelected = selectedPokemon === pokemon;
         const isHovered = hoveredIdx === idx;
@@ -77,7 +67,7 @@ export default function PokeballRow() {
                   height={40}
                   style={{ imageRendering: "pixelated", width: 40, height: 40, objectFit: "contain" }}
                 />
-                <span className="whitespace-nowrap text-[9px] font-semibold uppercase tracking-wider text-warm-400">
+                <span className="whitespace-nowrap text-[9px] font-semibold uppercase tracking-wider text-warm-600">
                   {label}
                 </span>
               </div>
@@ -96,13 +86,17 @@ export default function PokeballRow() {
             {/* Pokeball button */}
             <button
               onClick={() => handleClick(idx, pokemon)}
+              onFocus={() => setHoveredIdx(idx)}
+              onBlur={() => setHoveredIdx(null)}
+              aria-pressed={isSelected}
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
               aria-label={`Switch to ${label}`}
               title={label}
               className="relative flex items-center justify-center transition-transform duration-100"
               style={{
-                outline: "none",
+                minWidth: 44,
+                minHeight: 44,
                 background: "none",
                 border: "none",
                 padding: 2,
@@ -150,6 +144,12 @@ export default function PokeballRow() {
           </div>
         );
       })}
+      </div>
+      <p className="mt-2 flex items-center gap-2 text-xs text-warm-600" aria-live="polite">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={selected.icon} alt="" width={32} height={32} style={{ imageRendering: "pixelated" }} />
+        {selected.label} is your companion.
+      </p>
     </div>
   );
 }
