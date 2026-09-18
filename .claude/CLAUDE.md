@@ -8,8 +8,8 @@ This is the GitHub profile repo (`kevanwee/kevanwee`). It contains three generat
 - `readme/` — assets for the GitHub profile README. `archive/`, `genpokemon/`, `debug_tiles/` — generators and old versions.
 
 ### Key facts
-- Resume lives in **two places that must stay in sync**: `portfolio/public/resume.pdf` (served by the CV button / ResumeModal) and `docs/Kevan_Wee_Resume.pdf`. Update both together.
-- `vercel.json` sets `no-cache` on `/resume.pdf` so a new PDF goes live immediately after deploy.
+- Resume lives in **two places that must stay in sync**: `portfolio/public/resume.pdf` (served by the Resume / CV button / ResumeModal) and `docs/Kevan_Wee_Resume.pdf`. Update both together. The full CV lives at `portfolio/public/cv.pdf`; document labels and descriptions are in `careerDocuments` in `portfolio/src/data/index.ts`.
+- `portfolio/vercel.json` sets `no-cache` on `/resume.pdf` and `/cv.pdf` so updated PDFs go live immediately after deploy.
 - Site content (experience, projects, media, links) is centralised in `portfolio/src/data/index.ts` — edit content there, not in components.
 - `portfolio/public/` is deployed verbatim. **Never let personal or unrelated files sit there**, even untracked — one `git add -A` publishes them.
 - Pokémon sprite/cursor conventions are in `tasks/lessons.md` — read it before touching cursor/sprite code.

@@ -79,7 +79,8 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             <button
               onClick={() => setShowResume(true)}
               className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
-              title="View resume"
+              title="View my one-page resume or full academic and professional CV"
+              aria-haspopup="dialog"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
@@ -90,7 +91,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
                 <line x1="16" y1="17" x2="8" y2="17" />
                 <polyline points="10 9 9 9 8 9" />
               </svg>
-              CV
+              Resume / CV
             </button>
             <button
               onClick={onOpenModal}

@@ -1,3 +1,24 @@
+export const careerDocuments = [
+  {
+    id: "resume",
+    label: "Resume",
+    summary: "One-page overview",
+    description: "A condensed, one-page overview of my experience and qualifications.",
+    switchHint: "Select CV for my full academic and professional history.",
+    href: "/resume.pdf",
+    filename: "Kevan_Wee_Resume.pdf",
+  },
+  {
+    id: "cv",
+    label: "CV",
+    summary: "Full history",
+    description: "My full academic and professional history.",
+    switchHint: "Select Resume for a condensed, one-page overview.",
+    href: "/cv.pdf",
+    filename: "Kevan_Wee_CV.pdf",
+  },
+] as const;
+
 export const personal = {
   name: "Kevan Wee",
   fullName: "Kevan Wee Jia Wei",
