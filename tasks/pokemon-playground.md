@@ -20,7 +20,8 @@
 - `95708f8`: full map asset export and authentic Emerald items.
 - `58b4d34`: restore original layout, navigation, mouse and document viewer.
 - `33cfbe2`: isolated map preferences and seeded collision engine.
-- Live map UI and local verification complete; deploying the reviewed map-only changes.
+- `7339c8e`: live map previews and focused playground, verified on the deployed site at 390 and 1440px.
+- Follow-up: prevent clicks before hydration; ten consecutive fresh-load openings passed.
 
 ## Verification
 - `npm run test:world`: both complete rosters across eight seeds per scene, two simulated minutes each, dense opposing calls, greetings, berries, unreachable commands and deterministic replay. More than 16 million reservation checks per run.
@@ -28,4 +29,5 @@
 - Chromium desktop/mobile emulation: 320, 390, 768 and 1440px; pause, both roster counts, scene switching, greeting, berry action, focus containment, Escape and focus restoration.
 - Short 320?568 viewport, reduced motion, hidden-tab suspension, discovery/pause persistence, map-load failure and exit.
 - axe WCAG A/AA check on the playground: no violations in the tested mobile viewport.
+- Verified that the original portfolio UI files match pre-audit commit `1f260a6` (apart from the two map banners and map-only CSS).
 - Physical iOS/Safari testing has not been performed.
