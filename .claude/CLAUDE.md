@@ -13,6 +13,7 @@ This is the GitHub profile repo (`kevanwee/kevanwee`). It contains three generat
 - Site content (experience, projects, media, links) is centralised in `portfolio/src/data/index.ts` — edit content there, not in components.
 - `portfolio/public/` is deployed verbatim. **Never let personal or unrelated files sit there**, even untracked — one `git add -A` publishes them.
 - Pokémon sprite/cursor conventions are in `tasks/lessons.md` — read it before touching cursor/sprite code.
+- Live map work is limited to Route 111/Mauville and their focus mode. The user rejected broader cursor, navigation and document viewer changes; preserve the original portfolio UI. World logic lives in `portfolio/src/lib/pokemon-world.ts`; run `npm run test:world` in `portfolio/`. Export map assets with `python portfolio/scripts/export_worlds.py`; item provenance is in `portfolio/public/worlds/items/sources.json`.
 - Deploys happen automatically on push to `main` (Vercel watches the repo).
 
 ## Workflow Orchestration

@@ -52,11 +52,11 @@ def terrain(module, scene):
     blocked = module.build_collision_grid(entries, w, h)
     water, covered = module.build_terrain_masks(entries, w, h, pri, sec, pa, sa)
     # Route 111's pond uses static tile art outside the legacy animated-water ranges.
-    # Emerald metatile behaviors 0x10..0x15 identify pond/deep/ocean water directly.
+    # Include puddles/shallow water too: keep land residents on visibly dry terrain.
     for y in range(h):
         for x in range(w):
             _, attr = module.lookup_metatile(entries[y*w+x] & 0x3FF, pri, sec, pa, sa)
-            water[y][x] = water[y][x] or (attr & 0xFF) in range(0x10, 0x16)
+            water[y][x] = water[y][x] or (attr & 0xFF) in range(0x10, 0x18)
     rooftops = {304, 426, 427, 428, 256, 257, 258, 272, 273, 274} if scene == "mauville" else set()
     for y in range(h):
         for x in range(w):

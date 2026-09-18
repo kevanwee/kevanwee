@@ -14,7 +14,7 @@ export interface WorldMap {
 export interface Actor extends Resident, Point {
   radius: number; speed: number; direction: number; state: "wandering" | "resting" | "greeting" | "eating" | "waiting";
   next: Point | null; path: Point[]; goal: Point | null; wait: number;
-  allowed: Set<number>; cells: number[]; steps: number;
+  allowed: Set<number>; cells: number[]; steps: number; goalExpires: number;
 }
 export interface Berry extends Point { id: number; actor: string; expires: number }
 export interface World {
@@ -53,15 +53,19 @@ export function createWorld(map: WorldMap, seed: number): World {
   for (const resident of map.actors) {
     const actor: Actor = { ...resident, ...resident.home, radius: Math.min(10, resident.size * .24),
       speed: 14 + world.random() * 10, direction: 0, state: "resting", next: null, path: [], goal: null,
-      wait: world.random() * 3, allowed: new Set(), cells: [], steps: 0 };
+      wait: world.random() * 3, allowed: new Set(), cells: [], steps: 0, goalExpires: 0 };
     const valid: number[] = [];
-    for (let n = 0; n < map.land.length * cols(map); n++) if (terrainFits(map, actor, point(map, n))) valid.push(n);
+    for (let n = 0; n < map.land.length * cols(map); n++) {
+      const p = point(map, n);
+      if (p.y >= actor.size && p.x >= actor.size/2 && p.x <= map.width-actor.size/2 && terrainFits(map, actor, p)) valid.push(n);
+    }
     valid.sort((a, b) => distance(point(map, a), actor.home) - distance(point(map, b), actor.home));
-    const start = valid.find(n => world.actors.every(other => distance(point(map, n), other) > actor.radius + other.radius + 1));
+    const all = new Set(valid);
+    const start = valid.find(n => neighbours(map,n).some(next => all.has(next)) && world.actors.every(other => distance(point(map, n), other) > actor.radius + other.radius + 1));
     if (start === undefined) throw new Error(`No safe spawn for ${resident.name}`);
     Object.assign(actor, point(map, start));
     // Keep each resident in its connected habitat, including large footprints.
-    const all = new Set(valid), queue = [start]; actor.allowed.add(start);
+    const queue = [start]; actor.allowed.add(start);
     for (let i = 0; i < queue.length; i++) for (const n of neighbours(map, queue[i])) {
       if (all.has(n) && !actor.allowed.has(n)) { actor.allowed.add(n); queue.push(n); }
     }
@@ -122,6 +126,7 @@ export function callActor(world: World, id: string, destination: Point) {
   const path = route(world, actor, target, true);
   if (!path || blockers(world, actor, target, target).length) return `${actor.name} cannot reach that spot. Choose a clear ${actor.habitat === "water" ? "water" : "ground"} tile.`;
   actor.path = path; actor.goal = target; actor.wait = 0;
+  actor.goalExpires = world.time + Math.max(30, path.length * world.map.tileSize / actor.speed + 15);
   world.berries = world.berries.filter(b => b.actor !== id);
   return `${actor.name} is coming over.`;
 }
@@ -133,6 +138,7 @@ export function dropBerry(world: World, destination: Point) {
     const path = route(world, actor, target, true);
     if (!path || path.length > 28) continue;
     actor.path = path; actor.goal = target; actor.wait = 0;
+    actor.goalExpires = world.time + 45;
     world.berries.push({ ...target, id: world.nextBerry++, actor: actor.id, expires: world.time + 45 });
     world.lastBerry = world.time;
     return `${actor.name} spotted an Oran Berry!`;
@@ -146,6 +152,7 @@ export function stepWorld(world: World, dt: number) {
   const order = world.actors.length;
   for (let i = 0; i < order; i++) {
     const actor = world.actors[(i + world.turn) % order];
+    if (actor.goal && world.time > actor.goalExpires) { actor.goal = null; actor.path = []; }
     if (actor.next) {
       const remaining = distance(actor, actor.next), travel = actor.speed * dt;
       if (remaining <= travel) { Object.assign(actor, actor.next); actor.next = null; actor.steps++; }

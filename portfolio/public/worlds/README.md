@@ -17,3 +17,15 @@ for an offline map-only export. Navigation includes map collision/elevation,
 water behavior, covered tiles and the project's manually corrected terrain cells.
 Runtime footprints further restrict movement. Posters are static loading and
 failure fallbacks. No Pokémon is removed on smaller screens.
+
+The shared in-memory world survives opening, closing and switching maps within a
+visit. Only discovery and the map pause preference use optional local storage;
+positions reset on a page reload. All paths use cardinal movement and reserve
+their swept footprints before advancing. Land residents avoid shallow-water
+art as well as deep water. Rendered depth is sorted by feet position.
+
+Run `npm run test:world` inside `portfolio/` for deterministic collision, terrain,
+roster, crossing and interaction tests. Focus-mode controls have keyboard
+alternatives: resident selection, greeting, berry offering and calling to the
+camera centre. Arrow keys pan while the canvas has focus. Wheel/drag handling is
+limited to the focused map. The base portfolio retains its original controls.

@@ -32,7 +32,7 @@ export default function Modal({ children, onClose, label, describedBy, className
       className={`portfolio-dialog fixed inset-0 m-0 flex h-dvh max-h-none w-screen max-w-none items-center justify-center border-0 bg-transparent text-warm-800 [&:not([open])]:hidden ${className}`}
       onKeyDown={event => {
         if (event.key !== "Tab") return;
-        const items = Array.from(event.currentTarget.querySelectorAll<HTMLElement>("button, a[href], input, select, textarea, iframe, [tabindex]"))
+        const items = Array.from(event.currentTarget.querySelectorAll<HTMLElement>("button, a[href], input, select, textarea, summary, iframe, [tabindex]"))
           .filter(item => item.tabIndex >= 0 && !item.hasAttribute("disabled") && item.getClientRects().length > 0);
         const first = items[0], last = items[items.length - 1];
         if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }

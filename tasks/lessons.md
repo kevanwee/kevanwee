@@ -2,7 +2,7 @@
 
 ## Playground scope
 
-Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when changing renderers; optimize culling and scheduling rather than removing residents. Keep ordinary mouse navigation and the native pointer. Newly introduced Pokémon item art must use authentic game assets with recorded provenance, not approximations or generated art.
+Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when changing renderers; optimize culling and scheduling rather than removing residents. Keep the original portfolio mouse behavior; restrict new pointer handling to focused maps. Newly introduced Pokémon item art must use authentic game assets with recorded provenance, not approximations or generated art.
 
 ## Lesson 1: Normalize sprite scales by target rendered height, not arbitrary values
 

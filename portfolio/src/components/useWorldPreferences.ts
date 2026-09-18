@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 
 // Map-only preferences: never alter the portfolio's cursor, layout or animation CSS.
-const initial = { paused: true, modalCount: 0 };
+const initial = { paused: true, modalCount: 0, portfolioDialogOpen: false };
 let state = initial;
 const listeners = new Set<() => void>();
 let disconnect: (() => void) | undefined;
@@ -19,7 +19,13 @@ function subscribe(notify: () => void) {
     publish({ paused: media.matches || saved });
     const update = () => { if (media.matches) publish({ paused: true }); };
     media.addEventListener("change", update);
-    disconnect = () => media.removeEventListener("change", update);
+    const covered = () => {
+      const portfolioDialogOpen = !!document.querySelector('[role="dialog"]');
+      if (portfolioDialogOpen !== state.portfolioDialogOpen) publish({ portfolioDialogOpen });
+    };
+    const observer = new MutationObserver(covered);
+    observer.observe(document.body, { childList: true, subtree: true }); covered();
+    disconnect = () => { media.removeEventListener("change", update); observer.disconnect(); };
   }
   return () => { listeners.delete(notify); if (!listeners.size) disconnect?.(); };
 }
