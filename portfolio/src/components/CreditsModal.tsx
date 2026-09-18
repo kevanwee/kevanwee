@@ -10,6 +10,12 @@ interface Props {
 
 const CREDITS = [
   {
+    category: "Maps & Gen III items",
+    name: "Pokémon Emerald · pret preservation project",
+    href: "https://github.com/pret/pokeemerald/tree/5eff78649e7170a877b961ef0b3da13b81a16038/graphics/items",
+    description: "Original Emerald map art, Oran Berry and Poké Ball item sprites with their game palettes",
+  },
+  {
     category: "Pokémon Sprites",
     name: "PMD SpriteCollab",
     href: "https://sprites.pmdcollab.org/",
