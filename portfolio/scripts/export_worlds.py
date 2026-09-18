@@ -58,6 +58,7 @@ def terrain(module, scene):
             _, attr = module.lookup_metatile(entries[y*w+x] & 0x3FF, pri, sec, pa, sa)
             water[y][x] = water[y][x] or (attr & 0xFF) in range(0x10, 0x18)
     rooftops = {304, 426, 427, 428, 256, 257, 258, 272, 273, 274} if scene == "mauville" else set()
+    solid = [[bool((entries[y*w+x] >> 10) & 3) or (entries[y*w+x] & 0x3FF) in rooftops for x in range(w)] for y in range(h)]
     for y in range(h):
         for x in range(w):
             blocked[y][x] = blocked[y][x] or covered[y][x] or (entries[y*w+x] & 0x3FF) in rooftops
@@ -70,12 +71,14 @@ def terrain(module, scene):
                     continue
                 r, g, b = edit.getpixel((x*32+16, y*32+16))
                 if g > max(r, b)*1.25 and g > 100:
-                    blocked[y][x] = False
+                    blocked[y][x] = solid[y][x]
                 elif r > max(g, b)*1.25 and r > 100:
                     blocked[y][x] = True
     # Water retains its terrain class: land overrides must never turn water into a path.
     return (["".join("1" if not blocked[y][x] and not water[y][x] else "0" for x in range(w)) for y in range(h)],
-            ["".join("1" if water[y][x] else "0" for x in range(w)) for y in range(h)])
+            ["".join("1" if water[y][x] else "0" for x in range(w)) for y in range(h)],
+            ["".join(format(entries[y*w+x] >> 12, "x") for x in range(w)) for y in range(h)],
+            ["".join("1" if solid[y][x] else "0" for x in range(w)) for y in range(h)])
 
 
 def export(scene):
@@ -132,11 +135,32 @@ def export(scene):
             actors.append(actor)
             frame = sheet.crop((0, 0, pk["frame_w"], pk["frame_w"])).resize((pk["dp"], pk["dp"]), Image.Resampling.NEAREST)
             poster.alpha_composite(frame, (round(x-pk["dp"]/2), round(y-pk["dp"])))
-    land, water = terrain(module, scene)
+    land, water, elevation, solid = terrain(module, scene)
+    # The legacy foreground includes cliff/roof caps. They are not a global overlay:
+    # a Pokemon south of a structure must render in front of its upper tiles.
+    # Keep walkable floor tiles entirely behind residents; depth-sort the remaining
+    # opaque metatile spans with feet positions. Each span retains its map elevation.
+    structures = Image.new("RGBA", (width, height))
+    for src in foreground:
+        structures.alpha_composite(Image.open(PUBLIC / src.lstrip("/")).convert("RGBA"))
+    occlusion = []
+    for y in range(height // 16):
+        for x in range(width // 16):
+            if land[y][x] == "1" or water[y][x] == "1":
+                continue
+            if not structures.crop((x*16, y*16, x*16+16, y*16+16)).getbbox():
+                continue
+            level = int(elevation[y][x], 16)
+            if occlusion and occlusion[-1]["y"] == y*16 and occlusion[-1]["x"] + occlusion[-1]["width"] == x*16 and occlusion[-1]["elevation"] == level:
+                occlusion[-1]["width"] += 16
+            else:
+                occlusion.append({"x": x*16, "y": y*16, "width": 16, "height": 16, "elevation": level})
+    structures.save(folder / "structures.png")
     assert len(actors) == (32 if scene == "rt111" else 12)
     poster.convert("RGB").save(folder / "poster.webp", lossless=True)
     write_json(folder / "map.json", {"id": scene, "title": "Route 111" if scene == "rt111" else "Mauville City",
         "width": width, "height": height, "tileSize": 16, "land": land, "water": water,
+        "elevation": elevation, "solid": solid, "occlusion": occlusion, "structures": f"/worlds/{scene}/structures.png",
         "layers": layers, "foreground": foreground, "overlays": overlays, "actors": actors,
         "sourceSha256": hashlib.sha256(original.read_bytes()).hexdigest()})
     print(scene, len(actors), "residents;", sum(row.count("1") for row in land), "land tiles;", sum(row.count("1") for row in water), "water tiles")
@@ -169,9 +193,33 @@ def items():
     print("Exported", len(records), "authentic Gen III item icons")
 
 
+def reactions():
+    folder = OUT / "reactions"
+    folder.mkdir(parents=True, exist_ok=True)
+    base = f"https://raw.githubusercontent.com/pret/pokeemerald/{REV}/"
+    records = []
+    for name in ["exclamation", "heart"]:
+        path = f"graphics/field_effects/pics/emotion_{name}.png"
+        data = urllib.request.urlopen(base + path).read()
+        image = Image.open(io.BytesIO(data))
+        assert image.size == (16, 16) and image.mode == "P"
+        # Preserve the indexed PNG's embedded game colors. White/black are indices
+        # 14/15; the heart uses index 5 in the original object-event palette.
+        # trainer_see.c selects object palette slot 2 for the heart at runtime.
+        image.info["transparency"] = 0
+        image.convert("RGBA").save(folder / f"{name}.png")
+        records.append({"name": name, "source": base+path, "sourceSha256": hashlib.sha256(data).hexdigest(),
+                        "outputSha256": hashlib.sha256((folder / f"{name}.png").read_bytes()).hexdigest()})
+    write_json(folder / "sources.json", {"revision": REV, "implementation": base+"src/trainer_see.c",
+        "palette": "Embedded indexed game palette; transparent index 0", "assets": records})
+    print("Exported original Emerald exclamation and heart reactions")
+
+
 if __name__ == "__main__":
     for scene in ["rt111", "mauville"]:
         export(scene)
     Image.open(PUBLIC / "charc.gif").convert("RGBA").save(PUBLIC / "worlds/charcadet-still.png")
     if "--items" in sys.argv:
         items()
+    if "--reactions" in sys.argv:
+        reactions()

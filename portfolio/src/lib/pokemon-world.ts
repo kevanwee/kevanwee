@@ -10,6 +10,8 @@ export interface WorldMap {
   id: SceneId; title: string; width: number; height: number; tileSize: number;
   land: string[]; water: string[]; layers: string[]; foreground: string[];
   overlays: { src: string; steps: number[] }[]; actors: Resident[];
+  elevation?: string[]; solid?: string[]; structures?: string;
+  occlusion?: { x: number; y: number; width: number; height: number; elevation: number }[];
 }
 export interface Actor extends Resident, Point {
   radius: number; speed: number; direction: number; state: "wandering" | "resting" | "greeting" | "eating" | "waiting";
@@ -30,6 +32,13 @@ function neighbours(map: WorldMap, n: number) {
   if (n % width) result.push(n - 1);
   if (n % width < width - 1) result.push(n + 1);
   return result;
+}
+export function elevationsConnect(map: WorldMap, from: number, to: number) {
+  if (!map.elevation) return true;
+  const level = (n: number) => parseInt(map.elevation![Math.floor(n / cols(map))]?.[n % cols(map)] || "0", 16);
+  const a = level(from), b = level(to);
+  // Emerald elevation 0 is a transition; 15 is a multilevel tile (e.g. bridges).
+  return a === b || a === 0 || b === 0 || a === 15 || b === 15;
 }
 export function terrainFits(map: WorldMap, actor: Pick<Actor, "habitat" | "bounds" | "radius">, p: Point) {
   const tile = map.tileSize, grid = map[actor.habitat];
@@ -61,13 +70,13 @@ export function createWorld(map: WorldMap, seed: number): World {
     }
     valid.sort((a, b) => distance(point(map, a), actor.home) - distance(point(map, b), actor.home));
     const all = new Set(valid);
-    const start = valid.find(n => neighbours(map,n).some(next => all.has(next)) && world.actors.every(other => distance(point(map, n), other) > actor.radius + other.radius + 1));
+    const start = valid.find(n => neighbours(map,n).some(next => all.has(next) && elevationsConnect(map,n,next)) && world.actors.every(other => distance(point(map, n), other) > actor.radius + other.radius + 1));
     if (start === undefined) throw new Error(`No safe spawn for ${resident.name}`);
     Object.assign(actor, point(map, start));
     // Keep each resident in its connected habitat, including large footprints.
     const queue = [start]; actor.allowed.add(start);
     for (let i = 0; i < queue.length; i++) for (const n of neighbours(map, queue[i])) {
-      if (all.has(n) && !actor.allowed.has(n)) { actor.allowed.add(n); queue.push(n); }
+      if (all.has(n) && !actor.allowed.has(n) && elevationsConnect(map,queue[i],n)) { actor.allowed.add(n); queue.push(n); }
     }
     actor.cells = queue; world.actors.push(actor);
   }
@@ -99,7 +108,7 @@ function route(world: World, actor: Actor, target: Point, avoidActors = false): 
       return path;
     }
     for (const n of neighbours(world.map, current)) {
-      if (!actor.allowed.has(n) || parent.has(n)) continue;
+      if (!actor.allowed.has(n) || parent.has(n) || !elevationsConnect(world.map,current,n)) continue;
       if (avoidActors && blockers(world, actor, point(world.map, current), point(world.map, n)).length) continue;
       parent.set(n, current); queue.push(n);
     }

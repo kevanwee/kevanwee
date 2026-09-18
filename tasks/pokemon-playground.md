@@ -1,6 +1,7 @@
 # Live Pok?mon maps
 
 ## Current authorized scope
+- Follow-up: double movement; offset reachable berries; correct cliff/roof depth; use authentic game reactions and animated short idles; remove count slogan, pause controls and white preview bar; constrain zoom to map bounds.
 - Only Route 111, Mauville and their focused playground change.
 - Preserve all 32 Route 111 residents and all 12 Mauville residents, including shiny variants.
 - Clicking a preview opens focus mode; closing restores the trigger focus and page scroll.
@@ -13,7 +14,7 @@
 - Swept movement reservations prevent footprint overlaps, head-on swaps and crossing conflicts. Blocked paths replan; expired commands release their destinations.
 - Canvas renders the shared session in previews and focus mode. Offscreen previews, covered previews, paused worlds and hidden tabs do not advance.
 - Focus mode supports pan, zoom, scene switching, resident selection, greeting, calling and authentic Oran Berries. All residents remain available on mobile.
-- Optional browser-local discovery journal and map motion preference. Reduced motion starts maps paused. Neither changes the original page cursor or layout.
+- Optional browser-local discovery journal. Reduced motion freezes previews; explicitly opening the playground starts its interactive scene. Hidden tabs remain suspended. The original page cursor and layout stay intact.
 
 ## Progressive commits
 - `90008ff`: broader UX foundation (subsequently reverted at the user's direction).
@@ -31,3 +32,9 @@
 - axe WCAG A/AA check on the playground: no violations in the tested mobile viewport.
 - Verified that the original portfolio UI files match pre-audit commit `1f260a6` (apart from the two map banners and map-only CSS).
 - Physical iOS/Safari testing has not been performed.
+
+## Follow-up verification
+- `c6f9dfe`: speed, offset berries, animated shorter idles, simplified controls, unobstructed previews and bounded zoom.
+- Terrain checks forbid walkable solid structures and incompatible height transitions. All 44 residents still move across all tested seeds.
+- Rendering regression covers a tall sprite in front of a cliff cap and behind the same structure.
+- Browser checks at 320/390/1440px: no white bar/count slogan/pause button; both complete rosters; greetings/berries; repeated zoom-out stays inside both map dimensions; Escape works; no playground axe A/AA violations.

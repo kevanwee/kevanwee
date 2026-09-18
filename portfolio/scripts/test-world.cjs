@@ -28,6 +28,11 @@ assert.equal(segmentDistance({x:0,y:0},{x:10,y:0},{x:10,y:0},{x:0,y:0}), 0);
 for (const id of ['rt111','mauville']) {
   const map = mapFor(id);
   assert.equal(map.actors.length, id === 'rt111' ? 32 : 12);
+  for (let y=0;y<map.land.length;y++) for(let x=0;x<map.land[y].length;x++) {
+    assert.ok(!(map.land[y][x]==='1' && map.solid?.[y][x]==='1'), `${id}: structural collision was overridden at ${x},${y}`);
+  }
+  assert.ok(map.occlusion?.length > 0);
+  for(let i=1;i<map.occlusion.length;i++) assert.ok(map.occlusion[i].y>=map.occlusion[i-1].y,'occlusion spans must be ordered north to south');
   for (let seed = 1; seed <= 8; seed++) {
     const world = createWorld(map, seed);
     for (let frame = 0; frame < 30 * 120; frame++) {
@@ -81,4 +86,25 @@ for(const id of ['rt111','mauville']) for(const [w,h] of [[304,360],[1100,500],[
   }
 }
 console.log('PASS offset berries are reachable; zoom/pan never expose space outside either map');
+const elevated={...corridor,elevation:['333333333333','333333333333','444444444444','444444444444','444444444444']};
+assert.equal(api.elevationsConnect(elevated,12,24),false,'cannot cross between different heights');
+elevated.elevation[2]='044444444444';
+assert.equal(api.elevationsConnect(elevated,12,24),true,'explicit transition permits a height change');
+// Regression: a tall sprite south of a cliff cap must not be painted over by it.
+// Moving behind the same structure reverses the draw order.
+const renderCode=ts.transpileModule(readFileSync(resolve(__dirname,'../src/lib/world-session.ts'),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText;
+const renderer={}; new Function('exports','require',renderCode)(renderer,()=>api);
+const draws=[];
+const context=new Proxy({drawImage:(...args)=>draws.push(args)}, {get:(target,key)=>key in target?target[key]:()=>{}});
+const structure={width:128},sprite={width:256};
+const renderMap={...corridor,width:128,height:128,layers:[],foreground:['structure'],structures:'structure',
+  occlusion:[{x:48,y:16,width:16,height:32,elevation:3}]};
+const renderActor={...recipient,x:56,y:56,size:64,sprite:'sprite',next:null,state:'resting',direction:0};
+const session={world:{...offered,map:renderMap,actors:[renderActor],berries:[]},images:new Map([['structure',structure],['sprite',sprite]])};
+renderer.drawWorld(context,session,{x:64,y:64,zoom:1},128,128);
+assert.ok(draws.findIndex(d=>d[0]===sprite)>draws.findLastIndex(d=>d[0]===structure),'sprite in front of cliff cap remains whole');
+draws.length=0; renderActor.y=32;
+renderer.drawWorld(context,session,{x:64,y:64,zoom:1},128,128);
+assert.ok(draws.findIndex(d=>d[0]===sprite)<draws.findLastIndex(d=>d[0]===structure),'structure occludes the sprite behind it');
+console.log('PASS cliff-cap foreground regression and elevation transitions');
 console.log(`PASS deterministic replay, unreachable commands, dense crossings; ${checks.toLocaleString()} reservation checks`);
