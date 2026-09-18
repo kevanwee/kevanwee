@@ -17,7 +17,7 @@ export default function Projects() {
         <h2 className="mb-3 font-serif text-3xl font-bold text-warm-900">
           Projects
         </h2>
-        <p className="mb-12 text-xs font-semibold uppercase tracking-widest text-warm-600">
+        <p className="mb-12 text-xs font-semibold uppercase tracking-widest text-warm-300">
           LegalTech · Legal AI · LegalOps
         </p>
 
@@ -37,14 +37,14 @@ export default function Projects() {
                       {project.title}
                     </h3>
                     {project.isPrivate && (
-                      <span className="rounded-sm border border-warm-200 px-1.5 py-0.5 font-mono text-[10px] text-warm-600">
+                      <span className="rounded-sm border border-warm-200 px-1.5 py-0.5 font-mono text-[10px] text-warm-400">
                         private
                       </span>
                     )}
                   </div>
                   {project.collab && (
                     <div className="mb-3 flex items-center gap-2">
-                      <p className="text-xs text-warm-600">
+                      <p className="text-xs text-warm-400">
                         In collaboration with{" "}
                         <span className="font-medium text-warm-600">
                           {project.collab}
@@ -61,9 +61,9 @@ export default function Projects() {
                     </div>
                   )}
                   {project.role && (
-                    <p className="mb-3 text-xs text-warm-600">{project.role}</p>
+                    <p className="mb-3 text-xs text-warm-400">{project.role}</p>
                   )}
-                  <p className="text-sm leading-relaxed text-warm-600">
+                  <p className="text-sm leading-relaxed text-warm-500">
                     {project.description}
                   </p>
                   <ul className="mt-4 flex flex-wrap gap-1.5">
@@ -83,7 +83,7 @@ export default function Projects() {
                       className="inline-flex items-center gap-1.5 rounded-full border border-sage-200 bg-sage-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-sage-600 transition-all duration-200 hover:border-sage-300 hover:bg-sage-100"
                       aria-label="View BART case study"
                     >
-                      View case study
+                      Details
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
@@ -95,7 +95,7 @@ export default function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${project.title} on GitHub`}
-                      className="text-warm-600 transition-colors hover:text-warm-800"
+                      className="text-warm-400 transition-colors hover:text-warm-800"
                       onClick={e => e.stopPropagation()}
                     >
                       <GitHubIcon />
@@ -107,7 +107,7 @@ export default function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${project.title} external link`}
-                      className="text-warm-600 transition-colors hover:text-warm-800"
+                      className="text-warm-400 transition-colors hover:text-warm-800"
                       onClick={e => e.stopPropagation()}
                     >
                       <ExternalIcon />
@@ -123,10 +123,10 @@ export default function Projects() {
 
         {/* Other projects */}
         <div className="mt-16">
-          <p className="mb-6 text-xs font-bold uppercase tracking-widest text-warm-600">
+          <p className="mb-6 text-xs font-bold uppercase tracking-widest text-warm-400">
             Other noteworthy projects
           </p>
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {otherProjects.map((project) => (
               <li
                 key={project.title}
@@ -156,7 +156,7 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${project.title} on GitHub`}
-                          className="text-warm-600 transition-colors hover:text-warm-700"
+                          className="text-warm-300 transition-colors hover:text-warm-700"
                         >
                           <GitHubIcon />
                         </a>
@@ -167,7 +167,7 @@ export default function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${project.title} external link`}
-                          className="text-warm-600 transition-colors hover:text-warm-700"
+                          className="text-warm-300 transition-colors hover:text-warm-700"
                         >
                           <ExternalIcon />
                         </a>
@@ -177,7 +177,7 @@ export default function Projects() {
                   <h4 className="mb-1.5 text-sm font-semibold text-warm-800 group-hover:text-sage-700 transition-colors">
                     {project.title}
                   </h4>
-                  <p className="text-xs leading-relaxed text-warm-600">
+                  <p className="text-xs leading-relaxed text-warm-500">
                     {project.description}
                   </p>
                 </div>
@@ -185,7 +185,7 @@ export default function Projects() {
                   {project.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="rounded-full bg-cream-100 px-2.5 py-0.5 text-xs text-warm-600"
+                      className="rounded-full bg-cream-100 px-2.5 py-0.5 text-xs text-warm-500"
                     >
                       {tag}
                     </li>

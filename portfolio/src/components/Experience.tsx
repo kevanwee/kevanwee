@@ -1,6 +1,5 @@
 "use client";
 
-import { useAnimationGate } from "@/components/useAnimationGate";
 import React, { useEffect, useRef, useState } from "react";
 import { experiences, Experience } from "@/data";
 
@@ -16,12 +15,12 @@ const typeStyle: Record<string, string> = {
 
 const TAB_LABELS: Record<string, string> = {
   "shopee":        "Shopee",
-  "smu-cdl-solid": "SMU ? Legal database",
+  "smu-cdl-solid": "SMU YPHSOL",
   "smu-scis":      "SMU SCIS",
   "osborne":       "Osborne Clarke",
   "pwc":           "PwC",
   "imda":          "IMDA",
-  "smu-law":       "SMU ? Legal NLP",
+  "smu-law":       "SMU YPHSOL",
   "cjc":           "The State Courts",
   "rnt":           "Rajah & Tann",
   "tito":          "Tito Isaac",
@@ -64,7 +63,6 @@ interface SpriteAnimProps {
 function SpriteAnim({
   src, frameWidth, frameHeight, totalFrames, totalRows, row, durations, scale,
 }: SpriteAnimProps) {
-  const { ref: spriteElement, active: animating } = useAnimationGate<HTMLDivElement>();
   const [frame, setFrame] = useState(0);
   const frameRef   = useRef(0);
   const elapsedRef = useRef(0);
@@ -72,8 +70,6 @@ function SpriteAnim({
   const rafRef     = useRef(0);
 
   useEffect(() => {
-    if (!animating) return;
-    lastTsRef.current = 0;
     const tick = (ts: number) => {
       if (!lastTsRef.current) lastTsRef.current = ts;
       const dt = Math.min(ts - lastTsRef.current, 40);
@@ -94,7 +90,7 @@ function SpriteAnim({
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animating]);
+  }, []);
 
   const W = Math.round(frameWidth  * scale);
   const H = Math.round(frameHeight * scale);
@@ -105,7 +101,6 @@ function SpriteAnim({
 
   return (
     <div
-      ref={spriteElement}
       aria-hidden="true"
       style={{ width: W, height: H, overflow: "hidden", flexShrink: 0 }}
     >
@@ -204,13 +199,12 @@ export default function ExperienceSection() {
     >
       <div>
         {/* Heading row — title left, filter buttons right */}
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-12 flex items-end justify-between gap-4">
           <h2 className="font-serif text-3xl font-bold text-warm-900">
             Experience
           </h2>
 
-          <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Highlight experience by discipline">
-            <span className="text-xs text-warm-600">Highlight:</span>
+          <div className="flex shrink-0 items-center gap-2">
             {(["tech", "legal"] as FilterKey[]).map((key) => {
               const isActive = activeFilters.has(key);
               const tokens   = FILTER_TOKENS[key];
@@ -229,7 +223,7 @@ export default function ExperienceSection() {
                   style={{
                     height:          SPRITE_H + 16,  // sprite height + vertical padding
                     backgroundColor: isActive ? tokens.activeBg      : "transparent",
-                    color:           isActive ? tokens.activeText     : "#6e5f53",
+                    color:           isActive ? tokens.activeText     : "#a8a29e",
                     border:          isActive ? `2px solid ${tokens.active}` : "2px solid #e7e5e4",
                   }}
                 >
@@ -257,7 +251,6 @@ export default function ExperienceSection() {
           {/* Tab list */}
           <div
             role="tablist"
-            aria-label="Employers and research roles"
             className="flex shrink-0 flex-row overflow-x-auto border-b border-cream-200 sm:flex-col sm:overflow-x-visible sm:border-b-0 sm:border-l-2 sm:border-cream-200"
             style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
           >
@@ -267,25 +260,12 @@ export default function ExperienceSection() {
                 <button
                   key={exp.id}
                   role="tab"
-                  id={`experience-tab-${exp.id}`}
-                  aria-controls="experience-panel"
-                  tabIndex={isActive ? 0 : -1}
-                  onKeyDown={event => {
-                    const keys = ["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft", "Home", "End"];
-                    if (!keys.includes(event.key)) return;
-                    event.preventDefault();
-                    const index = experiences.findIndex(item => item.id === exp.id);
-                    const next = event.key === "Home" ? 0 : event.key === "End" ? experiences.length - 1
-                      : (index + (["ArrowDown", "ArrowRight"].includes(event.key) ? 1 : -1) + experiences.length) % experiences.length;
-                    setActiveId(experiences[next].id);
-                    document.getElementById(`experience-tab-${experiences[next].id}`)?.focus();
-                  }}
                   aria-selected={isActive}
                   onClick={() => setActiveId(exp.id)}
                   className={`relative shrink-0 whitespace-nowrap px-4 py-3 text-left text-xs transition-all duration-200 ease-in-out sm:w-44 sm:-ml-0.5 ${
                     isActive
                       ? "border-b-2 border-sage-500 font-semibold text-sage-700 sm:border-b-0 sm:border-l-2 sm:border-sage-500 sm:bg-sage-50 sm:text-sage-700"
-                      : "font-medium text-warm-600 hover:bg-cream-100 hover:text-warm-700"
+                      : "font-medium text-warm-400 hover:bg-cream-100 hover:text-warm-700"
                   }`}
                 >
                   <span className="flex items-center gap-2">
@@ -306,7 +286,7 @@ export default function ExperienceSection() {
           </div>
 
           {/* Panel */}
-          <div id="experience-panel" role="tabpanel" aria-labelledby={`experience-tab-${activeId}`} tabIndex={0} className="min-w-0 flex-1 px-0 pt-6 sm:pl-6 sm:pt-0">
+          <div className="flex-1 px-0 pt-6 sm:pl-8 sm:pt-0">
             <ExperiencePanel exp={active} activeFilters={activeFilters} />
           </div>
         </div>
@@ -339,7 +319,7 @@ function ExperiencePanel({ exp, activeFilters }: ExperiencePanelProps) {
         >
           {exp.company}
         </a>
-        <span className="font-mono text-xs text-warm-600 sm:flex-shrink-0">
+        <span className="font-mono text-xs text-warm-400 sm:flex-shrink-0">
           {exp.period}
         </span>
       </div>
@@ -352,7 +332,7 @@ function ExperiencePanel({ exp, activeFilters }: ExperiencePanelProps) {
         </span>
         <span
           className={`inline-block rounded-sm px-2 py-0.5 text-xs ring-1 ${
-            typeStyle[exp.type] ?? "text-warm-600 bg-warm-50 ring-warm-200"
+            typeStyle[exp.type] ?? "text-warm-500 bg-warm-50 ring-warm-200"
           }`}
         >
           {exp.type}
@@ -372,8 +352,8 @@ function ExperiencePanel({ exp, activeFilters }: ExperiencePanelProps) {
           return (
             <li
               key={i}
-              className="flex items-start gap-3 text-sm leading-relaxed text-warm-600 transition-opacity duration-200"
-              style={{ opacity: isDimmed ? 0.85 : 1 }}
+              className="flex items-start gap-3 text-sm leading-relaxed text-warm-500 transition-opacity duration-200"
+              style={{ opacity: isDimmed ? 0.4 : 1 }}
             >
               <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-sage-400" />
               {highlightStyle ? (

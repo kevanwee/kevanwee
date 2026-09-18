@@ -28,15 +28,15 @@ export default function About() {
       </div>
 
       {/* Education card + Substitute sandbox */}
-      <div className="mt-10 grid w-full grid-cols-[minmax(0,1fr)_80px] items-stretch gap-3 sm:grid-cols-[minmax(0,1fr)_120px]">
+      <div className="mt-10 flex w-full items-stretch gap-3">
         <EducationCard />
         <SubstituteSandbox className="flex-1" />
       </div>
 
       {/* Misc */}
       <div className="mt-8">
-        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-600">
-          Selected achievements
+        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-400">
+          Misc
         </p>
         <ul className="space-y-2.5">
           {achievements.map((a, i) => (

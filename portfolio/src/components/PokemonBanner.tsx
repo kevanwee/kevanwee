@@ -1,10 +1,8 @@
 "use client";
 
-import { usePokemonCursor } from "@/components/PokemonCursorContext";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 export default function PokemonBanner() {
-  const { paused } = usePokemonCursor();
   const [expanded, setExpanded] = useState(false);
 
   // Modal zoom state
@@ -45,7 +43,7 @@ export default function PokemonBanner() {
   return (
     <>
       <div className="mb-10">
-        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-600">
+        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-400">
           Currently roaming · Route 111
         </p>
 
@@ -65,7 +63,7 @@ export default function PokemonBanner() {
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={paused ? "/worlds/rt111/poster.webp" : "/pokemon-roam-rt111.svg"}
+            src="/pokemon-roam-rt111.svg"
             alt="Animated Pokémon roaming Route 111"
             className="w-full route-scroll"
             style={{ display: "block", height: "auto" }}
@@ -95,10 +93,10 @@ export default function PokemonBanner() {
           >
             {/* Header */}
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-cream-200 bg-white/90 px-4 py-3 backdrop-blur-sm">
-              <p className="text-xs font-bold uppercase tracking-widest text-warm-600">Route 111</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-warm-400">Route 111</p>
               <div className="flex items-center gap-3">
-                <span className="text-[10px] text-warm-600">Hold to zoom</span>
-                <button onClick={close} className="text-warm-600 transition-colors hover:text-warm-700" aria-label="Close" style={{ minWidth: 44, minHeight: 44 }}>✕</button>
+                <span className="text-[10px] text-warm-300">Hold to zoom</span>
+                <button onClick={close} className="text-warm-300 transition-colors hover:text-warm-700" aria-label="Close">✕</button>
               </div>
             </div>
 
@@ -120,7 +118,7 @@ export default function PokemonBanner() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={paused ? "/worlds/rt111/poster.webp" : "/pokemon-roam-rt111.svg"}
+                  src="/pokemon-roam-rt111.svg"
                   alt="Pokémon roaming Route 111"
                   className="w-full"
                   style={{ display: "block", height: "auto" }}

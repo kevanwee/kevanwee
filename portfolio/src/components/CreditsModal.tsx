@@ -1,20 +1,12 @@
 "use client";
 
-import Modal from "@/components/Modal";
-
-
+import { useEffect, useCallback, useState } from "react";
 
 interface Props {
   onClose: () => void;
 }
 
 const CREDITS = [
-  {
-    category: "Maps & Gen III items",
-    name: "Pokémon Emerald · pret preservation project",
-    href: "https://github.com/pret/pokeemerald/tree/5eff78649e7170a877b961ef0b3da13b81a16038/graphics/items",
-    description: "Original Emerald map art, Oran Berry and Poké Ball item sprites with their game palettes",
-  },
   {
     category: "Pokémon Sprites",
     name: "PMD SpriteCollab",
@@ -42,13 +34,40 @@ const CREDITS = [
 ];
 
 export default function CreditsModal({ onClose }: Props) {
+  const [visible, setVisible] = useState(false);
 
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); },
+    [onClose]
+  );
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleKey);
+    document.body.style.overflow = "hidden";
+    // Tiny delay so the transition is visible on mount
+    const t = setTimeout(() => setVisible(true), 16);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+      clearTimeout(t);
+    };
+  }, [handleKey]);
 
   return (
-    <Modal onClose={onClose} label="Credits">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-warm-900/70 p-4 backdrop-blur-sm"
+      onClick={onClose}
+      aria-modal="true"
+      role="dialog"
+      aria-label="Credits"
+    >
       <div
-        className="relative max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-2xl border border-cream-200 bg-white shadow-2xl"
+        className="relative w-full max-w-md overflow-hidden rounded-2xl border border-cream-200 bg-white shadow-2xl"
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "none" : "translateY(12px)",
+          transition: "opacity 300ms ease, transform 300ms ease",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -57,14 +76,14 @@ export default function CreditsModal({ onClose }: Props) {
             <p className="text-sm font-bold uppercase tracking-widest text-warm-700">
               Credits
             </p>
-            <p className="mt-0.5 text-xs text-warm-600">
+            <p className="mt-0.5 text-xs text-warm-300">
               Assets &amp; resources used in this site
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-warm-600 transition-colors hover:text-warm-700"
-            aria-label="Close" style={{ minWidth: 44, minHeight: 44 }}
+            className="text-warm-300 transition-colors hover:text-warm-700"
+            aria-label="Close"
           >
             ✕
           </button>
@@ -77,7 +96,7 @@ export default function CreditsModal({ onClose }: Props) {
               key={credit.category}
               className="border-l-2 border-cream-100 pl-3"
             >
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-warm-600">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-warm-300">
                 {credit.category}
               </p>
               {credit.href ? (
@@ -92,18 +111,18 @@ export default function CreditsModal({ onClose }: Props) {
               ) : (
                 <p className="mt-0.5 text-sm text-warm-700">{credit.name}</p>
               )}
-              <p className="mt-0.5 text-xs text-warm-600">{credit.description}</p>
+              <p className="mt-0.5 text-xs text-warm-400">{credit.description}</p>
             </div>
           ))}
         </div>
 
         {/* Footer note */}
         <div className="border-t border-cream-200 px-6 py-4">
-          <p className="text-[11px] leading-relaxed text-warm-600">
+          <p className="text-[11px] leading-relaxed text-warm-300">
             All Pokémon characters and assets remain the intellectual property of their respective owners.
           </p>
         </div>
       </div>
-    </Modal>
+    </div>
   );
 }

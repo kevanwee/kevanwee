@@ -1,13 +1,11 @@
 "use client";
 
-import { usePokemonCursor } from "@/components/PokemonCursorContext";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const IMG_HEIGHT = 220;
 const IMG_WIDTH = 880;
 
 export default function MauvilleBanner() {
-  const { paused } = usePokemonCursor();
   const [expanded, setExpanded] = useState(false);
 
   // Modal zoom state
@@ -48,7 +46,7 @@ export default function MauvilleBanner() {
   return (
     <>
       <div className="mt-12">
-        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-600">
+        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-400">
           Currently roaming · Mauville City
         </p>
 
@@ -69,14 +67,14 @@ export default function MauvilleBanner() {
           <div className="route-marquee-x" style={{ display: "flex", height: `${IMG_HEIGHT}px`, width: `${IMG_WIDTH * 2}px` }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={paused ? "/worlds/mauville/poster.webp" : "/pokemon-roam-mauville.svg"}
+              src="/pokemon-roam-mauville.svg"
               alt="Animated Pokémon roaming Mauville City"
               style={{ height: `${IMG_HEIGHT}px`, width: `${IMG_WIDTH}px`, flexShrink: 0, display: "block" }}
               draggable={false}
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={paused ? "/worlds/mauville/poster.webp" : "/pokemon-roam-mauville.svg"}
+              src="/pokemon-roam-mauville.svg"
               alt=""
               aria-hidden="true"
               style={{ height: `${IMG_HEIGHT}px`, width: `${IMG_WIDTH}px`, flexShrink: 0, display: "block" }}
@@ -107,10 +105,10 @@ export default function MauvilleBanner() {
           >
             {/* Header */}
             <div className="flex shrink-0 items-center justify-between border-b border-cream-200 bg-white/90 px-4 py-3 backdrop-blur-sm">
-              <p className="text-xs font-bold uppercase tracking-widest text-warm-600">Mauville City</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-warm-400">Mauville City</p>
               <div className="flex items-center gap-3">
-                <span className="text-[10px] text-warm-600">Hold to zoom</span>
-                <button onClick={close} className="text-warm-600 transition-colors hover:text-warm-700" aria-label="Close" style={{ minWidth: 44, minHeight: 44 }}>✕</button>
+                <span className="text-[10px] text-warm-300">Hold to zoom</span>
+                <button onClick={close} className="text-warm-300 transition-colors hover:text-warm-700" aria-label="Close">✕</button>
               </div>
             </div>
 
@@ -132,7 +130,7 @@ export default function MauvilleBanner() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={paused ? "/worlds/mauville/poster.webp" : "/pokemon-roam-mauville.svg"}
+                  src="/pokemon-roam-mauville.svg"
                   alt="Pokémon roaming Mauville City"
                   style={{ height: "320px", width: "auto", display: "block" }}
                   draggable={false}

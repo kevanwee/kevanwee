@@ -1,8 +1,6 @@
 "use client";
 
-import Modal from "@/components/Modal";
-
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useCallback, useRef, useState } from "react";
 import { careerDocuments } from "@/data";
 
 interface Props {
@@ -31,9 +29,33 @@ export default function ResumeModal({ onClose }: Props) {
   const selectedDocument = careerDocuments.find((item) => item.id === selectedId)!;
   const initialButton = useRef<HTMLButtonElement>(null);
 
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); },
+    [onClose]
+  );
+
+  useEffect(() => {
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    document.addEventListener("keydown", handleKey);
+    document.body.style.overflow = "hidden";
+    initialButton.current?.focus();
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = previousOverflow;
+      if (previousFocus instanceof HTMLElement) previousFocus.focus();
+    };
+  }, [handleKey]);
 
   return (
-    <Modal onClose={onClose} label="Resume and CV" describedBy="career-document-description">
+    <div
+      className="fixed left-0 top-0 z-50 flex h-dvh w-screen items-center justify-center bg-warm-900/70 p-4 backdrop-blur-sm"
+      onClick={onClose}
+      aria-modal="true"
+      role="dialog"
+      aria-label="Resume and CV"
+      aria-describedby="career-document-description"
+    >
       <div
         className="relative flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-cream-200 bg-white shadow-2xl"
         style={{ height: "90dvh" }}
@@ -78,10 +100,9 @@ export default function ResumeModal({ onClose }: Props) {
                 </svg>
                 Download {selectedDocument.label}
               </a>
-              {!isMobile && <a href={selectedDocument.href} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-sage-700 underline underline-offset-4">Open {selectedDocument.label}</a>}
               <button
                 onClick={onClose}
-                className="flex h-8 w-8 items-center justify-center text-warm-600 transition-colors hover:text-warm-700"
+                className="flex h-8 w-8 items-center justify-center text-warm-500 transition-colors hover:text-warm-700"
                 aria-label="Close document viewer"
               >
                 ✕
@@ -99,10 +120,10 @@ export default function ResumeModal({ onClose }: Props) {
         {isMobile ? (
           <div className="flex min-h-0 w-full flex-1 flex-col items-center gap-4 overflow-y-auto px-6 py-8 text-center">
             <div className="my-auto flex shrink-0 flex-col items-center gap-4">
-              <p className="text-xs font-bold uppercase tracking-widest text-warm-600">
+              <p className="text-xs font-bold uppercase tracking-widest text-warm-400">
                 Kevan Wee · {selectedDocument.label}
               </p>
-              <p className="max-w-xs text-sm text-warm-600">
+              <p className="max-w-xs text-sm text-warm-400">
                 PDF preview isn&apos;t available on this device — open or download
                 it instead.
               </p>
@@ -118,7 +139,6 @@ export default function ResumeModal({ onClose }: Props) {
           </div>
         ) : (
           <iframe
-            tabIndex={-1}
             key={selectedDocument.id}
             src={selectedDocument.href}
             className="min-h-0 w-full flex-1 border-0"
@@ -126,6 +146,6 @@ export default function ResumeModal({ onClose }: Props) {
           />
         )}
       </div>
-    </Modal>
+    </div>
   );
 }

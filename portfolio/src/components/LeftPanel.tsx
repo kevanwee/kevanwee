@@ -5,8 +5,6 @@ import { useState, useEffect } from "react";
 import { personal } from "@/data";
 import MusicPlayer from "@/components/MusicPlayer";
 import ResumeModal from "@/components/ResumeModal";
-import WorldControls from "@/components/WorldControls";
-import { usePokemonCursor } from "@/components/PokemonCursorContext";
 import PokeballRow from "@/components/PokeballRow";
 
 const NAV_ITEMS = [
@@ -24,7 +22,6 @@ interface LeftPanelProps {
 }
 
 export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: LeftPanelProps) {
-  const { paused } = usePokemonCursor();
   const [showResume, setShowResume] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -34,21 +31,21 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
   }, []);
 
   const fadeUp = (delay: string): React.CSSProperties => ({
-    opacity: paused || mounted ? 1 : 0,
-    transform: paused || mounted ? "none" : "translateY(16px)",
+    opacity: mounted ? 1 : 0,
+    transform: mounted ? "none" : "translateY(16px)",
     transition: `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}`,
   });
 
   return (
     <>
-      <aside className="left-panel-zoom lg:sticky lg:top-[var(--viewport-offset)] lg:flex  lg:flex-col lg:justify-between lg:pb-8">
+      <aside className="left-panel-zoom lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
         <div>
           <div style={fadeUp("0ms")}>
             <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">
               <span className="block">{personal.name.split(" ")[0]}</span>
               <span className="inline-flex items-end gap-1">
                 <span className="italic text-sage-600">{personal.name.split(" ")[1]}</span>
-                <span className="text-warm-600">.</span>
+                <span className="text-warm-200">.</span>
                 <Image
                   src="/cloud-chibi.png"
                   alt=""
@@ -61,28 +58,27 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             </h1>
           </div>
 
-          <p className="mt-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-600" style={fadeUp("80ms")}>
+          <p className="mt-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-warm-500" style={fadeUp("80ms")}>
             {personal.title}
           </p>
-          <p className="mt-1 text-[10px] font-medium tracking-[0.12em] text-warm-600" style={fadeUp("110ms")}>
+          <p className="mt-1 text-[10px] font-medium tracking-[0.12em] text-warm-300" style={fadeUp("110ms")}>
             {personal.tagline}
           </p>
 
           <div className="mt-5" style={fadeUp("160ms")}>
             <PokeballRow />
-            <WorldControls />
           </div>
 
           <div className="my-7 h-px w-12 bg-cream-200" style={fadeUp("210ms")} />
 
-          <p className="max-w-[238px] text-sm leading-7 text-warm-600" style={fadeUp("260ms")}>
+          <p className="max-w-[238px] text-sm leading-7 text-warm-400" style={fadeUp("260ms")}>
             {personal.description}
           </p>
 
-          <div className="mt-5 flex flex-wrap items-center gap-2" style={fadeUp("330ms")}>
+          <div className="mt-5 flex items-center gap-2" style={fadeUp("330ms")}>
             <button
               onClick={() => setShowResume(true)}
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-600 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
+              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
               title="View my one-page resume or full academic and professional CV"
               aria-haspopup="dialog"
             >
@@ -99,7 +95,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             </button>
             <button
               onClick={onOpenModal}
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-600 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
+              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
               title="View 3D portfolio"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -109,21 +105,20 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
                 <line x1="8" y1="21" x2="16" y2="21" />
                 <line x1="12" y1="17" x2="12" y2="21" />
               </svg>
-              3D portfolio
+              3D
             </button>
           </div>
 
-          <nav className="mt-6 hidden lg:block" aria-label="Page sections" style={fadeUp("410ms")}>
-            <ul className="space-y-1">
+          <nav className="mt-10 hidden lg:block" aria-label="Page sections" style={fadeUp("410ms")}>
+            <ul className="space-y-4">
               {NAV_ITEMS.map(({ id, label }) => {
                 const active = activeSection === id;
                 return (
                   <li key={id}>
                     <button
                       onClick={() => onNavClick(id)}
-                      aria-current={active ? "location" : undefined}
-                      className={`group flex min-h-11 items-center gap-4 transition-all duration-200 ${
-                        active ? "text-warm-900" : "text-warm-600 hover:text-warm-700"
+                      className={`group flex items-center gap-4 transition-all duration-200 ${
+                        active ? "text-warm-900" : "text-warm-300 hover:text-warm-700"
                       }`}
                     >
                       <span
@@ -155,7 +150,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-warm-600 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-warm-300 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
             >
               <LinkedInIcon />
             </a>
@@ -164,7 +159,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-warm-600 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-warm-300 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
             >
               <GitHubIcon />
             </a>
@@ -173,14 +168,14 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-warm-600 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-warm-300 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
             >
               <InstagramIcon />
             </a>
             <a
               href={`mailto:${personal.email}`}
               aria-label="Email"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-warm-600 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-warm-300 transition-all duration-200 hover:-translate-y-px hover:bg-cream-100 hover:text-sage-600"
             >
               <EmailIcon />
             </a>
@@ -188,7 +183,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             <MusicPlayer />
           </div>
 
-          <p className="mt-4 text-[11px] text-warm-600">
+          <p className="mt-4 text-[11px] text-warm-200">
             © {new Date().getFullYear()} Kevan Wee
           </p>
         </div>

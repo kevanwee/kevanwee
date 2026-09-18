@@ -1,6 +1,7 @@
 # Pokémon playground implementation
 
 ## Agreed behavior
+- Scope narrowed by the user: restore pre-audit mouse, portfolio layout/navigation and document viewer. Only the two live maps and their focus mode should change. The earlier Resume/CV feature remains.
 - Preserve all 32 Route 111 residents and all 12 Mauville residents, including existing shiny variants.
 - Normal mouse, touch, and keyboard portfolio navigation. Keep the native pointer.
 - Clicking a map opens a focused playground; closing restores page position. Preview and focus share scene state.

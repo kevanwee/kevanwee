@@ -1,13 +1,11 @@
 "use client";
 
-import { usePokemonCursor } from "@/components/PokemonCursorContext";
 import { useState } from "react";
 import { personal } from "@/data";
 import MauvilleBanner from "@/components/MauvilleBanner";
 import CreditsModal from "@/components/CreditsModal";
 
 export default function Contact() {
-  const { paused } = usePokemonCursor();
   const [showCredits, setShowCredits] = useState(false);
 
   return (
@@ -25,10 +23,10 @@ export default function Contact() {
             {/* Charcadet gif — top whitespace cropped via overflow clip */}
             <div style={{ overflow: "hidden", height: 72, width: 100, flexShrink: 0 }} aria-hidden="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={paused ? "/worlds/charcadet-still.png" : "/charc.gif"} alt="" width={100} style={{ marginTop: -28, display: "block", imageRendering: "pixelated" }} />
+              <img src="/charc.gif" alt="" width={100} style={{ marginTop: -28, display: "block", imageRendering: "pixelated" }} />
             </div>
           </div>
-          <p className="mb-8 text-sm leading-relaxed text-warm-600">
+          <p className="mb-8 text-sm leading-relaxed text-warm-500">
             Whether you&apos;re working on something at the intersection of law
             and technology, looking for a collaborator, or just want to connect
             — I&apos;d love to hear from you.
@@ -58,14 +56,14 @@ export default function Contact() {
         <MauvilleBanner />
 
         <footer className="mt-24 border-t border-cream-200 pt-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-warm-600">© {new Date().getFullYear()} Kevan Wee</p>
+          <p className="text-xs text-warm-400">© {new Date().getFullYear()} Kevan Wee</p>
           <div className="flex items-center gap-4">
-            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-600 hover:text-warm-700 transition-colors duration-200">LinkedIn</a>
-            <a href={personal.github} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-600 hover:text-warm-700 transition-colors duration-200">GitHub</a>
-            <a href={personal.funPortfolio} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-600 hover:text-warm-700 transition-colors duration-200">3D Portfolio</a>
+            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">LinkedIn</a>
+            <a href={personal.github} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">GitHub</a>
+            <a href={personal.funPortfolio} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">3D Portfolio</a>
             <button
               onClick={() => setShowCredits(true)}
-              className="text-xs text-warm-600 hover:text-warm-700 transition-colors duration-200"
+              className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200"
             >
               Credits
             </button>

@@ -37,7 +37,7 @@ export default function MediaAppearances() {
                   strokeWidth={1.5}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-warm-600 transition-colors group-hover:text-sage-400"
+                  className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-warm-300 transition-colors group-hover:text-sage-400"
                   aria-hidden="true"
                 >
                   <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
@@ -49,7 +49,7 @@ export default function MediaAppearances() {
           ))}
         </ul>
 
-        <p className="mt-4 text-xs text-warm-600">
+        <p className="mt-4 text-xs text-warm-400">
           Also featured on{" "}
           <a
             href="https://www.legalquants.com/lawyers/kevan-wee"

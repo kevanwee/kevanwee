@@ -13,3 +13,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 **Why:** Sprites from the PMD sprite project have wildly different base pixel dimensions (e.g. Ceruledge walk fH=56px vs Latios walk fH=80px). Picking an arbitrary scale like `2.2` for small sprites and `1.5` for large ones without checking the rendered output produces cursors that are visually 20–30% larger than the reference pokemon.
 
 **How to apply:** Whenever adding a new pokemon cursor config, verify: `frameHeight × scale ≈ 100px` for the walk animation before committing.
+# Scope correction: live maps only
+- The user rejected the mouse, navigation, page layout and document viewer changes. Restore the pre-audit portfolio, including its original mouse behavior. Keep the previously requested Resume/CV feature. Restrict this task's UI changes to Route 111, Mauville and their focused playground.
