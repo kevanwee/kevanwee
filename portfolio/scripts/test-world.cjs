@@ -59,4 +59,26 @@ for(let n=0;n<3600;n++) {
   stepWorld(crowd,1/30); invariant(crowd);
 }
 assert.ok(crowd.actors.every(a=>a.steps>5));
+// Offering a berry must create a clear, reachable tile outside the recipient's body.
+const offered = createWorld({...corridor, actors:corridor.actors.slice(0,1)}, 7);
+const recipient = offered.actors[0];
+assert.match(dropBerry(offered, recipient, recipient.id), /spotted/);
+assert.equal(offered.berries.length, 1);
+const berry = offered.berries[0];
+assert.ok(Math.hypot(recipient.x-berry.x,recipient.y-berry.y) >= recipient.radius+5);
+assert.ok(terrainFits(offered.map,recipient,berry));
+assert.ok(recipient.path.length > 0);
+for(let n=0;n<300;n++) stepWorld(offered,1/30);
+assert.equal(offered.berries.length,0,'recipient reaches and eats the offset berry');
+const cameraCode=ts.transpileModule(readFileSync(resolve(__dirname,'../src/lib/world-camera.ts'),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
+const cameras={}; new Function('exports',cameraCode)(cameras);
+for(const id of ['rt111','mauville']) for(const [w,h] of [[304,360],[1100,500],[1800,100],[200,1200]]) {
+  const map=mapFor(id);
+  for(const requested of [.0001,.2,1,10]) {
+    const camera={x:-200,y:99999,zoom:requested}; cameras.clampCamera(camera,map,w,h);
+    assert.ok(camera.x-w/camera.zoom/2>=-1e-6 && camera.x+w/camera.zoom/2<=map.width+1e-6);
+    assert.ok(camera.y-h/camera.zoom/2>=-1e-6 && camera.y+h/camera.zoom/2<=map.height+1e-6);
+  }
+}
+console.log('PASS offset berries are reachable; zoom/pan never expose space outside either map');
 console.log(`PASS deterministic replay, unreachable commands, dense crossings; ${checks.toLocaleString()} reservation checks`);

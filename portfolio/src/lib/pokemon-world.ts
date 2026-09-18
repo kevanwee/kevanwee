@@ -52,8 +52,8 @@ export function createWorld(map: WorldMap, seed: number): World {
   const world: World = { map, actors: [], berries: [], time: 0, random: seeded(seed), turn: 0, lastBerry: -10, nextBerry: 0 };
   for (const resident of map.actors) {
     const actor: Actor = { ...resident, ...resident.home, radius: Math.min(10, resident.size * .24),
-      speed: 14 + world.random() * 10, direction: 0, state: "resting", next: null, path: [], goal: null,
-      wait: world.random() * 3, allowed: new Set(), cells: [], steps: 0, goalExpires: 0 };
+      speed: (14 + world.random() * 10) * 2, direction: 0, state: "resting", next: null, path: [], goal: null,
+      wait: world.random() * .75, allowed: new Set(), cells: [], steps: 0, goalExpires: 0 };
     const valid: number[] = [];
     for (let n = 0; n < map.land.length * cols(map); n++) {
       const p = point(map, n);
@@ -111,12 +111,12 @@ function wander(world: World, actor: Actor) {
   const target = point(world.map, nearby[Math.floor(world.random() * nearby.length)]);
   actor.path = route(world, actor, target, true) || [];
   actor.goal = null;
-  if (!actor.path.length) actor.wait = .6 + world.random();
+  if (!actor.path.length) actor.wait = .2 + world.random() * .3;
 }
 export function greet(world: World, id: string) {
   const actor = world.actors.find(a => a.id === id)!;
   // Finish the reserved step before stopping, so no actor is stranded between cells.
-  actor.path = []; actor.goal = null; actor.wait = 3; actor.state = "greeting";
+  actor.path = []; actor.goal = null; actor.wait = 1.2; actor.state = "greeting";
   world.berries = world.berries.filter(b => b.actor !== id);
   return `${actor.name} says hello!`;
 }
@@ -130,18 +130,28 @@ export function callActor(world: World, id: string, destination: Point) {
   world.berries = world.berries.filter(b => b.actor !== id);
   return `${actor.name} is coming over.`;
 }
-export function dropBerry(world: World, destination: Point) {
+export function dropBerry(world: World, destination: Point, preferredActor?: string) {
   if (world.berries.length >= 3 || world.time - world.lastBerry < 2) return "Give them a moment to enjoy their berries.";
-  const target = point(world.map, cell(world.map, destination));
-  for (const actor of [...world.actors].sort((a, b) => distance(a,target)-distance(b,target))) {
-    if (world.berries.some(b => b.actor === actor.id) || blockers(world, actor, target, target).length) continue;
-    const path = route(world, actor, target, true);
-    if (!path || path.length > 28) continue;
-    actor.path = path; actor.goal = target; actor.wait = 0;
-    actor.goalExpires = world.time + 45;
-    world.berries.push({ ...target, id: world.nextBerry++, actor: actor.id, expires: world.time + 45 });
-    world.lastBerry = world.time;
-    return `${actor.name} spotted an Oran Berry!`;
+  const centre = point(world.map, cell(world.map, destination));
+  const targets: Point[] = [];
+  for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
+    if (Math.abs(dx)+Math.abs(dy) <= 2) targets.push({x:centre.x+dx*world.map.tileSize, y:centre.y+dy*world.map.tileSize});
+  }
+  targets.sort((a,b) => distance(a,centre)-distance(b,centre));
+  for (const target of targets) {
+    // Include the recipient's current/reserved step: the berry must not spawn under it.
+    if (world.actors.some(a => pointSegment(target,a,a.next || a) < a.radius+5) || world.berries.some(b => distance(b,target)<16)) continue;
+    const candidates = world.actors.filter(a => !preferredActor || a.id===preferredActor).sort((a,b) => distance(a,target)-distance(b,target));
+    for (const actor of candidates) {
+      if (world.berries.some(b => b.actor === actor.id) || blockers(world, actor, target, target).length) continue;
+      const path = route(world, actor, target, true);
+      if (!path?.length || path.length > 28) continue;
+      actor.path = path; actor.goal = target; actor.wait = 0;
+      actor.goalExpires = world.time + 45;
+      world.berries.push({ ...target, id: world.nextBerry++, actor: actor.id, expires: world.time + 45 });
+      world.lastBerry = world.time;
+      return `${actor.name} spotted an Oran Berry!`;
+    }
   }
   return "Place a berry on clear ground or water near a Pokémon.";
 }
@@ -163,12 +173,12 @@ export function stepWorld(world: World, dt: number) {
     if (!actor.path.length) {
       const berry = world.berries.find(b => b.actor === actor.id && distance(actor,b) < 2);
       if (berry) {
-        world.berries = world.berries.filter(b => b !== berry); actor.state = "eating"; actor.wait = 3;
+        world.berries = world.berries.filter(b => b !== berry); actor.state = "eating"; actor.wait = 1.4;
       } else if (actor.goal && distance(actor, actor.goal) > 2) {
         actor.path = route(world, actor, actor.goal, true) || [];
         if (!actor.path.length) { actor.state = "waiting"; actor.wait = .8; }
-      } else if (actor.goal) { actor.goal = null; actor.state = "greeting"; actor.wait = 2; }
-      else if (world.random() < .3) { actor.state = "resting"; actor.wait = 1 + world.random() * (actor.size > 30 ? 7 : 4); }
+      } else if (actor.goal) { actor.goal = null; actor.state = "greeting"; actor.wait = 1.2; }
+      else if (world.random() < .3) { actor.state = "resting"; actor.wait = .3 + world.random() * .9; }
       else wander(world, actor);
       continue;
     }

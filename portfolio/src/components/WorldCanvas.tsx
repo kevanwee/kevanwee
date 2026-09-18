@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState, type MutableRefObject } from "react";
 import { stepWorld, type Point } from "@/lib/pokemon-world";
-import { clampCamera, drawWorld, type Camera, type WorldSession } from "@/lib/world-session";
+import { drawWorld, type WorldSession } from "@/lib/world-session";
+import { clampCamera, type Camera } from "@/lib/world-camera";
 
 export default function WorldCanvas({ session, active, camera, focused = false, selected, revision = 0, onPick }: {
   session: WorldSession; active: boolean; camera: MutableRefObject<Camera>;
@@ -28,10 +29,11 @@ export default function WorldCanvas({ session, active, camera, focused = false, 
         camera.current.x = map.width > map.height ? width/camera.current.zoom/2 + excursion*(map.width-width/camera.current.zoom) : map.width/2;
         camera.current.y = map.height > map.width ? height/camera.current.zoom/2 + excursion*(map.height-height/camera.current.zoom) : map.height/2;
       }
-      clampCamera(camera.current, session.world, width, height);
+      clampCamera(camera.current, session.world.map, width, height);
       drawWorld(context, session, camera.current, width, height, selected);
       element.dataset.time = session.world.time.toFixed(3);
       element.dataset.residents = String(session.world.actors.length);
+      element.dataset.camera = JSON.stringify(camera.current);
     };
     repaint.current = paint;
     const resize = new ResizeObserver(([entry]) => {

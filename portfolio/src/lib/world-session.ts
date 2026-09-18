@@ -1,4 +1,5 @@
 import { createWorld, type World, type SceneId, type WorldMap } from "./pokemon-world";
+import type { Camera } from "./world-camera";
 
 export interface WorldSession { world: World; images: Map<string, HTMLImageElement> }
 const sessions = new Map<SceneId, Promise<WorldSession>>();
@@ -22,14 +23,6 @@ export function loadWorld(id: SceneId): Promise<WorldSession> {
   return pending;
 }
 
-export interface Camera { x: number; y: number; zoom: number }
-export function clampCamera(camera: Camera, world: World, width: number, height: number) {
-  const { map } = world;
-  camera.zoom = Math.max(.2, Math.min(5, camera.zoom));
-  const halfW = width / camera.zoom / 2, halfH = height / camera.zoom / 2;
-  camera.x = halfW * 2 >= map.width ? map.width / 2 : Math.max(halfW, Math.min(map.width-halfW, camera.x));
-  camera.y = halfH * 2 >= map.height ? map.height / 2 : Math.max(halfH, Math.min(map.height-halfH, camera.y));
-}
 export function drawWorld(context: CanvasRenderingContext2D, session: WorldSession, camera: Camera, width: number, height: number, selected?: string) {
   const { world, images } = session, { map } = world;
   context.clearRect(0, 0, width, height);
@@ -48,7 +41,8 @@ export function drawWorld(context: CanvasRenderingContext2D, session: WorldSessi
       context.strokeStyle = "#fff"; context.lineWidth = 2/camera.zoom;
       context.beginPath(); context.ellipse(actor.x, actor.y-2, actor.radius+3, 4, 0, 0, Math.PI*2); context.stroke();
     }
-    const sheet = images.get(actor.sprite)!, frame = actor.next ? Math.floor(world.time/.16) % (sheet.width/actor.frameSize) : 0;
+    const sheet = images.get(actor.sprite)!;
+    const frame = Math.floor(world.time/(actor.next ? .12 : .24)) % (sheet.width/actor.frameSize);
     context.drawImage(sheet, frame*actor.frameSize, actor.direction*actor.frameSize, actor.frameSize, actor.frameSize, actor.x-size/2, actor.y-size, size, size);
     if (actor.state === "greeting" || actor.state === "eating") {
       context.font = "bold 10px sans-serif"; context.textAlign = "center";

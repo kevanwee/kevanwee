@@ -30,15 +30,12 @@ export default function WorldPreview({ id }: { id: SceneId }) {
   }, [id, visible, session]);
   return <div className={id === "rt111" ? "mb-10" : "mt-12"}>
     <p className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-600">Currently roaming · {title}</p>
-    <button ref={ref} className="group relative block h-[200px] w-full overflow-hidden rounded-2xl border border-cream-200 bg-sage-100 text-left"
+    <button ref={ref} className="group relative block w-full overflow-hidden rounded-2xl border border-cream-200 bg-sage-100 text-left"
+      style={{ height: id === "rt111" ? 180 : 220 }}
       onClick={() => setExpanded(true)} disabled={!ready} aria-label={`Explore ${title}`} aria-haspopup="dialog">
       {session ? <WorldCanvas session={session} camera={camera} active={visible && !paused && modalCount === 0 && !portfolioDialogOpen && !expanded} /> :
         /* eslint-disable-next-line @next/next/no-img-element */
         <img src={`/worlds/${id}/poster.webp`} alt="" className="h-full w-full object-cover object-top" loading="lazy" />}
-      <span className="absolute bottom-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white/95 px-3 py-2 text-xs text-warm-800 shadow-sm">
-        <span className="font-semibold">Explore {title} ↗</span>
-        <span>{id === "rt111" ? 32 : 12} Pokémon · {paused ? "paused" : "live"}</span>
-      </span>
     </button>
     {expanded && <WorldPlayground initialScene={id} onClose={() => setExpanded(false)} />}
   </div>;
