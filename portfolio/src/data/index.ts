@@ -443,9 +443,9 @@ export const featuredProjects: FeaturedProject[] = [
   {
     id: "legalquants",
     title: "LegalQuants Plugins",
-    role: "Contributor · Testing & feedback",
+    role: "Contributor · Citation checking & playbooks",
     description:
-      "Three open-source plugins for litigation, transactional work, and AI learning, published for OpenAI's ChatGPT Enterprise as part of the Astra for Law launch. Built by the LegalQuants community, they turn legal workflows such as citation checking, document review, and contract analysis into reusable skills. I contributed testing and feedback ahead of release.",
+      "Three open-source plugins for litigation, transactional work, and AI learning, published for OpenAI's ChatGPT Enterprise as part of the Astra for Law launch. Built by the LegalQuants community, they turn legal workflows such as citation checking, document review, and contract analysis into reusable skills. My contributions focused on the $cite-check and playbook skills.",
     tags: ["Legal AI", "Open Source", "ChatGPT", "LegalTech"],
     github: "https://github.com/LegalQuants/lq-plugin-oss",
     external: null,
@@ -499,7 +499,7 @@ export const otherProjects: OtherProject[] = [
   {
     title: "copycat",
     description:
-      "Singapore-first copyright infringement triage tool with deterministic similarity scoring. Automates the initial assessment of IP claims against Singapore copyright law frameworks, helping legal practitioners quickly evaluate likely outcomes and prioritise cases.",
+      "Copyright infringement triage for Singapore law, with deterministic similarity scoring.",
     tags: ["Python", "NLP", "LegalTech", "IP Law"],
     github: "https://github.com/kevanwee/copycat",
     external: null,
