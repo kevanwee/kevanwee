@@ -505,6 +505,30 @@ export const otherProjects: OtherProject[] = [
     external: null,
   },
   {
+    title: "bundlebuild",
+    description:
+      "Builds court bundles from a YAML index, with PDF merging, page numbering, bookmarks, and input checks.",
+    tags: ["Python", "PDF", "LegalTech"],
+    github: "https://github.com/kevanwee/bundlebuild",
+    external: null,
+  },
+  {
+    title: "playbook-as-code",
+    description:
+      "Structured contract negotiation playbooks with clause matching, review memos, and proposed amendments.",
+    tags: ["Python", "YAML", "Contract Law"],
+    github: "https://github.com/kevanwee/playbook-as-code",
+    external: null,
+  },
+  {
+    title: "crimewatch",
+    description:
+      "Maps likely incident locations from Singapore criminal judgments using contextual extraction and weighted heatmaps.",
+    tags: ["Python", "Flask", "Legal Data"],
+    github: "https://github.com/kevanwee/crimewatch",
+    external: null,
+  },
+  {
     title: "sightstone",
     description:
       "Contract playbook harmonisation tool that identifies and reconciles conflicting clauses across multiple contract versions for M&A due diligence.",
