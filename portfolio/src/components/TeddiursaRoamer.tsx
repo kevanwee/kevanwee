@@ -34,6 +34,9 @@ function getPanelBounds() {
 
 export default function TeddiursaRoamer() {
   const [visual, setVisual] = useState<Visual | null>(null);
+  const [showHeart, setShowHeart] = useState(false);
+  const reactionRef = useRef(0);
+  const keyboardFocusRef = useRef(false);
 
   const xRef        = useRef(0);
   const velRef      = useRef(1);
@@ -101,6 +104,23 @@ export default function TeddiursaRoamer() {
         frameRef.current = (frameRef.current + 1) % cfg.frames;
       }
 
+      if (reactionRef.current > 0) {
+        reactionRef.current = Math.max(0, reactionRef.current - dt);
+        setVisual(v => v && ({ ...v, frame: frameRef.current, dirRow: DIR_S }));
+        if (reactionRef.current === 0) {
+          setShowHeart(false);
+          switchMode("walk");
+        }
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      // Keep the keyboard target still until focus moves elsewhere.
+      if (keyboardFocusRef.current) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
       if (m === "walk") {
         const { minX, maxX } = getPanelBounds();
         const w = ANIMS.walk.fw * SCALE;
@@ -149,6 +169,15 @@ export default function TeddiursaRoamer() {
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
+  const sayHello = () => {
+    reactionRef.current = 1500;
+    modeRef.current = "idle";
+    frameRef.current = 0;
+    frameElRef.current = 0;
+    setVisual(v => v && ({ ...v, mode: "idle", frame: 0, dirRow: DIR_S }));
+    setShowHeart(true);
+  };
+
   if (!visual) return null;
 
   const cfg    = ANIMS[visual.mode];
@@ -160,12 +189,27 @@ export default function TeddiursaRoamer() {
   const bgY    = cfg.rows === 1 ? 0 : -(visual.dirRow * cfg.fh * SCALE);
 
   return (
-    <div
-      aria-hidden="true"
+    <button
+      type="button"
+      aria-label="Say hello to Teddiursa"
+      title="Say hello to Teddiursa"
+      onClick={sayHello}
+      onFocus={event => { keyboardFocusRef.current = event.currentTarget.matches(":focus-visible"); }}
+      onBlur={() => { keyboardFocusRef.current = false; }}
+      className="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600"
       style={{
         position:           "fixed",
-        bottom:             20,
-        left:               visual.x,
+        bottom:             18,
+        left:               visual.x - (44 - sprW) / 2,
+        width:              44,
+        height:             44,
+        zIndex:             50,
+      }}
+    >
+      <span aria-hidden="true" style={{
+        position:           "absolute",
+        bottom:             2,
+        left:               (44 - sprW) / 2,
         width:              sprW,
         height:             sprH,
         backgroundImage:    `url(${cfg.src})`,
@@ -174,8 +218,21 @@ export default function TeddiursaRoamer() {
         backgroundPosition: `${bgX}px ${bgY}px`,
         imageRendering:     "pixelated",
         pointerEvents:      "none",
-        zIndex:             50,
-      }}
-    />
+      }} />
+      {showHeart && (
+        <span aria-hidden="true" data-teddiursa-heart style={{
+          position: "absolute",
+          bottom: 40,
+          left: 12,
+          width: 20,
+          height: 20,
+          backgroundImage: "url(/worlds/reactions/heart.png)",
+          backgroundSize: "contain",
+          imageRendering: "pixelated",
+          pointerEvents: "none",
+        }} />
+      )}
+      <span className="sr-only" role="status">{showHeart ? "Teddiursa sends you a heart!" : ""}</span>
+    </button>
   );
 }
