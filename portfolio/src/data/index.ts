@@ -154,7 +154,7 @@ export const experiences: Experience[] = [
     id: "smu-cdl-solid",
     logo: "/logos/smu.jpg",
     company: "SMU Yong Pung How School of Law",
-    role: "Research Engineer",
+    role: "Undergraduate Researcher",
     subtitle: "Centre for Digital Law · Singapore Open Legal Informatics Database",
     period: "Jul 2026 – Present",
     type: "Part-time",
