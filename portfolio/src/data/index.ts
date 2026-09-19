@@ -35,10 +35,10 @@ export const personal = {
 };
 
 export const aboutParagraphs = [
-  "I design and build software that operationalises legal processes, turning regulatory rules, contract logic, and compliance workflows into automated, auditable systems. My work spans platform regulation, IP enforcement, data protection, contract lifecycle management, and court document automation.",
-  "Currently a final-year undergraduate at Singapore Management University pursuing a BSc in Computing & Law, with a second major in Computing Studies (Cybersecurity).",
-  "Right now I work across three things: regional brand protection at Shopee, research engineering on Singapore's first open quantitative legal database at SMU's Centre for Digital Law, and DeFi security research with SCIS.",
-  "I map how legal work actually gets done, isolate the steps worth automating, and translate between the lawyers, engineers, and operations teams who each hold one piece of the requirement. The hard part is rarely the model. It is whether the output gets trusted enough to change how someone works.",
+  "I'm a LegalTech builder and final-year Computing & Law undergraduate at Singapore Management University, with a second major in Computing Studies (Cybersecurity). I build tools that help legal teams turn manual, document-heavy work into structured, reliable systems, drawing on experience with law firms, in-house legal teams, and legal technology teams across APAC.",
+  "My deepest legal experience is in intellectual property and brand protection, particularly in e-commerce. At Shopee, I handled cross-border IP enforcement and trademark and copyright escalations, working with global brand partners and teams across Legal, Operations, and Product. That work grounded my understanding of how legal rights are enforced in practice on online marketplaces.",
+  "My build work centres on drafting support, citation accuracy, and legal workflow automation. I currently contribute to Singapore's first open quantitative legal database at SMU's Centre for Digital Law, alongside DeFi security research with the School of Computing & Information Systems.",
+  "I work between legal users, product teams, and AI systems: understanding how lawyers actually work, identifying where technology adds value, and translating legal requirements into useful tools. That increasingly includes evaluating AI output against source material, testing it on real legal tasks, and feeding what breaks back to the people building the product.",
 ];
 
 export const achievements = [
@@ -151,26 +151,6 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
-    id: "shopee",
-    logo: "/logos/shopee.svg",
-    company: "Shopee",
-    role: "Regional Brand Protection Analyst (IPR)",
-    subtitle: "Regional Brand Partnerships",
-    period: "May 2026 – Present",
-    type: "Internship",
-    url: "https://shopee.com/",
-    bullets: [
-      "Managed 400+ e-commerce IPR enforcement cases across 10+ APAC and LATAM markets as direct point of contact for global brand partners, coordinating cross-border takedowns and resolving high-priority trademark and copyright escalations across Operations, Legal, and Product.",
-      "Owned IPR volume and SLA tracking for priority brands across FMCG, Electronics, Beauty, and Fashion & Lifestyle via regional dashboards.",
-      "Authored quarterly Brand Protection newsletter, consolidating regional IP enforcement updates and stakeholder inputs for external brand partners.",
-    ],
-    bulletTags: [
-      ["legal"],
-      ["tech", "legal"],
-      ["legal"],
-    ],
-  },
-  {
     id: "smu-cdl-solid",
     logo: "/logos/smu.jpg",
     company: "SMU Yong Pung How School of Law",
@@ -204,6 +184,26 @@ export const experiences: Experience[] = [
     bulletTags: [
       ["tech"],
       ["tech"],
+    ],
+  },
+  {
+    id: "shopee",
+    logo: "/logos/shopee.svg",
+    company: "Shopee",
+    role: "Regional Brand Protection Analyst (IPR)",
+    subtitle: "Regional Brand Partnerships",
+    period: "May 2026 – Aug 2026",
+    type: "Internship",
+    url: "https://shopee.com/",
+    bullets: [
+      "Managed 400+ e-commerce IPR enforcement cases across 10+ APAC and LATAM markets as direct point of contact for global brand partners, coordinating cross-border takedowns and resolving high-priority trademark and copyright escalations across Operations, Legal, and Product.",
+      "Owned IPR volume and SLA tracking for priority brands across FMCG, Electronics, Beauty, and Fashion & Lifestyle via regional dashboards.",
+      "Authored quarterly Brand Protection newsletter, consolidating regional IP enforcement updates and stakeholder inputs for external brand partners.",
+    ],
+    bulletTags: [
+      ["legal"],
+      ["tech", "legal"],
+      ["legal"],
     ],
   },
   {
@@ -367,6 +367,8 @@ export interface FeaturedProject {
   collabLogo?: string;
   hasCaseStudy?: boolean;
   role?: string;
+  showGithubStars?: boolean;
+  publications?: { label: string; url: string }[];
 }
 
 export interface OtherProject {
@@ -439,6 +441,23 @@ export const mediaAppearances: MediaAppearance[] = [
 
 export const featuredProjects: FeaturedProject[] = [
   {
+    id: "legalquants",
+    title: "LegalQuants Plugins",
+    role: "Contributor · Testing & feedback",
+    description:
+      "Three open-source plugins for litigation, transactional work, and AI learning, published for OpenAI's ChatGPT Enterprise as part of the Astra for Law launch. Built by the LegalQuants community, they turn legal workflows such as citation checking, document review, and contract analysis into reusable skills. I contributed testing and feedback ahead of release.",
+    tags: ["Legal AI", "Open Source", "ChatGPT", "LegalTech"],
+    github: "https://github.com/LegalQuants/lq-plugin-oss",
+    external: null,
+    isPrivate: false,
+    collab: null,
+    showGithubStars: true,
+    publications: [
+      { label: "OpenAI announcement", url: "https://openai.com/index/astra-for-law/" },
+      { label: "LegalQuants release", url: "https://www.legalquants.com/lqplugins" },
+    ],
+  },
+  {
     id: "bart",
     title: "BART",
     description:
@@ -453,12 +472,12 @@ export const featuredProjects: FeaturedProject[] = [
     role: "Team Lead · Scrum Master · Software Developer",
   },
   {
-    id: "copycat",
-    title: "copycat",
+    id: "sal-citation-generator",
+    title: "SAL Citation Generator",
     description:
-      "Singapore-first copyright infringement triage tool with deterministic similarity scoring. Automates the initial assessment of IP claims against Singapore copyright law frameworks, helping legal practitioners quickly evaluate likely outcomes and prioritise cases.",
-    tags: ["Python", "NLP", "LegalTech", "IP Law"],
-    github: "https://github.com/kevanwee/copycat",
+      "TypeScript citation generator for Singapore Academy of Law style guide materials. (WIP)",
+    tags: ["TypeScript", "LegalTech", "Citation"],
+    github: "https://github.com/kevanwee/sal-citation-generator",
     external: null,
     isPrivate: false,
     collab: null,
@@ -478,19 +497,19 @@ export const featuredProjects: FeaturedProject[] = [
 
 export const otherProjects: OtherProject[] = [
   {
+    title: "copycat",
+    description:
+      "Singapore-first copyright infringement triage tool with deterministic similarity scoring. Automates the initial assessment of IP claims against Singapore copyright law frameworks, helping legal practitioners quickly evaluate likely outcomes and prioritise cases.",
+    tags: ["Python", "NLP", "LegalTech", "IP Law"],
+    github: "https://github.com/kevanwee/copycat",
+    external: null,
+  },
+  {
     title: "sightstone",
     description:
       "Contract playbook harmonisation tool that identifies and reconciles conflicting clauses across multiple contract versions for M&A due diligence.",
     tags: ["Python", "NLP", "Contract Law"],
     github: "https://github.com/kevanwee/sightstone",
-    external: null,
-  },
-  {
-    title: "sal citation generator",
-    description:
-      "TypeScript citation generator for Singapore Academy of Law style guide materials. (WIP)",
-    tags: ["TypeScript", "LegalTech", "Citation"],
-    github: "https://github.com/kevanwee/sal-citation-generator",
     external: null,
   },
   {

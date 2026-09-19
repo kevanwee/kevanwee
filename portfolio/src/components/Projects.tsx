@@ -4,6 +4,7 @@ import { useState } from "react";
 import { featuredProjects, otherProjects } from "@/data";
 import Skills from "@/components/Skills";
 import BartCaseStudyModal from "@/components/BartCaseStudyModal";
+import GitHubStars from "@/components/GitHubStars";
 
 export default function Projects() {
   const [showBart, setShowBart] = useState(false);
@@ -66,6 +67,17 @@ export default function Projects() {
                   <p className="text-sm leading-relaxed text-warm-500">
                     {project.description}
                   </p>
+                  {project.publications && (
+                    <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-sage-700">
+                      {project.publications.map(publication => (
+                        <li key={publication.url}>
+                          <a href={publication.url} target="_blank" rel="noopener noreferrer" className="underline decoration-sage-200 underline-offset-4 hover:decoration-sage-600">
+                            {publication.label} <span aria-hidden="true">↗</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                   <ul className="mt-4 flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
                       <li key={tag} className="tag">
@@ -73,6 +85,11 @@ export default function Projects() {
                       </li>
                     ))}
                   </ul>
+                  {project.showGithubStars && project.github && (
+                    <div className="mt-4">
+                      <GitHubStars href={project.github} title={project.title} />
+                    </div>
+                  )}
                 </div>
 
                 {/* Links */}
@@ -89,7 +106,7 @@ export default function Projects() {
                       </svg>
                     </button>
                   )}
-                  {project.github && (
+                  {project.github && !project.showGithubStars && (
                     <a
                       href={project.github}
                       target="_blank"
