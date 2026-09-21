@@ -30,7 +30,7 @@ FORMS = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire',
          'flying', 'ghost', 'grass', 'ground', 'ice', 'poison', 'psychic',
          'rock', 'steel', 'water']
 FLYERS = {'beautifly', 'corviknight', 'noivern', 'talonflame', 'yveltal',
-          'dragonair', 'dragonite', 'giratina', 'mega-rayquaza', 'mega-skarmory',
+          'dragonite', 'giratina', 'mega-rayquaza', 'mega-skarmory',
           'naganadel', 'primal-kyogre', 'shadow-mewtwo', 'zapdos'}
 # Target rendered heights, so every sprite is normalised to a consistent apparent
 # size and relative bulk reads true (see tasks/lessons.md, lesson 1).
@@ -44,7 +44,7 @@ HEIGHTS = {'silvally': 58, 'armarouge': 43, 'ceruledge': 43, 'breloom': 36,
            'dragonair': 40, 'naganadel': 40, 'mega-skarmory': 42, 'arcanine': 44,
            'shadow-mewtwo': 46, 'zapdos': 48, 'dragonite': 50, 'primal-kyogre': 54, 'mega-rayquaza': 58}
 FLIGHT_TEMPO = {'beautifly': 1.1, 'corviknight': 1.35, 'noivern': 1.4, 'talonflame': 1.7, 'yveltal': 1.3,
-                'dragonair': 1.2, 'dragonite': 1.3, 'giratina': 1.25, 'mega-rayquaza': 1.3,
+                'dragonite': 1.3, 'giratina': 1.25, 'mega-rayquaza': 1.3,
                 'mega-skarmory': 1.5, 'naganadel': 1.4, 'primal-kyogre': 1.15,
                 'shadow-mewtwo': 1.2, 'zapdos': 1.45}
 

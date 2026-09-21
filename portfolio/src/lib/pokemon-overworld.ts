@@ -1,10 +1,10 @@
 /** DOM-independent wandering, naps and loosely choreographed sparring. */
 export const GROUND_SPECIES = ["breloom", "fidough", "flareon", "goomy", "pawmi", "tyrunt", "rowlet",
-  "appletun", "charcadet", "corphish", "eevee", "gible", "jolteon", "mega-zeraora", "skitty",
-  "squirtle", "sylveon", "umbreon", "vaporeon",
+  "appletun", "charcadet", "corphish", "dragonair", "eevee", "gible", "jolteon", "mega-zeraora",
+  "skitty", "squirtle", "sylveon", "umbreon", "vaporeon",
   ...["zorua", "hisuian-zorua", "mega-gardevoir", "mega-gallade", "dratini", "shiny-dratini", "growlithe", "arcanine"]];
 export const FLYING_SPECIES = ["beautifly", "corviknight", "noivern", "talonflame",
-  "dragonair", "dragonite", "giratina", "mega-rayquaza", "mega-skarmory", "naganadel",
+  "dragonite", "giratina", "mega-rayquaza", "mega-skarmory", "naganadel",
   "primal-kyogre", "shadow-mewtwo", "zapdos"];
 /** Bonded pairs share a ledge, and the second one trails the first everywhere it goes. */
 export const PAIRS: readonly (readonly [string, string])[] = [
