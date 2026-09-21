@@ -10,6 +10,9 @@
 .pokemon-overworld[hidden], .overworld-sprite[hidden], .silvally-resident[hidden], .overworld-resident[hidden], .overworld-heart[hidden] { display: none; }
 .overworld-resident { position: absolute; top: 0; left: 0; width: 44px; height: 44px; pointer-events: auto; touch-action: manipulation; border-radius: 12px; }
 .overworld-resident:focus-visible { outline: 2px solid #6b9f89; outline-offset: 3px; }
+/* Docked on the 3D button itself: sticky scrolling, reflow and panel zoom are then
+   the browser's job, and no frame of JS can leave him behind. */
+.overworld-resident.yveltal-nested { top: auto; left: 50%; bottom: 100%; margin-left: -22px; z-index: 22; }
 .overworld-battler { pointer-events: none; }
 .overworld-heart { position: absolute; left: 14px; width: 16px; height: 16px; background: url('/worlds/reactions/heart.png') center / contain no-repeat; image-rendering: pixelated; pointer-events: none; }
 .silvally-resident { position: fixed; top: 0; left: 0; width: 56px; height: 64px; z-index: 21; border-radius: 16px; touch-action: manipulation; }

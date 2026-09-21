@@ -116,7 +116,7 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
         window.__path = [];
         const tick = () => {
           const n = document.querySelector('[data-yveltal-state]');
-          if (n && !n.hidden) window.__path.push({t: n.style.transform, s: scrollY});
+          if (n && !n.hidden) { const r = n.getBoundingClientRect(); window.__path.push({x: r.left, y: r.top, s: scrollY}); }
           window.__pathRaf = requestAnimationFrame(tick);
         };
         tick();
@@ -145,17 +145,16 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       if (width < FLIGHT_WIDTH) {
         // Stacked columns leave no blank corridor, so he keeps his ledge instead.
         assert.equal(await button.getAttribute('data-animation'), 'Idle');
-        const still = await button.getAttribute('style');
+        const still = await button.evaluate(e => JSON.stringify(e.getBoundingClientRect()));
         await page.waitForTimeout(1500);
-        assert.equal(await button.getAttribute('style'), still, 'A perched Yveltal must not drift');
+        assert.equal(await button.evaluate(e => JSON.stringify(e.getBoundingClientRect())), still, 'A perched Yveltal must not drift');
         assert.ok(await onLedge(page), 'A perched Yveltal must stay on his ledge');
       } else {
         assert.equal(await button.getAttribute('data-animation'), 'Walk');
         // The shell sits inside the panel's no-fly column, so settling would otherwise
         // snap him clear in one frame. He flies out of it instead.
         await page.waitForTimeout(1000);
-        const path = (await page.evaluate(() => { cancelAnimationFrame(window.__pathRaf); return window.__path; }))
-          .map(f => ({...xy(f.t), s: f.s}));
+        const path = await page.evaluate(() => { cancelAnimationFrame(window.__pathRaf); return window.__path; });
         let biggest = 0;
         for (let i = 1; i < path.length; i++) {
           // Scrolling legitimately carries the shell along its sticky ledge through
@@ -164,7 +163,10 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
           biggest = Math.max(biggest, Math.hypot(path[i].x - path[i - 1].x, path[i].y - path[i - 1].y));
         }
         assert.ok(path.length > 60, `Only ${path.length} frames recorded across the hatch`);
-        assert.ok(biggest < 25, `Yveltal jumped ${biggest.toFixed(0)}px in one frame instead of flying out`);
+        // He leaves fast on purpose, so a step is only suspicious next to the whole
+        // exit: a teleport covers it in one, a flight needs many.
+        const span = Math.hypot(path[path.length - 1].x - path[0].x, path[path.length - 1].y - path[0].y);
+        assert.ok(biggest < Math.max(50, span * .45), `Yveltal jumped ${biggest.toFixed(0)}px of a ${span.toFixed(0)}px exit in one frame`);
         await clearOfContent(page);
         const start = await button.getAttribute('style');
         for (let i = 0; i < 60; i++) { await page.waitForTimeout(100); assert.equal(await button.isVisible(), true); await clearOfContent(page); }

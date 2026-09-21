@@ -22,6 +22,17 @@ export default function YveltalRoamer() {
     const layer = layerRef.current!, button = buttonRef.current!, art = spriteRef.current!, heart = heartRef.current!;
     const perch = document.querySelector<HTMLElement>("[data-yveltal-perch]");
     if (!perch) return;
+    const nest = document.querySelector<HTMLElement>("[data-yveltal-nest]") ?? perch.parentElement!;
+    // Anchored states ride the button in the DOM. A sticky panel is scrolled by the
+    // compositor without waiting for script, so anything script positions lags it.
+    let docked = "";
+    const dock = (home: "nest" | "layer") => {
+      if (docked === home) return;
+      docked = home;
+      button.classList.toggle("yveltal-nested", home === "nest");
+      if (home === "nest") button.style.transform = "";
+      (home === "nest" ? nest : layer).appendChild(button);
+    };
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     let mode: "dormant" | "hatching" | "active" | "perched" = "dormant";
     let elapsed = 0, last = 0, raf = 0, greeting = 0;
@@ -36,6 +47,11 @@ export default function YveltalRoamer() {
     };
     const factor = () => viewport().width < 640 ? .78 : 1;
     const canFly = () => document.documentElement.clientWidth >= FLIGHT_WIDTH;
+    /** Where the docked sprite stands, in document coordinates, for the handover. */
+    const anchor = (): [number, number] => {
+      const r = perch.getBoundingClientRect();
+      return [r.left + r.width / 2 + scrollX, r.top + scrollY - 24];
+    };
     const footprint = () => {
       const size = factor(), scale = sprite.scale * size, anim = sprite.animations.Walk;
       const boxes = anim.bounds.map((b, row) => ({left: (b[0] - anim.w / 2) * scale,
@@ -75,9 +91,8 @@ export default function YveltalRoamer() {
       try {
         await Promise.all([preload(sprite.animations.Special0.src), preload(sprite.animations.Walk.src), preload(sprite.animations.Idle.src)]);
         if (disposed) return;
-        const r = perch.getBoundingClientRect();
         elapsed = 0; mode = motion.matches ? (canFly() ? "active" : "perched") : "hatching";
-        flight = createFlight(r.left + r.width / 2 + scrollX, r.top + scrollY - 24);
+        flight = createFlight(...anchor());
         launch = undefined;
         hovered = false;
         if (statusRef.current) statusRef.current.textContent = motion.matches ? "Yveltal is awake." : "Yveltal is awakening.";
@@ -197,45 +212,34 @@ export default function YveltalRoamer() {
     function draw(now: number) {
       raf = 0;
       if (disposed || document.hidden) { last = 0; return; }
-      // Dormant, hatching and perched all follow a live element rect on a sticky panel,
-      // so a skipped frame strands the sprite a whole scroll tick away from its ledge.
-      if (mode === "active" && !launch && last && now - last < 32) { raf = requestAnimationFrame(draw); return; }
+      if (!launch && last && now - last < 32) { raf = requestAnimationFrame(draw); return; }
       const dt = last ? Math.min(64, now - last) : 0; last = now;
       const modal = !!document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]');
-      const r = perch!.getBoundingClientRect();
       layer.hidden = modal;
       if (mode === "active" && !canFly()) { mode = "perched"; launch = undefined; label(); }
-      else if (mode === "perched" && canFly()) { mode = "active"; flight = createFlight(r.left + r.width / 2 + scrollX, r.top + scrollY - 24); label(); }
+      else if (mode === "perched" && canFly()) { mode = "active"; flight = createFlight(...anchor()); label(); }
+      dock(mode === "active" ? "layer" : "nest");
       // He lives on the page, not on the screen, so the simulation runs whether or not
       // he is in view and only the paint is skipped. Scroll back and he has moved on.
       if (!modal) {
         if (!motion.matches) elapsed += dt;
         greeting = Math.max(0, greeting - dt);
-        let x = r.left + r.width / 2 + scrollX, y = r.top + scrollY, direction = 0;
-        let animation = "Special2";
-        const size = factor(), scale = sprite.scale * size;
+        let direction = 0, animation = "Special2", room = true;
+        const size = factor();
         if (mode === "hatching") {
-          // The ledge is sticky. Pinning the shell to the document point it occupied at
-          // the click leaves the whole hatch behind the moment the reader scrolls, so
-          // track the ledge live exactly as the dormant egg does.
-          const anim = sprite.animations.Special0;
-          const halfWidth = anim.w * scale / 2 + 8;
-          x = Math.max(halfWidth, Math.min(document.documentElement.clientWidth - halfWidth, r.left + r.width / 2)) + scrollX;
-          y = r.top + scrollY; animation = "Special0";
+          animation = "Special0";
           if (elapsed >= HATCH_MS || motion.matches) {
             mode = canFly() ? "active" : "perched"; elapsed = 0; hovered = false;
-            flight = createFlight(x, y - 24); label();
+            flight = createFlight(...anchor()); label();
+            dock(mode === "active" ? "layer" : "nest");
             if (mode === "active" && !motion.matches) takeOff();
             if (statusRef.current) statusRef.current.textContent = mode === "active" ? "Yveltal is awake and exploring." : "Yveltal is awake on his ledge.";
           }
         }
         if (mode === "perched") animation = "Idle";
-        let room = true;
         if (mode === "active") {
           untilObstacles -= dt;
           if (geometryDirty || untilObstacles <= 0) measureObstacles();
-          // Reflow can consume an old clear spot. Relocate to nearby whitespace;
-          // if none remains, hide until there is room instead of covering content.
           if (launch) {
             launch.elapsed = Math.min(launch.duration, launch.elapsed + dt);
             // Out of the shell fast, easing only into the landing. A symmetric curve
@@ -246,22 +250,26 @@ export default function YveltalRoamer() {
             flight.direction = directionFromMotion(launch.toX - launch.fromX, launch.toY - launch.fromY);
             if (launch.elapsed >= launch.duration) launch = undefined;
           } else {
+            // Reflow can consume an old clear spot. Relocate to nearby whitespace;
+            // if none remains, hide until there is room instead of covering content.
             room = settleFlight(flight, bounds(), around(flight.x, flight.y));
             if (!motion.matches) stepFlight(flight, dt, bounds(), hovered || focused || greeting > 0, Math.random, around(flight.x, flight.y));
           }
-          x = flight.x; y = flight.y + 27 * size; direction = flight.direction;
+          direction = flight.direction;
           animation = "Walk";
         }
-        const pageY = mode === "active" ? flight.y : r.top + scrollY;
-        button.hidden = !room || pageY - scrollY < -100 || pageY - scrollY > innerHeight + 100;
+        // Docked, his position is the browser's business and only the frame is ours.
+        if (mode === "active") {
+          button.hidden = !room || flight.y - scrollY < -100 || flight.y - scrollY > innerHeight + 100;
+          if (!button.hidden) button.style.transform = `translate3d(${Math.round(flight.x - 22)}px,${Math.round(flight.y + 27 * size - 44)}px,0)`;
+        } else button.hidden = false;
         if (!button.hidden) {
-          button.style.transform = `translate3d(${Math.round(x - 22)}px,${Math.round(y - 44)}px,0)`;
           paintSprite(art, sprite, animation, motion.matches ? 0 : animation === "Special2" ? elapsed / 1.5 : elapsed, direction, 22, 44, size, animation === "Special0" ? 6 : undefined);
           button.dataset.animation = animation; button.dataset.frame = art.dataset.frame;
           heart.hidden = greeting <= 0;
           heart.style.bottom = `${54 * size + 7}px`;
         }
-      }
+      } else button.hidden = true;
       if (!motion.matches) raf = requestAnimationFrame(draw);
     }
     function wake() { geometryDirty = true; if (!raf && !disposed && !document.hidden) { last = 0; raf = requestAnimationFrame(draw); } }

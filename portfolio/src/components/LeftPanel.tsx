@@ -93,6 +93,8 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
               </svg>
               Resume / CV
             </button>
+            {/* Yveltal's cocoon docks in here, so the browser keeps him on the button. */}
+            <span className="relative inline-flex" data-yveltal-nest>
             <button
               data-yveltal-perch
               onClick={onOpenModal}
@@ -108,6 +110,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
               </svg>
               3D
             </button>
+            </span>
           </div>
 
           <nav className="mt-10 hidden lg:block" aria-label="Page sections" style={fadeUp("410ms")}>
