@@ -1,0 +1,2 @@
+# Keep supplied XML bytes stable so source hashes survive a checkout on Windows.
+*.xml -text

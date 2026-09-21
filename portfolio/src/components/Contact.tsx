@@ -11,6 +11,8 @@ export default function Contact() {
   return (
     <section
       id="contact"
+      data-overworld-surface="contact-divider"
+      data-overworld-kind="divider"
       className="scroll-mt-24 border-t border-cream-200 pt-24 pb-24"
       aria-label="Contact"
     >

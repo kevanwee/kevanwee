@@ -8,6 +8,7 @@ export default function About() {
   return (
     <section
       id="about"
+      data-overworld-surface="sky-about"
       className="mb-24 scroll-mt-24 lg:mb-36"
       aria-label="About"
     >

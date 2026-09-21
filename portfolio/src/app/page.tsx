@@ -17,6 +17,7 @@ import { personal } from "@/data";
 const PortfolioModal = dynamic(() => import("@/components/PortfolioModal"), {
   ssr: false,
 });
+const PokemonOverworld = dynamic(() => import("@/components/PokemonOverworld"), { ssr: false });
 
 const SECTIONS = ["about", "experience", "projects", "media", "contact"] as const;
 
@@ -58,6 +59,7 @@ export default function Home() {
       <MouseGradient />
       <PokemonCursor />
       <TeddiursaRoamer />
+      <PokemonOverworld />
 
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">

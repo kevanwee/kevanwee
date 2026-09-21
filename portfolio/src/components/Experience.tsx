@@ -194,6 +194,8 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
+      data-overworld-surface="experience-divider"
+      data-overworld-kind="divider"
       className="mb-24 scroll-mt-24 border-t border-cream-200 pt-24 lg:mb-36"
       aria-label="Work Experience"
     >

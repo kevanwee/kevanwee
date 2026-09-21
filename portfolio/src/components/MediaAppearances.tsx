@@ -6,6 +6,8 @@ export default function MediaAppearances() {
   return (
     <section
       id="media"
+      data-overworld-surface="media-divider"
+      data-overworld-kind="divider"
       className="mb-24 scroll-mt-24 border-t border-cream-200 pt-24 lg:mb-36"
       aria-label="Media & Appearances"
     >

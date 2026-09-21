@@ -11,6 +11,8 @@ export default function Projects() {
   return (
     <section
       id="projects"
+      data-overworld-surface="projects-divider"
+      data-overworld-kind="divider"
       className="mb-24 scroll-mt-24 border-t border-cream-200 pt-24 lg:mb-36"
       aria-label="Projects"
     >
@@ -27,6 +29,7 @@ export default function Projects() {
           {featuredProjects.map((project) => (
             <li
               key={project.id}
+              data-overworld-surface={`project-${project.id}`}
               className={`group rounded-2xl border border-cream-200 bg-white p-6 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5 ${project.hasCaseStudy ? "cursor-pointer" : ""}`}
               onClick={project.hasCaseStudy ? () => setShowBart(true) : undefined}
             >

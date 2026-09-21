@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "test:world": "node scripts/test-world.cjs",
+    "test:overworld": "node scripts/test-overworld.cjs",
     "lint": "next lint"
   },
   "dependencies": {
