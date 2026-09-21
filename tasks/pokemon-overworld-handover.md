@@ -51,8 +51,10 @@
 - `573aa1e`: latest requested Route 111 placement and autonomous sleep/form coexistence.
 - `3b54fe6`: previous iteration's full browser verification/handover.
 - `1922cc1`: Yveltal source import, generated animation metadata, receipts and follow-up handover.
+- `83f5a40`: verified Yveltal awakening/viewport flight, grounded Rowlet, separate Corviknight, responsive project-card hops and compact Route 111 label exclusion.
 - All checkpoints pushed to origin/main; pushes deploy through Vercel. Final verification/handover is in the following commit.
 - Live site: https://kevanwee.vercel.app
+- Live deployment smoke check after `83f5a40`: mobile touch awakened Yveltal into active flight; Rowlet reported grounded, Corviknight occupied sky-footer, Route 111 label had a 12px gap, and no browser exceptions occurred.
 
 ## Preserve unrelated user work
 Never stage the pre-existing `portfolio/src/components/MouseGradient.tsx` change, `.claude/settings.json`, portfolio MP3/companylogos, unrelated untracked `public/icons` files, or `ssh-portfolio/`. Stage explicit task paths only. No unrelated personal files were published.
