@@ -1,10 +1,6 @@
 import { directionFromMotion, EEVEELUTIONS } from "./pokemon-overworld";
 
 export const FOREST_WIDTH = 480, FOREST_HEIGHT = 312;
-/** Body width in background pixels; nobody walks closer than this to a friend. */
-export const FOREST_GAP = 17;
-/** Straight on first, then progressively wider sidesteps around whoever is in the way. */
-const SIDESTEP = [0, .8, -.8, 1.5, -1.5];
 export type Point = { x: number; y: number };
 // Measured in the original background's pixels, inside the roots and canopy.
 export const CLEARING = [[203,137],[221,128],[239,157],[255,132],[271,141],[284,162],
@@ -31,18 +27,13 @@ export function forestSegment(a: Point, b: Point) {
 const grid: Point[] = [];
 for (let y = 128; y < 304; y += 8) for (let x = 144; x < 328; x += 8) if (forestWalkable(x, y)) grid.push({x, y});
 const neighbors = grid.map(a => grid.flatMap((b, i) => Math.hypot(a.x - b.x, a.y - b.y) <= 11.4 && a !== b && forestSegment(a, b) ? [i] : []));
-/** `avoid` are the others standing about; a napping friend is a wall, not a hazard to
- *  bump into later, so routes are planned around them instead of straight through. */
-export function forestRoute(from: Point, to: Point, avoid: readonly Point[] = []) {
-  const shut = (p: Point) => avoid.some(o => Math.hypot(p.x - o.x, p.y - o.y) < FOREST_GAP);
-  const nearest = (point: Point, whereItStands: boolean) => grid.reduce((best, p, i) =>
-    (whereItStands || !shut(p)) && forestSegment(point, p)
-      && (best < 0 || Math.hypot(p.x - point.x, p.y - point.y) < Math.hypot(grid[best].x - point.x, grid[best].y - point.y)) ? i : best, -1);
-  const start = nearest(from, true), end = nearest(to, false);
+export function forestRoute(from: Point, to: Point) {
+  const nearest = (point: Point) => grid.reduce((best, p, i) => forestSegment(point, p) && (best < 0 || Math.hypot(p.x - point.x, p.y - point.y) < Math.hypot(grid[best].x - point.x, grid[best].y - point.y)) ? i : best, -1);
+  const start = nearest(from), end = nearest(to);
   if (start < 0 || end < 0) return [];
   const queue = [start], previous = new Map<number, number>([[start, -1]]);
   for (let q = 0; q < queue.length && !previous.has(end); q++) for (const next of neighbors[queue[q]]) {
-    if (!previous.has(next) && !shut(grid[next])) { previous.set(next, queue[q]); queue.push(next); }
+    if (!previous.has(next)) { previous.set(next, queue[q]); queue.push(next); }
   }
   if (!previous.has(end)) return [];
   const path: Point[] = [to];
@@ -50,12 +41,12 @@ export function forestRoute(from: Point, to: Point, avoid: readonly Point[] = []
   return path;
 }
 export type ForestResident = Point & { species: string; path: Point[]; speed: number; rest: number; untilNap: number; nap: boolean;
-  direction: number; animation: string; elapsed: number; reaction: number; held: boolean; blocked: number };
+  direction: number; animation: string; elapsed: number; reaction: number; held: boolean };
 const between = (a: number, b: number, random: () => number) => a + random() * (b - a);
 export function createForest(random = Math.random): ForestResident[] {
   const starts = [{x:208,y:168},{x:280,y:168},{x:176,y:224},{x:304,y:232},{x:200,y:280},{x:272,y:280}];
   return EEVEELUTIONS.map((species, i) => ({...starts[i], species, path: [], speed: between(9, 15, random), rest: between(800, 3500, random),
-    untilNap: between(20000, 70000, random), nap: false, direction: 0, animation: "Idle", elapsed: random() * 1000, reaction: 0, held: false, blocked: 0}));
+    untilNap: between(20000, 70000, random), nap: false, direction: 0, animation: "Idle", elapsed: random() * 1000, reaction: 0, held: false}));
 }
 export function greetForest(a: ForestResident, random = Math.random) {
   a.nap = false; a.untilNap = between(30000, 80000, random); a.reaction = 1800; a.rest = 2400;
@@ -73,11 +64,7 @@ export function stepForest(actors: ForestResident[], delta: number, random = Mat
       a.rest = Math.max(0, a.rest - dt); a.animation = a.nap ? "Sleep" : "Idle";
       if (!a.rest) {
         if (a.nap) { a.nap = false; a.untilNap = between(35000, 100000, random); }
-        // Choose somewhere nobody is already standing, so one route call does it:
-        // retrying a blocked destination is the only part of this that is expensive.
-        const others = actors.filter(b => b !== a);
-        const open = grid.filter(p => !others.some(o => Math.hypot(p.x - o.x, p.y - o.y) < FOREST_GAP));
-        a.path = open.length ? forestRoute(a, open[Math.floor(random() * open.length)], others) : [];
+        a.path = forestRoute(a, grid[Math.floor(random() * grid.length)]);
         a.speed = between(9, 15, random);
       }
     } else if (a.path.length) {
@@ -85,26 +72,8 @@ export function stepForest(actors: ForestResident[], delta: number, random = Mat
       if (distance < .2) { a.x = target.x; a.y = target.y; a.path.shift(); }
       else {
         const step = Math.min(distance, a.speed * dt / 1000);
-        // Only closing the distance counts, so two who start close can still separate.
-        const crowds = (x: number, y: number) => actors.some(b => b !== a
-          && Math.hypot(x - b.x, y - b.y) < FOREST_GAP && Math.hypot(x - b.x, y - b.y) < Math.hypot(a.x - b.x, a.y - b.y));
-        // Walking through a friend is out, and so is stopping dead: six of them in one
-        // glade would gridlock. Slide around instead, widening the angle until it fits.
-        const slid = SIDESTEP.some(turn => {
-          const cos = Math.cos(turn), sin = Math.sin(turn);
-          const ux = (dx * cos - dy * sin) / distance, uy = (dx * sin + dy * cos) / distance;
-          const nx = a.x + ux * step, ny = a.y + uy * step;
-          if (!forestWalkable(nx, ny) || crowds(nx, ny)) return false;
-          a.x = nx; a.y = ny; a.direction = directionFromMotion(ux, uy); a.animation = "Walk"; a.blocked = 0;
-          return true;
-        });
-        if (!slid) {
-          // Nose to nose with nowhere to slide: give way and find another way round.
-          a.animation = "Idle";
-          if ((a.blocked += dt) > 600) {
-            a.blocked = 0; a.path = []; a.rest = between(200, 700, random);
-          }
-        }
+        a.x += dx / distance * step; a.y += dy / distance * step;
+        a.direction = directionFromMotion(dx, dy); a.animation = "Walk";
       }
     } else { a.rest = between(900, 5500, random); a.animation = "Idle"; if (random() < .3) a.direction = Math.floor(random() * 8); }
     if (a.animation !== before) a.elapsed = 0;
