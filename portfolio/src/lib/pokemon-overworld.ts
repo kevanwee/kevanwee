@@ -14,8 +14,8 @@ export const PAIRS: readonly (readonly [string, string])[] = [
   ["dratini", "shiny-dratini"], ["growlithe", "arcanine"]];
 /** How many project tiles get a resident. Lower this first to thin the crowd. */
 export const TILE_RESIDENTS = 5;
-/** A long divider or card carries a small group; a narrow ledge gets one resident.
- *  Two is the ceiling either way; the eeveelution line is the one exception. */
+/** A long divider or card carries two residents; a narrow ledge gets one.
+ *  The Eevee family has its own forest and does not enter this ledge lottery. */
 export const capacity = (width: number) => Math.max(1, Math.min(2, Math.floor(width / 180)));
 /** "mega-gallade" reads as "Mega Gallade" in tooltips and labels. */
 export const displayName = (species: string) =>

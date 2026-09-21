@@ -1,6 +1,7 @@
 /** Requires Playwright (or PLAYWRIGHT_MODULE pointing to a local playwright-core install).
  * Start the production site first, then run this script. BASE_URL defaults to localhost:3005.
  * Screenshots go to the OS temporary directory, never public/.
+ * Use --behavior-only to repeat the longer wandering/battle/nap checks independently.
  */
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
@@ -22,6 +23,7 @@ async function scrollSurface(page, id) {
   const errors = [];
   const brokenAssets = [];
   try {
+    if (!process.argv.includes('--behavior-only')) {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
     page.on('pageerror', e => errors.push(e.message));
     page.on('response', r => { if (/\/(overworld|ceruledge)\//.test(r.url()) && r.status() >= 400) brokenAssets.push(r.url()); });
@@ -158,6 +160,7 @@ async function scrollSurface(page, id) {
     await phone.waitForTimeout(2100);
     assert.equal(await phoneActor.locator('.overworld-heart').isVisible(), false, 'Reduced-motion heart must clear');
     await touch.close();
+    }
 
     // Accelerate RAF timestamps for long behavior checks; do not modify simulation
     // state. The production 64ms delta cap and actual browser rendering still apply.
@@ -210,7 +213,7 @@ async function scrollSurface(page, id) {
     let groundSlept = false;
     for (let i = 0; i < 100 && !groundSlept; i++) {
       await timed.waitForTimeout(250);
-      groundSlept = await timed.locator('[data-surface="skills-card"][data-pokemon]').getAttribute('data-sleeping') === 'true';
+      groundSlept = await timed.locator('[data-surface="skills-card"][data-pokemon]').evaluateAll(es => es.some(e => e.dataset.sleeping === 'true'));
     }
     assert.ok(groundSlept, 'Ground residents should nap');
     console.log('Variable battles, natural ground/flying naps and waking a sleeper passed.');
