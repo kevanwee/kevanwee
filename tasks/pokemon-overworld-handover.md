@@ -3,7 +3,7 @@
 ## Latest follow-up (2026-09-21)
 - Rowlet walks on Skills; Corviknight has its own footer airspace. Flyers no longer share ground/battle surfaces.
 - Fidough/Goomy start on the first and third other-project cards and randomly hop between adjacent cards in that row. Live DOM adjacency, landing reservations and same-card spacing prevent collisions. Hops cancel when responsive cards stack. Hop poses face the landing card.
-- Imported Downloads/yveltal with original bytes preserved. Special2 is the dormant cocoon; click/tap plays the full Special0 (27 frames / 4.32s) before directional Walk flight begins. Its perch is the left panel's divider below the Pokeballs.
+- Imported Downloads/yveltal with original bytes preserved. Special2 is the dormant cocoon; click/tap plays the full Special0 (27 frames / 4.32s) before directional Walk flight begins. Latest requested perch: centered on the 3D button's top edge. The decorative divider is restored to its original width.
 - Active Yveltal explores viewport-wide random destinations with eased velocity and pauses. He stays in view after scrolling, shrinks to 78% on phones, and clamps to viewport/visualViewport bounds on resize. Greetings, keyboard focus, hidden tabs, dialogs and reduced motion are supported.
 - Route 111's label is back to its original 12px map gap. Silvally's walking interval excludes the actual rendered label text plus 40px clearance. On narrow phones the label wraps to leave space for him on the map edge.
 - Build/TypeScript, source/hash/simulation checks, the existing full browser regression suite and targeted Yveltal/hopping browser verification passed. The latter caught an offscreen-resize hop cancellation bug, now fixed and covered in both simulation and browser checks.
@@ -32,6 +32,7 @@
 - Only nearby resident sheets and current/next Silvally forms load in the browser; the full source archive is not downloaded at runtime. Original unused animations/shadows/offsets are retained for future work. Existing PMD SpriteCollab credits apply.
 
 ## Verification
+- Latest 3D-button perch correction: production build passed; browser checks at 1440/390/320px confirmed centered top-edge alignment, independent 3D-button activation, modal hiding/restoration, egg click/tap awakening and no browser errors. Desktop/phone screenshots were visually reviewed (`yveltal-3d-*.png` in OS temp).
 - `npm run build` from `portfolio/`: production build and TypeScript passed.
 - `npm run test:overworld`: all asset hashes and frame metadata; 32 seeds, 100 seconds per seed; priority habitats, species sizing, steady flight selection, random battle phases/durations, all species sleeping/waking, flyer landing, greeting holds, eight Silvally facing directions, offscreen suspension and responsive bounds.
 - Additional pure checks cover both jumpers visiting all three cards across 12 seeds, stacked-card adjacency, offscreen mid-hop cancellation, separate flyer habitats and 20,000 Yveltal flight steps across alternating phone/desktop bounds.

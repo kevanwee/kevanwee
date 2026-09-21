@@ -69,7 +69,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             <PokeballRow />
           </div>
 
-          <div data-yveltal-perch className="my-7 h-px w-28 bg-cream-200" style={fadeUp("210ms")} />
+          <div className="my-7 h-px w-12 bg-cream-200" style={fadeUp("210ms")} />
 
           <p className="max-w-[238px] text-sm leading-7 text-warm-400" style={fadeUp("260ms")}>
             {personal.description}
@@ -94,6 +94,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
               Resume / CV
             </button>
             <button
+              data-yveltal-perch
               onClick={onOpenModal}
               className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
               title="View 3D portfolio"
