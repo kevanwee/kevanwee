@@ -109,8 +109,6 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             </button>
           </div>
 
-          <div data-silvally-habitat aria-hidden="true" className="pointer-events-none relative mt-3 h-24 lg:absolute lg:bottom-24 lg:right-0 lg:top-28 lg:mt-0 lg:h-auto lg:w-24 xl:w-36" />
-
           <nav className="mt-10 hidden lg:block" aria-label="Page sections" style={fadeUp("410ms")}>
             <ul className="space-y-4">
               {NAV_ITEMS.map(({ id, label }) => {

@@ -3,7 +3,7 @@
 ## Follow-up in progress (user corrections)
 - Add Skills, other project cards and Media card habitats, using the existing species.
 - Fix flight: visually inspected contact sheets confirm Talonflame Hover spins and other Hover sheets are rapid action sequences. Use directional Walk wingbeats at calmer rates, independent continuous altitude, and species-specific sizes (especially smaller Rowlet).
-- User clarified: Silvally must roam freely through the left panel in multiple directions, not remain on a perch. Added a responsive left-panel habitat and 2D wandering; preserve form interaction.
+- LATEST placement correction supersedes the left-panel plan: Silvally now wanders along the top edge of the Route 111 map. Removed the temporary left-panel habitat. The map heading has clearance above his walking surface so he does not cover its text. Walking, glancing, sleeping and form changes remain.
 - Add click/touch/keyboard hearts to every non-battle resident, with stable targets while hovered/focused.
 - Replace edge-to-edge shuttles and the fixed battle cycle with random destinations, pauses, glances and variable battle bouts.
 - User additionally requested occasional random sleep. Added authentic Sleep metadata, independent nap timers, landing/takeoff for flyers, and wake-on-click.

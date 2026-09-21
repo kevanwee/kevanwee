@@ -53,9 +53,10 @@ function animate(actor: Resident, animation: string, dt: number) {
   else actor.elapsed += dt;
 }
 
-export function greetResident(actor: Resident) {
+export function greetResident(actor: Resident, random = Math.random) {
   if (["armarouge", "ceruledge"].includes(actor.species)) return false;
   actor.reaction = 1800; actor.nap = false; actor.rest = 2400;
+  actor.untilNap = between(25000, 75000, random);
   actor.direction = 0; actor.elapsed = 0;
   actor.animation = actor.flying && actor.altitude > 1 ? "Walk" : "Idle";
   return true;

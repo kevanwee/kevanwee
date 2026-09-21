@@ -54,7 +54,7 @@ export default function PokemonOverworld() {
       divider: el.dataset.overworldKind === "divider", kind: el.dataset.overworldKind }));
     const world = createOverworld(surfaces);
     const wanderer = createWanderer();
-    const habitat = document.querySelector<HTMLElement>("[data-silvally-habitat]");
+    const habitat = document.querySelector<HTMLElement>("[data-silvally-surface]");
     const reactionTimers = new Map<string, ReturnType<typeof setTimeout>>();
     const nodes = new Map(world.residents.map(actor => {
       const interactive = !["armarouge", "ceruledge"].includes(actor.species);
@@ -85,7 +85,6 @@ export default function PokemonOverworld() {
         node.addEventListener("click", event => {
           event.stopPropagation();
           greetResident(actor);
-          actor.untilNap = 25000 + Math.random() * 50000;
           if (statusRef.current) statusRef.current.textContent = `${name} sends you a heart!`;
           clearTimeout(reactionTimers.get(actor.id));
           reactionTimers.set(actor.id, setTimeout(() => {
@@ -128,7 +127,7 @@ export default function PokemonOverworld() {
 
     const warmNextForm = () => {
       const sprite = SPRITES[`silvally-${nextForm}`];
-      void Promise.all(["Idle", "RearUp", "Double"].map(name => preload(sprite.animations[name].src))).catch(() => {});
+      void Promise.all(["Walk", "Idle", "Sleep", "RearUp", "Double"].map(name => preload(sprite.animations[name].src))).catch(() => {});
     };
     const label = () => {
       button.dataset.form = form;
@@ -149,7 +148,7 @@ export default function PokemonOverworld() {
           preload(SPRITES[`silvally-${target}`].animations[animation].src),
           preload(SPRITES[`silvally-${target}`].animations.Idle.src)]);
         if (disposed) return;
-        wanderer.nap = false; wanderer.untilNap = 30000 + Math.random() * 60000;
+        if (user) { wanderer.nap = false; wanderer.untilNap = 30000 + Math.random() * 60000; }
         wanderer.animation = "Idle"; wanderer.elapsed = 0; wanderer.wait = 1500;
         if (motion.matches) {
           form = target;
@@ -234,10 +233,10 @@ export default function PokemonOverworld() {
           heart.style.bottom = `${Math.max(28, (bounds[3] - bounds[1]) * sprite.scale + 4)}px`;
           if (actor.species === "armarouge" || actor.species === "ceruledge") node.dataset.battlePhase = world.battle?.phase;
         }
-        const silvallyVisible = !!area && area.bottom > 0 && area.top < window.innerHeight;
+        const silvallyVisible = !!area && area.top > 0 && area.top < window.innerHeight + 64;
         button!.hidden = !silvallyVisible;
         if (!motion.matches && silvallyVisible) {
-          if (!focused && !hovered && !transition) stepWanderer(wanderer, dt, Math.max(1, area!.width - 44), Math.max(1, area!.height - 64));
+          if (!focused && !hovered && !transition) stepWanderer(wanderer, dt, Math.max(1, area!.width - 64), 0);
           if (!focused && !hovered && !transition && !wanderer.nap) {
             nextChange -= dt;
             if (nextChange <= 0) void changeForm();
@@ -260,8 +259,8 @@ export default function PokemonOverworld() {
         }
         const sprite = SPRITES[`silvally-${form}`];
         if (area && silvallyVisible) {
-          const x = area.left + 22 + wanderer.x * Math.max(1, area.width - 44);
-          const y = area.top + 60 + wanderer.y * Math.max(1, area.height - 64);
+          const x = area.left + 32 + wanderer.x * Math.max(1, area.width - 64);
+          const y = area.top;
           button!.style.transform = `translate3d(${Math.round(x - 28)}px,${Math.round(y - 64)}px,0)`;
           const name = transition?.animation ?? (motion.matches || focused || hovered ? (wanderer.nap ? "Sleep" : "Idle") : wanderer.animation);
           paint(silvally!, sprite, name, transition?.elapsed ?? (motion.matches ? 0 : wanderer.elapsed), wanderer.direction, 28, 64);
