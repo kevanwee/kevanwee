@@ -110,17 +110,27 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       assert.ok(wandered < 2, `The dormant egg drifted ${wandered.toFixed(1)}px off its ledge while scrolling`);
       await page.evaluate(() => scrollTo(0, 0));
       await page.waitForTimeout(300);
+      // Record every frame across the hatch: a fast exit and a teleport look the same
+      // to a poll, and only the per-frame step tells them apart.
+      await page.evaluate(() => {
+        window.__path = [];
+        const tick = () => {
+          const n = document.querySelector('[data-yveltal-state]');
+          if (n && !n.hidden) window.__path.push({t: n.style.transform, s: scrollY});
+          window.__pathRaf = requestAnimationFrame(tick);
+        };
+        tick();
+      });
       if (width < 640) await button.tap(); else await button.click();
       await page.waitForFunction(() => document.querySelector('[data-yveltal-state]').dataset.animation === 'Special0');
       const started = Date.now(), frames = new Set();
-      let moved = 0, lastShell = null;
+      let moved = 0;
       while (await button.getAttribute('data-yveltal-state') === 'hatching') {
         assert.equal(await button.getAttribute('data-animation'), 'Special0');
         frames.add(Number(await button.getAttribute('data-frame')));
         // The shell rides its sticky ledge; pinning it to the page would leave the
         // whole hatch behind as soon as the reader scrolls.
         assert.ok(await onLedge(page), `The hatch left its ledge ${Date.now() - started}ms in`);
-        lastShell = await button.evaluate(e => e.style.transform);
         await inBounds(page);
         if (!moved && Date.now() - started > 900) { await page.evaluate(() => scrollTo(0, 300)); moved = 1; }
         else if (moved === 1 && Date.now() - started > 2100) { await page.evaluate(() => scrollTo(0, 0)); moved = 2; }
@@ -142,13 +152,19 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       } else {
         assert.equal(await button.getAttribute('data-animation'), 'Walk');
         // The shell sits inside the panel's no-fly column, so settling would otherwise
-        // snap him clear in one frame. He glides out instead.
-        const emerged = xy(await button.evaluate(e => e.style.transform)), shell = xy(lastShell);
-        const leapt = Math.hypot(emerged.x - shell.x, emerged.y - shell.y);
-        assert.ok(leapt < 25, `Yveltal teleported ${leapt.toFixed(0)}px out of his shell instead of flying out`);
-        // He crosses his own ledge during that exit flight, by design. Once he lands,
-        // and from then on, he owes the page the usual clearance.
+        // snap him clear in one frame. He flies out of it instead.
         await page.waitForTimeout(1000);
+        const path = (await page.evaluate(() => { cancelAnimationFrame(window.__pathRaf); return window.__path; }))
+          .map(f => ({...xy(f.t), s: f.s}));
+        let biggest = 0;
+        for (let i = 1; i < path.length; i++) {
+          // Scrolling legitimately carries the shell along its sticky ledge through
+          // document space, so only compare frames taken at the same scroll offset.
+          if (path[i].s !== path[i - 1].s) continue;
+          biggest = Math.max(biggest, Math.hypot(path[i].x - path[i - 1].x, path[i].y - path[i - 1].y));
+        }
+        assert.ok(path.length > 60, `Only ${path.length} frames recorded across the hatch`);
+        assert.ok(biggest < 25, `Yveltal jumped ${biggest.toFixed(0)}px in one frame instead of flying out`);
         await clearOfContent(page);
         const start = await button.getAttribute('style');
         for (let i = 0; i < 60; i++) { await page.waitForTimeout(100); assert.equal(await button.isVisible(), true); await clearOfContent(page); }
@@ -243,10 +259,19 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       window.requestAnimationFrame = callback => raf(time => callback(time * 4));
     });
     await hopping.goto(base, {waitUntil: 'domcontentloaded'});
-    await hopping.locator('[data-overworld-surface="other-project-0"]').scrollIntoViewIfNeeded();
+    // Centre the grid so every row counts as visible; residents off screen are frozen.
+    await hopping.evaluate(() => document.querySelector('[data-overworld-surface="other-project-4"]').scrollIntoView({block: 'center'}));
+    await hopping.waitForSelector('[data-pokemon]');
+    await hopping.waitForTimeout(600);
+    const onTiles = await hopping.locator('[data-pokemon]').evaluateAll(es => es
+      .filter(e => /^other-project-\d+$/.test(e.dataset.surface || '')).map(e => e.dataset.pokemon));
+    assert.equal(onTiles.length, 2, `Project tiles hold ${onTiles.join(',') || 'nobody'}`);
+    // Whoever drew a tile this load must hop, whatever species and whatever row.
     const jumped = new Set();
-    for (let i = 0; i < 450 && jumped.size < 2; i++) {
-      const actors = await hopping.locator('[data-pokemon="fidough"], [data-pokemon="goomy"]').evaluateAll(es => es.map(e => ({id: e.dataset.pokemon, hopping: e.dataset.hopping, animation: e.dataset.animation, direction: e.dataset.direction})));
+    for (let i = 0; i < 600 && jumped.size < onTiles.length; i++) {
+      const actors = await hopping.locator('[data-pokemon]').evaluateAll(es => es
+        .filter(e => /^other-project-\d+$/.test(e.dataset.surface || ''))
+        .map(e => ({id: e.dataset.pokemon, hopping: e.dataset.hopping, animation: e.dataset.animation, direction: e.dataset.direction})));
       for (const a of actors) if (a.hopping === 'true') {
         assert.equal(a.animation, 'Hop');
         assert.ok(['2', '6'].includes(a.direction), 'Jump toward the landing card');
@@ -254,11 +279,11 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       }
       await hopping.waitForTimeout(100);
     }
-    assert.equal(jumped.size, 2, 'Both Fidough and Goomy should visibly hop');
+    assert.deepEqual([...jumped].sort(), [...onTiles].sort(), 'Every project-tile resident should visibly hop');
     await hopping.setViewportSize({width: 390, height: 844});
     await hopping.waitForTimeout(200);
     assert.equal(await hopping.locator('[data-hopping="true"]').count(), 0, 'Stacked phone cards must stop hopping');
-    console.log('Fidough/Goomy both visibly hop; phone reflow stops cross-card hops.');
+    console.log(`${onTiles.join(' and ')} drew the project tiles and both visibly hop; phone reflow stops cross-card hops.`);
     assert.deepEqual(errors, []); assert.deepEqual(missing, []);
     console.log('Reduced motion passed; no browser exceptions or broken sprite requests.');
   } finally { await browser.close(); }

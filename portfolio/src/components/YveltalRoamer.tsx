@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { paintSprite, SPRITES } from "@/lib/overworld-sprites";
-import { createFlight, settleFlight, stepFlight, type FlightBounds } from "@/lib/yveltal-flight";
+import { clearFlightPath, createFlight, settleFlight, stepFlight, type FlightBounds } from "@/lib/yveltal-flight";
 import { directionFromMotion } from "@/lib/pokemon-overworld";
 
 const sprite = SPRITES.yveltal;
@@ -10,7 +10,6 @@ const HATCH_MS = sprite.animations.Special0.durations.reduce((sum, d) => sum + d
 // Tailwind's lg breakpoint. Below it the two columns stack and no blank corridor
 // survives, so he keeps his ledge instead of squeezing between the controls.
 const FLIGHT_WIDTH = 1024;
-const LAUNCH_MS = 700;
 const SOLID = "a,button,input,select,textarea,summary,img,svg,canvas,video,iframe,hr";
 
 export default function YveltalRoamer() {
@@ -28,7 +27,7 @@ export default function YveltalRoamer() {
     let elapsed = 0, last = 0, raf = 0, greeting = 0;
     let disposed = false, loading = false, hovered = false, focused = false;
     let flight = createFlight(0, 0);
-    let launch: {fromX: number; fromY: number; toX: number; toY: number; elapsed: number} | undefined;
+    let launch: {fromX: number; fromY: number; toX: number; toY: number; elapsed: number; duration: number} | undefined;
     let clearGreeting: ReturnType<typeof setTimeout> | undefined;
     const viewport = () => {
       const v = window.visualViewport;
@@ -163,21 +162,44 @@ export default function YveltalRoamer() {
       }
       return nearby;
     };
-    /** Emerging inside the panel's no-fly column would snap him clear in a single
-     *  frame. Find that clear spot up front and glide out of the shell into it. */
+    /** The shell sits inside the panel, so part of any take-off has to cross it.
+     *  Cast rays out of it and leave through the shortest crossing that exists,
+     *  preferring the one with the most open air beyond it. */
+    function escapeRoute(area: FlightBounds, boxes: FlightBounds[]) {
+      const free = (x: number, y: number) => clearFlightPath(x, y, x, y, boxes);
+      let best: {x: number; y: number; crossing: number; room: number} | undefined;
+      for (let step = 0; step < 32; step++) {
+        const angle = step / 32 * Math.PI * 2, dx = Math.cos(angle), dy = Math.sin(angle);
+        for (let reach = 8; reach <= 420; reach += 8) {
+          const x = flight.x + dx * reach, y = flight.y + dy * reach;
+          if (x < area.left || x > area.right || y < area.top || y > area.bottom) break;
+          if (!free(x, y)) continue;
+          let room = 0;
+          while (room < 120 && free(x + dx * (room + 8), y + dy * (room + 8))) room += 8;
+          if (!best || reach < best.crossing - 12 || (reach < best.crossing + 12 && room > best.room)) best = {x, y, crossing: reach, room};
+          break;
+        }
+      }
+      return best;
+    }
+    /** Emerging inside that column would otherwise snap him clear in a single frame. */
     function takeOff() {
       measureObstacles();
-      const spot = createFlight(flight.x, flight.y);
-      if (!settleFlight(spot, bounds(), around(spot.x, spot.y))) return;
-      if (Math.hypot(spot.x - flight.x, spot.y - flight.y) < 1) return;
-      launch = {fromX: flight.x, fromY: flight.y, toX: spot.x, toY: spot.y, elapsed: 0};
+      const exit = escapeRoute(bounds(), around(flight.x, flight.y));
+      if (!exit) return;
+      const dx = exit.x - flight.x, dy = exit.y - flight.y, crossing = Math.hypot(dx, dy) || 1;
+      // Carry on a little past the threshold so he lands in open air, not on its edge.
+      const beyond = Math.min(exit.room, 40), span = crossing + beyond;
+      launch = {fromX: flight.x, fromY: flight.y,
+        toX: exit.x + dx / crossing * beyond, toY: exit.y + dy / crossing * beyond,
+        elapsed: 0, duration: Math.max(260, Math.min(760, span / .34))};
     }
     function draw(now: number) {
       raf = 0;
       if (disposed || document.hidden) { last = 0; return; }
       // Dormant, hatching and perched all follow a live element rect on a sticky panel,
       // so a skipped frame strands the sprite a whole scroll tick away from its ledge.
-      if (mode === "active" && last && now - last < 32) { raf = requestAnimationFrame(draw); return; }
+      if (mode === "active" && !launch && last && now - last < 32) { raf = requestAnimationFrame(draw); return; }
       const dt = last ? Math.min(64, now - last) : 0; last = now;
       const modal = !!document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]');
       const r = perch!.getBoundingClientRect();
@@ -215,12 +237,14 @@ export default function YveltalRoamer() {
           // Reflow can consume an old clear spot. Relocate to nearby whitespace;
           // if none remains, hide until there is room instead of covering content.
           if (launch) {
-            launch.elapsed = Math.min(LAUNCH_MS, launch.elapsed + dt);
-            const t = launch.elapsed / LAUNCH_MS, ease = t * t * (3 - 2 * t);
+            launch.elapsed = Math.min(launch.duration, launch.elapsed + dt);
+            // Out of the shell fast, easing only into the landing. A symmetric curve
+            // spends its slowest moments exactly where he is still over the buttons.
+            const t = launch.elapsed / launch.duration, ease = 1 - Math.pow(1 - t, 3);
             flight.x = flight.targetX = launch.fromX + (launch.toX - launch.fromX) * ease;
             flight.y = flight.targetY = launch.fromY + (launch.toY - launch.fromY) * ease;
             flight.direction = directionFromMotion(launch.toX - launch.fromX, launch.toY - launch.fromY);
-            if (launch.elapsed >= LAUNCH_MS) launch = undefined;
+            if (launch.elapsed >= launch.duration) launch = undefined;
           } else {
             room = settleFlight(flight, bounds(), around(flight.x, flight.y));
             if (!motion.matches) stepFlight(flight, dt, bounds(), hovered || focused || greeting > 0, Math.random, around(flight.x, flight.y));
