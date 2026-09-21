@@ -155,4 +155,15 @@ for (let i = 0; i < 20000; i++) {
   flightDirections.add(flight.direction);
 }
 assert.equal(flightDirections.size, 8);
+const wall = [{left: 40, right: 60, top: 0, bottom: 100}];
+assert.equal(flightApi.clearFlightPath(10, 50, 90, 50, wall), false, 'Clear destinations must not permit crossing text in between');
+assert.equal(flightApi.clearFlightPath(10, 120, 90, 120, wall), true);
+const blockedFlight = flightApi.createFlight(50, 50), arena = {left: 0, right: 100, top: 0, bottom: 160};
+assert.equal(flightApi.settleFlight(blockedFlight, arena, wall), true);
+for (let i = 0; i < 15000; i++) {
+  const before = {x: blockedFlight.x, y: blockedFlight.y};
+  flightApi.stepFlight(blockedFlight, 64, arena, false, random, wall);
+  assert.ok(flightApi.clearFlightPath(before.x, before.y, blockedFlight.x, blockedFlight.y, wall), 'Each movement segment must avoid obstacles');
+}
+assert.equal(flightApi.settleFlight(blockedFlight, arena, [{left: -1, right: 101, top: -1, bottom: 161}]), false, 'No space means hide, not overlap');
 console.log(`Overworld passed: ${files} source hashes, ground Rowlet, separate flyers, all three hopping cards, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);

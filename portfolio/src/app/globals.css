@@ -4,7 +4,7 @@
 
 /* Residents live in their own click-through layer, anchored to real page surfaces. */
 .pokemon-overworld { position: fixed; inset: 0; z-index: 20; pointer-events: none; overflow: hidden; contain: strict; }
-.yveltal-layer { position: fixed; inset: 0; z-index: 22; pointer-events: none; overflow: hidden; contain: strict; }
+.yveltal-layer { position: absolute; inset: 0; z-index: 22; pointer-events: none; overflow: hidden; contain: strict; }
 .yveltal-layer[hidden] { display: none; }
 .overworld-sprite { position: absolute; left: 0; top: 0; background-repeat: no-repeat; image-rendering: pixelated; pointer-events: none; }
 .pokemon-overworld[hidden], .overworld-sprite[hidden], .silvally-resident[hidden], .overworld-resident[hidden], .overworld-heart[hidden] { display: none; }

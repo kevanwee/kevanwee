@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <PokemonCursorProvider>
     <div
-      className="min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
+      className="relative min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
       style={{ "--viewport-offset": "clamp(4rem, 12vh, 9rem)" } as CSSProperties}
     >
       <MouseGradient />
