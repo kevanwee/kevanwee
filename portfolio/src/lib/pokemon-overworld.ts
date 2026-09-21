@@ -1,13 +1,16 @@
 /** DOM-independent wandering, naps and loosely choreographed sparring. */
-export const GROUND_SPECIES = ["breloom", "fidough", "flareon", "goomy", "pawmi", "tyrunt"];
-export const FLYING_SPECIES = ["beautifly", "corviknight", "noivern", "rowlet", "talonflame"];
+export const GROUND_SPECIES = ["breloom", "fidough", "flareon", "goomy", "pawmi", "tyrunt", "rowlet"];
+export const FLYING_SPECIES = ["beautifly", "corviknight", "noivern", "talonflame"];
 export const SILVALLY_FORMS = ["bug", "dark", "dragon", "electric", "fairy", "fighting", "fire", "flying", "ghost", "grass", "ground", "ice", "poison", "psychic", "rock", "steel", "water"];
 export type Surface = { id: string; width: number; divider: boolean; kind?: string };
+export type SurfaceRect = { left: number; right: number; top: number; width: number };
+export type Hop = { from: string; to: string; start: number; landing: number; elapsed: number; duration: number };
 export type Resident = {
   id: string; species: string; surface: string; flying: boolean;
   progress: number; target: number; direction: number; speed: number;
   rest: number; nap: boolean; untilNap: number; elapsed: number; age: number; animation: string;
   altitude: number; targetAltitude: number; reaction: number; held: boolean;
+  hop: Hop | null; hopTarget: string | null;
 };
 export type Battle = { surface: string; elapsed: number; duration: number; phase: string; center: number; rounds: number; attacker: string; gap: number };
 export type Overworld = { residents: Resident[]; battle: Battle | null };
@@ -25,25 +28,35 @@ export function shuffle<T>(items: readonly T[], random = Math.random): T[] {
 
 export function createOverworld(surfaces: Surface[], random = Math.random): Overworld {
   const battleSurface = shuffle(surfaces.filter(s => s.divider && s.width >= 240), random)[0];
-  const available = shuffle(surfaces.filter(s => s.id !== battleSurface?.id && s.id !== "sky-about" && s.width >= 100), random);
+  const hopCards = surfaces.filter(s => /^other-project-[012]$/.test(s.id));
+  const available = shuffle(surfaces.filter(s => s.id !== battleSurface?.id && s.id !== "sky-about" && s.kind !== "air" && !hopCards.includes(s) && s.width >= 100), random);
   // Guarantee coverage of each requested area before filling random spare ledges.
   const platforms: Surface[] = [];
-  for (const kind of ["skills", "other-project", "media-card", "featured", "divider"]) {
+  for (const kind of ["skills", "media-card", "featured", "divider"]) {
     const index = available.findIndex(s => (s.kind ?? (s.divider ? "divider" : "")) === kind);
     if (index >= 0) platforms.push(...available.splice(index, 1));
   }
-  platforms.push(...available);
+  platforms.push(...available.filter(s => !s.divider));
   const residents: Resident[] = [];
   const add = (species: string, surface: string, flying: boolean) => {
     residents.push({ id: species, species, surface, flying, progress: between(.15, .85, random), target: random(),
       direction: random() < .5 ? 2 : 6, speed: between(flying ? 16 : 9, flying ? 28 : 18, random),
       rest: between(500, 3200, random), nap: false, untilNap: between(16000, 60000, random),
       elapsed: random() * 1000, age: random() * 10000, animation: flying ? "Walk" : "Idle",
-      altitude: flying ? between(43, 59, random) : 0, targetAltitude: between(40, 62, random), reaction: 0, held: false });
+      altitude: flying ? between(43, 59, random) : 0, targetAltitude: between(40, 62, random), reaction: 0, held: false, hop: null, hopTarget: null });
   };
-  shuffle(GROUND_SPECIES, random).forEach((species, i) => { if (platforms[i]) add(species, platforms[i].id, false); });
-  const airspace = shuffle(surfaces.filter(s => s.divider || s.id === "sky-about"), random);
-  shuffle(FLYING_SPECIES, random).forEach((species, i) => { if (airspace[i]) add(species, airspace[i].id, true); });
+  // Rowlet is a walker. Keep the two jumpers together on the first project row.
+  const walkers = hopCards.length ? ["rowlet", ...shuffle(GROUND_SPECIES.filter(s => !["rowlet", "fidough", "goomy"].includes(s)), random)] : shuffle(GROUND_SPECIES, random);
+  walkers.forEach((species, i) => { if (platforms[i]) add(species, platforms[i].id, false); });
+  if (hopCards.length) {
+    add("fidough", hopCards[0].id, false);
+    add("goomy", hopCards[Math.min(2, hopCards.length - 1)].id, false);
+  }
+  const occupied = new Set(residents.map(a => a.surface));
+  const airspace = shuffle(surfaces.filter(s => (s.divider || s.id === "sky-about" || s.kind === "air") && s.id !== battleSurface?.id && !occupied.has(s.id)), random);
+  const corviknight = airspace.findIndex(s => s.id === "sky-footer");
+  if (corviknight >= 0) add("corviknight", airspace.splice(corviknight, 1)[0].id, true);
+  shuffle(FLYING_SPECIES.filter(s => corviknight < 0 || s !== "corviknight"), random).forEach((species, i) => { if (airspace[i]) add(species, airspace[i].id, true); });
   if (battleSurface) { add("armarouge", battleSurface.id, false); add("ceruledge", battleSurface.id, false); }
   return { residents, battle: battleSurface ? { surface: battleSurface.id, elapsed: 0, duration: between(2200, 6500, random), phase: "rest", center: between(.4, .6, random), rounds: 0, attacker: "armarouge", gap: 83 } : null };
 }
@@ -55,6 +68,8 @@ function animate(actor: Resident, animation: string, dt: number) {
 
 export function greetResident(actor: Resident, random = Math.random) {
   if (["armarouge", "ceruledge"].includes(actor.species)) return false;
+  if (actor.hop) { actor.surface = actor.hop.to; actor.progress = actor.hop.landing; actor.hop = null; }
+  actor.hopTarget = null;
   actor.reaction = 1800; actor.nap = false; actor.rest = 2400;
   actor.untilNap = between(25000, 75000, random);
   actor.direction = 0; actor.elapsed = 0;
@@ -80,11 +95,31 @@ function nextBattlePhase(b: Battle, random: () => number) {
 }
 
 /** Only visible surfaces advance; no fast-forward after browser suspension. */
-export function stepOverworld(world: Overworld, delta: number, visibleWidths: Map<string, number>, random = Math.random) {
+export function adjacentHopCards(surface: string, rects: Map<string, SurfaceRect>) {
+  const from = rects.get(surface);
+  if (!from || !/^other-project-[012]$/.test(surface)) return [];
+  return [...rects].filter(([id, r]) => id !== surface && /^other-project-[012]$/.test(id) && Math.abs(r.top - from.top) < 3 &&
+    (Math.abs(r.left - from.right) <= 40 || Math.abs(from.left - r.right) <= 40)).map(([id]) => id);
+}
+
+export function stepOverworld(world: Overworld, delta: number, visibleWidths: Map<string, number>, random = Math.random, rects = new Map<string, SurfaceRect>()) {
   const dt = Math.min(Math.max(delta, 0), 64);
   for (const actor of world.residents) {
     const width = visibleWidths.get(actor.surface);
+    if (actor.hop && !adjacentHopCards(actor.hop.from, rects).includes(actor.hop.to)) {
+      actor.hop = null; actor.hopTarget = null; actor.rest = 1000; animate(actor, "Idle", 0);
+    }
+    if (actor.hopTarget && !adjacentHopCards(actor.surface, rects).includes(actor.hopTarget)) actor.hopTarget = null;
     if (!width || ["armarouge", "ceruledge"].includes(actor.species)) continue;
+    if (actor.hop) {
+      if (!actor.held) actor.hop.elapsed += dt;
+      animate(actor, "Hop", dt);
+      if (actor.hop.elapsed >= actor.hop.duration) {
+        actor.surface = actor.hop.to; actor.progress = actor.hop.landing;
+        actor.hop = null; actor.rest = between(800, 3500, random); animate(actor, "Idle", 0);
+      }
+      continue;
+    }
     actor.age += dt;
     if (actor.reaction > 0) {
       actor.reaction = Math.max(0, actor.reaction - dt);
@@ -93,7 +128,7 @@ export function stepOverworld(world: Overworld, delta: number, visibleWidths: Ma
     if (actor.held) { animate(actor, actor.flying && actor.altitude > 1 ? "Walk" : actor.nap ? "Sleep" : "Idle", dt); continue; }
     actor.untilNap -= dt;
     if (!actor.nap && actor.untilNap <= 0) {
-      actor.nap = true; actor.rest = between(7000, 18000, random); actor.target = actor.progress;
+      actor.nap = true; actor.rest = between(7000, 18000, random); actor.target = actor.progress; actor.hopTarget = null;
     }
     if (actor.flying) {
       // Land before sleeping. Altitude is independent of frame/behavior clocks.
@@ -106,6 +141,14 @@ export function stepOverworld(world: Overworld, delta: number, visibleWidths: Ma
       if (actor.rest === 0) {
         if (actor.nap) { actor.nap = false; actor.untilNap = between(30000, 95000, random); }
         actor.target = between(.03, .97, random);
+        actor.hopTarget = null;
+        if (["fidough", "goomy"].includes(actor.species) && random() < .7) {
+          const options = adjacentHopCards(actor.surface, rects);
+          if (options.length) {
+            actor.hopTarget = options[Math.floor(random() * options.length)];
+            actor.target = rects.get(actor.hopTarget)!.left > rects.get(actor.surface)!.left ? 1 : 0;
+          }
+        }
         actor.speed = between(actor.flying ? 14 : 8, actor.flying ? 30 : 19, random);
         actor.targetAltitude = between(40, 63, random);
         animate(actor, actor.flying ? "Walk" : "Idle", 0);
@@ -115,12 +158,28 @@ export function stepOverworld(world: Overworld, delta: number, visibleWidths: Ma
     const distance = (actor.target - actor.progress) * Math.max(1, width - 80);
     if (Math.abs(distance) < .8) {
       actor.progress = actor.target; actor.rest = between(1000, actor.flying ? 5000 : 6500, random);
+      if (actor.hopTarget && adjacentHopCards(actor.surface, rects).includes(actor.hopTarget)) {
+        const landing = actor.target === 1 ? 0 : 1;
+        const destination = actor.hopTarget;
+        const occupied = world.residents.some(other => other !== actor && (
+          (other.surface === destination && Math.abs(other.progress - landing) * Math.max(1, rects.get(destination)!.width - 80) < 34) ||
+          (other.hop?.to === destination && other.hop.landing === landing)));
+        if (!occupied) actor.hop = { from: actor.surface, to: destination, start: actor.progress, landing, elapsed: 0, duration: between(650, 850, random) };
+        actor.hopTarget = null;
+      }
       animate(actor, actor.flying ? "Walk" : "Idle", dt);
-      if (!actor.flying && random() < .4) actor.direction = [0, 2, 4, 6][Math.floor(random() * 4)];
+      if (actor.hop) {
+        actor.direction = actor.hop.landing === 0 ? 2 : 6;
+        animate(actor, "Hop", 0);
+      } else if (!actor.flying && random() < .4) actor.direction = [0, 2, 4, 6][Math.floor(random() * 4)];
     } else {
       actor.direction = distance > 0 ? 2 : 6;
       const speed = Math.min(actor.speed, Math.max(3, Math.abs(distance) * 1.8));
-      actor.progress = approach(actor.progress, actor.target, speed * dt / 1000 / Math.max(1, width - 80));
+      const next = approach(actor.progress, actor.target, speed * dt / 1000 / Math.max(1, width - 80));
+      const blocked = !actor.flying && world.residents.some(other => other !== actor && !other.flying && !other.hop && other.surface === actor.surface &&
+        Math.abs(next - other.progress) < Math.abs(actor.progress - other.progress) && Math.abs(next - other.progress) * Math.max(1, width - 80) < 34);
+      if (blocked) { actor.rest = between(600, 1800, random); animate(actor, "Idle", dt); continue; }
+      else actor.progress = next;
       animate(actor, "Walk", dt);
     }
   }

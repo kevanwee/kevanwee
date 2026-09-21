@@ -1,40 +1,46 @@
 # Portfolio overworld handover
 
-## New follow-up in progress
-- Ground Rowlet and move Corviknight to a separate, uncrowded airspace.
-- Put Fidough/Goomy on the first three other-project cards; add adjacent same-row hopping with responsive cancellation when cards stack.
-- Import Downloads/yveltal. Reviewed Special2 (dormant cocoon), Special0 (27-frame / 4.32s hatch sequence) and directional Walk wingbeats.
-- Add a dormant left-panel divider perch; clicking awakens Yveltal, then he can roam the viewport with smooth random destinations, resize clamps and phone-specific scale. Keep modal/visibility/reduced-motion handling.
-- Existing completion notes below describe the previous iteration until this follow-up is verified.
+## Latest follow-up (2026-09-21)
+- Rowlet walks on Skills; Corviknight has its own footer airspace. Flyers no longer share ground/battle surfaces.
+- Fidough/Goomy start on the first and third other-project cards and randomly hop between adjacent cards in that row. Live DOM adjacency, landing reservations and same-card spacing prevent collisions. Hops cancel when responsive cards stack. Hop poses face the landing card.
+- Imported Downloads/yveltal with original bytes preserved. Special2 is the dormant cocoon; click/tap plays the full Special0 (27 frames / 4.32s) before directional Walk flight begins. Its perch is the left panel's divider below the Pokeballs.
+- Active Yveltal explores viewport-wide random destinations with eased velocity and pauses. He stays in view after scrolling, shrinks to 78% on phones, and clamps to viewport/visualViewport bounds on resize. Greetings, keyboard focus, hidden tabs, dialogs and reduced motion are supported.
+- Route 111's label is back to its original 12px map gap. Silvally's walking interval excludes the actual rendered label text plus 40px clearance. On narrow phones the label wraps to leave space for him on the map edge.
+- Build/TypeScript, source/hash/simulation checks, the existing full browser regression suite and targeted Yveltal/hopping browser verification passed. The latter caught an offscreen-resize hop cancellation bug, now fixed and covered in both simulation and browser checks.
 
 ## Completed scope (2026-09-21, including user corrections)
-- Imported all 29 supplied Downloads packs: 12 species and 17 Silvally forms. Existing Ceruledge is reused. No further sprite downloads were needed; originals remain in Downloads.
-- Six ground residents populate random surfaces, guaranteeing a resident on Skills, an other-project card, a Media card and a featured project, plus available dividers/cards. Five flying species occupy section airspaces. Armarouge and Ceruledge always share one divider.
-- **Latest Silvally decision:** walk and rest on the top edge of the Route 111 map, like the other surface residents. The earlier viewport-corner and left-panel placements were rejected and removed. The original LeftPanel layout is restored. Route 111's heading has clearance for his sprite above the box.
+- Imported all 30 supplied Downloads packs: 13 species and 17 Silvally forms. Existing Ceruledge is reused. Originals remain in Downloads.
+- Seven ground residents populate Skills, other-project cards, Media, featured projects and a divider. Four ordinary flying species occupy separate airspaces; Yveltal has independent viewport flight. Armarouge and Ceruledge always share one divider.
+- **Latest Silvally decision:** walk and rest on the top edge of the Route 111 map, to the right of its closely spaced label. The earlier viewport-corner and left-panel placements were rejected and removed.
 - Silvally walks both ways, occasionally looks in other directions, sleeps and wakes. He keeps all 17 forms, random automatic change intervals and click/Enter/Space RearUp/Double transformations. Clicking wakes him. Automatic form changes do not reset his nap deadline.
 - All 11 non-battling residents are accessible 44px buttons. Mouse, touch or Enter/Space makes them face the visitor and display the same authentic heart asset used by Teddiursa. Hover/keyboard focus holds the target still. Clicking wakes sleepers.
 - Random destinations, speeds, pauses and glances replace repetitive edge-to-edge shuttles. Independent nap timers and varied nap lengths keep residents from sleeping together on a fixed schedule. Flyers land before sleeping and rise afterward. Silvally and residents pause offscreen/behind dialogs/in hidden tabs.
 - The battle pair uses randomized approach/ready/attack/retreat/rest phases, variable bout lengths, random initiator and one to four attacks per bout. It no longer repeats a fixed 16-second cycle.
 - Flight was visually reviewed frame by frame. Talonflame's Hover sheet spins; several other Hover sheets are rapid actions. Flight now uses the directional Walk wingbeats at species-specific tempos. Altitude moves gradually and is independent of animation resets.
-- Visible Walk body-height targets: Rowlet 22px; Goomy 24; Fidough 25; Pawmi 26; Beautifly 30; Flareon/Tyrunt 32; Breloom/Talonflame 36; Noivern 40; Corviknight 42; battle pair 43; Silvally 58. Idle/sleep feet anchor to their own alpha bounds; moving/action sheets keep their shared origin.
+- Visible Walk body-height targets: Rowlet 22px; Goomy 24; Fidough 25; Pawmi 26; Beautifly 30; Flareon/Tyrunt 32; Breloom/Talonflame 36; Noivern 40; Corviknight 42; battle pair 43; Yveltal 54; Silvally 58. Idle/sleep feet anchor to their own alpha bounds; moving/action sheets keep their shared origin.
 - Reduced motion freezes autonomous activity, while explicit greetings and instant form changes still work; hearts clear after the interaction. Modals suppress the overlays and suspend their clocks.
 
 ## Files and maintenance
 - `portfolio/src/lib/pokemon-overworld.ts`: pure wandering, greeting, nap and randomized battle state machines. `stepWanderer` supports direction changes; Silvally's current route uses the horizontal map edge.
 - `portfolio/src/components/PokemonOverworld.tsx`: one 30fps imperative renderer, sprite buttons, visibility handling, Silvally form changes, asset preloading. No per-frame React renders.
-- `portfolio/src/components/WorldPreview.tsx`: Route 111 `data-silvally-surface` anchor and heading clearance. Does not change either map's simulation/roster.
+- `portfolio/src/lib/overworld-sprites.ts`: shared frame painter and sprite metadata types.
+- `portfolio/src/components/YveltalRoamer.tsx` and `portfolio/src/lib/yveltal-flight.ts`: dormant/hatching/active renderer and pure random flight controller. Special0 uses the shared PMD origin offset +6, matching the cocoon feet. Avoid substituting Walk's foot offset during the hatch.
+- `portfolio/src/components/WorldPreview.tsx`: Route 111 `data-silvally-surface` anchor and `data-silvally-label` text exclusion. Does not change either map's simulation/roster.
 - `data-overworld-surface` opts in regular surfaces. `data-overworld-kind` identifies priority habitat groups. Skills/Projects/Media contain the new markers.
 - `portfolio/scripts/export-overworld.py`: validates supplied XML/PNGs and builds `src/data/overworld-sprites.json`. Requires Pillow. `python scripts/export-overworld.py` regenerates from repository assets; `--import-downloads` is only for intentional reimport.
-- `portfolio/public/overworld/sources.json`: SHA-256 receipts for all 2,582 supplied files (~14.3 MiB). `.gitattributes` preserves original XML bytes across platforms. All source hashes and committed XML blob hashes were verified.
+- `portfolio/public/overworld/sources.json`: SHA-256 receipts for all 2,625 supplied files. `.gitattributes` preserves original XML bytes across platforms. All source hashes were verified.
 - Only nearby resident sheets and current/next Silvally forms load in the browser; the full source archive is not downloaded at runtime. Original unused animations/shadows/offsets are retained for future work. Existing PMD SpriteCollab credits apply.
 
 ## Verification
 - `npm run build` from `portfolio/`: production build and TypeScript passed.
 - `npm run test:overworld`: all asset hashes and frame metadata; 32 seeds, 100 seconds per seed; priority habitats, species sizing, steady flight selection, random battle phases/durations, all species sleeping/waking, flyer landing, greeting holds, eight Silvally facing directions, offscreen suspension and responsive bounds.
+- Additional pure checks cover both jumpers visiting all three cards across 12 seeds, stacked-card adjacency, offscreen mid-hop cancellation, separate flyer habitats and 20,000 Yveltal flight steps across alternating phone/desktop bounds.
 - `npm run test:overworld:browser`: automatic change and all 17 forms; all 11 greetings by mouse/keyboard; mobile touch and reduced-motion heart cleanup; 320/390/768/1440px surface/foot alignment and no added document overflow; hidden-tab simulation; reduced motion; actual map modal and restoration; natural Silvally sleep while automatic form changes run; randomized bouts; ground/flyer naps and wake-on-click. No browser exceptions or broken sprite requests.
+- `npm run test:yveltal:browser`: real 4.32s awakening through frame 26 at 1440/390/320px; dormant perch alignment, active viewport movement, portrait/landscape resize bounds, scroll persistence, hearts, reduced motion and modal suspension. Route 111 retains its 12px gap with measured text clearance at 320/390/768/1440px. Both Fidough/Goomy visibly hop using the proper directional Hop sheet; phone reflow cancels hops. No browser exceptions or broken sprite requests.
 - Long browser behavior checks accelerate RAF timestamps (4x, with the production delta cap still applied), without modifying simulation state. Normal-speed interaction and geometry checks run separately within the same runner.
 - Browser runner needs a running production site (`npm run start -- --port 3005`) and Playwright. Set `PLAYWRIGHT_MODULE` to an installed playwright-core module if not locally installed; this session reused `../copycat/frontend/node_modules/playwright-core` via its absolute path. `BASE_URL` defaults to `http://localhost:3005`. No new npm dependency was installed.
 - Screenshots live in the OS temporary folder, including `silvally-route111.png`, `silvally-route111-mobile.png`, `skills-pokemon-heart.png` and the browser runner's desktop/responsive captures. Desktop and phone captures were visually reviewed.
+- Latest visually reviewed captures: `yveltal-desktop.png`, `yveltal-hatch.png`, `yveltal-flight.png`, `label-phone.png`, `yveltal-dormant-390.png` and `yveltal-active-320.png`. These are diagnostics outside the deployed public directory.
 - Existing `npm run test:world` passed in the initial iteration (44 map residents, 16,286,400 reservation checks). Map logic was not changed in this follow-up.
 - Known pre-existing issue: Experience Tech/Legal filters overflow a 320px viewport (388px document width), confirmed with overlays removed. This feature adds no document overflow. Physical Safari/iOS testing has not been performed.
 
@@ -43,6 +49,8 @@
 - `1972f70`, `e90e635`, `c595072`: first implementation, original XML preservation and verification.
 - `b87696e`: extra habitats, interactive residents, corrected flight/sizes, random movement/bouts and naps.
 - `573aa1e`: latest requested Route 111 placement and autonomous sleep/form coexistence.
+- `3b54fe6`: previous iteration's full browser verification/handover.
+- `1922cc1`: Yveltal source import, generated animation metadata, receipts and follow-up handover.
 - All checkpoints pushed to origin/main; pushes deploy through Vercel. Final verification/handover is in the following commit.
 - Live site: https://kevanwee.vercel.app
 

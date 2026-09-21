@@ -69,7 +69,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
             <PokeballRow />
           </div>
 
-          <div className="my-7 h-px w-12 bg-cream-200" style={fadeUp("210ms")} />
+          <div data-yveltal-perch className="my-7 h-px w-28 bg-cream-200" style={fadeUp("210ms")} />
 
           <p className="max-w-[238px] text-sm leading-7 text-warm-400" style={fadeUp("260ms")}>
             {personal.description}

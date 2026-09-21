@@ -80,7 +80,7 @@ async function scrollSurface(page, id) {
           // The existing Experience filters overflow at 320px. Verify this feature
           // adds no document width, without silently changing unrelated page layout.
           const widthWithResidents = document.documentElement.scrollWidth;
-          const overlays = [document.querySelector('.pokemon-overworld'), document.querySelector('.silvally-resident')];
+          const overlays = [document.querySelector('.pokemon-overworld'), document.querySelector('.silvally-resident'), document.querySelector('.yveltal-layer')];
           overlays.forEach(e => { e.style.display = 'none'; });
           const baselineWidth = document.documentElement.scrollWidth;
           overlays.forEach(e => e.style.removeProperty('display'));
@@ -186,11 +186,15 @@ async function scrollSurface(page, id) {
     const timedBattle = await timed.locator('[data-pokemon="armarouge"]').getAttribute('data-surface');
     await scrollSurface(timed, timedBattle);
     const phases = new Set();
-    let flyerSlept = false;
-    for (let i = 0; i < 600 && (!flyerSlept || phases.size < 6); i++) {
+    for (let i = 0; i < 600 && phases.size < 6; i++) {
       await timed.waitForTimeout(100);
       phases.add(await timed.locator('[data-pokemon="armarouge"]').getAttribute('data-battle-phase'));
-      const flyer = timed.locator(`[data-flying="true"][data-surface="${timedBattle}"]`);
+    }
+    const flyer = timed.locator('[data-pokemon="corviknight"]');
+    await scrollSurface(timed, await flyer.getAttribute('data-surface'));
+    let flyerSlept = false;
+    for (let i = 0; i < 300 && !flyerSlept; i++) {
+      await timed.waitForTimeout(150);
       if (await flyer.getAttribute('data-sleeping') === 'true') {
         flyerSlept = true;
         await flyer.dispatchEvent('click');

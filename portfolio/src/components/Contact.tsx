@@ -57,7 +57,7 @@ export default function Contact() {
 
         <MauvilleBanner />
 
-        <footer className="mt-24 border-t border-cream-200 pt-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <footer data-overworld-surface="sky-footer" data-overworld-kind="air" className="mt-24 border-t border-cream-200 pt-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-warm-400">© {new Date().getFullYear()} Kevan Wee</p>
           <div className="flex items-center gap-4">
             <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs text-warm-400 hover:text-warm-700 transition-colors duration-200">LinkedIn</a>

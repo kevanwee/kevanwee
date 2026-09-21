@@ -1,37 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import spriteData from "@/data/overworld-sprites.json";
-import { animationFrame, createOverworld, createWanderer, greetResident, SILVALLY_FORMS, shuffle, stepOverworld, stepWanderer } from "@/lib/pokemon-overworld";
+import { SPRITES, paintSprite as paint } from "@/lib/overworld-sprites";
+import { createOverworld, createWanderer, greetResident, SILVALLY_FORMS, shuffle, stepOverworld, stepWanderer } from "@/lib/pokemon-overworld";
 
-type Animation = { src: string; w: number; h: number; rows: number; durations: number[]; bounds: number[][] };
-type Sprite = { flying: boolean; flightTempo: number; scale: number; feet: number[]; animations: Record<string, Animation> };
-const SPRITES: Record<string, Sprite> = spriteData;
 const COLORS: Record<string, string> = {
   bug: "#94aa35", dark: "#6c5871", dragon: "#7860bc", electric: "#dcb83e", fairy: "#d08aaf",
   fighting: "#ba7551", fire: "#d78848", flying: "#91aad0", ghost: "#8c73b2", grass: "#78a65b",
   ground: "#ba9b62", ice: "#91c9d1", poison: "#ab78b3", psychic: "#d57c99", rock: "#a79664",
   steel: "#98a7b1", water: "#6b9dc6",
 };
-
-/** Frame sheets keep their original origin; feet stay planted across animations. */
-function paint(el: HTMLElement, sprite: Sprite, name: string, elapsed: number, direction: number, x: number, y: number, scaleFactor = 1) {
-  const anim = sprite.animations[name] ?? sprite.animations.Walk;
-  const row = anim.rows === 1 ? 0 : direction;
-  const loop = !["Attack", "Shoot", "Hurt", "RearUp", "Double"].includes(name);
-  const frame = animationFrame(anim.durations, elapsed / (sprite.flying && name === "Walk" ? sprite.flightTempo : 1), loop);
-  const scale = sprite.scale * scaleFactor;
-  el.style.width = `${anim.w * scale}px`;
-  el.style.height = `${anim.h * scale}px`;
-  el.style.backgroundImage = `url("${anim.src}")`;
-  el.style.backgroundSize = `${anim.w * anim.durations.length * scale}px ${anim.h * anim.rows * scale}px`;
-  el.style.backgroundPosition = `${-frame * anim.w * scale}px ${-row * anim.h * scale}px`;
-  const foot = name === "Sleep" || name === "Idle" ? anim.bounds[row][3] : anim.h / 2 + sprite.feet[row];
-  el.style.transform = `translate3d(${Math.round(x - anim.w / 2 * scale)}px,${Math.round(y - foot * scale)}px,0)`;
-  el.dataset.animation = name;
-  el.dataset.frame = String(frame);
-  el.dataset.direction = String(row);
-}
 
 export default function PokemonOverworld() {
   const layerRef = useRef<HTMLDivElement>(null);
@@ -55,6 +33,7 @@ export default function PokemonOverworld() {
     const world = createOverworld(surfaces);
     const wanderer = createWanderer();
     const habitat = document.querySelector<HTMLElement>("[data-silvally-surface]");
+    const mapLabel = document.querySelector<HTMLElement>("[data-silvally-label]");
     const reactionTimers = new Map<string, ReturnType<typeof setTimeout>>();
     const nodes = new Map(world.residents.map(actor => {
       const interactive = !["armarouge", "ceruledge"].includes(actor.species);
@@ -202,18 +181,31 @@ export default function PokemonOverworld() {
         // Batch layout reads before any writes, so transforms/hover/resizes remain aligned.
         const rects = new Map([...elements].map(([id, el]) => [id, el.getBoundingClientRect()]));
         const area = habitat?.getBoundingClientRect();
+        const labelRange = document.createRange();
+        if (mapLabel) labelRange.selectNodeContents(mapLabel);
+        const labelRight = mapLabel ? labelRange.getBoundingClientRect().right : 0;
+        const silvallyMin = area ? Math.min(area.right - 40, Math.max(area.left + 40, labelRight + 40)) : 0;
+        const silvallySpan = area ? Math.max(1, area.right - 40 - silvallyMin) : 1;
         const visible = new Map([...rects].filter(([, r]) => r.top > -100 && r.top < window.innerHeight + 150 && r.width > 0)
           .map(([id, r]) => [id, r.width]));
-        if (!motion.matches) stepOverworld(world, dt, visible);
+        if (!motion.matches) stepOverworld(world, dt, visible, Math.random, rects);
         // Re-clamp battle poses to responsive surface widths even while motion is paused.
-        else stepOverworld(world, 0, visible);
+        else stepOverworld(world, 0, visible, Math.random, rects);
         for (const actor of world.residents) {
           const { node, sprite: spriteNode, heart } = nodes.get(actor.id)!;
           const rect = rects.get(actor.surface)!;
+          node.dataset.surface = actor.surface;
+          node.dataset.hopping = String(!!actor.hop);
           const shown = visible.has(actor.surface);
           node.hidden = !shown;
           if (!shown) continue;
-          const x = rect.left + 40 + actor.progress * Math.max(1, rect.width - 80);
+          let x = rect.left + 40 + actor.progress * Math.max(1, rect.width - 80);
+          if (actor.hop) {
+            const destination = rects.get(actor.hop.to)!;
+            const start = rect.left + 40 + actor.hop.start * Math.max(1, rect.width - 80);
+            const end = destination.left + 40 + actor.hop.landing * Math.max(1, destination.width - 80);
+            x = start + (end - start) * actor.hop.elapsed / actor.hop.duration;
+          }
           const bob = actor.flying ? -actor.altitude : 0;
           const name = motion.matches ? (actor.nap && actor.altitude === 0 ? "Sleep" : actor.flying && actor.altitude > 0 ? "Walk" : "Idle") : actor.animation;
           const sprite = SPRITES[actor.species];
@@ -224,7 +216,8 @@ export default function PokemonOverworld() {
           const anim = sprite.animations[name] ?? sprite.animations.Walk;
           void preload(anim.src).catch(() => {});
           node.style.transform = `translate3d(${Math.round(x - 22)}px,${Math.round(rect.top + bob - 44)}px,0)`;
-          paint(spriteNode, sprite, name, motion.matches ? 0 : actor.elapsed, actor.direction, 22, 44);
+          const elapsed = actor.hop ? actor.hop.elapsed / actor.hop.duration * anim.durations.reduce((sum, d) => sum + d * 16, 0) : actor.elapsed;
+          paint(spriteNode, sprite, name, motion.matches ? 0 : elapsed, actor.direction, 22, 44);
           for (const key of ["animation", "frame", "direction"]) node.dataset[key] = spriteNode.dataset[key];
           node.dataset.sleeping = String(name === "Sleep");
           node.dataset.reacting = String(actor.reaction > 0);
@@ -236,7 +229,7 @@ export default function PokemonOverworld() {
         const silvallyVisible = !!area && area.top > 0 && area.top < window.innerHeight + 64;
         button!.hidden = !silvallyVisible;
         if (!motion.matches && silvallyVisible) {
-          if (!focused && !hovered && !transition) stepWanderer(wanderer, dt, Math.max(1, area!.width - 64), 0);
+          if (!focused && !hovered && !transition) stepWanderer(wanderer, dt, silvallySpan, 0);
           if (!focused && !hovered && !transition && !wanderer.nap) {
             nextChange -= dt;
             if (nextChange <= 0) void changeForm();
@@ -259,7 +252,7 @@ export default function PokemonOverworld() {
         }
         const sprite = SPRITES[`silvally-${form}`];
         if (area && silvallyVisible) {
-          const x = area.left + 32 + wanderer.x * Math.max(1, area.width - 64);
+          const x = silvallyMin + wanderer.x * silvallySpan;
           const y = area.top;
           button!.style.transform = `translate3d(${Math.round(x - 28)}px,${Math.round(y - 64)}px,0)`;
           const name = transition?.animation ?? (motion.matches || focused || hovered ? (wanderer.nap ? "Sleep" : "Idle") : wanderer.animation);

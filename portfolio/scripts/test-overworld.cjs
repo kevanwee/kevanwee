@@ -10,7 +10,7 @@ new Function('exports', js)(api);
 const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, animationFrame } = api;
 const assets = JSON.parse(readFileSync(resolve(__dirname, '../src/data/overworld-sprites.json')));
 assert.equal(SILVALLY_FORMS.length, 17);
-assert.equal(Object.keys(assets).length, 30);
+assert.equal(Object.keys(assets).length, 31);
 
 // Validate every runtime source against the actual PNG header, timing and alpha bounds.
 for (const [id, sprite] of Object.entries(assets)) {
@@ -44,17 +44,24 @@ for (let seed = 1; seed <= 32; seed++) {
   const random = seeded(seed);
   const surfaces = [
     { id: 'sky-about', width: 550, divider: false },
+    { id: 'sky-footer', width: 550, divider: false, kind: 'air' },
     ...Array.from({ length: 4 }, (_, i) => ({ id: `divider-${i}`, width: 550, divider: true })),
     ...Array.from({ length: 4 }, (_, i) => ({ id: `card-${i}`, width: 550, divider: false, kind: 'featured' })),
-    ...['skills', 'other-project', 'media-card'].map(kind => ({id: kind, kind, width: 272, divider: false})),
+    ...['skills', 'media-card'].map(kind => ({id: kind, kind, width: 272, divider: false})),
+    ...Array.from({length: 3}, (_, i) => ({id: `other-project-${i}`, kind: 'other-project', width: 156, divider: false})),
   ];
   const world = createOverworld(surfaces, random);
   assert.equal(world.residents.length, 13);
   assert.deepEqual(new Set(world.residents.map(a => a.species)), new Set([...GROUND_SPECIES, ...FLYING_SPECIES, 'armarouge', 'ceruledge']));
   const ground = world.residents.filter(a => GROUND_SPECIES.includes(a.species));
-  assert.equal(new Set(ground.map(a => a.surface)).size, 6, 'ground residents overlap surfaces');
+  assert.equal(new Set(ground.map(a => a.surface)).size, 7, 'ground residents overlap initial surfaces');
   assert.ok(ground.every(a => a.surface !== 'sky-about' && a.surface !== world.battle.surface));
-  for (const kind of ['skills', 'other-project', 'media-card']) assert.ok(ground.some(a => a.surface === kind), `${kind} has no resident`);
+  for (const kind of ['skills', 'media-card']) assert.ok(ground.some(a => a.surface === kind), `${kind} has no resident`);
+  assert.equal(world.residents.find(a => a.species === 'rowlet').flying, false);
+  assert.equal(world.residents.find(a => a.species === 'corviknight').surface, 'sky-footer');
+  assert.equal(world.residents.find(a => a.species === 'fidough').surface, 'other-project-0');
+  assert.equal(world.residents.find(a => a.species === 'goomy').surface, 'other-project-2');
+  for (const flyer of world.residents.filter(a => a.flying)) assert.ok(!ground.some(a => a.surface === flyer.surface) && flyer.surface !== world.battle.surface, 'Keep airspaces uncrowded');
   assignments.add(ground.map(a => a.species + a.surface).join(','));
   const before = JSON.stringify(world);
   stepOverworld(world, 50000, new Map(), random);
@@ -111,4 +118,41 @@ assert.deepEqual(sleepers, new Set([...GROUND_SPECIES, ...FLYING_SPECIES, 'silva
 assert.equal(animationFrame([4, 8, 2], 64), 1);
 assert.equal(animationFrame([4, 8, 2], 224), 0);
 assert.equal(animationFrame([4, 8, 2], 1000, false), 2);
-console.log(`Overworld passed: ${files} source hashes, all requested habitats, species sizing, steady flight, all residents sleep/wake, eight Silvally angles, random battles and responsive bounds across 32 seeds / 100 seconds each.`);
+// Card hopping follows real geometry, including a mid-hop responsive reflow.
+const cards = Array.from({length: 3}, (_, i) => ({id: `other-project-${i}`, width: 156, divider: false}));
+const cardRects = new Map(cards.map((c, i) => [c.id, {left: i * 170, right: i * 170 + 156, width: 156, top: 100}]));
+assert.deepEqual(api.adjacentHopCards('other-project-1', cardRects), ['other-project-0', 'other-project-2']);
+const stacked = new Map(cards.map((c, i) => [c.id, {left: 0, right: 272, width: 272, top: i * 280}]));
+assert.deepEqual(api.adjacentHopCards('other-project-0', stacked), []);
+const visited = {fidough: new Set(), goomy: new Set()};
+let hops = 0;
+for (let seed = 1; seed <= 12; seed++) {
+  const random = seeded(seed), world = createOverworld(cards, random), widths = new Map(cards.map(c => [c.id, c.width]));
+  for (let i = 0; i < 10000; i++) {
+    stepOverworld(world, 40, widths, random, cardRects);
+    for (const a of world.residents) {
+      visited[a.species].add(a.surface);
+      if (a.hop) { hops++; assert.ok(api.adjacentHopCards(a.hop.from, cardRects).includes(a.hop.to)); }
+    }
+  }
+  const a = world.residents[0];
+  a.surface = 'other-project-0'; a.hop = {from: a.surface, to: 'other-project-1', start: 1, landing: 0, elapsed: 200, duration: 700};
+  stepOverworld(world, 40, new Map(), random, stacked);
+  assert.equal(a.hop, null, 'Cancel even offscreen hops when phone cards stack');
+  assert.equal(a.surface, 'other-project-0');
+}
+assert.ok(hops > 100);
+for (const surfaces of Object.values(visited)) assert.equal(surfaces.size, 3, 'Both jumpers can visit all three cards');
+
+const flightSource = readFileSync(resolve(__dirname, '../src/lib/yveltal-flight.ts'), 'utf8');
+const flightApi = {};
+new Function('exports', 'require', ts.transpileModule(flightSource, {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020}}).outputText)(flightApi, () => api);
+const flight = flightApi.createFlight(300, 300), random = seeded(42), flightDirections = new Set();
+for (let i = 0; i < 20000; i++) {
+  const bounds = i % 300 < 150 ? {left: 40, right: 280, top: 75, bottom: 490} : {left: 50, right: 1390, top: 80, bottom: 900};
+  flightApi.stepFlight(flight, 40, bounds, false, random);
+  assert.ok(flight.x >= bounds.left && flight.x <= bounds.right && flight.y >= bounds.top && flight.y <= bounds.bottom);
+  flightDirections.add(flight.direction);
+}
+assert.equal(flightDirections.size, 8);
+console.log(`Overworld passed: ${files} source hashes, ground Rowlet, separate flyers, all three hopping cards, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);

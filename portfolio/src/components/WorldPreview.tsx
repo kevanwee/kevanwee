@@ -29,7 +29,9 @@ export default function WorldPreview({ id }: { id: SceneId }) {
     return () => { mounted = false; };
   }, [id, visible, session]);
   return <div className={id === "rt111" ? "mb-10" : "mt-12"}>
-    <p className={`${id === "rt111" ? "mb-16" : "mb-3"} text-xs font-bold uppercase tracking-widest text-warm-600`}>Currently roaming · {title}</p>
+    <p data-silvally-label={id === "rt111" ? "" : undefined}
+      style={id === "rt111" ? { maxWidth: "calc(100% - 112px)" } : undefined}
+      className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-600">Currently roaming · {title}</p>
     <button ref={ref} className="group relative block w-full overflow-hidden rounded-2xl border border-cream-200 bg-sage-100 text-left"
       data-silvally-surface={id === "rt111" ? "route111-map" : undefined}
       style={{ height: id === "rt111" ? 180 : 220 }}
