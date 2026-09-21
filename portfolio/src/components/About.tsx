@@ -48,10 +48,8 @@ export default function About() {
         </ul>
       </div>
 
-      {/* Memberships. The flyers' airspace hangs off this, near the foot of the
-          section: anchored to the section itself they opened the page hovering over
-          the heading, which is the first thing anyone sees. */}
-      <div className="mt-8" data-overworld-surface="sky-about">
+      {/* Memberships */}
+      <div className="mt-8">
         <Memberships />
       </div>
     </section>

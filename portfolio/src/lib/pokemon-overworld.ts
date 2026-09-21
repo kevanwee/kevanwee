@@ -53,7 +53,7 @@ export function shuffle<T>(items: readonly T[], random = Math.random): T[] {
 export function createOverworld(surfaces: Surface[], random = Math.random): Overworld {
   const battleSurface = shuffle(surfaces.filter(s => s.divider && s.width >= 240), random)[0];
   const hopCards = surfaces.filter(s => HOP_CARD.test(s.id));
-  const available = shuffle(surfaces.filter(s => s.id !== battleSurface?.id && s.id !== "sky-about" && s.kind !== "air" && !hopCards.includes(s) && s.width >= 100), random);
+  const available = shuffle(surfaces.filter(s => s.id !== battleSurface?.id && s.kind !== "air" && !hopCards.includes(s) && s.width >= 100), random);
   // Guarantee coverage of each requested area before filling random spare ledges.
   const platforms: Surface[] = [];
   for (const kind of ["skills", "media-card", "featured", "divider"]) {
@@ -99,7 +99,9 @@ export function createOverworld(surfaces: Surface[], random = Math.random): Over
   }
   for (const card of shuffle(hopCards, random).slice(0, TILE_RESIDENTS)) if (roster[next]) add(roster[next++], card.id, false);
   const occupied = new Set(residents.map(a => a.surface));
-  const airspace = shuffle(surfaces.filter(s => (s.divider || s.id === "sky-about" || s.kind === "air") && s.id !== battleSurface?.id && !occupied.has(s.id)), random);
+  // Dividers and the footer sky only: the About section used to carry an air strip,
+  // which put two flyers over the heading before a reader had read a word.
+  const airspace = shuffle(surfaces.filter(s => (s.divider || s.kind === "air") && s.id !== battleSurface?.id && !occupied.has(s.id)), random);
   const corviknight = airspace.findIndex(s => s.id === "sky-footer");
   if (corviknight >= 0) add("corviknight", airspace.splice(corviknight, 1)[0].id, true);
   const flyers = shuffle(FLYING_SPECIES.filter(s => corviknight < 0 || s !== "corviknight"), random);

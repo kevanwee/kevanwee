@@ -51,7 +51,6 @@ assert.ok(apparentHeight('rowlet') < 24 && apparentHeight('rowlet') < apparentHe
 for (let seed = 1; seed <= 32; seed++) {
   const random = seeded(seed);
   const surfaces = [
-    { id: 'sky-about', width: 550, divider: false },
     { id: 'sky-footer', width: 550, divider: false, kind: 'air' },
     ...Array.from({ length: 4 }, (_, i) => ({ id: `divider-${i}`, width: 550, divider: true })),
     { id: 'media-divider', width: 550, divider: true },
@@ -64,7 +63,7 @@ for (let seed = 1; seed <= 32; seed++) {
   assert.equal(new Set(species).size, species.length, 'a species may only appear once');
   assert.ok(species.every(s => assets[s]), 'every resident needs a sprite pack');
   const ground = world.residents.filter(a => GROUND_SPECIES.includes(a.species));
-  assert.ok(ground.every(a => a.surface !== 'sky-about' && a.surface !== world.battle.surface));
+  assert.ok(ground.every(a => a.surface !== world.battle.surface));
   for (const kind of ['skills', 'media-card']) assert.ok(ground.some(a => a.surface === kind), `${kind} has no resident`);
   assert.equal(world.residents.find(a => a.species === 'corviknight').surface, 'sky-footer');
   assert.ok(world.residents.filter(a => a.flying).every(a => FLYING_SPECIES.includes(a.species)));

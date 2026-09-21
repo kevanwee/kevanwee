@@ -136,7 +136,7 @@ async function scrollSurface(page, id) {
     await page.locator('.silvally-resident').click();
     await page.waitForFunction(form => document.querySelector('.silvally-resident').dataset.form !== form, before);
     assert.notEqual(await page.locator('.silvally-resident').getAttribute('data-changing'), 'true');
-    await scrollSurface(page, 'sky-about');
+    await scrollSurface(page, 'skills-card');
     await page.getByRole('button', { name: 'Explore Route 111', exact: true }).click();
     await page.waitForSelector('dialog[open]');
     await page.waitForFunction(() => document.querySelector('.silvally-resident').hidden && document.querySelector('.pokemon-overworld').hidden);
