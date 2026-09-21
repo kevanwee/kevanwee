@@ -7,7 +7,7 @@ const source = readFileSync(resolve(__dirname, '../src/lib/pokemon-overworld.ts'
 const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
 const api = {};
 new Function('exports', js)(api);
-const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, PAIRS, TILE_RESIDENTS, displayName, animationFrame } = api;
+const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, PAIRS, TILE_RESIDENTS, EEVEELUTIONS, EEVEELUTION_LINE, displayName, animationFrame } = api;
 assert.equal(displayName('mega-gallade'), 'Mega Gallade');
 assert.equal(displayName('zorua'), 'Zorua');
 const BONDED = new Set(PAIRS.flat());
@@ -54,6 +54,7 @@ for (let seed = 1; seed <= 32; seed++) {
     { id: 'sky-about', width: 550, divider: false },
     { id: 'sky-footer', width: 550, divider: false, kind: 'air' },
     ...Array.from({ length: 4 }, (_, i) => ({ id: `divider-${i}`, width: 550, divider: true })),
+    { id: EEVEELUTION_LINE, width: 550, divider: true },
     ...Array.from({ length: 4 }, (_, i) => ({ id: `card-${i}`, width: 550, divider: false, kind: 'featured' })),
     ...['skills', 'media-card'].map(kind => ({id: kind, kind, width: 272, divider: false})),
     ...Array.from({length: 3}, (_, i) => ({id: `other-project-${i}`, kind: 'other-project', width: 156, divider: false})),
@@ -83,10 +84,18 @@ for (let seed = 1; seed <= 32; seed++) {
   world.residents.filter(a => !['armarouge', 'ceruledge'].includes(a.species))
     .forEach(a => (perSurface[a.surface] ||= []).push(a));
   for (const [surface, list] of Object.entries(perSurface)) {
-    const room = api.capacity(byId.get(surface).width, list[0].flying);
+    if (surface === EEVEELUTION_LINE) continue;
+    const room = api.capacity(byId.get(surface).width);
+    assert.ok(room <= 2, 'no ledge should hold more than two');
     if (list.some(a => a.leader)) assert.equal(list.length, 2, `${surface} is a pair's ledge`);
     else assert.ok(list.length <= room, `${surface} holds ${list.length}, room for ${room}`);
   }
+  // The whole family turns up on its own line, every time, and nobody else does.
+  const line = world.residents.filter(a => a.surface === EEVEELUTION_LINE).map(a => a.species);
+  assert.deepEqual([...line].sort(), [...EEVEELUTIONS].sort(), 'the eeveelutions should own their line');
+  assert.notEqual(world.battle.surface, EEVEELUTION_LINE, 'no duelling on the family line');
+  const spread = world.residents.filter(a => EEVEELUTIONS.includes(a.species)).map(a => a.progress).sort((x, y) => x - y);
+  assert.ok(spread.every((v, i) => i === 0 || v - spread[i - 1] > .15), `eeveelutions start bunched: ${spread}`);
   const onTiles = ground.filter(a => /^other-project-\d+$/.test(a.surface));
   assert.ok(onTiles.length >= 1 && onTiles.length <= TILE_RESIDENTS, `${onTiles.length} residents on project tiles`);
   assert.equal(new Set(onTiles.map(a => a.surface)).size, onTiles.length, 'one per tile');

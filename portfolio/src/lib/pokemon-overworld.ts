@@ -1,11 +1,15 @@
 /** DOM-independent wandering, naps and loosely choreographed sparring. */
-export const GROUND_SPECIES = ["breloom", "fidough", "flareon", "goomy", "pawmi", "tyrunt", "rowlet",
-  "appletun", "charcadet", "corphish", "dragonair", "eevee", "gible", "jolteon", "mega-zeraora",
-  "skitty", "squirtle", "sylveon", "umbreon", "vaporeon",
+export const GROUND_SPECIES = ["breloom", "fidough", "goomy", "pawmi", "tyrunt", "rowlet",
+  "appletun", "charcadet", "corphish", "dragonair", "dragonite", "eevee", "gible", "mega-zeraora",
+  "skitty", "squirtle",
+  ...["flareon", "jolteon", "sylveon", "umbreon", "vaporeon"],
   ...["zorua", "hisuian-zorua", "mega-gardevoir", "mega-gallade", "dratini", "shiny-dratini", "growlithe", "arcanine"]];
 export const FLYING_SPECIES = ["beautifly", "corviknight", "noivern", "talonflame",
-  "dragonite", "giratina", "mega-rayquaza", "mega-skarmory", "naganadel",
+  "giratina", "mega-rayquaza", "mega-skarmory", "naganadel",
   "primal-kyogre", "shadow-mewtwo", "zapdos"];
+/** The eeveelutions keep to one line together, on every visit. */
+export const EEVEELUTIONS = ["vaporeon", "jolteon", "flareon", "umbreon", "sylveon"];
+export const EEVEELUTION_LINE = "media-divider";
 /** Bonded pairs share a ledge, and the second one trails the first everywhere it goes. */
 export const PAIRS: readonly (readonly [string, string])[] = [
   ["zorua", "hisuian-zorua"], ["mega-gardevoir", "mega-gallade"],
@@ -13,9 +17,8 @@ export const PAIRS: readonly (readonly [string, string])[] = [
 /** How many project tiles get a resident. Lower this first to thin the crowd. */
 export const TILE_RESIDENTS = 5;
 /** A long divider or card carries a small group; a narrow ledge gets one resident.
- *  Flyers take fewer, since they stack vertically rather than spreading out. */
-export const capacity = (width: number, flying = false) =>
-  Math.max(1, Math.min(flying ? 2 : 3, Math.floor(width / 180)));
+ *  Two is the ceiling either way; the eeveelution line is the one exception. */
+export const capacity = (width: number) => Math.max(1, Math.min(2, Math.floor(width / 180)));
 /** "mega-gallade" reads as "Mega Gallade" in tooltips and labels. */
 export const displayName = (species: string) =>
   species.split("-").map(part => part[0].toUpperCase() + part.slice(1)).join(" ");
@@ -47,9 +50,10 @@ export function shuffle<T>(items: readonly T[], random = Math.random): T[] {
 }
 
 export function createOverworld(surfaces: Surface[], random = Math.random): Overworld {
-  const battleSurface = shuffle(surfaces.filter(s => s.divider && s.width >= 240), random)[0];
+  const family = surfaces.find(s => s.id === EEVEELUTION_LINE);
+  const battleSurface = shuffle(surfaces.filter(s => s.divider && s.width >= 240 && s.id !== family?.id), random)[0];
   const hopCards = surfaces.filter(s => HOP_CARD.test(s.id));
-  const available = shuffle(surfaces.filter(s => s.id !== battleSurface?.id && s.id !== "sky-about" && s.kind !== "air" && !hopCards.includes(s) && s.width >= 100), random);
+  const available = shuffle(surfaces.filter(s => s.id !== battleSurface?.id && s.id !== family?.id && s.id !== "sky-about" && s.kind !== "air" && !hopCards.includes(s) && s.width >= 100), random);
   // Guarantee coverage of each requested area before filling random spare ledges.
   const platforms: Surface[] = [];
   for (const kind of ["skills", "media-card", "featured", "divider"]) {
@@ -69,6 +73,12 @@ export function createOverworld(surfaces: Surface[], random = Math.random): Over
       altitude: flying ? between(floor, floor + 12, random) : 0,
       targetAltitude: between(floor, floor + 12, random), reaction: 0, held: false, hop: null, hopTarget: null });
   };
+  // The eeveelutions own their line outright, spaced along it, and sit out the draw.
+  if (family) EEVEELUTIONS.forEach((species, i) => {
+    add(species, family.id, false);
+    const actor = residents[residents.length - 1];
+    actor.progress = actor.target = (i + .5) / EEVEELUTIONS.length;
+  });
   // Bonded pairs get a wide ledge to themselves and arrive together.
   const bonded = new Set(PAIRS.flat());
   const taken = new Set<string>();
@@ -82,7 +92,8 @@ export function createOverworld(surfaces: Surface[], random = Math.random): Over
   }
   // No species owns the project grid. Draw whoever turns up for its tiles and let
   // the rest walk; hopping is a property of the tile you land on, not of who you are.
-  const roster = shuffle(GROUND_SPECIES.filter(s => !bonded.has(s)), random);
+  const spokenFor = new Set([...bonded, ...(family ? EEVEELUTIONS : [])]);
+  const roster = shuffle(GROUND_SPECIES.filter(s => !spokenFor.has(s)), random);
   let next = 0;
   for (const ledge of platforms) {
     if (taken.has(ledge.id)) continue;
@@ -97,7 +108,7 @@ export function createOverworld(surfaces: Surface[], random = Math.random): Over
   const flyers = shuffle(FLYING_SPECIES.filter(s => corviknight < 0 || s !== "corviknight"), random);
   let aloft = 0;
   for (const sky of airspace)
-    for (let lane = 0; lane < capacity(sky.width, true) && flyers[aloft]; lane++) add(flyers[aloft++], sky.id, true, null, lane);
+    for (let lane = 0; lane < capacity(sky.width) && flyers[aloft]; lane++) add(flyers[aloft++], sky.id, true, null, lane);
   if (battleSurface) { add("armarouge", battleSurface.id, false); add("ceruledge", battleSurface.id, false); }
   return { residents, battle: battleSurface ? { surface: battleSurface.id, elapsed: 0, duration: between(2200, 6500, random), phase: "rest", center: between(.4, .6, random), rounds: 0, attacker: "armarouge", gap: 83 } : null };
 }

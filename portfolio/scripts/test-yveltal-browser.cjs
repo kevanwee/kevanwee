@@ -263,7 +263,8 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
     await hopping.goto(base, {waitUntil: 'domcontentloaded'});
     // Centre the grid so every row counts as visible; residents off screen are frozen.
     await hopping.evaluate(() => document.querySelector('[data-overworld-surface="other-project-4"]').scrollIntoView({block: 'center'}));
-    await hopping.waitForSelector('[data-pokemon]');
+    // Residents off screen are display:none, so wait for attachment, not visibility.
+    await hopping.waitForSelector('[data-pokemon]', {state: 'attached'});
     await hopping.waitForTimeout(600);
     const onTiles = await hopping.locator('[data-pokemon]').evaluateAll(es => es
       .filter(e => /^other-project-\d+$/.test(e.dataset.surface || '')).map(e => e.dataset.pokemon));
