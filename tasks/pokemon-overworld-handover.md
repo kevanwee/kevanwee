@@ -1,5 +1,12 @@
 # Portfolio overworld handover
 
+## New follow-up in progress
+- Ground Rowlet and move Corviknight to a separate, uncrowded airspace.
+- Put Fidough/Goomy on the first three other-project cards; add adjacent same-row hopping with responsive cancellation when cards stack.
+- Import Downloads/yveltal. Reviewed Special2 (dormant cocoon), Special0 (27-frame / 4.32s hatch sequence) and directional Walk wingbeats.
+- Add a dormant left-panel divider perch; clicking awakens Yveltal, then he can roam the viewport with smooth random destinations, resize clamps and phone-specific scale. Keep modal/visibility/reduced-motion handling.
+- Existing completion notes below describe the previous iteration until this follow-up is verified.
+
 ## Completed scope (2026-09-21, including user corrections)
 - Imported all 29 supplied Downloads packs: 12 species and 17 Silvally forms. Existing Ceruledge is reused. No further sprite downloads were needed; originals remain in Downloads.
 - Six ground residents populate random surfaces, guaranteeing a resident on Skills, an other-project card, a Media card and a featured project, plus available dividers/cards. Five flying species occupy section airspaces. Armarouge and Ceruledge always share one divider.

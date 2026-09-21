@@ -1,6 +1,10 @@
 # Lessons Learned
 
 ## Portfolio overworld corrections (2026-09-21)
+- Rowlet's supplied sheets are walking poses, not flight. Keep Rowlet grounded on a separate surface. Do not stack flyers above a battle pair or occupied ground ledge when assigning habitats.
+- Keep the Route 111 label close to its map (original small gap). Reserve the label's measured text footprint when choosing Silvally's walking range instead of lifting the label to create space.
+- Fidough/Goomy should share the first project-card row and hop only to adjacent cards with matching top edges. Recompute adjacency on responsive reflow; never leap vertically through stacked mobile cards.
+- Yveltal is an explicit exception: dormant Special2 on a left-panel perch, click Special0 once, then free viewport flight. Inspect the supplied sequence and enforce complete animation/flight bounds on phones.
 - Inspect animation contact sheets before assigning behavior: PMD Hover can be a spin/action, not sustained flight. Use visually verified directional wingbeats and keep altitude independent of animation frame resets.
 - Match apparent body sizes to species; a small Rowlet must not have the same target height as Corviknight. Compare ground and airborne silhouettes together.
 - Latest placement correction: Silvally belongs on a real surface like the other residents, specifically the Route 111 map's top edge. He should wander, turn and rest there, not roam through blank left-panel space or remain pinned to a viewport corner. All non-battling residents need accessible click/touch/keyboard reactions like Teddiursa.

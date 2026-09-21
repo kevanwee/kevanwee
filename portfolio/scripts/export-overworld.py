@@ -16,15 +16,15 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / 'public'
 DEST = PUBLIC / 'overworld'
 SPECIES = ['armarouge', 'beautifly', 'breloom', 'corviknight', 'fidough',
-           'flareon', 'goomy', 'noivern', 'pawmi', 'rowlet', 'talonflame', 'tyrunt']
+           'flareon', 'goomy', 'noivern', 'pawmi', 'rowlet', 'talonflame', 'tyrunt', 'yveltal']
 FORMS = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire',
          'flying', 'ghost', 'grass', 'ground', 'ice', 'poison', 'psychic',
          'rock', 'steel', 'water']
-FLYERS = {'beautifly', 'corviknight', 'noivern', 'rowlet', 'talonflame'}
+FLYERS = {'beautifly', 'corviknight', 'noivern', 'talonflame', 'yveltal'}
 HEIGHTS = {'silvally': 58, 'armarouge': 43, 'ceruledge': 43, 'breloom': 36,
            'fidough': 25, 'flareon': 32, 'goomy': 24, 'pawmi': 26, 'tyrunt': 32,
-           'rowlet': 22, 'beautifly': 30, 'corviknight': 42, 'noivern': 40, 'talonflame': 36}
-FLIGHT_TEMPO = {'rowlet': 1.3, 'beautifly': 1.1, 'corviknight': 1.35, 'noivern': 1.4, 'talonflame': 1.7}
+           'rowlet': 22, 'beautifly': 30, 'corviknight': 42, 'noivern': 40, 'talonflame': 36, 'yveltal': 54}
+FLIGHT_TEMPO = {'beautifly': 1.1, 'corviknight': 1.35, 'noivern': 1.4, 'talonflame': 1.7, 'yveltal': 1.3}
 
 
 def export(import_downloads=False):
@@ -51,7 +51,7 @@ def export(import_downloads=False):
         folder = DEST / key if key != 'ceruledge' else PUBLIC / key
         animations = {a.findtext('Name'): a for a in ET.parse(folder / 'AnimData.xml').findall('.//Anim')}
         configs = {}
-        for requested in ['Walk', 'Idle', 'Sleep', 'Hover', 'RearUp', 'Double', 'Attack', 'Strike', 'Shoot', 'Hurt']:
+        for requested in ['Walk', 'Idle', 'Sleep', 'Hop', 'Hover', 'RearUp', 'Double', 'Attack', 'Strike', 'Shoot', 'Hurt', 'Special0', 'Special2']:
             if requested not in animations:
                 continue
             name = requested

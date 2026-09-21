@@ -3196,6 +3196,184 @@
       ]
     },
     {
+      "id": "yveltal",
+      "suppliedFolder": "yveltal",
+      "files": [
+        {
+          "name": "AnimData.xml",
+          "sha256": "7d093c417c60ca63b3678f2b10d6a0bee9e151739c2ca4dd2a2fc602d01c385f"
+        },
+        {
+          "name": "Attack-Anim.png",
+          "sha256": "d054a7fc3b08bbd579b78e0212c04edab36dc22085fd5619539853fdb08eeba5"
+        },
+        {
+          "name": "Attack-Offsets.png",
+          "sha256": "6f9739c9f50e3c5a0c09bfe0d19acafc84dd7588ddf5436562aa04cd9113801e"
+        },
+        {
+          "name": "Attack-Shadow.png",
+          "sha256": "7c2b1d5a47cd841081614c2eb03dfce8657f5e545a038da5da3283eea354f816"
+        },
+        {
+          "name": "Charge-Anim.png",
+          "sha256": "869371a8fc8dc3544da155b0d7572cedfe862ad5aee4c812310209f46dddbaf1"
+        },
+        {
+          "name": "Charge-Offsets.png",
+          "sha256": "be86c6d3356d85ef973999e9317bb51cfb434b418346d41d0500cb89abcda8c6"
+        },
+        {
+          "name": "Charge-Shadow.png",
+          "sha256": "5a5ed4cb0ac82cc82b39afa50e722ff330102919146bda47b4b69668f9f29a6f"
+        },
+        {
+          "name": "Double-Anim.png",
+          "sha256": "4c2c9a2b8bca362601d681d5c3d4f3726f64be878f1df5bedc06b448bee92fad"
+        },
+        {
+          "name": "Double-Offsets.png",
+          "sha256": "e67bcabd50b7f8976df0f1b3a7fa3981229e51c3271f340034a9de7c0d13cbfc"
+        },
+        {
+          "name": "Double-Shadow.png",
+          "sha256": "d5c54bc5d3c3d6ae6961bddad07f67558cd9b87c3a0bf03044f8f324f0852900"
+        },
+        {
+          "name": "Hop-Anim.png",
+          "sha256": "e5fcc188bc32f16f123a3d9ab29f8495b5857c37828e4e67032f19756dd2e92d"
+        },
+        {
+          "name": "Hop-Offsets.png",
+          "sha256": "1b9e3f3fd41c8eaf177ffdd5ac729d23a823218321f0834b808624261bdb4abc"
+        },
+        {
+          "name": "Hop-Shadow.png",
+          "sha256": "40615a0ca91876c12d31d539241ebc070519624205979ccd5a8584139430c4c7"
+        },
+        {
+          "name": "Hurt-Anim.png",
+          "sha256": "9535625d440d333e9051a8915d9b7b2f8c5f58b4990026501158f5e1960b8a05"
+        },
+        {
+          "name": "Hurt-Offsets.png",
+          "sha256": "26f5d058e34b2ff5d9358fd6d9ca38fd73fb35f1ac8e79cdbdba7466fc16b9e6"
+        },
+        {
+          "name": "Hurt-Shadow.png",
+          "sha256": "2f4a0ae45ff3e25b7854ccc96de7824cb8b81580a679adc61262b30eb60b0805"
+        },
+        {
+          "name": "Idle-Anim.png",
+          "sha256": "02ccd00ad3acbc9412bd21f75b4f4ea0ad36eef88fa928c8ed1808cc937e9a7f"
+        },
+        {
+          "name": "Idle-Offsets.png",
+          "sha256": "5aa456af38a2bb0ac89e63e92bf72da5ac52a25a424af560cc92ab4ef09bf9c9"
+        },
+        {
+          "name": "Idle-Shadow.png",
+          "sha256": "4e358aa8b00f969d8cb1370e9597540986afe2587a1e37276d955dd6a3e621dc"
+        },
+        {
+          "name": "Rotate-Anim.png",
+          "sha256": "e1e53b8dcf69452aa45b26ffecb53388fedc76ff16ec4145000864e61995d0e2"
+        },
+        {
+          "name": "Rotate-Offsets.png",
+          "sha256": "6e92fcf0af9e428930d3f019631ab1109bbd1f0cb8c03bbb6ead64d92a9a1200"
+        },
+        {
+          "name": "Rotate-Shadow.png",
+          "sha256": "3eff54bb5123da81dc4cc75d5a58afbdabf42138fc6a64cad7a674291ab9f684"
+        },
+        {
+          "name": "Shoot-Anim.png",
+          "sha256": "cde7c50641bafb1e3377223decbb508796f4660fb48edb37fb1372cc34f9bb72"
+        },
+        {
+          "name": "Shoot-Offsets.png",
+          "sha256": "4a1b67103d2a0e773a7f3c6b88e7e0d768cfd07fd6b532fa06f31958925f1ce2"
+        },
+        {
+          "name": "Shoot-Shadow.png",
+          "sha256": "296d6952df1ef33dbe914b576c01518594bb88baad1bf58d58c5f0d9831f92dd"
+        },
+        {
+          "name": "Sleep-Anim.png",
+          "sha256": "773f57738f8b407247b89ed716c923b36d949072a9afebec4f996b7996ead70f"
+        },
+        {
+          "name": "Sleep-Offsets.png",
+          "sha256": "5763be8e002e7ec45a14eb052c5c7ef155766fb4fde020de69bbc206038d9349"
+        },
+        {
+          "name": "Sleep-Shadow.png",
+          "sha256": "bb1bcd3c58f1403f190f822cc75ab36c590790e1d452e7e836b24514df7f5585"
+        },
+        {
+          "name": "Special0-Anim.png",
+          "sha256": "78f8be1e620f29fe06f4d53eb62a618f14492d96e6d27f88c37eea7bf3a21603"
+        },
+        {
+          "name": "Special0-Offsets.png",
+          "sha256": "1620697c2b826ac9384434a3c963d491e4cd629d91178f043ea76def91dad893"
+        },
+        {
+          "name": "Special0-Shadow.png",
+          "sha256": "08515715f011bcd30c247d6850922f908d0992138d509132aa920ddfca5eda70"
+        },
+        {
+          "name": "Special1-Anim.png",
+          "sha256": "c26f99883ec7b1007234370b7a46e50db8ae289b361951228ed8cc527ea23ab1"
+        },
+        {
+          "name": "Special1-Offsets.png",
+          "sha256": "b0055e4da4b2a1c4651f5ce1d6ed0237ea0a30a3b48ed022ac69876f1c0de32e"
+        },
+        {
+          "name": "Special1-Shadow.png",
+          "sha256": "ebcee3f5da312dfb566ddcd7211b6d85589a0e0534086c7baf9c5a002f904533"
+        },
+        {
+          "name": "Special2-Anim.png",
+          "sha256": "2cd9bc09bac975ed02b8637e529efcc1c344da832add2ba546e32cf234f6c4f9"
+        },
+        {
+          "name": "Special2-Offsets.png",
+          "sha256": "8e5e9bc17dc21700222268f92e1b3e49accd795d1f251e677f07fd8e22599698"
+        },
+        {
+          "name": "Special2-Shadow.png",
+          "sha256": "60fbfb887a5f523904d2ce39a9966ce4d012347df5703c42e10f2a2850d5a9f5"
+        },
+        {
+          "name": "Swing-Anim.png",
+          "sha256": "8a50bec55b8d56056cd7c3a8888cbe3db3f8ed050690c4a5f3fa7847b279875a"
+        },
+        {
+          "name": "Swing-Offsets.png",
+          "sha256": "765158e4fa6f8c4b131cb566b05b3a33a5379525d31eae6094a85144f7df34e1"
+        },
+        {
+          "name": "Swing-Shadow.png",
+          "sha256": "4428c48a9a7d797693291803f8ade2f2640c47f696621799700da7d804b27f2a"
+        },
+        {
+          "name": "Walk-Anim.png",
+          "sha256": "8b29002824649af903bcba74de1165d8f03464c813860a4e6fdb6ad43970e852"
+        },
+        {
+          "name": "Walk-Offsets.png",
+          "sha256": "6cdbdc021d6d2229da49849b0b3d70f3f6936bc1a294ff9d8823724ff8a425b6"
+        },
+        {
+          "name": "Walk-Shadow.png",
+          "sha256": "4e358aa8b00f969d8cb1370e9597540986afe2587a1e37276d955dd6a3e621dc"
+        }
+      ]
+    },
+    {
       "id": "silvally-bug",
       "suppliedFolder": "silvally bug",
       "files": [
