@@ -159,14 +159,12 @@ export const experiences: Experience[] = [
     type: "Part-time",
     url: "https://cdl.smu.edu.sg/",
     bullets: [
-      "Contributing to Singapore's first open quantitative legal database, in collaboration with the Ministry of Law to enable data-driven legal research.",
+      "Contributing to Singapore's first open quantitative legal database, in collaboration with the Ministry of Law to enable data-driven legal research.[[official launch]](https://news.smu.edu.sg/news/2025/11/18/smu-build-open-legal-database-support-ministry-law)",
       "Extracting and verifying structured data from Singapore case law and statutes, with additional contributions to the project's data pipeline codebase.",
-      "Official launch — [SMU to build open legal database to support Ministry of Law](https://news.smu.edu.sg/news/2025/11/18/smu-build-open-legal-database-support-ministry-law).",
     ],
     bulletTags: [
       ["tech", "legal"],
       ["tech"],
-      ["legal"],
     ],
   },
   {
@@ -312,7 +310,7 @@ export const experiences: Experience[] = [
     bullets: [
       "Presented technology deployment recommendations to the CEO and COO after owning the end-to-end PoC lifecycle for ZTNA, AI document management, and workflow automation products, including evaluation criteria and vendor assessments with practice-side stakeholders.",
       "Supported the forensics team's remote workflow infrastructure, including Linux server configuration for RDP access; built data preprocessing pipelines for eDiscovery and document production in ongoing legal cases.",
-      "Represented the firm at the DBS x SG Courts Hackathon for a Better World 2024 and attained \"Most Innovative\" — [official release](https://www.dbs.com/newsroom/Hackathon_for_a_Better_World_2024_winners_devise_innovative_solutions_that_strengthen_access_to_justice_and_fortify_community_trust).",
+      "Represented the firm at the DBS x SG Courts Hackathon for a Better World 2024 and attained \"Most Innovative\".[[official release]](https://www.dbs.com/newsroom/Hackathon_for_a_Better_World_2024_winners_devise_innovative_solutions_that_strengthen_access_to_justice_and_fortify_community_trust)",
     ],
     bulletTags: [
       ["tech"],

@@ -5,20 +5,26 @@ import { experiences, Experience } from "@/data";
 
 const TICK_MS = 16;
 
-/** Bullets may carry [label](https://...) links; the rest is plain text. */
-const LINK = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g;
+/** Bullets carry two kinds of link: [label](url) reads inline as part of the sentence,
+ *  and [[label]](url) is a source, set as a chip at the end of the line. */
+const LINK = /\[\[([^\]]+)\]\]\((https?:\/\/[^)\s]+)\)|\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g;
 function withLinks(text: string): React.ReactNode {
   const parts: React.ReactNode[] = [];
   let at = 0, match: RegExpExecArray | null;
   LINK.lastIndex = 0;
   while ((match = LINK.exec(text))) {
     if (match.index > at) parts.push(text.slice(at, match.index));
-    parts.push(
+    parts.push(match[1] ? (
       <a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer"
-        className="underline decoration-sage-200 underline-offset-4 hover:decoration-sage-600">
-        {match[1]}
+        className="ml-1.5 inline-flex items-center gap-1 whitespace-nowrap rounded-sm border border-warm-200 px-1.5 py-0.5 align-[0.1em] font-mono text-[10px] text-warm-400 transition-colors hover:border-sage-300 hover:text-sage-600">
+        <span aria-hidden="true">&#8599;</span>{match[1]}
       </a>
-    );
+    ) : (
+      <a key={match.index} href={match[4]} target="_blank" rel="noopener noreferrer"
+        className="underline decoration-sage-200 underline-offset-4 hover:decoration-sage-600">
+        {match[3]}
+      </a>
+    ));
     at = match.index + match[0].length;
   }
   if (!parts.length) return text;
