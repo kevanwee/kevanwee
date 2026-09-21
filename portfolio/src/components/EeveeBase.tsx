@@ -63,8 +63,9 @@ export default function EeveeBase() {
     return () => { disposed = true; cancelAnimationFrame(raf); intersection.disconnect(); resize.disconnect(); mutations.disconnect();
       nodes.forEach(n => n.cleanup()); timers.forEach(clearTimeout); motion.removeEventListener('change', wake); document.removeEventListener('visibilitychange', wake); };
   }, []);
-  return <figure className="mb-24 lg:mb-36" aria-label="Eevee and friends in Transform Forest">
-    <figcaption className="mb-3 text-xs font-bold uppercase tracking-widest text-warm-400">Eevee &amp; friends · Transform Forest</figcaption>
+  // The section above owns a full section gap, which it earns because the next section
+  // opens with a rule. This has no rule, so it pulls up to the panel's own 64px rhythm.
+  return <figure className="-mt-8 mb-24 lg:-mt-20 lg:mb-36" aria-label="Eevee and friends in Transform Forest">
     <div ref={habitat} data-eevee-base className="relative isolate w-full overflow-hidden rounded-2xl border border-cream-200"
       style={{aspectRatio: '480 / 312', background: 'url(/eevee-base/background.png) center / 100% 100%', imageRendering: 'pixelated'}}>
       <span data-forest-stone aria-hidden="true" className="absolute pointer-events-none" style={{backgroundImage: 'url(/eevee-base/stone-frames.png)', backgroundRepeat: 'no-repeat'}} />

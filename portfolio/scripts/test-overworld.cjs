@@ -7,7 +7,7 @@ const source = readFileSync(resolve(__dirname, '../src/lib/pokemon-overworld.ts'
 const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
 const api = {};
 new Function('exports', js)(api);
-const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, PAIRS, TILE_RESIDENTS, EEVEELUTIONS, displayName, animationFrame } = api;
+const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, PAIRS, TILE_RESIDENTS, SHOULDER, EEVEELUTIONS, displayName, animationFrame } = api;
 assert.equal(displayName('mega-gallade'), 'Mega Gallade');
 assert.equal(displayName('zorua'), 'Zorua');
 const BONDED = new Set(PAIRS.flat());
@@ -214,18 +214,27 @@ for (let i = 0; i < 15000; i++) {
 }
 assert.equal(flightApi.settleFlight(blockedFlight, arena, [{left: -1, right: 101, top: -1, bottom: 161}]), false, 'No space means hide, not overlap');
 assert.ok(GROUND_SPECIES.includes('giratina') && !FLYING_SPECIES.includes('giratina') && !assets.giratina.flying);
-// Two walkers with opposing destinations must be able to exchange places.
+// Two walkers heading into each other must keep their distance and must not freeze:
+// they give way and go somewhere else rather than passing through or waiting forever.
 const crossing = createOverworld([{id: 'wide', kind: 'featured', width: 500, divider: false}], seeded(4));
 crossing.residents = crossing.residents.slice(0, 2);
 crossing.residents.forEach((a, i) => Object.assign(a, {leader: null, progress: i ? .55 : .45, target: i ? .1 : .9, rest: 0, untilNap: 999999, speed: 20}));
-for (let i = 0; i < 120; i++) stepOverworld(crossing, 40, new Map([['wide', 500]]), seeded(5));
-assert.ok(crossing.residents[0].progress > crossing.residents[1].progress, 'Shared-row walkers must pass rather than deadlock');
+const crossingRandom = seeded(5), spanSeen = [new Set(), new Set()];
+let closest = 1;
+for (let i = 0; i < 900; i++) {
+  stepOverworld(crossing, 40, new Map([['wide', 500]]), crossingRandom);
+  closest = Math.min(closest, Math.abs(crossing.residents[0].progress - crossing.residents[1].progress));
+  crossing.residents.forEach((a, n) => spanSeen[n].add(Math.round(a.progress * 60)));
+}
+assert.ok(closest * 420 >= SHOULDER - 1, `walkers closed to ${(closest * 420).toFixed(1)}px, under the ${SHOULDER}px shoulder`);
+assert.ok(spanSeen.every(seen => seen.size > 3), 'a blocked walker must go elsewhere, not freeze nose to nose');
 const sprinter = {...crossing.residents[0], species: 'mega-zeraora', rest: 1, untilNap: 999999};
 stepOverworld({residents: [sprinter], battle: null}, 40, new Map([['wide', 500]]), () => .5);
 assert.equal(sprinter.speed, 13.5 * 1.35, 'Zeraora keeps the faster pace when choosing a new walk');
 const forestApi = {};
 new Function('exports', 'require', ts.transpileModule(readFileSync(resolve(__dirname, '../src/lib/eevee-base.ts'), 'utf8'), {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020}}).outputText)(forestApi, () => api);
 const forestNaps = new Set(), quadrants = new Map();
+let forestClosest = Infinity, forestMoved = 0;
 for (let seed = 1; seed <= 8; seed++) {
   const random = seeded(seed), residents = forestApi.createForest(random);
   assert.deepEqual(residents.map(a => a.species), ['eevee', 'vaporeon', 'jolteon', 'flareon', 'umbreon', 'sylveon']);
@@ -236,9 +245,14 @@ for (let seed = 1; seed <= 8; seed++) {
       assert.ok(forestApi.forestWalkable(a.x, a.y), `${a.species} outside clearing: ${a.x},${a.y}`);
       assert.ok(forestApi.forestSegment(before[j], a), `${a.species} crossed stone/roots`);
       if (a.nap) forestNaps.add(a.species);
+      if (Math.hypot(a.x - before[j].x, a.y - before[j].y) > .05) forestMoved++;
       if (!quadrants.has(a.species)) quadrants.set(a.species, new Set());
       quadrants.get(a.species).add(`${a.x < 240}/${a.y < 240}`);
     });
+    // Nobody walks through a friend. Starting positions are already clear, so any
+    // closer approach than a body's width is the mover's doing.
+    for (let m = 0; m < residents.length; m++) for (let n = m + 1; n < residents.length; n++)
+      forestClosest = Math.min(forestClosest, Math.hypot(residents[m].x - residents[n].x, residents[m].y - residents[n].y));
   }
   const a = residents[0]; a.nap = true; forestApi.greetForest(a, random);
   assert.equal(a.nap, false); assert.ok(a.reaction > 0);
@@ -246,7 +260,9 @@ for (let seed = 1; seed <= 8; seed++) {
 assert.equal(forestNaps.size, 6);
 for (const [species, regions] of quadrants) assert.equal(regions.size, 4, `${species} cannot explore the whole forest`);
 console.log(`Overworld passed: populations ${[...population].sort((a,b)=>a-b).join('/')}; ${files} source hashes, ${GROUND_SPECIES.length} ground and ${FLYING_SPECIES.length} flying species, bonded pairs travelling together, any species hopping any project row, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);
-console.log('Forest passed: six residents, all quadrants reachable, stone/roots excluded throughout 40 minutes of simulation; natural naps and wake-on-click.');
+assert.ok(forestClosest >= forestApi.FOREST_GAP - 1, `the family closed to ${forestClosest.toFixed(1)}px, inside the ${forestApi.FOREST_GAP}px gap`);
+assert.ok(forestMoved > 100000, `only ${forestMoved} steps of movement: giving way should not freeze the forest`);
+console.log(`Forest passed: six residents keeping ${forestClosest.toFixed(1)}px apart, all quadrants reachable, stone/roots excluded throughout 40 minutes of simulation; natural naps and wake-on-click.`);
 
 (async () => {
   const fakeImages = [];

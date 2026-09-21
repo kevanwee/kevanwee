@@ -14,6 +14,8 @@ export const PAIRS: readonly (readonly [string, string])[] = [
   ["dratini", "shiny-dratini"], ["growlithe", "arcanine"]];
 /** How many project tiles get a resident. Lower this first to thin the crowd. */
 export const TILE_RESIDENTS = 5;
+/** Personal space on a shared ledge, in pixels. */
+export const SHOULDER = 34;
 /** A long divider or card carries two residents; a narrow ledge gets one.
  *  The Eevee family has its own forest and does not enter this ledge lottery. */
 export const capacity = (width: number) => Math.max(1, Math.min(2, Math.floor(width / 180)));
@@ -31,7 +33,7 @@ export type Resident = {
   progress: number; target: number; direction: number; speed: number;
   rest: number; nap: boolean; untilNap: number; elapsed: number; age: number; animation: string;
   altitude: number; targetAltitude: number; reaction: number; held: boolean;
-  hop: Hop | null; hopTarget: string | null; leader: string | null;
+  hop: Hop | null; hopTarget: string | null; leader: string | null; stall: number;
 };
 export type Battle = { surface: string; elapsed: number; duration: number; phase: string; center: number; rounds: number; attacker: string; gap: number };
 export type Overworld = { residents: Resident[]; battle: Battle | null };
@@ -69,7 +71,7 @@ export function createOverworld(surfaces: Surface[], random = Math.random): Over
       rest: between(500, 3200, random), nap: false, untilNap: between(16000, 60000, random),
       elapsed: random() * 1000, age: random() * 10000, animation: flying ? "Walk" : "Idle",
       altitude: flying ? between(floor, floor + 12, random) : 0,
-      targetAltitude: between(floor, floor + 12, random), reaction: 0, held: false, hop: null, hopTarget: null });
+      targetAltitude: between(floor, floor + 12, random), reaction: 0, held: false, hop: null, hopTarget: null, stall: 0 });
   };
   // Bonded pairs get a wide ledge to themselves and arrive together.
   const bonded = new Set(PAIRS.flat());
@@ -242,12 +244,32 @@ export function stepOverworld(world: Overworld, delta: number, visibleWidths: Ma
       } else if (!actor.flying && random() < .4) actor.direction = [0, 2, 4, 6][Math.floor(random() * 4)];
     } else {
       actor.direction = distance > 0 ? 2 : 6;
+      const span = Math.max(1, width - 80);
       const speed = Math.min(actor.speed, Math.max(3, Math.abs(distance) * 1.8));
-      const next = approach(actor.progress, actor.target, speed * dt / 1000 / Math.max(1, width - 80));
-      // Residents can pass on shared ledges; collision waits can deadlock a pair
-      // trying to swap places. Hop landings still avoid occupied edge positions.
+      let next = approach(actor.progress, actor.target, speed * dt / 1000 / span);
+      // Everyone else on this ledge is a wall: stop short rather than walk through.
+      // Stopping alone would let two deadlock trying to swap ends, so a walker that
+      // gets nowhere turns around instead of waiting it out.
+      if (!actor.flying) {
+        const gap = SHOULDER / span, heading = Math.sign(next - actor.progress);
+        for (const other of world.residents) {
+          if (other === actor || other.flying || other.hop || other.surface !== actor.surface) continue;
+          const toward = Math.sign(other.progress - actor.progress);
+          if (!toward || toward !== heading) continue;
+          const limit = other.progress - toward * gap;
+          if ((limit - actor.progress) * heading <= 0) next = actor.progress;
+          else if (Math.abs(limit - actor.progress) < Math.abs(next - actor.progress)) next = limit;
+        }
+      }
+      const gained = Math.abs(next - actor.progress) * span;
       actor.progress = next;
-      animate(actor, "Walk", dt);
+      if (gained > .05) actor.stall = 0;
+      else if (!actor.leader && (actor.stall += dt) > 700) {
+        actor.stall = 0;
+        actor.target = Math.min(.97, Math.max(.03, actor.progress - Math.sign(distance) * between(.2, .6, random)));
+        actor.rest = between(300, 1200, random);
+      }
+      animate(actor, gained > .05 ? "Walk" : "Idle", dt);
     }
   }
   const b = world.battle;
