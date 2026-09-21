@@ -38,7 +38,10 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
 
   return (
     <>
-      <aside className="left-panel-zoom lg:sticky lg:top-[var(--viewport-offset)] lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
+      {/* Sticky sits outside the zoom: on one element, Chrome resolves the sticky
+          offset in zoomed units and the whole panel snaps ~20px as you scroll. */}
+      <div className="lg:sticky lg:top-[var(--viewport-offset)]">
+      <aside className="left-panel-zoom lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
         <div>
           <div style={fadeUp("0ms")}>
             <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">
@@ -192,6 +195,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
           </p>
         </div>
       </aside>
+      </div>
 
       {showResume && <ResumeModal onClose={() => setShowResume(false)} />}
     </>

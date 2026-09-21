@@ -286,6 +286,35 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
     await hopping.waitForTimeout(200);
     assert.equal(await hopping.locator('[data-hopping="true"]').count(), 0, 'Stacked phone cards must stop hopping');
     console.log(`${onTiles.join(' and ')} drew the project tiles and both visibly hop; phone reflow stops cross-card hops.`);
+    // zoom and position:sticky on one element make Chrome resolve the sticky offset in
+    // zoomed units, so the whole panel snaps mid-scroll and takes the egg with it.
+    const zoomed = await browser.newPage({viewport: {width: 1440, height: 700}, deviceScaleFactor: 1.25});
+    zoomed.on('pageerror', e => errors.push(e.message));
+    await zoomed.goto(base, {waitUntil: 'domcontentloaded'});
+    await zoomed.waitForSelector('[data-yveltal-state="dormant"]');
+    await zoomed.waitForTimeout(800);
+    assert.notEqual(await zoomed.evaluate(() => getComputedStyle(document.querySelector('.left-panel-zoom')).zoom), '1',
+      'This viewport is meant to zoom the panel, or the check proves nothing');
+    await zoomed.evaluate(() => {
+      window.__panel = [];
+      const tick = () => {
+        const heading = document.querySelector('#teddiursa-panel h1'), egg = document.querySelector('[data-yveltal-state]');
+        if (heading && egg) window.__panel.push([heading.getBoundingClientRect().top, egg.getBoundingClientRect().top]);
+        window.__panelRaf = requestAnimationFrame(tick);
+      };
+      tick();
+    });
+    await zoomed.mouse.move(700, 400);
+    for (let i = 0; i < 20; i++) { await zoomed.mouse.wheel(0, 117); await zoomed.waitForTimeout(20); }
+    await zoomed.waitForTimeout(300);
+    const held = await zoomed.evaluate(() => { cancelAnimationFrame(window.__panelRaf); return window.__panel; });
+    assert.ok(held.length > 30, `Only ${held.length} frames sampled the zoomed panel`);
+    [[0, 'heading'], [1, 'egg']].forEach(([column, name]) => {
+      const seen = held.map(r => r[column]), swing = Math.max(...seen) - Math.min(...seen);
+      assert.ok(swing < 1, `The ${name} shifted ${swing.toFixed(1)}px while scrolling a zoomed sticky panel`);
+    });
+    await zoomed.close();
+    console.log('A zoomed sticky panel, and the egg riding it, hold still through a scroll.');
     assert.deepEqual(errors, []); assert.deepEqual(missing, []);
     console.log('Reduced motion passed; no browser exceptions or broken sprite requests.');
   } finally { await browser.close(); }
