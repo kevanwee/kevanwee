@@ -3,12 +3,14 @@
 import { useEffect, useRef } from "react";
 import { paintSprite, SPRITES } from "@/lib/overworld-sprites";
 import { createFlight, settleFlight, stepFlight, type FlightBounds } from "@/lib/yveltal-flight";
+import { directionFromMotion } from "@/lib/pokemon-overworld";
 
 const sprite = SPRITES.yveltal;
 const HATCH_MS = sprite.animations.Special0.durations.reduce((sum, d) => sum + d * 16, 0);
 // Tailwind's lg breakpoint. Below it the two columns stack and no blank corridor
 // survives, so he keeps his ledge instead of squeezing between the controls.
 const FLIGHT_WIDTH = 1024;
+const LAUNCH_MS = 700;
 const SOLID = "a,button,input,select,textarea,summary,img,svg,canvas,video,iframe,hr";
 
 export default function YveltalRoamer() {
@@ -25,8 +27,8 @@ export default function YveltalRoamer() {
     let mode: "dormant" | "hatching" | "active" | "perched" = "dormant";
     let elapsed = 0, last = 0, raf = 0, greeting = 0;
     let disposed = false, loading = false, hovered = false, focused = false;
-    let hatchX = 0, hatchY = 0;
     let flight = createFlight(0, 0);
+    let launch: {fromX: number; fromY: number; toX: number; toY: number; elapsed: number} | undefined;
     let clearGreeting: ReturnType<typeof setTimeout> | undefined;
     const viewport = () => {
       const v = window.visualViewport;
@@ -75,9 +77,9 @@ export default function YveltalRoamer() {
         await Promise.all([preload(sprite.animations.Special0.src), preload(sprite.animations.Walk.src), preload(sprite.animations.Idle.src)]);
         if (disposed) return;
         const r = perch.getBoundingClientRect();
-        hatchX = r.left + r.width / 2 + scrollX; hatchY = r.top + scrollY;
         elapsed = 0; mode = motion.matches ? (canFly() ? "active" : "perched") : "hatching";
-        flight = createFlight(hatchX, hatchY - 24);
+        flight = createFlight(r.left + r.width / 2 + scrollX, r.top + scrollY - 24);
+        launch = undefined;
         hovered = false;
         if (statusRef.current) statusRef.current.textContent = motion.matches ? "Yveltal is awake." : "Yveltal is awakening.";
       } catch { /* Retain the dormant cocoon if its awakening assets cannot load. */ }
@@ -161,15 +163,26 @@ export default function YveltalRoamer() {
       }
       return nearby;
     };
+    /** Emerging inside the panel's no-fly column would snap him clear in a single
+     *  frame. Find that clear spot up front and glide out of the shell into it. */
+    function takeOff() {
+      measureObstacles();
+      const spot = createFlight(flight.x, flight.y);
+      if (!settleFlight(spot, bounds(), around(spot.x, spot.y))) return;
+      if (Math.hypot(spot.x - flight.x, spot.y - flight.y) < 1) return;
+      launch = {fromX: flight.x, fromY: flight.y, toX: spot.x, toY: spot.y, elapsed: 0};
+    }
     function draw(now: number) {
       raf = 0;
       if (disposed || document.hidden) { last = 0; return; }
-      if (last && now - last < 32) { raf = requestAnimationFrame(draw); return; }
+      // Dormant, hatching and perched all follow a live element rect on a sticky panel,
+      // so a skipped frame strands the sprite a whole scroll tick away from its ledge.
+      if (mode === "active" && last && now - last < 32) { raf = requestAnimationFrame(draw); return; }
       const dt = last ? Math.min(64, now - last) : 0; last = now;
       const modal = !!document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]');
       const r = perch!.getBoundingClientRect();
       layer.hidden = modal;
-      if (mode === "active" && !canFly()) { mode = "perched"; label(); }
+      if (mode === "active" && !canFly()) { mode = "perched"; launch = undefined; label(); }
       else if (mode === "perched" && canFly()) { mode = "active"; flight = createFlight(r.left + r.width / 2 + scrollX, r.top + scrollY - 24); label(); }
       // He lives on the page, not on the screen, so the simulation runs whether or not
       // he is in view and only the paint is skipped. Scroll back and he has moved on.
@@ -180,13 +193,17 @@ export default function YveltalRoamer() {
         let animation = "Special2";
         const size = factor(), scale = sprite.scale * size;
         if (mode === "hatching") {
+          // The ledge is sticky. Pinning the shell to the document point it occupied at
+          // the click leaves the whole hatch behind the moment the reader scrolls, so
+          // track the ledge live exactly as the dormant egg does.
           const anim = sprite.animations.Special0;
           const halfWidth = anim.w * scale / 2 + 8;
-          hatchX = Math.max(halfWidth, Math.min(document.documentElement.clientWidth - halfWidth, hatchX));
-          x = hatchX; y = hatchY; animation = "Special0";
+          x = Math.max(halfWidth, Math.min(document.documentElement.clientWidth - halfWidth, r.left + r.width / 2)) + scrollX;
+          y = r.top + scrollY; animation = "Special0";
           if (elapsed >= HATCH_MS || motion.matches) {
             mode = canFly() ? "active" : "perched"; elapsed = 0; hovered = false;
             flight = createFlight(x, y - 24); label();
+            if (mode === "active" && !motion.matches) takeOff();
             if (statusRef.current) statusRef.current.textContent = mode === "active" ? "Yveltal is awake and exploring." : "Yveltal is awake on his ledge.";
           }
         }
@@ -197,12 +214,21 @@ export default function YveltalRoamer() {
           if (geometryDirty || untilObstacles <= 0) measureObstacles();
           // Reflow can consume an old clear spot. Relocate to nearby whitespace;
           // if none remains, hide until there is room instead of covering content.
-          room = settleFlight(flight, bounds(), around(flight.x, flight.y));
-          if (!motion.matches) stepFlight(flight, dt, bounds(), hovered || focused || greeting > 0, Math.random, around(flight.x, flight.y));
+          if (launch) {
+            launch.elapsed = Math.min(LAUNCH_MS, launch.elapsed + dt);
+            const t = launch.elapsed / LAUNCH_MS, ease = t * t * (3 - 2 * t);
+            flight.x = flight.targetX = launch.fromX + (launch.toX - launch.fromX) * ease;
+            flight.y = flight.targetY = launch.fromY + (launch.toY - launch.fromY) * ease;
+            flight.direction = directionFromMotion(launch.toX - launch.fromX, launch.toY - launch.fromY);
+            if (launch.elapsed >= LAUNCH_MS) launch = undefined;
+          } else {
+            room = settleFlight(flight, bounds(), around(flight.x, flight.y));
+            if (!motion.matches) stepFlight(flight, dt, bounds(), hovered || focused || greeting > 0, Math.random, around(flight.x, flight.y));
+          }
           x = flight.x; y = flight.y + 27 * size; direction = flight.direction;
           animation = "Walk";
         }
-        const pageY = mode === "hatching" ? hatchY : mode === "active" ? flight.y : r.top + scrollY;
+        const pageY = mode === "active" ? flight.y : r.top + scrollY;
         button.hidden = !room || pageY - scrollY < -100 || pageY - scrollY > innerHeight + 100;
         if (!button.hidden) {
           button.style.transform = `translate3d(${Math.round(x - 22)}px,${Math.round(y - 44)}px,0)`;

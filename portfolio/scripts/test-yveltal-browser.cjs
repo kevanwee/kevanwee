@@ -65,6 +65,8 @@ async function clearOfContent(page) {
   assert.deepEqual(overlaps, [], 'Flying Yveltal must not overlap any visible content');
 }
 
+const xy = t => { const m = /translate3d\((-?[\d.]+)px, ?(-?[\d.]+)px/.exec(t || '') || [0, 0, 0]; return {x: +m[1], y: +m[2]}; };
+
 const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
   const r = e.getBoundingClientRect(), p = document.querySelector('[data-yveltal-perch]').getBoundingClientRect();
   return Math.abs(r.bottom - p.top) < 2 && Math.abs((r.left + r.width / 2) - (p.left + p.width / 2)) < 2;
@@ -87,16 +89,45 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       await inBounds(page);
       await page.screenshot({path: join(tmpdir(), `yveltal-dormant-${width}.png`)});
       assert.ok(await onLedge(page), 'Cocoon must sit on its left-panel ledge');
+      // Sampled every frame: a skipped frame strands the egg a whole scroll tick from
+      // the sticky ledge, which reads as jumping.
+      await page.evaluate(() => {
+        window.__drift = [];
+        const tick = () => {
+          const egg = document.querySelector('[data-yveltal-state]'), ledge = document.querySelector('[data-yveltal-perch]');
+          // A hidden egg measures as a zero rect, which is not drift.
+          if (egg && ledge && !egg.hidden) window.__drift.push(egg.getBoundingClientRect().bottom - ledge.getBoundingClientRect().top);
+          window.__driftRaf = requestAnimationFrame(tick);
+        };
+        tick();
+      });
+      await page.mouse.move(Math.round(width / 2), 300);
+      for (let i = 0; i < 8; i++) { await page.mouse.wheel(0, 60); await page.waitForTimeout(24); }
+      await page.waitForTimeout(300);
+      const drift = await page.evaluate(() => { cancelAnimationFrame(window.__driftRaf); return window.__drift; });
+      assert.ok(drift.length > 10, `Only ${drift.length} frames sampled the dormant egg`);
+      const wandered = Math.max(...drift.map(v => Math.abs(v - drift[0])));
+      assert.ok(wandered < 2, `The dormant egg drifted ${wandered.toFixed(1)}px off its ledge while scrolling`);
+      await page.evaluate(() => scrollTo(0, 0));
+      await page.waitForTimeout(300);
       if (width < 640) await button.tap(); else await button.click();
       await page.waitForFunction(() => document.querySelector('[data-yveltal-state]').dataset.animation === 'Special0');
       const started = Date.now(), frames = new Set();
+      let moved = 0, lastShell = null;
       while (await button.getAttribute('data-yveltal-state') === 'hatching') {
         assert.equal(await button.getAttribute('data-animation'), 'Special0');
         frames.add(Number(await button.getAttribute('data-frame')));
+        // The shell rides its sticky ledge; pinning it to the page would leave the
+        // whole hatch behind as soon as the reader scrolls.
+        assert.ok(await onLedge(page), `The hatch left its ledge ${Date.now() - started}ms in`);
+        lastShell = await button.evaluate(e => e.style.transform);
         await inBounds(page);
+        if (!moved && Date.now() - started > 900) { await page.evaluate(() => scrollTo(0, 300)); moved = 1; }
+        else if (moved === 1 && Date.now() - started > 2100) { await page.evaluate(() => scrollTo(0, 0)); moved = 2; }
         await page.waitForTimeout(90);
         assert.ok(Date.now() - started < 7000, 'Awakening never completed');
       }
+      assert.equal(moved, 2, 'The mid-hatch scroll check never ran');
       assert.ok(Date.now() - started >= 4000, 'Do not cut short Special0');
       assert.ok(frames.size >= 23 && Math.max(...frames) === 26, `Full hatch frames: ${[...frames]}`);
       assert.equal(await button.getAttribute('data-yveltal-state'), width >= FLIGHT_WIDTH ? 'active' : 'perched');
@@ -110,6 +141,15 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
         assert.ok(await onLedge(page), 'A perched Yveltal must stay on his ledge');
       } else {
         assert.equal(await button.getAttribute('data-animation'), 'Walk');
+        // The shell sits inside the panel's no-fly column, so settling would otherwise
+        // snap him clear in one frame. He glides out instead.
+        const emerged = xy(await button.evaluate(e => e.style.transform)), shell = xy(lastShell);
+        const leapt = Math.hypot(emerged.x - shell.x, emerged.y - shell.y);
+        assert.ok(leapt < 25, `Yveltal teleported ${leapt.toFixed(0)}px out of his shell instead of flying out`);
+        // He crosses his own ledge during that exit flight, by design. Once he lands,
+        // and from then on, he owes the page the usual clearance.
+        await page.waitForTimeout(1000);
+        await clearOfContent(page);
         const start = await button.getAttribute('style');
         for (let i = 0; i < 60; i++) { await page.waitForTimeout(100); assert.equal(await button.isVisible(), true); await clearOfContent(page); }
         assert.notEqual(await button.getAttribute('style'), start, 'Active Yveltal must roam');
@@ -142,6 +182,9 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       // Reflow across the flight breakpoint, in both directions.
       for (const viewport of [{width: 320, height: 568}, {width: 568, height: 320}, {width: 1440, height: 720}, {width: 900, height: 800}, {width: 1152, height: 900}, {width: 390, height: 844}]) {
         await page.setViewportSize(viewport);
+        // A short viewport can drop the ledge below the fold, where a hidden sprite
+        // measures as a zero rect rather than a misplaced one.
+        await page.evaluate(() => document.querySelector('[data-yveltal-perch]').scrollIntoView({block: 'center'}));
         await page.waitForTimeout(450);
         assert.equal(await button.getAttribute('data-yveltal-state'), viewport.width >= FLIGHT_WIDTH ? 'active' : 'perched', `Wrong mode at ${viewport.width}px`);
         if (viewport.width >= FLIGHT_WIDTH) await clearOfContent(page); else assert.ok(await onLedge(page), `Must perch at ${viewport.width}px`);
