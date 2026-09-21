@@ -161,10 +161,12 @@ export const experiences: Experience[] = [
     bullets: [
       "Contributing to Singapore's first open quantitative legal database, in collaboration with the Ministry of Law to enable data-driven legal research.",
       "Extracting and verifying structured data from Singapore case law and statutes, with additional contributions to the project's data pipeline codebase.",
+      "Official launch — [SMU to build open legal database to support Ministry of Law](https://news.smu.edu.sg/news/2025/11/18/smu-build-open-legal-database-support-ministry-law).",
     ],
     bulletTags: [
       ["tech", "legal"],
       ["tech"],
+      ["legal"],
     ],
   },
   {
@@ -272,7 +274,7 @@ export const experiences: Experience[] = [
     url: "https://law.smu.edu.sg/",
     bullets: [
       "Built a 500-paper structured dataset on Legal NLP, reviewing proceedings of general NLP conferences (ROCLING, RANLP) and specialised legal NLP gatherings (Jurix, ICAIL, ISAIL).",
-      "Conducted an in-depth literature review supporting the paper \"NLP in the Legal Domain\".",
+      "Conducted an in-depth literature review supporting the paper [\"NLP in the Legal Domain\"](https://arxiv.org/pdf/2302.12039).",
     ],
     bulletTags: [
       ["tech", "legal"],
@@ -287,7 +289,7 @@ export const experiences: Experience[] = [
     subtitle: "On-site Legal Advice Scheme",
     period: "Oct 2024 – Jan 2026",
     type: "Pro Bono",
-    url: "https://cjc.org.sg/",
+    url: "https://www.judiciary.gov.sg/visit-us/state-courts",
     proSono: true,
     bullets: [
       "Evaluated Thomson Reuters CoCounsel for court user guidance and public-facing procedural use cases.",
@@ -306,13 +308,15 @@ export const experiences: Experience[] = [
     subtitle: "",
     period: "Jun 2024 – Nov 2024",
     type: "Internship",
-    url: "https://www.rajahtanntech.com/",
+    url: "https://sg.rajahtannasia.com/",
     bullets: [
       "Presented technology deployment recommendations to the CEO and COO after owning the end-to-end PoC lifecycle for ZTNA, AI document management, and workflow automation products, including evaluation criteria and vendor assessments with practice-side stakeholders.",
       "Supported the forensics team's remote workflow infrastructure, including Linux server configuration for RDP access; built data preprocessing pipelines for eDiscovery and document production in ongoing legal cases.",
+      "Represented the firm at the DBS x SG Courts Hackathon for a Better World 2024 and attained \"Most Innovative\" — [official release](https://www.dbs.com/newsroom/Hackathon_for_a_Better_World_2024_winners_devise_innovative_solutions_that_strengthen_access_to_justice_and_fortify_community_trust).",
     ],
     bulletTags: [
       ["tech"],
+      ["tech", "legal"],
       ["tech", "legal"],
     ],
   },
@@ -324,7 +328,7 @@ export const experiences: Experience[] = [
     subtitle: "Litigation & Dispute Resolution",
     period: "Apr 2023 – May 2023",
     type: "Internship",
-    url: "#",
+    url: "https://www.titoisaaclaw.com/",
     bullets: [
       "Conducted legal research and assisted in litigation involving SOPA claims, drafted affidavits, and assisted in deputyship and family law proceedings.",
     ],

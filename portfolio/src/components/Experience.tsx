@@ -5,6 +5,27 @@ import { experiences, Experience } from "@/data";
 
 const TICK_MS = 16;
 
+/** Bullets may carry [label](https://...) links; the rest is plain text. */
+const LINK = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g;
+function withLinks(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = [];
+  let at = 0, match: RegExpExecArray | null;
+  LINK.lastIndex = 0;
+  while ((match = LINK.exec(text))) {
+    if (match.index > at) parts.push(text.slice(at, match.index));
+    parts.push(
+      <a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer"
+        className="underline decoration-sage-200 underline-offset-4 hover:decoration-sage-600">
+        {match[1]}
+      </a>
+    );
+    at = match.index + match[0].length;
+  }
+  if (!parts.length) return text;
+  if (at < text.length) parts.push(text.slice(at));
+  return parts;
+}
+
 const typeStyle: Record<string, string> = {
   "Part-time":      "text-sage-600 bg-sage-50 ring-sage-100",
   "Internship":     "text-warm-600 bg-warm-50 ring-warm-200",
@@ -366,10 +387,10 @@ function ExperiencePanel({ exp, activeFilters }: ExperiencePanelProps) {
                     padding:      "2px 6px",
                   }}
                 >
-                  {b}
+                  {withLinks(b)}
                 </span>
               ) : (
-                b
+                withLinks(b)
               )}
             </li>
           );
