@@ -1,5 +1,12 @@
 # Lessons Learned
 
+## Portfolio overworld corrections (2026-09-21)
+- Inspect animation contact sheets before assigning behavior: PMD Hover can be a spin/action, not sustained flight. Use visually verified directional wingbeats and keep altitude independent of animation frame resets.
+- Match apparent body sizes to species; a small Rowlet must not have the same target height as Corviknight. Compare ground and airborne silhouettes together.
+- Silvally must roam freely in the left panel, showing different facing angles, rather than being pinned to a single perch or viewport corner. All non-battling residents need accessible click/touch/keyboard reactions like Teddiursa.
+- Include Skills, other project cards and Media appearances as habitats. Randomize destinations, rests, glances and battle bouts; a random starting offset does not make a fixed repeating cycle feel alive.
+- Occasional naps are part of the requested behavior. Use authentic Sleep sheets, varied timing and wake-on-click; flyers must land before sleeping.
+
 ## Playground scope
 
 Map refinements: keep previews free of persistent white text bars; do not add resident-count slogans or pause controls. Use authentic Gen III reaction sprites, place berries on reachable tiles offset from every Pokémon, and clamp zoom to cover the map viewport. Terrain overrides must not turn cliff faces, walls or roofs into paths; verify sprite occlusion against elevation and structure depth.

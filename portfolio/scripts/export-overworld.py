@@ -22,7 +22,9 @@ FORMS = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire',
          'rock', 'steel', 'water']
 FLYERS = {'beautifly', 'corviknight', 'noivern', 'rowlet', 'talonflame'}
 HEIGHTS = {'silvally': 58, 'armarouge': 43, 'ceruledge': 43, 'breloom': 36,
-           'fidough': 24, 'flareon': 32, 'goomy': 24, 'pawmi': 26, 'tyrunt': 32}
+           'fidough': 25, 'flareon': 32, 'goomy': 24, 'pawmi': 26, 'tyrunt': 32,
+           'rowlet': 22, 'beautifly': 30, 'corviknight': 42, 'noivern': 40, 'talonflame': 36}
+FLIGHT_TEMPO = {'rowlet': 1.3, 'beautifly': 1.1, 'corviknight': 1.35, 'noivern': 1.4, 'talonflame': 1.7}
 
 
 def export(import_downloads=False):
@@ -49,7 +51,7 @@ def export(import_downloads=False):
         folder = DEST / key if key != 'ceruledge' else PUBLIC / key
         animations = {a.findtext('Name'): a for a in ET.parse(folder / 'AnimData.xml').findall('.//Anim')}
         configs = {}
-        for requested in ['Walk', 'Idle', 'Hover', 'RearUp', 'Double', 'Attack', 'Strike', 'Shoot', 'Hurt']:
+        for requested in ['Walk', 'Idle', 'Sleep', 'Hover', 'RearUp', 'Double', 'Attack', 'Strike', 'Shoot', 'Hurt']:
             if requested not in animations:
                 continue
             name = requested
@@ -75,10 +77,13 @@ def export(import_downloads=False):
             configs[requested] = {'src': '/' + path.relative_to(PUBLIC).as_posix(),
                                  'w': w, 'h': h, 'rows': rows, 'durations': durations, 'bounds': bounds}
         flying = key in FLYERS
-        base = configs.get('Hover', configs['Walk']) if flying else configs['Walk']
+        # Hover is a trick/spin in several supplied packs. Contact-sheet reviewed
+        # Walk rows contain steady directional wingbeats for every flying species.
+        base = configs['Walk']
         height = max(base['bounds'][r][3] - base['bounds'][r][1] for r in [2, 6])
         species = 'silvally' if key.startswith('silvally-') else key
-        manifest[key] = {'flying': flying, 'scale': round(HEIGHTS.get(species, 38) / height, 4),
+        manifest[key] = {'flying': flying, 'flightTempo': FLIGHT_TEMPO.get(key, 1),
+                         'scale': round(HEIGHTS.get(species, 38) / height, 4),
                          'feet': [b[3] - base['h']/2 for b in base['bounds']], 'animations': configs}
 
     output = ROOT / 'src' / 'data' / 'overworld-sprites.json'

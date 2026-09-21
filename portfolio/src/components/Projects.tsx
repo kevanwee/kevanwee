@@ -30,6 +30,7 @@ export default function Projects() {
             <li
               key={project.id}
               data-overworld-surface={`project-${project.id}`}
+              data-overworld-kind="featured"
               className={`group rounded-2xl border border-cream-200 bg-white p-6 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5 ${project.hasCaseStudy ? "cursor-pointer" : ""}`}
               onClick={project.hasCaseStudy ? () => setShowBart(true) : undefined}
             >
@@ -147,9 +148,11 @@ export default function Projects() {
             Other noteworthy projects
           </p>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {otherProjects.map((project) => (
+            {otherProjects.map((project, index) => (
               <li
                 key={project.title}
+                data-overworld-surface={`other-project-${index}`}
+                data-overworld-kind="other-project"
                 className="group flex flex-col justify-between rounded-2xl border border-cream-200 border-t-2 border-t-sage-100 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:border-t-sage-300 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-1"
               >
                 <div>

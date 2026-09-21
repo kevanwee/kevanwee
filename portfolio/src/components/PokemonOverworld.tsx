@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import spriteData from "@/data/overworld-sprites.json";
-import { animationFrame, createOverworld, SILVALLY_FORMS, shuffle, stepOverworld } from "@/lib/pokemon-overworld";
+import { animationFrame, createOverworld, createWanderer, greetResident, SILVALLY_FORMS, shuffle, stepOverworld, stepWanderer } from "@/lib/pokemon-overworld";
 
 type Animation = { src: string; w: number; h: number; rows: number; durations: number[]; bounds: number[][] };
-type Sprite = { flying: boolean; scale: number; feet: number[]; animations: Record<string, Animation> };
+type Sprite = { flying: boolean; flightTempo: number; scale: number; feet: number[]; animations: Record<string, Animation> };
 const SPRITES: Record<string, Sprite> = spriteData;
 const COLORS: Record<string, string> = {
   bug: "#94aa35", dark: "#6c5871", dragon: "#7860bc", electric: "#dcb83e", fairy: "#d08aaf",
@@ -19,14 +19,15 @@ function paint(el: HTMLElement, sprite: Sprite, name: string, elapsed: number, d
   const anim = sprite.animations[name] ?? sprite.animations.Walk;
   const row = anim.rows === 1 ? 0 : direction;
   const loop = !["Attack", "Shoot", "Hurt", "RearUp", "Double"].includes(name);
-  const frame = animationFrame(anim.durations, elapsed, loop);
+  const frame = animationFrame(anim.durations, elapsed / (sprite.flying && name === "Walk" ? sprite.flightTempo : 1), loop);
   const scale = sprite.scale * scaleFactor;
   el.style.width = `${anim.w * scale}px`;
   el.style.height = `${anim.h * scale}px`;
   el.style.backgroundImage = `url("${anim.src}")`;
   el.style.backgroundSize = `${anim.w * anim.durations.length * scale}px ${anim.h * anim.rows * scale}px`;
   el.style.backgroundPosition = `${-frame * anim.w * scale}px ${-row * anim.h * scale}px`;
-  el.style.transform = `translate3d(${Math.round(x - anim.w / 2 * scale)}px,${Math.round(y - (anim.h / 2 + sprite.feet[row]) * scale)}px,0)`;
+  const foot = name === "Sleep" ? anim.bounds[row][3] : anim.h / 2 + sprite.feet[row];
+  el.style.transform = `translate3d(${Math.round(x - anim.w / 2 * scale)}px,${Math.round(y - foot * scale)}px,0)`;
   el.dataset.animation = name;
   el.dataset.frame = String(frame);
   el.dataset.direction = String(row);
@@ -50,16 +51,51 @@ export default function PokemonOverworld() {
       elements.set(el.dataset.overworldSurface || `platform-${i}`, el);
     });
     const surfaces = [...elements].map(([id, el]) => ({ id, width: el.getBoundingClientRect().width,
-      divider: el.dataset.overworldKind === "divider" }));
+      divider: el.dataset.overworldKind === "divider", kind: el.dataset.overworldKind }));
     const world = createOverworld(surfaces);
+    const wanderer = createWanderer();
+    const habitat = document.querySelector<HTMLElement>("[data-silvally-habitat]");
+    const reactionTimers = new Map<string, ReturnType<typeof setTimeout>>();
     const nodes = new Map(world.residents.map(actor => {
-      const node = document.createElement("span");
-      node.className = "overworld-sprite";
+      const interactive = !["armarouge", "ceruledge"].includes(actor.species);
+      const node: HTMLElement = document.createElement(interactive ? "button" : "span");
+      node.className = interactive ? "overworld-resident" : "overworld-resident overworld-battler";
       node.dataset.pokemon = actor.species;
       node.dataset.surface = actor.surface;
       node.dataset.flying = String(actor.flying);
+      const sprite = document.createElement("span");
+      sprite.className = "overworld-sprite";
+      sprite.setAttribute("aria-hidden", "true");
+      const heart = document.createElement("span");
+      heart.className = "overworld-heart";
+      heart.setAttribute("aria-hidden", "true");
+      heart.hidden = true;
+      node.append(sprite, heart);
+      if (interactive) {
+        (node as HTMLButtonElement).type = "button";
+        const name = actor.species[0].toUpperCase() + actor.species.slice(1);
+        node.setAttribute("aria-label", `Say hello to ${name}`);
+        node.title = `Say hello to ${name}`;
+        let pointer = false, keyboard = false;
+        const hold = () => { actor.held = pointer || keyboard; wake(); };
+        node.addEventListener("pointerenter", event => { pointer = event.pointerType !== "touch"; hold(); });
+        node.addEventListener("pointerleave", () => { pointer = false; hold(); });
+        node.addEventListener("focus", () => { keyboard = node.matches(":focus-visible"); hold(); });
+        node.addEventListener("blur", () => { keyboard = false; hold(); });
+        node.addEventListener("click", event => {
+          event.stopPropagation();
+          greetResident(actor);
+          actor.untilNap = 25000 + Math.random() * 50000;
+          if (statusRef.current) statusRef.current.textContent = `${name} sends you a heart!`;
+          clearTimeout(reactionTimers.get(actor.id));
+          reactionTimers.set(actor.id, setTimeout(() => {
+            actor.reaction = 0; reactionTimers.delete(actor.id); wake();
+          }, 1800));
+          wake();
+        });
+      } else node.setAttribute("aria-hidden", "true");
       layer.appendChild(node);
-      return [actor.id, node];
+      return [actor.id, { node, sprite, heart }];
     }));
     // Establish separated battle poses even when reduced motion starts enabled.
     stepOverworld(world, 0, new Map(surfaces.map(s => [s.id, s.width])));
@@ -79,11 +115,11 @@ export default function PokemonOverworld() {
     let formBag = shuffle(SILVALLY_FORMS);
     let form = formBag.pop()!;
     let nextForm = formBag.pop()!;
-    let idleElapsed = 0;
     let nextChange = 18000 + Math.random() * 8000;
     let transition: { elapsed: number; duration: number; animation: string; target: string; switched: boolean; user: boolean } | null = null;
     let loading = false;
     let focused = false;
+    let hovered = false;
     let last = 0;
     let raf = 0;
     let dirty = true;
@@ -113,6 +149,8 @@ export default function PokemonOverworld() {
           preload(SPRITES[`silvally-${target}`].animations[animation].src),
           preload(SPRITES[`silvally-${target}`].animations.Idle.src)]);
         if (disposed) return;
+        wanderer.nap = false; wanderer.untilNap = 30000 + Math.random() * 60000;
+        wanderer.animation = "Idle"; wanderer.elapsed = 0; wanderer.wait = 1500;
         if (motion.matches) {
           form = target;
           label();
@@ -139,9 +177,13 @@ export default function PokemonOverworld() {
     const onClick = () => { void changeForm(true); };
     const onFocus = () => { focused = button.matches(":focus-visible"); };
     const onBlur = () => { focused = false; };
+    const onEnter = (event: PointerEvent) => { hovered = event.pointerType !== "touch"; };
+    const onLeave = () => { hovered = false; };
     button.addEventListener("click", onClick);
     button.addEventListener("focus", onFocus);
     button.addEventListener("blur", onBlur);
+    button.addEventListener("pointerenter", onEnter);
+    button.addEventListener("pointerleave", onLeave);
 
     function draw(now: number) {
       raf = 0;
@@ -160,20 +202,21 @@ export default function PokemonOverworld() {
       if (!modal) {
         // Batch layout reads before any writes, so transforms/hover/resizes remain aligned.
         const rects = new Map([...elements].map(([id, el]) => [id, el.getBoundingClientRect()]));
+        const area = habitat?.getBoundingClientRect();
         const visible = new Map([...rects].filter(([, r]) => r.top > -100 && r.top < window.innerHeight + 150 && r.width > 0)
           .map(([id, r]) => [id, r.width]));
         if (!motion.matches) stepOverworld(world, dt, visible);
         // Re-clamp battle poses to responsive surface widths even while motion is paused.
         else stepOverworld(world, 0, visible);
         for (const actor of world.residents) {
-          const node = nodes.get(actor.id)!;
+          const { node, sprite: spriteNode, heart } = nodes.get(actor.id)!;
           const rect = rects.get(actor.surface)!;
           const shown = visible.has(actor.surface);
           node.hidden = !shown;
           if (!shown) continue;
           const x = rect.left + 40 + actor.progress * Math.max(1, rect.width - 80);
-          const bob = actor.flying ? -52 + Math.sin(actor.elapsed / 900 + actor.speed) * 12 : 0;
-          const name = motion.matches ? (actor.flying ? "Hover" : "Idle") : actor.animation;
+          const bob = actor.flying ? -actor.altitude : 0;
+          const name = motion.matches ? (actor.nap && actor.altitude === 0 ? "Sleep" : actor.flying && actor.altitude > 0 ? "Walk" : "Idle") : actor.animation;
           const sprite = SPRITES[actor.species];
           if (actor.species === "armarouge" || actor.species === "ceruledge") {
             for (const key of ["Walk", "Idle", "Shoot", "Attack", "Hurt"]) void preload(sprite.animations[key].src).catch(() => {});
@@ -181,17 +224,26 @@ export default function PokemonOverworld() {
           // Load only the animations of nearby residents (never all imported sheets).
           const anim = sprite.animations[name] ?? sprite.animations.Walk;
           void preload(anim.src).catch(() => {});
-          paint(node, sprite, name, motion.matches ? 0 : actor.elapsed, actor.direction, x, rect.top + bob);
+          node.style.transform = `translate3d(${Math.round(x - 22)}px,${Math.round(rect.top + bob - 44)}px,0)`;
+          paint(spriteNode, sprite, name, motion.matches ? 0 : actor.elapsed, actor.direction, 22, 44);
+          for (const key of ["animation", "frame", "direction"]) node.dataset[key] = spriteNode.dataset[key];
+          node.dataset.sleeping = String(name === "Sleep");
+          node.dataset.reacting = String(actor.reaction > 0);
+          heart.hidden = actor.reaction <= 0;
+          const bounds = anim.bounds[anim.rows === 1 ? 0 : actor.direction];
+          heart.style.bottom = `${Math.max(28, (bounds[3] - bounds[1]) * sprite.scale + 4)}px`;
           if (actor.species === "armarouge" || actor.species === "ceruledge") node.dataset.battlePhase = world.battle?.phase;
         }
-        if (!motion.matches) {
-          idleElapsed += dt;
-          if (!focused && !transition) {
+        const silvallyVisible = !!area && area.bottom > 0 && area.top < window.innerHeight;
+        button!.hidden = !silvallyVisible;
+        if (!motion.matches && silvallyVisible) {
+          if (!focused && !hovered && !transition) stepWanderer(wanderer, dt, Math.max(1, area!.width - 44), Math.max(1, area!.height - 64));
+          if (!focused && !hovered && !transition && !wanderer.nap) {
             nextChange -= dt;
             if (nextChange <= 0) void changeForm();
           }
         }
-        if (transition) {
+        if (transition && silvallyVisible) {
           transition.elapsed += dt;
           if (!transition.switched && (transition.elapsed >= transition.duration * .48 || motion.matches)) {
             form = transition.target;
@@ -202,12 +254,20 @@ export default function PokemonOverworld() {
           if (transition.elapsed >= transition.duration || motion.matches) {
             transition = null;
             button!.dataset.changing = "false";
-            idleElapsed = 0;
+            wanderer.elapsed = 0;
             pickNext();
           }
         }
         const sprite = SPRITES[`silvally-${form}`];
-        paint(silvally!, sprite, transition?.animation ?? "Idle", transition?.elapsed ?? (motion.matches ? 0 : idleElapsed), 2, 55, 73);
+        if (area && silvallyVisible) {
+          const x = area.left + 22 + wanderer.x * Math.max(1, area.width - 44);
+          const y = area.top + 60 + wanderer.y * Math.max(1, area.height - 64);
+          button!.style.transform = `translate3d(${Math.round(x - 28)}px,${Math.round(y - 64)}px,0)`;
+          const name = transition?.animation ?? (motion.matches || focused || hovered ? (wanderer.nap ? "Sleep" : "Idle") : wanderer.animation);
+          paint(silvally!, sprite, name, transition?.elapsed ?? (motion.matches ? 0 : wanderer.elapsed), wanderer.direction, 28, 64);
+          button!.dataset.direction = String(wanderer.direction);
+          button!.dataset.animation = name;
+        }
       }
       // In reduced motion, observers/events trigger renders; no perpetual RAF loop.
       if (!motion.matches) raf = requestAnimationFrame(draw);
@@ -220,6 +280,7 @@ export default function PokemonOverworld() {
     const resizeObserver = new ResizeObserver(wake);
     resizeObserver.observe(document.body);
     for (const el of elements.values()) resizeObserver.observe(el);
+    if (habitat) resizeObserver.observe(habitat);
     // Detect modal opening/closing even when reduced motion has no RAF running.
     const mutations = new MutationObserver(wake);
     mutations.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["open", "aria-modal"] });
@@ -241,14 +302,17 @@ export default function PokemonOverworld() {
       button.removeEventListener("click", onClick);
       button.removeEventListener("focus", onFocus);
       button.removeEventListener("blur", onBlur);
-      nodes.forEach(node => node.remove());
+      button.removeEventListener("pointerenter", onEnter);
+      button.removeEventListener("pointerleave", onLeave);
+      reactionTimers.forEach(timer => clearTimeout(timer));
+      nodes.forEach(({ node }) => node.remove());
     };
   }, []);
 
   return (
     <>
-      <div ref={layerRef} className="pokemon-overworld" aria-hidden="true" />
-      <button ref={silvallyRef} type="button" className="silvally-resident" aria-label="Silvally. Change form">
+      <div ref={layerRef} className="pokemon-overworld" role="group" aria-label="Roaming Pokémon" />
+      <button ref={silvallyRef} type="button" className="silvally-resident" hidden aria-label="Silvally. Change form">
         <span className="silvally-aura" aria-hidden="true" />
         <span ref={silvallySpriteRef} className="overworld-sprite" aria-hidden="true" />
       </button>

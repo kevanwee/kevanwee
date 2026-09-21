@@ -5,8 +5,12 @@
 /* Residents live in their own click-through layer, anchored to real page surfaces. */
 .pokemon-overworld { position: fixed; inset: 0; z-index: 20; pointer-events: none; overflow: hidden; contain: strict; }
 .overworld-sprite { position: absolute; left: 0; top: 0; background-repeat: no-repeat; image-rendering: pixelated; pointer-events: none; }
-.pokemon-overworld[hidden], .overworld-sprite[hidden], .silvally-resident[hidden] { display: none; }
-.silvally-resident { position: fixed; top: max(4px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); width: 110px; height: 84px; z-index: 21; border-radius: 50%; touch-action: manipulation; }
+.pokemon-overworld[hidden], .overworld-sprite[hidden], .silvally-resident[hidden], .overworld-resident[hidden], .overworld-heart[hidden] { display: none; }
+.overworld-resident { position: absolute; top: 0; left: 0; width: 44px; height: 44px; pointer-events: auto; touch-action: manipulation; border-radius: 12px; }
+.overworld-resident:focus-visible { outline: 2px solid #6b9f89; outline-offset: 3px; }
+.overworld-battler { pointer-events: none; }
+.overworld-heart { position: absolute; left: 14px; width: 16px; height: 16px; background: url('/worlds/reactions/heart.png') center / contain no-repeat; image-rendering: pixelated; pointer-events: none; }
+.silvally-resident { position: fixed; top: 0; left: 0; width: 56px; height: 64px; z-index: 21; border-radius: 16px; touch-action: manipulation; }
 .silvally-resident:focus-visible { outline: 2px solid var(--silvally-color, #6b9f89); outline-offset: 2px; }
 .silvally-aura { position: absolute; inset: 10px 4px 0; border-radius: 50%; background: radial-gradient(ellipse, var(--silvally-color) 0%, transparent 68%); opacity: 0; pointer-events: none; }
 .silvally-resident[data-changing="true"] .silvally-aura { animation: silvally-change 650ms ease-in-out; }

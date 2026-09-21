@@ -20,6 +20,8 @@ export default function MediaAppearances() {
           {mediaAppearances.map((item, i) => (
             <li key={i}>
               <a
+                data-overworld-surface={i === 0 ? "media-card" : undefined}
+                data-overworld-kind={i === 0 ? "media-card" : undefined}
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"

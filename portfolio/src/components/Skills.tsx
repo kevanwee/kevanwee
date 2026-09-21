@@ -106,7 +106,7 @@ export default function Skills() {
         Skills
       </p>
 
-      <div className="rounded-2xl border border-cream-200 bg-white p-6">
+      <div data-overworld-surface="skills-card" data-overworld-kind="skills" className="rounded-2xl border border-cream-200 bg-white p-6">
         {/* Tab bar */}
         <div className="mb-6 flex items-center gap-2">
           {TABS.map(({ id, label }) => (

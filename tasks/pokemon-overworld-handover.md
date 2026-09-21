@@ -1,5 +1,15 @@
 # Portfolio overworld handover
 
+## Follow-up in progress (user corrections)
+- Add Skills, other project cards and Media card habitats, using the existing species.
+- Fix flight: visually inspected contact sheets confirm Talonflame Hover spins and other Hover sheets are rapid action sequences. Use directional Walk wingbeats at calmer rates, independent continuous altitude, and species-specific sizes (especially smaller Rowlet).
+- User clarified: Silvally must roam freely through the left panel in multiple directions, not remain on a perch. Added a responsive left-panel habitat and 2D wandering; preserve form interaction.
+- Add click/touch/keyboard hearts to every non-battle resident, with stable targets while hovered/focused.
+- Replace edge-to-edge shuttles and the fixed battle cycle with random destinations, pauses, glances and variable battle bouts.
+- User additionally requested occasional random sleep. Added authentic Sleep metadata, independent nap timers, landing/takeoff for flyers, and wake-on-click.
+- Implementation now builds and passes simulation tests. Initial desktop/mobile screenshots show a smaller Rowlet, Silvally walking through the left panel, and new habitat assignments. Full interactive browser checks are next.
+- The original completion notes below describe the first iteration and will be superseded by this follow-up.
+
 ## Request / scope (2026-09-21)
 - Import the 29 named Pokemon sprite folders from the user's Downloads (12 species, 17 Silvally forms).
 - Random residents walk/rest on portfolio card tops and section dividers; flyers travel freely above surfaces.

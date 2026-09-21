@@ -7,7 +7,7 @@ const source = readFileSync(resolve(__dirname, '../src/lib/pokemon-overworld.ts'
 const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
 const api = {};
 new Function('exports', js)(api);
-const { createOverworld, stepOverworld, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, animationFrame } = api;
+const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, animationFrame } = api;
 const assets = JSON.parse(readFileSync(resolve(__dirname, '../src/data/overworld-sprites.json')));
 assert.equal(SILVALLY_FORMS.length, 17);
 assert.equal(Object.keys(assets).length, 30);
@@ -35,12 +35,18 @@ for (const pack of receipts.packs) for (const file of pack.files) {
 function seeded(seed) { return () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }; }
 const assignments = new Set();
 const phases = new Set();
+const sleepers = new Set();
+const battleDurations = new Set();
+const angles = new Set();
+const apparentHeight = id => Math.max(...[2, 6].map(row => { const b = assets[id].animations.Walk.bounds[row]; return (b[3] - b[1]) * assets[id].scale; }));
+assert.ok(apparentHeight('rowlet') < 24 && apparentHeight('rowlet') < apparentHeight('corviknight') * .6, 'Rowlet must stay small beside larger birds');
 for (let seed = 1; seed <= 32; seed++) {
   const random = seeded(seed);
   const surfaces = [
     { id: 'sky-about', width: 550, divider: false },
     ...Array.from({ length: 4 }, (_, i) => ({ id: `divider-${i}`, width: 550, divider: true })),
-    ...Array.from({ length: 4 }, (_, i) => ({ id: `card-${i}`, width: 550, divider: false })),
+    ...Array.from({ length: 4 }, (_, i) => ({ id: `card-${i}`, width: 550, divider: false, kind: 'featured' })),
+    ...['skills', 'other-project', 'media-card'].map(kind => ({id: kind, kind, width: 272, divider: false})),
   ];
   const world = createOverworld(surfaces, random);
   assert.equal(world.residents.length, 13);
@@ -48,18 +54,32 @@ for (let seed = 1; seed <= 32; seed++) {
   const ground = world.residents.filter(a => GROUND_SPECIES.includes(a.species));
   assert.equal(new Set(ground.map(a => a.surface)).size, 6, 'ground residents overlap surfaces');
   assert.ok(ground.every(a => a.surface !== 'sky-about' && a.surface !== world.battle.surface));
+  for (const kind of ['skills', 'other-project', 'media-card']) assert.ok(ground.some(a => a.surface === kind), `${kind} has no resident`);
   assignments.add(ground.map(a => a.species + a.surface).join(','));
   const before = JSON.stringify(world);
   stepOverworld(world, 50000, new Map(), random);
   assert.equal(JSON.stringify(world), before, 'offscreen actors must freeze');
   let previousPositions;
   let moved = false;
+  const wanderer = createWanderer(random);
   for (let frame = 0; frame < 2500; frame++) {
     // Resize during approach/attacks/retreat; check 320px phone through desktop surfaces.
     const width = frame % 210 < 90 ? 272 : frame % 210 < 160 ? 554 : 928;
     const visible = new Map(surfaces.map(s => [s.id, width]));
     stepOverworld(world, 40, visible, random);
+    stepWanderer(wanderer, 40, frame % 300 < 150 ? 100 : 272, frame % 300 < 150 ? 500 : 32, random);
+    assert.ok(wanderer.x >= 0 && wanderer.x <= 1 && wanderer.y >= 0 && wanderer.y <= 1, 'Silvally escaped habitat');
+    angles.add(wanderer.direction);
+    if (wanderer.animation === 'Sleep') sleepers.add('silvally');
     phases.add(world.battle.phase);
+    battleDurations.add(Math.round(world.battle.duration));
+    for (const actor of world.residents) {
+      if (actor.flying) assert.notEqual(actor.animation, 'Hover', 'Do not loop action/spin sheets as flight');
+      if (actor.animation === 'Sleep') {
+        sleepers.add(actor.species);
+        assert.equal(actor.altitude, 0, 'A sleeping flyer must have landed');
+      }
+    }
     for (const actor of world.residents) assert.ok(actor.progress >= 0 && actor.progress <= 1, `${actor.species} escaped surface at ${width}px`);
     const a = world.residents.find(a => a.species === 'armarouge');
     const c = world.residents.find(a => a.species === 'ceruledge');
@@ -72,10 +92,23 @@ for (let seed = 1; seed <= 32; seed++) {
     previousPositions = positions;
   }
   assert.ok(moved, 'ground residents never walked');
+  const actor = ground[0];
+  actor.nap = true; actor.animation = 'Sleep';
+  const position = actor.progress;
+  assert.equal(greetResident(actor), true);
+  stepOverworld(world, 40, new Map(surfaces.map(s => [s.id, 272])), random);
+  assert.equal(actor.nap, false, 'Greeting should wake a sleeper');
+  assert.equal(actor.progress, position, 'Greeting must hold still');
+  assert.equal(actor.direction, 0, 'Greeting faces the visitor');
+  assert.ok(actor.reaction > 0);
+  assert.equal(greetResident(world.residents.find(a => a.species === 'armarouge')), false);
 }
 assert.ok(assignments.size > 20, 'placements are not varied');
 for (const phase of ['approach', 'ready', 'armarouge-attacks', 'ceruledge-attacks', 'retreat', 'rest']) assert.ok(phases.has(phase), phase);
+assert.equal(angles.size, 8, 'Silvally must expose all eight directions');
+assert.ok(battleDurations.size > 100, 'Bouts must vary, not run a fixed cycle');
+assert.deepEqual(sleepers, new Set([...GROUND_SPECIES, ...FLYING_SPECIES, 'silvally']));
 assert.equal(animationFrame([4, 8, 2], 64), 1);
 assert.equal(animationFrame([4, 8, 2], 224), 0);
 assert.equal(animationFrame([4, 8, 2], 1000, false), 2);
-console.log(`Overworld passed: ${files} source hashes, 30 variants, all 13 residents, 32 random seeds, 100 simulated seconds each, responsive bounds and all battle phases.`);
+console.log(`Overworld passed: ${files} source hashes, all requested habitats, species sizing, steady flight, all residents sleep/wake, eight Silvally angles, random battles and responsive bounds across 32 seeds / 100 seconds each.`);
