@@ -1,57 +1,43 @@
 # Portfolio overworld handover
 
-## Follow-up in progress (user corrections)
-- Add Skills, other project cards and Media card habitats, using the existing species.
-- Fix flight: visually inspected contact sheets confirm Talonflame Hover spins and other Hover sheets are rapid action sequences. Use directional Walk wingbeats at calmer rates, independent continuous altitude, and species-specific sizes (especially smaller Rowlet).
-- LATEST placement correction supersedes the left-panel plan: Silvally now wanders along the top edge of the Route 111 map. Removed the temporary left-panel habitat. The map heading has clearance above his walking surface so he does not cover its text. Walking, glancing, sleeping and form changes remain.
-- Add click/touch/keyboard hearts to every non-battle resident, with stable targets while hovered/focused.
-- Replace edge-to-edge shuttles and the fixed battle cycle with random destinations, pauses, glances and variable battle bouts.
-- User additionally requested occasional random sleep. Added authentic Sleep metadata, independent nap timers, landing/takeoff for flyers, and wake-on-click.
-- Implementation now builds and passes simulation tests. Initial desktop/mobile screenshots show a smaller Rowlet, Silvally walking through the left panel, and new habitat assignments. Full interactive browser checks are next.
-- The original completion notes below describe the first iteration and will be superseded by this follow-up.
+## Completed scope (2026-09-21, including user corrections)
+- Imported all 29 supplied Downloads packs: 12 species and 17 Silvally forms. Existing Ceruledge is reused. No further sprite downloads were needed; originals remain in Downloads.
+- Six ground residents populate random surfaces, guaranteeing a resident on Skills, an other-project card, a Media card and a featured project, plus available dividers/cards. Five flying species occupy section airspaces. Armarouge and Ceruledge always share one divider.
+- **Latest Silvally decision:** walk and rest on the top edge of the Route 111 map, like the other surface residents. The earlier viewport-corner and left-panel placements were rejected and removed. The original LeftPanel layout is restored. Route 111's heading has clearance for his sprite above the box.
+- Silvally walks both ways, occasionally looks in other directions, sleeps and wakes. He keeps all 17 forms, random automatic change intervals and click/Enter/Space RearUp/Double transformations. Clicking wakes him. Automatic form changes do not reset his nap deadline.
+- All 11 non-battling residents are accessible 44px buttons. Mouse, touch or Enter/Space makes them face the visitor and display the same authentic heart asset used by Teddiursa. Hover/keyboard focus holds the target still. Clicking wakes sleepers.
+- Random destinations, speeds, pauses and glances replace repetitive edge-to-edge shuttles. Independent nap timers and varied nap lengths keep residents from sleeping together on a fixed schedule. Flyers land before sleeping and rise afterward. Silvally and residents pause offscreen/behind dialogs/in hidden tabs.
+- The battle pair uses randomized approach/ready/attack/retreat/rest phases, variable bout lengths, random initiator and one to four attacks per bout. It no longer repeats a fixed 16-second cycle.
+- Flight was visually reviewed frame by frame. Talonflame's Hover sheet spins; several other Hover sheets are rapid actions. Flight now uses the directional Walk wingbeats at species-specific tempos. Altitude moves gradually and is independent of animation resets.
+- Visible Walk body-height targets: Rowlet 22px; Goomy 24; Fidough 25; Pawmi 26; Beautifly 30; Flareon/Tyrunt 32; Breloom/Talonflame 36; Noivern 40; Corviknight 42; battle pair 43; Silvally 58. Idle/sleep feet anchor to their own alpha bounds; moving/action sheets keep their shared origin.
+- Reduced motion freezes autonomous activity, while explicit greetings and instant form changes still work; hearts clear after the interaction. Modals suppress the overlays and suspend their clocks.
 
-## Request / scope (2026-09-21)
-- Import the 29 named Pokemon sprite folders from the user's Downloads (12 species, 17 Silvally forms).
-- Random residents walk/rest on portfolio card tops and section dividers; flyers travel freely above surfaces.
-- Silvally stays at the top, periodically changes form and responds to clicks with RearUp/Double.
-- Armarouge and existing Ceruledge share a surface and a coordinated sparring sequence.
-- Preserve the existing cursor, maps, content and layout. Commit/push progress to main as explicitly requested.
+## Files and maintenance
+- `portfolio/src/lib/pokemon-overworld.ts`: pure wandering, greeting, nap and randomized battle state machines. `stepWanderer` supports direction changes; Silvally's current route uses the horizontal map edge.
+- `portfolio/src/components/PokemonOverworld.tsx`: one 30fps imperative renderer, sprite buttons, visibility handling, Silvally form changes, asset preloading. No per-frame React renders.
+- `portfolio/src/components/WorldPreview.tsx`: Route 111 `data-silvally-surface` anchor and heading clearance. Does not change either map's simulation/roster.
+- `data-overworld-surface` opts in regular surfaces. `data-overworld-kind` identifies priority habitat groups. Skills/Projects/Media contain the new markers.
+- `portfolio/scripts/export-overworld.py`: validates supplied XML/PNGs and builds `src/data/overworld-sprites.json`. Requires Pillow. `python scripts/export-overworld.py` regenerates from repository assets; `--import-downloads` is only for intentional reimport.
+- `portfolio/public/overworld/sources.json`: SHA-256 receipts for all 2,582 supplied files (~14.3 MiB). `.gitattributes` preserves original XML bytes across platforms. All source hashes and committed XML blob hashes were verified.
+- Only nearby resident sheets and current/next Silvally forms load in the browser; the full source archive is not downloaded at runtime. Original unused animations/shadows/offsets are retained for future work. Existing PMD SpriteCollab credits apply.
 
-## Plan / checkpoints
-1. Copy original sprite packs, retain XML/offset/shadow data, generate validated runtime metadata. Commit/push assets and this handover.
-2. Add a shared, viewport-culled overworld renderer and a keyboard/touch accessible Silvally. Commit/push implementation after build.
-3. Exercise desktop/mobile, reduced motion, resizing, form changes and battle progression. Update this handover and commit/push verification/fixes.
+## Verification
+- `npm run build` from `portfolio/`: production build and TypeScript passed.
+- `npm run test:overworld`: all asset hashes and frame metadata; 32 seeds, 100 seconds per seed; priority habitats, species sizing, steady flight selection, random battle phases/durations, all species sleeping/waking, flyer landing, greeting holds, eight Silvally facing directions, offscreen suspension and responsive bounds.
+- `npm run test:overworld:browser`: automatic change and all 17 forms; all 11 greetings by mouse/keyboard; mobile touch and reduced-motion heart cleanup; 320/390/768/1440px surface/foot alignment and no added document overflow; hidden-tab simulation; reduced motion; actual map modal and restoration; natural Silvally sleep while automatic form changes run; randomized bouts; ground/flyer naps and wake-on-click. No browser exceptions or broken sprite requests.
+- Long browser behavior checks accelerate RAF timestamps (4x, with the production delta cap still applied), without modifying simulation state. Normal-speed interaction and geometry checks run separately within the same runner.
+- Browser runner needs a running production site (`npm run start -- --port 3005`) and Playwright. Set `PLAYWRIGHT_MODULE` to an installed playwright-core module if not locally installed; this session reused `../copycat/frontend/node_modules/playwright-core` via its absolute path. `BASE_URL` defaults to `http://localhost:3005`. No new npm dependency was installed.
+- Screenshots live in the OS temporary folder, including `silvally-route111.png`, `silvally-route111-mobile.png`, `skills-pokemon-heart.png` and the browser runner's desktop/responsive captures. Desktop and phone captures were visually reviewed.
+- Existing `npm run test:world` passed in the initial iteration (44 map residents, 16,286,400 reservation checks). Map logic was not changed in this follow-up.
+- Known pre-existing issue: Experience Tech/Legal filters overflow a 320px viewport (388px document width), confirmed with overlays removed. This feature adds no document overflow. Physical Safari/iOS testing has not been performed.
 
-## Current status
-- Inspected .claude/CLAUDE.md and tasks/lessons.md. Live site is portfolio/ (Next.js).
-- Found all requested Downloads folders; all include AnimData.xml. Existing Ceruledge is portfolio/public/ceruledge/.
-- Asset checkpoint `ef3177f` committed/pushed to origin/main: all 2,582 supplied files (~14.3 MiB), original metadata/shadows/offsets, per-file SHA-256 receipts in public/overworld/sources.json. Originals remain in Downloads.
-- Generator: python portfolio/scripts/export-overworld.py (Pillow). Manifest: src/data/overworld-sprites.json; 30 variants including existing Ceruledge, XML timing, directional alpha bounds, foot anchors and normalized visible heights.
-- Implemented src/lib/pokemon-overworld.ts (random distribution, movement/rest, shared battle clock) and components/PokemonOverworld.tsx (30fps imperative sprite layer, culling, hidden-tab/modal suspension, reduced motion, Silvally interaction).
-- Explicit surface attributes on four section dividers and featured project cards; About is an airspace only. Silvally is pinned at the viewport top-right; forms are shuffled without repeats until the bag is exhausted, every 18–26 seconds or click/Enter/Space. RearUp/Double transitions are preloaded.
-- COMPLETE: implementation checkpoint `1972f70` and original-XML byte preservation `e90e635` committed and pushed to origin/main. Live deployment verified at https://kevanwee.vercel.app (13 residents plus Silvally; clicking Silvally changed ghost to ice during the live smoke check).
-- Full local Chromium verification passed: all 17 forms, automatic transitions, Enter/Space, mobile touch, complete battle progression, every surface at 320/390/768/1440px, feet alignment, no added horizontal overflow, simulated hidden-document suspension, reduced motion, map dialog suppression and restoration. No browser exceptions or failed sprite requests.
-- Test-driven fix: battle center/gap now remain inside their surface when resizing down to a 320px viewport.
-- The pre-existing Experience Tech/Legal filter row overflows a 320px viewport (388px document width). Confirmed by measuring with the overworld overlays hidden. Not changed, to preserve the original layout. Physical Safari/iOS testing has not been performed.
+## Commit checkpoints / deployment
+- `ef3177f`: import packs and initial handover.
+- `1972f70`, `e90e635`, `c595072`: first implementation, original XML preservation and verification.
+- `b87696e`: extra habitats, interactive residents, corrected flight/sizes, random movement/bouts and naps.
+- `573aa1e`: latest requested Route 111 placement and autonomous sleep/form coexistence.
+- All checkpoints pushed to origin/main; pushes deploy through Vercel. Final verification/handover is in the following commit.
+- Live site: https://kevanwee.vercel.app
 
-## Behavior / maintenance
-- Six ground species occupy randomly shuffled, distinct card/divider surfaces on each page load. One spare ground surface can remain empty. Five flyers use the four section gaps and About airspace. Movement/rest timing and initial positions vary per visit.
-- Armarouge/Ceruledge always share one randomly chosen divider; their 16-second shared clock coordinates approach, Shoot/Attack and Hurt responses, retreat and rest. Offscreen groups pause, so each sequence resumes when viewed.
-- One imperative 30fps loop updates sprites without per-frame React renders. Sheet requests are limited to nearby residents and current/next Silvally forms. The 14.3 MiB archive is not downloaded in full by the browser.
-- Reduced motion renders still residents and disables automatic form changes. Explicit Silvally activation changes form immediately. Keyboard focus pauses automatic changes. Modals hide the overlays and suspend their clocks.
-- Surface opt-in is data-overworld-surface, plus data-overworld-kind="divider" for battle/airspace candidates. Keep surfaces at least 240px wide for a battle pair.
-- Frame durations come directly from AnimData.xml (16ms ticks). Metadata uses alpha bounds to size visible bodies, with a consistent sprite-sheet origin to preserve foot placement during different animations.
-- Full original packs (including currently unused animations, shadows and offsets) remain available for future work. public/overworld/.gitattributes preserves original XML line endings; committed XML blobs were checked against the recorded source hashes.
-
-## Workspace boundaries
-Pre-existing changes must not be staged: portfolio/src/components/MouseGradient.tsx; .claude/settings.json; portfolio MP3/companylogos; unrelated untracked public/icons files; ssh-portfolio/.
-Stage explicit paths only. Pushing main triggers Vercel. Keep Downloads originals as a backup.
-
-## Verification / resume commands
-- Read this file and git log/status first. Requested implementation is complete; preserve the unrelated user work listed above.
-- From portfolio/: npm run build — passed production compilation, TypeScript and static generation.
-- npm run test:overworld — passed 2,582 source hashes, 30 variants, all 13 residents over 32 seeds and 100 simulated seconds per seed, responsive bounds, offscreen freezing and every battle phase.
-- npm run test:world — passed the original 44 map residents and 16,286,400 reservation checks. Original map logic was not changed.
-- npm run start -- --port 3005, then npm run test:overworld:browser. Requires Playwright, or set PLAYWRIGHT_MODULE to an installed playwright-core module. This session reused ../copycat/frontend/node_modules/playwright-core (absolute path in the environment variable), with its existing Chromium installation. No new dependency was installed.
-- Browser runner accepts BASE_URL (default http://localhost:3005); screenshots are written to the OS temporary folder as overworld-desktop-top.png, overworld-battle.png and overworld-projects-{width}.png. Screenshots were visually inspected.
-- python scripts/export-overworld.py regenerates the manifest from repository assets; add --import-downloads only when intentionally reimporting the original folders. Requires Pillow. Downloads originals were preserved.
+## Preserve unrelated user work
+Never stage the pre-existing `portfolio/src/components/MouseGradient.tsx` change, `.claude/settings.json`, portfolio MP3/companylogos, unrelated untracked `public/icons` files, or `ssh-portfolio/`. Stage explicit task paths only. No unrelated personal files were published.

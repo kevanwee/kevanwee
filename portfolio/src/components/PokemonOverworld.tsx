@@ -26,7 +26,7 @@ function paint(el: HTMLElement, sprite: Sprite, name: string, elapsed: number, d
   el.style.backgroundImage = `url("${anim.src}")`;
   el.style.backgroundSize = `${anim.w * anim.durations.length * scale}px ${anim.h * anim.rows * scale}px`;
   el.style.backgroundPosition = `${-frame * anim.w * scale}px ${-row * anim.h * scale}px`;
-  const foot = name === "Sleep" ? anim.bounds[row][3] : anim.h / 2 + sprite.feet[row];
+  const foot = name === "Sleep" || name === "Idle" ? anim.bounds[row][3] : anim.h / 2 + sprite.feet[row];
   el.style.transform = `translate3d(${Math.round(x - anim.w / 2 * scale)}px,${Math.round(y - foot * scale)}px,0)`;
   el.dataset.animation = name;
   el.dataset.frame = String(frame);
@@ -147,7 +147,7 @@ export default function PokemonOverworld() {
         await Promise.all([preload(SPRITES[`silvally-${form}`].animations[animation].src),
           preload(SPRITES[`silvally-${target}`].animations[animation].src),
           preload(SPRITES[`silvally-${target}`].animations.Idle.src)]);
-        if (disposed) return;
+        if (disposed || (!user && wanderer.nap)) return;
         if (user) { wanderer.nap = false; wanderer.untilNap = 30000 + Math.random() * 60000; }
         wanderer.animation = "Idle"; wanderer.elapsed = 0; wanderer.wait = 1500;
         if (motion.matches) {
