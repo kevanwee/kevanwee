@@ -8,7 +8,6 @@ export default function About() {
   return (
     <section
       id="about"
-      data-overworld-surface="sky-about"
       className="mb-24 scroll-mt-24 lg:mb-36"
       aria-label="About"
     >
@@ -49,8 +48,10 @@ export default function About() {
         </ul>
       </div>
 
-      {/* Memberships */}
-      <div className="mt-8">
+      {/* Memberships. The flyers' airspace hangs off this, near the foot of the
+          section: anchored to the section itself they opened the page hovering over
+          the heading, which is the first thing anyone sees. */}
+      <div className="mt-8" data-overworld-surface="sky-about">
         <Memberships />
       </div>
     </section>

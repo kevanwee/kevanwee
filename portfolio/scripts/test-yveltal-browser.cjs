@@ -125,12 +125,20 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       await page.waitForFunction(() => document.querySelector('[data-yveltal-state]').dataset.animation === 'Special0');
       const started = Date.now(), frames = new Set();
       let moved = 0;
-      while (await button.getAttribute('data-yveltal-state') === 'hatching') {
-        assert.equal(await button.getAttribute('data-animation'), 'Special0');
-        frames.add(Number(await button.getAttribute('data-frame')));
+      // State and ledge have to be read in one go: sampled separately, the hatch can
+      // finish between the two and the launch flight is read as the shell straying.
+      for (let shell; (shell = await page.evaluate(() => {
+        const node = document.querySelector('[data-yveltal-state]');
+        if (node.dataset.yveltalState !== 'hatching') return null;
+        const r = node.getBoundingClientRect(), p = document.querySelector('[data-yveltal-perch]').getBoundingClientRect();
+        return {animation: node.dataset.animation, frame: Number(node.dataset.frame),
+          onLedge: Math.abs(r.bottom - p.top) < 2 && Math.abs((r.left + r.width / 2) - (p.left + p.width / 2)) < 2};
+      })); ) {
+        assert.equal(shell.animation, 'Special0');
+        frames.add(shell.frame);
         // The shell rides its sticky ledge; pinning it to the page would leave the
         // whole hatch behind as soon as the reader scrolls.
-        assert.ok(await onLedge(page), `The hatch left its ledge ${Date.now() - started}ms in`);
+        assert.ok(shell.onLedge, `The hatch left its ledge ${Date.now() - started}ms in`);
         await inBounds(page);
         if (!moved && Date.now() - started > 900) { await page.evaluate(() => scrollTo(0, 300)); moved = 1; }
         else if (moved === 1 && Date.now() - started > 2100) { await page.evaluate(() => scrollTo(0, 0)); moved = 2; }
