@@ -8,6 +8,12 @@ interface Props {
 
 const CREDITS = [
   {
+    category: "Transform Forest",
+    name: "Toastypk / The Spriters Resource · Pamtre Berry archive",
+    href: "https://pamtre-berry.neocities.org/articles/friendareas",
+    description: "PMD forest background and the original 32 stone colour frames",
+  },
+  {
     category: "Pokémon Sprites",
     name: "PMD SpriteCollab",
     href: "https://sprites.pmdcollab.org/",

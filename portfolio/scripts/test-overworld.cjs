@@ -7,7 +7,7 @@ const source = readFileSync(resolve(__dirname, '../src/lib/pokemon-overworld.ts'
 const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
 const api = {};
 new Function('exports', js)(api);
-const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, PAIRS, TILE_RESIDENTS, EEVEELUTIONS, EEVEELUTION_LINE, displayName, animationFrame } = api;
+const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, PAIRS, TILE_RESIDENTS, EEVEELUTIONS, displayName, animationFrame } = api;
 assert.equal(displayName('mega-gallade'), 'Mega Gallade');
 assert.equal(displayName('zorua'), 'Zorua');
 const BONDED = new Set(PAIRS.flat());
@@ -54,7 +54,7 @@ for (let seed = 1; seed <= 32; seed++) {
     { id: 'sky-about', width: 550, divider: false },
     { id: 'sky-footer', width: 550, divider: false, kind: 'air' },
     ...Array.from({ length: 4 }, (_, i) => ({ id: `divider-${i}`, width: 550, divider: true })),
-    { id: EEVEELUTION_LINE, width: 550, divider: true },
+    { id: 'media-divider', width: 550, divider: true },
     ...Array.from({ length: 4 }, (_, i) => ({ id: `card-${i}`, width: 550, divider: false, kind: 'featured' })),
     ...['skills', 'media-card'].map(kind => ({id: kind, kind, width: 272, divider: false})),
     ...Array.from({length: 3}, (_, i) => ({id: `other-project-${i}`, kind: 'other-project', width: 156, divider: false})),
@@ -75,6 +75,7 @@ for (let seed = 1; seed <= 32; seed++) {
     if (!a) continue;
     assert.equal(b.surface, a.surface, `${follower} should share a ledge with ${lead}`);
     assert.equal(b.leader, lead); assert.equal(a.leader, null);
+    assert.ok(Math.abs(a.progress - b.progress) * Math.max(1, surfaces.find(s => s.id === a.surface).width - 80) >= 44, 'Pairs need separate initial tap targets, even with reduced motion');
     assert.ok(!/^other-project-/.test(a.surface), 'pairs want a wide ledge, not a project tile');
     pairsPlaced.add(lead);
   }
@@ -84,18 +85,12 @@ for (let seed = 1; seed <= 32; seed++) {
   world.residents.filter(a => !['armarouge', 'ceruledge'].includes(a.species))
     .forEach(a => (perSurface[a.surface] ||= []).push(a));
   for (const [surface, list] of Object.entries(perSurface)) {
-    if (surface === EEVEELUTION_LINE) continue;
     const room = api.capacity(byId.get(surface).width);
     assert.ok(room <= 2, 'no ledge should hold more than two');
     if (list.some(a => a.leader)) assert.equal(list.length, 2, `${surface} is a pair's ledge`);
     else assert.ok(list.length <= room, `${surface} holds ${list.length}, room for ${room}`);
   }
-  // The whole family turns up on its own line, every time, and nobody else does.
-  const line = world.residents.filter(a => a.surface === EEVEELUTION_LINE).map(a => a.species);
-  assert.deepEqual([...line].sort(), [...EEVEELUTIONS].sort(), 'the eeveelutions should own their line');
-  assert.notEqual(world.battle.surface, EEVEELUTION_LINE, 'no duelling on the family line');
-  const spread = world.residents.filter(a => EEVEELUTIONS.includes(a.species)).map(a => a.progress).sort((x, y) => x - y);
-  assert.ok(spread.every((v, i) => i === 0 || v - spread[i - 1] > .15), `eeveelutions start bunched: ${spread}`);
+  assert.ok(!world.residents.some(a => EEVEELUTIONS.includes(a.species)), 'Family lives in its forest, without duplicate ledge residents');
   const onTiles = ground.filter(a => /^other-project-\d+$/.test(a.surface));
   assert.ok(onTiles.length >= 1 && onTiles.length <= TILE_RESIDENTS, `${onTiles.length} residents on project tiles`);
   assert.equal(new Set(onTiles.map(a => a.surface)).size, onTiles.length, 'one per tile');
@@ -218,4 +213,57 @@ for (let i = 0; i < 15000; i++) {
   assert.ok(flightApi.clearFlightPath(before.x, before.y, blockedFlight.x, blockedFlight.y, wall), 'Each movement segment must avoid obstacles');
 }
 assert.equal(flightApi.settleFlight(blockedFlight, arena, [{left: -1, right: 101, top: -1, bottom: 161}]), false, 'No space means hide, not overlap');
+assert.ok(GROUND_SPECIES.includes('giratina') && !FLYING_SPECIES.includes('giratina') && !assets.giratina.flying);
+// Two walkers with opposing destinations must be able to exchange places.
+const crossing = createOverworld([{id: 'wide', kind: 'featured', width: 500, divider: false}], seeded(4));
+crossing.residents = crossing.residents.slice(0, 2);
+crossing.residents.forEach((a, i) => Object.assign(a, {leader: null, progress: i ? .55 : .45, target: i ? .1 : .9, rest: 0, untilNap: 999999, speed: 20}));
+for (let i = 0; i < 120; i++) stepOverworld(crossing, 40, new Map([['wide', 500]]), seeded(5));
+assert.ok(crossing.residents[0].progress > crossing.residents[1].progress, 'Shared-row walkers must pass rather than deadlock');
+const sprinter = {...crossing.residents[0], species: 'mega-zeraora', rest: 1, untilNap: 999999};
+stepOverworld({residents: [sprinter], battle: null}, 40, new Map([['wide', 500]]), () => .5);
+assert.equal(sprinter.speed, 13.5 * 1.35, 'Zeraora keeps the faster pace when choosing a new walk');
+const forestApi = {};
+new Function('exports', 'require', ts.transpileModule(readFileSync(resolve(__dirname, '../src/lib/eevee-base.ts'), 'utf8'), {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020}}).outputText)(forestApi, () => api);
+const forestNaps = new Set(), quadrants = new Map();
+for (let seed = 1; seed <= 8; seed++) {
+  const random = seeded(seed), residents = forestApi.createForest(random);
+  assert.deepEqual(residents.map(a => a.species), ['eevee', 'vaporeon', 'jolteon', 'flareon', 'umbreon', 'sylveon']);
+  for (let i = 0; i < 7500; i++) {
+    const before = residents.map(a => ({x: a.x, y: a.y}));
+    forestApi.stepForest(residents, 40, random);
+    residents.forEach((a, j) => {
+      assert.ok(forestApi.forestWalkable(a.x, a.y), `${a.species} outside clearing: ${a.x},${a.y}`);
+      assert.ok(forestApi.forestSegment(before[j], a), `${a.species} crossed stone/roots`);
+      if (a.nap) forestNaps.add(a.species);
+      if (!quadrants.has(a.species)) quadrants.set(a.species, new Set());
+      quadrants.get(a.species).add(`${a.x < 240}/${a.y < 240}`);
+    });
+  }
+  const a = residents[0]; a.nap = true; forestApi.greetForest(a, random);
+  assert.equal(a.nap, false); assert.ok(a.reaction > 0);
+}
+assert.equal(forestNaps.size, 6);
+for (const [species, regions] of quadrants) assert.equal(regions.size, 4, `${species} cannot explore the whole forest`);
 console.log(`Overworld passed: populations ${[...population].sort((a,b)=>a-b).join('/')}; ${files} source hashes, ${GROUND_SPECIES.length} ground and ${FLYING_SPECIES.length} flying species, bonded pairs travelling together, any species hopping any project row, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);
+console.log('Forest passed: six residents, all quadrants reachable, stone/roots excluded throughout 40 minutes of simulation; natural naps and wake-on-click.');
+
+(async () => {
+  const fakeImages = [];
+  class FakeImage { constructor() { fakeImages.push(this); } decode() { return Promise.resolve(); } }
+  const painter = {};
+  new Function('exports', 'require', 'Image', ts.transpileModule(readFileSync(resolve(__dirname, '../src/lib/overworld-sprites.ts'), 'utf8'), {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020}}).outputText)(painter, id => id.includes('json') ? {default: assets} : api, FakeImage);
+  const sprite = assets.eevee, element = {style: {}, dataset: {}, isConnected: true};
+  const flush = async () => {for (let i = 0; i < 5; i++) await Promise.resolve();};
+  painter.paintSprite(element, sprite, 'Walk', 80, 2, 22, 44);
+  fakeImages[0].onload(); await flush();
+  const walk = JSON.stringify(element.style); assert.ok(element.style.backgroundImage.includes('Walk'));
+  painter.paintSprite(element, sprite, 'Sleep', 0, 0, 22, 44);
+  assert.equal(JSON.stringify(element.style), walk, 'Pending Sleep decode must retain the full visible Walk pose');
+  painter.paintSprite(element, sprite, 'Walk', 100, 6, 22, 44);
+  fakeImages[1].onload(); await flush();
+  assert.ok(element.style.backgroundImage.includes('Walk'), 'Late Sleep decode must not overwrite a newer state');
+  painter.paintSprite(element, sprite, 'Sleep', 0, 0, 22, 44);
+  assert.ok(element.style.backgroundImage.includes('Sleep'));
+  console.log('Sprite decode handoff passed: retain last pose, ignore stale completion, switch only when decoded.');
+})().catch(error => {console.error(error); process.exitCode = 1;});

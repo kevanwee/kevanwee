@@ -10,6 +10,7 @@
     "test:overworld": "node scripts/test-overworld.cjs",
     "test:overworld:browser": "node scripts/test-overworld-browser.cjs",
     "test:yveltal:browser": "node scripts/test-yveltal-browser.cjs",
+    "test:eevee-base:browser": "node scripts/test-eevee-base-browser.cjs",
     "lint": "next lint"
   },
   "dependencies": {

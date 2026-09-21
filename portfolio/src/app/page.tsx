@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import MediaAppearances from "@/components/MediaAppearances";
 import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
+import EeveeBase from "@/components/EeveeBase";
 import MouseGradient from "@/components/MouseGradient";
 import PokemonCursor from "@/components/PokemonCursor";
 import TeddiursaRoamer from "@/components/TeddiursaRoamer";
@@ -77,6 +78,7 @@ export default function Home() {
             <About />
             <Experience />
             <Projects />
+            <EeveeBase />
             <MediaAppearances />
             <Contact />
           </main>

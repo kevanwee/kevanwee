@@ -1,6 +1,11 @@
 # Lessons Learned
 
 ## Portfolio overworld corrections (2026-09-21)
+- Shared ledge residents must be able to pass each other. Mutual collision waits can deadlock walkers and bonded followers. Keep landing checks for hops, but do not block ordinary walking past another resident.
+- Bonded pairs must start with separate 44px tap targets; spawning both at one position makes one permanently inaccessible in reduced motion. Refresh event-only parent metadata when a sprite sheet finishes decoding.
+- Giratina's supplied form is grounded. Mega Zeraora needs a 35% faster travel speed to match its footstep animation; apply the multiplier to every newly chosen walking speed.
+- Prevent sprite-sheet transition flicker by keeping the previous complete pose until the next image has decoded. Late image completions must not replace a newer pose. Warm nearby Idle/Walk/Sleep/Hop sheets ahead of behavior changes.
+- Eevee joins Vaporeon, Jolteon, Flareon, Umbreon and Sylveon in a dedicated Transform Forest base. Use the archived stone colour frames, record source/quality/timing limits, and define an explicit clearing boundary and obstacle around the stone. Test each movement segment, including waypoint corners.
 - Yveltal's dormant egg belongs on top of the 3D button, centered on its top edge. Keep the egg's hit area above the button so awakening and opening the portfolio remain separate actions.
 - Rowlet's supplied sheets are walking poses, not flight. Keep Rowlet grounded on a separate surface. Do not stack flyers above a battle pair or occupied ground ledge when assigning habitats.
 - Keep the Route 111 label close to its map (original small gap). Reserve the label's measured text footprint when choosing Silvally's walking range instead of lifting the label to create space.

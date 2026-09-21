@@ -1,0 +1,22 @@
+{
+  "area": "Transform Forest, Pokemon Mystery Dungeon: Red/Blue Rescue Team",
+  "originalRipper": "Toastypk",
+  "originalListing": "https://www.spriters-resource.com/game_boy_advance/pokemonmysterydungeonredrescueteam/asset/5395/",
+  "mirrorPage": "https://pamtre-berry.neocities.org/articles/friendareas",
+  "backgroundUrl": "https://pamtre-berry.neocities.org/images/friend-areas/og/evolutionforest.png",
+  "rockFramesUrl": "https://pamtre-berry.neocities.org/images/misc/transformforestrock.jpg",
+  "notes": "Original PNG download returned 403. Public mirror preserves the background and all 32 original rock colour poses; its rock sheet is JPEG, so these are not lossless original pixels. Crops exclude the white grid. No generated glow or recolouring. Playback uses 120ms per pose; original game timing was not supplied.",
+  "rock": {
+    "x": 209,
+    "y": 177,
+    "width": 54,
+    "height": 39,
+    "frames": 32,
+    "frameMs": 120
+  },
+  "sha256": {
+    "background.png": "bf1ca7eda66e1828ff04fa90ffbf89cd68874431a1d4e3b46591d3bd2017e5fb",
+    "rock-source.jpg": "0996120296f8d620664bc792fe70b1616bbb4bdb18c4fe6c7596c3bd7bb22b29",
+    "stone-frames.png": "fbffa39d98dd3944a344c75d95a046cc0d8d6b5ca67f361e063ec6be2721790e"
+  }
+}

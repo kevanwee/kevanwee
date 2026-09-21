@@ -30,7 +30,7 @@ FORMS = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire',
          'flying', 'ghost', 'grass', 'ground', 'ice', 'poison', 'psychic',
          'rock', 'steel', 'water']
 FLYERS = {'beautifly', 'corviknight', 'noivern', 'talonflame', 'yveltal',
-          'giratina', 'mega-rayquaza', 'mega-skarmory',
+          'mega-rayquaza', 'mega-skarmory',
           'naganadel', 'primal-kyogre', 'shadow-mewtwo', 'zapdos'}
 # Target rendered heights, so every sprite is normalised to a consistent apparent
 # size and relative bulk reads true (see tasks/lessons.md, lesson 1).

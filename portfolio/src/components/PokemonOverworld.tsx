@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { SPRITES, paintSprite as paint } from "@/lib/overworld-sprites";
+import { SPRITES, paintSprite as paint, preloadSpriteSheet as preload } from "@/lib/overworld-sprites";
 import { SILVALLY_FORMS, createOverworld, createWanderer, displayName, greetResident, shuffle, stepOverworld, stepWanderer } from "@/lib/pokemon-overworld";
 
 const COLORS: Record<string, string> = {
@@ -78,18 +78,6 @@ export default function PokemonOverworld() {
     // Establish separated battle poses even when reduced motion starts enabled.
     stepOverworld(world, 0, new Map(surfaces.map(s => [s.id, s.width])));
 
-    const images = new Map<string, Promise<void>>();
-    function preload(src: string) {
-      if (!images.has(src)) {
-        images.set(src, new Promise<void>((resolve, reject) => {
-          const image = new Image();
-          image.onload = () => resolve();
-          image.onerror = () => { images.delete(src); reject(new Error(`Sprite could not load: ${src}`)); };
-          image.src = src;
-        }));
-      }
-      return images.get(src)!;
-    }
     let formBag = shuffle(SILVALLY_FORMS);
     let form = formBag.pop()!;
     let nextForm = formBag.pop()!;
@@ -103,6 +91,13 @@ export default function PokemonOverworld() {
     let dirty = true;
     let lastModalCheck = 0;
     let modal = false;
+    const warmed = new Set<string>();
+    const warm = (src: string) => {
+      if (warmed.has(src)) return;
+      warmed.add(src);
+      // Event-only rendering must refresh parent metadata after the first decode.
+      void preload(src).then(wake).catch(() => warmed.delete(src));
+    };
 
     const warmNextForm = () => {
       const sprite = SPRITES[`silvally-${nextForm}`];
@@ -209,12 +204,15 @@ export default function PokemonOverworld() {
           const bob = actor.flying ? -actor.altitude : 0;
           const name = motion.matches ? (actor.nap && actor.altitude === 0 ? "Sleep" : actor.flying && actor.altitude > 0 ? "Walk" : "Idle") : actor.animation;
           const sprite = SPRITES[actor.species];
+          for (const key of ["Walk", "Idle", "Sleep", "Hop"]) {
+            if (sprite.animations[key]) warm(sprite.animations[key].src);
+          }
           if (actor.species === "armarouge" || actor.species === "ceruledge") {
-            for (const key of ["Walk", "Idle", "Shoot", "Attack", "Hurt"]) void preload(sprite.animations[key].src).catch(() => {});
+            for (const key of ["Walk", "Idle", "Shoot", "Attack", "Hurt"]) warm(sprite.animations[key].src);
           }
           // Load only the animations of nearby residents (never all imported sheets).
           const anim = sprite.animations[name] ?? sprite.animations.Walk;
-          void preload(anim.src).catch(() => {});
+          warm(anim.src);
           node.style.transform = `translate3d(${Math.round(x - 22)}px,${Math.round(rect.top + bob - 44)}px,0)`;
           const elapsed = actor.hop ? actor.hop.elapsed / actor.hop.duration * anim.durations.reduce((sum, d) => sum + d * 16, 0) : actor.elapsed;
           paint(spriteNode, sprite, name, motion.matches ? 0 : elapsed, actor.direction, 22, 44);
@@ -256,6 +254,7 @@ export default function PokemonOverworld() {
           const y = area.top;
           button!.style.transform = `translate3d(${Math.round(x - 28)}px,${Math.round(y - 64)}px,0)`;
           const name = transition?.animation ?? (motion.matches || focused || hovered ? (wanderer.nap ? "Sleep" : "Idle") : wanderer.animation);
+          warm((sprite.animations[name] ?? sprite.animations.Walk).src);
           paint(silvally!, sprite, name, transition?.elapsed ?? (motion.matches ? 0 : wanderer.elapsed), wanderer.direction, 28, 64);
           button!.dataset.direction = String(wanderer.direction);
           button!.dataset.animation = name;

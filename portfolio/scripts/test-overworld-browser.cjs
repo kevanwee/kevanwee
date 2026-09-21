@@ -27,9 +27,10 @@ async function scrollSurface(page, id) {
     page.on('response', r => { if (/\/(overworld|ceruledge)\//.test(r.url()) && r.status() >= 400) brokenAssets.push(r.url()); });
     await page.goto(base, { waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => document.querySelector('.silvally-resident')?.dataset.form);
-    assert.equal(await page.locator('[data-pokemon]').count(), 13);
-    assert.equal(await page.locator('button[data-pokemon]').count(), 11);
-    for (const surface of ['skills-card', 'media-card']) assert.equal(await page.locator(`[data-pokemon][data-surface="${surface}"]`).count(), 1);
+    const population = await page.locator('[data-pokemon]').count();
+    assert.ok(population >= 20);
+    assert.equal(await page.locator('button[data-pokemon]').count(), population - 2);
+    for (const surface of ['skills-card', 'media-card']) assert.ok(await page.locator(`[data-pokemon][data-surface="${surface}"]`).count() >= 1);
     assert.ok(await page.locator('[data-pokemon][data-surface^="other-project-"]').count() >= 1);
     await page.screenshot({ path: join(tmpdir(), 'overworld-desktop-top.png') });
     const initialForm = await page.locator('.silvally-resident').getAttribute('data-form');
@@ -67,7 +68,7 @@ async function scrollSurface(page, id) {
       assert.equal(await resident.getAttribute('data-reacting'), 'true');
       await page.mouse.move(0, 0);
     }
-    console.log('All 11 non-battle residents react to mouse and keyboard.');
+    console.log('All non-battle residents react to mouse and keyboard.');
 
     const surfaceIds = await page.locator('[data-overworld-surface]').evaluateAll(es => es.map(e => e.dataset.overworldSurface));
     for (const width of [320, 390, 768, 1440]) {
