@@ -390,7 +390,9 @@ function ExperiencePanel({ exp, activeFilters }: ExperiencePanelProps) {
                   {withLinks(b)}
                 </span>
               ) : (
-                withLinks(b)
+                // One element, not a list of them: the row is a flex container, so
+                // loose text and link nodes would each become a column of their own.
+                <span>{withLinks(b)}</span>
               )}
             </li>
           );
