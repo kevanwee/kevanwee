@@ -2,6 +2,8 @@
 export const GROUND_SPECIES = ["breloom", "fidough", "flareon", "goomy", "pawmi", "tyrunt", "rowlet"];
 export const FLYING_SPECIES = ["beautifly", "corviknight", "noivern", "talonflame"];
 export const SILVALLY_FORMS = ["bug", "dark", "dragon", "electric", "fairy", "fighting", "fire", "flying", "ghost", "grass", "ground", "ice", "poison", "psychic", "rock", "steel", "water"];
+/** Every tile in the "other noteworthy projects" grid, on any row. */
+export const HOP_CARD = /^other-project-\d+$/;
 export type Surface = { id: string; width: number; divider: boolean; kind?: string };
 export type SurfaceRect = { left: number; right: number; top: number; width: number };
 export type Hop = { from: string; to: string; start: number; landing: number; elapsed: number; duration: number };
@@ -28,7 +30,7 @@ export function shuffle<T>(items: readonly T[], random = Math.random): T[] {
 
 export function createOverworld(surfaces: Surface[], random = Math.random): Overworld {
   const battleSurface = shuffle(surfaces.filter(s => s.divider && s.width >= 240), random)[0];
-  const hopCards = surfaces.filter(s => /^other-project-[012]$/.test(s.id));
+  const hopCards = surfaces.filter(s => HOP_CARD.test(s.id));
   const available = shuffle(surfaces.filter(s => s.id !== battleSurface?.id && s.id !== "sky-about" && s.kind !== "air" && !hopCards.includes(s) && s.width >= 100), random);
   // Guarantee coverage of each requested area before filling random spare ledges.
   const platforms: Surface[] = [];
@@ -45,13 +47,12 @@ export function createOverworld(surfaces: Surface[], random = Math.random): Over
       elapsed: random() * 1000, age: random() * 10000, animation: flying ? "Walk" : "Idle",
       altitude: flying ? between(43, 59, random) : 0, targetAltitude: between(40, 62, random), reaction: 0, held: false, hop: null, hopTarget: null });
   };
-  // Rowlet is a walker. Keep the two jumpers together on the first project row.
-  const walkers = hopCards.length ? ["rowlet", ...shuffle(GROUND_SPECIES.filter(s => !["rowlet", "fidough", "goomy"].includes(s)), random)] : shuffle(GROUND_SPECIES, random);
-  walkers.forEach((species, i) => { if (platforms[i]) add(species, platforms[i].id, false); });
-  if (hopCards.length) {
-    add("fidough", hopCards[0].id, false);
-    add("goomy", hopCards[Math.min(2, hopCards.length - 1)].id, false);
-  }
+  // No species owns the project grid. Draw whoever turns up for its tiles and let
+  // the rest walk; hopping is a property of the tile you land on, not of who you are.
+  const jumpers = Math.min(2, hopCards.length);
+  const roster = shuffle(GROUND_SPECIES, random);
+  shuffle(hopCards, random).slice(0, jumpers).forEach((card, i) => add(roster[i], card.id, false));
+  roster.slice(jumpers).forEach((species, i) => { if (platforms[i]) add(species, platforms[i].id, false); });
   const occupied = new Set(residents.map(a => a.surface));
   const airspace = shuffle(surfaces.filter(s => (s.divider || s.id === "sky-about" || s.kind === "air") && s.id !== battleSurface?.id && !occupied.has(s.id)), random);
   const corviknight = airspace.findIndex(s => s.id === "sky-footer");
@@ -97,8 +98,8 @@ function nextBattlePhase(b: Battle, random: () => number) {
 /** Only visible surfaces advance; no fast-forward after browser suspension. */
 export function adjacentHopCards(surface: string, rects: Map<string, SurfaceRect>) {
   const from = rects.get(surface);
-  if (!from || !/^other-project-[012]$/.test(surface)) return [];
-  return [...rects].filter(([id, r]) => id !== surface && /^other-project-[012]$/.test(id) && Math.abs(r.top - from.top) < 3 &&
+  if (!from || !HOP_CARD.test(surface)) return [];
+  return [...rects].filter(([id, r]) => id !== surface && HOP_CARD.test(id) && Math.abs(r.top - from.top) < 3 &&
     (Math.abs(r.left - from.right) <= 40 || Math.abs(from.left - r.right) <= 40)).map(([id]) => id);
 }
 
@@ -142,12 +143,11 @@ export function stepOverworld(world: Overworld, delta: number, visibleWidths: Ma
         if (actor.nap) { actor.nap = false; actor.untilNap = between(30000, 95000, random); }
         actor.target = between(.03, .97, random);
         actor.hopTarget = null;
-        if (["fidough", "goomy"].includes(actor.species) && random() < .7) {
-          const options = adjacentHopCards(actor.surface, rects);
-          if (options.length) {
-            actor.hopTarget = options[Math.floor(random() * options.length)];
-            actor.target = rects.get(actor.hopTarget)!.left > rects.get(actor.surface)!.left ? 1 : 0;
-          }
+        // Whoever is standing on a project tile may hop to the one beside it.
+        const options = adjacentHopCards(actor.surface, rects);
+        if (options.length && random() < .7) {
+          actor.hopTarget = options[Math.floor(random() * options.length)];
+          actor.target = rects.get(actor.hopTarget)!.left > rects.get(actor.surface)!.left ? 1 : 0;
         }
         actor.speed = between(actor.flying ? 14 : 8, actor.flying ? 30 : 19, random);
         actor.targetAltitude = between(40, 63, random);

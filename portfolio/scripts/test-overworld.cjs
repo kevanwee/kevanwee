@@ -34,6 +34,7 @@ for (const pack of receipts.packs) for (const file of pack.files) {
 
 function seeded(seed) { return () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }; }
 const assignments = new Set();
+const tileSpecies = new Set();
 const phases = new Set();
 const sleepers = new Set();
 const battleDurations = new Set();
@@ -59,8 +60,10 @@ for (let seed = 1; seed <= 32; seed++) {
   for (const kind of ['skills', 'media-card']) assert.ok(ground.some(a => a.surface === kind), `${kind} has no resident`);
   assert.equal(world.residents.find(a => a.species === 'rowlet').flying, false);
   assert.equal(world.residents.find(a => a.species === 'corviknight').surface, 'sky-footer');
-  assert.equal(world.residents.find(a => a.species === 'fidough').surface, 'other-project-0');
-  assert.equal(world.residents.find(a => a.species === 'goomy').surface, 'other-project-2');
+  const onTiles = ground.filter(a => /^other-project-\d+$/.test(a.surface));
+  assert.equal(onTiles.length, 2, 'Two ground residents should take project tiles');
+  assert.equal(new Set(onTiles.map(a => a.surface)).size, 2, 'and they should take different ones');
+  onTiles.forEach(a => tileSpecies.add(a.species));
   for (const flyer of world.residents.filter(a => a.flying)) assert.ok(!ground.some(a => a.surface === flyer.surface) && flyer.surface !== world.battle.surface, 'Keep airspaces uncrowded');
   assignments.add(ground.map(a => a.species + a.surface).join(','));
   const before = JSON.stringify(world);
@@ -124,14 +127,21 @@ const cardRects = new Map(cards.map((c, i) => [c.id, {left: i * 170, right: i * 
 assert.deepEqual(api.adjacentHopCards('other-project-1', cardRects), ['other-project-0', 'other-project-2']);
 const stacked = new Map(cards.map((c, i) => [c.id, {left: 0, right: 272, width: 272, top: i * 280}]));
 assert.deepEqual(api.adjacentHopCards('other-project-0', stacked), []);
-const visited = {fidough: new Set(), goomy: new Set()};
+assert.ok(tileSpecies.size > 2, `Project tiles are stuck with ${[...tileSpecies]}`);
+// Any species that lands on a tile can hop along its row, and tiles below the first
+// row hop too: the row is decided by geometry, not by the tile's index.
+const secondRow = new Map([['other-project-3', {left: 0, right: 156, width: 156, top: 400}],
+  ['other-project-4', {left: 170, right: 326, width: 156, top: 400}]]);
+assert.deepEqual(api.adjacentHopCards('other-project-3', secondRow), ['other-project-4']);
+const visited = new Map();
 let hops = 0;
 for (let seed = 1; seed <= 12; seed++) {
   const random = seeded(seed), world = createOverworld(cards, random), widths = new Map(cards.map(c => [c.id, c.width]));
   for (let i = 0; i < 10000; i++) {
     stepOverworld(world, 40, widths, random, cardRects);
     for (const a of world.residents) {
-      visited[a.species].add(a.surface);
+      if (!visited.has(a.species)) visited.set(a.species, new Set());
+      visited.get(a.species).add(a.surface);
       if (a.hop) { hops++; assert.ok(api.adjacentHopCards(a.hop.from, cardRects).includes(a.hop.to)); }
     }
   }
@@ -142,7 +152,8 @@ for (let seed = 1; seed <= 12; seed++) {
   assert.equal(a.surface, 'other-project-0');
 }
 assert.ok(hops > 100);
-for (const surfaces of Object.values(visited)) assert.equal(surfaces.size, 3, 'Both jumpers can visit all three cards');
+assert.ok(visited.size > 2, `Only ${[...visited.keys()]} ever took a project tile`);
+for (const [species, seen] of visited) assert.equal(seen.size, 3, `${species} should reach all three cards`);
 
 const flightSource = readFileSync(resolve(__dirname, '../src/lib/yveltal-flight.ts'), 'utf8');
 const flightApi = {};
@@ -166,4 +177,4 @@ for (let i = 0; i < 15000; i++) {
   assert.ok(flightApi.clearFlightPath(before.x, before.y, blockedFlight.x, blockedFlight.y, wall), 'Each movement segment must avoid obstacles');
 }
 assert.equal(flightApi.settleFlight(blockedFlight, arena, [{left: -1, right: 101, top: -1, bottom: 161}]), false, 'No space means hide, not overlap');
-console.log(`Overworld passed: ${files} source hashes, ground Rowlet, separate flyers, all three hopping cards, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);
+console.log(`Overworld passed: ${files} source hashes, ground Rowlet, separate flyers, any species hopping any project row, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);
