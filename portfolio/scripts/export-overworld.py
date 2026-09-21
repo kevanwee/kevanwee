@@ -16,24 +16,46 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / 'public'
 DEST = PUBLIC / 'overworld'
 SPECIES = ['armarouge', 'beautifly', 'breloom', 'corviknight', 'fidough',
-           'flareon', 'goomy', 'noivern', 'pawmi', 'rowlet', 'talonflame', 'tyrunt', 'yveltal']
+           'flareon', 'goomy', 'noivern', 'pawmi', 'rowlet', 'talonflame', 'tyrunt', 'yveltal',
+           # Second intake. Keys are slugs; FOLDERS maps the ones whose pack is named differently.
+           'appletun', 'arcanine', 'charcadet', 'corphish', 'dragonair', 'dragonite', 'dratini',
+           'eevee', 'gible', 'giratina', 'growlithe', 'hisuian-zorua', 'jolteon', 'mega-gallade',
+           'mega-gardevoir', 'mega-rayquaza', 'mega-skarmory', 'mega-zeraora', 'naganadel',
+           'primal-kyogre', 'shadow-mewtwo', 'shiny-dratini', 'skitty', 'squirtle', 'sylveon',
+           'umbreon', 'vaporeon', 'zapdos', 'zorua']
+FOLDERS = {'hisuian-zorua': 'h zorua', 'mega-gallade': 'm gallade', 'mega-gardevoir': 'm gardevoir',
+           'mega-rayquaza': 'm rayquaza', 'mega-skarmory': 'm skarmory', 'mega-zeraora': 'm zeraora',
+           'primal-kyogre': 'p kyogre', 'shadow-mewtwo': 'shadow mewtwo', 'shiny-dratini': 'dratini shiny'}
 FORMS = ['bug', 'dark', 'dragon', 'electric', 'fairy', 'fighting', 'fire',
          'flying', 'ghost', 'grass', 'ground', 'ice', 'poison', 'psychic',
          'rock', 'steel', 'water']
-FLYERS = {'beautifly', 'corviknight', 'noivern', 'talonflame', 'yveltal'}
+FLYERS = {'beautifly', 'corviknight', 'noivern', 'talonflame', 'yveltal',
+          'dragonair', 'dragonite', 'giratina', 'mega-rayquaza', 'mega-skarmory',
+          'naganadel', 'primal-kyogre', 'shadow-mewtwo', 'zapdos'}
+# Target rendered heights, so every sprite is normalised to a consistent apparent
+# size and relative bulk reads true (see tasks/lessons.md, lesson 1).
 HEIGHTS = {'silvally': 58, 'armarouge': 43, 'ceruledge': 43, 'breloom': 36,
            'fidough': 25, 'flareon': 32, 'goomy': 24, 'pawmi': 26, 'tyrunt': 32,
-           'rowlet': 22, 'beautifly': 30, 'corviknight': 42, 'noivern': 40, 'talonflame': 36, 'yveltal': 54}
-FLIGHT_TEMPO = {'beautifly': 1.1, 'corviknight': 1.35, 'noivern': 1.4, 'talonflame': 1.7, 'yveltal': 1.3}
+           'rowlet': 22, 'beautifly': 30, 'corviknight': 42, 'noivern': 40, 'talonflame': 36, 'yveltal': 54,
+           'skitty': 24, 'zorua': 24, 'hisuian-zorua': 24, 'squirtle': 26, 'eevee': 26,
+           'corphish': 26, 'gible': 26, 'charcadet': 28, 'dratini': 28, 'shiny-dratini': 28,
+           'growlithe': 28, 'appletun': 30, 'jolteon': 30, 'vaporeon': 30, 'umbreon': 30,
+           'sylveon': 32, 'mega-zeraora': 34, 'mega-gardevoir': 38, 'mega-gallade': 40,
+           'dragonair': 40, 'naganadel': 40, 'mega-skarmory': 42, 'arcanine': 44,
+           'shadow-mewtwo': 46, 'zapdos': 48, 'dragonite': 50, 'primal-kyogre': 54, 'mega-rayquaza': 58}
+FLIGHT_TEMPO = {'beautifly': 1.1, 'corviknight': 1.35, 'noivern': 1.4, 'talonflame': 1.7, 'yveltal': 1.3,
+                'dragonair': 1.2, 'dragonite': 1.3, 'giratina': 1.25, 'mega-rayquaza': 1.3,
+                'mega-skarmory': 1.5, 'naganadel': 1.4, 'primal-kyogre': 1.15,
+                'shadow-mewtwo': 1.2, 'zapdos': 1.45}
 
 
-def export(import_downloads=False):
-    packs = {name: name for name in SPECIES}
+def export(import_downloads=False, only=None):
+    packs = {name: FOLDERS.get(name, name) for name in SPECIES}
     packs.update({f'silvally-{form}': f'silvally {form}' for form in FORMS})
     receipts = []
     for key, folder in packs.items():
         target = DEST / key
-        if import_downloads:
+        if import_downloads and (only is None or key in only):
             source = Path.home() / 'Downloads' / folder
             assert source.is_dir(), source
             target.mkdir(parents=True, exist_ok=True)
@@ -97,4 +119,7 @@ def export(import_downloads=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--import-downloads', action='store_true')
-    export(parser.parse_args().import_downloads)
+    parser.add_argument('--only', nargs='*', default=None,
+                        help='copy just these keys out of Downloads; the rest regenerate in place')
+    args = parser.parse_args()
+    export(args.import_downloads, args.only)

@@ -7,10 +7,15 @@ const source = readFileSync(resolve(__dirname, '../src/lib/pokemon-overworld.ts'
 const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
 const api = {};
 new Function('exports', js)(api);
-const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, animationFrame } = api;
+const { createOverworld, stepOverworld, createWanderer, stepWanderer, greetResident, GROUND_SPECIES, FLYING_SPECIES, SILVALLY_FORMS, PAIRS, TILE_RESIDENTS, displayName, animationFrame } = api;
+assert.equal(displayName('mega-gallade'), 'Mega Gallade');
+assert.equal(displayName('zorua'), 'Zorua');
+const BONDED = new Set(PAIRS.flat());
 const assets = JSON.parse(readFileSync(resolve(__dirname, '../src/data/overworld-sprites.json')));
 assert.equal(SILVALLY_FORMS.length, 17);
-assert.equal(Object.keys(assets).length, 31);
+assert.equal(Object.keys(assets).length, 60);
+for (const name of [...GROUND_SPECIES, ...FLYING_SPECIES]) assert.ok(assets[name], `${name} has no sprite pack`);
+for (const name of GROUND_SPECIES) assert.ok(assets[name].animations.Hop && assets[name].animations.Sleep, `${name} cannot hop or sleep`);
 
 // Validate every runtime source against the actual PNG header, timing and alpha bounds.
 for (const [id, sprite] of Object.entries(assets)) {
@@ -35,6 +40,8 @@ for (const pack of receipts.packs) for (const file of pack.files) {
 function seeded(seed) { return () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; }; }
 const assignments = new Set();
 const tileSpecies = new Set();
+const pairsPlaced = new Set();
+const population = new Set();
 const phases = new Set();
 const sleepers = new Set();
 const battleDurations = new Set();
@@ -52,18 +59,40 @@ for (let seed = 1; seed <= 32; seed++) {
     ...Array.from({length: 3}, (_, i) => ({id: `other-project-${i}`, kind: 'other-project', width: 156, divider: false})),
   ];
   const world = createOverworld(surfaces, random);
-  assert.equal(world.residents.length, 13);
-  assert.deepEqual(new Set(world.residents.map(a => a.species)), new Set([...GROUND_SPECIES, ...FLYING_SPECIES, 'armarouge', 'ceruledge']));
+  const species = world.residents.map(a => a.species);
+  assert.equal(new Set(species).size, species.length, 'a species may only appear once');
+  assert.ok(species.every(s => assets[s]), 'every resident needs a sprite pack');
   const ground = world.residents.filter(a => GROUND_SPECIES.includes(a.species));
-  assert.equal(new Set(ground.map(a => a.surface)).size, 7, 'ground residents overlap initial surfaces');
   assert.ok(ground.every(a => a.surface !== 'sky-about' && a.surface !== world.battle.surface));
   for (const kind of ['skills', 'media-card']) assert.ok(ground.some(a => a.surface === kind), `${kind} has no resident`);
-  assert.equal(world.residents.find(a => a.species === 'rowlet').flying, false);
   assert.equal(world.residents.find(a => a.species === 'corviknight').surface, 'sky-footer');
+  assert.ok(world.residents.filter(a => a.flying).every(a => FLYING_SPECIES.includes(a.species)));
+  // Bonded pairs arrive together, on one ledge, or not at all.
+  for (const [lead, follower] of PAIRS) {
+    const a = world.residents.find(r => r.species === lead), b = world.residents.find(r => r.species === follower);
+    assert.equal(!!a, !!b, `${lead}/${follower} must be placed as a pair`);
+    if (!a) continue;
+    assert.equal(b.surface, a.surface, `${follower} should share a ledge with ${lead}`);
+    assert.equal(b.leader, lead); assert.equal(a.leader, null);
+    assert.ok(!/^other-project-/.test(a.surface), 'pairs want a wide ledge, not a project tile');
+    pairsPlaced.add(lead);
+  }
+  // A ledge holds no more than its length allows; a pair's holds exactly its two.
+  const byId = new Map(surfaces.map(s => [s.id, s]));
+  const perSurface = {};
+  world.residents.filter(a => !['armarouge', 'ceruledge'].includes(a.species))
+    .forEach(a => (perSurface[a.surface] ||= []).push(a));
+  for (const [surface, list] of Object.entries(perSurface)) {
+    const room = api.capacity(byId.get(surface).width, list[0].flying);
+    if (list.some(a => a.leader)) assert.equal(list.length, 2, `${surface} is a pair's ledge`);
+    else assert.ok(list.length <= room, `${surface} holds ${list.length}, room for ${room}`);
+  }
   const onTiles = ground.filter(a => /^other-project-\d+$/.test(a.surface));
-  assert.equal(onTiles.length, 2, 'Two ground residents should take project tiles');
-  assert.equal(new Set(onTiles.map(a => a.surface)).size, 2, 'and they should take different ones');
+  assert.ok(onTiles.length >= 1 && onTiles.length <= TILE_RESIDENTS, `${onTiles.length} residents on project tiles`);
+  assert.equal(new Set(onTiles.map(a => a.surface)).size, onTiles.length, 'one per tile');
+  assert.ok(onTiles.every(a => !BONDED.has(a.species)), 'bonded species stay off the tiles');
   onTiles.forEach(a => tileSpecies.add(a.species));
+  population.add(world.residents.length);
   for (const flyer of world.residents.filter(a => a.flying)) assert.ok(!ground.some(a => a.surface === flyer.surface) && flyer.surface !== world.battle.surface, 'Keep airspaces uncrowded');
   assignments.add(ground.map(a => a.species + a.surface).join(','));
   const before = JSON.stringify(world);
@@ -153,7 +182,10 @@ for (let seed = 1; seed <= 12; seed++) {
 }
 assert.ok(hops > 100);
 assert.ok(visited.size > 2, `Only ${[...visited.keys()]} ever took a project tile`);
-for (const [species, seen] of visited) assert.equal(seen.size, 3, `${species} should reach all three cards`);
+// With every tile occupied a resident cannot always reach all three, but each one
+// must get off its starting tile, and between them they must cover the row.
+for (const [species, seen] of visited) assert.ok(seen.size >= 2, `${species} never left its tile`);
+assert.equal(new Set([...visited.values()].flatMap(seen => [...seen])).size, 3, 'the three cards should all see use');
 
 const flightSource = readFileSync(resolve(__dirname, '../src/lib/yveltal-flight.ts'), 'utf8');
 const flightApi = {};
@@ -177,4 +209,4 @@ for (let i = 0; i < 15000; i++) {
   assert.ok(flightApi.clearFlightPath(before.x, before.y, blockedFlight.x, blockedFlight.y, wall), 'Each movement segment must avoid obstacles');
 }
 assert.equal(flightApi.settleFlight(blockedFlight, arena, [{left: -1, right: 101, top: -1, bottom: 161}]), false, 'No space means hide, not overlap');
-console.log(`Overworld passed: ${files} source hashes, ground Rowlet, separate flyers, any species hopping any project row, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);
+console.log(`Overworld passed: populations ${[...population].sort((a,b)=>a-b).join('/')}; ${files} source hashes, ${GROUND_SPECIES.length} ground and ${FLYING_SPECIES.length} flying species, bonded pairs travelling together, any species hopping any project row, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);

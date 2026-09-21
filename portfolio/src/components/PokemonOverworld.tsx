@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { SPRITES, paintSprite as paint } from "@/lib/overworld-sprites";
-import { createOverworld, createWanderer, greetResident, SILVALLY_FORMS, shuffle, stepOverworld, stepWanderer } from "@/lib/pokemon-overworld";
+import { SILVALLY_FORMS, createOverworld, createWanderer, displayName, greetResident, shuffle, stepOverworld, stepWanderer } from "@/lib/pokemon-overworld";
 
 const COLORS: Record<string, string> = {
   bug: "#94aa35", dark: "#6c5871", dragon: "#7860bc", electric: "#dcb83e", fairy: "#d08aaf",
@@ -52,7 +52,7 @@ export default function PokemonOverworld() {
       node.append(sprite, heart);
       if (interactive) {
         (node as HTMLButtonElement).type = "button";
-        const name = actor.species[0].toUpperCase() + actor.species.slice(1);
+        const name = displayName(actor.species);
         node.setAttribute("aria-label", `Say hello to ${name}`);
         node.title = `Say hello to ${name}`;
         let pointer = false, keyboard = false;
