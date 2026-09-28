@@ -71,7 +71,7 @@ export default function ResumeModal({ onClose }: Props) {
                   ref={index === 0 ? initialButton : undefined}
                   type="button"
                   aria-pressed={selectedId === item.id}
-                  title={`${selectedId === item.id ? "Viewing" : "View"} ${item.label}: ${item.description} ${item.switchHint}`}
+                  title={`${item.label}: ${item.description} ${item.switchHint}`}
                   onClick={() => setSelectedId(item.id)}
                   className={`rounded-lg px-3 py-2 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600 ${
                     selectedId === item.id
@@ -85,7 +85,7 @@ export default function ResumeModal({ onClose }: Props) {
               ))}
             </div>
             <div className="ml-auto flex items-center gap-3">
-              <a
+              {selectedDocument.available && <a
                 href={selectedDocument.href}
                 download={selectedDocument.filename}
                 title={`Download ${selectedDocument.label} (PDF)`}
@@ -99,7 +99,7 @@ export default function ResumeModal({ onClose }: Props) {
                   <line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
                 Download {selectedDocument.label}
-              </a>
+              </a>}
               <button
                 onClick={onClose}
                 className="flex h-8 w-8 items-center justify-center text-warm-500 transition-colors hover:text-warm-700"
@@ -117,7 +117,13 @@ export default function ResumeModal({ onClose }: Props) {
         </div>
 
         {/* PDF viewer */}
-        {isMobile ? (
+        {!selectedDocument.available ? (
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 px-6 py-8 text-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-warm-400">CV</p>
+            <p className="font-serif text-2xl text-warm-700">Work in progress</p>
+            <p className="text-sm text-warm-500">The resume is still available.</p>
+          </div>
+        ) : isMobile ? (
           <div className="flex min-h-0 w-full flex-1 flex-col items-center gap-4 overflow-y-auto px-6 py-8 text-center">
             <div className="my-auto flex shrink-0 flex-col items-center gap-4">
               <p className="text-xs font-bold uppercase tracking-widest text-warm-400">

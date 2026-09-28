@@ -1,18 +1,20 @@
 export const careerDocuments = [
   {
     id: "resume",
+    available: true,
     label: "Resume",
     summary: "One-page overview",
     description: "A condensed, one-page overview of my experience and qualifications.",
-    switchHint: "Select CV for my full academic and professional history.",
+    switchHint: "The full CV is currently being updated.",
     href: "/resume.pdf",
     filename: "Kevan_Wee_Resume.pdf",
   },
   {
     id: "cv",
+    available: false,
     label: "CV",
-    summary: "Full history",
-    description: "My full academic and professional history.",
+    summary: "Work in progress",
+    description: "Work in progress.",
     switchHint: "Select Resume for a condensed, one-page overview.",
     href: "/cv.pdf",
     filename: "Kevan_Wee_CV.pdf",
