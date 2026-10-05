@@ -1,19 +1,25 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { usePokemonCursor, type PokemonId } from "@/components/PokemonCursorContext";
+import { useEffect, useRef, useState } from "react";
+import armarougeCombo from "./fusion-armarouge-combo.json";
+import { usePokemonCursor, type FusionId, type PokemonId } from "./PokemonCursorContext";
 
 type Mode = "walk" | "idle" | "sleep" | "click";
 
-type AnimConfig = {
+export type AnimConfig = {
   src: string;
   frameWidth: number;
   frameHeight: number;
   rows: number;
   durations: number[];
+  /** Transparent padding added around the base frame (a fusion's extra hair, say); the anchor ignores it. */
+  padX?: number;
+  padTop?: number;
+  /** Logical base height when a sheet also adds bottom padding. */
+  baseFrameHeight?: number;
 };
 
-type PokemonConfig = {
+export type PokemonConfig = {
   walk: AnimConfig;
   idle: AnimConfig;
   sleep: AnimConfig;
@@ -36,13 +42,14 @@ const DIR_NE = 5;
 const DIR_E = 6;
 const DIR_SE = 7;
 
-const POKEMON_CONFIGS: Record<PokemonId, PokemonConfig> = {
+export const POKEMON_CONFIGS: Record<PokemonId, PokemonConfig> = {
+  // Base Diancie (from the owner's diancie.zip); its Mega form (the long-standing cursor) is in MEGA_CONFIGS.
   diancie: {
-    walk:  { src: "/diancie/Walk-Anim.png",   frameWidth: 56, frameHeight: 88,  rows: 8, durations: [4,4,4,4,4,4,4,4,4] },
-    idle:  { src: "/diancie/Idle-Anim.png",   frameWidth: 64, frameHeight: 88,  rows: 8, durations: [16,12,16,12] },
-    sleep: { src: "/diancie/Sleep-Anim.png",  frameWidth: 48, frameHeight: 80,  rows: 1, durations: [14,13,12,16,14,13,12,16] },
-    click: { src: "/diancie/Strike-Anim.png", frameWidth: 88, frameHeight: 144, rows: 8, durations: [2,2,6,1,1,2,2,6,1,2,2,2,2,2] },
-    scale: 1.15, anchorX: 0.46, anchorY: 0.22,
+    walk:  { src: "/diancie-base/Walk-Anim.png",   frameWidth: 32, frameHeight: 56, rows: 8, durations: [8,8,10,8,10] },
+    idle:  { src: "/diancie-base/Idle-Anim.png",   frameWidth: 24, frameHeight: 56, rows: 8, durations: [12,12,12,12,8,8,8,8] },
+    sleep: { src: "/diancie-base/Sleep-Anim.png",  frameWidth: 24, frameHeight: 56, rows: 1, durations: [16,12,16,16,12,16] },
+    click: { src: "/diancie-base/Attack-Anim.png", frameWidth: 64, frameHeight: 80, rows: 8, durations: [2,4,1,1,1,2,2,2,2,2] },
+    scale: 1.3, anchorX: 0.46, anchorY: 0.22,
   },
   ceruledge: {
     walk:  { src: "/ceruledge/Walk-Anim.png",   frameWidth: 32, frameHeight: 56, rows: 8, durations: [10,10,10,10] },
@@ -74,6 +81,14 @@ const POKEMON_CONFIGS: Record<PokemonId, PokemonConfig> = {
     // 64px fH × 1.5 = 96px
     scale: 1.5, anchorX: 0.5, anchorY: 0.3,
   },
+  // Shiny Dragonite (the green resident sheets); its shiny Mega form is in MEGA_CONFIGS.
+  dragonite: {
+    walk:  { src: "/overworld/dragonite/Walk-Anim.png",   frameWidth: 40, frameHeight: 56, rows: 8, durations: [8,12,8,12] },
+    idle:  { src: "/overworld/dragonite/Idle-Anim.png",   frameWidth: 40, frameHeight: 64, rows: 8, durations: [40,2,2,3,3,2,2] },
+    sleep: { src: "/overworld/dragonite/Sleep-Anim.png",  frameWidth: 32, frameHeight: 40, rows: 1, durations: [30,35] },
+    click: { src: "/overworld/dragonite/Attack-Anim.png", frameWidth: 72, frameHeight: 80, rows: 8, durations: [2,4,1,1,1,2,2,2,2,2,2,2,2] },
+    scale: 1.3, anchorX: 0.46, anchorY: 0.22,
+  },
   ironvaliant: {
     walk:  { src: "/ironvaliant/Walk-Anim.png",     frameWidth: 24, frameHeight: 48, rows: 8, durations: [12,12,12,12] },
     idle:  { src: "/ironvaliant/Twirl-Anim.png",    frameWidth: 88, frameHeight: 80, rows: 8, durations: [2,2,2,2,2,2,2,2,2,3,3,3,2,2,2,2] },
@@ -81,6 +96,64 @@ const POKEMON_CONFIGS: Record<PokemonId, PokemonConfig> = {
     click: { src: "/ironvaliant/SpAttack-Anim.png", frameWidth: 56, frameHeight: 80, rows: 8, durations: [2,6,2,2,2,2,2,2] },
     scale: 1.3, anchorX: 0.5, anchorY: 0.22,
   },
+};
+
+/** Soul Unison forms: Ceruledge's frames and timing, built by scripts/build-fusion.py. */
+const fused = (folder: string, padX = 0, padTop = 0): PokemonConfig => {
+  const base = POKEMON_CONFIGS.ceruledge;
+  const swap = (anim: AnimConfig) => ({ ...anim, src: anim.src.replace("/ceruledge/", `/fusion/${folder}/`),
+    frameWidth: anim.frameWidth + 2 * padX, frameHeight: anim.frameHeight + padTop, padX, padTop });
+  return { ...base, walk: swap(base.walk), idle: swap(base.idle), sleep: swap(base.sleep), click: swap(base.click) };
+};
+/** Mega Evolutions (F): Mega Diancie (default), shiny Mega Latias/Latios from the owner's archives, Mega
+ *  Greninja and shiny Mega Dragonite from the owner's sheets. */
+export const MEGA_CONFIGS: Partial<Record<PokemonId, PokemonConfig>> = {
+  // Mega Diancie: the long-standing Diancie cursor, its default form.
+  diancie: {
+    walk:  { src: "/diancie/Walk-Anim.png",   frameWidth: 56, frameHeight: 88,  rows: 8, durations: [4,4,4,4,4,4,4,4,4] },
+    idle:  { src: "/diancie/Idle-Anim.png",   frameWidth: 64, frameHeight: 88,  rows: 8, durations: [16,12,16,12] },
+    sleep: { src: "/diancie/Sleep-Anim.png",  frameWidth: 48, frameHeight: 80,  rows: 1, durations: [14,13,12,16,14,13,12,16] },
+    click: { src: "/diancie/Strike-Anim.png", frameWidth: 88, frameHeight: 144, rows: 8, durations: [2,2,6,1,1,2,2,6,1,2,2,2,2,2] },
+    scale: 1.15, anchorX: 0.46, anchorY: 0.22,
+  },
+  // Shiny Mega Dragonite (Dratini blues, purple fins); attack from build-mega-dragonite-attack.py.
+  dragonite: {
+    walk:  { src: "/overworld/shiny-mega-dragonite/Walk-Anim.png",   frameWidth: 104, frameHeight: 84, rows: 8, durations: [8,12,8,12] },
+    idle:  { src: "/overworld/shiny-mega-dragonite/Idle-Anim.png",   frameWidth: 104, frameHeight: 84, rows: 8, durations: [60] },
+    sleep: { src: "/overworld/shiny-mega-dragonite/Sleep-Anim.png",  frameWidth: 104, frameHeight: 84, rows: 1, durations: [60] },
+    click: { src: "/overworld/shiny-mega-dragonite/Attack-Anim.png", frameWidth: 104, frameHeight: 84, rows: 8, durations: [3,3,6,8,3,3] },
+    scale: 1.15, anchorX: 0.5, anchorY: 0.3,
+  },
+  greninja: {
+    walk:  { src: "/overworld/mega-greninja/Walk-Anim.png",   frameWidth: 88, frameHeight: 80, rows: 8, durations: [6,6,6,6] },
+    idle:  { src: "/overworld/mega-greninja/Idle-Anim.png",   frameWidth: 88, frameHeight: 80, rows: 1, durations: [10,8,10,8] },
+    sleep: { src: "/overworld/mega-greninja/Sleep-Anim.png",  frameWidth: 88, frameHeight: 80, rows: 1, durations: [60] },
+    click: { src: "/overworld/mega-greninja/Attack-Anim.png", frameWidth: 88, frameHeight: 80, rows: 8, durations: [3,4,10,4] },
+    scale: 1.2, anchorX: 0.5, anchorY: 0.3,
+  },
+  latias: {
+    walk:  { src: "/mega/latias/Walk-Anim.png",   frameWidth: 72, frameHeight: 72, rows: 8, durations: [4,4,4,4,4,4,4,4,4,4,4,4] },
+    idle:  { src: "/mega/latias/Idle-Anim.png",   frameWidth: 72, frameHeight: 72, rows: 8, durations: [8,8,8,8,8,8] },
+    sleep: { src: "/mega/latias/Sleep-Anim.png",  frameWidth: 64, frameHeight: 32, rows: 1, durations: [30,35] },
+    click: { src: "/mega/latias/Attack-Anim.png", frameWidth: 88, frameHeight: 80, rows: 8, durations: [2,2,6,1,1,1,2,2,2,2,2] },
+    scale: 1.5, anchorX: 0.5, anchorY: 0.3,
+  },
+  latios: {
+    walk:  { src: "/mega/latios/Walk-Anim.png",   frameWidth: 80, frameHeight: 80, rows: 8, durations: [4,4,4,4,4,4,4,4,4,4,4,4] },
+    idle:  { src: "/mega/latios/Idle-Anim.png",   frameWidth: 80, frameHeight: 80, rows: 8, durations: [8,8,8,8,8,8] },
+    sleep: { src: "/mega/latios/Sleep-Anim.png",  frameWidth: 72, frameHeight: 32, rows: 1, durations: [30,35] },
+    click: { src: "/mega/latios/Attack-Anim.png", frameWidth: 96, frameHeight: 88, rows: 8, durations: [2,2,6,1,1,1,2,2,2,2,2] },
+    scale: 1.25, anchorX: 0.5, anchorY: 0.3,
+  },
+};
+
+export const FUSION_CONFIGS: Record<FusionId, PokemonConfig> = {
+  armarouge: { ...fused("ceruledge-armarouge"), click: armarougeCombo },
+  // Darkrai's shadow arms and hair overhang Ceruledge's frame: 8px either side and on top
+  // (build-fusion-darkrai.py).
+  darkrai: fused("ceruledge-darkrai", 8, 8),
+  // Shiny Zygarde (Complete Forme): build-fusion-zygarde.py.
+  zygarde: fused("ceruledge-zygarde", 6),
 };
 
 function directionFromDelta(dx: number, dy: number, fallback: number) {
@@ -107,7 +180,9 @@ function totalDurationMs(durations: number[]) {
 }
 
 export default function PokemonCursor() {
-  const { selectedPokemon } = usePokemonCursor();
+  const { selectedPokemon, fusion, fusing, mega } = usePokemonCursor();
+  const configFor = (pokemon: PokemonId, partner: FusionId | null, isMega = mega) =>
+    partner ? FUSION_CONFIGS[partner] : (isMega && MEGA_CONFIGS[pokemon]) || POKEMON_CONFIGS[pokemon];
 
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<Mode>("idle");
@@ -117,12 +192,17 @@ export default function PokemonCursor() {
   const [spawning, setSpawning] = useState(false);
 
   const pokemonRef = useRef<PokemonId>(selectedPokemon);
-  const configRef = useRef<PokemonConfig>(POKEMON_CONFIGS[selectedPokemon]);
-
-  const clickLengthMs = useMemo(
-    () => totalDurationMs(POKEMON_CONFIGS[selectedPokemon].click.durations),
-    [selectedPokemon]
-  );
+  const configRef = useRef<PokemonConfig>(configFor(selectedPokemon, fusion));
+  // Fusion changes can change frame count and duration (slash + cannon), so reset playback.
+  useEffect(() => {
+    configRef.current = configFor(selectedPokemon, fusion);
+    modeRef.current = "idle";
+    frameRef.current = 0;
+    frameElapsedRef.current = 0;
+    clickRemainingMsRef.current = 0;
+    setMode("idle");
+    setFrame(0);
+  }, [selectedPokemon, fusion, mega]);
 
   const modeRef = useRef<Mode>("idle");
   const frameRef = useRef(0);
@@ -133,7 +213,7 @@ export default function PokemonCursor() {
   const targetPosRef = useRef({ x: 0, y: 0 });
   const spritePosRef = useRef({ x: 0, y: 0 });
   const velocityRef = useRef({ x: 0, y: 0 });
-  const clickUntilRef = useRef(0);
+  const clickRemainingMsRef = useRef(0);
   const dirRowRef = useRef(DIR_S);
   const readyRef = useRef(false);
   const rafRef = useRef(0);
@@ -142,12 +222,12 @@ export default function PokemonCursor() {
   useEffect(() => {
     if (pokemonRef.current !== selectedPokemon) {
       pokemonRef.current = selectedPokemon;
-      configRef.current = POKEMON_CONFIGS[selectedPokemon];
+      configRef.current = configFor(selectedPokemon, fusion);
       // Reset animation state
       modeRef.current = "idle";
       frameRef.current = 0;
       frameElapsedRef.current = 0;
-      clickUntilRef.current = 0;
+      clickRemainingMsRef.current = 0;
       setMode("idle");
       setFrame(0);
       // Spawn animation
@@ -207,7 +287,7 @@ export default function PokemonCursor() {
         velocityRef.current.y,
         dirRowRef.current
       );
-      if (nextDir !== dirRowRef.current) {
+      if (modeRef.current !== "click" && nextDir !== dirRowRef.current) {
         dirRowRef.current = nextDir;
         setDirRow(nextDir);
       }
@@ -218,7 +298,7 @@ export default function PokemonCursor() {
     const onMouseDown = () => {
       const cfg = configRef.current;
       const dur = totalDurationMs(cfg.click.durations);
-      clickUntilRef.current = performance.now() + dur;
+      clickRemainingMsRef.current = dur;
       setModeWithReset("click", true);
     };
 
@@ -246,7 +326,9 @@ export default function PokemonCursor() {
         setSpritePos(nextSprite);
       }
 
-      if (modeRef.current === "click" && nowMs >= clickUntilRef.current) {
+      // Use the same elapsed time as frame playback, so slow frames cannot cut off the cannon.
+      if (modeRef.current === "click") clickRemainingMsRef.current -= dt;
+      if (modeRef.current === "click" && clickRemainingMsRef.current <= 0) {
         if (inactiveFor >= SLEEP_AFTER_MS) setModeWithReset("sleep");
         else if (inactiveFor >= IDLE_AFTER_MS) setModeWithReset("idle");
         else setModeWithReset("walk");
@@ -276,7 +358,8 @@ export default function PokemonCursor() {
             nextFrame += 1;
             changed = true;
           }
-          break;
+          else break;
+          continue;
         }
 
         nextFrame = (nextFrame + 1) % current.durations.length;
@@ -306,7 +389,7 @@ export default function PokemonCursor() {
 
   if (!ready) return null;
 
-  const cfg = POKEMON_CONFIGS[selectedPokemon];
+  const cfg = configFor(selectedPokemon, fusion);
   const animMap: Record<Mode, AnimConfig> = {
     walk: cfg.walk,
     idle: cfg.idle,
@@ -318,18 +401,27 @@ export default function PokemonCursor() {
   const width = anim.frameWidth * scale;
   const height = anim.frameHeight * scale;
   const row = anim.rows === 1 ? 0 : dirRow;
+  // The anchor sits on the base frame, so padding (fusions) never shifts the sprite.
+  const padX = anim.padX ?? 0, padTop = anim.padTop ?? 0;
+  const anchorX = ((anim.frameWidth - 2 * padX) * cfg.anchorX + padX) * scale;
+  const anchorY = ((anim.baseFrameHeight ?? anim.frameHeight - padTop) * cfg.anchorY + padTop) * scale;
   const bgX = -(frame * anim.frameWidth * scale);
   const bgY = -(row * anim.frameHeight * scale);
 
   return (
     <div
       aria-hidden="true"
-      className={spawning ? "pokemon-spawning" : undefined}
+      data-pokemon-cursor={selectedPokemon}
+      data-fusion={fusion ?? undefined}
+      data-mega={mega || undefined}
+      data-mode={mode}
+      data-frame={frame}
+      className={[spawning && "pokemon-spawning", fusion && "pokemon-fused"].filter(Boolean).join(" ") || undefined}
       style={{
         position: "fixed",
         left: 0,
         top: 0,
-        transform: `translate3d(${spritePos.x - width * cfg.anchorX}px, ${spritePos.y - height * cfg.anchorY}px, 0)`,
+        transform: `translate3d(${spritePos.x - anchorX}px, ${spritePos.y - anchorY}px, 0)`,
         width,
         height,
         pointerEvents: "none",
@@ -339,6 +431,7 @@ export default function PokemonCursor() {
         backgroundSize: `${anim.frameWidth * anim.durations.length * scale}px ${anim.frameHeight * anim.rows * scale}px`,
         backgroundPosition: `${bgX}px ${bgY}px`,
         imageRendering: "pixelated",
+        visibility: fusing ? "hidden" : undefined,
       }}
     />
   );

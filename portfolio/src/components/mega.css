@@ -1,0 +1,74 @@
+/* Mega Evolution (MegaEvolution.tsx): 2.3s to evolve, 1s to revert. Drawn with CSS only. */
+.mega-evolution { position:fixed; inset:0; z-index:85; pointer-events:none; overflow:hidden; }
+.mega-evolution > * { position:absolute; }
+.mega-actor { background-repeat:no-repeat; image-rendering:pixelated; }
+.mega-dim { inset:0; background:radial-gradient(circle at 50% 50%, #120d22cc, #06050ce6); animation:mega-dim 2.3s ease both; }
+.mega-flash { inset:0; background:#fff; animation:mega-flash 2.3s ease both; }
+
+/* Rainbow light streams converge on the Pokémon. */
+.mega-stream { width:3px; height:46vmax; margin-left:-1.5px; transform-origin:50% 0;
+  background:linear-gradient(transparent, hsl(calc(var(--i) * 36deg) 95% 70%), #fff);
+  rotate:calc(var(--i) * 36deg + 180deg); animation:mega-stream 2.3s ease-in both; filter:blur(.5px); }
+/* The orb: a white core in a turning rainbow rim. */
+.mega-orb { width:var(--orb); height:var(--orb); translate:-50% -50%; border-radius:50%;
+  background:radial-gradient(circle, #fff 0 38%, #fff8 58%, transparent 70%),
+    conic-gradient(from 0deg, #ff6ad5, #ffd84a, #5cf0b8, #6aa8ff, #c58bff, #ff6ad5);
+  -webkit-mask:radial-gradient(circle, #000 66%, transparent 70%); mask:radial-gradient(circle, #000 66%, transparent 70%);
+  box-shadow:0 0 30px #fff; animation:mega-orb 2.3s ease both; }
+.mega-emblem { --eh:calc(var(--orb) * .66); --ew:calc(var(--eh) * 12 / 18); width:var(--ew); height:var(--eh); translate:-50% -50%;
+  background:url(/mega/mega-symbol-flame.png) 0 0 / calc(var(--ew) * 12) var(--eh) no-repeat; image-rendering:pixelated;
+  animation:mega-emblem 2.3s ease both, mega-flame .9s steps(12) infinite; }
+@keyframes mega-flame { to { background-position-x:calc(var(--ew) * -12); } }
+.mega-shard { width:5px; height:16px; margin:-8px 0 0 -2.5px; border-radius:2px; background:#fff;
+  box-shadow:0 0 8px hsl(calc(var(--i) * 45deg) 95% 70%); rotate:calc(var(--i) * 45deg); animation:mega-shard 2.3s ease-out both; }
+.mega-evolution .from { animation:mega-from 2.3s linear both; }
+.mega-evolution .to { animation:mega-to 2.3s ease-out both; }
+
+@keyframes mega-dim { 0% { opacity:0; } 10%, 85% { opacity:1; } 100% { opacity:0; } }
+@keyframes mega-stream { 0%, 4% { opacity:0; transform:translateY(-60vmax); } 12% { opacity:1; } 34% { opacity:1; transform:translateY(-4px); } 40%, 100% { opacity:0; transform:translateY(0); } }
+@keyframes mega-from {
+  0%, 18% { opacity:1; filter:none; }
+  24%, 32% { filter:brightness(0) invert(1) drop-shadow(0 0 8px #fff); }
+  28% { filter:drop-shadow(0 0 6px #fff); }
+  36%, 52% { opacity:1; filter:brightness(0) invert(1) drop-shadow(0 0 12px #fff); scale:1; }
+  60%, 100% { opacity:0; scale:.7; }
+}
+@keyframes mega-orb { 0%, 30% { opacity:0; scale:.1; rotate:0deg; } 40% { opacity:1; scale:1; } 58% { opacity:1; scale:1.12; rotate:220deg; }
+  63% { opacity:1; scale:1.3; } 66%, 100% { opacity:0; scale:1.7; rotate:300deg; } }
+@keyframes mega-emblem { 0%, 42% { opacity:0; scale:.3; } 52% { opacity:1; scale:1; } 62% { opacity:1; scale:1.15; } 66%, 100% { opacity:0; scale:1.6; } }
+@keyframes mega-shard { 0%, 62% { opacity:0; transform:translateY(0); } 65% { opacity:1; } 100% { opacity:0; transform:translateY(calc(var(--orb) * -1.1)); } }
+@keyframes mega-flash { 0%, 60% { opacity:0; } 64% { opacity:.9; } 78%, 100% { opacity:0; } }
+/* The Mega form stands in a rainbow afterglow, then settles into the cursor. */
+@keyframes mega-to {
+  0%, 63% { opacity:0; scale:1.25; filter:brightness(0) invert(1) drop-shadow(0 0 14px #fff); }
+  70% { opacity:1; scale:1; filter:brightness(1.7) drop-shadow(0 0 8px #ffd84a) drop-shadow(0 0 10px #c58bff); }
+  88% { opacity:1; filter:drop-shadow(0 0 6px #5cf0b8) drop-shadow(0 0 8px #6aa8ff); }
+  100% { opacity:1; filter:none; }
+}
+
+/* Reverting: the Mega form folds into a small orb that pops, and the base form returns. */
+.mega-evolution.revert .mega-stream, .mega-evolution.revert .mega-emblem { display:none; }
+.mega-evolution.revert .mega-dim { animation:mega-revert-dim 1s ease both; }
+.mega-evolution.revert .mega-orb { animation:mega-revert-orb 1s ease both; }
+.mega-evolution.revert .mega-flash { animation:mega-revert-flash 1s ease both; }
+.mega-evolution.revert .mega-shard { animation:mega-revert-shard 1s ease-out both; }
+.mega-evolution.revert .from { animation:mega-revert-from 1s linear both; }
+.mega-evolution.revert .to { animation:mega-revert-to 1s ease-out both; }
+@keyframes mega-revert-dim { 0% { opacity:0; } 20%, 70% { opacity:.6; } 100% { opacity:0; } }
+@keyframes mega-revert-from { 0% { opacity:1; filter:none; scale:1; } 25% { filter:brightness(0) invert(1) drop-shadow(0 0 8px #fff); scale:1; } 42%, 100% { opacity:0; scale:.3; filter:brightness(0) invert(1); } }
+@keyframes mega-revert-orb { 0%, 25% { opacity:0; scale:.6; } 38% { opacity:1; scale:.5; } 46% { opacity:1; scale:.25; } 52%, 100% { opacity:0; scale:1.2; } }
+@keyframes mega-revert-flash { 0%, 42% { opacity:0; } 48% { opacity:.6; } 65%, 100% { opacity:0; } }
+@keyframes mega-revert-shard { 0%, 46% { opacity:0; transform:translateY(0); } 52% { opacity:1; } 100% { opacity:0; transform:translateY(calc(var(--orb) * -.6)); } }
+@keyframes mega-revert-to { 0%, 44% { opacity:0; scale:.4; filter:brightness(0) invert(1); } 60% { opacity:1; scale:1; filter:brightness(1.5); } 100% { opacity:1; filter:none; } }
+
+/* The Mega Stone appears above the Pokémon, glows, and streaks down into it. */
+.mega-stone { width:40px; height:40px; margin:-20px 0 0 -20px; image-rendering:auto; object-fit:contain; animation:mega-stone 2.3s ease-in both; }
+@keyframes mega-stone {
+  0% { opacity:0; scale:.3; filter:none; }
+  7% { opacity:1; scale:1.1; }
+  10% { scale:1; filter:drop-shadow(0 0 4px #fff); }
+  18% { filter:drop-shadow(0 0 14px #fff) drop-shadow(0 0 22px #ffe46a) brightness(1.4); }
+  26% { opacity:1; transform:translateY(0); scale:1; }
+  34%, 100% { opacity:0; transform:translateY(var(--drop)); scale:.2; filter:brightness(3); }
+}
+

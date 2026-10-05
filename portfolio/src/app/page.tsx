@@ -12,6 +12,7 @@ import EeveeBase from "@/components/EeveeBase";
 import MouseGradient from "@/components/MouseGradient";
 import PokemonCursor from "@/components/PokemonCursor";
 import TeddiursaRoamer from "@/components/TeddiursaRoamer";
+import FusionWheel from "@/components/FusionWheel";
 import { PokemonCursorProvider } from "@/components/PokemonCursorContext";
 import { personal } from "@/data";
 
@@ -60,6 +61,7 @@ export default function Home() {
     >
       <MouseGradient />
       <PokemonCursor />
+      <FusionWheel />
       <TeddiursaRoamer />
       <PokemonOverworld />
       <YveltalRoamer />
