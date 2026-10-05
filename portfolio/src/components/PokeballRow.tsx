@@ -3,8 +3,43 @@
 import Image from "next/image";
 import { useState, useRef } from "react";
 import { usePokemonCursor, type PokemonId } from "@/components/PokemonCursorContext";
-import { CURSOR_ROSTER } from "@/components/cursorRoster";
+import { CURSOR_ROSTER, FUSION_ICONS } from "@/components/cursorRoster";
 import CursorLineupPicker from "@/components/CursorLineupPicker";
+
+/**
+ * The hover portrait shows the Pokémon as it is now: its Mega portrait (with the Mega symbol in the
+ * corner) when Mega Evolved, or, for a fused Ceruledge, its partner's small portrait and the DNA
+ * Splicers in the corner.
+ */
+function FormPortrait({ pokemon, icon, label }: { pokemon: PokemonId; icon: string; label: string }) {
+  const { megaForms, fusion, selectedPokemon } = usePokemonCursor();
+  const megaIcon = CURSOR_ROSTER[pokemon].megaIcon;
+  const isMega = !!megaIcon && megaForms.includes(pokemon);
+  const partner = pokemon === selectedPokemon && fusion ? FUSION_ICONS[fusion] : null;
+  const pixel = { imageRendering: "pixelated" as const };
+  return (
+    <div className="relative" data-form={isMega ? "mega" : partner ? `fused-${fusion}` : "base"} style={{ width: 40, height: 40 }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={isMega ? megaIcon : icon} alt={isMega ? `Mega ${label}` : label} width={40} height={40}
+        style={{ ...pixel, width: 40, height: 40, objectFit: "contain" }} />
+      {isMega && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src="/icons/forms/mega-badge.png" alt="" aria-hidden="true" width={10} height={15}
+          style={{ ...pixel, position: "absolute", top: -5, right: -5, width: 10, height: 15, filter: "drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff)" }} />
+      )}
+      {partner && (
+        <span aria-hidden="true" style={{ position: "absolute", top: -7, right: -9, width: 20, height: 20 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={partner} alt="" width={20} height={20} style={{ ...pixel, width: 20, height: 20, borderRadius: 5, border: "1px solid #fff", boxShadow: "0 1px 3px #0003" }} />
+          {/* The DNA Splicers, held at the partner's lower-left corner on a white disc. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icons/forms/dna-splicers.png" alt="" width={16} height={16} style={{ ...pixel, position: "absolute", left: -9, bottom: -8, width: 16, height: 16,
+            borderRadius: "50%", background: "#fff", boxShadow: "0 1px 2px #0003" }} />
+        </span>
+      )}
+    </div>
+  );
+}
 
 export default function PokeballRow() {
   const { selectedPokemon, setSelectedPokemon, lineup } = usePokemonCursor();
@@ -59,14 +94,7 @@ export default function PokeballRow() {
               }}
             >
               <div className="flex flex-col items-center gap-0.5 rounded-xl border border-cream-200 bg-white px-2 py-1.5 shadow-md">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={icon}
-                  alt={label}
-                  width={40}
-                  height={40}
-                  style={{ imageRendering: "pixelated", width: 40, height: 40, objectFit: "contain" }}
-                />
+<FormPortrait pokemon={pokemon} icon={icon} label={label} />
                 <span className="whitespace-nowrap text-[9px] font-semibold uppercase tracking-wider text-warm-400">
                   {label}
                 </span>

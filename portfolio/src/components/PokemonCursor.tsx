@@ -122,7 +122,9 @@ export const MEGA_CONFIGS: Partial<Record<PokemonId, PokemonConfig>> = {
     idle:  { src: "/overworld/shiny-mega-dragonite/Idle-Anim.png",   frameWidth: 104, frameHeight: 84, rows: 8, durations: [60] },
     sleep: { src: "/overworld/shiny-mega-dragonite/Sleep-Anim.png",  frameWidth: 104, frameHeight: 84, rows: 1, durations: [60] },
     click: { src: "/overworld/shiny-mega-dragonite/Attack-Anim.png", frameWidth: 104, frameHeight: 84, rows: 8, durations: [3,3,6,8,3,3] },
-    scale: 1.15, anchorX: 0.5, anchorY: 0.3,
+    // Anchored like base Dragonite (pointer 28 px above the feet, same offset from the body's
+    // centre), not by the frame: the tall ear wings made the old anchor sit too high.
+    scale: 1.15, anchorX: 0.483, anchorY: 0.542,
   },
   greninja: {
     walk:  { src: "/overworld/mega-greninja/Walk-Anim.png",   frameWidth: 88, frameHeight: 80, rows: 8, durations: [6,6,6,6] },
