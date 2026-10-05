@@ -31,9 +31,9 @@ function FormPortrait({ pokemon, icon, label }: { pokemon: PokemonId; icon: stri
         <span aria-hidden="true" style={{ position: "absolute", top: -7, right: -9, width: 20, height: 20 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={partner} alt="" width={20} height={20} style={{ ...pixel, width: 20, height: 20, borderRadius: 5, border: "1px solid #fff", boxShadow: "0 1px 3px #0003" }} />
-          {/* The DNA Splicers, held at the partner's lower-left corner on a white disc. */}
+          {/* The DNA Splicers, at the partner's lower-right corner on a white disc (clear of the portrait). */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icons/forms/dna-splicers.png" alt="" width={16} height={16} style={{ ...pixel, position: "absolute", left: -9, bottom: -8, width: 16, height: 16,
+          <img src="/icons/forms/dna-splicers.png" alt="" width={16} height={16} style={{ ...pixel, position: "absolute", right: -11, bottom: -8, width: 16, height: 16,
             borderRadius: "50%", background: "#fff", boxShadow: "0 1px 2px #0003" }} />
         </span>
       )}
