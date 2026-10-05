@@ -35,6 +35,8 @@ interface PokemonCursorContextType {
   setFusing: (f: boolean) => void;
   /** Whether the selected cursor is Mega Evolved (Greninja, Latias, Latios). */
   mega: boolean;
+  /** Every Pokémon currently in its Mega form (for portraits, whichever is selected). */
+  megaForms: PokemonId[];
   /** Mega Evolve or revert a Pokémon (the selected one unless named: handlers registered once must name it). */
   setMega: (on: boolean, pokemon?: PokemonId) => void;
   /** The Poké Ball row: up to six cursor Pokémon, in order (Make it yours). Remembered in this browser. */
@@ -50,6 +52,7 @@ const PokemonCursorContext = createContext<PokemonCursorContextType>({
   fusing: false,
   setFusing: () => {},
   mega: false,
+  megaForms: [],
   setMega: () => {},
   lineup: [],
   setLineup: () => {},
@@ -101,7 +104,7 @@ export function PokemonCursorProvider({
 
   return (
     <PokemonCursorContext.Provider value={{ selectedPokemon, setSelectedPokemon, fusion: selectedPokemon === FUSION_HOST ? fusion : null, setFusion, fusing, setFusing,
-      mega: MEGA_CAPABLE.includes(selectedPokemon) && megas.includes(selectedPokemon), setMega, lineup, setLineup }}>
+      mega: MEGA_CAPABLE.includes(selectedPokemon) && megas.includes(selectedPokemon), megaForms: megas, setMega, lineup, setLineup }}>
       {children}
     </PokemonCursorContext.Provider>
   );

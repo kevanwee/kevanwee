@@ -14,6 +14,9 @@ the portfolio cursor matches Voracity's. Keep the two copies in step; Voracity's
   `portfolio.cursor.mega`, `portfolio.cursor.lineup`. The page server-renders the defaults and
   loads saved choices after mount (no hydration mismatch).
 - Reduced motion swaps forms without the sequences.
+- The Poké Ball hover portrait shows the current form: the Mega portrait with the Mega symbol in the
+  top-right corner, or, for a fused Ceruledge, the partner's small portrait with the DNA Splicers.
+- Mega Dragonite is anchored like base Dragonite (by the feet), so clicking lines up.
 
 ## Files
 `src/components/`: `PokemonCursor.tsx`, `PokemonCursorContext.tsx`, `FusionWheel.tsx`,
@@ -34,4 +37,9 @@ the portfolio cursor matches Voracity's. Keep the two copies in step; Voracity's
 - `public/diancie-base/` — base Diancie from the owner's diancie.zip.
 - `public/pokeballs/dive-ball.png` — PokeAPI item sprite, like the other balls.
 - `public/icons/dragonite.png` — shiny Dragonite portrait from PMD SpriteCollab, like the others.
+- `public/icons/forms/` — PMD SpriteCollab portraits: base Diancie (0719), Mega Diancie (0719/0001),
+  shiny Mega Latias (0380/0001/0001), Latios (0381/0001/0001), Greninja (0658/0002/0001), Dragonite
+  (0149/0001/0001); partners Armarouge (0936), Darkrai (0491), shiny Complete Zygarde
+  (0718/0002/0001). `dna-splicers.png` is the PokeAPI item sprite; `mega-badge.png` is the Mega
+  symbol at native size.
 Pokémon, items and the Mega symbol are © The Pokémon Company / Nintendo.
