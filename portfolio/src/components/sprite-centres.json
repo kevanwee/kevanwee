@@ -1,0 +1,50 @@
+{
+  "/diancie-base/Idle-Anim.png": [
+    11.5,
+    18.0
+  ],
+  "/ceruledge/Idle-Anim.png": [
+    15.5,
+    18.0
+  ],
+  "/greninja/Idle-Anim.png": [
+    16.5,
+    20.0
+  ],
+  "/latios/Idle-Anim.png": [
+    32.5,
+    29.5
+  ],
+  "/latias/Idle-Anim.png": [
+    24.0,
+    27.0
+  ],
+  "/overworld/dragonite/Idle-Anim.png": [
+    19.5,
+    22.0
+  ],
+  "/ironvaliant/Twirl-Anim.png": [
+    45.0,
+    31.0
+  ],
+  "/diancie/Idle-Anim.png": [
+    31.5,
+    25.5
+  ],
+  "/overworld/shiny-mega-dragonite/Idle-Anim.png": [
+    51.5,
+    51.0
+  ],
+  "/overworld/mega-greninja/Idle-Anim.png": [
+    43.0,
+    41.0
+  ],
+  "/mega/latias/Idle-Anim.png": [
+    37.0,
+    28.0
+  ],
+  "/mega/latios/Idle-Anim.png": [
+    40.5,
+    30.0
+  ]
+}

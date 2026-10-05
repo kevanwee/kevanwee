@@ -3,6 +3,7 @@
 import type { CSSProperties } from "react";
 import type { PokemonId } from "./PokemonCursorContext";
 import { MEGA_CONFIGS, POKEMON_CONFIGS, type PokemonConfig } from "./PokemonCursor";
+import SPRITE_CENTRES from "./sprite-centres.json";
 import "./mega.css";
 
 /** Matches mega.css: when the new form takes over, and when the sequence ends. */
@@ -43,12 +44,16 @@ function Form({ config, className, at }: { config: PokemonConfig; className: str
 export default function MegaEvolution({ kind, pokemon, x, y }: MegaSequence) {
   const base = POKEMON_CONFIGS[pokemon], mega = MEGA_CONFIGS[pokemon]!;
   const from = kind === "evolve" ? base : mega, to = kind === "evolve" ? mega : base;
-  // Centre the orb on the sprite, not on the pointer (the anchor sits near the top).
+  // Centre everything on the Pokémon itself: the visible pixels of each form's first idle frame
+  // (sprite-centres.json, built in Voracity; PMD frames carry empty space, mostly below), midway
+  // between the two forms.
   const size = Math.max(from.idle.frameWidth, from.idle.frameHeight) * from.scale;
-  const centre = {
-    left: x + (0.5 - from.anchorX) * from.idle.frameWidth * from.scale,
-    top: y + (0.5 - from.anchorY) * from.idle.frameHeight * from.scale,
+  const visible = (config: PokemonConfig) => {
+    const [cx, cy] = (SPRITE_CENTRES as Record<string, number[]>)[config.idle.src] ?? [config.idle.frameWidth / 2, config.idle.frameHeight / 2];
+    return { left: x + (cx - config.anchorX * config.idle.frameWidth) * config.scale, top: y + (cy - config.anchorY * config.idle.frameHeight) * config.scale };
   };
+  const a = visible(from), b = visible(to);
+  const centre = { left: (a.left + b.left) / 2, top: (a.top + b.top) / 2 };
   const at = { left: x, top: y };
   return <div className={`mega-evolution ${kind}`} aria-hidden="true" style={{ ["--orb" as string]: `${Math.max(72, size * 0.85)}px` }}>
     <span className="mega-dim" />
