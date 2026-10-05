@@ -51,3 +51,8 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - A whole-document habitat makes any full-bounds grid search (`settleFlight`) quadratic. Search outward in rings from the current position and prefilter obstacles to a window around the sprite.
 
 **Also:** the committed `test:yveltal:browser` was already red before this task, and its Silvally block used `scrollIntoViewIfNeeded`, which can leave the map's top edge above the viewport — Silvally is hidden by design at that point, so the assertion then measured a stale transform. Pin the scroll explicitly. Run the suite before assuming a failure is yours.
+
+## Cursor forms (2026-10-06)
+- The owner explicitly asked to port Voracity's cursor forms (Soul Unison, Mega Evolution, cursor line-up) to the portfolio, so the earlier "keep the original cursor" scope does not block them. See `tasks/pokemon-forms.md`; keep it in step with Voracity.
+- Client components here are server-rendered first: never read `window` or `localStorage` during render or in state initialisers; start from defaults and load saved choices after mount.
+

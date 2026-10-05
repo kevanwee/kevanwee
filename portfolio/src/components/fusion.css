@@ -1,0 +1,118 @@
+/* Soul Unison (FusionWheel.tsx): the F-key wheel and the Double Soul-style transformation. */
+.fusion-sprite { display:block; background-repeat:no-repeat; image-rendering:pixelated; }
+
+/* Below the cursor sprite (z 80) so the pointer stays visible over the choices. */
+.fusion-backdrop { position:fixed; inset:0; z-index:79; }
+.fusion-wheel { position:fixed; width:0; height:0; }
+.fusion-wheel::before { content:""; position:absolute; left:-74px; top:-74px; width:148px; height:148px; border-radius:50%;
+  border:2px dashed color-mix(in srgb, #6f8cff 55%, #ff8a24); opacity:.55; animation:fusion-spin 12s linear infinite; }
+.fusion-hub { position:absolute; left:0; top:0; translate:-50% -50%; display:grid; place-items:center; width:58px; height:58px; border-radius:50%;
+  background:var(--c-fffdf9, #fffdf9); border:1px solid var(--line, #dddacf); box-shadow:0 8px 24px #303e2422; overflow:hidden; }
+.fusion-hub .fusion-sprite { margin-top:-6px; }
+.fusion-choice { position:absolute; left:-30px; top:-30px; display:grid; place-items:center; width:60px; height:60px;
+  border-radius:50%; border:2px solid var(--soul); background:var(--c-fffdf9, #fffdf9); color:var(--c-414a3f, #414a3f);
+  box-shadow:0 6px 18px #303e2426, 0 0 0 4px color-mix(in srgb, var(--soul) 18%, transparent); font-size:9px; font-weight:600;
+  animation:fusion-pop .18s cubic-bezier(.22,1,.36,1) both; }
+.fusion-choice .fusion-sprite { height:44px !important; background-position-y:-4px !important; }
+/* The name sits under the circle as a small pill, so it is never clipped. */
+.fusion-choice > span:last-child { position:absolute; top:calc(100% + 4px); padding:2px 7px; border-radius:999px; white-space:nowrap; line-height:1.3;
+  background:var(--c-fffdf9, #fffdf9); border:1px solid color-mix(in srgb, var(--soul) 50%, transparent); box-shadow:0 2px 8px #303e2418; }
+html[data-theme="dark"] .fusion-choice > span:last-child { background:#2a2a2a; }
+.fusion-choice:hover:not(:disabled), .fusion-choice:focus-visible { background:color-mix(in srgb, var(--soul) 16%, var(--c-fffdf9, #fffdf9)); outline:none;
+  box-shadow:0 6px 18px #303e2426, 0 0 0 4px color-mix(in srgb, var(--soul) 45%, transparent); }
+.fusion-choice:active:not(:disabled) { scale:.95; }
+.fusion-choice:disabled { opacity:.55; }
+html[data-theme="dark"] .fusion-hub, html[data-theme="dark"] .fusion-choice { background:#2a2a2a; color:#e6e6e6; border-color:#3a3a3a; }
+html[data-theme="dark"] .fusion-choice { border-color:var(--soul); }
+html[data-theme="dark"] .fusion-choice:hover:not(:disabled), html[data-theme="dark"] .fusion-choice:focus-visible { background:color-mix(in srgb, var(--soul) 22%, #2a2a2a); }
+@keyframes fusion-pop { from { opacity:0; scale:.4; } }
+@keyframes fusion-spin { to { rotate:360deg; } }
+
+/* The fused cursor: Armarouge's fire on one side, Ceruledge's blue on the other. */
+.pokemon-fused { filter:drop-shadow(-2px 0 3px rgb(255 138 36 / .75)) drop-shadow(2px 0 3px rgb(111 140 255 / .75)); }
+
+/* ---- The transformation: 2s to fuse, 0.9s to separate ---- */
+.soul-unison { position:fixed; inset:0; z-index:85; pointer-events:none; overflow:hidden; }
+.soul-unison > * { position:absolute; }
+.soul-dim { inset:0; background:radial-gradient(circle at 50% 50%, #0b0d1acc, #05060ce6); animation:soul-dim 2s ease both; }
+.soul-actor { translate:-46% -22%; transform-origin:46% 22%; }
+.soul-ring { width:0; height:0; }
+.soul-ring::before { content:""; position:absolute; left:-60px; top:-50px; width:120px; height:120px; border-radius:50%; }
+.soul-ring.outer::before { border:4px dashed var(--soul); box-shadow:0 0 18px var(--soul), inset 0 0 18px var(--soul); animation:soul-ring 2s ease-out both; }
+.soul-ring.inner::before { border:3px solid var(--host); box-shadow:0 0 14px var(--host); animation:soul-ring-in 2s ease-out both; }
+.soul-pillar { width:46px; height:200vh; translate:-50% -50%;
+  background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--soul) 70%, #fff), #fff, color-mix(in srgb, var(--host) 70%, #fff), transparent);
+  filter:blur(2px); animation:soul-pillar 2s ease both; }
+.soul-flash { inset:0; background:#fff; animation:soul-flash 2s ease both; }
+.soul-spark { width:6px; height:6px; margin:-3px 0 0 -3px; border-radius:50%; background:#fff; box-shadow:0 0 8px var(--soul), 0 0 12px var(--host);
+  rotate:calc(var(--i) * 36deg); animation:soul-spark 2s ease-out both; }
+
+.soul-unison.fuse .host { animation:soul-host 2s linear both; }
+.soul-unison.fuse .guest { animation:soul-guest 2s cubic-bezier(.5,0,.3,1) both; }
+.soul-unison.fuse .fused { animation:soul-fused 2s ease-out both; }
+
+@keyframes soul-dim { 0% { opacity:0; } 12%, 82% { opacity:1; } 100% { opacity:0; } }
+/* Ceruledge stands, then flickers to a white silhouette as the souls meet. */
+@keyframes soul-host {
+  0% { opacity:1; filter:none; scale:.65; }
+  14%, 25% { opacity:1; filter:none; scale:1; }
+  30%, 40%, 50% { filter:brightness(0) invert(1) drop-shadow(0 0 6px var(--host)); }
+  35%, 45% { filter:drop-shadow(0 0 6px var(--host)); }
+  55%, 61% { opacity:1; filter:brightness(0) invert(1) drop-shadow(0 0 10px #fff); }
+  62%, 100% { opacity:0; }
+}
+/* The partner arrives in its soul colour from the upper left and dives in. */
+@keyframes soul-guest {
+  0% { opacity:0; transform:translate(-130px, -70px); filter:brightness(0) invert(1) drop-shadow(0 0 8px var(--soul)); }
+  10% { opacity:1; transform:translate(-120px, -60px); filter:none; }
+  22% { transform:translate(-112px, -56px); filter:none; }
+  27% { filter:brightness(0) invert(1) drop-shadow(0 0 10px var(--soul)); }
+  36% { opacity:1; transform:translate(0, 0) scale(.9); }
+  40%, 100% { opacity:0; transform:translate(0, 0) scale(.6); }
+}
+@keyframes soul-ring { 0%, 32% { opacity:0; scale:.2; rotate:0deg; } 40% { opacity:1; } 64% { opacity:1; scale:1.4; rotate:200deg; } 78%, 100% { opacity:0; scale:2.2; rotate:300deg; } }
+@keyframes soul-ring-in { 0%, 34% { opacity:0; scale:.15; } 42% { opacity:1; } 64% { opacity:.9; scale:1; } 76%, 100% { opacity:0; scale:1.8; } }
+@keyframes soul-pillar { 0%, 37% { opacity:0; scale:.1 0; } 48% { opacity:.9; scale:1 1; } 62% { opacity:1; scale:1.6 1; } 76%, 100% { opacity:0; scale:2.4 1; } }
+@keyframes soul-flash { 0%, 57% { opacity:0; } 62% { opacity:.95; } 78%, 100% { opacity:0; } }
+/* The fusion stands in the afterglow. */
+@keyframes soul-fused {
+  0%, 61% { opacity:0; scale:1.35; filter:brightness(0) invert(1) drop-shadow(0 0 14px #fff); }
+  68% { opacity:1; scale:1; filter:brightness(1.8) drop-shadow(-3px 0 6px var(--soul)) drop-shadow(3px 0 6px var(--host)); }
+  84% { opacity:1; scale:1; filter:drop-shadow(-2px 0 4px var(--soul)) drop-shadow(2px 0 4px var(--host)); }
+  100% { opacity:1; scale:.65; filter:drop-shadow(-2px 0 3px var(--soul)) drop-shadow(2px 0 3px var(--host)); }
+}
+@keyframes soul-spark { 0%, 62% { opacity:0; transform:translateY(0); } 66% { opacity:1; } 100% { opacity:0; transform:translateY(-70px); } }
+
+/* Separating: the fusion flares, then the partner leaves. */
+.soul-unison.split .soul-dim { animation:soul-split-dim .9s ease both; }
+.soul-unison.split .soul-pillar, .soul-unison.split .soul-ring.inner { display:none; }
+.soul-unison.split .soul-ring.outer::before { animation:soul-split-ring .9s ease-out both; }
+.soul-unison.split .soul-flash { animation:soul-split-flash .9s ease both; }
+.soul-unison.split .fused { animation:soul-split-fused .9s linear both; }
+.soul-unison.split .host { animation:soul-split-host .9s linear both; }
+.soul-unison.split .guest { animation:soul-split-guest .9s cubic-bezier(.3,0,.5,1) both; }
+.soul-unison.split .soul-spark { animation:soul-split-spark .9s ease-out both; }
+@keyframes soul-split-dim { 0% { opacity:0; } 20%, 70% { opacity:.6; } 100% { opacity:0; } }
+@keyframes soul-split-ring { 0%, 35% { opacity:0; scale:.3; } 45% { opacity:1; } 100% { opacity:0; scale:2; } }
+@keyframes soul-split-flash { 0%, 38% { opacity:0; } 45% { opacity:.85; } 65%, 100% { opacity:0; } }
+@keyframes soul-split-fused { 0% { opacity:1; scale:.65; } 12% { scale:1; } 15%, 30% { filter:brightness(0) invert(1); } 22% { filter:none; } 44%, 100% { opacity:0; } }
+@keyframes soul-split-host { 0%, 43% { opacity:0; scale:1; } 50% { opacity:1; scale:1; } 100% { opacity:1; scale:.65; } }
+@keyframes soul-split-guest {
+  0%, 43% { opacity:0; transform:translate(0, 0); filter:brightness(0) invert(1) drop-shadow(0 0 8px var(--soul)); }
+  55% { opacity:1; }
+  100% { opacity:0; transform:translate(-120px, -70px); }
+}
+@keyframes soul-split-spark { 0%, 43% { opacity:0; transform:translateY(0); } 50% { opacity:1; } 100% { opacity:0; transform:translateY(-50px); } }
+
+@media (prefers-reduced-motion: reduce) { .fusion-wheel::before, .fusion-choice { animation:none; } }
+
+/* The hint shown on switching to Ceruledge: a quiet pill in the bottom left, gone after 4s. */
+.fusion-hint { position:fixed; left:22px; bottom:22px; z-index:70; display:flex; align-items:center; gap:6px; padding:8px 13px;
+  border-radius:999px; border:1px solid var(--line, #dddacf); background:var(--c-fffdf9, #fffdf9); color:var(--c-414a3f, #414a3f);
+  box-shadow:0 8px 24px #303e2422; font-size:12px; pointer-events:none; animation:fusion-hint 4s ease both; }
+.fusion-hint kbd { display:inline-grid; place-items:center; min-width:20px; height:20px; padding:0 5px; border-radius:5px; font:600 11px/1 inherit;
+  border:1px solid color-mix(in srgb, #6f8cff 45%, #ff8a24); background:color-mix(in srgb, #6f8cff 10%, transparent); }
+html[data-theme="dark"] .fusion-hint { background:#2a2a2a; color:#e6e6e6; border-color:#3a3a3a; }
+@keyframes fusion-hint { 0% { opacity:0; translate:0 8px; } 8%, 85% { opacity:1; translate:0 0; } 100% { opacity:0; } }
+@media (prefers-reduced-motion: reduce) { .fusion-hint { animation:none; } }
+

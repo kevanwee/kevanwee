@@ -3,23 +3,13 @@
 import Image from "next/image";
 import { useState, useRef } from "react";
 import { usePokemonCursor, type PokemonId } from "@/components/PokemonCursorContext";
-
-const POKEBALLS: {
-  ball: string;
-  pokemon: PokemonId;
-  label: string;
-  icon: string;
-}[] = [
-  { ball: "/pokeballs/cherish-ball.png",  pokemon: "diancie",    label: "Diancie",      icon: "/icons/diancie.png" },
-  { ball: "/pokeballs/quick-ball.png",    pokemon: "ceruledge",  label: "Ceruledge",    icon: "/icons/ceruledge.png" },
-  { ball: "/pokeballs/luxury-ball.png",   pokemon: "greninja",   label: "Greninja",     icon: "/icons/greninja.png" },
-  { ball: "/pokeballs/beast-ball.png",    pokemon: "latios",     label: "Latios",       icon: "/icons/latios.png" },
-  { ball: "/pokeballs/fast-ball.png",     pokemon: "latias",     label: "Latias",       icon: "/icons/latias.png" },
-  { ball: "/pokeballs/premier-ball.png",  pokemon: "ironvaliant",label: "Iron Valiant", icon: "/icons/ironvaliant.png" },
-];
+import { CURSOR_ROSTER } from "@/components/cursorRoster";
+import CursorLineupPicker from "@/components/CursorLineupPicker";
 
 export default function PokeballRow() {
-  const { selectedPokemon, setSelectedPokemon } = usePokemonCursor();
+  const { selectedPokemon, setSelectedPokemon, lineup } = usePokemonCursor();
+  // The visitor's six (or fewer), in their order: the picker at the end of the row edits it.
+  const POKEBALLS = lineup.map(pokemon => ({ pokemon, ...CURSOR_ROSTER[pokemon] }));
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [shakingIdx, setShakingIdx] = useState<number | null>(null);
   const [flashIdx, setFlashIdx] = useState<number | null>(null);
@@ -150,6 +140,7 @@ export default function PokeballRow() {
           </div>
         );
       })}
+      <CursorLineupPicker />
     </div>
   );
 }
