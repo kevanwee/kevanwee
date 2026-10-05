@@ -30,7 +30,8 @@ export type PokemonConfig = {
 };
 
 const TICK_MS = 16;
-const SLEEP_AFTER_MS = 2600;
+/** How long the pointer must rest before the cursor Pokémon dozes off (owner: 2.6 s was far too quick). */
+const SLEEP_AFTER_MS = 8000;
 const IDLE_AFTER_MS = 320;
 
 const DIR_S = 0;
