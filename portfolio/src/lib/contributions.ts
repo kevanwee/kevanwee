@@ -1,6 +1,6 @@
 // The year of GitHub contributions under the Eevee forest, from the free public mirror of the profile
-// calendar (no key, CORS-enabled), cached for an hour. Ported from Voracity's contributions.ts; the pastel
-// wave's colours (in globals.css) are shared with Voracity and the README garden.
+// calendar (no key, CORS-enabled), cached for an hour. Ported from Voracity's contributions.ts; the RGB
+// rule (rgbHue) is shared with Voracity and the README garden.
 
 export const PROFILE_LOGIN = 'kevanwee';
 export const CACHE_KEY = 'kevanwee.contributions';
@@ -97,3 +97,6 @@ export async function loadContributions(fetcher: typeof fetch = fetch, now = Dat
   return calendar;
 }
 
+/** The RGB-keyboard grid, shared with the README garden (rgb_cell in gen_contribution_garden.py) and
+ *  the portfolio: hue by position, sweeping diagonally across the year. Lightness by level is in CSS. */
+export const rgbHue = (column: number, row: number, columns = 53) => Math.round((column * 360 / columns + row * 9) % 360);
