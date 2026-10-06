@@ -26,12 +26,17 @@ export default function MessageLog() {
     let live = true;
     const refresh = () => {
       if (document.hidden || activityFresh(readActivity())) return;
-      loadActivity().then(next => { if (live) setActivity(next); }, () => { /* keep what we have */ });
+      loadActivity().then(next => {
+        // Only a changed feed replaces the box (and retypes it)
+        if (live) setActivity(current => current && JSON.stringify(current.lines) === JSON.stringify(next.lines) ? current : next);
+      }, () => { /* keep what we have */ });
     };
     const cached = readActivity(); if (cached) setActivity(cached.activity);
     refresh();
     document.addEventListener('visibilitychange', refresh);
-    return () => { live = false; document.removeEventListener('visibilitychange', refresh); };
+    // A tab left open keeps checking too (the cache decides whether that costs a request)
+    const timer = setInterval(refresh, 10 * 60 * 1000);
+    return () => { live = false; clearInterval(timer); document.removeEventListener('visibilitychange', refresh); };
   }, []);
 
   const lines = activity?.lines.length ? activity.lines : [QUIET_LINE];
