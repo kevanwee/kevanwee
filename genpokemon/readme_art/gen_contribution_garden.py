@@ -12,7 +12,8 @@ contributions.json is the public mirror's shape:
 """
 import base64, datetime as dt, json, struct, sys
 from pathlib import Path
-from pmd import Scene, roamer, SRC, PUBLIC, META
+from pmd import Scene, Sheet, roamer, SRC, PUBLIC, META
+import sky as skies
 
 THEMES = {
     "light": dict(panel="#fcfcf7", border="#e2e5d9", ink="#4d5745", muted="#8a987c", faint="#a0a591",
@@ -96,8 +97,11 @@ def streak(days):
     return n
 
 
-def render(data, theme):
+def render(data, theme, sky=None):
+    """sky: from sky.fetch() (phase, kind, intensity); None draws a clear day."""
     sc = Scene(0, 0)
+    sky = sky or {"phase": "day", "kind": "clear", "intensity": 0}
+    night = sky["phase"] == "night"
     T = THEMES[theme]
     today = dt.date.today().isoformat()
     days = [d for d in data["contributions"] if d["date"] <= today]
@@ -125,9 +129,15 @@ def render(data, theme):
               ("flareon", [(182, 252), (204, 292), (158, 284), (150, 220)], 9, [6, 2, 4, 3], -3),
               ("umbreon", [(302, 262), (250, 296), (190, 240), (232, 250), (330, 280)], 12, [2, 3, 1.5, 2, 2.5], -11)]
     for species, points, speed, pauses, delay in routes:
-        forest.append(roamer(sc, species, points, speed, pauses, delay, 1.0))
+        if night:  # asleep where their walk begins
+            forest.append(sc.sprite(Sheet(species, "Sleep"), 0, points[0][0], points[0][1], 1.0))
+        else:
+            forest.append(roamer(sc, species, points, speed, pauses, delay, 1.0))
     forest.append("</svg>")
-    parts.append(f'<g clip-path="url(#fc)">{"".join(forest)}</g>')
+    weather = skies.overlay(sc, fx, fy, cw, ch, sky["kind"], sky["intensity"], sky["phase"])
+    caption = skies.label(sky["kind"], sky["phase"])
+    tag = f'<rect x="{fx + 8}" y="{fy + 8}" width="{len(caption) * 5.6 + 14:.0f}" height="17" rx="8.5" fill="#0b0f1a" opacity=".55"/>'           f'<text x="{fx + 15}" y="{fy + 20}" font-size="9.5" fill="#f4f1e6">{caption}</text>'
+    parts.append(f'<g clip-path="url(#fc)">{"".join(forest)}{weather}{tag}</g>')
     parts.append(f'<rect x="{fx}" y="{fy}" width="{cw}" height="{ch}" rx="11" fill="none" stroke="{T["border"]}"/>')
 
     # Heading
@@ -158,7 +168,10 @@ def render(data, theme):
 
     # The path, and the pair walking it
     parts.append(f'<line x1="{GRID_X}" y1="{LANE_Y + 1}" x2="{right}" y2="{LANE_Y + 1}" stroke="{T["path"]}" stroke-width="2" stroke-dasharray="2 5" stroke-linecap="round"/>')
-    for species, delay in [("eevee", 0), ("sylveon", -1.6)]:
+    for i, (species, delay) in enumerate([("eevee", 0), ("sylveon", -1.6)]):
+        if night:  # curled up together on the path
+            parts.append(sc.sprite(Sheet(species, "Sleep"), 0, GRID_X + 60 + i * 30, LANE_Y + 1, 1.0))
+            continue
         s, c = walker(species, delay, 30, GRID_X + 14, right - 14)
         parts.append(s); css.append(c)
 
