@@ -1,70 +1,10 @@
 {
- "generatedAt": "2026-10-06T11:11:21+00:00",
+ "generatedAt": "2026-10-06T11:28:10+00:00",
  "speaker": "Diancie",
  "lines": [
   {
-   "mood": "Joyous",
-   "when": "2026-10-06T10:56:37+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request "
-    ],
-    [
-     "number",
-     "#38"
-    ],
-    [
-     "text",
-     " was merged into "
-    ],
-    [
-     "place",
-     "voracity"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Happy",
-   "when": "2026-10-06T10:42:18+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "voracity"
-    ],
-    [
-     "text",
-     " ("
-    ],
-    [
-     "number",
-     "\u00d711"
-    ],
-    [
-     "text",
-     ")"
-    ]
-   ]
-  },
-  {
    "mood": "Normal",
-   "when": "2026-10-06T10:10:14+00:00",
+   "when": "2026-10-06T11:26:43+00:00",
    "parts": [
     [
      "name",
@@ -76,7 +16,7 @@
     ],
     [
      "number",
-     "#37"
+     "#42"
     ],
     [
      "text",
@@ -93,8 +33,8 @@
    ]
   },
   {
-   "mood": "Joyous",
-   "when": "2026-10-06T07:54:52+00:00",
+   "mood": "Normal",
+   "when": "2026-10-06T11:25:38+00:00",
    "parts": [
     [
      "name",
@@ -102,15 +42,15 @@
     ],
     [
      "text",
-     "'s pull request "
+     " opened pull request "
     ],
     [
      "number",
-     "#36"
+     "#41"
     ],
     [
      "text",
-     " was merged into "
+     " on "
     ],
     [
      "place",
@@ -118,7 +58,67 @@
     ],
     [
      "text",
-     "!"
+     "."
+    ]
+   ]
+  },
+  {
+   "mood": "Normal",
+   "when": "2026-10-06T11:18:24+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " opened pull request "
+    ],
+    [
+     "number",
+     "#40"
+    ],
+    [
+     "text",
+     " on "
+    ],
+    [
+     "place",
+     "voracity"
+    ],
+    [
+     "text",
+     "."
+    ]
+   ]
+  },
+  {
+   "mood": "Normal",
+   "when": "2026-10-06T11:13:37+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " opened pull request "
+    ],
+    [
+     "number",
+     "#39"
+    ],
+    [
+     "text",
+     " on "
+    ],
+    [
+     "place",
+     "voracity"
+    ],
+    [
+     "text",
+     "."
     ]
    ]
   }
