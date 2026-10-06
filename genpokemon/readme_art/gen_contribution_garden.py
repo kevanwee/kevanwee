@@ -21,18 +21,15 @@ THEMES = {
     "dark": dict(panel="#232323", border="#3a3a3a", ink="#e6e6e6", muted="#b8b8b8", faint="#8f8f8f",
                  path="#3a3a3a", cells=["#323232", "#2e4a3d", "#3d6e57", "#63a184", "#9fc9ad"], ring="#9fc9ad"),
 }
-# The pastel RGB wave, shared with Voracity's and the portfolio's contribution panels (contributions.css):
-# the hue follows how busy the day was (sky blue, mint, butter, pink for levels 1-4) at pastel lightness,
-# and a ±WAVE_DEGREES hue drift travels across the year, each column WAVE_STEP seconds behind the last.
-# Empty days keep the theme's neutral.
-LEVEL_HUE = {1: 205, 2: 160, 3: 45, 4: 335}
-PASTEL = {"light": (72, {1: 80, 2: 74, 3: 72, 4: 72}), "dark": (62, {1: 68, 2: 70, 3: 72, 4: 74})}
-WAVE_DEGREES, WAVE_SECONDS, WAVE_STEP = 20, 3, .12
+# The RGB-keyboard grid, shared with Voracity's and the portfolio's contribution panels
+# (rgbCell in contributions.ts): hue by position, sweeping diagonally across the year; lightness by
+# level; the whole wave turns once every RGB_SECONDS. Empty days keep the theme's neutral.
+RGB_LIGHTNESS = {"light": {1: 72, 2: 60, 3: 50, 4: 41}, "dark": {1: 34, 2: 46, 3: 58, 4: 70}}
+RGB_SATURATION, RGB_SECONDS = 82, 8
 
 
-def pastel(level, theme):
-    saturation, lightness = PASTEL[theme]
-    return f"hsl({LEVEL_HUE[level]} {saturation}% {lightness[level]}%)"
+def rgb_cell(column, row, level, theme, columns=53):
+    return f"hsl({(column * 360 / columns + row * 9) % 360:.0f} {RGB_SATURATION}% {RGB_LIGHTNESS[theme][level]}%)"
 
 
 W, H = 910, 252
@@ -162,7 +159,7 @@ def render(data, theme, sky=None):
 
     # Months and cells
     previous, last_label = "", -9
-    lit, quiet = {}, []
+    lit, quiet = [], []
     for c, week in enumerate(weeks):
         first = next(d for d in week if d)
         month = first["date"][:7]
@@ -177,16 +174,13 @@ def render(data, theme, sky=None):
                 continue
             x, y = GRID_X + c * PITCH, GRID_Y + r * PITCH
             ring = f' stroke="{T["ring"]}" stroke-width="1.2"' if d["date"] == today else ""
-            fill = pastel(d["level"], theme) if d["level"] else T["cells"][0]
+            fill = rgb_cell(c, r, d["level"], theme, len(weeks)) if d["level"] else T["cells"][0]
             cell = (f'<rect class="c" style="animation-delay:{c * 8}ms" x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="2" fill="{fill}"{ring}>'
                     f'<title>{d["count"]} on {d["date"]}</title></rect>')
-            if d["level"]: lit.setdefault(c, []).append(cell)
-            else: quiet.append(cell)
-    # Each column's lit days drift together, a little behind the column before: the travelling wave
-    parts.append("".join(quiet) + "".join(f'<g class="wave" style="animation-delay:{-c * WAVE_STEP:.2f}s">{"".join(cells)}</g>' for c, cells in lit.items()))
+            (lit if d["level"] else quiet).append(cell)
+    parts.append("".join(quiet) + f'<g class="rgb">{"".join(lit)}</g>')
     css.append(".c{animation:sprout .4s ease-out both}@keyframes sprout{from{opacity:0}}"
-               f".wave{{animation:wave {WAVE_SECONDS}s ease-in-out infinite alternate}}"
-               f"@keyframes wave{{from{{filter:hue-rotate(-{WAVE_DEGREES}deg)}}to{{filter:hue-rotate({WAVE_DEGREES}deg)}}}}")
+               f".rgb{{animation:rgb {RGB_SECONDS}s linear infinite}}@keyframes rgb{{from{{filter:hue-rotate(0deg)}}to{{filter:hue-rotate(360deg)}}}}")
 
     # The path, and the pair walking it
     parts.append(f'<line x1="{GRID_X}" y1="{LANE_Y + 1}" x2="{right}" y2="{LANE_Y + 1}" stroke="{T["path"]}" stroke-width="2" stroke-dasharray="2 5" stroke-linecap="round"/>')
@@ -203,8 +197,8 @@ def render(data, theme, sky=None):
     lx = right - 5 * 11 - 30
     parts.append(f'<text x="{lx - 6}" y="{H - 16}" text-anchor="end" font-size="10" fill="{T["muted"]}">Less</text>')
     parts.append(f'<rect x="{lx}" y="{H - 24}" width="9" height="9" rx="2" fill="{T["cells"][0]}"/>')
-    legend = "".join(f'<rect x="{lx + i * 11}" y="{H - 24}" width="9" height="9" rx="2" fill="{pastel(i, theme)}"/>' for i in range(1, 5))
-    parts.append(f'<g class="wave">{legend}</g>')
+    legend = "".join(f'<rect x="{lx + i * 11}" y="{H - 24}" width="9" height="9" rx="2" fill="{rgb_cell(40 + i * 3, 3, i, theme)}"/>' for i in range(1, 5))
+    parts.append(f'<g class="rgb">{legend}</g>')
     parts.append(f'<text x="{right}" y="{H - 16}" text-anchor="end" font-size="10" fill="{T["muted"]}">More</text>')
 
     css.append("@media (prefers-reduced-motion:reduce){*{animation:none!important}}")
