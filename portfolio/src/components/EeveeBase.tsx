@@ -74,9 +74,8 @@ export default function EeveeBase() {
     return () => { disposed = true; cancelAnimationFrame(raf); intersection.disconnect(); resize.disconnect(); mutations.disconnect();
       nodes.forEach(n => n.cleanup()); timers.forEach(clearTimeout); motion.removeEventListener('change', wake); document.removeEventListener('visibilitychange', wake); };
   }, []);
-  // The section above owns a full section gap, which it earns because the next section
-  // opens with a rule. This has no rule, so it pulls up to the panel's own 64px rhythm.
-  return <figure className="-mt-8 mb-24 lg:-mt-20 lg:mb-36" aria-label="Eevee and friends in Transform Forest">
+  // Margins live on the wrapper in page.tsx, which also holds the contribution panel and dialogue box.
+  return <figure className="m-0" aria-label="Eevee and friends in Transform Forest">
     <div ref={habitat} data-eevee-base className="relative isolate w-full overflow-hidden rounded-2xl border border-cream-200"
       style={{aspectRatio: '480 / 312', background: 'url(/eevee-base/background.png) center / 100% 100%', imageRendering: 'pixelated'}}>
       <ForestSky sky={sky} />
