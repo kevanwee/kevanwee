@@ -4,7 +4,7 @@ import datetime as dt, html, itertools, json, random, re, sys
 SEEDS = itertools.count()  # every resident gets its own deterministic phase
 from pathlib import Path
 from PIL import ImageFont
-from pmd import Scene, Sheet, THEMES, species_scale, silvally
+from pmd import Scene, Sheet, THEMES, species_scale, silvally, tint
 import cast
 
 def _font(*candidates):
@@ -66,9 +66,9 @@ def resident(sc, species, mode, x0, x1, feet, period):
     return sc.sprite(sheet, row, x0, feet, fit_scale(species, anim, row=row))
 
 
-def card(theme, title, desc, href_label, lang, tags, who):
+def card(theme, title, desc, href_label, lang, tags, who, hue=None):
     """440 × (LANE + 104) project card; the resident stands on the card's top edge."""
-    T, W, CH = THEMES[theme], 440, 104
+    T, W, CH = tint(theme, hue), 440, 104
     H = LANE + CH
     sc = Scene(W, H)
     sc.body.append(f'<rect x=".5" y="{LANE + .5}" width="{W - 1}" height="{CH - 1}" rx="11" fill="{T["panel"]}" stroke="{T["border"]}"/>')
@@ -107,9 +107,9 @@ def divider(pair, flyer=None):
     return sc.svg(f"{lead} and {follow} walking the path")
 
 
-def tree_card(theme, columns):
+def tree_card(theme, columns, hue="teddiursa"):
     """Two skill trees side by side, residents along the top edge."""
-    T, W = THEMES[theme], 910
+    T, W = tint(theme, hue), 910
     col_w, label_w, size, gap = 425, 138, 12.5, 18
     blocks = []
     for title, rows in columns:
@@ -146,8 +146,8 @@ def ago(iso, now):
     return f"{days // 30} months ago"
 
 
-def stove_card(theme, repos, now):
-    T, W = THEMES[theme], 910
+def stove_card(theme, repos, now, hue="fuecoco"):
+    T, W = tint(theme, hue), 910
     rows = repos[:4]
     body_h = 48 + len(rows) * 44 + 8
     H = LANE + body_h
@@ -194,7 +194,7 @@ if __name__ == "__main__":
             p["who"], p["mode"] = cast.CARDS[p["slug"]]
             lang = LANGS.get(p["repo"].lower(), (None, 0))[0] if p.get("repo") else None
             for theme in THEMES:
-                write(f'card-{p["slug"]}-{theme}.svg', card(theme, p["title"], p["desc"], p.get("label", "github"), lang, p.get("tags", []), (p["who"], p["mode"])))
+                write(f'card-{p["slug"]}-{theme}.svg', card(theme, p["title"], p["desc"], p.get("label", "github"), lang, p.get("tags", []), (p["who"], p["mode"]), group["mascot"]))
     for name, (pair, flyer) in cast.PATHS.items():
         write(f"path-{name}.svg", divider(pair, flyer))
     trees = json.loads(Path("trees.json").read_text(encoding="utf-8"))
