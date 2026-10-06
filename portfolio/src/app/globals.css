@@ -205,3 +205,99 @@ html.pokemon-cursor .portfolio-dialog, html.pokemon-cursor .portfolio-dialog * {
 
 /* Reduced motion and quiet mode: the lighting stays, the movement stops */
 .forest-sky[data-still] > span { animation:none !important; }
+
+/* Contributions (components/ContributionGarden.tsx; ported from Voracity): GitHub contributions under the Eevee forest: two half-year beds, styled like the Calendar panel. */
+.contributions {
+  --cg-0:var(--c-ebeee4, #ebeee4); --cg-1:var(--c-cfe0c3, #cfe0c3); --cg-2:var(--c-9fc9ad, #9fc9ad); --cg-3:var(--c-5f9a7c, #5f9a7c); --cg-4:var(--c-3a6b59, #3a6b59); --cg-ring:var(--c-3a6b59, #3a6b59);
+  container-type:inline-size;
+  border:1px solid var(--c-e2e5d9, #e2e5d9); border-radius:11px; padding:14px 16px 12px; background:var(--c-fcfcf7, #fcfcf7); min-width:0;
+}
+html[data-theme="dark"] .contributions {
+  --cg-0:#353535; --cg-1:var(--c-2e4a3d, #2e4a3d); --cg-2:var(--c-3d6e57, #3d6e57); --cg-3:var(--c-63a184, #63a184); --cg-4:var(--c-9fc9ad, #9fc9ad); --cg-ring:var(--c-9fc9ad, #9fc9ad);
+  background:var(--night-panel); border-color:var(--line); color:var(--night-text);
+}
+.contributions-heading h3 { font-size:15px; }
+.contributions-heading a {
+  display:inline-flex; align-items:center; gap:2px; padding:2px 4px; margin-right:-4px; border-radius:6px;
+  font-size:10px; color:inherit; text-decoration:none;
+}
+.contributions-heading a:hover, .contributions-heading a:focus-visible { background:var(--c-edf1e5, #edf1e5); color:var(--c-3a6b59, #3a6b59); }
+.contributions-heading a:active { transform:translateY(1px); }
+html[data-theme="dark"] .contributions-heading a:hover, html[data-theme="dark"] .contributions-heading a:focus-visible { background:var(--night-raised); color:var(--sage); }
+.contributions-caption {
+  margin:4px 0 10px; min-height:1.5em; font-size:10px; line-height:1.5; color:var(--c-8a987c, #8a987c);
+  font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+html[data-theme="dark"] .contributions-caption { color:var(--muted); }
+.contributions-beds { display:grid; gap:10px; }
+/* Wide enough (the stacked phone layout): the year runs in one line, like GitHub's. */
+@container (min-width:520px) { .contributions-beds { grid-template-columns:1fr 1fr; gap:3px; } }
+.contributions-months, .contributions-grid { display:grid; grid-template-columns:repeat(var(--weeks), minmax(0, 1fr)); column-gap:2px; }
+.contributions-months { height:13px; font-size:8.5px; line-height:13px; color:var(--c-a0a591, #a0a591); letter-spacing:.02em; }
+html[data-theme="dark"] .contributions-months { color:var(--muted); }
+.contributions-months span { grid-row:1; white-space:nowrap; }
+.contributions-week { display:grid; grid-template-rows:repeat(7, auto); row-gap:2px; align-content:start; }
+.contributions-cell { display:block; aspect-ratio:1; border-radius:2px; background:var(--cg-0); }
+.contributions-cell[data-empty] { visibility:hidden; }
+/* The pastel RGB wave, shared with the README garden and the portfolio. The hue follows how busy the day was
+   (sky blue, mint, butter, pink as commits rise); lightness keeps it pastel. A ±20° hue drift travels across
+   the year, each column a little behind the last, like an RGB keyboard. Empty days keep the palette's neutral.
+   Fixed colours on purpose, like sprite artwork; reduced motion and quiet mode stop the drift. */
+@property --rgb-wave { syntax:'<number>'; inherits:true; initial-value:0; }
+.contributions { --rgb-s:72%; --rgb-l1:80%; --rgb-l2:74%; --rgb-l3:72%; --rgb-l4:72%; }
+html[data-theme="dark"] .contributions { --rgb-s:62%; --rgb-l1:68%; --rgb-l2:70%; --rgb-l3:72%; --rgb-l4:74%; }
+.contributions-cell[data-level="1"] { background:hsl(calc(205 + var(--rgb-wave)) var(--rgb-s) var(--rgb-l1)); }
+.contributions-cell[data-level="2"] { background:hsl(calc(160 + var(--rgb-wave)) var(--rgb-s) var(--rgb-l2)); }
+.contributions-cell[data-level="3"] { background:hsl(calc(45 + var(--rgb-wave)) var(--rgb-s) var(--rgb-l3)); }
+.contributions-cell[data-level="4"] { background:hsl(calc(335 + var(--rgb-wave)) var(--rgb-s) var(--rgb-l4)); }
+@keyframes contributions-wave { from { --rgb-wave:-20; } to { --rgb-wave:20; } }
+.contributions-cell[data-today] { box-shadow:0 0 0 1px var(--cg-ring); }
+.contributions-grid .contributions-cell[data-date]:hover { box-shadow:0 0 0 1.5px var(--cg-ring); position:relative; z-index:1; }
+.contributions[data-state="loading"] .contributions-grid { opacity:.6; }
+.contributions-foot {
+  display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:10px;
+  font-size:9.5px; color:var(--c-8a987c, #8a987c); font-variant-numeric:tabular-nums;
+}
+html[data-theme="dark"] .contributions-foot { color:var(--muted); }
+.contributions-foot > span:first-child { display:flex; gap:10px; min-width:0; }
+.contributions-legend { display:inline-flex; align-items:center; gap:2px; flex-shrink:0; }
+.contributions-legend .contributions-cell { width:8px; }
+.contributions-legend .contributions-cell:first-child { margin-left:4px; }
+.contributions-legend .contributions-cell:last-child { margin-right:4px; }
+/* Each column sprouts in turn once the year arrives. */
+@media (prefers-reduced-motion:no-preference) {
+  .contributions[data-state="ready"] .contributions-week {
+    animation:contributions-sprout .5s calc(var(--column) * 9ms) both ease-out,
+      contributions-wave 3s calc(var(--column) * -120ms) ease-in-out infinite alternate;
+  }
+  .contributions[data-state="ready"] .contributions-legend { animation:contributions-wave 3s ease-in-out infinite alternate; }
+  .quiet .contributions[data-state="ready"] :is(.contributions-week, .contributions-legend) { animation:none; }
+}
+@keyframes contributions-sprout { from { opacity:0; transform:translateY(3px); } }
+
+.contributions .panel-heading { display:flex; justify-content:space-between; align-items:center; color:#8a987c; }
+.contributions .panel-heading h3 { font-family:var(--font-playfair), Georgia, serif; font-weight:500; color:#626c57; margin:0; }
+
+/* The Mystery Dungeon dialogue box (components/MessageLog.tsx; ported from Voracity), matching the README's message-log.svg. The box is the
+   game's own dark UI, so it keeps its colours in both themes. Pixelify Sans: SIL Open Font License. */
+@font-face { font-family:"Pixelify Sans"; src:url("/fonts/PixelifySans.woff2") format("woff2"); font-weight:400 700; font-display:swap; }
+.pmd-log { display:grid; grid-template-columns:auto minmax(0, 1fr); gap:8px; align-items:start;
+  --pmd-navy:#0e1736; --pmd-edge:#a9bce4; --pmd-inner:#34477c; }
+.pmd-portrait, .pmd-box { background:var(--pmd-navy); border:2px solid var(--pmd-edge); border-radius:9px; box-shadow:inset 0 0 0 3px var(--pmd-navy), inset 0 0 0 4px var(--pmd-inner); }
+.pmd-portrait { padding:5px; line-height:0; }
+.pmd-portrait img { width:56px; height:56px; image-rendering:pixelated; }
+.pmd-box { position:relative; min-width:0; min-height:70px; padding:10px 14px 18px; color:#f8f8f8; cursor:pointer;
+  font:13px/1.55 "Pixelify Sans", "Courier New", monospace; letter-spacing:.2px; text-shadow:1px 1px 0 #00000080; }
+.pmd-box:focus-visible { outline:2px solid #f8e058; outline-offset:2px; }
+.pmd-speaker { margin:0 0 4px; color:#f8e058; font-weight:600; }
+.pmd-speaker span { color:#f8f8f8; font-weight:400; }
+.pmd-box ul { list-style:none; margin:0; padding:0; display:grid; gap:3px; }
+.pmd-name { color:#f8e058; }
+.pmd-place { color:#68d0f8; }
+.pmd-number { color:#90f090; }
+.pmd-faint { color:#8f9ac2; white-space:nowrap; }
+.pmd-arrow { position:absolute; right:12px; bottom:7px; width:0; height:0; border:5px solid transparent; border-top:7px solid #f8f8f8; border-bottom:0; opacity:0; }
+.pmd-log[data-done] .pmd-arrow { opacity:1; animation:pmd-arrow 1s steps(2, jump-none) infinite; }
+@keyframes pmd-arrow { 50% { opacity:.15; } }
+@media (prefers-reduced-motion:reduce) { .pmd-log[data-done] .pmd-arrow { animation:none; } }
+.quiet .pmd-log[data-done] .pmd-arrow { animation:none; }
