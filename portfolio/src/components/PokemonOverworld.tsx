@@ -171,7 +171,9 @@ export default function PokemonOverworld() {
       }
       dirty = false;
       layer!.hidden = modal;
-      button!.hidden = modal;
+      // Keep offscreen Silvally hidden while measuring, avoiding two display
+      // changes and a forced layout on every animation frame.
+      if (modal) button!.hidden = true;
       if (!modal) {
         // Batch layout reads before any writes, so transforms/hover/resizes remain aligned.
         const rects = new Map([...elements].map(([id, el]) => [id, el.getBoundingClientRect()]));

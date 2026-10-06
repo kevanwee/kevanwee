@@ -56,3 +56,6 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - The owner explicitly asked to port Voracity's cursor forms (Soul Unison, Mega Evolution, cursor line-up) to the portfolio, so the earlier "keep the original cursor" scope does not block them. See `tasks/pokemon-forms.md`; keep it in step with Voracity.
 - Client components here are server-rendered first: never read `window` or `localStorage` during render or in state initialisers; start from defaults and load saved choices after mount.
 
+
+## Scroll audit (6 October 2026)
+- The owner explicitly requested scroll/lag fixes on both sites. Preserve the visual design and all residents; reduce measured offscreen/style/layout work. See tasks/scroll-performance.md. Native smooth navigation must honour reduced motion.

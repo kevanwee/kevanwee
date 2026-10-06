@@ -250,7 +250,7 @@ html[data-theme="dark"] .contributions { --rgb-1:34%; --rgb-2:46%; --rgb-3:58%; 
 .contributions-cell[data-level="3"] { background:hsl(calc(var(--h, 140) + var(--rgb-spin)) var(--rgb-s) var(--rgb-3)); }
 .contributions-cell[data-level="4"] { background:hsl(calc(var(--h, 140) + var(--rgb-spin)) var(--rgb-s) var(--rgb-4)); }
 @media (prefers-reduced-motion:no-preference) {
-  .contributions[data-state="ready"] { animation:contributions-rgb 8s linear infinite; }
+  .contributions[data-state="ready"] { animation:contributions-rgb 8s steps(120) infinite; }
   .quiet .contributions[data-state="ready"] { animation:none; }
 }
 @keyframes contributions-rgb { to { --rgb-spin:360; } }
@@ -361,3 +361,8 @@ html[data-theme="dark"] .contributions-foot { color:var(--muted); }
 .pmd-bio-toggle:focus-visible { outline:2px solid #7d9a6f; outline-offset:2px; }
 html[data-theme="dark"] .pmd-bio-toggle { border-color:var(--line); color:var(--muted); }
 html[data-theme="dark"] .pmd-bio-toggle[aria-pressed="true"], html[data-theme="dark"] .pmd-bio-toggle:hover { background:var(--night-raised); color:var(--sage); }
+
+/* Preserve the RGB wave in 3-degree hue steps; suspend offscreen CSS work. */
+.contributions[data-animation-paused="true"], .contributions[data-animation-paused="true"] * { animation-play-state:paused !important; }
+.forest-sky[data-animation-paused="true"] > span { animation-play-state:paused !important; }
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto !important; } }

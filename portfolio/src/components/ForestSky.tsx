@@ -1,4 +1,5 @@
 "use client";
+import { useAnimationVisibility } from '@/lib/useAnimationVisibility';
 
 import { useEffect, useState, type CSSProperties } from 'react';
 import { isFresh, LABELS, loadSky, rainLayers, rainTile, readCache, settle, tintsFor, type Sky } from '@/lib/forest-sky';
@@ -32,6 +33,7 @@ export function useForestSky() {
 
 /** Weather and time-of-day layers over the forest, Mystery Dungeon style. Clicks pass through. */
 export default function ForestSky({ sky, label = true }: { sky: Sky; label?: boolean }) {
+  const animationRef = useAnimationVisibility<HTMLDivElement>();
   const [still, setStill] = useState(false);
   useEffect(() => {
     const motion = motionPreference(), update = () => setStill(motion.matches);
@@ -40,7 +42,7 @@ export default function ForestSky({ sky, label = true }: { sky: Sky; label?: boo
   }, []);
   const { phase, kind, intensity } = sky;
   const fireflies = (phase === 'night' || phase === 'dusk') && kind !== 'rain' && kind !== 'storm' ? FIREFLIES.slice(0, phase === 'night' ? 7 : 3) : [];
-  return <div className="forest-sky" data-phase={phase} data-kind={kind} data-still={still || undefined} aria-hidden="true">
+  return <div ref={animationRef} className="forest-sky" data-phase={phase} data-kind={kind} data-still={still || undefined} aria-hidden="true">
     {tintsFor(sky).map(([colour, opacity, blend], i) =>
       <span key={`t${i}`} className="forest-tint" style={{ background: colour, opacity, mixBlendMode: blend as CSSProperties['mixBlendMode'] }} />)}
     {(kind === 'cloudy' || kind === 'rain' || kind === 'storm') && <span className="forest-clouds" style={{ opacity: kind === 'cloudy' ? .16 : .22 }} />}
