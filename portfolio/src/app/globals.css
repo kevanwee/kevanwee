@@ -282,14 +282,20 @@ html[data-theme="dark"] .contributions-foot { color:var(--muted); }
 .pmd-log { display:grid; grid-template-columns:auto minmax(0, 1fr); gap:8px; align-items:start;
   --pmd-navy:#0e1736; --pmd-edge:#a9bce4; --pmd-inner:#34477c; }
 .pmd-portrait, .pmd-box { background:var(--pmd-navy); border:2px solid var(--pmd-edge); border-radius:9px; box-shadow:inset 0 0 0 3px var(--pmd-navy), inset 0 0 0 4px var(--pmd-inner); }
-.pmd-portrait { padding:5px; line-height:0; }
+.pmd-portrait { padding:5px; line-height:0; box-sizing:border-box; }
 .pmd-portrait img { width:56px; height:56px; image-rendering:pixelated; }
-.pmd-box { position:relative; min-width:0; min-height:70px; padding:10px 14px 18px; color:#f8f8f8; cursor:pointer;
+/* One fixed height (the portrait's, and room for about four lines): the page never moves as text types in. */
+.pmd-log { --pmd-height:138px; }
+.pmd-box { position:relative; min-width:0; height:var(--pmd-height); box-sizing:border-box; display:flex; flex-direction:column;
+  padding:10px 14px 18px; color:#f8f8f8; cursor:pointer; overflow:hidden;
   font:13px/1.55 "Pixelify Sans", "Courier New", monospace; letter-spacing:.2px; text-shadow:1px 1px 0 #00000080; }
 .pmd-box:focus-visible { outline:2px solid #f8e058; outline-offset:2px; }
 .pmd-speaker { margin:0 0 4px; color:#f8e058; font-weight:600; }
 .pmd-speaker span { color:#f8f8f8; font-weight:400; }
-.pmd-box ul { list-style:none; margin:0; padding:0; display:grid; gap:3px; }
+.pmd-box ul { list-style:none; margin:0; padding:0; display:grid; align-content:start; gap:3px; flex:1; min-height:0;
+  overflow-y:auto; scrollbar-width:none; overscroll-behavior:contain;
+  mask-image:linear-gradient(to bottom, transparent 0, #000 6px, #000 calc(100% - 4px), transparent 100%); }
+.pmd-box ul::-webkit-scrollbar { display:none; }
 .pmd-name { color:#f8e058; }
 .pmd-place { color:#68d0f8; }
 .pmd-number { color:#90f090; }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { activityFresh, ago, loadActivity, readActivity, type Activity, type ActivityLine } from '@/lib/activity';
 // Styles: app/globals.css (the Mystery Dungeon dialogue box).
 
@@ -18,6 +18,7 @@ export default function MessageLog() {
   const [activity, setActivity] = useState<Activity | null>(null);
   const [shown, setShown] = useState(0);
   const [round, setRound] = useState(0);
+  const scroller = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     let live = true;
@@ -45,6 +46,14 @@ export default function MessageLog() {
     return () => clearInterval(timer);
   }, [total, round, label]);
 
+  // The box keeps one height: as the text types past the bottom it scrolls up, like the game's text box.
+  // A replay starts from the top; once done, the earlier lines can be scrolled back to.
+  useEffect(() => {
+    const list = scroller.current;
+    if (!list) return;
+    list.scrollTop = shown === 0 ? 0 : list.scrollHeight;
+  }, [shown]);
+
   let budget = shown;
   const done = shown >= total;
   const mood = lines[0]?.mood ?? 'Normal';
@@ -53,7 +62,7 @@ export default function MessageLog() {
     <div className="pmd-box" role="button" tabIndex={0} aria-label={`${activity?.speaker ?? 'Diancie'}: ${label}. Replay`}
       onClick={() => setRound(r => r + 1)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setRound(r => r + 1); } }}>
       <p className="pmd-speaker">{activity?.speaker ?? 'Diancie'}<span>:</span></p>
-      <ul aria-hidden="true">
+      <ul ref={scroller} aria-hidden="true">
         {rendered.map((line, i) => <li key={i}>
           {line.parts.map(([kind, text], j) => {
             const visible = text.slice(0, Math.max(0, budget)); budget -= text.length;
