@@ -37,5 +37,8 @@ for group in json.loads(Path("projects.json").read_text(encoding="utf-8")):
             (out / f'card-{p["slug"]}-{theme}.svg').write_text(build_cards.card(theme, p["title"], p["desc"], p.get("label", "github"), lang, p.get("tags", []), (species, mode), group["mascot"]), encoding="utf-8")
 if len(sys.argv) > 4:  # the message log
     events = json.loads(Path(sys.argv[4]).read_text(encoding="utf-8"))
-    (out / "message-log.svg").write_text(build_log.render(build_log.lines_from(events, dt.datetime.now(dt.timezone.utc))), encoding="utf-8")
+    now_utc = dt.datetime.now(dt.timezone.utc)
+    lines = build_log.lines_from(events, now_utc)
+    (out / "message-log.svg").write_text(build_log.render(lines), encoding="utf-8")
+    (out / "activity.json").write_text(json.dumps(build_log.activity(lines, now_utc), indent=1), encoding="utf-8")
 print("regrown", data["total"]["lastYear"], "contributions,", len(repos), "repositories")
