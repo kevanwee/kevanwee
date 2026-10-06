@@ -78,6 +78,14 @@ def lines_from(events, now, limit=4):
     return out[:limit]
 
 
+def activity(lines, now):
+    """The same lines for Voracity's and the portfolio's dialogue boxes (readme/art/activity.json):
+    coloured parts without the trailing "· 2h ago", which each site works out from `when`."""
+    return {"generatedAt": now.isoformat(timespec="seconds"), "speaker": "Diancie",
+            "lines": [{"mood": l["mood"], "when": l["when"].isoformat(timespec="seconds"),
+                       "parts": [[k, t] for k, t in l["parts"] if k != "faint"]} for l in lines]}
+
+
 def render(lines):
     css = [f"@font-face{{font-family:Pix;src:url(data:font/woff2;base64,{FONT}) format('woff2');font-weight:400 700}}",
            "text{font-family:Pix,'Courier New',monospace;letter-spacing:.3px}", "image{image-rendering:pixelated}"]
@@ -135,3 +143,4 @@ if __name__ == "__main__":
     lines = lines_from(events, dt.datetime.now(dt.timezone.utc))
     for l in lines: print("".join(s for _, s in l["parts"]))
     (out / "message-log.svg").write_text(render(lines), encoding="utf-8")
+    (out / "activity.json").write_text(json.dumps(activity(lines, dt.datetime.now(dt.timezone.utc)), indent=1), encoding="utf-8")
