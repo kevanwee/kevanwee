@@ -2,10 +2,14 @@ name: Regrow the README garden
 
 # Every two hours: the contribution garden with the sky over its forest (Singapore's time of day and
 # NEA's 2-hour forecast), the message log of recent activity, and the README's open card spots.
+# Also on each push to main (the bot's own regrow commits use GITHUB_TOKEN, so they never trigger it).
 # Commits as github-actions[bot], so the regrow never counts towards your own contributions.
 on:
   schedule:
-    - cron: "35 */2 * * *" # every two hours (GitHub may run it late)
+    - cron: "17 1-23/2 * * *" # every two hours, off the busy top of the hour (GitHub may still run it late)
+  push:
+    branches: [main]
+    paths-ignore: ["readme/art/**"]
   workflow_dispatch:
 
 permissions:

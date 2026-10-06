@@ -32,7 +32,9 @@ export default function ContributionGarden() {
     const cached = readCache(); if (cached) setCalendar(cached);
     refresh();
     document.addEventListener('visibilitychange', refresh);
-    return () => { live = false; document.removeEventListener('visibilitychange', refresh); };
+    // A tab left open keeps checking too (the cache decides whether that costs a request)
+    const timer = setInterval(refresh, 10 * 60 * 1000);
+    return () => { live = false; clearInterval(timer); document.removeEventListener('visibilitychange', refresh); };
   }, []);
 
   const days = useMemo(() => calendar?.days.length ? calendar.days : blankYear(), [calendar]);

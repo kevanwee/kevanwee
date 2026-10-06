@@ -95,6 +95,7 @@ export const educationHistory: EducationEntry[] = [
     logo: "/logos/utokyo.svg",
     qualification: "Summer Exchange (GUC) · Law in Transnational East Asia",
     period: "July 2026",
+    grade: "Grade: A",
   },
   {
     institution: "Dunman High School",
