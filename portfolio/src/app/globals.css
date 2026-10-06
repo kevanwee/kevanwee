@@ -292,10 +292,11 @@ html[data-theme="dark"] .contributions-foot { color:var(--muted); }
 .pmd-box:focus-visible { outline:2px solid #f8e058; outline-offset:2px; }
 .pmd-speaker { margin:0 0 4px; color:#f8e058; font-weight:600; }
 .pmd-speaker span { color:#f8f8f8; font-weight:400; }
-.pmd-box ul { list-style:none; margin:0; padding:0; display:grid; align-content:start; gap:3px; flex:1; min-height:0;
-  overflow-y:auto; scrollbar-width:none; overscroll-behavior:contain;
+/* The lines slide inside a clipped window (transform, not scrolling: see MessageLog.tsx). */
+.pmd-lines { flex:1; min-height:0; overflow:hidden;
   mask-image:linear-gradient(to bottom, transparent 0, #000 6px, #000 calc(100% - 4px), transparent 100%); }
-.pmd-box ul::-webkit-scrollbar { display:none; }
+.pmd-box ul { list-style:none; margin:0; padding:2px 0 0; display:grid; align-content:start; gap:3px; transition:transform .12s ease-out; }
+@media (prefers-reduced-motion:reduce) { .pmd-box ul { transition:none; } }
 .pmd-name { color:#f8e058; }
 .pmd-place { color:#68d0f8; }
 .pmd-number { color:#90f090; }

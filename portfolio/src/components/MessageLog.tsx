@@ -18,7 +18,9 @@ export default function MessageLog() {
   const [activity, setActivity] = useState<Activity | null>(null);
   const [shown, setShown] = useState(0);
   const [round, setRound] = useState(0);
-  const scroller = useRef<HTMLUListElement>(null);
+  const viewport = useRef<HTMLDivElement>(null);
+  const content = useRef<HTMLUListElement>(null);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     let live = true;
@@ -46,13 +48,22 @@ export default function MessageLog() {
     return () => clearInterval(timer);
   }, [total, round, label]);
 
-  // The box keeps one height: as the text types past the bottom it scrolls up, like the game's text box.
-  // A replay starts from the top; once done, the earlier lines can be scrolled back to.
+  // The box keeps one height: as the text types past the bottom it slides up, like the game's text box.
+  // It moves by transform, never by scrolling: a scroll event would close Telegram's message preview.
+  const overflow = () => Math.max(0, (content.current?.offsetHeight ?? 0) - (viewport.current?.clientHeight ?? 0));
+  useEffect(() => { setOffset(shown === 0 ? 0 : overflow()); }, [shown]);
+  // Once done, the wheel (or ↑/↓ while focused) reads back through earlier lines; at either end the page scrolls as usual.
   useEffect(() => {
-    const list = scroller.current;
-    if (!list) return;
-    list.scrollTop = shown === 0 ? 0 : list.scrollHeight;
-  }, [shown]);
+    const box = viewport.current;
+    if (!box) return;
+    const wheel = (event: WheelEvent) => setOffset(current => {
+      const next = Math.min(overflow(), Math.max(0, current + event.deltaY));
+      if (next !== current) event.preventDefault();
+      return next;
+    });
+    box.addEventListener('wheel', wheel, { passive: false });
+    return () => box.removeEventListener('wheel', wheel);
+  }, []);
 
   let budget = shown;
   const done = shown >= total;
@@ -60,9 +71,13 @@ export default function MessageLog() {
   return <div className="pmd-log" data-done={done || undefined}>
     <div className="pmd-portrait"><img src={`/pmd/diancie-${mood}.png`} alt="" width={80} height={80} /></div>
     <div className="pmd-box" role="button" tabIndex={0} aria-label={`${activity?.speaker ?? 'Diancie'}: ${label}. Replay`}
-      onClick={() => setRound(r => r + 1)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setRound(r => r + 1); } }}>
+      onClick={() => setRound(r => r + 1)} onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setRound(r => r + 1); }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault(); setOffset(o => Math.min(overflow(), Math.max(0, o + (e.key === 'ArrowDown' ? 20 : -20)))); }
+      }}>
       <p className="pmd-speaker">{activity?.speaker ?? 'Diancie'}<span>:</span></p>
-      <ul ref={scroller} aria-hidden="true">
+      <div ref={viewport} className="pmd-lines">
+      <ul ref={content} aria-hidden="true" style={{ transform: `translateY(${-offset}px)` }}>
         {rendered.map((line, i) => <li key={i}>
           {line.parts.map(([kind, text], j) => {
             const visible = text.slice(0, Math.max(0, budget)); budget -= text.length;
@@ -70,6 +85,7 @@ export default function MessageLog() {
           })}
         </li>)}
       </ul>
+      </div>
       <span className="pmd-arrow" aria-hidden="true" />
     </div>
   </div>;
