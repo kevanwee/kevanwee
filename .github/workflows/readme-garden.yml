@@ -1,10 +1,11 @@
 name: Regrow the README garden
 
-# Redraws the contribution garden and the fresh-off-the-stove card each morning.
+# Every two hours: the contribution garden with the sky over its forest (Singapore's time of day and
+# NEA's 2-hour forecast), the message log of recent activity, and the README's open card spots.
 # Commits as github-actions[bot], so the regrow never counts towards your own contributions.
 on:
   schedule:
-    - cron: "17 22 * * *" # 06:17 in Singapore
+    - cron: "35 */2 * * *" # every two hours (GitHub may run it late)
   workflow_dispatch:
 
 permissions:
@@ -27,14 +28,22 @@ jobs:
       - name: Fetch the contribution calendar and repositories
         env:
           GH_TOKEN: ${{ github.token }}
+          LOG_TOKEN: ${{ secrets.LOG_TOKEN }}
         run: |
           curl -sf "https://github-contributions-api.jogruber.de/v4/kevanwee?y=last" -o "$RUNNER_TEMP/contributions.json"
           gh repo list kevanwee --limit 100 --json name,description,isPrivate,isFork,pushedAt > "$RUNNER_TEMP/repos.json"
+          # With the LOG_TOKEN secret (a read-only token of kevanwee's), the feed includes private work;
+          # build_log.py names only the private repos in PRIVATE_SHOWN. Without it, public activity only.
+          if [ -n "$LOG_TOKEN" ]; then
+            GH_TOKEN="$LOG_TOKEN" gh api "users/kevanwee/events?per_page=100" > "$RUNNER_TEMP/events.json"
+          else
+            gh api "users/kevanwee/events/public?per_page=100" > "$RUNNER_TEMP/events.json"
+          fi
       - name: Regrow
         working-directory: genpokemon/readme_art
         env:
           TZ: Asia/Singapore
-        run: python regrow.py "$RUNNER_TEMP/contributions.json" "$RUNNER_TEMP/repos.json" ../../readme/art
+        run: python regrow.py "$RUNNER_TEMP/contributions.json" "$RUNNER_TEMP/repos.json" ../../readme/art "$RUNNER_TEMP/events.json"
       - name: Commit if anything changed
         run: |
           git config user.name "github-actions[bot]"

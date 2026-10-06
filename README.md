@@ -46,9 +46,9 @@
     <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/note-cooking-dark.svg" /><img src="./readme/art/note-cooking-light.svg" alt="anyone can cook" /></picture>
   </p>
 
-  <!-- garden:stove (regrown daily) -->
+  <!-- message log: recent public activity, regrown every two hours -->
   <p align="center">
-    <a href="https://github.com/kevanwee?tab=repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/stove-dark.svg" /><img src="./readme/art/stove-light.svg" alt="recently pushed repositories" /></picture></a>
+    <a href="https://github.com/kevanwee?tab=overview"><img src="./readme/art/message-log.svg" alt="recent activity, as a mystery dungeon message log" /></a>
   </p>
 
   <p align="center">

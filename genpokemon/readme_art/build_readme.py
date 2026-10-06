@@ -105,9 +105,9 @@ readme = f"""<div align="center">
     a wise rat once said <em>"anyone can cook"</em> 👨‍🍳 — i build everything and anything!
   </p>
 
-  <!-- garden:stove (regrown daily) -->
+  <!-- message log: recent public activity, regrown every two hours -->
   <p align="center">
-    {themed("stove", "recently pushed repositories", href="https://github.com/kevanwee?tab=repositories")}
+    <a href="https://github.com/kevanwee?tab=overview"><img src="{ART}/message-log.svg" alt="recent activity, as a mystery dungeon message log" /></a>
   </p>
 
   <p align="center">
