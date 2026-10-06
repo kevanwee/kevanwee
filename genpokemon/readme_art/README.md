@@ -12,6 +12,7 @@ Every animated card on the profile README is a self-contained SVG: sprites are e
 | `build_readme.py` | `more.md` → the repository's `README.md` |
 | `sky.py` | The sky over the garden's forest: Singapore's time of day and NEA's 2-hour forecast, Mystery Dungeon style. Voracity and the portfolio share the rules (`forest-sky.ts`) |
 | `build_log.py` | The message log: recent activity as a Mystery Dungeon dialogue box with Diancie's portrait, typed out line by line. Also writes `readme/art/activity.json`, which Voracity's and the portfolio's dialogue boxes read |
+| `build_pmdui.py` | Explorer Rank (Explorers of Sky's ladder, points = all-time contributions; badges from Explorers of Time/Darkness and Sky) and Castform's 24-hour weather forecast for Singapore (NEA), in Mystery Dungeon's navy UI |
 | `regrow.py` | Every two hours: the garden with its sky, the message log and the open card spots (see `.github/workflows/readme-garden.yml`) |
 
 `pmd.py` is the shared library: sprite sheets cropped to the rows used, frame timing from PMD durations, walkers, eight-direction roamers and Silvally's form changes. `cast.py` says which Pokémon stands where (each appears once), and `data.py` holds the project list and skill trees.
@@ -22,6 +23,8 @@ Every animated card on the profile README is a self-contained SVG: sprites are e
 - `assets/voracity/`: the subset of Voracity's sprites the daily regrow needs.
 - A full rebuild needs a Voracity checkout: `VORACITY_SRC=/path/to/voracity`.
 - `stones/`: Mega Stone icons via PokeAPI. `mega-symbol.png`: the Mega Evolution symbol by pixelthecollector.
+- `areas/thunder-meadow.png`: Thunder Meadow, Castform's friend area in Pokémon Mystery Dungeon: Red/Blue Rescue Team (via the Mystery Dungeon Wiki).
+- `ranks/`: Explorer Rank badges from Pokémon Mystery Dungeon: Explorers of Time/Darkness and Sky (via the Mystery Dungeon Wiki).
 - `portraits/`: Diancie's PMD portraits (PMD Sprite Collab). `fonts/`: Pixelify Sans (SIL Open Font License, `fonts/OFL.txt`).
 
 ## Private activity in the message log
