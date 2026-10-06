@@ -188,6 +188,7 @@ if __name__ == "__main__":
     OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "out"); OUT.mkdir(parents=True, exist_ok=True)
     now = dt.date.today()
     projects = json.loads(Path("projects.json").read_text(encoding="utf-8"))
+    cast.fill_open_spots()
     for group in projects:
         for p in group["items"]:
             p["who"], p["mode"] = cast.CARDS[p["slug"]]

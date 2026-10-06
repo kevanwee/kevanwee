@@ -68,7 +68,7 @@
 <p align="center"><img src="./readme/art/path-gardevoir.svg" alt="mega gardevoir and mega gallade on the path" /></p>
 
 <details>
-  <summary align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/sign-cuisines-dark.svg" /><img src="./readme/art/sign-cuisines-light.svg" alt="cuisines" /></picture> <img src="./readme/slowitsgood.gif" width="80" /></summary>
+  <summary align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/sign-cuisines-dark.svg" /><img src="./readme/art/sign-cuisines-light.svg" alt="cuisines" /></picture> </summary>
 
   <br>
 
