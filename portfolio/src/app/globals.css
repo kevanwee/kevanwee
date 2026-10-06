@@ -239,18 +239,21 @@ html[data-theme="dark"] .contributions-months { color:var(--muted); }
 .contributions-week { display:grid; grid-template-rows:repeat(7, auto); row-gap:2px; align-content:start; }
 .contributions-cell { display:block; aspect-ratio:1; border-radius:2px; background:var(--cg-0); }
 .contributions-cell[data-empty] { visibility:hidden; }
-/* The pastel RGB wave, shared with the README garden and the portfolio. The hue follows how busy the day was
-   (sky blue, mint, butter, pink as commits rise); lightness keeps it pastel. A ±20° hue drift travels across
-   the year, each column a little behind the last, like an RGB keyboard. Empty days keep the palette's neutral.
-   Fixed colours on purpose, like sprite artwork; reduced motion and quiet mode stop the drift. */
-@property --rgb-wave { syntax:'<number>'; inherits:true; initial-value:0; }
-.contributions { --rgb-s:72%; --rgb-l1:80%; --rgb-l2:74%; --rgb-l3:72%; --rgb-l4:72%; }
-html[data-theme="dark"] .contributions { --rgb-s:62%; --rgb-l1:68%; --rgb-l2:70%; --rgb-l3:72%; --rgb-l4:74%; }
-.contributions-cell[data-level="1"] { background:hsl(calc(205 + var(--rgb-wave)) var(--rgb-s) var(--rgb-l1)); }
-.contributions-cell[data-level="2"] { background:hsl(calc(160 + var(--rgb-wave)) var(--rgb-s) var(--rgb-l2)); }
-.contributions-cell[data-level="3"] { background:hsl(calc(45 + var(--rgb-wave)) var(--rgb-s) var(--rgb-l3)); }
-.contributions-cell[data-level="4"] { background:hsl(calc(335 + var(--rgb-wave)) var(--rgb-s) var(--rgb-l4)); }
-@keyframes contributions-wave { from { --rgb-wave:-20; } to { --rgb-wave:20; } }
+/* The RGB-keyboard wave, shared with the README garden and the portfolio: each active day's hue comes from its
+   place (--h, set in ContributionGarden.tsx), lightness from its level, and --rgb-spin turns the whole wave once
+   every 8 seconds. Empty days keep the palette's neutral. Fixed colours on purpose, like sprite artwork. */
+@property --rgb-spin { syntax:'<number>'; inherits:true; initial-value:0; }
+.contributions { --rgb-s:82%; --rgb-1:72%; --rgb-2:60%; --rgb-3:50%; --rgb-4:41%; }
+html[data-theme="dark"] .contributions { --rgb-1:34%; --rgb-2:46%; --rgb-3:58%; --rgb-4:70%; }
+.contributions-cell[data-level="1"] { background:hsl(calc(var(--h, 140) + var(--rgb-spin)) var(--rgb-s) var(--rgb-1)); }
+.contributions-cell[data-level="2"] { background:hsl(calc(var(--h, 140) + var(--rgb-spin)) var(--rgb-s) var(--rgb-2)); }
+.contributions-cell[data-level="3"] { background:hsl(calc(var(--h, 140) + var(--rgb-spin)) var(--rgb-s) var(--rgb-3)); }
+.contributions-cell[data-level="4"] { background:hsl(calc(var(--h, 140) + var(--rgb-spin)) var(--rgb-s) var(--rgb-4)); }
+@media (prefers-reduced-motion:no-preference) {
+  .contributions[data-state="ready"] { animation:contributions-rgb 8s linear infinite; }
+  .quiet .contributions[data-state="ready"] { animation:none; }
+}
+@keyframes contributions-rgb { to { --rgb-spin:360; } }
 .contributions-cell[data-today] { box-shadow:0 0 0 1px var(--cg-ring); }
 .contributions-grid .contributions-cell[data-date]:hover { box-shadow:0 0 0 1.5px var(--cg-ring); position:relative; z-index:1; }
 .contributions[data-state="loading"] .contributions-grid { opacity:.6; }
@@ -266,12 +269,7 @@ html[data-theme="dark"] .contributions-foot { color:var(--muted); }
 .contributions-legend .contributions-cell:last-child { margin-right:4px; }
 /* Each column sprouts in turn once the year arrives. */
 @media (prefers-reduced-motion:no-preference) {
-  .contributions[data-state="ready"] .contributions-week {
-    animation:contributions-sprout .5s calc(var(--column) * 9ms) both ease-out,
-      contributions-wave 3s calc(var(--column) * -120ms) ease-in-out infinite alternate;
-  }
-  .contributions[data-state="ready"] .contributions-legend { animation:contributions-wave 3s ease-in-out infinite alternate; }
-  .quiet .contributions[data-state="ready"] :is(.contributions-week, .contributions-legend) { animation:none; }
+  .contributions[data-state="ready"] .contributions-week { animation:contributions-sprout .5s calc(var(--column) * 9ms) both ease-out; }
 }
 @keyframes contributions-sprout { from { opacity:0; transform:translateY(3px); } }
 

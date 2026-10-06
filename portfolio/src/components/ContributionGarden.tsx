@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type PointerEvent } from 'react';
-import { isFresh, isoDate, loadContributions, monthLabels, PROFILE_LOGIN, readCache, stats, toWeeks, type Calendar, type Day } from '@/lib/contributions';
+import { isFresh, isoDate, loadContributions, monthLabels, PROFILE_LOGIN, readCache, rgbHue, stats, toWeeks, type Calendar, type Day } from '@/lib/contributions';
 // Styles: app/globals.css (Contributions).
 
 const number = new Intl.NumberFormat('en');
@@ -66,7 +66,8 @@ export default function ContributionGarden() {
         <div className="contributions-grid" aria-hidden="true">
           {weeks.map((week, column) => <span className="contributions-week" key={column} style={{ ['--column' as string]: column + band * width }}>
             {week.map((day, row) => day
-              ? <span key={day.date} className="contributions-cell" data-level={day.level} data-date={day.date} data-today={day.date === today || undefined} title={describeDay(day)} />
+              ? <span key={day.date} className="contributions-cell" data-level={day.level} data-date={day.date} data-today={day.date === today || undefined} title={describeDay(day)}
+                  style={{ ['--h' as string]: rgbHue(column + band * width, row, width * 2) }} />
               : <span key={`pad-${row}`} className="contributions-cell" data-empty="" />)}
           </span>)}
         </div>
@@ -78,7 +79,7 @@ export default function ContributionGarden() {
         {calendar && summary.best && <span title={describeDay(summary.best)}>Best day {number.format(summary.best.count)}</span>}
       </span>
       <span className="contributions-legend" aria-hidden="true">
-        Less{([0, 1, 2, 3, 4] as const).map(level => <span key={level} className="contributions-cell" data-level={level} />)}More
+        Less{([0, 1, 2, 3, 4] as const).map(level => <span key={level} className="contributions-cell" data-level={level} style={{ ['--h' as string]: rgbHue(40 + level * 3, 3) }} />)}More
       </span>
     </div>
   </div>;
