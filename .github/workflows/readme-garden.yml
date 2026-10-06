@@ -1,0 +1,43 @@
+name: Regrow the README garden
+
+# Redraws the contribution garden and the fresh-off-the-stove card each morning.
+# Commits as github-actions[bot], so the regrow never counts towards your own contributions.
+on:
+  schedule:
+    - cron: "17 22 * * *" # 06:17 in Singapore
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: readme-garden
+
+jobs:
+  regrow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Pillow and metric-compatible fonts
+        run: |
+          pip install pillow
+          sudo apt-get install -y fonts-liberation
+      - name: Fetch the contribution calendar and repositories
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -sf "https://github-contributions-api.jogruber.de/v4/kevanwee?y=last" -o "$RUNNER_TEMP/contributions.json"
+          gh repo list kevanwee --limit 100 --json name,description,isPrivate,isFork,pushedAt > "$RUNNER_TEMP/repos.json"
+      - name: Regrow
+        working-directory: genpokemon/readme_art
+        env:
+          TZ: Asia/Singapore
+        run: python regrow.py "$RUNNER_TEMP/contributions.json" "$RUNNER_TEMP/repos.json" ../../readme/art
+      - name: Commit if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add readme/art
+          git diff --cached --quiet || (git commit -m "Regrow the README garden" && git push)
