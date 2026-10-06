@@ -1,0 +1,37 @@
+# readme_art — the profile README's Pokémon art
+
+Every animated card on the profile README is a self-contained SVG: sprites are embedded as base64 and the animation is CSS inside the file, because GitHub shows README SVGs as images (no scripts). Each themed piece has a light and a dark file, chosen by `<picture>`.
+
+| Script | Makes |
+|---|---|
+| `gen_contribution_garden.py` | The contribution garden: the year's contributions beside Voracity's Eevee forest, with the Eeveelutions roaming |
+| `build_playground.py` | Mega Evolution (Diancie, Greninja, Dragonite) and Soul Unison (Ceruledge with Darkrai, Zygarde, Armarouge), with Iron Valiant and Yveltal |
+| `build_cards.py` | Project cards, the paths between sections, the skill trees and the fresh-off-the-stove card |
+| `build_more.py` | Header plate, nav and contact chips, signboards and note cards |
+| `gen_mascots.py` | Heading mascots (Voracity's tab Pokémon) |
+| `build_readme.py` | `more.md` → the repository's `README.md` |
+| `regrow.py` | Daily: the garden and the stove card (see `.github/workflows/readme-garden.yml`) |
+
+`pmd.py` is the shared library: sprite sheets cropped to the rows used, frame timing from PMD durations, walkers, eight-direction roamers and Silvally's form changes. `cast.py` says which Pokémon stands where (each appears once), and `data.py` holds the project list and skill trees.
+
+## Sprites
+
+- `sprites/`: the owner's picks from [PMD Sprite Collab](https://sprites.pmdcollab.org/), fetched by `fetch_sprites.py` (`sprites/extra.json` records frame sizes and durations).
+- `assets/voracity/`: the subset of Voracity's sprites the daily regrow needs.
+- A full rebuild needs a Voracity checkout: `VORACITY_SRC=/path/to/voracity`.
+- `stones/`: Mega Stone icons via PokeAPI. `mega-symbol.png`: the Mega Evolution symbol by pixelthecollector.
+
+## Rebuild everything
+
+```bash
+cd genpokemon/readme_art
+export VORACITY_SRC=/path/to/voracity
+curl -s "https://github-contributions-api.jogruber.de/v4/kevanwee?y=last" -o contributions.json
+python data.py
+python gen_contribution_garden.py contributions.json ../../readme/art
+python build_playground.py ../../readme/art
+python build_cards.py ../../readme/art
+python build_more.py ../../readme/art
+python gen_mascots.py ../../readme/art
+python build_readme.py && cp more.md ../../README.md
+```

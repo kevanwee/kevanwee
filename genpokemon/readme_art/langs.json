@@ -1,0 +1,254 @@
+{
+"voracity": [
+"TypeScript",
+0
+],
+"kevanwee": [
+"TypeScript",
+1
+],
+"voracity-watcher": [
+"TypeScript",
+0
+],
+"sg-legal-corpus": [
+"Python",
+0
+],
+"lq-plugin-oss": [
+"HTML",
+0
+],
+"sg-deadline": [
+"Python",
+1
+],
+"bundlebuild": [
+"Python",
+1
+],
+"oblig-register": [
+"Python",
+1
+],
+"chronology": [
+"Python",
+1
+],
+"citecheck": [
+"Python",
+1
+],
+"copycat": [
+"Python",
+1
+],
+"sal-citation-generator": [
+"TypeScript",
+0
+],
+"apac-lateral-tracker": [
+"Python",
+2
+],
+"seofon": [
+"Python",
+1
+],
+"ipatlas": [
+"Python",
+1
+],
+"playbook-as-code": [
+"Python",
+1
+],
+"defi-audit-competition": [
+"Solidity",
+1
+],
+"spdx-spec": [
+"Python",
+1
+],
+"specification": [
+"XSLT",
+1
+],
+"harvey-labs": [
+"Python",
+1
+],
+"mike": [
+"TypeScript",
+0
+],
+"claw-code": [
+"Rust",
+0
+],
+"autogradingsystem": [
+"Java",
+0
+],
+"bart": [
+"Python",
+4
+],
+"openzeppelinsecurityaudit": [
+"Python",
+0
+],
+"esxitoctou": [
+"C",
+0
+],
+"pdpcscraper": [
+"Python",
+0
+],
+"eternals": [
+null,
+1
+],
+"pmdsvgworld": [
+"JavaScript",
+0
+],
+"immunefi-bug-bounty-programs": [
+"Shell",
+0
+],
+"theoffice": [
+"TypeScript",
+1
+],
+"sightstone": [
+"TypeScript",
+0
+],
+"mapmole": [
+"Python",
+4
+],
+"kevanweeportfolio": [
+"JavaScript",
+2
+],
+"codex": [
+"Rust",
+0
+],
+"crimewatch": [
+"Python",
+2
+],
+"codeoflaw": [
+"Python",
+1
+],
+"hawkshot": [
+"Python",
+2
+],
+"hansardscraper": [
+"Python",
+0
+],
+"justicegap": [
+"JavaScript",
+0
+],
+"moonshot": [
+"Python",
+0
+],
+"bart-ri": [
+"TypeScript",
+0
+],
+"lit-hackathon-2025": [
+"TypeScript",
+1
+],
+"lolpixelart": [
+null,
+2
+],
+"raster-vision": [
+"Python",
+0
+],
+"sgstatutescraper": [
+"Python",
+0
+],
+"elitiscraper": [
+"Python",
+2
+],
+"huhh": [
+"CSS",
+3
+],
+"past-audit-competitions": [
+"TypeScript",
+0
+],
+"lexlynx": [
+"Python",
+3
+],
+"tortrat": [
+null,
+1
+],
+"bookworm": [
+"Python",
+1
+],
+"coastsat": [
+"Jupyter Notebook",
+0
+],
+"3dportfolio": [
+"JavaScript",
+0
+],
+"llamaindex-chat-with-streamlit-docs": [
+"Python",
+1
+],
+"tortlawchatbot": [
+null,
+0
+],
+"realtime-indexer-qa-chat": [
+"Dockerfile",
+0
+],
+"orthophoto_maps": [
+"Python",
+0
+],
+"conceptualmathmodellingtuitioncentre": [
+"HTML",
+0
+],
+"citation_extraction": [
+"Cypher",
+0
+],
+"web3-bug-bounty-platform": [
+null,
+0
+],
+"safmappingunit51stanniversary": [
+"HTML",
+1
+],
+"potential-conflict-identifier": [
+"HTML",
+0
+]
+}

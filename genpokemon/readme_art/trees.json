@@ -1,0 +1,64 @@
+[
+ [
+  "tech tree",
+  [
+   [
+    "legal engineering",
+    "rules as data, deterministic engines with derivation traces, mcp servers, claude skills"
+   ],
+   [
+    "ai",
+    "rag, hybrid retrieval (bm25 + dense + reranking), llm evaluation, local models (ollama)"
+   ],
+   [
+    "web dev",
+    "typescript, react, next.js, firebase, office.js add-ins"
+   ],
+   [
+    "scripting & data",
+    "python (fastapi, pandas etl, nlp), java, js, php"
+   ],
+   [
+    "data stores",
+    "mysql, chromadb, firestore"
+   ],
+   [
+    "security",
+    "defi vulnerability research, solidity, ztna"
+   ],
+   [
+    "gis",
+    "arcgis products, qgis, global mapper, geospatial data production"
+   ],
+   [
+    "3d & games",
+    "blender, unity (but it's been a decade)"
+   ]
+  ]
+ ],
+ [
+  "everything-else tree",
+  [
+   [
+    "legaltech",
+    "clm, e-discovery (relativityone), aml/kyc-ctf, document and practice management"
+   ],
+   [
+    "law",
+    "ip and brand protection, data protection, contract, civil and criminal litigation"
+   ],
+   [
+    "intelligence",
+    "imint, geoint, osint"
+   ],
+   [
+    "cartography",
+    "topographic maps, orthoimage maps, situation maps (disaster relief/change assessment)"
+   ],
+   [
+    "geomatics",
+    "georectification, orthorectification, mosaicing, stereophotogrammetry"
+   ]
+  ]
+ ]
+]
