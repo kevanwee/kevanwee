@@ -52,7 +52,9 @@ function stillMotion() {
 export default function BioDialogue() {
   const [plain, setPlain] = useState(false);
   const [page, setPage] = useState(0);
-  const [shown, setShown] = useState(Infinity);
+  // Starts empty: the box types in rather than flashing its text first (the plain paragraphs below
+  // the laptop breakpoint, and the box's label, carry the whole bio for crawlers and screen readers).
+  const [shown, setShown] = useState(0);
   const [started, setStarted] = useState(false);
   const box = useRef<HTMLDivElement>(null);
   const total = PAGES[page].reduce((sum, [, text]) => sum + text.length, 0);
@@ -65,8 +67,8 @@ export default function BioDialogue() {
   // Start typing the first time the box comes into view
   useEffect(() => {
     const node = box.current;
-    if (plain || started || !node || typeof IntersectionObserver === "undefined") return;
-    if (!stillMotion()) setShown(0);
+    if (plain || started || !node) return;
+    if (typeof IntersectionObserver === "undefined") { setStarted(true); return; }
     const seen = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) { seen.disconnect(); setStarted(true); } }, { threshold: 0.4 });
     seen.observe(node);
     return () => seen.disconnect();
@@ -87,6 +89,8 @@ export default function BioDialogue() {
   const advance = () => {
     if (!started) { setStarted(true); return; }
     if (!done) { setShown(Infinity); return; }
+    // Clear the box in the same render that turns the page, so the next page never flashes in full
+    setShown(stillMotion() ? Infinity : 0);
     setPage(p => (p + 1) % PAGES.length);
   };
   const toggle = () => {

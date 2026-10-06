@@ -10,6 +10,7 @@ import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
 import EeveeBase from "@/components/EeveeBase";
 import MouseGradient from "@/components/MouseGradient";
+import SmoothScroll from "@/components/SmoothScroll";
 import PokemonCursor from "@/components/PokemonCursor";
 import TeddiursaRoamer from "@/components/TeddiursaRoamer";
 import FusionWheel from "@/components/FusionWheel";
@@ -59,6 +60,7 @@ export default function Home() {
       className="relative min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
       style={{ "--viewport-offset": "clamp(4rem, 12vh, 9rem)" } as CSSProperties}
     >
+      <SmoothScroll />
       <MouseGradient />
       <PokemonCursor />
       <FusionWheel />

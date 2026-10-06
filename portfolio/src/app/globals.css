@@ -34,6 +34,11 @@ html.pokemon-cursor .portfolio-dialog, html.pokemon-cursor .portfolio-dialog * {
   html {
     scroll-behavior: smooth;
   }
+  /* While Lenis eases the wheel it moves the window every frame; native smoothing on top would fight it.
+     The nav still asks scrollIntoView for smooth scrolling explicitly. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
 
   body {
     -webkit-font-smoothing: antialiased;
