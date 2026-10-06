@@ -29,10 +29,11 @@ Every animated card on the profile README is a self-contained SVG: sprites are e
 
 ## Private activity in the message log
 
-With a `LOG_TOKEN` repository secret (a fine-grained, read-only token scoped to the allowlisted private repos), the
-workflow adds each private repo's own activity feed to the public one. The log keeps only kevanwee's events, names only
-the private repos in `PRIVATE_SHOWN` (build_log.py), and shows only repo names and PR numbers. Without the secret it
-uses public activity.
+With a `LOG_TOKEN` repository secret (a fine-grained, read-only token; give it "All repositories" to cover every
+private repo), the workflow adds the activity feed of every private repo the token can read to the public one. The log
+keeps only kevanwee's own events (so the bot's regrow commits never appear), never shows titles or commit messages,
+names only the private repos in `PRIVATE_SHOWN` (build_log.py, with their PR numbers), and shows every other private
+repo unnamed as "a hidden dungeon", without PR numbers. Without the secret it uses public activity.
 
 ## Rebuild everything
 

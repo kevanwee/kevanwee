@@ -2,8 +2,8 @@
 Diancie's portrait (PMD Sprite Collab, 40×40 at 2×) and each line typed out in turn.
 
     python build_log.py events.json ../../readme/art
-    events.json: public activity (users/kevanwee/events/public) merged with each allowlisted private repo's
-                 own feed (repos/kevanwee/voracity/events, read with LOG_TOKEN); see the workflow.
+    events.json: public activity (users/kevanwee/events/public) merged with every private repo's own feed
+                 (repos/<repo>/events for each private repo LOG_TOKEN can read); see the workflow.
 
 The box is the game's own dark UI, so one SVG serves both themes.
 """
@@ -13,10 +13,11 @@ from build_cards import width
 
 HERE = Path(__file__).parent
 USER, NAME = "kevanwee", "Kevan"
-SKIP = {"kevanwee/kevanwee"}  # the profile repo itself: its README commits would drown the rest
 # Private repos the log may name (with LOG_TOKEN the feed includes private work). Names and PR numbers
-# only, never titles or commit messages; every other private repo stays out.
+# only, never titles or commit messages. Every other private repo appears unnamed, as a hidden dungeon,
+# without PR numbers. (The README's own regrow commits are github-actions[bot]'s, so the actor check drops them.)
 PRIVATE_SHOWN = {"kevanwee/voracity"}
+HIDDEN = "a hidden dungeon"
 W, H = 910, 196
 BOX = dict(x=118, y=14, w=W - 132, h=H - 28)
 LINE_SIZE, LINE_GAP, FIRST_LINE = 15, 27, 66
@@ -47,30 +48,34 @@ def lines_from(events, now, limit=4):
             merged.add((e["repo"]["name"], e["payload"].get("number")))
     for e in events:
         repo = e["repo"]["name"]
-        if repo in SKIP or (e.get("public") is False and repo not in PRIVATE_SHOWN): continue
         if e.get("actor", {}).get("login", USER) != USER: continue  # repo feeds include bots and others
+        hidden = e.get("public") is False and repo not in PRIVATE_SHOWN
+        place = ("place", HIDDEN if hidden else short(repo))
+        if hidden: repo = "(hidden)"  # unnamed repos share one line per day
         when = dt.datetime.fromisoformat(e["created_at"].replace("Z", "+00:00"))
         p, kind = e.get("payload", {}), e["type"]
         if kind == "PushEvent":
             key = (repo, when.date())
             if key in seen_push: seen_push[key]["n"] += 1; continue
-            item = {"mood": "Happy", "when": when, "n": 1, "parts": [("name", NAME), ("text", " pushed new work to "), ("place", short(repo)), ("text", "!")]}
+            item = {"mood": "Happy", "when": when, "n": 1, "parts": [("name", NAME), ("text", " pushed new work to "), place, ("text", "!")]}
             seen_push[key] = item; out.append(item); continue
         if kind == "PullRequestEvent":
             number, action = p.get("number"), p.get("action")
             if action == "merged":
-                out.append({"mood": "Joyous", "when": when, "parts": [("name", NAME), ("text", "'s pull request "), ("number", f"#{number}"), ("text", " was merged into "), ("place", short(repo)), ("text", "!")]})
-            elif action == "opened" and (repo, number) not in merged:
-                out.append({"mood": "Normal", "when": when, "parts": [("name", NAME), ("text", " opened pull request "), ("number", f"#{number}"), ("text", " on "), ("place", short(repo)), ("text", ".")]})
+                pr = [("text", "'s pull request was merged into ")] if hidden else [("text", "'s pull request "), ("number", f"#{number}"), ("text", " was merged into ")]
+                out.append({"mood": "Joyous", "when": when, "parts": [("name", NAME), *pr, place, ("text", "!")]})
+            elif action == "opened" and (e["repo"]["name"], number) not in merged:
+                pr = [("text", " opened a pull request on ")] if hidden else [("text", " opened pull request "), ("number", f"#{number}"), ("text", " on ")]
+                out.append({"mood": "Normal", "when": when, "parts": [("name", NAME), *pr, place, ("text", ".")]})
             continue
         if kind == "CreateEvent" and p.get("ref_type") == "repository":
-            out.append({"mood": "Inspired", "when": when, "parts": [("text", "A new dungeon appeared: "), ("place", short(repo)), ("text", "!")]})
+            out.append({"mood": "Inspired", "when": when, "parts": [("text", "A new hidden dungeon appeared!")] if hidden else [("text", "A new dungeon appeared: "), place, ("text", "!")]})
         elif kind == "ReleaseEvent":
-            out.append({"mood": "Joyous", "when": when, "parts": [("place", short(repo)), ("text", " "), ("number", p.get("release", {}).get("tag_name", "")), ("text", " was released!")]})
+            out.append({"mood": "Joyous", "when": when, "parts": [place, ("text", " "), ("number", p.get("release", {}).get("tag_name", "")), ("text", " was released!")]})
         elif kind == "WatchEvent":
-            out.append({"mood": "Normal", "when": when, "parts": [("name", NAME), ("text", " starred "), ("place", short(repo)), ("text", ".")]})
+            out.append({"mood": "Normal", "when": when, "parts": [("name", NAME), ("text", " starred "), place, ("text", ".")]})
         elif kind == "ForkEvent":
-            out.append({"mood": "Normal", "when": when, "parts": [("name", NAME), ("text", " forked "), ("place", short(repo)), ("text", ".")]})
+            out.append({"mood": "Normal", "when": when, "parts": [("name", NAME), ("text", " forked "), place, ("text", ".")]})
     out.sort(key=lambda i: i["when"], reverse=True)
     for item in out:
         if item.get("n", 1) > 1:

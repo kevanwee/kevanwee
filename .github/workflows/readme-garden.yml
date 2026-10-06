@@ -36,15 +36,23 @@ jobs:
         run: |
           curl -sf "https://github-contributions-api.jogruber.de/v4/kevanwee?y=last" -o "$RUNNER_TEMP/contributions.json"
           gh repo list kevanwee --limit 100 --json name,description,isPrivate,isFork,pushedAt > "$RUNNER_TEMP/repos.json"
-          # Public activity, plus (with the LOG_TOKEN secret, a read-only token scoped to the allowlisted private
-          # repos) each private repo's own feed. build_log.py keeps only kevanwee's events and names private
-          # repos only if they are in PRIVATE_SHOWN.
+          # Public activity, plus (with the LOG_TOKEN secret, a read-only fine-grained token) the own feed of every
+          # private repo the token can read. build_log.py keeps only kevanwee's events, names private repos only
+          # if they are in PRIVATE_SHOWN, and shows the rest as unnamed hidden dungeons.
           gh api "users/kevanwee/events/public?per_page=100" > "$RUNNER_TEMP/public-events.json"
-          echo '[]' > "$RUNNER_TEMP/private-events.json"
+          mkdir -p "$RUNNER_TEMP/private"
+          echo '[]' > "$RUNNER_TEMP/private/none.json"
           if [ -n "$LOG_TOKEN" ]; then
-            GH_TOKEN="$LOG_TOKEN" gh api "repos/kevanwee/voracity/events?per_page=100" > "$RUNNER_TEMP/private-events.json" || echo '[]' > "$RUNNER_TEMP/private-events.json"
+            GH_TOKEN="$LOG_TOKEN" gh api --paginate "user/repos?per_page=100"               --jq '.[] | select(.private and .owner.login == "kevanwee") | .full_name' > "$RUNNER_TEMP/private-repos.txt"               || echo "kevanwee/voracity" > "$RUNNER_TEMP/private-repos.txt"
+            [ -s "$RUNNER_TEMP/private-repos.txt" ] || echo "kevanwee/voracity" > "$RUNNER_TEMP/private-repos.txt"
+            i=0
+            while read -r repo; do
+              i=$((i + 1))
+              GH_TOKEN="$LOG_TOKEN" gh api "repos/$repo/events?per_page=100" > "$RUNNER_TEMP/private/$i.json" 2>/dev/null || echo '[]' > "$RUNNER_TEMP/private/$i.json"
+            done < "$RUNNER_TEMP/private-repos.txt"
+            echo "private repos read: $(wc -l < "$RUNNER_TEMP/private-repos.txt")"
           fi
-          jq -s 'add | unique_by(.id) | sort_by(.created_at) | reverse' "$RUNNER_TEMP/public-events.json" "$RUNNER_TEMP/private-events.json" > "$RUNNER_TEMP/events.json"
+          jq -s 'add | unique_by(.id) | sort_by(.created_at) | reverse' "$RUNNER_TEMP/public-events.json" "$RUNNER_TEMP"/private/*.json > "$RUNNER_TEMP/events.json"
           echo "events: $(jq length "$RUNNER_TEMP/events.json") (private: $(jq '[.[] | select(.public == false)] | length' "$RUNNER_TEMP/events.json"))"
       - name: Regrow
         working-directory: genpokemon/readme_art
