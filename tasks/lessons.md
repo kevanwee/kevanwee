@@ -59,3 +59,10 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 
 ## Scroll audit (6 October 2026)
 - The owner explicitly requested scroll/lag fixes on both sites. Preserve the visual design and all residents; reduce measured offscreen/style/layout work. See tasks/scroll-performance.md. Native smooth navigation must honour reduced motion.
+
+## Regrow commits count on the graph (2026-10-06)
+- The owner chose to author the README regrow commits as themselves (the account's noreply address) so the
+  contribution graph shows the pipeline is alive, accepting about 12 commits a day and the inflated Explorer
+  Rank. Don't switch them back to github-actions[bot] without asking. The push stays GITHUB_TOKEN's, so the
+  message log still leaves them out.
+

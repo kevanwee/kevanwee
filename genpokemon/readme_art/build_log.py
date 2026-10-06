@@ -15,7 +15,7 @@ HERE = Path(__file__).parent
 USER, NAME = "kevanwee", "Kevan"
 # Private repos the log may name (with LOG_TOKEN the feed includes private work). Names and PR numbers
 # only, never titles or commit messages. Every other private repo appears unnamed, as a hidden dungeon,
-# without PR numbers. (The README's own regrow commits are github-actions[bot]'s, so the actor check drops them.)
+# without PR numbers. (The README's regrow commits are pushed by github-actions[bot], so the actor check drops them.)
 PRIVATE_SHOWN = {"kevanwee/voracity"}
 HIDDEN = "a hidden dungeon"
 W, H = 910, 196
