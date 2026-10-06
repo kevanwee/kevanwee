@@ -31,7 +31,7 @@ export function useForestSky() {
 }
 
 /** Weather and time-of-day layers over the forest, Mystery Dungeon style. Clicks pass through. */
-export default function ForestSky({ sky }: { sky: Sky }) {
+export default function ForestSky({ sky, label = true }: { sky: Sky; label?: boolean }) {
   const [still, setStill] = useState(false);
   useEffect(() => {
     const motion = motionPreference(), update = () => setStill(motion.matches);
@@ -54,6 +54,6 @@ export default function ForestSky({ sky }: { sky: Sky }) {
     {kind === 'windy' && <span className="forest-wind" />}
     {fireflies.map(([x, y], i) => <span key={`f${i}`} className="forest-firefly"
       style={{ left: `${x * 100}%`, top: `${y * 100}%`, animationDuration: `${9 + i * 1.7}s, ${2.4 + i * .37}s`, animationDelay: `${-i * 1.3}s, ${-i * .4}s` }} />)}
-    <span className="forest-sky-label">{LABELS[kind]} · {phase}</span>
+    {label && <span className="forest-sky-label">{LABELS[kind]} · {phase}</span>}
   </div>;
 }

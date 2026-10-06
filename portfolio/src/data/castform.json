@@ -1,0 +1,73 @@
+{
+ "normal": {
+  "src": "/pmd/castform/normal.png",
+  "w": 24,
+  "h": 40,
+  "rows": 8,
+  "durations": [
+   8,
+   6,
+   6,
+   6,
+   6,
+   8
+  ],
+  "bounds": [
+   [
+    6,
+    3,
+    17,
+    22
+   ]
+  ]
+ },
+ "sunny": {
+  "src": "/pmd/castform/sunny.png",
+  "w": 24,
+  "h": 40,
+  "rows": 8,
+  "durations": [
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8
+  ],
+  "bounds": [
+   [
+    2,
+    0,
+    23,
+    23
+   ]
+  ]
+ },
+ "rainy": {
+  "src": "/pmd/castform/rainy.png",
+  "w": 24,
+  "h": 48,
+  "rows": 8,
+  "durations": [
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6
+  ],
+  "bounds": [
+   [
+    4,
+    1,
+    19,
+    28
+   ]
+  ]
+ }
+}
