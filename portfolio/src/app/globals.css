@@ -142,3 +142,66 @@ html.pokemon-cursor .portfolio-dialog, html.pokemon-cursor .portfolio-dialog * {
   background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%);
   animation: pokeball-flash 0.18s ease-out forwards;
 }
+
+/* The forest's sky (components/ForestSky.tsx; the same as Voracity's forest-sky.css): Mystery Dungeon-style weather and time of day over the Eevee forest.
+   Colours and timings match the README's sky.py. Fixed colours on purpose: they are lighting, not theme. */
+/* No z-index on the container: that would make it its own stacking context, and the tints would blend
+   with an empty layer instead of the forest. Each layer sits above the residents (z 400) instead. */
+.forest-sky { position:absolute; inset:0; overflow:hidden; border-radius:inherit; pointer-events:none; }
+.forest-sky > span { position:absolute; inset:0; z-index:400; }
+
+/* Cloud shadows drifting across: soft dark blobs on a tile twice the forest's width */
+.forest-clouds {
+  inset:-10% auto -10% -100% !important; width:200%; mix-blend-mode:multiply; filter:blur(10px);
+  background:
+    radial-gradient(60px 26px at 14% 22%, #1c2430 60%, transparent 100%),
+    radial-gradient(70px 30px at 61% 54%, #1c2430 60%, transparent 100%),
+    radial-gradient(55px 22px at 32% 85%, #1c2430 60%, transparent 100%),
+    radial-gradient(40px 18px at 86% 18%, #1c2430 60%, transparent 100%);
+  background-size:50% 100%; background-repeat:repeat-x;
+  animation:forest-drift 46s linear infinite;
+}
+@keyframes forest-drift { to { transform:translateX(50%); } }
+
+/* Rain: the 32 × 48 streak tile falls one diagonal step per cycle, so the loop never shows a seam */
+.forest-rain { inset:-96px -32px 0 0 !important; background-repeat:repeat; animation:forest-rain 1s linear infinite; }
+@keyframes forest-rain { to { transform:translate(-32px, 96px); } }
+
+.forest-lightning { background:#f4f7ff; opacity:0; animation:forest-flash 7.5s linear infinite; }
+@keyframes forest-flash { 0%, 58% { opacity:0; } 59% { opacity:.75; } 60.5% { opacity:0; } 62% { opacity:.45; } 63.5%, 100% { opacity:0; } }
+
+/* Fog: two bands of soft mist drifting in opposite directions */
+.forest-fog {
+  inset:0 auto 0 -100% !important; width:300%; filter:blur(7px);
+  background:
+    radial-gradient(70px 16px at 13% 18%, #f2f5f7 55%, transparent 100%),
+    radial-gradient(70px 16px at 50% 54%, #f2f5f7 55%, transparent 100%),
+    radial-gradient(70px 16px at 86% 89%, #f2f5f7 55%, transparent 100%);
+  background-size:33.334% 100%; background-repeat:repeat-x;
+  animation:forest-fog 60s linear infinite;
+}
+.forest-fog.back { background-position:0 22px; animation-duration:38s; animation-direction:reverse; }
+@keyframes forest-fog { to { transform:translateX(33.334%); } }
+
+.forest-wind {
+  inset:0 -90px 0 0 !important; opacity:.6;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='40'%3E%3Cg stroke='white' stroke-linecap='round' stroke-width='1.2'%3E%3Cline x1='4' y1='8' x2='26' y2='8'/%3E%3Cline x1='48' y1='27' x2='62' y2='27'/%3E%3C/g%3E%3C/svg%3E");
+  animation:forest-wind .7s linear infinite;
+}
+@keyframes forest-wind { to { transform:translateX(-90px); } }
+
+.forest-firefly {
+  inset:auto !important; width:4px; height:4px; margin:-2px 0 0 -2px; border-radius:50%;
+  background:#ffffe0; box-shadow:0 0 5px 2px #fff6a0b3;
+  animation:forest-firefly 9s ease-in-out infinite, forest-blink 2.4s ease-in-out infinite;
+}
+@keyframes forest-firefly { 0%, 100% { translate:0 0; } 33% { translate:9px -7px; } 66% { translate:-7px 6px; } }
+@keyframes forest-blink { 0%, 100% { opacity:.15; } 50% { opacity:1; } }
+
+.forest-sky-label {
+  inset:8px auto auto 8px !important; padding:1px 8px; border-radius:999px;
+  background:#0b0f1a8c; color:#f4f1e6; font-size:10px; line-height:16px; white-space:nowrap;
+}
+
+/* Reduced motion and quiet mode: the lighting stays, the movement stops */
+.forest-sky[data-still] > span { animation:none !important; }

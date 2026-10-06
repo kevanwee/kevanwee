@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import ForestSky, { useForestSky } from "./ForestSky";
 import { EEVEELUTIONS, displayName } from "@/lib/pokemon-overworld";
 import { createForest, greetForest, stepForest, FOREST_WIDTH } from "@/lib/eevee-base";
 import { paintSprite, preloadSpriteSheet, SPRITES } from "@/lib/overworld-sprites";
@@ -8,6 +9,11 @@ import { paintSprite, preloadSpriteSheet, SPRITES } from "@/lib/overworld-sprite
 export default function EeveeBase() {
   const habitat = useRef<HTMLDivElement>(null);
   const status = useRef<HTMLSpanElement>(null);
+  // The sky over the forest (lib/forest-sky.ts): at night the residents sleep where they are.
+  const sky = useForestSky();
+  const night = useRef(sky.phase === "night");
+  const wakeRef = useRef<() => void>(() => {});
+  useEffect(() => { night.current = sky.phase === "night"; wakeRef.current(); }, [sky.phase]);
   useEffect(() => {
     const root = habitat.current!, stone = root.querySelector<HTMLElement>('[data-forest-stone]')!;
     const actors = createForest(), motion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -37,6 +43,10 @@ export default function EeveeBase() {
       const dt = last ? Math.min(64, now - last) : 0; last = now;
       const modal = !!document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]');
       const scale = root.clientWidth / FOREST_WIDTH;
+      for (const actor of actors) {
+        if (night.current) { if (!actor.nap) { actor.nap = true; actor.path = []; } actor.rest = Math.max(actor.rest, 60000); actor.animation = "Sleep"; }
+        else if (actor.nap && actor.rest > 30000) { actor.nap = false; actor.rest = 400 + Math.random() * 1800; actor.animation = "Idle"; }
+      }
       if (!motion.matches && !modal) { elapsed += dt; stepForest(actors, dt); }
       const frame = motion.matches ? 9 : Math.floor(elapsed / 120) % 32;
       stone.style.width = `${54 * scale}px`; stone.style.height = `${39 * scale}px`;
@@ -56,6 +66,7 @@ export default function EeveeBase() {
       if (!motion.matches && !modal) raf = requestAnimationFrame(draw);
     }
     function wake() { if (!raf && !disposed && visible && !document.hidden) { last = 0; raf = requestAnimationFrame(draw); } }
+    wakeRef.current = wake;
     const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; wake(); }); intersection.observe(root);
     const resize = new ResizeObserver(wake); resize.observe(root);
     const mutations = new MutationObserver(wake); mutations.observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ['open', 'aria-modal']});
@@ -68,6 +79,7 @@ export default function EeveeBase() {
   return <figure className="-mt-8 mb-24 lg:-mt-20 lg:mb-36" aria-label="Eevee and friends in Transform Forest">
     <div ref={habitat} data-eevee-base className="relative isolate w-full overflow-hidden rounded-2xl border border-cream-200"
       style={{aspectRatio: '480 / 312', background: 'url(/eevee-base/background.png) center / 100% 100%', imageRendering: 'pixelated'}}>
+      <ForestSky sky={sky} />
       <span data-forest-stone aria-hidden="true" className="absolute pointer-events-none" style={{backgroundImage: 'url(/eevee-base/stone-frames.png)', backgroundRepeat: 'no-repeat'}} />
       {EEVEELUTIONS.map(species => <button key={species} data-forest-pokemon={species} className="overworld-resident" type="button" aria-label={`Say hello to ${displayName(species)}`}>
         <span className="overworld-sprite" aria-hidden="true" /><span className="overworld-heart" hidden aria-hidden="true" />
