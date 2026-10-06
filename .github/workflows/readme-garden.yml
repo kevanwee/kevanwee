@@ -46,7 +46,12 @@ jobs:
         working-directory: genpokemon/readme_art
         env:
           TZ: Asia/Singapore
-        run: python regrow.py "$RUNNER_TEMP/contributions.json" "$RUNNER_TEMP/repos.json" ../../readme/art "$RUNNER_TEMP/events.json"
+        run: |
+          python regrow.py "$RUNNER_TEMP/contributions.json" "$RUNNER_TEMP/repos.json" ../../readme/art "$RUNNER_TEMP/events.json"
+          # Explorer Rank (all-time contributions) and Castform's 24-hour forecast (NEA)
+          curl -sf "https://github-contributions-api.jogruber.de/v4/kevanwee?y=all" -o "$RUNNER_TEMP/all-contributions.json"
+          curl -sf "https://api-open.data.gov.sg/v2/real-time/api/twenty-four-hr-forecast" -o "$RUNNER_TEMP/forecast.json"
+          python build_pmdui.py "$RUNNER_TEMP/all-contributions.json" "$RUNNER_TEMP/forecast.json" ../../readme/art
       - name: Commit if anything changed
         run: |
           git config user.name "github-actions[bot]"
