@@ -33,7 +33,7 @@ RANKS = [("Normal", 0, "td-Normal"), ("Bronze", 100, "td-Bronze"), ("Silver", 30
          ("Diamond", 3200, "td-Diamond"), ("Super", 5000, "td-Diamond"), ("Ultra", 7500, "td-Ultra"), ("Hyper", 10500, "td-Hyper"),
          ("Master", 13500, "td-Master"), ("Master ★", 17000, "eos-Master-1"), ("Master ★★", 21000, "eos-Master-2"),
          ("Master ★★★", 25000, "eos-Master-3"), ("Guildmaster", 100000, "eos-Guildmaster")]
-TEAM = ["diancie", "fuecoco", "froakie", "teddiursa", "jirachi"]  # the leader, then the tab mascots
+TEAM = [("charcadet", "Charcadet"), ("fuecoco", "Fuecoco")]  # a Mystery Dungeon pair: the leader, then the partner
 
 
 def rank_of(points):
@@ -84,12 +84,14 @@ def render_rank(points):
     tx = 610
     sc.body.append(f'<text x="{tx}" y="34" font-size="13" fill="{GOLD}" font-weight="600">Team</text>'
                    f'<line x1="{tx + 44}" y1="36" x2="{W - 26}" y2="36" stroke="{INNER}" stroke-dasharray="3 3"/>')
-    for i, species in enumerate(TEAM):
-        sheet = Sheet(species if species != "diancie" else "diancie", "Idle")
+    for i, (species, label) in enumerate(TEAM):
+        sheet = Sheet(species, "Idle")
         l, t, r, b = sheet.bounds(0)
-        s = min(2.0, 52 / (b - t))
-        sc.body.append(sc.sprite(sheet, 0, tx + 22 + i * 56, 112, s))
-    sc.body.append(f'<line x1="{tx}" y1="113" x2="{W - 26}" y2="113" stroke="{INNER}" stroke-dasharray="2 4"/>')
+        s = min(2.5, 60 / (b - t))
+        cx = tx + 70 + i * 130
+        sc.body.append(sc.sprite(sheet, 0, cx, 110, s))
+        sc.body.append(f'<text x="{cx}" y="126" text-anchor="middle" font-size="11" fill="{FAINT}">{label}</text>')
+    sc.body.append(f'<line x1="{tx}" y1="111" x2="{W - 26}" y2="111" stroke="{INNER}" stroke-dasharray="2 4"/>')
     return svg(sc, f"Explorer Rank: {name} Rank, {points:,} points. {to_go}.")
 
 

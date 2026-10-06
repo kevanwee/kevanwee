@@ -1893,5 +1893,41 @@
    ],
    "rows": 1
   }
+ },
+ "charcadet": {
+  "Walk": {
+   "src": "sprites/charcadet/Walk-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    6,
+    8,
+    6,
+    8
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/charcadet/Idle-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    12,
+    8,
+    8,
+    8
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/charcadet/Sleep-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
  }
 }

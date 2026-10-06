@@ -16,6 +16,7 @@ PICKS = {
     "shiny-emboar": "0500/0000/0001", "oshawott": "0501", "shiny-toxtricity": "0849/0000/0001", "dragapult": "0887",
     "zacian-crowned": "0888/0001", "shiny-cyclizar": "0967/0000/0001", "shiny-goodra": "0706/0000/0001",
     "castform": "0351", "castform-sunny": "0351/0001", "castform-rainy": "0351/0002",  # the weather strip
+    "charcadet": "0935",  # the Explorer team leader
 }
 OUT = Path("sprites")
 
