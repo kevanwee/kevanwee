@@ -32,13 +32,16 @@ jobs:
         run: |
           curl -sf "https://github-contributions-api.jogruber.de/v4/kevanwee?y=last" -o "$RUNNER_TEMP/contributions.json"
           gh repo list kevanwee --limit 100 --json name,description,isPrivate,isFork,pushedAt > "$RUNNER_TEMP/repos.json"
-          # With the LOG_TOKEN secret (a read-only token of kevanwee's), the feed includes private work;
-          # build_log.py names only the private repos in PRIVATE_SHOWN. Without it, public activity only.
+          # Public activity, plus (with the LOG_TOKEN secret, a read-only token scoped to the allowlisted private
+          # repos) each private repo's own feed. build_log.py keeps only kevanwee's events and names private
+          # repos only if they are in PRIVATE_SHOWN.
+          gh api "users/kevanwee/events/public?per_page=100" > "$RUNNER_TEMP/public-events.json"
+          echo '[]' > "$RUNNER_TEMP/private-events.json"
           if [ -n "$LOG_TOKEN" ]; then
-            GH_TOKEN="$LOG_TOKEN" gh api "users/kevanwee/events?per_page=100" > "$RUNNER_TEMP/events.json"
-          else
-            gh api "users/kevanwee/events/public?per_page=100" > "$RUNNER_TEMP/events.json"
+            GH_TOKEN="$LOG_TOKEN" gh api "repos/kevanwee/voracity/events?per_page=100" > "$RUNNER_TEMP/private-events.json" || echo '[]' > "$RUNNER_TEMP/private-events.json"
           fi
+          jq -s 'add | unique_by(.id) | sort_by(.created_at) | reverse' "$RUNNER_TEMP/public-events.json" "$RUNNER_TEMP/private-events.json" > "$RUNNER_TEMP/events.json"
+          echo "events: $(jq length "$RUNNER_TEMP/events.json") (private: $(jq '[.[] | select(.public == false)] | length' "$RUNNER_TEMP/events.json"))"
       - name: Regrow
         working-directory: genpokemon/readme_art
         env:

@@ -2,8 +2,8 @@
 Diancie's portrait (PMD Sprite Collab, 40×40 at 2×) and each line typed out in turn.
 
     python build_log.py events.json ../../readme/art
-    events.json: gh api "users/kevanwee/events?per_page=100" (signed in as kevanwee: includes private work)
-                 or gh api "users/kevanwee/events/public?per_page=100" (public only)
+    events.json: public activity (users/kevanwee/events/public) merged with each allowlisted private repo's
+                 own feed (repos/kevanwee/voracity/events, read with LOG_TOKEN); see the workflow.
 
 The box is the game's own dark UI, so one SVG serves both themes.
 """
@@ -48,6 +48,7 @@ def lines_from(events, now, limit=4):
     for e in events:
         repo = e["repo"]["name"]
         if repo in SKIP or (e.get("public") is False and repo not in PRIVATE_SHOWN): continue
+        if e.get("actor", {}).get("login", USER) != USER: continue  # repo feeds include bots and others
         when = dt.datetime.fromisoformat(e["created_at"].replace("Z", "+00:00"))
         p, kind = e.get("payload", {}), e["type"]
         if kind == "PushEvent":

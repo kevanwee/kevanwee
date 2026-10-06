@@ -26,9 +26,10 @@ Every animated card on the profile README is a self-contained SVG: sprites are e
 
 ## Private activity in the message log
 
-With a `LOG_TOKEN` repository secret (a read-only token of kevanwee's), the log reads the signed-in feed, which includes
-private work. It names only the private repos in `PRIVATE_SHOWN` (build_log.py), and only repo names and PR numbers.
-Without the secret it uses public activity.
+With a `LOG_TOKEN` repository secret (a fine-grained, read-only token scoped to the allowlisted private repos), the
+workflow adds each private repo's own activity feed to the public one. The log keeps only kevanwee's events, names only
+the private repos in `PRIVATE_SHOWN` (build_log.py), and shows only repo names and PR numbers. Without the secret it
+uses public activity.
 
 ## Rebuild everything
 
