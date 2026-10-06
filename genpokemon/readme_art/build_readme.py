@@ -127,7 +127,7 @@ readme = f"""<div align="center">
 {path("gardevoir", "mega gardevoir and mega gallade on the path")}
 
 <details>
-  <summary align="center"><h2>🍳 &nbsp;what cuisines do you specialise in? &nbsp;<img src="./readme/slowitsgood.gif" width="80" /></h2></summary>
+  <summary align="center"><h2>🍳 &nbsp;what cuisines do you specialise in?</h2></summary>
 
   <br>
 
@@ -224,7 +224,7 @@ more = swap(more, '<p align="center">\n  <strong>welcome', 'coffee addict</em>\n
 more = swap(more, '<p align="center">\n  <a href="#cooking">', '</a>\n</p>',
             '<p align="center">\n' + "\n".join(f'  {themed(f"nav-{k}", k, href="#" + k)}' for k in ["cooking", "cuisines", "recipes", "contacts"]) + '\n</p>')
 for key, emoji_title, gif in [("cooking", "<h2>🍜 &nbsp;what's cooking?", ''),
-                              ("cuisines", "<h2>🍳 &nbsp;what cuisines do you specialise in?", '<img src="./readme/slowitsgood.gif" width="80" />'),
+                              ("cuisines", "<h2>🍳 &nbsp;what cuisines do you specialise in?", ''),
                               ("recipes", "<h2>🍽️ &nbsp;what recipes have you come up with?", '')]:
     more = swap(more, emoji_title, '</h2>', f'{themed(f"sign-{key}", key)} {gif}')
 more = swap(more, '  <p align="center">\n    probably some nissin', '</p>', f'  <p align="center">\n    {themed("note-cooking", "anyone can cook")}\n  </p>')
