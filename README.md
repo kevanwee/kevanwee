@@ -24,6 +24,14 @@
 </p>
 
 <p align="center">
+  <img src="./readme/art/explorer-rank.svg" alt="explorer rank, from all-time contributions" />
+</p>
+
+<p align="center">
+  <img src="./readme/art/forecast.svg" alt="castform's weather forecast for singapore" />
+</p>
+
+<p align="center">
   <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/contribution-garden-dark.svg" /><img src="./readme/art/contribution-garden-light.svg" alt="a year of contributions beside the eevee forest" /></picture>
 </p>
 

@@ -81,6 +81,14 @@ readme = f"""<div align="center">
 </p>
 
 <p align="center">
+  <img src="{ART}/explorer-rank.svg" alt="explorer rank, from all-time contributions" />
+</p>
+
+<p align="center">
+  <img src="{ART}/forecast.svg" alt="castform's weather forecast for singapore" />
+</p>
+
+<p align="center">
   {themed("contribution-garden", "a year of contributions beside the eevee forest")}
 </p>
 

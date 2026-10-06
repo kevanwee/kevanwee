@@ -1753,5 +1753,145 @@
    ],
    "rows": 1
   }
+ },
+ "castform": {
+  "Walk": {
+   "src": "sprites/castform/Walk-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/castform/Idle-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    8,
+    6,
+    6,
+    6,
+    6,
+    8
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/castform/Sleep-Anim.png",
+   "w": 24,
+   "h": 24,
+   "durations": [
+    35,
+    30
+   ],
+   "rows": 1
+  }
+ },
+ "castform-sunny": {
+  "Walk": {
+   "src": "sprites/castform-sunny/Walk-Anim.png",
+   "w": 32,
+   "h": 48,
+   "durations": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/castform-sunny/Idle-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/castform-sunny/Sleep-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    10,
+    10,
+    16,
+    10,
+    10,
+    16
+   ],
+   "rows": 1
+  }
+ },
+ "castform-rainy": {
+  "Walk": {
+   "src": "sprites/castform-rainy/Walk-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/castform-rainy/Idle-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/castform-rainy/Sleep-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    10,
+    10,
+    16,
+    10,
+    10,
+    16
+   ],
+   "rows": 1
+  }
  }
 }
