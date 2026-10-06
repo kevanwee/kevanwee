@@ -6,7 +6,6 @@ import Skills from "@/components/Skills";
 import BartCaseStudyModal from "@/components/BartCaseStudyModal";
 import GitHubStars from "@/components/GitHubStars";
 import ContributionGarden from "@/components/ContributionGarden";
-import ExplorerRank from "@/components/ExplorerRank";
 import MessageLog from "@/components/MessageLog";
 import WeatherForecast from "@/components/WeatherForecast";
 
@@ -28,10 +27,9 @@ export default function Projects() {
           LegalTech · Legal AI · LegalOps
         </p>
 
-        {/* Contributions and Explorer Rank, side by side */}
-        <div className="projects-stats mb-12 grid items-stretch gap-4 sm:grid-cols-2">
+        {/* Contributions, under the heading */}
+        <div className="mb-12">
           <ContributionGarden />
-          <ExplorerRank />
         </div>
 
         {/* Featured */}
