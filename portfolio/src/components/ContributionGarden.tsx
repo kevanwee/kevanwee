@@ -1,4 +1,5 @@
 "use client";
+import { useAnimationVisibility } from '@/lib/useAnimationVisibility';
 
 import { useEffect, useMemo, useState, type PointerEvent } from 'react';
 import { isFresh, isoDate, loadContributions, monthLabels, PROFILE_LOGIN, readCache, rgbHue, stats, toWeeks, type Calendar, type Day } from '@/lib/contributions';
@@ -18,6 +19,7 @@ function blankYear(): Day[] {
 
 /** GitHub's contribution year, as two half-year beds under the Eevee forest (side by side when there's room). */
 export default function ContributionGarden() {
+  const animationRef = useAnimationVisibility<HTMLDivElement>();
   // A blank year on the server and first paint; the cached or fetched year arrives in the browser.
   const [calendar, setCalendar] = useState<Calendar | null>(null);
   const [failed, setFailed] = useState(false);
@@ -52,7 +54,7 @@ export default function ContributionGarden() {
     setHover(date ? byDate.get(date) ?? null : null);
   };
 
-  return <div className="contributions" data-state={calendar ? 'ready' : failed ? 'failed' : 'loading'}>
+  return <div ref={animationRef} className="contributions" data-state={calendar ? 'ready' : failed ? 'failed' : 'loading'}>
     <div className="panel-heading contributions-heading">
       <div><h3>Contributions</h3></div>
       <a href={`https://github.com/${login}`} target="_blank" rel="noreferrer" aria-label={`${login} on GitHub`}>{login} <span aria-hidden="true">↗</span></a>
