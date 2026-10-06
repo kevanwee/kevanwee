@@ -7,8 +7,8 @@ import { explorerFresh, loadPoints, rankOf, readExplorer } from '@/lib/explorer'
 // Styles: app/globals.css (Mystery Dungeon UI cards).
 
 const number = new Intl.NumberFormat('en');
-/** The team: Diancie leads, then the workspace tabs' mascots. The team name is left blank on purpose. */
-const TEAM = [team.diancie, team.fuecoco, team.froakie, team.teddiursa, team.jirachi] as PmdAnim[];
+/** The team, a Mystery Dungeon pair: Charcadet leads, Fuecoco partners. The team name is left blank on purpose. */
+const TEAM: { name: string; anim: PmdAnim }[] = [{ name: 'Charcadet', anim: team.charcadet }, { name: 'Fuecoco', anim: team.fuecoco }];
 
 /** Explorer Rank in Mystery Dungeon's navy UI: the rank badge, all-time contributions as points, progress to the next rank. */
 export default function ExplorerRank() {
@@ -33,9 +33,10 @@ export default function ExplorerRank() {
       </div>
       <p className="pmd-note pmd-to-go">{points === null ? '' : toGo}</p>
     </div>
-    <div className="pmd-team" aria-label="Team: Diancie, Fuecoco, Froakie, Teddiursa and Jirachi">
+    <div className="pmd-team" aria-label="Team: Charcadet (leader) and Fuecoco">
       <p className="pmd-label">Team <span className="pmd-blank" aria-hidden="true" /></p>
-      <div className="pmd-members">{TEAM.map((anim, i) => <PmdSprite key={i} anim={anim} size={26} />)}</div>
+      <div className="pmd-members">{TEAM.map(({ name, anim }) =>
+        <figure key={name} className="pmd-member"><PmdSprite anim={anim} size={34} /><figcaption>{name}</figcaption></figure>)}</div>
     </div>
   </div>;
 }

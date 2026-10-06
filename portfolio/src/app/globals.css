@@ -330,26 +330,35 @@ html[data-theme="dark"] .contributions-foot { color:var(--muted); }
 .pmd-team .pmd-label { display:flex; align-items:center; gap:8px; }
 .pmd-blank { flex:1; border-bottom:1px dashed var(--pmd-inner); height:0; }
 .pmd-members { display:flex; justify-content:space-around; align-items:flex-end; padding:2px 4px 3px; border-bottom:1px dashed var(--pmd-inner); }
+.pmd-member { display:grid; justify-items:center; gap:2px; margin:0; }
+.pmd-member figcaption { color:#8f9ac2; font-size:10px; }
 @container (min-width:620px) {
   .pmd-rank { grid-template-columns:auto minmax(0, 1fr) minmax(0, .8fr); }
   .pmd-team { grid-column:auto; }
   .pmd-badge { width:84px; height:84px; }
 }
 
-/* Forecast: rows of small windows in a narrow column, side by side when there's room */
+/* Forecast: one period at a time; the arrows step through them. Castform roams the meadow (WeatherForecast.tsx). */
 .pmd-forecast-head { display:grid; gap:2px; margin-bottom:8px; }
-.pmd-periods { list-style:none; margin:0; padding:0; display:grid; gap:8px; }
-.pmd-period { display:grid; grid-template-columns:44% minmax(0, 1fr); gap:10px; align-items:center; }
+.pmd-period { display:grid; gap:6px; }
+.pmd-period-nav { display:grid; grid-template-columns:auto minmax(0, 1fr) auto; align-items:center; gap:8px; }
+.pmd-period-label { text-align:center; color:#f8e058; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pmd-period-count { color:#8f9ac2; font-size:11px; }
+.pmd-step { display:grid; place-items:center; width:26px; height:22px; border:1px solid var(--pmd-inner); border-radius:5px; background:#060b1d; color:#f8e058; }
+.pmd-step svg { width:10px; height:10px; fill:currentColor; }
+.pmd-step:hover:not(:disabled) { border-color:var(--pmd-edge); }
+.pmd-step:focus-visible { outline:2px solid #f8e058; outline-offset:1px; }
+.pmd-step:disabled { color:#34477c; cursor:default; }
 .pmd-window { position:relative; isolation:isolate; overflow:hidden; border-radius:6px; border:1px solid var(--pmd-inner);
   background:url("/pmd/thunder-meadow.png") no-repeat; image-rendering:pixelated; }
-.pmd-castform { position:absolute; left:50%; bottom:12%; translate:-50% 0; animation:pmd-bob 2.4s ease-in-out infinite; }
-.pmd-castform::after { content:""; position:absolute; left:50%; bottom:-5px; translate:-50% 0; width:70%; height:5px; border-radius:50%; background:#0000003d; }
+.pmd-castform { position:absolute; translate:-50% -100%; }
+.pmd-castform > span { animation:pmd-bob 2.4s ease-in-out infinite; }
+.pmd-castform::after { content:""; position:absolute; z-index:-1; left:50%; bottom:-3px; translate:-50% 0; width:70%; height:5px; border-radius:50%; background:#0000003d; }
+.pmd-period-text { color:#68d0f8; font-size:12px; text-align:center; }
 @keyframes pmd-bob { 50% { transform:translateY(-3px); } }
-.pmd-period-label { position:absolute; z-index:401; left:4px; top:4px; padding:0 6px; border-radius:999px; background:#0b0f1a99; font-size:10px; line-height:15px; white-space:nowrap; }
-.pmd-period-text { color:#68d0f8; font-size:12px; }
 @container (min-width:520px) {
   .pmd-forecast-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
-  .pmd-periods { grid-template-columns:repeat(auto-fit, minmax(0, 1fr)); gap:10px; }
-  .pmd-period { grid-template-columns:1fr; gap:4px; text-align:center; }
+  .pmd-castform > span { scale:1.6; transform-origin:50% 100%; } /* keeps Castform in proportion to a wide meadow */
 }
-@media (prefers-reduced-motion:reduce) { .pmd-castform { animation:none; } .pmd-bar span { transition:none; } }
+@media (prefers-reduced-motion:reduce) { .pmd-castform > span { animation:none; } .pmd-bar span { transition:none; } }
+.quiet .pmd-castform > span { animation:none; }

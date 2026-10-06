@@ -32,7 +32,7 @@ function getPanelBounds() {
   return { minX: r.left + MARGIN, maxX: r.right - MARGIN };
 }
 
-export default function TeddiursaRoamer() {
+function Teddiursa() {
   const [visual, setVisual] = useState<Visual | null>(null);
   const [showHeart, setShowHeart] = useState(false);
   const reactionRef = useRef(0);
@@ -235,4 +235,17 @@ export default function TeddiursaRoamer() {
       <span className="sr-only" role="status">{showHeart ? "Teddiursa sends you a heart!" : ""}</span>
     </button>
   );
+}
+
+/** Teddiursa only roams wider screens; on a phone it never spawns (it sat asleep in an odd spot there). */
+export default function TeddiursaRoamer() {
+  const [wide, setWide] = useState(false);
+  useEffect(() => {
+    const media = matchMedia("(min-width: 768px)");
+    const update = () => setWide(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+  return wide ? <Teddiursa /> : null;
 }

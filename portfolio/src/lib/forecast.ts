@@ -67,5 +67,3 @@ export async function loadForecast(fetcher: typeof fetch = fetch, now = new Date
 
 /** Castform's form for each kind of weather (PMD Sprite Collab sheets in public/pmd/castform). */
 export const CASTFORM_FORM: Partial<Record<Kind, 'sunny' | 'rainy'>> = { sunny: 'sunny', rain: 'rainy', storm: 'rainy' };
-/** One crop of Thunder Meadow (456 × 335) per period, below its own storm clouds: x, y, width, height. */
-export const MEADOW_VIEWS: [number, number, number, number][] = [[118, 150, 220, 92], [40, 196, 220, 92], [196, 182, 220, 92], [90, 122, 220, 92]];
