@@ -1,15 +1,11 @@
-﻿<div align="center">
+<div align="center">
   <img src="./readme/bardnner.gif" alt="banner" />
 </div>
 
 <br>
 
 <p align="center">
-  <strong>welcome to the rat den 🐀</strong>
-</p>
-
-<p align="center">
-  <em>computing &amp; law major &nbsp;·&nbsp; aspiring legal technologist &nbsp;·&nbsp; ex cartographer &nbsp;·&nbsp; intelligence practitioner &nbsp;·&nbsp; failing artist &nbsp;·&nbsp; coffee addict</em>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/header-dark.svg" /><img src="./readme/art/header-light.svg" alt="welcome to the rat den" /></picture>
 </p>
 
 <p align="center">
@@ -20,16 +16,23 @@
   <a href="mailto:kevan.wee.2023@scis.smu.edu.sg"><img src="https://img.shields.io/badge/email-reach_out-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="email" /></a>
 </p>
 
-<div align="center">
-  <img src="./readme/pokemon-roam-mauville.svg" alt="pokemon roaming" />
-</div>
+<p align="center">
+  <a href="#cooking"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/nav-cooking-dark.svg" /><img src="./readme/art/nav-cooking-light.svg" alt="cooking" /></picture></a>
+  <a href="#cuisines"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/nav-cuisines-dark.svg" /><img src="./readme/art/nav-cuisines-light.svg" alt="cuisines" /></picture></a>
+  <a href="#recipes"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/nav-recipes-dark.svg" /><img src="./readme/art/nav-recipes-light.svg" alt="recipes" /></picture></a>
+  <a href="#contacts"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/nav-contacts-dark.svg" /><img src="./readme/art/nav-contacts-light.svg" alt="contacts" /></picture></a>
+</p>
 
-<br>
+<p align="center">
+  <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/contribution-garden-dark.svg" /><img src="./readme/art/contribution-garden-light.svg" alt="a year of contributions beside the eevee forest" /></picture>
+</p>
 
----
+<a name="cooking"></a>
+
+<p align="center"><img src="./readme/art/path-zorua.svg" alt="zorua and hisuian zorua on the path" /></p>
 
 <details>
-  <summary align="center"><h2>🍜 &nbsp;what's cooking? &nbsp;<img src="./readme/charc.gif" width="80" /></h2></summary>
+  <summary align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/sign-cooking-dark.svg" /><img src="./readme/art/sign-cooking-light.svg" alt="cooking" /></picture> </summary>
 
   <br>
 
@@ -40,12 +43,12 @@
   <br>
 
   <p align="center">
-    probably some nissin laksa and a cup of instant coffee...
-    <br><br>
-    a wise rat once said <em>"anyone can cook"</em> 👨‍🍳 — i build everything and anything!
-    <br><br>
-    recent brews: a copyright infringement triage tool, a contract harmonisation tool,<br>
-    a parliamentary debate scraper, and too many other wip experiments 🛠️
+    <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/note-cooking-dark.svg" /><img src="./readme/art/note-cooking-light.svg" alt="anyone can cook" /></picture>
+  </p>
+
+  <!-- garden:stove (regrown daily) -->
+  <p align="center">
+    <a href="https://github.com/kevanwee?tab=repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/stove-dark.svg" /><img src="./readme/art/stove-light.svg" alt="recently pushed repositories" /></picture></a>
   </p>
 
   <p align="center">
@@ -60,10 +63,12 @@
 
 </details>
 
----
+<a name="cuisines"></a>
+
+<p align="center"><img src="./readme/art/path-gardevoir.svg" alt="mega gardevoir and mega gallade on the path" /></p>
 
 <details>
-  <summary align="center"><h2>🍳 &nbsp;what cuisines do you specialise in? &nbsp;<img src="./readme/slowitsgood.gif" width="80" /></h2></summary>
+  <summary align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/sign-cuisines-dark.svg" /><img src="./readme/art/sign-cuisines-light.svg" alt="cuisines" /></picture> <img src="./readme/slowitsgood.gif" width="80" /></summary>
 
   <br>
 
@@ -74,53 +79,28 @@
   <br>
 
   <p align="center">
-    as someone studying both computing and law, i suffer from every conceivable <em>"jack of all trades"</em> stereotype<br>
-    but i primarily specialise in <strong>legaltech product management and digital transformation</strong> 👨‍💻<br>
-    <em>(think video game where you refuse to pick a class and unlock skills in every tree 🗡️)</em>
+    <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/note-cuisines-dark.svg" /><img src="./readme/art/note-cuisines-light.svg" alt="jack of all trades" /></picture>
   </p>
 
-  <br>
-
-  <div align="center">
-
-  | 🖥️ **tech** | |
-  |:---|:---|
-  | 🌐 web dev | html, css, typescript |
-  | 🐍 scripting | python, java, js, php |
-  | 🛢️ dbms | mysql |
-  | 📡 network administration | server setup, ztna |
-  | 🤖 ai | rag, openai api, vector search, similarity scoring |
-  | 🎨 3d design | blender |
-  | 🌎 gis | arcgis products, qgis, global mapper, geospatial data production |
-  | 🎮 game dev | unity-based development (but it's been a decade 😭) |
-
-  </div>
-
-  <div align="center">
-
-  | 📚 **others** | |
-  |:---|:---|
-  | 🛠️ legaltech | e-discovery, aml/kyc-ctf, doc management, practice management |
-  | ⚖️ law | civil (contract, torts, family, ip, corporate) & criminal — leaning towards ip and data privacy |
-  | 🔍 intelligence analysis | imint, geoint, osint |
-  | 🗺️ cartography | topographic maps, orthoimage maps, situation maps (disaster relief/change assessment) |
-  | 📷 geomatics | georectification, orthorectification, mosaicing, stereophotogrammetry |
-
-  </div>
-
-  <br>
+  <p align="center">
+    <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/trees-dark.svg" /><img src="./readme/art/trees-light.svg" alt="tech tree and everything-else tree" /></picture>
+  </p>
 
   <div align="center">
     <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" />
     <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white" />
-    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" />
+    <img src="https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB" />
+    <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=white" />
+    <img src="https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white" />
+    <img src="https://img.shields.io/badge/Firebase-DD2C00?style=flat&logo=firebase&logoColor=white" />
+    <img src="https://img.shields.io/badge/Solidity-363636?style=flat&logo=solidity&logoColor=white" />
     <img src="https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white" />
     <img src="https://img.shields.io/badge/PHP-777BB4?style=flat&logo=php&logoColor=white" />
-    <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white" />
-    <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white" />
     <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white" />
-    <img src="https://img.shields.io/badge/Blender-F5792A?style=flat&logo=blender&logoColor=white" />
+    <img src="https://img.shields.io/badge/Ollama-000000?style=flat&logo=ollama&logoColor=white" />
+    <img src="https://img.shields.io/badge/Claude-D97757?style=flat&logo=claude&logoColor=white" />
     <img src="https://img.shields.io/badge/OpenAI-412991?style=flat&logo=openai&logoColor=white" />
+    <img src="https://img.shields.io/badge/Blender-F5792A?style=flat&logo=blender&logoColor=white" />
     <img src="https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=white" />
   </div>
 
@@ -128,109 +108,144 @@
 
 </details>
 
----
+<a name="recipes"></a>
+
+<p align="center"><img src="./readme/art/path-growlithe.svg" alt="growlithe and arcanine on the path" /></p>
 
 <details>
-  <summary align="center"><h2>🍽️ &nbsp;what recipes have you come up with? &nbsp;<img src="./readme/ruanmei.gif" width="40" /><img src="./readme/ruancreation.gif" width="40" /></h2></summary>
+  <summary align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/sign-recipes-dark.svg" /><img src="./readme/art/sign-recipes-light.svg" alt="recipes" /></picture> </summary>
 
   <br>
 
   <p align="center">here's some of the dishes i've made recently! (and some works in progress) 🍽️🛠️</p>
 
   <div align="center">
-    <img src="./readme/seox.gif" width="75" />
+    <img src="./readme/totoro.gif" alt="totoro" />
   </div>
 
   <br>
 
-  <div align="center">
+<h3 align="center"><img src="./readme/art/mascot-diancie.svg" height="26" /> &nbsp;highlights</h3>
 
-  **🛠️ legal technology ⚖️**
+<p align="center">
+<a href="https://github.com/LegalQuants/lq-plugin-oss"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-lq-plugins-dark.svg" /><img src="./readme/art/card-lq-plugins-light.svg" alt="legalquants plugins" width="49%" /></picture></a>
+<a href="https://kevanwee.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-bart-dark.svg" /><img src="./readme/art/card-bart-light.svg" alt="bart" width="49%" /></picture></a>
+<br>
+<a href="https://www.legalbenchmarks.ai/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legalbenchmarks-dark.svg" /><img src="./readme/art/card-legalbenchmarks-light.svg" alt="legalbenchmarks.ai" width="49%" /></picture></a>
+<a href="https://kevanwee.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-voracity-dark.svg" /><img src="./readme/art/card-voracity-light.svg" alt="voracity" width="49%" /></picture></a>
+</p>
 
-  | project | description |
-  |:---|:---|
-  | [copycat](https://github.com/kevanwee/copycat) | 🐈 singapore-first copyright infringement triage tool with deterministic similarity scoring |
-  | [sightstone](https://github.com/kevanwee/sightstone) | 📋 contract playbook harmonisation tool |
-  | [sal citation generator *(wip)*](https://github.com/kevanwee/sal-citation-generator) | 📝 footnote generator using the sal style guide |
-  | [eliti scraper](https://github.com/kevanwee/elitiscraper) | 🧹 elitigation sghc/sgca judgment scraper using beautifulsoup4 |
-  | [sg statute scraper *(wip)*](https://github.com/kevanwee/sgstatutescraper) | 📜 singapore statutes online scraper using beautifulsoup |
-  | [hansard scraper *(wip)*](https://github.com/kevanwee/hansardscraper) | 🏛️ singapore parliamentary debate scraper using beautifulsoup |
-  | [lex lynx](https://github.com/kevanwee/lexlynx) | 🦁 openai wrapper that summarizes case law |
-  | [tort rat](https://github.com/kevanwee/tortrat) | 🐀 discord chatbot for sg tort law |
-  | [codeoflaw *(wip)*](https://github.com/kevanwee/codeoflaw) | 📊 statistical analysis on all reported sghc and sgca judgments |
-  | [crimewatch *(wip)*](https://github.com/kevanwee/crimewatch) | 👀 heatmap analysis on locations mentioned in sg criminal law judgments |
+<h3 align="center"><img src="./readme/art/mascot-fuecoco.svg" height="26" /> &nbsp;legal engineering toolkit</h3>
 
-  </div>
+<p align="center">
+<a href="https://github.com/kevanwee/sg-legal-corpus"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-legal-corpus-dark.svg" /><img src="./readme/art/card-sg-legal-corpus-light.svg" alt="sg legal corpus" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/sg-deadline"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-deadline-dark.svg" /><img src="./readme/art/card-sg-deadline-light.svg" alt="sg deadline" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/citecheck"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-citecheck-dark.svg" /><img src="./readme/art/card-citecheck-light.svg" alt="citecheck" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/chronology"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-chronology-dark.svg" /><img src="./readme/art/card-chronology-light.svg" alt="chronology" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/oblig-register"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-oblig-register-dark.svg" /><img src="./readme/art/card-oblig-register-light.svg" alt="oblig register" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/bundlebuild"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-bundlebuild-dark.svg" /><img src="./readme/art/card-bundlebuild-light.svg" alt="bundlebuild" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/playbook-as-code"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-playbook-as-code-dark.svg" /><img src="./readme/art/card-playbook-as-code-light.svg" alt="playbook as code" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/ipatlas"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-ipatlas-dark.svg" /><img src="./readme/art/card-ipatlas-light.svg" alt="ip atlas" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/copycat"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-copycat-dark.svg" /><img src="./readme/art/card-copycat-light.svg" alt="copycat" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/sightstone"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sightstone-dark.svg" /><img src="./readme/art/card-sightstone-light.svg" alt="sightstone" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/sal-citation-generator"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sal-citation-generator-dark.svg" /><img src="./readme/art/card-sal-citation-generator-light.svg" alt="sal citation generator" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/apac-lateral-tracker"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-apac-lateral-tracker-dark.svg" /><img src="./readme/art/card-apac-lateral-tracker-light.svg" alt="apac lateral tracker" width="49%" /></picture></a>
+</p>
 
-  <div align="center">
+<h3 align="center"><img src="./readme/art/mascot-fuecoco.svg" height="26" /> &nbsp;legal data &amp; analytics</h3>
 
-  **🗺️ intelligence analysis tools 🧠**
+<p align="center">
+<a href="https://github.com/kevanwee/pdpcscraper"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-pdpcscraper-dark.svg" /><img src="./readme/art/card-pdpcscraper-light.svg" alt="pdpc scraper" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/elitiscraper"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-elitiscraper-dark.svg" /><img src="./readme/art/card-elitiscraper-light.svg" alt="eliti scraper" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/sgstatutescraper"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sgstatutescraper-dark.svg" /><img src="./readme/art/card-sgstatutescraper-light.svg" alt="sg statute scraper" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/hansardscraper"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-hansardscraper-dark.svg" /><img src="./readme/art/card-hansardscraper-light.svg" alt="hansard scraper" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/codeoflaw"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-codeoflaw-dark.svg" /><img src="./readme/art/card-codeoflaw-light.svg" alt="codeoflaw" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/crimewatch"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-crimewatch-dark.svg" /><img src="./readme/art/card-crimewatch-light.svg" alt="crimewatch" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/justicegap"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-justicegap-dark.svg" /><img src="./readme/art/card-justicegap-light.svg" alt="justicegap" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/lexlynx"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-lexlynx-dark.svg" /><img src="./readme/art/card-lexlynx-light.svg" alt="lex lynx" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/tortrat"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-tortrat-dark.svg" /><img src="./readme/art/card-tortrat-light.svg" alt="tort rat" width="49%" /></picture></a>
+</p>
 
-  | project | description |
-  |:---|:---|
-  | [hawk shot](https://github.com/kevanwee/hawkshot) | 🦅 line-of-sight / viewshed analysis tool |
-  | [map mole](https://github.com/kevanwee/mapmole) | 🕵️ satellite imagery change detection |
+<h3 align="center"><img src="./readme/art/mascot-froakie.svg" height="26" /> &nbsp;intelligence analysis tools</h3>
 
-  </div>
+<p align="center">
+<a href="https://github.com/kevanwee/hawkshot"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-hawkshot-dark.svg" /><img src="./readme/art/card-hawkshot-light.svg" alt="hawk shot" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/mapmole"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-mapmole-dark.svg" /><img src="./readme/art/card-mapmole-light.svg" alt="map mole" width="49%" /></picture></a>
+</p>
 
-  <div align="center">
+<h3 align="center"><img src="./readme/art/mascot-teddiursa.svg" height="26" /> &nbsp;art</h3>
 
-  **🎨 art**
+<p align="center">
+<a href="https://github.com/kevanwee/lolpixelart"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-lolpixelart-dark.svg" /><img src="./readme/art/card-lolpixelart-light.svg" alt="lol pixel art" width="49%" /></picture></a>
+</p>
 
-  | project | description |
-  |:---|:---|
-  | [lol pixel art](https://github.com/kevanwee/lolpixelart) | 🖌️ pixel art for league of legends skins |
+<h3 align="center"><img src="./readme/art/mascot-jirachi.svg" height="26" /> &nbsp;others</h3>
 
-  </div>
+<p align="center">
+<a href="https://github.com/kevanwee/voracity-watcher"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-voracity-watcher-dark.svg" /><img src="./readme/art/card-voracity-watcher-light.svg" alt="voracity watcher" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/theoffice"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-theoffice-dark.svg" /><img src="./readme/art/card-theoffice-light.svg" alt="the office" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/pmdsvgworld"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-pmdsvgworld-dark.svg" /><img src="./readme/art/card-pmdsvgworld-light.svg" alt="pmd svg world" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/kevanwee"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-kevanwee-dark.svg" /><img src="./readme/art/card-kevanwee-light.svg" alt="kevanwee portfolio" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/kevanweeportfolio"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-kevanweeportfolio-dark.svg" /><img src="./readme/art/card-kevanweeportfolio-light.svg" alt="3d portfolio" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/bookworm"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-bookworm-dark.svg" /><img src="./readme/art/card-bookworm-light.svg" alt="book worm" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/HUHH"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-huhh-dark.svg" /><img src="./readme/art/card-huhh-light.svg" alt="huhh" width="49%" /></picture></a>
+</p>
 
-  <div align="center">
-
-  **✨ others**
-
-  | project | description |
-  |:---|:---|
-  | [the office](https://github.com/kevanwee/theoffice) | 🏢 vs code extension — animated pokémon characters that follow your ai agents as they code |
-  | [kevanwee portfolio](https://github.com/kevanwee/kevanwee) | 🌐 this static portfolio site |
-  | [3d portfolio](https://github.com/kevanwee/kevanweeportfolio) | 📦 javascript-based website that displays 3d objects |
-  | [book worm](https://github.com/kevanwee/bookworm) | 📚 book price scraper — amazon, kinokuniya, thryft |
-  | [huhh](https://github.com/kevanwee/HUHH) | 😂 an april fools joke |
-
-  </div>
 
   <br>
 
 </details>
 
----
+<p align="center"><img src="./readme/art/path-starters.svg" alt="charmander and quilava on the path" /></p>
 
-<br>
+<p align="center">
+  <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/playground-dark.svg" /><img src="./readme/art/playground-light.svg" alt="mega evolution and soul unison" /></picture>
+</p>
 
 <div align="center">
-  <img src="./readme/totoro.gif" alt="totoro" />
+  <img src="./readme/pokemon-roam-mauville.svg" alt="pokemon roaming" />
 </div>
 
-<br>
 
----
+<a name="contacts"></a>
 
-<br>
+<p align="center"><img src="./readme/art/path-teddiursa.svg" alt="sandshrew and alolan sandshrew on the path" /></p>
 
-<h2 align="center">contacts! &nbsp;<img src="./readme/xdd.avif" width="28" /></h2>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/sign-contacts-dark.svg" /><img src="./readme/art/sign-contacts-light.svg" alt="contacts" /></picture></p>
 
 <div align="center">
   <img src="./readme/totorosmile.gif" alt="totoro smile" />
 </div>
 
 <p align="center">
-  want to talk about anything across tech, law and art?
-  <br><br>
-  📧 email me at <a href="mailto:kevan.wee.2023@scis.smu.edu.sg">kevan.wee.2023@scis.smu.edu.sg</a>
-  <br>
-  🔗 connect with me: &nbsp;<a href="https://www.linkedin.com/in/kevanwee/">linkedin</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/kwjw30/">instagram</a>
-  <br>
-  🎨 art accounts: &nbsp;<a href="https://www.instagram.com/van.fullofkebabs/">instagram</a> &nbsp;·&nbsp; <a href="https://www.tiktok.com/@seofon30">tiktok</a>
-  <br><br>
-  feel free to reach out!
-  <br><br>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/note-contacts-dark.svg" /><img src="./readme/art/note-contacts-light.svg" alt="want to talk" /></picture>
+</p>
+
+<p align="center">
+  <a href="mailto:kevan.wee.2023@scis.smu.edu.sg"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/contact-email-dark.svg" /><img src="./readme/art/contact-email-light.svg" alt="email" /></picture></a>
+  <a href="https://www.linkedin.com/in/kevanwee/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/contact-linkedin-dark.svg" /><img src="./readme/art/contact-linkedin-light.svg" alt="linkedin" /></picture></a>
+  <a href="https://www.instagram.com/kwjw30/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/contact-instagram-dark.svg" /><img src="./readme/art/contact-instagram-light.svg" alt="instagram" /></picture></a>
+  <a href="https://www.instagram.com/van.fullofkebabs/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/contact-art-instagram-dark.svg" /><img src="./readme/art/contact-art-instagram-light.svg" alt="art instagram" /></picture></a>
+  <a href="https://www.tiktok.com/@seofon30"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/contact-tiktok-dark.svg" /><img src="./readme/art/contact-tiktok-light.svg" alt="tiktok" /></picture></a>
+</p>
+
+<p align="center">
   <img src="./readme/pokemon-roam-rt111.svg" alt="pokemon roaming rt111" />
 </p>
+
+<p align="center"><sub>
+  sprites by the <a href="https://sprites.pmdcollab.org/">PMD Sprite Collab</a> contributors · item icons via <a href="https://github.com/PokeAPI/sprites">PokeAPI</a> ·
+  mega evolution symbol by pixelthecollector · drawn and regrown daily by <a href="./genpokemon/readme_art">genpokemon/readme_art</a>
+</sub></p>
