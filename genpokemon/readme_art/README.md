@@ -4,7 +4,7 @@ Every animated card on the profile README is a self-contained SVG: sprites are e
 
 | Script | Makes |
 |---|---|
-| `gen_contribution_garden.py` | The contribution garden: the year's contributions (an RGB-keyboard rainbow wave, shared with Voracity and the portfolio) beside Voracity's Eevee forest, with the Eeveelutions roaming |
+| `gen_contribution_garden.py` | The contribution garden: the year's contributions (a pastel RGB wave coloured by how busy each day was, shared with Voracity and the portfolio) beside Voracity's Eevee forest, with the Eeveelutions roaming |
 | `build_playground.py` | Mega Evolution (Diancie, Greninja, Dragonite) and Soul Unison (Ceruledge with Darkrai, Zygarde, Armarouge), with Iron Valiant and Yveltal |
 | `build_cards.py` | Project cards, the paths between sections, the skill trees and the fresh-off-the-stove card |
 | `build_more.py` | Header plate, nav and contact chips, signboards and note cards |
