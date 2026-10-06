@@ -37,22 +37,31 @@ function RoamingCastform({ form }: { form: Form }) {
       }
       raf = requestAnimationFrame(tick);
     };
+    let onScreen = true;
     const run = () => {
       cancelAnimationFrame(raf); last = 0;
-      if (motion.matches || document.hidden) {
+      if (motion.matches || document.hidden || !onScreen) {
         if (motion.matches) { pos = { ...START }; target = null; place(); show(false, 0); }
         return;
       }
       raf = requestAnimationFrame(tick);
     };
+    // Only roam while the meadow is on screen
+    const seen = typeof IntersectionObserver === 'undefined' ? null
+      : new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; run(); });
+    if (node.current) seen?.observe(node.current.parentElement ?? node.current);
     place(); run();
     document.addEventListener('visibilitychange', run);
     motion.addEventListener('change', run);
-    return () => { cancelAnimationFrame(raf); document.removeEventListener('visibilitychange', run); motion.removeEventListener('change', run); };
+    return () => {
+      cancelAnimationFrame(raf); seen?.disconnect();
+      document.removeEventListener('visibilitychange', run); motion.removeEventListener('change', run);
+    };
   }, []);
-  const anim = pose.walking ? FORMS[form].walk : FORMS[form].idle;
+  // Both sheets stay mounted, so switching between walking and resting never fetches an image again
   return <span ref={node} className="pmd-castform" data-walking={pose.walking || undefined} style={at(START)}>
-    <PmdSprite anim={anim} size={30} row={pose.row} />
+    <PmdSprite anim={FORMS[form].idle} size={30} row={pose.row} className={pose.walking ? 'pmd-off' : undefined} />
+    <PmdSprite anim={FORMS[form].walk} size={30} row={pose.row} className={pose.walking ? undefined : 'pmd-off'} />
   </span>;
 }
 

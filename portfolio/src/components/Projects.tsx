@@ -5,6 +5,10 @@ import { featuredProjects, otherProjects } from "@/data";
 import Skills from "@/components/Skills";
 import BartCaseStudyModal from "@/components/BartCaseStudyModal";
 import GitHubStars from "@/components/GitHubStars";
+import ContributionGarden from "@/components/ContributionGarden";
+import ExplorerRank from "@/components/ExplorerRank";
+import MessageLog from "@/components/MessageLog";
+import WeatherForecast from "@/components/WeatherForecast";
 
 export default function Projects() {
   const [showBart, setShowBart] = useState(false);
@@ -20,9 +24,15 @@ export default function Projects() {
         <h2 className="mb-3 font-serif text-3xl font-bold text-warm-900">
           Projects
         </h2>
-        <p className="mb-12 text-xs font-semibold uppercase tracking-widest text-warm-300">
+        <p className="mb-8 text-xs font-semibold uppercase tracking-widest text-warm-300">
           LegalTech · Legal AI · LegalOps
         </p>
+
+        {/* Contributions and Explorer Rank, side by side */}
+        <div className="projects-stats mb-12 grid items-stretch gap-4 sm:grid-cols-2">
+          <ContributionGarden />
+          <ExplorerRank />
+        </div>
 
         {/* Featured */}
         <ol className="space-y-6">
@@ -140,6 +150,11 @@ export default function Projects() {
           ))}
         </ol>
 
+        {/* Diancie's dialogue box, under the last featured project */}
+        <div className="mt-6">
+          <MessageLog />
+        </div>
+
         {showBart && <BartCaseStudyModal onClose={() => setShowBart(false)} />}
 
         {/* Other projects */}
@@ -217,6 +232,11 @@ export default function Projects() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* Castform's forecast, above the skills card */}
+        <div className="mt-16">
+          <WeatherForecast />
         </div>
 
         <Skills />
