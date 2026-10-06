@@ -1,4 +1,5 @@
-import { aboutParagraphs, achievements } from "@/data";
+import { achievements } from "@/data";
+import BioDialogue from "@/components/BioDialogue";
 import Memberships from "@/components/Memberships";
 import PokemonBanner from "@/components/PokemonBanner";
 import SubstituteSandbox from "@/components/SubstituteSandbox";
@@ -18,14 +19,8 @@ export default function About() {
 
       <PokemonBanner />
 
-      {/* Bio */}
-      <div className="space-y-4">
-        {aboutParagraphs.map((p, i) => (
-          <p key={i} className="text-sm leading-relaxed text-warm-600">
-            {p}
-          </p>
-        ))}
-      </div>
+      {/* Bio: a dialogue box, or plain text */}
+      <BioDialogue />
 
       {/* Education card + Substitute sandbox */}
       <div className="mt-10 flex w-full items-stretch gap-3">

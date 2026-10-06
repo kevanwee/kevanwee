@@ -353,6 +353,7 @@ html[data-theme="dark"] .contributions-foot { color:var(--muted); }
   background:url("/pmd/thunder-meadow.png") no-repeat; image-rendering:pixelated; }
 .pmd-castform { position:absolute; translate:-50% -100%; }
 .pmd-castform > span { animation:pmd-bob 2.4s ease-in-out infinite; }
+.pmd-castform > .pmd-off { display:none !important; }
 .pmd-castform::after { content:""; position:absolute; z-index:-1; left:50%; bottom:-3px; translate:-50% 0; width:70%; height:5px; border-radius:50%; background:#0000003d; }
 .pmd-period-text { color:#68d0f8; font-size:12px; text-align:center; }
 @keyframes pmd-bob { 50% { transform:translateY(-3px); } }
@@ -362,3 +363,18 @@ html[data-theme="dark"] .contributions-foot { color:var(--muted); }
 }
 @media (prefers-reduced-motion:reduce) { .pmd-castform > span { animation:none; } .pmd-bar span { transition:none; } }
 .quiet .pmd-castform > span { animation:none; }
+
+/* The bio as a dialogue box (components/BioDialogue.tsx): the box grows to the whole bio and the untyped text is
+   transparent, so nothing moves while it types. "Plain text" is a small flag beneath it. */
+.pmd-bio .pmd-box { height:auto; display:block; padding:12px 16px 22px; }
+.pmd-bio .pmd-box p { margin:0 0 .7em; }
+.pmd-bio .pmd-box p:last-of-type { margin-bottom:0; }
+.pmd-untyped { color:transparent; text-shadow:none; }
+.pmd-bio .pmd-portrait img { width:64px; height:64px; }
+.pmd-bio-toggle { display:block; margin:8px 0 0 auto; padding:2px 10px; border:1px solid #e3ddcf; border-radius:999px;
+  background:transparent; color:#8b8578; font-size:11px; letter-spacing:.04em; transition:background .15s, color .15s, border-color .15s; }
+.pmd-bio-toggle:hover { border-color:#c7d3bd; color:#4f6b45; }
+.pmd-bio-toggle[aria-pressed="true"] { background:#eef3ea; border-color:#c7d3bd; color:#4f6b45; }
+.pmd-bio-toggle:focus-visible { outline:2px solid #7d9a6f; outline-offset:2px; }
+html[data-theme="dark"] .pmd-bio-toggle { border-color:var(--line); color:var(--muted); }
+html[data-theme="dark"] .pmd-bio-toggle[aria-pressed="true"], html[data-theme="dark"] .pmd-bio-toggle:hover { background:var(--night-raised); color:var(--sage); }
