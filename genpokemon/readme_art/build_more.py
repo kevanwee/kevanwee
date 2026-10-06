@@ -71,7 +71,8 @@ SIGNS = {"cooking": ("what's cooking?", [("fuecoco", "walk", 60, 400)]),
 if __name__ == "__main__":
     for theme in THEMES:
         w = lambda name, svg: (OUT / f"{name}-{theme}.svg").write_text(svg, encoding="utf-8")
-        w("header", plate(theme, "welcome to the rat den", ["computing & law major · aspiring legal technologist · ex cartographer · intelligence practitioner · failing artist · coffee addict"],
+        w("header", plate(theme, "welcome to the rat den", ["computing & law @ smu · legaltech builder · legal ai & legal engineering",
+                           "ex geospatial mapper · intelligence practitioner · failing artist · coffee addict"],
                           [(cast.HEADER[0][0], cast.HEADER[0][1], 80, 830), (cast.HEADER[1][0], cast.HEADER[1][1], 120, 0), ("mega-diancie", "idle", 820, 0)]))
         for key, label, species in NAV:
             w(f"nav-{key}", chip(theme, label, species, hue=species))
