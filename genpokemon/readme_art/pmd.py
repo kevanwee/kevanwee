@@ -264,3 +264,33 @@ def silvally(sc, forms, x0, x1, y, speed=32.0, scale=1.0, delay=0.0):
     flashes = [l for l in layers if "<circle" in l]
     sprites = [l for l in layers if "<circle" not in l]
     return f'<g class="{mv}">{"".join(flashes)}{"".join(sprites)}</g>'
+
+
+# Each section takes its Pokémon's colour (the tab mascots); everything else keeps Voracity's green.
+HUES = {
+    "fuecoco": {"light": dict(accent="#c4553f", soft="#fbe9e4", border="#f0d3cb", panel="#fdf8f6"),
+                "dark": dict(accent="#f0917c", soft="#3a2a26", border="#4a3631", panel="#262220")},
+    "teddiursa": {"light": dict(accent="#a8682a", soft="#f6ead9", border="#ead8bd", panel="#fdf9f3"),
+                  "dark": dict(accent="#e0aa6a", soft="#3a3024", border="#4a3d2c", panel="#262320")},
+    "froakie": {"light": dict(accent="#3f78b5", soft="#e3eef9", border="#cddff0", panel="#f7fafd"),
+                "dark": dict(accent="#8cb8e6", soft="#243142", border="#33445a", panel="#20242a")},
+    "jirachi": {"light": dict(accent="#a98a1f", soft="#f7f0d2", border="#ece0ae", panel="#fdfbf2"),
+                "dark": dict(accent="#e3c95a", soft="#37331f", border="#4a4428", panel="#25241f")},
+    "diancie": {"light": dict(accent="#c0517f", soft="#f9e4ee", border="#efcfdc", panel="#fdf7fa"),
+                "dark": dict(accent="#f09cc0", soft="#3a2630", border="#4b3340", panel="#262124")},
+}
+
+
+def _mix(a, b, t):
+    pa, pb = [int(a[i:i + 2], 16) for i in (1, 3, 5)], [int(b[i:i + 2], 16) for i in (1, 3, 5)]
+    return "#" + "".join(f"{round(x + (y - x) * t):02x}" for x, y in zip(pa, pb))
+
+
+def tint(theme, hue=None):
+    """THEMES[theme], recoloured to a Pokémon's hue (panel, border, accent, level squares)."""
+    T = dict(THEMES[theme])
+    if hue in HUES:
+        T.update(HUES[hue][theme])
+        T["path"] = T["border"]
+        T["cells"] = [T["soft"]] + [_mix(T["soft"], T["accent"], t) for t in (.3, .55, .8, 1)]
+    return T

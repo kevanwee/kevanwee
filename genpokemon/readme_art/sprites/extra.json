@@ -1274,5 +1274,484 @@
    ],
    "rows": 1
   }
+ },
+ "totodile": {
+  "Walk": {
+   "src": "sprites/totodile/Walk-Anim.png",
+   "w": 24,
+   "h": 32,
+   "durations": [
+    8,
+    10,
+    8,
+    10
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/totodile/Idle-Anim.png",
+   "w": 32,
+   "h": 48,
+   "durations": [
+    30,
+    4,
+    2,
+    6,
+    3,
+    2,
+    3
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/totodile/Sleep-Anim.png",
+   "w": 24,
+   "h": 32,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "shiny-poochyena": {
+  "Walk": {
+   "src": "sprites/shiny-poochyena/Walk-Anim.png",
+   "w": 32,
+   "h": 48,
+   "durations": [
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/shiny-poochyena/Idle-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    40,
+    8,
+    5,
+    8,
+    5,
+    8
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/shiny-poochyena/Sleep-Anim.png",
+   "w": 24,
+   "h": 24,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "mightyena": {
+  "Walk": {
+   "src": "sprites/mightyena/Walk-Anim.png",
+   "w": 32,
+   "h": 40,
+   "durations": [
+    10,
+    10,
+    10,
+    10
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/mightyena/Idle-Anim.png",
+   "w": 48,
+   "h": 48,
+   "durations": [
+    40,
+    8,
+    5,
+    8,
+    5,
+    8
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/mightyena/Sleep-Anim.png",
+   "w": 24,
+   "h": 32,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "kricketune": {
+  "Walk": {
+   "src": "sprites/kricketune/Walk-Anim.png",
+   "w": 32,
+   "h": 48,
+   "durations": [
+    8,
+    8,
+    8,
+    8
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/kricketune/Idle-Anim.png",
+   "w": 32,
+   "h": 56,
+   "durations": [
+    40,
+    2,
+    2,
+    4,
+    4,
+    2,
+    2
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/kricketune/Sleep-Anim.png",
+   "w": 32,
+   "h": 24,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "magby": {
+  "Walk": {
+   "src": "sprites/magby/Walk-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    8,
+    10,
+    8,
+    10
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/magby/Idle-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    30,
+    2,
+    3,
+    4,
+    3,
+    2
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/magby/Sleep-Anim.png",
+   "w": 24,
+   "h": 32,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "shiny-emboar": {
+  "Walk": {
+   "src": "sprites/shiny-emboar/Walk-Anim.png",
+   "w": 40,
+   "h": 48,
+   "durations": [
+    6,
+    10,
+    6,
+    10
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/shiny-emboar/Idle-Anim.png",
+   "w": 40,
+   "h": 64,
+   "durations": [
+    40,
+    1,
+    1,
+    4,
+    4,
+    2,
+    1
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/shiny-emboar/Sleep-Anim.png",
+   "w": 40,
+   "h": 32,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "oshawott": {
+  "Walk": {
+   "src": "sprites/oshawott/Walk-Anim.png",
+   "w": 24,
+   "h": 32,
+   "durations": [
+    8,
+    10,
+    8,
+    10
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/oshawott/Idle-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    40,
+    2,
+    4,
+    4,
+    4,
+    2
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/oshawott/Sleep-Anim.png",
+   "w": 24,
+   "h": 24,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "shiny-toxtricity": {
+  "Walk": {
+   "src": "sprites/shiny-toxtricity/Walk-Anim.png",
+   "w": 32,
+   "h": 72,
+   "durations": [
+    8,
+    10,
+    8,
+    10
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/shiny-toxtricity/Idle-Anim.png",
+   "w": 32,
+   "h": 72,
+   "durations": [
+    40,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    12
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/shiny-toxtricity/Sleep-Anim.png",
+   "w": 32,
+   "h": 56,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "dragapult": {
+  "Walk": {
+   "src": "sprites/dragapult/Walk-Anim.png",
+   "w": 48,
+   "h": 80,
+   "durations": [
+    5,
+    3,
+    5,
+    7,
+    9,
+    7,
+    5,
+    5
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/dragapult/Idle-Anim.png",
+   "w": 48,
+   "h": 72,
+   "durations": [
+    14,
+    8,
+    14,
+    8
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/dragapult/Sleep-Anim.png",
+   "w": 48,
+   "h": 72,
+   "durations": [
+    16,
+    8,
+    16,
+    16,
+    8,
+    16
+   ],
+   "rows": 1
+  }
+ },
+ "zacian-crowned": {
+  "Walk": {
+   "src": "sprites/zacian-crowned/Walk-Anim.png",
+   "w": 80,
+   "h": 72,
+   "durations": [
+    10,
+    10,
+    10,
+    10
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/zacian-crowned/Idle-Anim.png",
+   "w": 88,
+   "h": 72,
+   "durations": [
+    30,
+    12,
+    2,
+    2,
+    2,
+    2,
+    2,
+    12
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/zacian-crowned/Sleep-Anim.png",
+   "w": 56,
+   "h": 64,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "shiny-cyclizar": {
+  "Walk": {
+   "src": "sprites/shiny-cyclizar/Walk-Anim.png",
+   "w": 48,
+   "h": 56,
+   "durations": [
+    8,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/shiny-cyclizar/Idle-Anim.png",
+   "w": 56,
+   "h": 48,
+   "durations": [
+    40,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    12
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/shiny-cyclizar/Sleep-Anim.png",
+   "w": 40,
+   "h": 48,
+   "durations": [
+    35,
+    35
+   ],
+   "rows": 1
+  }
+ },
+ "shiny-goodra": {
+  "Walk": {
+   "src": "sprites/shiny-goodra/Walk-Anim.png",
+   "w": 40,
+   "h": 48,
+   "durations": [
+    8,
+    12,
+    8,
+    12
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/shiny-goodra/Idle-Anim.png",
+   "w": 40,
+   "h": 64,
+   "durations": [
+    40,
+    2,
+    2,
+    3,
+    3,
+    2,
+    2
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/shiny-goodra/Sleep-Anim.png",
+   "w": 40,
+   "h": 48,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
  }
 }

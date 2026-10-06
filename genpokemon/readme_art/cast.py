@@ -46,8 +46,10 @@ def used_species():
 
 def fill_open_spots(rng=random.SystemRandom()):
     """Give each open card spot a random Pokémon that isn't on the page yet."""
-    from pmd import META, PICKS
-    pool = sorted(s for s in set(META) | set(PICKS) if not s.startswith("silvally-") and s not in EXCLUDED and s not in used_species())
+    from pmd import META, PICKS, PUBLIC
+    # Only Pokémon whose sheets are here: all of Voracity's with VORACITY_SRC, the bundled subset otherwise
+    drawable = set(PICKS) | {s for s, m in META.items() if (PUBLIC / m["animations"]["Walk"]["src"].lstrip("/")).exists()}
+    pool = sorted(s for s in drawable if not s.startswith("silvally-") and s not in EXCLUDED and s not in used_species())
     for slug, (species, mode) in CARDS.items():
         if species != "?": continue
         if not pool: raise SystemExit(f"no Pokémon left for {slug}: add more to the pool")

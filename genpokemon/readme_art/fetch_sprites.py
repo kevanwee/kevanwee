@@ -12,6 +12,9 @@ PICKS = {
     "pikachu": "0025", "sandshrew": "0027", "alolan-sandshrew": "0027/0001", "dachsbun": "0927", "kleavor": "0900",
     "crobat": "0169", "electrike": "0309", "mega-absol": "0359/0001", "shieldon": "0410", "shiny-ditto": "0132/0000/0001",
     "shiny-cranidos": "0408/0000/0001", "shiny-kingambit": "0983/0000/0001", "tatsugiri-stretchy": "0978/0001", "tandemaus": "0924",
+    "totodile": "0158", "shiny-poochyena": "0261/0000/0001", "mightyena": "0262", "kricketune": "0402", "magby": "0240",
+    "shiny-emboar": "0500/0000/0001", "oshawott": "0501", "shiny-toxtricity": "0849/0000/0001", "dragapult": "0887",
+    "zacian-crowned": "0888/0001", "shiny-cyclizar": "0967/0000/0001", "shiny-goodra": "0706/0000/0001",
 }
 OUT = Path("sprites")
 
@@ -36,8 +39,9 @@ def anims(xml):
 
 
 if __name__ == "__main__":
-    meta = {}
+    meta = json.loads((OUT / "extra.json").read_text(encoding="utf-8")) if (OUT / "extra.json").exists() else {}
     for name, path in PICKS.items():
+        if name in meta: continue
         d = OUT / name; d.mkdir(parents=True, exist_ok=True)
         xml = get(RAW + path + "/AnimData.xml").decode("utf-8")
         a = anims(xml)
@@ -50,6 +54,6 @@ if __name__ == "__main__":
             w, h = struct.unpack(">II", png[16:24])
             info = a[anim]
             assert w == info["w"] * len(info["durations"]), (name, anim, w, info)
-            meta[name][anim] = {"src": str((d / f"{anim}-Anim.png").resolve()), "w": info["w"], "h": info["h"], "durations": info["durations"], "rows": h // info["h"]}
+            meta[name][anim] = {"src": (d / f"{anim}-Anim.png").as_posix(), "w": info["w"], "h": info["h"], "durations": info["durations"], "rows": h // info["h"]}
         print(name, path, sorted(meta[name]))
     (OUT / "extra.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")

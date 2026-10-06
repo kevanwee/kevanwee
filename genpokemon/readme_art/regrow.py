@@ -1,5 +1,6 @@
 """Daily regrow (run by .github/workflows/readme-garden.yml): the contribution garden and the
-fresh-off-the-stove card, from today's contribution calendar and repository list. Uses only the
+fresh-off-the-stove card, from today's contribution calendar and repository list, and a fresh
+random Pokémon on every open spot in cast.py. Uses only the
 bundled sprites in assets/ and sprites/, so it runs without a Voracity checkout.
 
     python regrow.py contributions.json repos.json ../../readme/art
@@ -7,6 +8,7 @@ bundled sprites in assets/ and sprites/, so it runs without a Voracity checkout.
 import datetime as dt, json, sys
 from pathlib import Path
 import build_cards
+import cast
 import gen_contribution_garden as garden
 from pmd import THEMES
 
@@ -18,4 +20,14 @@ out = Path(out)
 for theme in THEMES:
     (out / f"contribution-garden-{theme}.svg").write_text(garden.render(data, theme), encoding="utf-8")
     (out / f"stove-{theme}.svg").write_text(build_cards.stove_card(theme, repos, dt.date.today()), encoding="utf-8")
+# Re-roll the open spots
+open_spots = {slug for slug, who in cast.CARDS.items() if who == cast.RANDOM}
+cast.fill_open_spots()
+for group in json.loads(Path("projects.json").read_text(encoding="utf-8")):
+    for p in group["items"]:
+        if p["slug"] not in open_spots: continue
+        species, mode = cast.CARDS[p["slug"]]
+        lang = build_cards.LANGS.get(p["repo"].lower(), (None, 0))[0] if p.get("repo") else None
+        for theme in THEMES:
+            (out / f'card-{p["slug"]}-{theme}.svg').write_text(build_cards.card(theme, p["title"], p["desc"], p.get("label", "github"), lang, p.get("tags", []), (species, mode), group["mascot"]), encoding="utf-8")
 print("regrown", data["total"]["lastYear"], "contributions,", len(repos), "repositories")
