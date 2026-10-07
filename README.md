@@ -35,6 +35,10 @@
   <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/contribution-garden-dark.svg" /><img src="./readme/art/contribution-garden-light.svg" alt="a year of contributions beside the eevee forest" /></picture>
 </p>
 
+<p align="center"><sub>
+  contains information from NEA's 24-hour and 2-hour weather forecasts, accessed from data.gov.sg (updated every two hours) and made available under the <a href="https://data.gov.sg/open-data-licence">Singapore Open Data Licence v1.0</a> · when NEA can't be reached, <a href="https://open-meteo.com/">weather data by Open-Meteo.com</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)
+</sub></p>
+
 <a name="cooking"></a>
 
 <p align="center"><img src="./readme/art/path-zorua.svg" alt="zorua and hisuian zorua on the path" /></p>
@@ -254,6 +258,8 @@
 </p>
 
 <p align="center"><sub>
-  sprites by the <a href="https://sprites.pmdcollab.org/">PMD Sprite Collab</a> contributors · item icons via <a href="https://github.com/PokeAPI/sprites">PokeAPI</a> ·
-  mega evolution symbol by pixelthecollector · drawn and regrown daily by <a href="./genpokemon/readme_art">genpokemon/readme_art</a>
+  sprites by the <a href="https://sprites.pmdcollab.org/">PMD Sprite Collab</a> contributors (each artist credited on its sprite page), <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, some cropped, recoloured or combined ·
+  thunder meadow and rank badges via the <a href="https://mysterydungeon.fandom.com/">Mystery Dungeon Wiki</a> · item icons via <a href="https://github.com/PokeAPI/sprites">PokeAPI</a> ·
+  mega evolution symbol by pixelthecollector · drawn and regrown daily by <a href="./genpokemon/readme_art">genpokemon/readme_art</a><br />
+  a non-commercial fan project, not affiliated with or endorsed by Nintendo, Creatures, GAME FREAK or The Pokémon Company · Pokémon © their owners
 </sub></p>

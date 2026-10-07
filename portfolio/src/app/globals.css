@@ -371,3 +371,10 @@ html[data-theme="dark"] .pmd-bio-toggle[aria-pressed="true"], html[data-theme="d
 .contributions[data-animation-paused="true"], .contributions[data-animation-paused="true"] * { animation-play-state:paused !important; }
 .forest-sky[data-animation-paused="true"] > span { animation-play-state:paused !important; }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto !important; } }
+
+/* Data attribution (WeatherCredit.tsx): required by NEA's and Open-Meteo's licences */
+.weather-credit { margin-top:6px; font-size:10px; line-height:1.5; color:#6c7b5c; }
+.weather-credit a, .pmd-credit a { color:inherit; text-decoration:underline; text-underline-offset:2px; }
+.weather-credit a:hover, .weather-credit a:focus-visible { color:#375b34; }
+.pmd-credit { margin-top:8px; font-size:10px; line-height:1.5; }
+.pmd-credit a:hover, .pmd-credit a:focus-visible { color:#f8f8f8; }
