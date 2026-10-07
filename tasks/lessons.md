@@ -97,3 +97,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - The owner chose "all rights reserved" for this public repo (replacing Apache 2.0, which let anyone reuse it).
   LICENSE reserves the owner's own work; NOTICE.md lists third-party material under its owners' terms. Keep NOTICE.md
   current when adding sprites, fonts, data or music, and never present third-party assets as the owner's.
+
+- Diancie dialogue (8 October 2026): the owner wants activity close to live across Voracity, portfolio and README. Two-hour or thirty-minute refreshes are too slow. Separate the lightweight activity feed from the garden, poll frequently while visible, preserve private-repo redaction and distinguish scheduled polling from immediate push delivery.

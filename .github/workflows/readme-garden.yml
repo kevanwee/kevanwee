@@ -1,14 +1,14 @@
 name: Regrow the README garden
 
 # Every two hours: the contribution garden with the sky over its forest (Singapore's time of day and
-# NEA's 2-hour forecast), the message log of recent activity, and the README's open card spots.
+# NEA's 2-hour forecast) and the README's open card spots. Diancie has a separate workflow.
 # Also on each push to main (the bot's own regrow commits use GITHUB_TOKEN, so they never trigger it).
 # Commits authored as kevanwee (the account's noreply address), so each regrow counts on the contribution graph:
 # the owner's choice, as a visible sign the pipeline is alive. It still pushes with GITHUB_TOKEN, so the push
 # event's actor is github-actions[bot] and the message log leaves these commits out.
 on:
   schedule:
-    - cron: "17 1-23/2 * * *" # every two hours, off the busy top of the hour (GitHub may still run it late)
+    - cron: "17 1-23/2 * * *" # the separate activity workflow refreshes Diancie every five minutes
   push:
     branches: [main]
     paths-ignore: ["readme/art/**"]
@@ -34,34 +34,15 @@ jobs:
       - name: Fetch the contribution calendar and repositories
         env:
           GH_TOKEN: ${{ github.token }}
-          LOG_TOKEN: ${{ secrets.LOG_TOKEN }}
         run: |
           curl -sf "https://github-contributions-api.jogruber.de/v4/kevanwee?y=last" -o "$RUNNER_TEMP/contributions.json"
           gh repo list kevanwee --limit 100 --json name,description,isPrivate,isFork,pushedAt > "$RUNNER_TEMP/repos.json"
-          # Public activity, plus (with the LOG_TOKEN secret, a read-only fine-grained token) the own feed of every
-          # private repo the token can read. build_log.py keeps only kevanwee's events, names private repos only
-          # if they are in PRIVATE_SHOWN, and shows the rest as unnamed hidden dungeons.
-          gh api "users/kevanwee/events/public?per_page=100" > "$RUNNER_TEMP/public-events.json"
-          mkdir -p "$RUNNER_TEMP/private"
-          echo '[]' > "$RUNNER_TEMP/private/none.json"
-          if [ -n "$LOG_TOKEN" ]; then
-            GH_TOKEN="$LOG_TOKEN" gh api --paginate "user/repos?per_page=100"               --jq '.[] | select(.private and .owner.login == "kevanwee") | .full_name' > "$RUNNER_TEMP/private-repos.txt"               || echo "kevanwee/voracity" > "$RUNNER_TEMP/private-repos.txt"
-            [ -s "$RUNNER_TEMP/private-repos.txt" ] || echo "kevanwee/voracity" > "$RUNNER_TEMP/private-repos.txt"
-            i=0
-            while read -r repo; do
-              i=$((i + 1))
-              GH_TOKEN="$LOG_TOKEN" gh api "repos/$repo/events?per_page=100" > "$RUNNER_TEMP/private/$i.json" 2>/dev/null || echo '[]' > "$RUNNER_TEMP/private/$i.json"
-            done < "$RUNNER_TEMP/private-repos.txt"
-            echo "private repos read: $(wc -l < "$RUNNER_TEMP/private-repos.txt")"
-          fi
-          jq -s 'add | unique_by(.id) | sort_by(.created_at) | reverse' "$RUNNER_TEMP/public-events.json" "$RUNNER_TEMP"/private/*.json > "$RUNNER_TEMP/events.json"
-          echo "events: $(jq length "$RUNNER_TEMP/events.json") (private: $(jq '[.[] | select(.public == false)] | length' "$RUNNER_TEMP/events.json"))"
       - name: Regrow
         working-directory: genpokemon/readme_art
         env:
           TZ: Asia/Singapore
         run: |
-          python regrow.py "$RUNNER_TEMP/contributions.json" "$RUNNER_TEMP/repos.json" ../../readme/art "$RUNNER_TEMP/events.json"
+          python regrow.py "$RUNNER_TEMP/contributions.json" "$RUNNER_TEMP/repos.json" ../../readme/art
           # Explorer Rank (all-time contributions) and Castform's 24-hour forecast (NEA)
           curl -sf "https://github-contributions-api.jogruber.de/v4/kevanwee?y=all" -o "$RUNNER_TEMP/all-contributions.json"
           curl -sf "https://api-open.data.gov.sg/v2/real-time/api/twenty-four-hr-forecast" -o "$RUNNER_TEMP/forecast.json"

@@ -18,40 +18,47 @@ export default function MessageLog() {
   const [activity, setActivity] = useState<Activity | null>(null);
   const [shown, setShown] = useState(0);
   const [round, setRound] = useState(0);
+  const [now, setNow] = useState(() => Date.now());
   const viewport = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLUListElement>(null);
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    let live = true;
+    let live = true, loading = false;
+    const accept = (next: Activity) => {
+      if (live) setActivity(current => current && JSON.stringify(current.lines) === JSON.stringify(next.lines) ? current : next);
+    };
     const refresh = () => {
-      if (document.hidden || activityFresh(readActivity())) return;
-      loadActivity().then(next => {
-        // Only a changed feed replaces the box (and retypes it)
-        if (live) setActivity(current => current && JSON.stringify(current.lines) === JSON.stringify(next.lines) ? current : next);
-      }, () => { /* keep what we have */ });
+      if (document.hidden) return;
+      setNow(Date.now());
+      const cached = readActivity();
+      if (cached) accept(cached.activity); // another tab may have refreshed the shared cache
+      if (activityFresh(cached) || loading) return;
+      loading = true;
+      loadActivity().then(accept, () => { /* keep what we have */ }).finally(() => { loading = false; });
     };
     const cached = readActivity(); if (cached) setActivity(cached.activity);
     refresh();
     document.addEventListener('visibilitychange', refresh);
-    // A tab left open keeps checking too (the cache decides whether that costs a request)
-    const timer = setInterval(refresh, 10 * 60 * 1000);
-    return () => { live = false; clearInterval(timer); document.removeEventListener('visibilitychange', refresh); };
+    window.addEventListener('focus', refresh);
+    // Fetch the small shared snapshot while visible; never call authenticated GitHub APIs here.
+    const timer = setInterval(refresh, 30 * 1000);
+    return () => { live = false; clearInterval(timer); document.removeEventListener('visibilitychange', refresh); window.removeEventListener('focus', refresh); };
   }, []);
 
   const lines = activity?.lines.length ? activity.lines : [QUIET_LINE];
   const rendered = useMemo(() => lines.map(line => ({
-    ...line, parts: [...line.parts, ...(line.when ? [['faint', `  · ${ago(line.when)}`] as [string, string]] : [])] as [string, string][],
-  })), [lines]);
+    ...line, parts: [...line.parts, ...(line.when ? [['faint', `  · ${ago(line.when, new Date(now))}`] as [string, string]] : [])] as [string, string][],
+  })), [lines, now]);
   const total = rendered.reduce((sum, line) => sum + line.parts.reduce((s, [, t]) => s + t.length, 0), 0);
   const label = rendered.map(line => line.parts.map(([, t]) => t).join('')).join('. ');
 
   useEffect(() => {
-    if (stillMotion()) { setShown(total); return; }
+    if (stillMotion()) { setShown(Infinity); return; }
     setShown(0);
-    const timer = setInterval(() => setShown(n => { if (n >= total) { clearInterval(timer); return n; } return n + 1; }), TYPE_MS);
+    const timer = setInterval(() => setShown(n => { if (n >= total) { clearInterval(timer); return Infinity; } return n + 1; }), TYPE_MS);
     return () => clearInterval(timer);
-  }, [total, round, label]);
+  }, [activity?.lines, round]); // age changes do not replay the dialogue
 
   // The box keeps one height: as the text types past the bottom it slides up, like the game's text box.
   // It moves by transform, never by scrolling: a scroll event would close Telegram's message preview.
