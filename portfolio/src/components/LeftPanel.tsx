@@ -199,7 +199,7 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
           </div>
 
           <p className="mt-4 text-[11px] text-warm-200">
-            © {new Date().getFullYear()} Kevan Wee
+            © {new Date().getFullYear()} Kevan Wee · All rights reserved
           </p>
         </div>
       </aside>
