@@ -12,7 +12,8 @@
     "test:yveltal:browser": "node scripts/test-yveltal-browser.cjs",
     "test:eevee-base:browser": "node scripts/test-eevee-base-browser.cjs",
     "lint": "next lint",
-    "test:terminal": "node scripts/test-terminal.cjs"
+    "test:terminal": "node scripts/test-terminal.cjs",
+    "test:ssh:browser": "node scripts/test-ssh-browser.cjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
