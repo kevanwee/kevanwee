@@ -1,0 +1,51 @@
+name: Refresh Diancie activity
+
+on:
+  schedule:
+    - cron: '2-57/5 * * * *'
+  push:
+    branches: [main]
+    paths-ignore: ['readme/art/**']
+  workflow_dispatch:
+  repository_dispatch:
+    types: [refresh-activity]
+
+permissions:
+  contents: write
+
+# The garden also writes readme/art. Serialise commits rather than racing it.
+concurrency: readme-garden
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install rendering dependencies
+        run: |
+          pip install pillow
+          sudo apt-get install -y fonts-liberation
+      - name: Collect public and permitted private activity
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LOG_TOKEN: ${{ secrets.LOG_TOKEN }}
+        run: python .github/scripts/fetch-activity.py "$RUNNER_TEMP/events.json"
+      - name: Validate and render both shared outputs
+        working-directory: genpokemon/readme_art
+        run: |
+          python -m unittest test_build_log.py
+          python build_log.py "$RUNNER_TEMP/events.json" ../../readme/art
+      - name: Publish changed dialogue
+        run: |
+          git config user.name kevanwee
+          git config user.email '16420323+kevanwee@users.noreply.github.com'
+          git add readme/art/activity.json readme/art/message-log.svg
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh Diancie activity'
+            git pull --rebase origin main
+            git push
+          fi

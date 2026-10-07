@@ -1,10 +1,10 @@
 // Recent activity for the Mystery Dungeon dialogue box. The GitHub profile README's workflow builds it
-// every two hours (genpokemon/readme_art/build_log.py → readme/art/activity.json): pushes, merges and
+// every five minutes (genpokemon/readme_art/build_log.py → readme/art/activity.json): pushes, merges and
 // new repos, with private repos named only when allowlisted (Voracity). The portfolio reads the same
 // file, so all three logs show the same lines.
 export const ACTIVITY_URL = 'https://raw.githubusercontent.com/kevanwee/kevanwee/main/readme/art/activity.json';
 export const ACTIVITY_CACHE = 'kevanwee.activity';
-const FRESH_FOR = 10 * 60 * 1000;
+const FRESH_FOR = 30 * 1000;
 
 export type PartKind = 'text' | 'name' | 'place' | 'number';
 export interface ActivityLine { mood: string; when: string; parts: [PartKind, string][] }

@@ -42,6 +42,7 @@ def short(repo):
 
 def lines_from(events, now, limit=4):
     """Newest first; pushes to one repo on one day become one line."""
+    events = sorted(events, key=lambda event: event['created_at'], reverse=True)
     out, seen_push, merged = [], {}, set()
     for e in events:
         if e["type"] == "PullRequestEvent" and e["payload"].get("action") == "merged":
@@ -143,10 +144,27 @@ def render(lines):
             f'<style>{"".join(css)}</style>{"".join(parts)}</svg>')
 
 
+def publish(lines, now, out):
+    """Keep both surfaces coherent; unchanged events/relative ages do not make bot commits."""
+    snapshot, svg = activity(lines, now), render(lines)
+    json_path, svg_path = out / 'activity.json', out / 'message-log.svg'
+    try:
+        previous = json.loads(json_path.read_text(encoding='utf-8'))
+        if (previous.get('speaker') == snapshot['speaker'] and previous.get('lines') == snapshot['lines']
+                and svg_path.read_text(encoding='utf-8') == svg):
+            return False
+    except (OSError, ValueError):
+        pass
+    out.mkdir(parents=True, exist_ok=True)
+    svg_path.write_text(svg, encoding='utf-8')
+    json_path.write_text(json.dumps(snapshot, indent=1), encoding='utf-8')
+    return True
+
+
 if __name__ == "__main__":
     events = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
     out = Path(sys.argv[2]); out.mkdir(parents=True, exist_ok=True)
-    lines = lines_from(events, dt.datetime.now(dt.timezone.utc))
+    now = dt.datetime.now(dt.timezone.utc)
+    lines = lines_from(events, now)
     for l in lines: print("".join(s for _, s in l["parts"]))
-    (out / "message-log.svg").write_text(render(lines), encoding="utf-8")
-    (out / "activity.json").write_text(json.dumps(activity(lines, dt.datetime.now(dt.timezone.utc)), indent=1), encoding="utf-8")
+    print('Published changed dialogue' if publish(lines, now, out) else 'Dialogue unchanged')
