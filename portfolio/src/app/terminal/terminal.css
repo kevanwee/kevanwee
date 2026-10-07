@@ -1,0 +1,36 @@
+/* /terminal: the portfolio as an SSH session. A dark terminal on a charcoal page, the portfolio's sage as the
+   prompt colour, mono text throughout; Mega Diancie is line-only ASCII in a single colour. */
+.term-page {
+  --term-bg: #161616; --term-panel: #1d1d1d; --term-line: #2e2e2e; --term-text: #e4e2dc; --term-muted: #8b8a84;
+  --term-user: #9fc9ad; --term-dir: #8fb8e0; --term-file: #e4e2dc; --term-link: #e8c37a; --term-accent: #c9a6e8; --term-error: #f08d7e;
+  min-height: 100svh; background: var(--term-bg); color: var(--term-text);
+  display: flex; flex-direction: column; align-items: center; padding: 20px 16px 32px; gap: 12px;
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+.term-back { align-self: flex-start; max-width: 960px; width: 100%; margin: 0 auto; font-size: 12px; color: var(--term-muted); text-decoration: none; }
+.term-back:hover, .term-back:focus-visible { color: var(--term-text); }
+.term-window {
+  width: 100%; max-width: 960px; flex: 1; display: flex; flex-direction: column; min-height: 0;
+  border: 1px solid var(--term-line); border-radius: 10px; background: var(--term-panel); overflow: hidden;
+  box-shadow: 0 18px 48px #0006;
+}
+.term-bar { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-bottom: 1px solid var(--term-line); font-size: 12px; color: var(--term-muted); }
+.term-dots { display: inline-flex; gap: 6px; }
+.term-dots i { width: 11px; height: 11px; border-radius: 50%; background: #3a3a3a; }
+.term-dots i:nth-child(1) { background: #e06c5f; } .term-dots i:nth-child(2) { background: #e3b55b; } .term-dots i:nth-child(3) { background: #7ebf74; }
+.term-screen { flex: 1; overflow-y: auto; padding: 14px 16px 20px; font-size: 13px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; cursor: text; min-height: 70svh; }
+.term-screen button.term-run { font: inherit; color: var(--term-text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: #ffffff2e; text-underline-offset: 3px; }
+.term-screen button.term-run:hover, .term-screen button.term-run:focus-visible { text-decoration-color: currentColor; outline: none; }
+.term-screen a { text-underline-offset: 3px; }
+.term-screen :focus-visible { outline: 1px dashed var(--term-accent); outline-offset: 2px; }
+.term-page .term-user { color: var(--term-user); } .term-page .term-dir { color: var(--term-dir); } .term-page .term-file { color: var(--term-file); }
+.term-page .term-link { color: var(--term-link); } .term-page .term-accent { color: var(--term-accent); } .term-page .term-muted { color: var(--term-muted); } .term-page .term-error { color: var(--term-error); }
+.term-input { display: flex; align-items: baseline; }
+.term-screen .term-input input:focus-visible { outline: none; }
+.term-input input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: var(--term-text); font: inherit; caret-color: var(--term-user); padding: 0; }
+.term-welcome { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin: 4px 0 10px; }
+.term-art { margin: 0; font: inherit; font-size: 9px; line-height: 1.15; letter-spacing: 0; white-space: pre; color: var(--term-user); user-select: none; }
+.term-card { min-width: 0; flex: 1 1 280px; }
+@media (min-width: 640px) { .term-art { font-size: 11px; } .term-screen { font-size: 14px; } }
+@media (min-width: 1024px) { .term-art { font-size: 12.5px; } }
+@media (max-width: 480px) { .term-page { padding: 12px 8px 16px; } .term-screen { padding: 12px 10px 16px; font-size: 12px; } }

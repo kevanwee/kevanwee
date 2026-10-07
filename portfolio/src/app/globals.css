@@ -378,3 +378,18 @@ html[data-theme="dark"] .pmd-bio-toggle[aria-pressed="true"], html[data-theme="d
 .weather-credit a:hover, .weather-credit a:focus-visible { color:#375b34; }
 .pmd-credit { margin-top:8px; font-size:10px; line-height:1.5; }
 .pmd-credit a:hover, .pmd-credit a:focus-visible { color:#f8f8f8; }
+
+/* Media marquee (MediaAppearances.tsx): two copies of the list slide left by one copy's width and repeat.
+   Paused under the pointer or keyboard focus; under reduced motion, one list in a row you scroll. */
+.media-marquee { position:relative; overflow:hidden; padding:4px 0 6px;
+  mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.media-marquee-track { display:flex; width:max-content; animation:media-marquee var(--marquee-duration, 54s) linear infinite; }
+.media-marquee-list { display:flex; gap:12px; padding-right:12px; }
+.media-marquee-list > li { display:flex; }
+.media-marquee:hover .media-marquee-track, .media-marquee:focus-within .media-marquee-track { animation-play-state:paused; }
+@keyframes media-marquee { to { transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .media-marquee { overflow-x:auto; mask-image:none; }
+  .media-marquee-track { animation:none; }
+  .media-marquee-list[aria-hidden] { display:none; }
+}

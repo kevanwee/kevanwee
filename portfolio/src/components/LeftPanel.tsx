@@ -1,11 +1,19 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { personal } from "@/data";
 import MusicPlayer from "@/components/MusicPlayer";
 import ResumeModal from "@/components/ResumeModal";
 import PokeballRow from "@/components/PokeballRow";
+
+// The question both assistants open with, built from the same data as the page
+const ASK = `Tell me about ${personal.fullName}: ${personal.title} at ${personal.institution} (${personal.tagline}). Read https://kevanwee.vercel.app and summarise the experience, projects and media appearances there.`;
+const ASSISTANTS = [
+  { name: "Claude", url: "https://claude.ai/new?q=" },
+  { name: "ChatGPT", url: "https://chatgpt.com/?q=" },
+];
 
 const NAV_ITEMS = [
   { id: "about", label: "About" },
@@ -114,6 +122,37 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
               3D
             </button>
             </span>
+            <Link
+              href="/terminal"
+              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
+              title="Browse this portfolio as a terminal session"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
+                className="h-3.5 w-3.5" aria-hidden="true">
+                <polyline points="4 17 10 11 4 5" />
+                <line x1="12" y1="19" x2="20" y2="19" />
+              </svg>
+              Terminal
+            </Link>
+          </div>
+
+          {/* Opens either assistant with a question about this portfolio already typed in */}
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-warm-300" style={fadeUp("370ms")}>
+            <span>Ask about me</span>
+            {ASSISTANTS.map(({ name, url }) => (
+              <a
+                key={name}
+                href={url + encodeURIComponent(ASK)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-full border border-cream-200 px-2.5 py-1 font-medium text-warm-400 transition-all duration-200 hover:-translate-y-px hover:border-sage-300 hover:text-sage-600 focus-visible:border-sage-300 focus-visible:text-sage-600"
+              >
+                {name}
+                <span aria-hidden="true">↗</span>
+                <span className="sr-only"> (opens a new tab)</span>
+              </a>
+            ))}
           </div>
 
           <nav className="mt-10 hidden lg:block" aria-label="Page sections" style={fadeUp("410ms")}>

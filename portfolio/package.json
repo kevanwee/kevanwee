@@ -11,7 +11,8 @@
     "test:overworld:browser": "node scripts/test-overworld-browser.cjs",
     "test:yveltal:browser": "node scripts/test-yveltal-browser.cjs",
     "test:eevee-base:browser": "node scripts/test-eevee-base-browser.cjs",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:terminal": "node scripts/test-terminal.cjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
