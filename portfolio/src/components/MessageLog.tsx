@@ -63,7 +63,7 @@ export default function MessageLog() {
   // The box keeps one height: as the text types past the bottom it slides up, like the game's text box.
   // It moves by transform, never by scrolling: a scroll event would close Telegram's message preview.
   const overflow = () => Math.max(0, (content.current?.offsetHeight ?? 0) - (viewport.current?.clientHeight ?? 0));
-  useEffect(() => { setOffset(shown === 0 ? 0 : overflow()); }, [shown]);
+  useEffect(() => { setOffset(shown === 0 ? 0 : overflow()); }, [shown, activity?.lines]);
   // Once done, the wheel (or ↑/↓ while focused) reads back through earlier lines; at either end the page scrolls as usual.
   useEffect(() => {
     const box = viewport.current;
