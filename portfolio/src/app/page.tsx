@@ -8,7 +8,7 @@ import Projects from "@/components/Projects";
 import MediaAppearances from "@/components/MediaAppearances";
 import Contact from "@/components/Contact";
 import LeftPanel from "@/components/LeftPanel";
-import EeveeBase from "@/components/EeveeBase";
+import EeveeBase from "@/components/FriendAreas";
 import MouseGradient from "@/components/MouseGradient";
 import SmoothScroll from "@/components/SmoothScroll";
 import PokemonCursor from "@/components/PokemonCursor";

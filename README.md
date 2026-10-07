@@ -259,6 +259,7 @@
 
 <p align="center"><sub>
   sprites by the <a href="https://sprites.pmdcollab.org/">PMD Sprite Collab</a> contributors (each artist credited on its sprite page), <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, some cropped, recoloured or combined ·
+  Friend Area scenery ripped by Toastypk and MYSTERY_DUNGEON, backgrounds via <a href="https://pamtre-berry.neocities.org/articles/friendareas">Pamtre Berry</a> ?
   thunder meadow and rank badges via the <a href="https://mysterydungeon.fandom.com/">Mystery Dungeon Wiki</a> · item icons via <a href="https://github.com/PokeAPI/sprites">PokeAPI</a> ·
   mega evolution symbol by pixelthecollector · drawn and regrown daily by <a href="./genpokemon/readme_art">genpokemon/readme_art</a><br />
   a non-commercial fan project, not affiliated with or endorsed by Nintendo, Creatures, GAME FREAK or The Pokémon Company · Pokémon © their owners
