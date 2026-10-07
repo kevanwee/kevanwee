@@ -20,7 +20,7 @@ export default function FriendAreas() {
   const residents = useRef(new Map<string, Resident[]>());
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/friend-areas/catalog.json", { signal: controller.signal })
+    fetch("/friend-areas/catalog.json", { signal: controller.signal, cache: "no-cache" })
       .then((r) => {
         if (!r.ok) throw new Error();
         return r.json();
