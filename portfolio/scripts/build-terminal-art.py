@@ -1,88 +1,52 @@
-r"""Mega Diancie as line-only ASCII art for /terminal, from her PMD idle sprite (public/diancie).
+r"""The terminal's welcome art, written to src/data/terminal-art.ts.
 
-    python scripts/build-terminal-art.py        # writes src/data/terminal-art.ts
+    python scripts/build-terminal-art.py
 
-How: the front-facing idle frame is split into broad regions (empty, pink diamonds, the rest), smoothed with
-Scale2x three times (8x) so diagonals are lines rather than stairs, and its silhouette and diamond edges become
-strokes; specks are dropped. Each terminal cell then takes whichever line character (- _ | / \ . , ' `) looks
-most like the strokes under it, rendered in a monospace font. Needs Pillow and numpy.
+- NAME_BANNER: the owner's "KEVAN" banner, verbatim from scripts/art/kevan-banner.txt.
+- SQUIRTLE: Squirtle from Pokémon Blue's title screen as block text art, one Game Boy pixel per two characters
+  (so each pixel is roughly square): white is a full block, light grey a medium shade, dark grey a light shade,
+  black is left blank, like the outline gaps in classic text art. scripts/art/squirtle-blue-title.png is the
+  title-screen Squirtle recovered at Game Boy resolution (46 x 37, four shades) from a screenshot the owner
+  supplied: the screen's 7.5x pixel grid was sampled at each pixel's centre and snapped to the four shades.
 """
 from collections import deque
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
-SHEET, FRAME_W, FRAME_H = ROOT / "public/diancie/Idle-Anim.png", 64, 88
-COLS, MIN_SPECK, CHARS = 60, 80, r" .,'`-_/\|"
-CELL_W, CELL_H = 11, 22  # a monospace cell at 20px
+ART = ROOT / "scripts/art"
+SHADES = {255: "█", 170: "▒", 85: "░", 0: " "}
 
 
-def mono_font():
-    for path in ("C:/Windows/Fonts/consola.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", "/Library/Fonts/Menlo.ttc"):
-        if Path(path).exists(): return ImageFont.truetype(path, 20)
-    raise SystemExit("no monospace font found")
-
-
-def scale2x(a):
-    h, w = a.shape; out = np.zeros((h * 2, w * 2), a.dtype); p = np.pad(a, 1, mode="edge")
-    B, D, E, F, H = p[:-2, 1:-1], p[1:-1, :-2], p[1:-1, 1:-1], p[1:-1, 2:], p[2:, 1:-1]
-    c = (B != H) & (D != F)
-    out[0::2, 0::2] = np.where(c & (D == B), D, E); out[0::2, 1::2] = np.where(c & (B == F), F, E)
-    out[1::2, 0::2] = np.where(c & (D == H), D, E); out[1::2, 1::2] = np.where(c & (H == F), F, E)
-    return out
-
-
-def without_specks(mask):
-    seen = np.zeros_like(mask); keep = np.zeros_like(mask); h, w = mask.shape
-    for y, x in zip(*np.nonzero(mask)):
-        if seen[y, x]: continue
-        queue, part = deque([(y, x)]), []; seen[y, x] = True
-        while queue:
-            cy, cx = queue.popleft(); part.append((cy, cx))
-            for ny in (cy - 1, cy, cy + 1):
-                for nx in (cx - 1, cx, cx + 1):
-                    if 0 <= ny < h and 0 <= nx < w and mask[ny, nx] and not seen[ny, nx]: seen[ny, nx] = True; queue.append((ny, nx))
-        if len(part) >= MIN_SPECK:
-            for cy, cx in part: keep[cy, cx] = True
-    return keep
-
-
-def art():
-    frame = Image.open(SHEET).convert("RGBA").crop((0, 0, FRAME_W, FRAME_H))
-    frame = frame.crop(frame.getbbox())
-    a = np.asarray(frame).astype(int)
-    pink = (a[..., 0] - a[..., 1] > 40) & ((a[..., 0] * 299 + a[..., 1] * 587 + a[..., 2] * 114) // 1000 >= 70)
-    region = np.where(a[..., 3] < 128, 0, np.where(pink, 2, 5)).astype(np.int32)
-    for _ in range(3): region = scale2x(region)
-    stroke = np.zeros(region.shape, bool)
-    stroke[:, :-1] |= region[:, :-1] != region[:, 1:]
-    stroke[:-1, :] |= region[:-1, :] != region[1:, :]
-    lines = Image.fromarray((without_specks(stroke) * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3))
-    width = COLS * CELL_W
-    img = np.minimum(1, np.asarray(lines.resize((width, round(lines.height * width / lines.width)), Image.BILINEAR), np.float32) / 255 * 1.6)
-    font = mono_font()
-    def glyph(ch):
-        im = Image.new("L", (CELL_W, CELL_H), 0); ImageDraw.Draw(im).text((0, 0), ch, font=font, fill=255)
-        return np.asarray(im, np.float32) / 255
-    glyphs = {ch: glyph(ch) for ch in CHARS}
-    rows = []
-    for r in range(img.shape[0] // CELL_H):
-        row = ""
-        for c in range(img.shape[1] // CELL_W):
-            cell = img[r * CELL_H:(r + 1) * CELL_H, c * CELL_W:(c + 1) * CELL_W]
-            row += " " if cell.sum() < 8 else min(CHARS, key=lambda ch: ((glyphs[ch] - cell) ** 2).sum())
-        rows.append(row.rstrip())
+def block_art(path):
+    a = np.asarray(Image.open(path).convert("L")).astype(int)
+    a = np.array([[min(SHADES, key=lambda s: abs(s - v)) for v in row] for row in a])
+    h, w = a.shape
+    # White that touches the edge is background, not Squirtle: flood it out
+    outside = np.zeros_like(a, bool)
+    queue = deque([(y, x) for y in range(h) for x in (0, w - 1)] + [(y, x) for x in range(w) for y in (0, h - 1)])
+    while queue:
+        y, x = queue.popleft()
+        if 0 <= y < h and 0 <= x < w and not outside[y, x] and a[y, x] == 255:
+            outside[y, x] = True
+            queue.extend(((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)))
+    rows = ["".join((" " if outside[y, x] else SHADES[a[y, x]]) * 2 for x in range(w)).rstrip() for y in range(h)]
     while rows and not rows[0].strip(): rows.pop(0)
     while rows and not rows[-1].strip(): rows.pop()
     indent = min(len(r) - len(r.lstrip()) for r in rows if r.strip())
     return [r[indent:] for r in rows]
 
 
+def literal(rows):
+    return "`" + "\n".join(rows).replace("\\", "\\\\").replace("`", "\\`").replace("${", "\\${") + "`"
+
+
 if __name__ == "__main__":
-    rows = art()
-    body = "\n".join(rows).replace("\\", "\\\\").replace("`", "\\`").replace("${", "\\${")
+    banner = [r.rstrip() for r in (ART / "kevan-banner.txt").read_text(encoding="utf-8").splitlines()]
+    squirtle = block_art(ART / "squirtle-blue-title.png")
     out = ROOT / "src/data/terminal-art.ts"
-    out.write_text("// Generated by scripts/build-terminal-art.py from public/diancie/Idle-Anim.png. Do not edit by hand.\n"
-                   f"export const MEGA_DIANCIE = `{body}`;\n", encoding="utf-8")
-    print(f"{out.relative_to(ROOT)}: {len(rows)} rows x {max(map(len, rows))} cols")
+    out.write_text("// Generated by scripts/build-terminal-art.py. Do not edit by hand.\n"
+                   f"export const NAME_BANNER = {literal(banner)};\n\n"
+                   f"export const SQUIRTLE = {literal(squirtle)};\n", encoding="utf-8")
+    print(f"{out.relative_to(ROOT)}: banner {len(banner)} rows x {max(map(len, banner))}, squirtle {len(squirtle)} x {max(map(len, squirtle))}")

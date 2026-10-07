@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Terminal from "@/components/Terminal";
-import "./terminal.css";
+
 
 export const metadata: Metadata = {
   title: "Kevan Wee — Terminal",

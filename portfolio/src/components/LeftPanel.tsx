@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { personal } from "@/data";
 import MusicPlayer from "@/components/MusicPlayer";
 import ResumeModal from "@/components/ResumeModal";
+import SshLauncher from "@/components/SshLauncher";
 import PokeballRow from "@/components/PokeballRow";
 
 // The question both assistants open with, built from the same data as the page
@@ -26,10 +26,9 @@ const NAV_ITEMS = [
 interface LeftPanelProps {
   activeSection: string;
   onNavClick: (id: string) => void;
-  onOpenModal: () => void;
 }
 
-export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: LeftPanelProps) {
+export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps) {
   const [showResume, setShowResume] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -104,37 +103,7 @@ export default function LeftPanel({ activeSection, onNavClick, onOpenModal }: Le
               </svg>
               Resume / CV
             </button>
-            {/* Yveltal's cocoon docks in here, so the browser keeps him on the button. */}
-            <span className="relative inline-flex" data-yveltal-nest>
-            <button
-              data-yveltal-perch
-              onClick={onOpenModal}
-              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
-              title="View 3D portfolio"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
-                className="h-3.5 w-3.5" aria-hidden="true">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
-              3D
-            </button>
-            </span>
-            <Link
-              href="/terminal"
-              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
-              title="Browse this portfolio as a terminal session"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
-                className="h-3.5 w-3.5" aria-hidden="true">
-                <polyline points="4 17 10 11 4 5" />
-                <line x1="12" y1="19" x2="20" y2="19" />
-              </svg>
-              Terminal
-            </Link>
+            <SshLauncher className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600" />
           </div>
 
           {/* Opens either assistant with a question about this portfolio already typed in */}

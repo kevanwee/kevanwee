@@ -15,18 +15,13 @@ import PokemonCursor from "@/components/PokemonCursor";
 import TeddiursaRoamer from "@/components/TeddiursaRoamer";
 import FusionWheel from "@/components/FusionWheel";
 import { PokemonCursorProvider } from "@/components/PokemonCursorContext";
-import { personal } from "@/data";
 
-const PortfolioModal = dynamic(() => import("@/components/PortfolioModal"), {
-  ssr: false,
-});
 const PokemonOverworld = dynamic(() => import("@/components/PokemonOverworld"), { ssr: false });
 const YveltalRoamer = dynamic(() => import("@/components/YveltalRoamer"), { ssr: false });
 
 const SECTIONS = ["about", "experience", "projects", "media", "contact"] as const;
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("about");
 
   useEffect(() => {
@@ -74,7 +69,6 @@ export default function Home() {
             <LeftPanel
               activeSection={activeSection}
               onNavClick={scrollToSection}
-              onOpenModal={() => setShowModal(true)}
             />
           </div>
 
@@ -93,9 +87,6 @@ export default function Home() {
         </div>
       </div>
 
-      {showModal && (
-        <PortfolioModal url={personal.funPortfolio} onClose={() => setShowModal(false)} />
-      )}
     </div>
     </PokemonCursorProvider>
   );

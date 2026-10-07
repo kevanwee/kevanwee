@@ -1,0 +1,75 @@
+/* The SSH terminal (Terminal.tsx): a floating window over the portfolio (SshLauncher.tsx) or a full page at
+   /terminal. A dark terminal with the portfolio's sage as the prompt colour, mono text throughout; the name banner
+   and Squirtle are text art that scales to the window's width (container query units). */
+.term-page, .term-window {
+  --term-bg: #161616; --term-panel: #1d1d1d; --term-line: #2e2e2e; --term-text: #e4e2dc; --term-muted: #8b8a84;
+  --term-user: #9fc9ad; --term-dir: #8fb8e0; --term-file: #e4e2dc; --term-link: #e8c37a; --term-accent: #c9a6e8; --term-error: #f08d7e;
+  --term-font: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  color: var(--term-text); font-family: var(--term-font);
+}
+.term-page {
+  min-height: 100svh; background: var(--term-bg);
+  display: flex; flex-direction: column; align-items: center; padding: 20px 16px 32px; gap: 12px;
+}
+.term-back { align-self: flex-start; max-width: 960px; width: 100%; margin: 0 auto; font-size: 12px; color: var(--term-muted); text-decoration: none; }
+.term-back:hover, .term-back:focus-visible { color: var(--term-text); }
+
+/* The window */
+.term-window {
+  display: flex; flex-direction: column; min-height: 0;
+  border: 1px solid var(--term-line); border-radius: 10px; background: var(--term-panel); overflow: hidden;
+  box-shadow: 0 24px 60px #0000004d, 0 2px 8px #00000026;
+}
+.term-window-page { width: 100%; max-width: 960px; flex: 1; }
+.term-floating { position: fixed; z-index: 45; transform-origin: 0 0; }
+.term-floating[hidden] { display: none; }
+.term-floating.term-max { inset: 12px !important; width: auto !important; height: auto !important; }
+@media (max-width: 639px) { .term-floating { inset: 8px !important; width: auto !important; height: auto !important; } }
+.term-bar { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-bottom: 1px solid var(--term-line); font-size: 12px; color: var(--term-muted); user-select: none; }
+.term-floating .term-bar { cursor: grab; touch-action: none; }
+.term-floating .term-bar:active { cursor: grabbing; }
+.term-floating.term-max .term-bar { cursor: default; }
+.term-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.term-dots { display: inline-flex; gap: 7px; flex-shrink: 0; }
+.term-dots i, .term-dot { display: block; width: 12px; height: 12px; padding: 0; border: 0; border-radius: 50%; background: #3a3a3a; }
+.term-dots i:nth-child(1), .term-close { background: #e06c5f; }
+.term-dots i:nth-child(2), .term-min { background: #e3b55b; }
+.term-dots i:nth-child(3), .term-max-btn { background: #7ebf74; }
+.term-dot { cursor: pointer; position: relative; }
+.term-dot::after { content: ""; position: absolute; inset: -6px; } /* a larger touch target */
+.term-dot:hover, .term-dot:focus-visible { filter: brightness(1.15); outline: 1px solid #ffffff59; outline-offset: 1px; }
+
+/* The screen */
+.term-screen {
+  flex: 1; overflow-y: auto; padding: 14px 16px 20px; font-size: 13px; line-height: 1.55; white-space: pre-wrap;
+  overflow-wrap: anywhere; cursor: text; min-height: 0; container-type: inline-size; overscroll-behavior: contain;
+}
+.term-window-page .term-screen { min-height: 70svh; }
+.term-screen button.term-run { font: inherit; color: var(--term-text); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: #ffffff2e; text-underline-offset: 3px; }
+.term-screen button.term-run:hover, .term-screen button.term-run:focus-visible { text-decoration-color: currentColor; outline: none; }
+.term-screen a { text-underline-offset: 3px; }
+.term-screen :focus-visible { outline: 1px dashed var(--term-accent); outline-offset: 2px; }
+.term-page .term-user, .term-window .term-user { color: var(--term-user); }
+.term-page .term-dir, .term-window .term-dir { color: var(--term-dir); }
+.term-page .term-file, .term-window .term-file { color: var(--term-file); }
+.term-page .term-link, .term-window .term-link { color: var(--term-link); }
+.term-page .term-accent, .term-window .term-accent { color: var(--term-accent); }
+.term-page .term-muted, .term-window .term-muted { color: var(--term-muted); }
+.term-page .term-error, .term-window .term-error { color: var(--term-error); }
+.term-input { display: flex; align-items: baseline; }
+.term-screen .term-input input:focus-visible { outline: none; }
+.term-input input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: var(--term-text); font: inherit; caret-color: var(--term-user); padding: 0; }
+
+/* The welcome: banner, then Squirtle beside the card. Monospace glyphs are about 0.6em wide, so a block of n
+   columns fits the screen at 100cqw / (0.6 n). */
+.term-welcome { margin: 4px 0 12px; }
+.term-banner, .term-art { margin: 0; font-family: var(--term-font); letter-spacing: 0; white-space: pre; user-select: none; overflow: hidden; }
+.term-banner { font-size: min(11px, calc(100cqw / 76)); line-height: 1.15; color: var(--term-user); margin-bottom: 14px; }
+.term-welcome-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
+.term-art { font-size: min(7px, calc(100cqw / 44)); line-height: 1; color: var(--term-text); }
+.term-card { min-width: 0; flex: 1 1 280px; }
+@media (min-width: 640px) { .term-screen { font-size: 14px; } }
+@media (max-width: 480px) { .term-page { padding: 12px 8px 16px; } .term-screen { padding: 12px 10px 16px; font-size: 12px; } }
+
+/* A minimised session: a small dot on the SSH button */
+.ssh-running { width: 5px; height: 5px; border-radius: 50%; background: currentColor; margin-left: 2px; }

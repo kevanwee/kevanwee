@@ -6,7 +6,7 @@
 - Giratina's supplied form is grounded. Mega Zeraora needs a 35% faster travel speed to match its footstep animation; apply the multiplier to every newly chosen walking speed.
 - Prevent sprite-sheet transition flicker by keeping the previous complete pose until the next image has decoded. Late image completions must not replace a newer pose. Warm nearby Idle/Walk/Sleep/Hop sheets ahead of behavior changes.
 - Eevee joins Vaporeon, Jolteon, Flareon, Umbreon and Sylveon in a dedicated Transform Forest base. Use the archived stone colour frames, record source/quality/timing limits, and define an explicit clearing boundary and obstacle around the stone. Test each movement segment, including waypoint corners.
-- Yveltal's dormant egg belongs on top of the 3D button, centered on its top edge. Keep the egg's hit area above the button so awakening and opening the portfolio remain separate actions.
+- Yveltal's dormant egg belongs on top of the SSH button (formerly the 3D button, replaced 7 Oct 2026), centered on its top edge. Keep the egg's hit area above the button so awakening and opening the terminal remain separate actions.
 - Rowlet's supplied sheets are walking poses, not flight. Keep Rowlet grounded on a separate surface. Do not stack flyers above a battle pair or occupied ground ledge when assigning habitats.
 - Keep the Route 111 label close to its map (original small gap). Reserve the label's measured text footprint when choosing Silvally's walking range instead of lifting the label to create space.
 - Fidough/Goomy should share the first project-card row and hop only to adjacent cards with matching top edges. Recompute adjacency on responsive reflow; never leap vertically through stacked mobile cards.
@@ -78,10 +78,13 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
   The Pokémon Company. Keep the portfolio, the README and Voracity consistent (`WeatherCredit.tsx` in both apps).
 
 ## Terminal, Ask and media strip (2026-10-07)
+- The terminal is a window over the page (7 Oct 2026): the ">_ SSH" button replaces 3D; the window drags by its title
+  bar, maximises, minimises back into the button (keeping the session) and closes (fresh session next time), like
+  the reference site. /terminal stays as a full-page version for direct links. The welcome is the owner's KEVAN
+  banner (verbatim) and Squirtle from Pokémon Blue's title screen as block text art (owner: "the diancie looks bad").
 - /terminal is the portfolio as a pretend SSH session. Its folders are the page's sections and its files are built
   from src/data at render time: never copy portfolio content into it (owner: "read off the current portfolio's
-  content so it doesn't need separate updating"). Mega Diancie is line-only, single-colour ASCII (owner rejected the
-  coloured half-block version); regenerate it with scripts/build-terminal-art.py.
+  content so it doesn't need separate updating"). Regenerate the art with scripts/build-terminal-art.py.
 - A real SSH server (the untracked Go/Wish draft in ssh-portfolio/) needs a VPS; keep to free hosting unless the
   owner decides otherwise.
 - "Ask about me" opens Claude or ChatGPT with a prompt built from `personal`. Media appearances scroll as a strip that
