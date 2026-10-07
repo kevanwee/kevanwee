@@ -76,3 +76,13 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
   link; Open-Meteo needs "Weather data by Open-Meteo.com" (CC BY 4.0). SpriteCollab credit names its contributors,
   links CC BY-NC 4.0 and notes modifications. Credits state a non-commercial fan project, unaffiliated with Nintendo /
   The Pokémon Company. Keep the portfolio, the README and Voracity consistent (`WeatherCredit.tsx` in both apps).
+
+## Terminal, Ask and media strip (2026-10-07)
+- /terminal is the portfolio as a pretend SSH session. Its folders are the page's sections and its files are built
+  from src/data at render time: never copy portfolio content into it (owner: "read off the current portfolio's
+  content so it doesn't need separate updating"). Mega Diancie is line-only, single-colour ASCII (owner rejected the
+  coloured half-block version); regenerate it with scripts/build-terminal-art.py.
+- A real SSH server (the untracked Go/Wish draft in ssh-portfolio/) needs a VPS; keep to free hosting unless the
+  owner decides otherwise.
+- "Ask about me" opens Claude or ChatGPT with a prompt built from `personal`. Media appearances scroll as a strip that
+  pauses on hover/focus; its static frame keeps the media-card resident perch; reduced motion shows a scrollable row.
