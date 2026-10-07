@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import ForestSky, { useForestSky } from "./ForestSky";
+import WeatherCredit from "@/components/WeatherCredit";
 import { EEVEELUTIONS, displayName } from "@/lib/pokemon-overworld";
 import { createForest, greetForest, stepForest, FOREST_WIDTH } from "@/lib/eevee-base";
 import { paintSprite, preloadSpriteSheet, SPRITES } from "@/lib/overworld-sprites";
@@ -85,5 +86,6 @@ export default function EeveeBase() {
       </button>)}
     </div>
     <span ref={status} className="sr-only" role="status" />
+    <figcaption><WeatherCredit className="weather-credit" source={sky.source} dataset="2-hour weather forecast" at={sky.fetchedAt || undefined} /></figcaption>
   </figure>;
 }

@@ -70,3 +70,9 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - A shiny Castform keeps Castform company on the portfolio, the README and Voracity, always in the same weather
   form (PMD SpriteCollab shiny sheets). Form changes already worked: rain/showers/thunder → Rainy, "Fair & Warm"/
   "Sunny" by day → Sunny, the usual "Partly Cloudy"/"Fair"/night → Normal. Change all three surfaces together.
+
+## Attribution (2026-10-07)
+- Weather data carries its licence notice beside it: NEA (data.gov.sg) needs the Singapore Open Data Licence notice and
+  link; Open-Meteo needs "Weather data by Open-Meteo.com" (CC BY 4.0). SpriteCollab credit names its contributors,
+  links CC BY-NC 4.0 and notes modifications. Credits state a non-commercial fan project, unaffiliated with Nintendo /
+  The Pokémon Company. Keep the portfolio, the README and Voracity consistent (`WeatherCredit.tsx` in both apps).

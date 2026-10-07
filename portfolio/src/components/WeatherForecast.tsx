@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ForestSky from '@/components/ForestSky';
+import WeatherCredit from '@/components/WeatherCredit';
 import PmdSprite, { type PmdAnim } from '@/components/PmdSprite';
 import castform from '@/data/castform.json';
 import { CASTFORM_FORM, forecastFresh, loadForecast, parseForecast, readForecast, type Forecast } from '@/lib/forecast';
@@ -113,5 +114,6 @@ export default function WeatherForecast() {
       </div>
       <p className="pmd-period-text">{period.text}</p>
     </div> : <p className="pmd-note">Asking Castform…</p>}
+    {forecast && <WeatherCredit className="pmd-note pmd-credit" source="NEA" dataset="24-hour weather forecast" at={readForecast()?.at} />}
   </div>;
 }

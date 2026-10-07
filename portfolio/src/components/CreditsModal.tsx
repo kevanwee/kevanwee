@@ -15,15 +15,57 @@ const CREDITS = [
   },
   {
     category: "Pokémon Sprites",
-    name: "PMD SpriteCollab",
+    name: "PMD SpriteCollab contributors · CC BY-NC 4.0",
     href: "https://sprites.pmdcollab.org/",
-    description: "Pixel art sprite sheets for all Pokémon characters",
+    description: "Sprite sheets and portraits; each artist is credited on its sprite page. Some are cropped, recoloured or combined (fusions, Mega forms)",
+  },
+  {
+    category: "Sprite licence",
+    name: "Creative Commons BY-NC 4.0",
+    href: "https://creativecommons.org/licenses/by-nc/4.0/",
+    description: "The licence PMD SpriteCollab artists release their sprites under (non-commercial, with credit)",
+  },
+  {
+    category: "Mystery Dungeon UI",
+    name: "Mystery Dungeon Wiki",
+    href: "https://mysterydungeon.fandom.com/",
+    description: "Thunder Meadow (Red/Blue Rescue Team) and the Explorer Rank badges (Explorers of Time/Darkness and Sky), game assets",
+  },
+  {
+    category: "Item sprites",
+    name: "PokeAPI sprites · WikiDex",
+    href: "https://github.com/PokeAPI/sprites",
+    description: "Poké Balls, Key Stone and DNA Splicers (PokeAPI); Mega Stones (WikiDex), game assets",
+  },
+  {
+    category: "Mega symbol",
+    name: "PixelTheCollector",
+    href: null,
+    description: "Pixel-art Mega Evolution symbol, animated for the cursor forms",
+  },
+  {
+    category: "Weather",
+    name: "NEA via data.gov.sg · Singapore Open Data Licence v1.0",
+    href: "https://data.gov.sg/open-data-licence",
+    description: "Contains information from NEA's 2-hour and 24-hour weather forecasts, accessed from data.gov.sg under the Singapore Open Data Licence v1.0",
+  },
+  {
+    category: "Weather fallback",
+    name: "Open-Meteo.com · CC BY 4.0",
+    href: "https://open-meteo.com/",
+    description: "Weather data by Open-Meteo.com, used when NEA cannot be reached",
+  },
+  {
+    category: "Pixel font",
+    name: "Pixelify Sans · SIL Open Font License",
+    href: "https://fonts.google.com/specimen/Pixelify+Sans",
+    description: "Mystery Dungeon cards and dialogue box",
   },
   {
     category: "Pokémon IP",
-    name: "The Pokémon Company / Nintendo",
+    name: "Nintendo / Creatures / GAME FREAK / The Pokémon Company",
     href: null,
-    description: "All Pokémon characters are © The Pokémon Company International",
+    description: "Pokémon characters, sprites, maps and music are © their owners",
   },
   {
     category: "Music",
@@ -96,7 +138,7 @@ export default function CreditsModal({ onClose }: Props) {
         </div>
 
         {/* Credit entries */}
-        <div className="flex flex-col gap-3 px-6 py-5">
+        <div data-lenis-prevent className="flex max-h-[60vh] flex-col gap-3 overflow-y-auto px-6 py-5">
           {CREDITS.map((credit) => (
             <div
               key={credit.category}
@@ -125,7 +167,7 @@ export default function CreditsModal({ onClose }: Props) {
         {/* Footer note */}
         <div className="border-t border-cream-200 px-6 py-4">
           <p className="text-[11px] leading-relaxed text-warm-300">
-            All Pokémon characters and assets remain the intellectual property of their respective owners.
+            A non-commercial fan project, not affiliated with or endorsed by Nintendo, Creatures, GAME FREAK or The Pokémon Company. All Pokémon characters and assets remain the intellectual property of their respective owners.
           </p>
         </div>
       </div>
