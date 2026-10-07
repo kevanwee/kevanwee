@@ -5,30 +5,33 @@ import ForestSky from '@/components/ForestSky';
 import PmdSprite, { type PmdAnim } from '@/components/PmdSprite';
 import castform from '@/data/castform.json';
 import { CASTFORM_FORM, forecastFresh, loadForecast, parseForecast, readForecast, type Forecast } from '@/lib/forecast';
-import { facing, MEADOW, pickTarget, START, VIEW, type Point } from '@/lib/meadow';
+import { COMPANION_START, facing, MEADOW, pickNear, pickTarget, START, VIEW, type Point } from '@/lib/meadow';
 // Styles: app/globals.css (Mystery Dungeon UI cards).
 
 const motionPreference = () => matchMedia('(prefers-reduced-motion: reduce)');
 
 type Form = 'normal' | 'sunny' | 'rainy';
-const FORMS = castform as Record<Form, { idle: PmdAnim; walk: PmdAnim }>;
+const FORMS = castform as Record<Form | `shiny-${Form}`, { idle: PmdAnim; walk: PmdAnim }>;
 const SPEED = 22; // meadow pixels a second
-const at = (p: Point) => ({ left: `${(p.x - VIEW.x) / VIEW.w * 100}%`, top: `${(p.y - VIEW.y) / VIEW.h * 100}%` });
+// The one further down the meadow is drawn in front
+const at = (p: Point) => ({ left: `${(p.x - VIEW.x) / VIEW.w * 100}%`, top: `${(p.y - VIEW.y) / VIEW.h * 100}%`, zIndex: String(Math.round(p.y)) });
 
 /** Castform wandering Thunder Meadow: it walks in straight lines to random spots on the grass, around the tree
- *  in the middle (never onto it), and rests a moment at each. It stands still under reduced motion. */
-function RoamingCastform({ form }: { form: Form }) {
+ *  in the middle (never onto it), and rests a moment at each. It stands still under reduced motion.
+ *  The shiny one keeps it company: it starts beside Castform and picks spots near wherever Castform is. */
+function RoamingCastform({ form, shiny = false, where }: { form: Form; shiny?: boolean; where: { current: Point } }) {
+  const start = shiny ? COMPANION_START : START;
   const node = useRef<HTMLSpanElement>(null);
   const [pose, setPose] = useState({ walking: false, row: 0 });
   useEffect(() => {
     const motion = motionPreference();
-    let pos = { ...START }, target: Point | null = null, restUntil = 0, last = 0, raf = 0, row = 0, walking = false;
-    const place = () => Object.assign(node.current?.style ?? {}, at(pos));
+    let pos = { ...start }, target: Point | null = null, restUntil = 0, last = 0, raf = 0, row = 0, walking = false;
+    const place = () => { Object.assign(node.current?.style ?? {}, at(pos)); if (!shiny) where.current = pos; };
     const show = (w: boolean, r: number) => { if (w !== walking || r !== row) { walking = w; row = r; setPose({ walking: w, row: r }); } };
     const tick = (now: number) => {
       const dt = last ? Math.min(.1, (now - last) / 1000) : 0;
       last = now;
-      if (!target && now >= restUntil) target = pickTarget(pos);
+      if (!target && now >= restUntil) target = shiny ? pickNear(pos, where.current) : pickTarget(pos);
       if (target) {
         const dx = target.x - pos.x, dy = target.y - pos.y, dist = Math.hypot(dx, dy), step = SPEED * dt;
         if (dist <= step) { pos = target; target = null; restUntil = now + 1200 + Math.random() * 2600; show(false, row); }
@@ -41,7 +44,7 @@ function RoamingCastform({ form }: { form: Form }) {
     const run = () => {
       cancelAnimationFrame(raf); last = 0;
       if (motion.matches || document.hidden || !onScreen) {
-        if (motion.matches) { pos = { ...START }; target = null; place(); show(false, 0); }
+        if (motion.matches) { pos = { ...start }; target = null; place(); show(false, 0); }
         return;
       }
       raf = requestAnimationFrame(tick);
@@ -57,11 +60,12 @@ function RoamingCastform({ form }: { form: Form }) {
       cancelAnimationFrame(raf); seen?.disconnect();
       document.removeEventListener('visibilitychange', run); motion.removeEventListener('change', run);
     };
-  }, []);
+  }, [shiny, start, where]);
+  const sheets = FORMS[shiny ? `shiny-${form}` as const : form];
   // Both sheets stay mounted, so switching between walking and resting never fetches an image again
-  return <span ref={node} className="pmd-castform" data-walking={pose.walking || undefined} style={at(START)}>
-    <PmdSprite anim={FORMS[form].idle} size={30} row={pose.row} className={pose.walking ? 'pmd-off' : undefined} />
-    <PmdSprite anim={FORMS[form].walk} size={30} row={pose.row} className={pose.walking ? undefined : 'pmd-off'} />
+  return <span ref={node} className="pmd-castform" data-shiny={shiny || undefined} data-form={form} data-walking={pose.walking || undefined} style={at(start)}>
+    <PmdSprite anim={sheets.idle} size={30} row={pose.row} className={pose.walking ? 'pmd-off' : undefined} />
+    <PmdSprite anim={sheets.walk} size={30} row={pose.row} className={pose.walking ? undefined : 'pmd-off'} />
   </span>;
 }
 
@@ -70,6 +74,7 @@ function RoamingCastform({ form }: { form: Form }) {
 export default function WeatherForecast() {
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [index, setIndex] = useState(0);
+  const castformAt = useRef<Point>(START); // where Castform is, for its shiny companion
   useEffect(() => {
     let live = true;
     const cached = readForecast(); if (cached) setForecast(parseForecast(cached.body));
@@ -102,7 +107,8 @@ export default function WeatherForecast() {
         </button>
       </div>
       <div className="pmd-window" style={view}>
-        <RoamingCastform form={CASTFORM_FORM[period.kind] ?? 'normal'} />
+        <RoamingCastform form={CASTFORM_FORM[period.kind] ?? 'normal'} where={castformAt} />
+        <RoamingCastform form={CASTFORM_FORM[period.kind] ?? 'normal'} where={castformAt} shiny />
         <ForestSky sky={{ phase: period.phase, kind: period.kind, intensity: period.intensity, forecast: period.text, source: 'NEA', fetchedAt: 0 }} label={false} />
       </div>
       <p className="pmd-period-text">{period.text}</p>

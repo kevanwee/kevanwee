@@ -58,6 +58,17 @@ export function pickTarget(from: Point, random: () => number = Math.random): Poi
   return null;
 }
 
+/** Somewhere near a friend (within `reach`, not on top of it), so a companion keeps it company; falls back to
+ *  anywhere reachable when nothing near turns up. */
+export function pickNear(from: Point, friend: Point, random: () => number = Math.random, reach = 64): Point | null {
+  for (let tries = 0; tries < 40; tries++) {
+    const angle = random() * Math.PI * 2, r = 22 + random() * (reach - 22);
+    const p = { x: friend.x + Math.cos(angle) * r, y: friend.y + Math.sin(angle) * r * .6 };
+    if (Math.hypot(p.x - from.x, p.y - from.y) > 18 && walkable(p) && clearPath(from, p)) return p;
+  }
+  return pickTarget(from, random);
+}
+
 /** The PMD sheet row for walking along (dx, dy): 0 down, 1 down-right, 2 right … 6 left, 7 down-left. */
 export function facing(dx: number, dy: number): number {
   const deg = Math.atan2(dy, dx) * 180 / Math.PI;
@@ -66,3 +77,5 @@ export function facing(dx: number, dy: number): number {
 
 /** Where Castform first stands: on the grass, left of the tree. */
 export const START: Point = { x: 140, y: 236 };
+/** Where its shiny companion first stands: beside it, a little further back. */
+export const COMPANION_START: Point = { x: 96, y: 208 };

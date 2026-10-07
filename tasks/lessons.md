@@ -66,3 +66,7 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
   Rank. Don't switch them back to github-actions[bot] without asking. The push stays GITHUB_TOKEN's, so the
   message log still leaves them out.
 
+## Castform's company (2026-10-07)
+- A shiny Castform keeps Castform company on the portfolio, the README and Voracity, always in the same weather
+  form (PMD SpriteCollab shiny sheets). Form changes already worked: rain/showers/thunder → Rainy, "Fair & Warm"/
+  "Sunny" by day → Sunny, the usual "Partly Cloudy"/"Fair"/night → Normal. Change all three surfaces together.

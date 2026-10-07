@@ -1929,5 +1929,145 @@
    ],
    "rows": 1
   }
+ },
+ "shiny-castform": {
+  "Walk": {
+   "src": "sprites/shiny-castform/Walk-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/shiny-castform/Idle-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    8,
+    6,
+    6,
+    6,
+    6,
+    8
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/shiny-castform/Sleep-Anim.png",
+   "w": 24,
+   "h": 24,
+   "durations": [
+    35,
+    30
+   ],
+   "rows": 1
+  }
+ },
+ "shiny-castform-sunny": {
+  "Walk": {
+   "src": "sprites/shiny-castform-sunny/Walk-Anim.png",
+   "w": 32,
+   "h": 48,
+   "durations": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/shiny-castform-sunny/Idle-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/shiny-castform-sunny/Sleep-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    10,
+    10,
+    16,
+    10,
+    10,
+    16
+   ],
+   "rows": 1
+  }
+ },
+ "shiny-castform-rainy": {
+  "Walk": {
+   "src": "sprites/shiny-castform-rainy/Walk-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/shiny-castform-rainy/Idle-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/shiny-castform-rainy/Sleep-Anim.png",
+   "w": 24,
+   "h": 48,
+   "durations": [
+    10,
+    10,
+    16,
+    10,
+    10,
+    16
+   ],
+   "rows": 1
+  }
  }
 }
