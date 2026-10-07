@@ -109,7 +109,7 @@ def streak(days):
     return n
 
 
-def render(data, theme, sky=None, friend_area="transformforest"):
+def render(data, theme, sky=None, friend_area="transformforest", friend_guests=None):
     """sky: from sky.fetch() (phase, kind, intensity); None draws a clear day."""
     sc = Scene(0, 0)
     sky = sky or {"phase": "day", "kind": "clear", "intensity": 0}
@@ -151,7 +151,7 @@ def render(data, theme, sky=None, friend_area="transformforest"):
         caption = skies.label(sky["kind"], sky["phase"])
         tag = f'<rect x="{fx + 8}" y="{fy + 8}" width="{len(caption) * 5.6 + 14:.0f}" height="17" rx="8.5" fill="#0b0f1a" opacity=".55"/>'           f'<text x="{fx + 15}" y="{fy + 20}" font-size="9.5" fill="#f4f1e6">{caption}</text>'
     if friend_area != "transformforest":
-        habitat, habitat_css = friend_areas.panel(friend_area, fx, fy, cw, ch)
+        habitat, habitat_css = friend_areas.panel(friend_area, fx, fy, cw, ch, friend_guests)
         css.append(habitat_css)
         parts.append(f'<g clip-path="url(#fc)">{habitat}</g>')
     else:

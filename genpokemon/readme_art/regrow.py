@@ -24,9 +24,10 @@ out = Path(out)
 sky = skies.fetch()
 print("sky:", sky)
 friend_area = friend_areas.choose()  # One draw shared by light and dark.
+friend_guests = friend_areas.choose_guests(friend_area)  # Same visitors in both themes.
 print("Friend Area:", friend_area)
 for theme in THEMES:
-    (out / f"contribution-garden-{theme}.svg").write_text(garden.render(data, theme, sky, friend_area), encoding="utf-8")
+    (out / f"contribution-garden-{theme}.svg").write_text(garden.render(data, theme, sky, friend_area, friend_guests), encoding="utf-8")
     (out / f"stove-{theme}.svg").write_text(build_cards.stove_card(theme, repos, dt.date.today()), encoding="utf-8")
 # Re-roll the open spots
 open_spots = {slug for slug, who in cast.CARDS.items() if who == cast.RANDOM}

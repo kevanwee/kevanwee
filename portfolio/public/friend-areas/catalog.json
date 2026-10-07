@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "spriteRevision": "6cec0a7f7ed48390a2d22d9e11fd96079e6f406e",
   "areas": [
     {
@@ -91,7 +91,20 @@
       "source": "https://pamtre-berry.neocities.org/images/friend-areas/og/mushroomforest.png",
       "sha256": "f2b52c816aaf9417b91d322363a14634a1de9bd61908881332f1632a18a96321",
       "sceneryAnimation": "Unverified: static draft; no invented environmental effects.",
-      "collisionStatus": "Conservative hand-traced foot zones, not extracted game collision data."
+      "collisionStatus": "Conservative hand-traced foot zones, not extracted game collision data.",
+      "guests": [
+        {
+          "id": 590,
+          "reason": "Fungal body; follows Paras and Shroomish.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 755,
+          "reason": "Forest mushroom ecology; follows the existing fungal residents.",
+          "basis": "Curated habitat inference"
+        }
+      ],
+      "guestLimit": 1
     },
     {
       "id": "mtmoonview",
@@ -115,66 +128,216 @@
             115
           ],
           [
-            170,
+            177,
             115
           ],
           [
-            170,
-            138
+            204,
+            131
+          ],
+          [
+            185,
+            150
           ],
           [
             77,
-            138
+            150
           ]
         ],
         [
           [
-            123,
-            192
+            90,
+            141
           ],
           [
-            177,
+            176,
+            141
+          ],
+          [
+            176,
+            197
+          ],
+          [
+            90,
+            197
+          ]
+        ],
+        [
+          [
+            89,
             185
           ],
           [
-            180,
-            221
+            177,
+            179
           ],
           [
-            130,
-            232
+            207,
+            196
+          ],
+          [
+            216,
+            218
+          ],
+          [
+            174,
+            236
+          ],
+          [
+            127,
+            231
+          ],
+          [
+            89,
+            211
           ]
         ],
         [
           [
-            271,
-            262
+            177,
+            218
           ],
           [
-            340,
-            247
+            216,
+            218
           ],
           [
-            351,
-            279
+            240,
+            242
           ],
           [
-            320,
+            256,
+            270
+          ],
+          [
+            229,
+            287
+          ],
+          [
+            209,
+            278
+          ],
+          [
+            198,
+            251
+          ],
+          [
+            180,
+            237
+          ]
+        ],
+        [
+          [
+            232,
+            260
+          ],
+          [
+            272,
+            250
+          ],
+          [
+            310,
+            238
+          ],
+          [
+            356,
+            243
+          ],
+          [
+            372,
+            274
+          ],
+          [
+            335,
             302
           ],
           [
-            268,
-            297
+            273,
+            309
+          ],
+          [
+            221,
+            321
+          ],
+          [
+            216,
+            295
           ]
         ]
       ],
-      "obstacles": [],
-      "description": "Moonlit terraces, a quiet pond and a mountain shrine.",
+      "obstacles": [
+        [
+          [
+            196,
+            155
+          ],
+          [
+            241,
+            155
+          ],
+          [
+            270,
+            177
+          ],
+          [
+            277,
+            215
+          ],
+          [
+            261,
+            250
+          ],
+          [
+            247,
+            249
+          ],
+          [
+            239,
+            211
+          ],
+          [
+            225,
+            191
+          ],
+          [
+            202,
+            180
+          ],
+          [
+            192,
+            171
+          ]
+        ]
+      ],
+      "description": "Moonlit terraces linked by walkable stairs, beside a quiet pond.",
       "background": "mtmoonview.png",
       "source": "https://pamtre-berry.neocities.org/images/friend-areas/og/mtmoonview.png",
       "sha256": "c1c3726050658219afd6bdd98cad663e2fa77dac10eb8bccfd85f80d9a712aef",
       "sceneryAnimation": "Unverified: static draft; no invented environmental effects.",
-      "collisionStatus": "Conservative hand-traced foot zones, not extracted game collision data."
+      "collisionStatus": "Conservative hand-traced foot zones, not extracted game collision data.",
+      "guests": [
+        {
+          "id": 605,
+          "reason": "Extraterrestrial theme follows Lunatone and Solrock.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 606,
+          "reason": "Elgyem evolution; the same celestial association.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 517,
+          "reason": "Dream theme suits a permanently moonlit sanctuary.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 518,
+          "reason": "Munna evolution; retains the dream association.",
+          "basis": "Curated habitat inference"
+        }
+      ],
+      "guestLimit": 2
     },
     {
       "id": "decrepitlab",
@@ -195,24 +358,60 @@
       "zones": [
         [
           [
-            69,
-            139
+            48,
+            122
           ],
           [
-            407,
-            139
+            176,
+            120
           ],
           [
-            407,
-            281
+            193,
+            133
           ],
           [
-            376,
-            294
+            292,
+            133
           ],
           [
-            74,
-            294
+            312,
+            120
+          ],
+          [
+            429,
+            122
+          ],
+          [
+            449,
+            149
+          ],
+          [
+            449,
+            255
+          ],
+          [
+            417,
+            259
+          ],
+          [
+            417,
+            312
+          ],
+          [
+            65,
+            312
+          ],
+          [
+            65,
+            258
+          ],
+          [
+            32,
+            258
+          ],
+          [
+            32,
+            156
           ]
         ]
       ],
@@ -241,7 +440,176 @@
       "source": "https://pamtre-berry.neocities.org/images/friend-areas/og/decrepitlab.png",
       "sha256": "91039f7735c0721491ebb2e9ec7409d34fbb823a679182258f13d04d3b1d3962",
       "sceneryAnimation": "Unverified: static draft; no invented environmental effects.",
-      "collisionStatus": "Conservative hand-traced foot zones, not extracted game collision data."
+      "collisionStatus": "Conservative hand-traced foot zones, not extracted game collision data.",
+      "guests": [
+        {
+          "id": 474,
+          "reason": "Porygon evolution; also assigned here in Rescue Team DX.",
+          "basis": "Rescue Team DX"
+        },
+        {
+          "id": 577,
+          "reason": "Cellular design and Psychic typing suit the laboratory.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 578,
+          "reason": "Solosis evolution; retains the cellular theme.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 579,
+          "reason": "Solosis evolution; retains the cellular theme.",
+          "basis": "Curated habitat inference"
+        }
+      ],
+      "guestLimit": 1
+    },
+    {
+      "id": "seafloorcave",
+      "name": "Seafloor Cave",
+      "size": [
+        360,
+        336
+      ],
+      "roster": [
+        382
+      ],
+      "zones": [
+        [
+          [
+            119,
+            103
+          ],
+          [
+            242,
+            103
+          ],
+          [
+            270,
+            159
+          ],
+          [
+            248,
+            231
+          ],
+          [
+            260,
+            336
+          ],
+          [
+            97,
+            336
+          ],
+          [
+            114,
+            238
+          ],
+          [
+            89,
+            161
+          ]
+        ]
+      ],
+      "obstacles": [],
+      "footRadius": 18,
+      "separation": 60,
+      "guestLimit": 1,
+      "description": "Kyogre's crystal-lined sanctuary beneath the sea.",
+      "background": "seafloorcave.png",
+      "source": "https://pamtre-berry.neocities.org/images/friend-areas/og/seafloorcave.png",
+      "sha256": "77398697843c347af6082dc31b4e965046a442fafe37e8baa6e557a3c2b291c4",
+      "sceneryAnimation": "Unverified: static draft; no invented environmental effects.",
+      "collisionStatus": "Conservative hand-traced foot zones, not extracted game collision data.",
+      "guests": [
+        {
+          "id": 489,
+          "reason": "Ocean-dwelling mythical visitor; follows the underwater habitat.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 490,
+          "reason": "Ocean mythical visitor; fits Kyogre's marine sanctuary.",
+          "basis": "Curated habitat inference"
+        }
+      ]
+    },
+    {
+      "id": "volcanicpit",
+      "name": "Volcanic Pit",
+      "size": [
+        480,
+        312
+      ],
+      "roster": [
+        383
+      ],
+      "zones": [
+        [
+          [
+            217,
+            116
+          ],
+          [
+            261,
+            113
+          ],
+          [
+            284,
+            133
+          ],
+          [
+            296,
+            164
+          ],
+          [
+            284,
+            191
+          ],
+          [
+            259,
+            209
+          ],
+          [
+            223,
+            211
+          ],
+          [
+            198,
+            191
+          ],
+          [
+            184,
+            166
+          ],
+          [
+            191,
+            139
+          ]
+        ]
+      ],
+      "obstacles": [],
+      "footRadius": 12,
+      "separation": 48,
+      "guestLimit": 1,
+      "description": "Groudon's stone refuge, surrounded by flowing magma.",
+      "background": "volcanicpit.png",
+      "source": "https://pamtre-berry.neocities.org/images/friend-areas/og/volcanicpit.png",
+      "sha256": "bff7da8e2a9738436cd27d709d3709c2edd4c20d01321576b42b803a134a2f94",
+      "sceneryAnimation": "Unverified: static draft; no invented environmental effects.",
+      "collisionStatus": "Conservative hand-traced foot zones, not extracted game collision data.",
+      "guests": [
+        {
+          "id": 485,
+          "reason": "Magma-associated legendary; fits the volcanic habitat.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 721,
+          "reason": "Fire/steam mythical visitor; a thematic volcanic match, not a canonical assignment.",
+          "basis": "Curated habitat inference"
+        }
+      ]
     }
   ],
   "sprites": {
@@ -2738,6 +3106,2099 @@
             ]
           ],
           "sha256": "befd02823fc04d78706ae7fe8bbbc79c52ea8fa316358ae3f3624d54b4ca3340",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "382": {
+      "id": 382,
+      "name": "Kyogre",
+      "animations": {
+        "Idle": {
+          "src": "sprites/382/Idle-Anim.png",
+          "w": 64,
+          "h": 72,
+          "rows": 8,
+          "durations": [
+            10,
+            14,
+            14,
+            14,
+            14,
+            10,
+            14,
+            14,
+            14,
+            14
+          ],
+          "origins": [
+            [
+              31.5,
+              47
+            ],
+            [
+              35.0,
+              56
+            ],
+            [
+              28.5,
+              57
+            ],
+            [
+              33.0,
+              53
+            ],
+            [
+              31.5,
+              50
+            ],
+            [
+              31.0,
+              53
+            ],
+            [
+              35.5,
+              57
+            ],
+            [
+              29.0,
+              56
+            ]
+          ],
+          "sha256": "30b4030193457b062f23a0d6afce4a7c84f72738c1583456c3b19fe059dcffa5",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/382/Walk-Anim.png",
+          "w": 64,
+          "h": 72,
+          "rows": 8,
+          "durations": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              31.5,
+              47
+            ],
+            [
+              35.0,
+              56
+            ],
+            [
+              28.5,
+              57
+            ],
+            [
+              33.0,
+              53
+            ],
+            [
+              31.5,
+              50
+            ],
+            [
+              31.0,
+              53
+            ],
+            [
+              35.5,
+              57
+            ],
+            [
+              29.0,
+              56
+            ]
+          ],
+          "sha256": "30b4030193457b062f23a0d6afce4a7c84f72738c1583456c3b19fe059dcffa5",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/382/Sleep-Anim.png",
+          "w": 64,
+          "h": 72,
+          "rows": 1,
+          "durations": [
+            16,
+            12,
+            16,
+            16,
+            12,
+            16
+          ],
+          "origins": [
+            [
+              30.5,
+              52
+            ]
+          ],
+          "sha256": "182edb5f47e92a51de0040d5c76940d039b7348fe108c39587ea21aaef940cd2",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "383": {
+      "id": 383,
+      "name": "Groudon",
+      "animations": {
+        "Idle": {
+          "src": "sprites/383/Idle-Anim.png",
+          "w": 64,
+          "h": 80,
+          "rows": 8,
+          "durations": [
+            60,
+            10,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            10
+          ],
+          "origins": [
+            [
+              31.5,
+              49
+            ],
+            [
+              31.5,
+              53
+            ],
+            [
+              29.5,
+              51
+            ],
+            [
+              31.0,
+              50
+            ],
+            [
+              31.5,
+              57
+            ],
+            [
+              32.5,
+              50
+            ],
+            [
+              34.0,
+              51
+            ],
+            [
+              32.5,
+              53
+            ]
+          ],
+          "sha256": "7a7a2d8b83f1e79552fdf502bc4d8accbdc3e2589cc5d0deade17aaa8389ba74",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/383/Walk-Anim.png",
+          "w": 64,
+          "h": 88,
+          "rows": 8,
+          "durations": [
+            10,
+            12,
+            10,
+            12
+          ],
+          "origins": [
+            [
+              32.0,
+              57
+            ],
+            [
+              29.5,
+              59
+            ],
+            [
+              30.5,
+              54
+            ],
+            [
+              28.5,
+              56
+            ],
+            [
+              32.0,
+              58
+            ],
+            [
+              35.5,
+              56
+            ],
+            [
+              34.0,
+              54
+            ],
+            [
+              34.5,
+              59
+            ]
+          ],
+          "sha256": "32b4ba4d0e19eedacad89682b892c18fad8dc2301c6dc6e585b205fdf1e19579",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/383/Sleep-Anim.png",
+          "w": 56,
+          "h": 56,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              32.5,
+              43
+            ]
+          ],
+          "sha256": "9dcf54b63cb18a9bf55bbf6b9dc082b431e5be88801a4499dfacec8290c3db24",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "590": {
+      "id": 590,
+      "name": "Foongus",
+      "animations": {
+        "Idle": {
+          "src": "sprites/590/Idle-Anim.png",
+          "w": 24,
+          "h": 24,
+          "rows": 8,
+          "durations": [
+            40,
+            4,
+            4,
+            4,
+            4
+          ],
+          "origins": [
+            [
+              12.0,
+              18
+            ],
+            [
+              12.5,
+              18
+            ],
+            [
+              12.5,
+              18
+            ],
+            [
+              12.0,
+              18
+            ],
+            [
+              12.0,
+              18
+            ],
+            [
+              12.0,
+              18
+            ],
+            [
+              11.5,
+              18
+            ],
+            [
+              11.5,
+              18
+            ]
+          ],
+          "sha256": "15d3d1c9ed5a325786fe1461c447474129d8eb2459d5ae3633b404eac6ee735d",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/590/Walk-Anim.png",
+          "w": 24,
+          "h": 24,
+          "rows": 8,
+          "durations": [
+            8,
+            10,
+            8,
+            10
+          ],
+          "origins": [
+            [
+              12.0,
+              18
+            ],
+            [
+              12.5,
+              18
+            ],
+            [
+              12.5,
+              17
+            ],
+            [
+              12.0,
+              18
+            ],
+            [
+              12.0,
+              18
+            ],
+            [
+              12.0,
+              18
+            ],
+            [
+              11.5,
+              17
+            ],
+            [
+              11.5,
+              18
+            ]
+          ],
+          "sha256": "5adae22de0d79c9889d0715fc42554dfa98cec483a9aa4c0787a65f8b7cdab01",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/590/Sleep-Anim.png",
+          "w": 24,
+          "h": 24,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              11.5,
+              17
+            ]
+          ],
+          "sha256": "401800e79dff133b795b6c86d0c3bc31adabc24ca566c04f96d627b8e8695dab",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "755": {
+      "id": 755,
+      "name": "Morelull",
+      "animations": {
+        "Idle": {
+          "src": "sprites/755/Idle-Anim.png",
+          "w": 24,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            30,
+            8,
+            6,
+            6,
+            4,
+            4,
+            4,
+            4
+          ],
+          "origins": [
+            [
+              11.5,
+              34
+            ],
+            [
+              11.0,
+              34
+            ],
+            [
+              11.5,
+              34
+            ],
+            [
+              12.0,
+              34
+            ],
+            [
+              11.5,
+              34
+            ],
+            [
+              11.0,
+              34
+            ],
+            [
+              11.0,
+              34
+            ],
+            [
+              11.5,
+              34
+            ]
+          ],
+          "sha256": "017fc48a3681bb4355e0c36bb1587625aa0b66ad3ded9a85d9aabcb4fd58df68",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/755/Walk-Anim.png",
+          "w": 32,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            8,
+            6,
+            6,
+            6,
+            6
+          ],
+          "origins": [
+            [
+              15.5,
+              31
+            ],
+            [
+              16.0,
+              31
+            ],
+            [
+              17.5,
+              29
+            ],
+            [
+              17.5,
+              29
+            ],
+            [
+              15.5,
+              29
+            ],
+            [
+              13.5,
+              29
+            ],
+            [
+              13.0,
+              29
+            ],
+            [
+              15.0,
+              31
+            ]
+          ],
+          "sha256": "b2c39512a79531514fad75c4ff6e172cae0e5af263b0726366e2614f4d96f578",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/755/Sleep-Anim.png",
+          "w": 24,
+          "h": 40,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              12.0,
+              26
+            ]
+          ],
+          "sha256": "4cdbed2c8c639c615e6bae75902829bacea223b43e593913b94806352b3a9bb7",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "605": {
+      "id": 605,
+      "name": "Elgyem",
+      "animations": {
+        "Idle": {
+          "src": "sprites/605/Idle-Anim.png",
+          "w": 24,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            14,
+            8,
+            6,
+            8,
+            14,
+            8,
+            6,
+            8
+          ],
+          "origins": [
+            [
+              12.5,
+              29
+            ],
+            [
+              12.0,
+              30
+            ],
+            [
+              12.0,
+              29
+            ],
+            [
+              13.0,
+              29
+            ],
+            [
+              12.5,
+              29
+            ],
+            [
+              12.0,
+              29
+            ],
+            [
+              13.0,
+              29
+            ],
+            [
+              13.0,
+              30
+            ]
+          ],
+          "sha256": "6cfe170acab301fdd0a3f0e4df0b0a5f982560c50e64946b7b720164af2c8c15",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/605/Walk-Anim.png",
+          "w": 24,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            8,
+            6,
+            6,
+            8,
+            8,
+            6,
+            6,
+            8
+          ],
+          "origins": [
+            [
+              12.5,
+              28
+            ],
+            [
+              13.0,
+              29
+            ],
+            [
+              13.5,
+              28
+            ],
+            [
+              13.5,
+              28
+            ],
+            [
+              12.5,
+              28
+            ],
+            [
+              11.5,
+              28
+            ],
+            [
+              10.5,
+              28
+            ],
+            [
+              12.0,
+              29
+            ]
+          ],
+          "sha256": "1109e3336cf05dafcd85c01e08da9f94de4c6d63e47c459a315dc999c0739d1d",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/605/Sleep-Anim.png",
+          "w": 24,
+          "h": 48,
+          "rows": 1,
+          "durations": [
+            10,
+            9,
+            8,
+            14,
+            10,
+            9,
+            8,
+            14
+          ],
+          "origins": [
+            [
+              11.5,
+              27
+            ]
+          ],
+          "sha256": "6221c2ce1460ffc106f2e4843f3f51b3b0ea6d55ef429863ece9e6fb79b6a118",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "606": {
+      "id": 606,
+      "name": "Beheeyem",
+      "animations": {
+        "Idle": {
+          "src": "sprites/606/Idle-Anim.png",
+          "w": 32,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            24,
+            8,
+            8,
+            24,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              16.0,
+              32
+            ],
+            [
+              17.5,
+              32
+            ],
+            [
+              16.5,
+              32
+            ],
+            [
+              16.5,
+              33
+            ],
+            [
+              15.0,
+              33
+            ],
+            [
+              14.5,
+              33
+            ],
+            [
+              14.5,
+              32
+            ],
+            [
+              13.5,
+              32
+            ]
+          ],
+          "sha256": "ac51b49fa7a623aaf5467b98cd8e8c38e4a8d84f8a3ff17ed6c7f00e997d13af",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/606/Walk-Anim.png",
+          "w": 32,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "origins": [
+            [
+              15.5,
+              33
+            ],
+            [
+              16.0,
+              32
+            ],
+            [
+              16.5,
+              33
+            ],
+            [
+              16.5,
+              34
+            ],
+            [
+              15.5,
+              34
+            ],
+            [
+              14.5,
+              34
+            ],
+            [
+              14.5,
+              33
+            ],
+            [
+              16.0,
+              32
+            ]
+          ],
+          "sha256": "7fac8b430cdad03a72fa29c44dc80469d09758e916603fd44060ab6be8e4e336",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/606/Sleep-Anim.png",
+          "w": 24,
+          "h": 56,
+          "rows": 1,
+          "durations": [
+            8,
+            8,
+            16,
+            8,
+            8,
+            8,
+            16,
+            8
+          ],
+          "origins": [
+            [
+              11.0,
+              32
+            ]
+          ],
+          "sha256": "5feb42257b9420ff851d6523c825da55eab4105cebe0eb4ef018ee6bb20aa23b",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "517": {
+      "id": 517,
+      "name": "Munna",
+      "animations": {
+        "Idle": {
+          "src": "sprites/517/Idle-Anim.png",
+          "w": 24,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            24,
+            8,
+            8,
+            24,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              12.0,
+              19
+            ],
+            [
+              12.5,
+              19
+            ],
+            [
+              12.0,
+              19
+            ],
+            [
+              12.5,
+              20
+            ],
+            [
+              12.0,
+              19
+            ],
+            [
+              11.5,
+              20
+            ],
+            [
+              12.0,
+              19
+            ],
+            [
+              11.5,
+              19
+            ]
+          ],
+          "sha256": "a7193de4b115b48a28aa8f51494b2551daafd4e8ae6e91a3f522858e6f334057",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/517/Walk-Anim.png",
+          "w": 24,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            8,
+            10,
+            8,
+            10,
+            8,
+            10,
+            8,
+            10
+          ],
+          "origins": [
+            [
+              12.0,
+              20
+            ],
+            [
+              12.5,
+              21
+            ],
+            [
+              12.0,
+              20
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.0,
+              20
+            ],
+            [
+              11.5,
+              22
+            ],
+            [
+              12.0,
+              20
+            ],
+            [
+              11.5,
+              21
+            ]
+          ],
+          "sha256": "83648bbb643393da8e696eeff8de5b36c2a6bd7f6bc48fe5d8283487934bffb5",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/517/Sleep-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            10,
+            9,
+            8,
+            14,
+            10,
+            9,
+            8,
+            14
+          ],
+          "origins": [
+            [
+              11.5,
+              19
+            ]
+          ],
+          "sha256": "59007a5a5af3eead67f239c84be7b6b5eea0108b70243bf108ed3d7a04a7f5fd",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "518": {
+      "id": 518,
+      "name": "Musharna",
+      "animations": {
+        "Idle": {
+          "src": "sprites/518/Idle-Anim.png",
+          "w": 40,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "origins": [
+            [
+              19.0,
+              32
+            ],
+            [
+              23.5,
+              32
+            ],
+            [
+              23.5,
+              32
+            ],
+            [
+              24.0,
+              32
+            ],
+            [
+              19.5,
+              31
+            ],
+            [
+              16.0,
+              32
+            ],
+            [
+              16.5,
+              32
+            ],
+            [
+              16.5,
+              32
+            ]
+          ],
+          "sha256": "b72f6601ce07af7d5175bf9aee7d3e391470fb6e0091ce63bd7569211d915c9a",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/518/Walk-Anim.png",
+          "w": 40,
+          "h": 64,
+          "rows": 8,
+          "durations": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "origins": [
+            [
+              18.5,
+              36
+            ],
+            [
+              23.5,
+              36
+            ],
+            [
+              23.5,
+              36
+            ],
+            [
+              24.0,
+              35
+            ],
+            [
+              19.5,
+              37
+            ],
+            [
+              16.0,
+              35
+            ],
+            [
+              16.5,
+              36
+            ],
+            [
+              16.5,
+              36
+            ]
+          ],
+          "sha256": "c3c8b2bd5a585b049a59c7b01a2421acc32145b316d2afffda2ae6c2f6504f69",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/518/Sleep-Anim.png",
+          "w": 40,
+          "h": 56,
+          "rows": 1,
+          "durations": [
+            9,
+            9,
+            9,
+            16,
+            9,
+            9,
+            9,
+            16
+          ],
+          "origins": [
+            [
+              17.5,
+              30
+            ]
+          ],
+          "sha256": "1bdc517c0fbd662fd19b6cbe9c5bea34f5d2b08376c0c874bc7163cfb75527ac",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "474": {
+      "id": 474,
+      "name": "Porygon-Z",
+      "animations": {
+        "Idle": {
+          "src": "sprites/474/Idle-Anim.png",
+          "w": 24,
+          "h": 64,
+          "rows": 8,
+          "durations": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            2,
+            2,
+            3,
+            4,
+            4,
+            2,
+            2,
+            4,
+            4,
+            4,
+            60
+          ],
+          "origins": [
+            [
+              12.5,
+              33
+            ],
+            [
+              12.5,
+              33
+            ],
+            [
+              12.5,
+              34
+            ],
+            [
+              12.5,
+              34
+            ],
+            [
+              12.5,
+              34
+            ],
+            [
+              12.5,
+              34
+            ],
+            [
+              12.5,
+              34
+            ],
+            [
+              12.5,
+              33
+            ]
+          ],
+          "sha256": "3127044a3a5ed24076c0f3e5b2286690efda73e875ea37a7a4ce36aef53b74b8",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/474/Walk-Anim.png",
+          "w": 24,
+          "h": 64,
+          "rows": 8,
+          "durations": [
+            6,
+            6,
+            4,
+            6,
+            6,
+            4,
+            6
+          ],
+          "origins": [
+            [
+              12.5,
+              34
+            ],
+            [
+              13.5,
+              35
+            ],
+            [
+              14.0,
+              36
+            ],
+            [
+              13.5,
+              35
+            ],
+            [
+              12.5,
+              34
+            ],
+            [
+              11.5,
+              35
+            ],
+            [
+              11.0,
+              36
+            ],
+            [
+              11.5,
+              35
+            ]
+          ],
+          "sha256": "7d7d1e65c8ef7aae7b41d9c4d03f9f0667a43d869c55e8820c7eb21febb72e59",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/474/Sleep-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              11.5,
+              24
+            ]
+          ],
+          "sha256": "d92ef73c567bd47c77bc4dcfb1fe6d77c79c96581e032a24774e02cd1fc44f0b",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "577": {
+      "id": 577,
+      "name": "Solosis",
+      "animations": {
+        "Idle": {
+          "src": "sprites/577/Idle-Anim.png",
+          "w": 24,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            13,
+            10,
+            13,
+            10
+          ],
+          "origins": [
+            [
+              11.5,
+              20
+            ],
+            [
+              11.5,
+              20
+            ],
+            [
+              11.5,
+              20
+            ],
+            [
+              11.5,
+              20
+            ],
+            [
+              11.5,
+              20
+            ],
+            [
+              11.5,
+              20
+            ],
+            [
+              11.5,
+              20
+            ],
+            [
+              11.5,
+              20
+            ]
+          ],
+          "sha256": "e3b5dc27f2e8c860942fc2a96f03032f3b35f74c2d3ed2a268224b6bc2531a9c",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/577/Walk-Anim.png",
+          "w": 32,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            6,
+            6,
+            5,
+            5,
+            6,
+            6,
+            6,
+            5,
+            5,
+            6
+          ],
+          "origins": [
+            [
+              15.5,
+              20
+            ],
+            [
+              17.0,
+              20
+            ],
+            [
+              16.0,
+              20
+            ],
+            [
+              18.0,
+              20
+            ],
+            [
+              15.5,
+              20
+            ],
+            [
+              14.0,
+              20
+            ],
+            [
+              16.0,
+              20
+            ],
+            [
+              15.0,
+              20
+            ]
+          ],
+          "sha256": "4ed3b4a3588afa3e388282fa498396467431fd54e935de8d7366200d1cf18071",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/577/Sleep-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            30,
+            4,
+            35,
+            4
+          ],
+          "origins": [
+            [
+              11.5,
+              18
+            ]
+          ],
+          "sha256": "74f595a57014d569fc41002a16d8f86ca38cfce714ace610cc06643e85d1c6b0",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "578": {
+      "id": 578,
+      "name": "Duosion",
+      "animations": {
+        "Idle": {
+          "src": "sprites/578/Idle-Anim.png",
+          "w": 24,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              12.5,
+              26
+            ],
+            [
+              12.5,
+              26
+            ],
+            [
+              12.5,
+              26
+            ],
+            [
+              12.5,
+              26
+            ],
+            [
+              12.5,
+              26
+            ],
+            [
+              12.5,
+              26
+            ],
+            [
+              12.5,
+              26
+            ],
+            [
+              12.5,
+              26
+            ]
+          ],
+          "sha256": "d7a64ce781def45eade288e2eb7e665fbbe78860a5835fc2ef1968eb15033d6a",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/578/Walk-Anim.png",
+          "w": 24,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "origins": [
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ]
+          ],
+          "sha256": "57880119b7ec068df5ae9effc526328f8a8c052b54d2d727509136a168c05b36",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/578/Sleep-Anim.png",
+          "w": 24,
+          "h": 40,
+          "rows": 1,
+          "durations": [
+            16,
+            12,
+            16,
+            16,
+            12,
+            16
+          ],
+          "origins": [
+            [
+              11.5,
+              23
+            ]
+          ],
+          "sha256": "398152caf3df72104daf47cd34a631538277c34290ea648853663a72611d22df",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "579": {
+      "id": 579,
+      "name": "Reuniclus",
+      "animations": {
+        "Idle": {
+          "src": "sprites/579/Idle-Anim.png",
+          "w": 56,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12
+          ],
+          "origins": [
+            [
+              27.5,
+              31
+            ],
+            [
+              26.5,
+              31
+            ],
+            [
+              27.5,
+              30
+            ],
+            [
+              29.0,
+              31
+            ],
+            [
+              27.5,
+              31
+            ],
+            [
+              26.0,
+              31
+            ],
+            [
+              27.5,
+              30
+            ],
+            [
+              28.5,
+              31
+            ]
+          ],
+          "sha256": "ae5414a1d196d214110a1fef0535b84d50eb5f19d730fa5cfe5089d186547f43",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/579/Walk-Anim.png",
+          "w": 56,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              27.5,
+              31
+            ],
+            [
+              26.5,
+              31
+            ],
+            [
+              27.5,
+              30
+            ],
+            [
+              29.0,
+              31
+            ],
+            [
+              27.5,
+              31
+            ],
+            [
+              26.0,
+              31
+            ],
+            [
+              27.5,
+              30
+            ],
+            [
+              28.5,
+              31
+            ]
+          ],
+          "sha256": "ae5414a1d196d214110a1fef0535b84d50eb5f19d730fa5cfe5089d186547f43",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/579/Sleep-Anim.png",
+          "w": 48,
+          "h": 56,
+          "rows": 1,
+          "durations": [
+            16,
+            12,
+            16,
+            16,
+            12,
+            16
+          ],
+          "origins": [
+            [
+              24.5,
+              31
+            ]
+          ],
+          "sha256": "7d91d624e2176a0f6bee29a2c5c0d7c624b0a09da816290c843a8bf65495b016",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "489": {
+      "id": 489,
+      "name": "Phione",
+      "animations": {
+        "Idle": {
+          "src": "sprites/489/Idle-Anim.png",
+          "w": 32,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            6,
+            6,
+            6,
+            6,
+            8,
+            8,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              15.5,
+              27
+            ],
+            [
+              13.5,
+              29
+            ],
+            [
+              12.0,
+              29
+            ],
+            [
+              13.0,
+              28
+            ],
+            [
+              15.5,
+              27
+            ],
+            [
+              19.0,
+              28
+            ],
+            [
+              20.0,
+              29
+            ],
+            [
+              18.5,
+              29
+            ]
+          ],
+          "sha256": "d3bcf10c5896198ceedb5bfcbafb4963b5362b5c60e74b256b88f48eafe5b263",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/489/Walk-Anim.png",
+          "w": 32,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            6,
+            2,
+            2,
+            2,
+            4,
+            6,
+            6,
+            4,
+            4,
+            4
+          ],
+          "origins": [
+            [
+              15.5,
+              26
+            ],
+            [
+              13.5,
+              28
+            ],
+            [
+              12.0,
+              28
+            ],
+            [
+              13.0,
+              27
+            ],
+            [
+              15.5,
+              26
+            ],
+            [
+              19.0,
+              27
+            ],
+            [
+              20.0,
+              28
+            ],
+            [
+              18.5,
+              28
+            ]
+          ],
+          "sha256": "721b528f523992bc9178d62f6833520a2710dc9227079848af11fd7d58aa972d",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/489/Sleep-Anim.png",
+          "w": 24,
+          "h": 40,
+          "rows": 1,
+          "durations": [
+            14,
+            12,
+            20,
+            14,
+            12,
+            20
+          ],
+          "origins": [
+            [
+              12.5,
+              23
+            ]
+          ],
+          "sha256": "407b0166ea404a2105a39f33174190028ad2bfbcf0947616fe2fc5b093072a99",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "490": {
+      "id": 490,
+      "name": "Manaphy",
+      "animations": {
+        "Idle": {
+          "src": "sprites/490/Idle-Anim.png",
+          "w": 40,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            4,
+            6,
+            6,
+            4,
+            6,
+            6,
+            6,
+            6,
+            6,
+            40
+          ],
+          "origins": [
+            [
+              19.5,
+              26
+            ],
+            [
+              15.5,
+              28
+            ],
+            [
+              14.5,
+              29
+            ],
+            [
+              16.5,
+              30
+            ],
+            [
+              19.5,
+              31
+            ],
+            [
+              23.5,
+              30
+            ],
+            [
+              25.5,
+              28
+            ],
+            [
+              24.5,
+              28
+            ]
+          ],
+          "sha256": "05c67ece8826389d0586528027c4740245c3c491ea01c919351e11472837f31e",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/490/Walk-Anim.png",
+          "w": 40,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            6,
+            6,
+            6,
+            2,
+            6,
+            6,
+            6,
+            2
+          ],
+          "origins": [
+            [
+              19.5,
+              26
+            ],
+            [
+              17.5,
+              27
+            ],
+            [
+              15.5,
+              27
+            ],
+            [
+              17.0,
+              26
+            ],
+            [
+              19.5,
+              25
+            ],
+            [
+              23.0,
+              26
+            ],
+            [
+              24.5,
+              27
+            ],
+            [
+              22.5,
+              27
+            ]
+          ],
+          "sha256": "c03f715aebe4a6584656074877f341663cf4d8cb87d4e5bf9952a4a5aaafd8ae",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/490/Sleep-Anim.png",
+          "w": 32,
+          "h": 16,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              19.0,
+              16
+            ]
+          ],
+          "sha256": "edf8439d8a6c0f3fd1d1d2ec94f9a7570c29ab013fc33a26f769fb9431e97ffe",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "485": {
+      "id": 485,
+      "name": "Heatran",
+      "animations": {
+        "Idle": {
+          "src": "sprites/485/Idle-Anim.png",
+          "w": 40,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            60,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            12
+          ],
+          "origins": [
+            [
+              20.0,
+              29
+            ],
+            [
+              20.5,
+              32
+            ],
+            [
+              21.0,
+              31
+            ],
+            [
+              20.5,
+              32
+            ],
+            [
+              20.0,
+              30
+            ],
+            [
+              20.5,
+              32
+            ],
+            [
+              20.0,
+              31
+            ],
+            [
+              20.5,
+              32
+            ]
+          ],
+          "sha256": "da05cac548fb6f5ccd5bab67715907d0591ddbf373fcbc58a316a8f690975019",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/485/Walk-Anim.png",
+          "w": 40,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "origins": [
+            [
+              20.5,
+              32
+            ],
+            [
+              21.5,
+              34
+            ],
+            [
+              20.5,
+              30
+            ],
+            [
+              20.5,
+              34
+            ],
+            [
+              20.5,
+              33
+            ],
+            [
+              20.5,
+              34
+            ],
+            [
+              20.5,
+              30
+            ],
+            [
+              19.5,
+              34
+            ]
+          ],
+          "sha256": "21ec7d4f0f750864345f54c1a272d8873a32c5cd10af405f40dacbef2eb1d51e",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/485/Sleep-Anim.png",
+          "w": 40,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              20.0,
+              29
+            ]
+          ],
+          "sha256": "025d72284ffc0090014a2df3f413df283a1b2a53b737662c30c7dfc3dac61ae1",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "721": {
+      "id": 721,
+      "name": "Volcanion",
+      "animations": {
+        "Idle": {
+          "src": "sprites/721/Idle-Anim.png",
+          "w": 56,
+          "h": 64,
+          "rows": 8,
+          "durations": [
+            90,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "origins": [
+            [
+              28.5,
+              43
+            ],
+            [
+              27.0,
+              44
+            ],
+            [
+              25.5,
+              45
+            ],
+            [
+              26.5,
+              45
+            ],
+            [
+              28.5,
+              43
+            ],
+            [
+              29.5,
+              45
+            ],
+            [
+              30.5,
+              45
+            ],
+            [
+              29.0,
+              44
+            ]
+          ],
+          "sha256": "e54f09c59cf1832f13205f3455535fd408e126667cd13ecdc2b9d698669cc7ab",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/721/Walk-Anim.png",
+          "w": 56,
+          "h": 64,
+          "rows": 8,
+          "durations": [
+            8,
+            14,
+            8,
+            14
+          ],
+          "origins": [
+            [
+              28.0,
+              46
+            ],
+            [
+              27.5,
+              45
+            ],
+            [
+              25.5,
+              44
+            ],
+            [
+              26.5,
+              46
+            ],
+            [
+              28.0,
+              45
+            ],
+            [
+              29.5,
+              46
+            ],
+            [
+              30.5,
+              44
+            ],
+            [
+              28.5,
+              45
+            ]
+          ],
+          "sha256": "5d28c41e648ff48f30f9028fff43ad7656ac401ecf0ff357f28aa9bb4b3f3de5",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/721/Sleep-Anim.png",
+          "w": 40,
+          "h": 48,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              21.5,
+              35
+            ]
+          ],
+          "sha256": "70d3d688cd7dda2164ed557653dd81f5a12571bacf20f8a38925f94cf8ca3e2f",
           "sourceAnimation": "Sleep"
         }
       }

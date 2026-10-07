@@ -90,15 +90,28 @@
       "elapsed": 0,
       "rest": 6300,
       "moving": false
+    },
+    {
+      "id": 590,
+      "x": 296,
+      "y": 200,
+      "target": [
+        296,
+        200
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 7150,
+      "moving": false
     }
   ],
   "mtmoonview": [
     {
       "id": 35,
-      "x": 280,
+      "x": 240,
       "y": 272,
       "target": [
-        280,
+        240,
         272
       ],
       "direction": 0,
@@ -121,11 +134,11 @@
     },
     {
       "id": 173,
-      "x": 168,
-      "y": 216,
+      "x": 360,
+      "y": 264,
       "target": [
-        168,
-        216
+        360,
+        264
       ],
       "direction": 0,
       "elapsed": 0,
@@ -134,11 +147,11 @@
     },
     {
       "id": 337,
-      "x": 160,
-      "y": 128,
+      "x": 136,
+      "y": 224,
       "target": [
-        160,
-        128
+        136,
+        224
       ],
       "direction": 0,
       "elapsed": 0,
@@ -147,11 +160,11 @@
     },
     {
       "id": 338,
-      "x": 336,
-      "y": 256,
+      "x": 184,
+      "y": 136,
       "target": [
-        336,
-        256
+        184,
+        136
       ],
       "direction": 0,
       "elapsed": 0,
@@ -160,15 +173,41 @@
     },
     {
       "id": 385,
-      "x": 136,
+      "x": 200,
       "y": 200,
       "target": [
-        136,
+        200,
         200
       ],
       "direction": 0,
       "elapsed": 0,
       "rest": 5450,
+      "moving": false
+    },
+    {
+      "id": 605,
+      "x": 304,
+      "y": 296,
+      "target": [
+        304,
+        296
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 6300,
+      "moving": false
+    },
+    {
+      "id": 518,
+      "x": 128,
+      "y": 168,
+      "target": [
+        128,
+        168
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 7150,
       "moving": false
     }
   ],
@@ -188,11 +227,11 @@
     },
     {
       "id": 64,
-      "x": 80,
-      "y": 152,
+      "x": 48,
+      "y": 136,
       "target": [
-        80,
-        152
+        48,
+        136
       ],
       "direction": 0,
       "elapsed": 0,
@@ -201,11 +240,11 @@
     },
     {
       "id": 65,
-      "x": 400,
-      "y": 152,
+      "x": 424,
+      "y": 128,
       "target": [
-        400,
-        152
+        424,
+        128
       ],
       "direction": 0,
       "elapsed": 0,
@@ -214,11 +253,11 @@
     },
     {
       "id": 122,
-      "x": 104,
-      "y": 280,
+      "x": 408,
+      "y": 304,
       "target": [
-        104,
-        280
+        408,
+        304
       ],
       "direction": 0,
       "elapsed": 0,
@@ -227,11 +266,11 @@
     },
     {
       "id": 132,
-      "x": 376,
-      "y": 280,
+      "x": 72,
+      "y": 304,
       "target": [
-        376,
-        280
+        72,
+        304
       ],
       "direction": 0,
       "elapsed": 0,
@@ -240,11 +279,11 @@
     },
     {
       "id": 137,
-      "x": 328,
-      "y": 200,
+      "x": 176,
+      "y": 128,
       "target": [
-        328,
-        200
+        176,
+        128
       ],
       "direction": 0,
       "elapsed": 0,
@@ -253,15 +292,84 @@
     },
     {
       "id": 233,
-      "x": 144,
-      "y": 208,
+      "x": 328,
+      "y": 192,
       "target": [
-        144,
-        208
+        328,
+        192
       ],
       "direction": 0,
       "elapsed": 0,
       "rest": 6300,
+      "moving": false
+    },
+    {
+      "id": 474,
+      "x": 136,
+      "y": 224,
+      "target": [
+        136,
+        224
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 7150,
+      "moving": false
+    }
+  ],
+  "seafloorcave": [
+    {
+      "id": 382,
+      "x": 176,
+      "y": 272,
+      "target": [
+        176,
+        272
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 1200,
+      "moving": false
+    },
+    {
+      "id": 489,
+      "x": 232,
+      "y": 128,
+      "target": [
+        232,
+        128
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 2050,
+      "moving": false
+    }
+  ],
+  "volcanicpit": [
+    {
+      "id": 383,
+      "x": 240,
+      "y": 192,
+      "target": [
+        240,
+        192
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 1200,
+      "moving": false
+    },
+    {
+      "id": 485,
+      "x": 224,
+      "y": 128,
+      "target": [
+        224,
+        128
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 2050,
       "moving": false
     }
   ]
