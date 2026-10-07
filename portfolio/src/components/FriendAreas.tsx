@@ -1,5 +1,12 @@
 "use client";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from "react";
 import Modal from "./Modal";
 import EeveeBase from "./EeveeBase";
 import type { Catalog, Resident } from "./friend-areas";
@@ -13,7 +20,7 @@ export default function FriendAreas() {
   const residents = useRef(new Map<string, Resident[]>());
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/friend-areas/catalog.json", { signal: controller.signal })
+    fetch("/friend-areas/catalog.json", { signal: controller.signal, cache: "no-cache" })
       .then((r) => {
         if (!r.ok) throw new Error();
         return r.json();
@@ -36,6 +43,50 @@ export default function FriendAreas() {
     return () => controller.abort();
   }, []);
   const area = catalog?.areas.find((a) => a.id === selected);
+  const options = [
+    "transformforest",
+    ...(catalog?.areas.map((a) => a.id) ?? []),
+  ];
+  function choose(id: string) {
+    setSelected(id);
+    try {
+      localStorage.setItem("friend-area", id);
+    } catch {
+      /* storage is optional */
+    }
+  }
+  function cycle(offset: number) {
+    choose(
+      options[
+        (options.indexOf(selected) + offset + options.length) % options.length
+      ],
+    );
+  }
+  function navigate(event: KeyboardEvent<HTMLDivElement>, expand = false) {
+    if (event.target !== event.currentTarget) return;
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      event.stopPropagation();
+      cycle(event.key === "ArrowLeft" ? -1 : 1);
+    } else if (expand && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault();
+      setOpen(true);
+    }
+  }
+  const arrow = (offset: number) => (
+    <button
+      type="button"
+      disabled={!catalog}
+      aria-label={offset < 0 ? "Previous Friend Area" : "Next Friend Area"}
+      onClick={() => cycle(offset)}
+      title={
+        offset < 0 ? "Previous area (Left arrow)" : "Next area (Right arrow)"
+      }
+      style={{ minWidth: 44, minHeight: 44, fontSize: 20, borderRadius: 10 }}
+    >
+      {offset < 0 ? "‹" : "›"}
+    </button>
+  );
   const scene = (expanded: boolean) =>
     area && catalog ? (
       <Suspense fallback={<p>Opening {area.name}…</p>}>
@@ -52,6 +103,10 @@ export default function FriendAreas() {
   return (
     <section aria-label="Friend Area">
       <div
+        role="group"
+        tabIndex={0}
+        aria-label={`${area?.name ?? "Transform Forest"} map. Enter to expand; Left and Right to change area.`}
+        onKeyDown={(event) => navigate(event, true)}
         onClick={(event) => {
           if (!(event.target as HTMLElement).closest("button,a")) setOpen(true);
         }}
@@ -59,13 +114,25 @@ export default function FriendAreas() {
       >
         {scene(false)}
       </div>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        style={{ fontSize: 12, opacity: 0.8, padding: "8px 2px" }}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 6,
+        }}
       >
-        Explore Friend Areas ↗
-      </button>
+        {arrow(-1)}
+        <button
+          type="button"
+          aria-label="Explore Friend Areas"
+          onClick={() => setOpen(true)}
+          style={{ fontSize: 12, opacity: 0.8, padding: "8px 2px" }}
+        >
+          {area?.name ?? "Transform Forest"} ↗
+        </button>
+        {arrow(1)}
+      </div>
       {error && <p role="status">{error}</p>}
       {open && (
         <Modal label="Friend Areas" onClose={() => setOpen(false)}>
@@ -95,18 +162,11 @@ export default function FriendAreas() {
                 <select
                   aria-label="Choose Friend Area"
                   value={selected}
-                  onChange={(event) => {
-                    setSelected(event.target.value);
-                    try {
-                      localStorage.setItem("friend-area", event.target.value);
-                    } catch {
-                      /* optional */
-                    }
-                  }}
+                  onChange={(event) => choose(event.target.value)}
                   style={{
                     fontSize: 20,
                     background: "transparent",
-                    maxWidth: "65vw",
+                    maxWidth: "60vw",
                     padding: "5px 0",
                   }}
                 >
@@ -128,6 +188,10 @@ export default function FriendAreas() {
               </button>
             </header>
             <div
+              role="group"
+              tabIndex={0}
+              aria-label="Friend Area map. Use Left and Right arrows to change area."
+              onKeyDown={(event) => navigate(event)}
               style={{
                 borderRadius: 12,
                 overflow: "hidden",
@@ -136,9 +200,39 @@ export default function FriendAreas() {
             >
               {scene(true)}
             </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 8,
+              }}
+            >
+              {arrow(-1)}
+              <span style={{ fontSize: 11, opacity: 0.7 }}>
+                Click arrows or focus the map and use ← →
+              </span>
+              {arrow(1)}
+            </div>
             <p style={{ fontSize: 13, marginTop: 12 }}>
               {area?.description ?? "Your familiar Eevee garden."}
             </p>
+            {!!area?.guests?.length && catalog && (
+              <details style={{ fontSize: 12, marginTop: 10 }}>
+                <summary style={{ cursor: "pointer" }}>
+                  Habitat visitors · up to {area.guestLimit} per visit
+                </summary>
+                <ul style={{ paddingLeft: 18, marginTop: 8 }}>
+                  {area.guests.map((guest) => (
+                    <li key={guest.id} style={{ margin: "5px 0" }}>
+                      <strong>{catalog.sprites[guest.id].name}</strong> —{" "}
+                      {guest.reason}{" "}
+                      <span style={{ opacity: 0.7 }}>({guest.basis})</span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
             <p style={{ fontSize: 12, marginTop: 8 }}>
               <strong>{area ? "Native residents" : "Garden residents"}</strong>{" "}
               ·{" "}
@@ -147,9 +241,24 @@ export default function FriendAreas() {
                 : "Eevee · Vaporeon · Jolteon · Flareon · Umbreon · Sylveon"}
             </p>
             <p style={{ fontSize: 10, marginTop: 12, opacity: 0.7 }}>
-              Scenery: Pokémon Mystery Dungeon, ripped by Toastypk and MYSTERY_DUNGEON;
-              backgrounds via <a href="https://pamtre-berry.neocities.org/articles/friendareas" target="_blank" rel="noreferrer">Pamtre Berry</a>.
-              Sprites: <a href="https://github.com/PMDCollab/SpriteCollab" target="_blank" rel="noreferrer">PMD SpriteCollab contributors</a>.
+              Scenery: Pokémon Mystery Dungeon, ripped by Toastypk and
+              MYSTERY_DUNGEON; backgrounds via{" "}
+              <a
+                href="https://pamtre-berry.neocities.org/articles/friendareas"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Pamtre Berry
+              </a>
+              . Sprites:{" "}
+              <a
+                href="https://github.com/PMDCollab/SpriteCollab"
+                target="_blank"
+                rel="noreferrer"
+              >
+                PMD SpriteCollab contributors
+              </a>
+              .
             </p>
           </section>
         </Modal>

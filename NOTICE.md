@@ -19,7 +19,7 @@ welcome art.
 | Material | Source | Terms |
 | --- | --- | --- |
 | Pokémon sprite sheets and portraits | [PMD SpriteCollab](https://sprites.pmdcollab.org/) contributors; each artist is credited on its sprite's page | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) for community sprites (some are cropped, recoloured or combined here); Chunsoft originals remain Nintendo / Chunsoft material |
-| Transform Forest background and stone frames | Toastypk / The Spriters Resource, via the [Pamtre Berry archive](https://pamtre-berry.neocities.org/articles/friendareas) | Their owners' terms |
+| Friend Area backgrounds (Transform Forest, Mushroom Forest, Mt. Moonview, Decrepit Lab, Seafloor Cave and Volcanic Pit) and stone frames | Toastypk and MYSTERY_DUNGEON / The Spriters Resource, via the [Pamtre Berry archive](https://pamtre-berry.neocities.org/articles/friendareas), which describes some scenery-layer reconstruction | Their owners' terms |
 | Mega Evolution symbol pixel art | PixelTheCollector | Used with credit; the symbol itself is The Pokémon Company / Nintendo's |
 | Item sprites | [PokeAPI sprites](https://github.com/PokeAPI/sprites), WikiDex | Game assets of The Pokémon Company / Nintendo |
 

@@ -39,6 +39,10 @@ export default function FriendAreaScene({
       residents.set(area.id, actors);
     }
     const population = actors;
+    element.setAttribute(
+      "aria-label",
+      `${area.name}. Residents: ${population.map((a) => catalog.sprites[a.id].name).join(", ")}`,
+    );
     const quiet = () => {
       try {
         return (
@@ -133,7 +137,7 @@ export default function FriendAreaScene({
     });
     const paths = [
       area.background,
-      ...area.roster.flatMap((id) =>
+      ...population.flatMap(({ id }) =>
         ["Idle", "Walk"].map((a) => catalog.sprites[id].animations[a].src),
       ),
     ];

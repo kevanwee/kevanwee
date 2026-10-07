@@ -6,6 +6,10 @@ export type Area = {
   background: string;
   description: string;
   roster: number[];
+  guests?: { id: number; reason: string; basis: string }[];
+  guestLimit?: number;
+  footRadius?: number;
+  separation?: number;
   zones: Point[][];
   obstacles: Point[][];
 };
@@ -51,12 +55,12 @@ export function walkable(area: Area, point: Point) {
   const samples: Point[] = [
     point,
     ...Array.from({ length: 8 }, (_, i): Point => [
-      point[0] + 6 * Math.cos((i * Math.PI) / 4),
-      point[1] + 6 * Math.sin((i * Math.PI) / 4),
+      point[0] + (area.footRadius ?? 6) * Math.cos((i * Math.PI) / 4),
+      point[1] + (area.footRadius ?? 6) * Math.sin((i * Math.PI) / 4),
     ]),
   ];
   return (
-    area.zones.some((zone) => samples.every((p) => inside(p, zone))) &&
+    samples.every((p) => area.zones.some((zone) => inside(p, zone))) &&
     !samples.some((p) => area.obstacles.some((o) => inside(p, o)))
   );
 }
@@ -75,13 +79,21 @@ export function segment(area: Area, from: Point, to: Point) {
       return false;
   return true;
 }
-export function createResidents(area: Area): Resident[] {
+export function chooseRoster(area: Area, random = Math.random): number[] {
+  const pool = (area.guests ?? []).map((g) => g.id);
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return [...area.roster, ...pool.slice(0, area.guestLimit ?? 0)];
+}
+export function createResidents(area: Area, random = Math.random): Resident[] {
   const candidates: Point[] = [];
   for (let y = 8; y < area.size[1]; y += 8)
     for (let x = 8; x < area.size[0]; x += 8)
       if (walkable(area, [x, y])) candidates.push([x, y]);
   const chosen: Point[] = [];
-  return area.roster.map((id, i) => {
+  return chooseRoster(area, random).map((id, i) => {
     // Spread the native roster across safe floor, stable for this visit.
     const ordered = candidates.slice().sort((a, b) => {
       const score = (p: Point) =>
@@ -149,7 +161,8 @@ export function stepResidents(
         actors.some(
           (other) =>
             other !== actor &&
-            Math.hypot(other.x - next[0], other.y - next[1]) < 18,
+            Math.hypot(other.x - next[0], other.y - next[1]) <
+              (area.separation ?? 18),
         )
       ) {
         actor.target = [actor.x, actor.y];

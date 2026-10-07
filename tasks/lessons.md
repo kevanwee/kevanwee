@@ -92,6 +92,7 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 
 - Friend Areas (7 October 2026): random selection belongs in README regeneration; websites expand the existing Eevee garden with a dropdown. Preserve compact layout, native rosters, original scenery animation and collision boundaries. Show drafts and renders before merging. Distinguish verified game assets from reconstructed scenery, and hand-traced collision zones from extracted game data.
 
+- Friend Area corrections (7 October 2026): Moonview stairs and the lab's dark floor corners are walkable. Add Kyogre's base and another legendary base; curate later-generation guests by habitat rather than treating them as original PMD assignments. Both Voracity and portfolio need visible arrows, clickable expansion, a map dropdown and saved choice; Left/Right works while the map is focused. The owner approved the original preview PRs for merge.
 ## Licence (2026-10-07)
 - The owner chose "all rights reserved" for this public repo (replacing Apache 2.0, which let anyone reuse it).
   LICENSE reserves the owner's own work; NOTICE.md lists third-party material under its owners' terms. Keep NOTICE.md

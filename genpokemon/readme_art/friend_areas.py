@@ -10,16 +10,26 @@ SEATS = json.loads((ASSETS/'seats.json').read_text(encoding='utf-8'))
 def choose(rng=None):
     return (rng or random.SystemRandom()).choice(['transformforest']+[a['id'] for a in CATALOG['areas']])
 
+def choose_guests(area_id, rng=None):
+    area=next((a for a in CATALOG['areas'] if a['id']==area_id),None)
+    if not area: return []
+    pool=[g['id'] for g in area.get('guests',[])]
+    return (rng or random.SystemRandom()).sample(pool,min(area.get('guestLimit',0),len(pool)))
+
 def uri(data):
     return 'data:image/png;base64,'+base64.b64encode(data).decode()
 
-def panel(area_id, x=12, y=14, width=280, height=224):
+def panel(area_id, x=12, y=14, width=280, height=224, guests=None):
     area = next(a for a in CATALOG['areas'] if a['id']==area_id)
     w,h = area['size']
     parts=[f'<svg x="{x}" y="{y}" width="{width}" height="{height}" viewBox="0 0 {w} {h}" preserveAspectRatio="xMidYMid meet">',
            f'<title>{area["name"]}</title><image width="{w}" height="{h}" href="{uri((ASSETS/area["background"]).read_bytes())}"/>']
     css=[]
-    for resident in sorted(SEATS[area_id],key=lambda s:s['y']):
+    chosen=area['roster']+(guests if guests is not None else [g['id'] for g in area.get('guests',[])][:area.get('guestLimit',0)])
+    if len(chosen)!=len(SEATS[area_id]) or any(g not in [x['id'] for x in area.get('guests',[])] for g in chosen[len(area['roster']):]):
+        raise ValueError('Invalid Friend Area guest selection')
+    seated=[dict(seat,id=dex) for seat,dex in zip(SEATS[area_id],chosen)]
+    for resident in sorted(seated,key=lambda s:s['y']):
         sprite=CATALOG['sprites'][str(resident['id'])]
         a=sprite['animations']['Idle']; fw,fh=a['w'],a['h']; ox,oy=a['origins'][0]
         # Embed only the needed facing, with exact source frame timings.
