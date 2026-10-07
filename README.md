@@ -28,7 +28,7 @@
 </p>
 
 <p align="center">
-  <img src="./readme/art/forecast.svg" alt="castform's weather forecast for singapore" />
+  <img src="./readme/art/forecast.svg" alt="castform and a shiny castform's weather forecast for singapore" />
 </p>
 
 <p align="center">

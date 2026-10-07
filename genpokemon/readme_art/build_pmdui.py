@@ -3,8 +3,9 @@
 * Explorer Rank: Explorers of Sky's rank ladder, points = all-time GitHub contributions (a rank never
   drops, as in the game). Rank badges: Explorers of Time/Darkness and Sky (via Mystery Dungeon Wiki).
 * Weather forecast: NEA's 24-hour forecast for Singapore's central region, one window per period onto
-  Thunder Meadow (Castform's friend area in Red/Blue Rescue Team) with Castform in the matching form (PMD
-  Sprite Collab), and the forecast's weather drawn with the forest's sky effects (sky.py).
+  Thunder Meadow (Castform's friend area in Red/Blue Rescue Team) with Castform in the matching form and a
+  shiny Castform keeping it company in the same form (PMD Sprite Collab), and the forecast's weather drawn with
+  the forest's sky effects (sky.py).
 
 Voracity and the portfolio share these rules (explorer.ts, forecast in forest-sky.ts).
 
@@ -104,6 +105,7 @@ def period_label(start, end, now):
 
 
 CASTFORM = {"sunny": "castform-sunny", "rain": "castform-rainy", "storm": "castform-rainy"}
+PAIR = [("", -24, 0), ("shiny-", 24, .35)]  # Castform, then its shiny companion: sheet prefix, x offset, bob lag (s)
 
 
 def render_forecast(record, now, region="central"):
@@ -126,11 +128,13 @@ def render_forecast(record, now, region="central"):
         vx, vy, vw, vh = MEADOW_VIEWS[i % len(MEADOW_VIEWS)]
         window = [f'<svg x="{x:.1f}" y="{top}" width="{cell_w:.1f}" height="{cell_h}" viewBox="{vx} {vy} {vw} {vh}" preserveAspectRatio="xMidYMid slice">'
                   f'<use href="#meadow"/></svg>']
-        sheet = Sheet(CASTFORM.get(kind, "castform"), "Idle")
-        l, t, r, b = sheet.bounds(0)
-        bob = sc.keyframes(sc.uid("cb"), 2.4, [("0%,100%", "transform:translateY(0)"), ("50%", "transform:translateY(-4px)")], "ease-in-out", -i * .5)
-        window.append(f'<ellipse cx="{x + cell_w / 2:.1f}" cy="{top + cell_h - 14}" rx="16" ry="4" fill="#000" opacity=".25"/>'
-                      f'<g class="{bob}">{sc.sprite(sheet, 0, x + cell_w / 2, top + cell_h - 22, min(2.4, 62 / (b - t)))}</g>')
+        for prefix, dx, lag in PAIR:
+            sheet = Sheet(prefix + CASTFORM.get(kind, "castform"), "Idle")
+            l, t, r, b = sheet.bounds(0)
+            bob = sc.keyframes(sc.uid("cb"), 2.4, [("0%,100%", "transform:translateY(0)"), ("50%", "transform:translateY(-4px)")], "ease-in-out", -i * .5 - lag)
+            cx = x + cell_w / 2 + dx
+            window.append(f'<ellipse cx="{cx:.1f}" cy="{top + cell_h - 14}" rx="14" ry="4" fill="#000" opacity=".25"/>'
+                          f'<g class="{bob}">{sc.sprite(sheet, 0, cx, top + cell_h - 22, min(2.4, 62 / (b - t)))}</g>')
         window.append(skies.overlay(sc, x, top, cell_w, cell_h, kind, intensity, phase))
         sc.body.append(f'<g clip-path="url(#{cid})">{"".join(window)}</g>'
                        f'<rect x="{x:.1f}" y="{top}" width="{cell_w:.1f}" height="{cell_h}" rx="7" fill="none" stroke="{INNER}"/>')

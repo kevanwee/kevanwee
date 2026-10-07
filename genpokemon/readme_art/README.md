@@ -12,7 +12,7 @@ Every animated card on the profile README is a self-contained SVG: sprites are e
 | `build_readme.py` | `more.md` → the repository's `README.md` |
 | `sky.py` | The sky over the garden's forest: Singapore's time of day and NEA's 2-hour forecast, Mystery Dungeon style. Voracity and the portfolio share the rules (`forest-sky.ts`) |
 | `build_log.py` | The message log: recent activity as a Mystery Dungeon dialogue box with Diancie's portrait, typed out line by line. Also writes `readme/art/activity.json`, which Voracity's and the portfolio's dialogue boxes read |
-| `build_pmdui.py` | Explorer Rank (Explorers of Sky's ladder, points = all-time contributions; badges from Explorers of Time/Darkness and Sky) and Castform's 24-hour weather forecast for Singapore (NEA), in Mystery Dungeon's navy UI |
+| `build_pmdui.py` | Explorer Rank (Explorers of Sky's ladder, points = all-time contributions; badges from Explorers of Time/Darkness and Sky) and Castform's 24-hour weather forecast for Singapore (NEA), with a shiny Castform beside it in the same form, in Mystery Dungeon's navy UI |
 | `regrow.py` | Every two hours: the garden with its sky, the message log and the open card spots (see `.github/workflows/readme-garden.yml`) |
 
 `pmd.py` is the shared library: sprite sheets cropped to the rows used, frame timing from PMD durations, walkers, eight-direction roamers and Silvally's form changes. `cast.py` says which Pokémon stands where (each appears once), and `data.py` holds the project list and skill trees.
