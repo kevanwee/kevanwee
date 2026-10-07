@@ -7,7 +7,7 @@ import { EEVEELUTIONS, displayName } from "@/lib/pokemon-overworld";
 import { createForest, greetForest, stepForest, FOREST_WIDTH } from "@/lib/eevee-base";
 import { paintSprite, preloadSpriteSheet, SPRITES } from "@/lib/overworld-sprites";
 
-export default function EeveeBase() {
+export default function EeveeBase({ inDialog = false }: { inDialog?: boolean }) {
   const habitat = useRef<HTMLDivElement>(null);
   const status = useRef<HTMLSpanElement>(null);
   // The sky over the forest (lib/forest-sky.ts): at night the residents sleep where they are.
@@ -42,7 +42,7 @@ export default function EeveeBase() {
       if (disposed || document.hidden || !visible) { last = 0; return; }
       if (last && now - last < 32) { raf = requestAnimationFrame(draw); return; }
       const dt = last ? Math.min(64, now - last) : 0; last = now;
-      const modal = !!document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]');
+      const modal = !inDialog && !!document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]');
       const scale = root.clientWidth / FOREST_WIDTH;
       for (const actor of actors) {
         if (night.current) { if (!actor.nap) { actor.nap = true; actor.path = []; } actor.rest = Math.max(actor.rest, 60000); actor.animation = "Sleep"; }
@@ -74,7 +74,7 @@ export default function EeveeBase() {
     motion.addEventListener('change', wake); document.addEventListener('visibilitychange', wake);
     return () => { disposed = true; cancelAnimationFrame(raf); intersection.disconnect(); resize.disconnect(); mutations.disconnect();
       nodes.forEach(n => n.cleanup()); timers.forEach(clearTimeout); motion.removeEventListener('change', wake); document.removeEventListener('visibilitychange', wake); };
-  }, []);
+  }, [inDialog]);
   // Margins live on the wrapper in page.tsx, which also holds the contribution panel and dialogue box.
   return <figure className="m-0" aria-label="Eevee and friends in Transform Forest">
     <div ref={habitat} data-eevee-base className="relative isolate w-full overflow-hidden rounded-2xl border border-cream-200"

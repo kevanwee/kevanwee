@@ -89,3 +89,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
   owner decides otherwise.
 - "Ask about me" opens Claude or ChatGPT with a prompt built from `personal`. Media appearances scroll as a strip that
   pauses on hover/focus; its static frame keeps the media-card resident perch; reduced motion shows a scrollable row.
+
+- Friend Areas (7 October 2026): random selection belongs in README regeneration; websites expand the existing Eevee garden with a dropdown. Preserve compact layout, native rosters, original scenery animation and collision boundaries. Show drafts and renders before merging. Distinguish verified game assets from reconstructed scenery, and hand-traced collision zones from extracted game data.

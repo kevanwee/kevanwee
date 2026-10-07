@@ -14,6 +14,7 @@ import cast
 import gen_contribution_garden as garden
 from pmd import THEMES
 import sky as skies
+import friend_areas
 
 contrib, repos_file, out = sys.argv[1:4]
 data = json.loads(Path(contrib).read_text(encoding="utf-8"))
@@ -22,8 +23,10 @@ repos.sort(key=lambda r: r["pushedAt"], reverse=True)
 out = Path(out)
 sky = skies.fetch()
 print("sky:", sky)
+friend_area = friend_areas.choose()  # One draw shared by light and dark.
+print("Friend Area:", friend_area)
 for theme in THEMES:
-    (out / f"contribution-garden-{theme}.svg").write_text(garden.render(data, theme, sky), encoding="utf-8")
+    (out / f"contribution-garden-{theme}.svg").write_text(garden.render(data, theme, sky, friend_area), encoding="utf-8")
     (out / f"stove-{theme}.svg").write_text(build_cards.stove_card(theme, repos, dt.date.today()), encoding="utf-8")
 # Re-roll the open spots
 open_spots = {slug for slug, who in cast.CARDS.items() if who == cast.RANDOM}

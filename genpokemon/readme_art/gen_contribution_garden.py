@@ -14,6 +14,7 @@ import base64, datetime as dt, json, struct, sys
 from pathlib import Path
 from pmd import Scene, Sheet, roamer, SRC, PUBLIC, META
 import sky as skies
+import friend_areas
 
 THEMES = {
     "light": dict(panel="#fcfcf7", border="#e2e5d9", ink="#4d5745", muted="#8a987c", faint="#a0a591",
@@ -108,7 +109,7 @@ def streak(days):
     return n
 
 
-def render(data, theme, sky=None):
+def render(data, theme, sky=None, friend_area="transformforest"):
     """sky: from sky.fetch() (phase, kind, intensity); None draws a clear day."""
     sc = Scene(0, 0)
     sky = sky or {"phase": "day", "kind": "clear", "intensity": 0}
@@ -126,29 +127,35 @@ def render(data, theme, sky=None):
 
     # Forest, cropped through the same camera as Voracity, with the animated stone
     fx, fy, (cx, cy, cw, ch) = FOREST["x"], FOREST["y"], FOREST["cam"]
-    bg = PUBLIC / "eevee-base/background.png"
-    bw, bh = png_size(bg)
-    stone = PUBLIC / "eevee-base/stone-frames.png"
     parts.append(f'<clipPath id="fc"><rect x="{fx}" y="{fy}" width="{cw}" height="{ch}" rx="11"/></clipPath>')
-    forest = [f'<svg x="{fx}" y="{fy}" width="{cw}" height="{ch}" viewBox="{cx} {cy} {cw} {ch}">',
-              f'<image href="{b64(bg)}" width="{bw}" height="{bh}"/>',
-              f'<svg x="209" y="177" width="54" height="39" overflow="hidden"><g class="stone"><image href="{b64(stone)}" width="{54 * 32}" height="39"/></g></svg>']
-    css.append(".stone{animation:stone 3.84s steps(32) infinite}@keyframes stone{to{transform:translateX(-1728px)}}")
-    # The forest residents roam the clearing (map coordinates), routed around the stone
-    routes = [("vaporeon", [(176, 232), (190, 168), (290, 160), (322, 204), (252, 246)], 11, [2.5, 1.5, 3, 2, 1.5], 0),
-              ("jolteon", [(292, 182), (322, 246), (282, 292), (220, 282), (300, 232)], 15, [1.5, 2, 1, 2.5, 1], -6),
-              ("flareon", [(182, 252), (204, 292), (158, 284), (150, 220)], 9, [6, 2, 4, 3], -3),
-              ("umbreon", [(302, 262), (250, 296), (190, 240), (232, 250), (330, 280)], 12, [2, 3, 1.5, 2, 2.5], -11)]
-    for species, points, speed, pauses, delay in routes:
-        if night:  # asleep where their walk begins
-            forest.append(sc.sprite(Sheet(species, "Sleep"), 0, points[0][0], points[0][1], 1.0))
-        else:
-            forest.append(roamer(sc, species, points, speed, pauses, delay, 1.0))
-    forest.append("</svg>")
-    weather = skies.overlay(sc, fx, fy, cw, ch, sky["kind"], sky["intensity"], sky["phase"])
-    caption = skies.label(sky["kind"], sky["phase"])
-    tag = f'<rect x="{fx + 8}" y="{fy + 8}" width="{len(caption) * 5.6 + 14:.0f}" height="17" rx="8.5" fill="#0b0f1a" opacity=".55"/>'           f'<text x="{fx + 15}" y="{fy + 20}" font-size="9.5" fill="#f4f1e6">{caption}</text>'
-    parts.append(f'<g clip-path="url(#fc)">{"".join(forest)}{weather}{tag}</g>')
+    if friend_area == "transformforest":
+        bg = PUBLIC / "eevee-base/background.png"
+        bw, bh = png_size(bg)
+        stone = PUBLIC / "eevee-base/stone-frames.png"
+        forest = [f'<svg x="{fx}" y="{fy}" width="{cw}" height="{ch}" viewBox="{cx} {cy} {cw} {ch}">',
+                  f'<image href="{b64(bg)}" width="{bw}" height="{bh}"/>',
+                  f'<svg x="209" y="177" width="54" height="39" overflow="hidden"><g class="stone"><image href="{b64(stone)}" width="{54 * 32}" height="39"/></g></svg>']
+        css.append(".stone{animation:stone 3.84s steps(32) infinite}@keyframes stone{to{transform:translateX(-1728px)}}")
+        # The forest residents roam the clearing (map coordinates), routed around the stone
+        routes = [("vaporeon", [(176, 232), (190, 168), (290, 160), (322, 204), (252, 246)], 11, [2.5, 1.5, 3, 2, 1.5], 0),
+                  ("jolteon", [(292, 182), (322, 246), (282, 292), (220, 282), (300, 232)], 15, [1.5, 2, 1, 2.5, 1], -6),
+                  ("flareon", [(182, 252), (204, 292), (158, 284), (150, 220)], 9, [6, 2, 4, 3], -3),
+                  ("umbreon", [(302, 262), (250, 296), (190, 240), (232, 250), (330, 280)], 12, [2, 3, 1.5, 2, 2.5], -11)]
+        for species, points, speed, pauses, delay in routes:
+            if night:  # asleep where their walk begins
+                forest.append(sc.sprite(Sheet(species, "Sleep"), 0, points[0][0], points[0][1], 1.0))
+            else:
+                forest.append(roamer(sc, species, points, speed, pauses, delay, 1.0))
+        forest.append("</svg>")
+        weather = skies.overlay(sc, fx, fy, cw, ch, sky["kind"], sky["intensity"], sky["phase"])
+        caption = skies.label(sky["kind"], sky["phase"])
+        tag = f'<rect x="{fx + 8}" y="{fy + 8}" width="{len(caption) * 5.6 + 14:.0f}" height="17" rx="8.5" fill="#0b0f1a" opacity=".55"/>'           f'<text x="{fx + 15}" y="{fy + 20}" font-size="9.5" fill="#f4f1e6">{caption}</text>'
+    if friend_area != "transformforest":
+        habitat, habitat_css = friend_areas.panel(friend_area, fx, fy, cw, ch)
+        css.append(habitat_css)
+        parts.append(f'<g clip-path="url(#fc)">{habitat}</g>')
+    else:
+        parts.append(f'<g clip-path="url(#fc)">{"".join(forest)}{weather}{tag}</g>')
     parts.append(f'<rect x="{fx}" y="{fy}" width="{cw}" height="{ch}" rx="11" fill="none" stroke="{T["border"]}"/>')
 
     # Heading
@@ -203,7 +210,7 @@ def render(data, theme, sky=None):
 
     css.append("@media (prefers-reduced-motion:reduce){*{animation:none!important}}")
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" '
-            f'aria-label="{total:,} GitHub contributions in the last year, with Eevee and friends">'
+            f'aria-label="{total:,} GitHub contributions in the last year, with a Pok?mon Friend Area">'
             f'<style>{"".join(css)}{"".join(sc.css)}</style><defs>{"".join(sc.defs)}</defs>{"".join(parts)}</svg>')
 
 
