@@ -77,7 +77,7 @@ Reproduce using commands in [FRIEND-AREA-DRAFTS.md](friend-area-drafts.md).
 The asset importer remains canonical here; mirror its public output and the
 three shared renderer/navigation files to the portfolio before validation.
 
-Next agent: review the new renders with the owner before merging this expansion.
+The owner approved these expansion renders for merge and deployment on 7 October 2026.
 Preserve all approved controls and mappings. Continue verification of original
 environmental frames and foreground occlusion rather than inventing animated
 effects or calling the hand-traced zones original game collision data.
