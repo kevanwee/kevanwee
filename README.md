@@ -262,5 +262,6 @@
   Friend Area scenery ripped by Toastypk and MYSTERY_DUNGEON, backgrounds via <a href="https://pamtre-berry.neocities.org/articles/friendareas">Pamtre Berry</a> ?
   thunder meadow and rank badges via the <a href="https://mysterydungeon.fandom.com/">Mystery Dungeon Wiki</a> · item icons via <a href="https://github.com/PokeAPI/sprites">PokeAPI</a> ·
   mega evolution symbol by pixelthecollector · drawn and regrown daily by <a href="./genpokemon/readme_art">genpokemon/readme_art</a><br />
-  a non-commercial fan project, not affiliated with or endorsed by Nintendo, Creatures, GAME FREAK or The Pokémon Company · Pokémon © their owners
+  a non-commercial fan project, not affiliated with or endorsed by Nintendo, Creatures, GAME FREAK or The Pokémon Company · Pokémon © their owners<br />
+  © 2023–2026 Kevan Wee · all rights reserved: see <a href="./LICENSE">LICENSE</a>; third-party material in <a href="./NOTICE.md">NOTICE.md</a>
 </sub></p>
