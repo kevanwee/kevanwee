@@ -11,8 +11,8 @@ const longDate = (date: string) => new Date(`${date}T00:00:00Z`).toLocaleDateStr
 export const describeDay = (day: Day) => `${day.count ? plural(day.count, 'contribution') : 'No contributions'} on ${longDate(day.date)}`;
 
 /** A blank year in the same shape, so the panel doesn't jump when the data arrives. */
-function blankYear(): Day[] {
-  const today = new Date(), days: Day[] = [];
+function blankYear(date: string): Day[] {
+  const today = new Date(`${date}T12:00:00`), days: Day[] = [];
   for (let i = 364; i >= 0; i--) days.push({ date: isoDate(new Date(today.getFullYear(), today.getMonth(), today.getDate() - i)), count: 0, level: 0 });
   return days;
 }
@@ -20,15 +20,18 @@ function blankYear(): Day[] {
 /** GitHub's contribution year, as two half-year beds under the Eevee forest (side by side when there's room). */
 export default function ContributionGarden() {
   const animationRef = useAnimationVisibility<HTMLDivElement>();
-  // A blank year on the server and first paint; the cached or fetched year arrives in the browser.
+  // Date-free skeleton on the server and first paint: build and browser dates may differ.
   const [calendar, setCalendar] = useState<Calendar | null>(null);
+  const [today, setToday] = useState<string | null>(null);
   const [failed, setFailed] = useState(false);
   const [hover, setHover] = useState<Day | null>(null);
 
   useEffect(() => {
     let live = true;
     const refresh = () => {
-      if (document.hidden || isFresh(readCache())) return;
+      if (document.hidden) return;
+      setToday(isoDate(new Date()));
+      if (isFresh(readCache())) return;
       loadContributions().then(next => { if (live) { setCalendar(next); setFailed(false); } }, () => { if (live) setFailed(true); });
     };
     const cached = readCache(); if (cached) setCalendar(cached);
@@ -39,12 +42,13 @@ export default function ContributionGarden() {
     return () => { live = false; clearInterval(timer); document.removeEventListener('visibilitychange', refresh); };
   }, []);
 
-  const days = useMemo(() => calendar?.days.length ? calendar.days : blankYear(), [calendar]);
+  const days = useMemo(() => calendar?.days.length ? calendar.days : today ? blankYear(today) : [], [calendar, today]);
   const { bands, width, byDate, summary } = useMemo(() => {
-    const weeks = toWeeks(days), split = Math.ceil(weeks.length / 2);
+    const weeks = days.length ? toWeeks(days) : Array.from({ length: 53 }, () => Array<Day | null>(7).fill(null));
+    const split = Math.ceil(weeks.length / 2);
     return { bands: [weeks.slice(0, split), weeks.slice(split)], width: split, byDate: new Map(days.map(day => [day.date, day])), summary: stats(days) };
   }, [days]);
-  const login = calendar?.login || PROFILE_LOGIN, today = isoDate(new Date());
+  const login = calendar?.login || PROFILE_LOGIN;
   const caption = hover ? describeDay(hover)
     : calendar ? `${plural(calendar.total, 'contribution')} in the last year`
     : failed ? "GitHub can't be reached right now." : 'Loading contributions…';
