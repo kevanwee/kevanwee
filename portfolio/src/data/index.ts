@@ -153,6 +153,18 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    id: "brewing",
+    company: "???",
+    role: "???",
+    subtitle: "???",
+    period: "Oct 2026 – Present",
+    type: "???",
+    url: "#",
+    bullets: [
+      "Something is brewing here ☕",
+    ],
+  },
+  {
     id: "smu-cdl-solid",
     logo: "/logos/smu.jpg",
     company: "SMU Yong Pung How School of Law",
