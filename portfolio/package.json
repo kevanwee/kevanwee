@@ -14,7 +14,8 @@
     "test:eevee-base:browser": "node scripts/test-eevee-base-browser.cjs",
     "lint": "next lint",
     "test:terminal": "node scripts/test-terminal.cjs",
-    "test:ssh:browser": "node scripts/test-ssh-browser.cjs"
+    "test:ssh:browser": "node scripts/test-ssh-browser.cjs",
+    "test:pokemon-pc:browser": "node scripts/test-pokemon-pc-browser.cjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

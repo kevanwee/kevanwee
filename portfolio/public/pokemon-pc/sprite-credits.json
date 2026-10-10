@@ -1,0 +1,1289 @@
+{
+  "source": "https://github.com/PMDCollab/SpriteCollab",
+  "revision": "47e5b9920bc5b2b491c53b18076300dc6813f103",
+  "licence": "CC BY-NC 4.0",
+  "species": [
+    {
+      "dex": 7,
+      "name": "Squirtle",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0007",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0007/0000/0001",
+          "credit": "SilverDeoxys563"
+        }
+      ]
+    },
+    {
+      "dex": 58,
+      "name": "Growlithe",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0058",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0058/0000/0001",
+          "credit": "Audino"
+        },
+        {
+          "label": "Hisui",
+          "path": "0058/0001",
+          "credit": "baronessfaron"
+        },
+        {
+          "label": "Hisui Shiny",
+          "path": "0058/0001/0001",
+          "credit": "ShyStarryRain"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0058/0002",
+          "credit": "baronessfaron"
+        }
+      ]
+    },
+    {
+      "dex": 59,
+      "name": "Arcanine",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0059",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0059/0000/0001",
+          "credit": "Tacocoa"
+        },
+        {
+          "label": "Hisui",
+          "path": "0059/0001",
+          "credit": "baronessfaron"
+        },
+        {
+          "label": "Hisui Shiny",
+          "path": "0059/0001/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0059/0002",
+          "credit": "baronessfaron"
+        }
+      ]
+    },
+    {
+      "dex": 133,
+      "name": "Eevee",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0133",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Female",
+          "path": "0133/0000/0000/0002",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Shiny",
+          "path": "0133/0000/0001",
+          "credit": "baronessfaron"
+        },
+        {
+          "label": "Shiny Female",
+          "path": "0133/0000/0001/0002",
+          "credit": "Morei"
+        },
+        {
+          "label": "Gigantamax",
+          "path": "0133/0001",
+          "credit": ""
+        },
+        {
+          "label": "Gigantamax Shiny",
+          "path": "0133/0001/0001",
+          "credit": ""
+        },
+        {
+          "label": "Alternate",
+          "path": "0133/0002",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Alternate Female",
+          "path": "0133/0002/0000/0002",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Alternate Shiny",
+          "path": "0133/0002/0001",
+          "credit": ""
+        },
+        {
+          "label": "Alternate2",
+          "path": "0133/0003",
+          "credit": ""
+        },
+        {
+          "label": "Alternate2 Shiny",
+          "path": "0133/0003/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 134,
+      "name": "Vaporeon",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0134",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0134/0000/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0134/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Altcolor Shiny",
+          "path": "0134/0001/0001",
+          "credit": "Anonymous"
+        }
+      ]
+    },
+    {
+      "dex": 135,
+      "name": "Jolteon",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0135",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0135/0000/0001",
+          "credit": "Lovi"
+        }
+      ]
+    },
+    {
+      "dex": 136,
+      "name": "Flareon",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0136",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0136/0000/0001",
+          "credit": "Tacocoa"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0136/0001",
+          "credit": "baronessfaron"
+        }
+      ]
+    },
+    {
+      "dex": 145,
+      "name": "Zapdos",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0145",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0145/0000/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Galar",
+          "path": "0145/0001",
+          "credit": "JHONY_REX"
+        },
+        {
+          "label": "Galar Shiny",
+          "path": "0145/0001/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Cutscene",
+          "path": "0145/0002",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Cutscene Shiny",
+          "path": "0145/0002/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0145/0003",
+          "credit": "SpectrumStars"
+        }
+      ]
+    },
+    {
+      "dex": 147,
+      "name": "Dratini",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0147",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0147/0000/0001",
+          "credit": "Pencil"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0147/0001",
+          "credit": "Deeshura"
+        }
+      ]
+    },
+    {
+      "dex": 148,
+      "name": "Dragonair",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0148",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0148/0000/0001",
+          "credit": "Lovi"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0148/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Altcolor Shiny",
+          "path": "0148/0001/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 149,
+      "name": "Dragonite",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0149",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0149/0000/0001",
+          "credit": "Deeshura"
+        },
+        {
+          "label": "Mega",
+          "path": "0149/0001",
+          "credit": ""
+        },
+        {
+          "label": "Altcolor",
+          "path": "0149/0002",
+          "credit": "Deeshura"
+        },
+        {
+          "label": "Altcolor Shiny",
+          "path": "0149/0002/0001",
+          "credit": "El_Pangoro_Parse"
+        }
+      ]
+    },
+    {
+      "dex": 150,
+      "name": "Mewtwo",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0150",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0150/0000/0001",
+          "credit": "El_Pangoro_Parse"
+        },
+        {
+          "label": "Mega X",
+          "path": "0150/0001",
+          "credit": ""
+        },
+        {
+          "label": "Mega X Shiny",
+          "path": "0150/0001/0001",
+          "credit": ""
+        },
+        {
+          "label": "Mega Y",
+          "path": "0150/0002",
+          "credit": "JFain"
+        },
+        {
+          "label": "Mega Y Shiny",
+          "path": "0150/0002/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Shadow",
+          "path": "0150/0003",
+          "credit": "Deeshura"
+        },
+        {
+          "label": "Shadow Mega X",
+          "path": "0150/0004",
+          "credit": ""
+        },
+        {
+          "label": "Altcolor",
+          "path": "0150/0005",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 197,
+      "name": "Umbreon",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0197",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0197/0000/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0197/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Altcolor Shiny",
+          "path": "0197/0001/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Alternate",
+          "path": "0197/0002",
+          "credit": ""
+        },
+        {
+          "label": "Alternate Shiny",
+          "path": "0197/0002/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 227,
+      "name": "Skarmory",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0227",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0227/0000/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Mega",
+          "path": "0227/0001",
+          "credit": "Johanne2"
+        },
+        {
+          "label": "Mega Shiny",
+          "path": "0227/0001/0001",
+          "credit": ""
+        },
+        {
+          "label": "Cutscene",
+          "path": "0227/0002",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Cutscene Shiny",
+          "path": "0227/0002/0001",
+          "credit": "Prismatic"
+        },
+        {
+          "label": "Alternate",
+          "path": "0227/0003",
+          "credit": ""
+        },
+        {
+          "label": "Alternate Shiny",
+          "path": "0227/0003/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 267,
+      "name": "Beautifly",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0267",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Female",
+          "path": "0267/0000/0000/0002",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0267/0000/0001",
+          "credit": "Anonymous"
+        },
+        {
+          "label": "Shiny Female",
+          "path": "0267/0000/0001/0002",
+          "credit": "Anonymous"
+        }
+      ]
+    },
+    {
+      "dex": 282,
+      "name": "Gardevoir",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0282",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0282/0000/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Mega",
+          "path": "0282/0001",
+          "credit": "baronessfaron"
+        },
+        {
+          "label": "Mega Shiny",
+          "path": "0282/0001/0001",
+          "credit": "baronessfaron"
+        },
+        {
+          "label": "Cutscene",
+          "path": "0282/0002",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Cutscene Shiny",
+          "path": "0282/0002/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Alternate",
+          "path": "0282/0003",
+          "credit": ""
+        },
+        {
+          "label": "Alternate Shiny",
+          "path": "0282/0003/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 286,
+      "name": "Breloom",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0286",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0286/0000/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 300,
+      "name": "Skitty",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0300",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0300/0000/0001",
+          "credit": "lokatts"
+        },
+        {
+          "label": "Alternate",
+          "path": "0300/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Alternate Shiny",
+          "path": "0300/0001/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 341,
+      "name": "Corphish",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0341",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0341/0000/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Cutscene",
+          "path": "0341/0001",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Cutscene Shiny",
+          "path": "0341/0001/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0341/0002",
+          "credit": ""
+        },
+        {
+          "label": "Cutscene Altcolor",
+          "path": "0341/0003",
+          "credit": "Morei"
+        }
+      ]
+    },
+    {
+      "dex": 382,
+      "name": "Kyogre",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0382",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0382/0000/0001",
+          "credit": "lokatts"
+        },
+        {
+          "label": "Primal",
+          "path": "0382/0001",
+          "credit": "baronessfaron"
+        },
+        {
+          "label": "Primal Shiny",
+          "path": "0382/0001/0001",
+          "credit": "G〜"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0382/0002",
+          "credit": "Gust"
+        }
+      ]
+    },
+    {
+      "dex": 384,
+      "name": "Rayquaza",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0384",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0384/0000/0001",
+          "credit": "lokatts"
+        },
+        {
+          "label": "Mega",
+          "path": "0384/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Mega Shiny",
+          "path": "0384/0001/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0384/0002",
+          "credit": "G〜"
+        },
+        {
+          "label": "Alternate",
+          "path": "0384/0003",
+          "credit": ""
+        },
+        {
+          "label": "Alternate Shiny",
+          "path": "0384/0003/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 443,
+      "name": "Gible",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0443",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Female",
+          "path": "0443/0000/0000/0002",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0443/0000/0001",
+          "credit": "Lovi"
+        },
+        {
+          "label": "Shiny Female",
+          "path": "0443/0000/0001/0002",
+          "credit": "Lovi"
+        }
+      ]
+    },
+    {
+      "dex": 475,
+      "name": "Gallade",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0475",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0475/0000/0001",
+          "credit": "Anonymous"
+        },
+        {
+          "label": "Mega",
+          "path": "0475/0001",
+          "credit": "JFain"
+        },
+        {
+          "label": "Mega Shiny",
+          "path": "0475/0001/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0475/0002",
+          "credit": "G〜"
+        }
+      ]
+    },
+    {
+      "dex": 487,
+      "name": "Giratina",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0487",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Shiny",
+          "path": "0487/0000/0001",
+          "credit": "G〜"
+        },
+        {
+          "label": "Origin",
+          "path": "0487/0001",
+          "credit": "CHUNSOFT"
+        },
+        {
+          "label": "Origin Shiny",
+          "path": "0487/0001/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Altcolor",
+          "path": "0487/0002",
+          "credit": "G〜"
+        },
+        {
+          "label": "Altcolor Shiny",
+          "path": "0487/0002/0001",
+          "credit": "G〜"
+        },
+        {
+          "label": "Origin Alternate",
+          "path": "0487/0003",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Origin Alternate Shiny",
+          "path": "0487/0003/0001",
+          "credit": "Moo"
+        }
+      ]
+    },
+    {
+      "dex": 570,
+      "name": "Zorua",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0570",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Shiny",
+          "path": "0570/0000/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Hisui",
+          "path": "0570/0001",
+          "credit": "Ichor"
+        },
+        {
+          "label": "Hisui Shiny",
+          "path": "0570/0001/0001",
+          "credit": "Morei"
+        },
+        {
+          "label": "Alternate",
+          "path": "0570/0002",
+          "credit": ""
+        },
+        {
+          "label": "Alternate2",
+          "path": "0570/0003",
+          "credit": ""
+        },
+        {
+          "label": "Alternate2 Shiny",
+          "path": "0570/0003/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 663,
+      "name": "Talonflame",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0663",
+          "credit": "Soulja"
+        },
+        {
+          "label": "Shiny",
+          "path": "0663/0000/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 696,
+      "name": "Tyrunt",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0696",
+          "credit": "NeroIntruder"
+        },
+        {
+          "label": "Shiny",
+          "path": "0696/0000/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 700,
+      "name": "Sylveon",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0700",
+          "credit": "baronessfaron"
+        },
+        {
+          "label": "Shiny",
+          "path": "0700/0000/0001",
+          "credit": "Mond"
+        }
+      ]
+    },
+    {
+      "dex": 704,
+      "name": "Goomy",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0704",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Shiny",
+          "path": "0704/0000/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 715,
+      "name": "Noivern",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0715",
+          "credit": "Soulja"
+        },
+        {
+          "label": "Shiny",
+          "path": "0715/0000/0001",
+          "credit": "Top_Kec"
+        }
+      ]
+    },
+    {
+      "dex": 717,
+      "name": "Yveltal",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0717",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Shiny",
+          "path": "0717/0000/0001",
+          "credit": "Top_Kec"
+        }
+      ]
+    },
+    {
+      "dex": 722,
+      "name": "Rowlet",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0722",
+          "credit": "Reimu\\_needs\\_$$$"
+        },
+        {
+          "label": "Shiny",
+          "path": "0722/0000/0001",
+          "credit": "XModxGodX"
+        },
+        {
+          "label": "Alternate",
+          "path": "0722/0001",
+          "credit": ""
+        },
+        {
+          "label": "Alternate Shiny",
+          "path": "0722/0001/0001",
+          "credit": ""
+        }
+      ]
+    },
+    {
+      "dex": 773,
+      "name": "Silvally",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0773",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Shiny",
+          "path": "0773/0000/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Fighting",
+          "path": "0773/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Fighting Shiny",
+          "path": "0773/0001/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Flying",
+          "path": "0773/0002",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Flying Shiny",
+          "path": "0773/0002/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Poison",
+          "path": "0773/0003",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Poison Shiny",
+          "path": "0773/0003/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Ground",
+          "path": "0773/0004",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Ground Shiny",
+          "path": "0773/0004/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Rock",
+          "path": "0773/0005",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Rock Shiny",
+          "path": "0773/0005/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Bug",
+          "path": "0773/0006",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Bug Shiny",
+          "path": "0773/0006/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Ghost",
+          "path": "0773/0007",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Ghost Shiny",
+          "path": "0773/0007/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Steel",
+          "path": "0773/0008",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Steel Shiny",
+          "path": "0773/0008/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Fire",
+          "path": "0773/0009",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Fire Shiny",
+          "path": "0773/0009/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Water",
+          "path": "0773/0010",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Water Shiny",
+          "path": "0773/0010/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Grass",
+          "path": "0773/0011",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Grass Shiny",
+          "path": "0773/0011/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Electric",
+          "path": "0773/0012",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Electric Shiny",
+          "path": "0773/0012/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Psychic",
+          "path": "0773/0013",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Psychic Shiny",
+          "path": "0773/0013/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Ice",
+          "path": "0773/0014",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Ice Shiny",
+          "path": "0773/0014/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Dragon",
+          "path": "0773/0015",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Dragon Shiny",
+          "path": "0773/0015/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Dark",
+          "path": "0773/0016",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Dark Shiny",
+          "path": "0773/0016/0001",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Fairy",
+          "path": "0773/0017",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Fairy Shiny",
+          "path": "0773/0017/0001",
+          "credit": "Top_Kec"
+        }
+      ]
+    },
+    {
+      "dex": 804,
+      "name": "Naganadel",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0804",
+          "credit": "Top_Kec"
+        },
+        {
+          "label": "Shiny",
+          "path": "0804/0000/0001",
+          "credit": "Top_Kec"
+        }
+      ]
+    },
+    {
+      "dex": 807,
+      "name": "Zeraora",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0807",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Shiny",
+          "path": "0807/0000/0001",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Mega",
+          "path": "0807/0001",
+          "credit": "pi3.14"
+        },
+        {
+          "label": "Mega Shiny",
+          "path": "0807/0001/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 823,
+      "name": "Corviknight",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0823",
+          "credit": "NATANIEL_SAMA"
+        },
+        {
+          "label": "Shiny",
+          "path": "0823/0000/0001",
+          "credit": "G〜"
+        }
+      ]
+    },
+    {
+      "dex": 842,
+      "name": "Appletun",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0842",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Shiny",
+          "path": "0842/0000/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 921,
+      "name": "Pawmi",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0921",
+          "credit": "ShyStarryRain"
+        },
+        {
+          "label": "Shiny",
+          "path": "0921/0000/0001",
+          "credit": "ShyStarryRain"
+        }
+      ]
+    },
+    {
+      "dex": 926,
+      "name": "Fidough",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0926",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Shiny",
+          "path": "0926/0000/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 935,
+      "name": "Charcadet",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0935",
+          "credit": "Emmuffin"
+        },
+        {
+          "label": "Shiny",
+          "path": "0935/0000/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 936,
+      "name": "Armarouge",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0936",
+          "credit": "Soulja"
+        },
+        {
+          "label": "Shiny",
+          "path": "0936/0000/0001",
+          "credit": "Emmuffin"
+        }
+      ]
+    },
+    {
+      "dex": 937,
+      "name": "Ceruledge",
+      "forms": [
+        {
+          "label": "Normal",
+          "path": "0937",
+          "credit": "baronessfaron"
+        },
+        {
+          "label": "Shiny",
+          "path": "0937/0000/0001",
+          "credit": "baronessfaron"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "description": "Original embedded asset references, including fixed mascots and cursor forms; supplements defaults-v1.json. No preferences are overwritten.",
+  "sources": {
+    "src/app/layout.tsx": [
+      "/cloud-chibi.png"
+    ],
+    "src/components/BartCaseStudyModal.tsx": [
+      "/projects/bart/image1.png",
+      "/projects/bart/image10.png",
+      "/projects/bart/image12.png",
+      "/projects/bart/image15.png",
+      "/projects/bart/image16.png",
+      "/projects/bart/image18.png",
+      "/projects/bart/image19.png",
+      "/projects/bart/image20.png",
+      "/projects/bart/image21.png",
+      "/projects/bart/image3.png",
+      "/projects/bart/image4.png",
+      "/projects/bart/image5.png"
+    ],
+    "src/components/BioDialogue.tsx": [
+      "/pmd/ceruledge-shiny.png"
+    ],
+    "src/components/Contact.tsx": [
+      "/charc.gif"
+    ],
+    "src/components/DiancieCursor.tsx": [
+      "/diancie/Idle-Anim.png",
+      "/diancie/Sleep-Anim.png",
+      "/diancie/Strike-Anim.png",
+      "/diancie/Walk-Anim.png"
+    ],
+    "src/components/Experience.tsx": [
+      "/froakie/Idle-Anim.png",
+      "/froakie/Sleep-Anim.png",
+      "/fuecoco/Idle-Anim.png",
+      "/fuecoco/Sleep-Anim.png"
+    ],
+    "src/components/FriendAreas.tsx": [
+      "/friend-areas/catalog.json"
+    ],
+    "src/components/FusionWheel.tsx": [
+      "/fusion/partners/darkrai/Idle-Anim.png",
+      "/fusion/partners/zygarde/Idle-Anim.png"
+    ],
+    "src/components/LeftPanel.tsx": [
+      "/cloud-chibi.png"
+    ],
+    "src/components/MegaEvolution.tsx": [
+      "/mega/stones/diancite.png",
+      "/mega/stones/dragoninite.png",
+      "/mega/stones/key-stone.png",
+      "/mega/stones/latiasite.png",
+      "/mega/stones/latiosite.png"
+    ],
+    "src/components/PokeballRow.tsx": [
+      "/icons/forms/dna-splicers.png",
+      "/icons/forms/mega-badge.png"
+    ],
+    "src/components/PokemonCursor.tsx": [
+      "/ceruledge/Attack-Anim.png",
+      "/ceruledge/Idle-Anim.png",
+      "/ceruledge/Sleep-Anim.png",
+      "/ceruledge/Walk-Anim.png",
+      "/diancie-base/Attack-Anim.png",
+      "/diancie-base/Idle-Anim.png",
+      "/diancie-base/Sleep-Anim.png",
+      "/diancie-base/Walk-Anim.png",
+      "/diancie/Idle-Anim.png",
+      "/diancie/Sleep-Anim.png",
+      "/diancie/Strike-Anim.png",
+      "/diancie/Walk-Anim.png",
+      "/greninja/Attack-Anim.png",
+      "/greninja/Idle-Anim.png",
+      "/greninja/Sleep-Anim.png",
+      "/greninja/Walk-Anim.png",
+      "/ironvaliant/Sleep-Anim.png",
+      "/ironvaliant/SpAttack-Anim.png",
+      "/ironvaliant/Twirl-Anim.png",
+      "/ironvaliant/Walk-Anim.png",
+      "/latias/Attack-Anim.png",
+      "/latias/Idle-Anim.png",
+      "/latias/Sleep-Anim.png",
+      "/latias/Walk-Anim.png",
+      "/latios/Attack-Anim.png",
+      "/latios/Idle-Anim.png",
+      "/latios/Sleep-Anim.png",
+      "/latios/Walk-Anim.png",
+      "/mega/latias/Attack-Anim.png",
+      "/mega/latias/Idle-Anim.png",
+      "/mega/latias/Sleep-Anim.png",
+      "/mega/latias/Walk-Anim.png",
+      "/mega/latios/Attack-Anim.png",
+      "/mega/latios/Idle-Anim.png",
+      "/mega/latios/Sleep-Anim.png",
+      "/mega/latios/Walk-Anim.png",
+      "/overworld/dragonite/Attack-Anim.png",
+      "/overworld/dragonite/Idle-Anim.png",
+      "/overworld/dragonite/Sleep-Anim.png",
+      "/overworld/dragonite/Walk-Anim.png",
+      "/overworld/mega-greninja/Attack-Anim.png",
+      "/overworld/mega-greninja/Idle-Anim.png",
+      "/overworld/mega-greninja/Sleep-Anim.png",
+      "/overworld/mega-greninja/Walk-Anim.png",
+      "/overworld/shiny-mega-dragonite/Attack-Anim.png",
+      "/overworld/shiny-mega-dragonite/Idle-Anim.png",
+      "/overworld/shiny-mega-dragonite/Sleep-Anim.png",
+      "/overworld/shiny-mega-dragonite/Walk-Anim.png"
+    ],
+    "src/components/SubstituteSandbox.tsx": [
+      "/substitute/Hurt-Anim.png",
+      "/substitute/Idle-Anim.png",
+      "/substitute/Walk-Anim.png"
+    ],
+    "src/components/TeddiursaRoamer.tsx": [
+      "/teddiursa/Idle-Anim.png",
+      "/teddiursa/Sleep-Anim.png",
+      "/teddiursa/Walk-Anim.png"
+    ],
+    "src/components/WorldPlayground.tsx": [
+      "/worlds/items/oran_berry.png",
+      "/worlds/items/poke_ball.png"
+    ]
+  }
+}
