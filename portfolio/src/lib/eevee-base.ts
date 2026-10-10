@@ -17,6 +17,7 @@ function inside(x: number, y: number) {
 export function forestWalkable(x: number, y: number) {
   // Room for feet at the tree edge, and the entire body around the stone.
   return [[0,0],[-9,0],[9,0],[0,-7],[0,4]].every(([dx,dy]) => inside(x + dx, y + dy)) &&
+    !(x > 223 && x < 257 && y > 269) &&
     !(x + 17 > 209 && x - 17 < 263 && y > 177 && y - 30 < 216);
 }
 export function forestSegment(a: Point, b: Point) {

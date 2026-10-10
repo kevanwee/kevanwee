@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import {connectPageResidents} from "./pc/residents";
 import { SPRITES, paintSprite as paint, preloadSpriteSheet as preload } from "@/lib/overworld-sprites";
 import { SILVALLY_FORMS, createOverworld, createWanderer, displayName, greetResident, shuffle, stepOverworld, stepWanderer } from "@/lib/pokemon-overworld";
 
@@ -64,7 +65,7 @@ export default function PokemonOverworld() {
         node.addEventListener("click", event => {
           event.stopPropagation();
           greetResident(actor);
-          if (statusRef.current) statusRef.current.textContent = `${name} sends you a heart!`;
+          if (statusRef.current) statusRef.current.textContent = `${displayName(actor.species)} sends you a heart!`;
           clearTimeout(reactionTimers.get(actor.id));
           reactionTimers.set(actor.id, setTimeout(() => {
             actor.reaction = 0; reactionTimers.delete(actor.id); wake();
@@ -269,6 +270,11 @@ export default function PokemonOverworld() {
       dirty = true;
       if (!raf && !document.hidden && !disposed) raf = requestAnimationFrame(draw);
     }
+    const disconnectPc = connectPageResidents(world.residents, SPRITES, preload, wake, (id, species) => {
+      const entry = nodes.get(id); if (!entry) return;
+      entry.node.dataset.pokemon = species;
+      entry.node.setAttribute('aria-label', `Say hello to ${displayName(species)}`);
+    });
     const visibility = () => { last = 0; wake(); };
     const resizeObserver = new ResizeObserver(wake);
     resizeObserver.observe(document.body);
@@ -284,7 +290,7 @@ export default function PokemonOverworld() {
     document.fonts.ready.then(() => { if (!disposed) wake(); });
     wake();
     return () => {
-      disposed = true;
+      disconnectPc(); disposed = true;
       cancelAnimationFrame(raf);
       resizeObserver.disconnect();
       mutations.disconnect();

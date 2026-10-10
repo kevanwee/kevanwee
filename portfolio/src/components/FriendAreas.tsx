@@ -133,6 +133,7 @@ export default function FriendAreas() {
         </button>
         {arrow(1)}
       </div>
+      {area && <button type="button" onClick={() => choose("transformforest")} style={{fontSize:12,padding:"6px 0"}}>Visit the PC in Transform Forest</button>}
       {error && <p role="status">{error}</p>}
       {open && (
         <Modal label="Friend Areas" onClose={() => setOpen(false)}>

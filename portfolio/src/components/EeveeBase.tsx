@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import MapPc from "./pc/MapPc";
+import {connectForestResidents} from "./pc/forest";
 import ForestSky, { useForestSky } from "./ForestSky";
 import WeatherCredit from "@/components/WeatherCredit";
 import { EEVEELUTIONS, displayName } from "@/lib/pokemon-overworld";
@@ -42,7 +44,7 @@ export default function EeveeBase({ inDialog = false }: { inDialog?: boolean }) 
       if (disposed || document.hidden || !visible) { last = 0; return; }
       if (last && now - last < 32) { raf = requestAnimationFrame(draw); return; }
       const dt = last ? Math.min(64, now - last) : 0; last = now;
-      const modal = !inDialog && !!document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]');
+      const modal = !!document.querySelector('.pokemon-pc-dialog[open]') || !inDialog && !!document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]');
       const scale = root.clientWidth / FOREST_WIDTH;
       for (const actor of actors) {
         if (night.current) { if (!actor.nap) { actor.nap = true; actor.path = []; } actor.rest = Math.max(actor.rest, 60000); actor.animation = "Sleep"; }
@@ -67,12 +69,16 @@ export default function EeveeBase({ inDialog = false }: { inDialog?: boolean }) 
       if (!motion.matches && !modal) raf = requestAnimationFrame(draw);
     }
     function wake() { if (!raf && !disposed && visible && !document.hidden) { last = 0; raf = requestAnimationFrame(draw); } }
+    const disconnectPc = connectForestResidents(actors, SPRITES, preloadSpriteSheet, wake, (i, species) => {
+      nodes[i].button.dataset.forestPokemon = species;
+      nodes[i].button.setAttribute('aria-label', `Say hello to ${displayName(species)}`);
+    });
     wakeRef.current = wake;
     const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; wake(); }); intersection.observe(root);
     const resize = new ResizeObserver(wake); resize.observe(root);
     const mutations = new MutationObserver(wake); mutations.observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ['open', 'aria-modal']});
     motion.addEventListener('change', wake); document.addEventListener('visibilitychange', wake);
-    return () => { disposed = true; cancelAnimationFrame(raf); intersection.disconnect(); resize.disconnect(); mutations.disconnect();
+    return () => { disconnectPc(); disposed = true; cancelAnimationFrame(raf); intersection.disconnect(); resize.disconnect(); mutations.disconnect();
       nodes.forEach(n => n.cleanup()); timers.forEach(clearTimeout); motion.removeEventListener('change', wake); document.removeEventListener('visibilitychange', wake); };
   }, [inDialog]);
   // Margins live on the wrapper in page.tsx, which also holds the contribution panel and dialogue box.
@@ -80,6 +86,7 @@ export default function EeveeBase({ inDialog = false }: { inDialog?: boolean }) 
     <div ref={habitat} data-eevee-base className="relative isolate w-full overflow-hidden rounded-2xl border border-cream-200"
       style={{aspectRatio: '480 / 312', background: 'url(/eevee-base/background.png) center / 100% 100%', imageRendering: 'pixelated'}}>
       <ForestSky sky={sky} />
+      <MapPc style={{left: '50%', top: '96.15%', width: '5%'}} />
       <span data-forest-stone aria-hidden="true" className="absolute pointer-events-none" style={{backgroundImage: 'url(/eevee-base/stone-frames.png)', backgroundRepeat: 'no-repeat'}} />
       {EEVEELUTIONS.map(species => <button key={species} data-forest-pokemon={species} className="overworld-resident" type="button" aria-label={`Say hello to ${displayName(species)}`}>
         <span className="overworld-sprite" aria-hidden="true" /><span className="overworld-heart" hidden aria-hidden="true" />

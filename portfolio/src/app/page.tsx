@@ -14,6 +14,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import PokemonCursor from "@/components/PokemonCursor";
 import TeddiursaRoamer from "@/components/TeddiursaRoamer";
 import FusionWheel from "@/components/FusionWheel";
+import PokemonPcHost from "@/components/PokemonPcHost";
 import { PokemonCursorProvider } from "@/components/PokemonCursorContext";
 
 const PokemonOverworld = dynamic(() => import("@/components/PokemonOverworld"), { ssr: false });
@@ -51,6 +52,7 @@ export default function Home() {
 
   return (
     <PokemonCursorProvider>
+    <PokemonPcHost />
     <div
       className="relative min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
       style={{ "--viewport-offset": "clamp(4rem, 12vh, 9rem)" } as CSSProperties}
