@@ -8,6 +8,7 @@ import {
   type Catalog,
   type Resident,
 } from "./friend-areas";
+import { connectFriendArea } from "./pc/friend-areas";
 
 export default function FriendAreaScene({
   area,
@@ -39,10 +40,12 @@ export default function FriendAreaScene({
       residents.set(area.id, actors);
     }
     const population = actors;
-    element.setAttribute(
-      "aria-label",
-      `${area.name}. Residents: ${population.map((a) => catalog.sprites[a.id].name).join(", ")}`,
-    );
+    const describe = () =>
+      element.setAttribute(
+        "aria-label",
+        `${area.name}. Residents: ${population.map((a) => catalog.sprites[a.id].name).join(", ")}`,
+      );
+    describe();
     const quiet = () => {
       try {
         return (
@@ -141,11 +144,10 @@ export default function FriendAreaScene({
         ["Idle", "Walk"].map((a) => catalog.sprites[id].animations[a].src),
       ),
     ];
-    setError("");
-    Promise.all(
-      [...new Set(paths)].map(
-        (src) =>
-          new Promise<void>((resolve, reject) => {
+    const load = (src: string) =>
+      images.has(src)
+        ? Promise.resolve()
+        : new Promise<void>((resolve, reject) => {
             const img = new Image();
             img.onload = () => {
               images.set(src, img);
@@ -153,9 +155,15 @@ export default function FriendAreaScene({
             };
             img.onerror = () => reject(new Error(src));
             img.src = "/friend-areas/" + src;
-          }),
-      ),
-    )
+          });
+    setError("");
+    // PC choices change natives in place; their sheets are loaded before the change applies.
+    const areaOrder = catalog.areas.findIndex((a) => a.id === area.id);
+    const disconnectPc = connectFriendArea(area, areaOrder, catalog, population, load, () => {
+      describe();
+      wake();
+    });
+    Promise.all([...new Set(paths)].map(load))
       .then(wake)
       .catch(() => {
         if (!disposed)
@@ -165,6 +173,7 @@ export default function FriendAreaScene({
     window.addEventListener("voracity:motion-change", wake);
     document.addEventListener("visibilitychange", wake);
     return () => {
+      disconnectPc();
       disposed = true;
       cancelAnimationFrame(raf);
       observer.disconnect();
@@ -181,7 +190,7 @@ export default function FriendAreaScene({
         width={area.size[0]}
         height={area.size[1]}
         role="img"
-        aria-label={`${area.name}. Residents: ${area.roster.map((id) => catalog.sprites[id].name).join(", ")}`}
+        aria-label={`${area.name}. Residents: ${(residents.get(area.id)?.map((a) => a.id) ?? area.roster).map((id) => catalog.sprites[id].name).join(", ")}`}
         style={{
           width: "100%",
           height: "auto",

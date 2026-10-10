@@ -99,3 +99,4 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
   current when adding sprites, fonts, data or music, and never present third-party assets as the owner's.
 
 - Diancie dialogue (8 October 2026): the owner wants activity close to live across Voracity, portfolio and README. Two-hour or thirty-minute refreshes are too slow. Separate the lightweight activity feed from the garden, poll frequently while visible, preserve private-repo redaction and distinguish scheduled polling from immediate push delivery.
+- Pokémon PC (11 October 2026): one sprite set at one scale (Smogon box icons, PokeAPI 96px fronts; natural size times an integer, never fitted). The left bar lists boxes: Cursor companion, one per Friend Area (Transform Forest first) and Free roaming; opening a box lists its Pokémon like the in-game party panel. Fixed mascots, the search pair and bonded pairs are not listed. Apply to Voracity and the portfolio together.
