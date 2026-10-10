@@ -3,6 +3,10 @@ export interface PcTarget {
  id:string; label:string; group:string; original:string; allowed:string[];
  current:()=>string; apply:(id:string)=>void; prepare?:(id:string)=>Promise<void>;
  reason?:string;
+ /** Boxes are listed by this order (smaller first), then by registration. */
+ order?:number;
+ /** Declared rather than on screen; an on-screen registration always takes precedence. */
+ passive?:boolean;
 }
 export interface CursorSnapshot {lineup:string[];selected:string;mega:string[];fusion:string|null}
 type Backup={version:1;cursor:CursorSnapshot;residents:Record<string,string>};
@@ -15,6 +19,13 @@ export const pcSubscribe=(listener:()=>void)=>{listeners.add(listener);return ()
 export const pcRevision=()=>revision;
 export const pcTargets=()=>[...targets.values()];
 export const openPc=()=>window.dispatchEvent(new Event('pokemon-pc:open'));
+/** The saved choice for a place, if any. */
+export const pcChoice=(id:string):string|undefined=>choices[id];
+/** List a place whose scene is not on screen. Choices are saved; the scene applies them when it mounts and registers. */
+export function declarePcSlot(slot:Omit<PcTarget,'current'|'apply'|'prepare'>){
+ const allowed=new Set(slot.allowed);
+ return registerPcTarget({...slot,passive:true,current:()=>{const id=choices[slot.id];return id&&allowed.has(id)?id:slot.original;},apply:()=>{}});
+}
 const record=(value:unknown):value is Record<string,string>=>!!value&&typeof value==='object'&&!Array.isArray(value)&&Object.entries(value).length<=512&&Object.entries(value).every(([k,v])=>k.length<160&&typeof v==='string'&&/^[a-z0-9-]{1,80}$/.test(v));
 export function configurePc(namespace:string|null){
  if(key===(namespace||''))return;
@@ -32,8 +43,8 @@ async function restoreChoice(target:PcTarget){
 }
 export function registerPcTarget(target:PcTarget){
  const group=registrations.get(target.id)||[];group.push(target);registrations.set(target.id,group);
- targets.set(target.id,target);if(key)void restoreChoice(target);notify();
- return ()=>{const remaining=(registrations.get(target.id)||[]).filter(t=>t!==target);if(remaining.length){registrations.set(target.id,remaining);targets.set(target.id,remaining.at(-1)!);}else{registrations.delete(target.id);targets.delete(target.id);}notify();};
+ const shown=targets.get(target.id);if(!target.passive||!shown||shown.passive)targets.set(target.id,target);if(key)void restoreChoice(target);notify();
+ return ()=>{const remaining=(registrations.get(target.id)||[]).filter(t=>t!==target);if(remaining.length){registrations.set(target.id,remaining);targets.set(target.id,remaining.filter(t=>!t.passive).at(-1)||remaining.at(-1)!);}else{registrations.delete(target.id);targets.delete(target.id);}notify();};
 }
 export function capturePcDefaults(cursor:CursorSnapshot):Backup{
  if(!key)throw Error('Your Pokémon preferences are still loading.');

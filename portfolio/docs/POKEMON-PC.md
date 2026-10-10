@@ -2,8 +2,11 @@
 
 The cabinet at the bottom of Transform Forest opens a main-series-style storage
 screen: cream frame, green 6 × 5 boxes, native pixel icons, National Dex navigation,
-search and forms. **Build team occupies the left column**; the box remains on the
-right. On phones the team scrolls above the box. The cabinet is original pixel SVG,
+search and forms. **The left bar lists your boxes**: Cursor companion, Transform
+Forest, one box per Friend Area and Free roaming. Opening one lists its Pokémon, like
+the party panel in the games; pick one, then choose its replacement from the box on
+the right. On phones the boxes sit above the box grid. Other Friend Areas show a
+**Pokémon PC** button under the map. The cabinet is original pixel SVG,
 with a keyboard/touch button and a reserved footprint in forest pathfinding.
 
 ## Defaults first
@@ -24,16 +27,20 @@ PC choices apply to matching resident identities and stable forest places.
 
 ## What can change
 
-- Cursor companions already supported by the site's cursor renderer.
-- Six forest places, using existing compatible ground Idle/Walk/Sleep sheets.
-- Independent page residents, restricted to compatible ground/flying animation sets.
+- **Cursor companion**: the six lineup slots. A Pokémon already in the lineup swaps
+  places instead of appearing twice. Only cursors the site's renderer supports.
+- **Transform Forest**: six places, using compatible ground Idle/Walk/Sleep sheets.
+  Listed even while another Friend Area is on screen (declared slots apply on mount).
+- **Each Friend Area**: its native residents. Any species with Friend Area sheets
+  can take a place; visiting guests keep their per-visit draw.
+- **Free roaming**: independent page residents, restricted to compatible
+  ground/flying sets. Fixed mascots, the search bar's pair and bonded pairs are not
+  listed.
 
 The full 1,025-species base Dex is browsable. **Usable here** filters the actual
 compatible choices. This does not add 1,025 animated residents. Search pairs,
 bonded companions and residents with special page roles keep those roles; fixed
-mascots, forecast forms and Route 111/Mauville populations are preserved. The
-portfolio's other Friend Areas retain their native visitor logic; their navigation
-offers a return to the PC in Transform Forest.
+mascots, forecast forms and Route 111/Mauville populations are preserved.
 
 ## Architecture
 
@@ -43,8 +50,9 @@ flowchart LR
   Catalog[Static Dex + verified sprite files] --> Dialog
   Dialog --> Host[Site cursor adapter]
   Dialog --> Registry[Resident registry]
-  Registry --> Forest[Existing forest actors]
-  Registry --> Page[Existing independent page actors]
+  Registry --> Forest[Forest actors, or declared slots off screen]
+  Registry --> Areas[Friend Area natives on screen, declared slots otherwise]
+  Registry --> Page[Independent page actors]
   Host --> Cursor[Existing cursor context]
   Registry --> Storage[Browser defaults and overrides]
 ```
@@ -64,7 +72,13 @@ Native dialogs preserve focus, make the page inert and work with reduced motion.
 
 ## Assets and maintenance
 
-Box icons/front sprites retain the pinned PokeAPI source URLs and SHA-256 receipts;
+Every box icon comes from one set, the [Smogon / Pokémon Showdown sprite
+repository](https://github.com/smogon/sprites) (Gen 6/7 menu sprites; Generation VIII
+and IX by the Smogon community in the same style), and every front from PokeAPI's
+uniform 96 × 96 set (later generations by the Smogon Sprite Project), including Mega,
+Primal, Hisuian and Silvally forms. Sprites render at natural size times an integer
+(CSS zoom), never fitted, so species keep their relative sizes as in the games. Both
+sources are pinned, with source URLs and SHA-256 receipts;
 SpriteCollab credits list individual contributors/forms and the pinned revision.
 Type metadata carries its PokeAPI BSD-3-Clause source. The font is Pixelify Sans
 (SIL OFL). Toastypk/Pamtre Berry retain the existing Transform Forest credit.

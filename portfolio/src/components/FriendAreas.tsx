@@ -10,6 +10,8 @@ import {
 import Modal from "./Modal";
 import EeveeBase from "./EeveeBase";
 import type { Catalog, Resident } from "./friend-areas";
+import { declareFriendAreas } from "./pc/friend-areas";
+import { openPc } from "./pc/runtime";
 const Scene = lazy(() => import("./FriendAreaScene"));
 
 export default function FriendAreas() {
@@ -42,6 +44,11 @@ export default function FriendAreas() {
       });
     return () => controller.abort();
   }, []);
+  useEffect(() => {
+    if (!catalog) return;
+    // Every area keeps a PC box; the scene on screen applies the choices to its residents.
+    return declareFriendAreas(catalog);
+  }, [catalog]);
   const area = catalog?.areas.find((a) => a.id === selected);
   const options = [
     "transformforest",
@@ -133,7 +140,8 @@ export default function FriendAreas() {
         </button>
         {arrow(1)}
       </div>
-      {area && <button type="button" onClick={() => choose("transformforest")} style={{fontSize:12,padding:"6px 0"}}>Visit the PC in Transform Forest</button>}
+      {/* The PC cabinet stands in Transform Forest; other areas reach it from here. */}
+      {area && <button type="button" aria-label="Open Pokémon PC" aria-haspopup="dialog" onClick={openPc} style={{fontSize:12,padding:"6px 0"}}>Pokémon PC</button>}
       {error && <p role="status">{error}</p>}
       {open && (
         <Modal label="Friend Areas" onClose={() => setOpen(false)}>
