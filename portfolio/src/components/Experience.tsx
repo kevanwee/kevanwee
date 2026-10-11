@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { experiences, Experience } from "@/data";
+import ExperienceTimeline from "./ExperienceTimeline";
 
 const TICK_MS = 16;
 
@@ -275,6 +276,14 @@ export default function ExperienceSection() {
             })}
           </div>
         </div>
+
+        {/* A draggable timeline of the same roles; it and the tabs share one selection. */}
+        <ExperienceTimeline
+          experiences={experiences}
+          activeId={activeId}
+          label={(exp) => TAB_LABELS[exp.id] ?? exp.company.split(" ")[0]}
+          onSelect={setActiveId}
+        />
 
         <div className="flex flex-col gap-0 sm:flex-row">
           {/* Tab list */}
