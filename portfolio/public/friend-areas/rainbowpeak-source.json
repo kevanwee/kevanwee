@@ -1,0 +1,25 @@
+{
+  "background": "rainbowpeak.png",
+  "size": [
+    456,
+    312
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H05P02.bpl",
+      "sha256": "60826a435bc402d2408266e3b269c7299d67af50e69f74f7b4cca0bf67597fa5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H05P02c.bpc",
+      "sha256": "c696082cc83cc065fa26aad2b5c6e39987c56228398b8a975e211c361edbca57"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H05P02m.bma",
+      "sha256": "755ed7ee3d39f9b2a3b4ee3c206ddcb952e023a683af66ef1654e0fb1a095e73"
+    }
+  ],
+  "sceneryAnimation": "Native map has no BPL palette or BPA tile animation.",
+  "collisionStatus": "Conservative authored foot zones, not game collision data."
+}

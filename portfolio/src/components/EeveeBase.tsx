@@ -51,11 +51,11 @@ export default function EeveeBase({ inDialog = false }: { inDialog?: boolean }) 
         else if (actor.nap && actor.rest > 30000) { actor.nap = false; actor.rest = 400 + Math.random() * 1800; actor.animation = "Idle"; }
       }
       if (!motion.matches && !modal) { elapsed += dt; stepForest(actors, dt); }
-      const frame = motion.matches ? 9 : Math.floor(elapsed / 120) % 32;
-      stone.style.width = `${54 * scale}px`; stone.style.height = `${39 * scale}px`;
+      const frame = motion.matches ? 0 : Math.floor(elapsed / 100) % 32;
+      stone.style.width = `${40 * scale}px`; stone.style.height = `${32 * scale}px`;
       stone.style.left = `${209 * scale}px`; stone.style.top = `${177 * scale}px`;
-      stone.style.backgroundSize = `${54 * 32 * scale}px ${39 * scale}px`;
-      stone.style.backgroundPosition = `${-frame * 54 * scale}px 0`;
+      stone.style.backgroundSize = `${40 * 32 * scale}px ${32 * scale}px`;
+      stone.style.backgroundPosition = `${-frame * 40 * scale}px 0`;
       stone.dataset.frame = String(frame);
       actors.forEach((actor, i) => {
         const {button, art, heart} = nodes[i], sprite = SPRITES[actor.species];
@@ -84,10 +84,10 @@ export default function EeveeBase({ inDialog = false }: { inDialog?: boolean }) 
   // Margins live on the wrapper in page.tsx, which also holds the contribution panel and dialogue box.
   return <figure className="m-0" aria-label="Eevee and friends in Transform Forest">
     <div ref={habitat} data-eevee-base className="relative isolate w-full overflow-hidden rounded-2xl border border-cream-200"
-      style={{aspectRatio: '480 / 312', background: 'url(/eevee-base/background.png) center / 100% 100%', imageRendering: 'pixelated'}}>
+      style={{aspectRatio: '480 / 312', background: 'url(/friend-areas/transformforest.png) center / 100% 100%', imageRendering: 'pixelated'}}>
       <ForestSky sky={sky} />
       <MapPc style={{left: '50%', top: '96.15%', width: '5%'}} />
-      <span data-forest-stone aria-hidden="true" className="absolute pointer-events-none" style={{backgroundImage: 'url(/eevee-base/stone-frames.png)', backgroundRepeat: 'no-repeat'}} />
+      <span data-forest-stone aria-hidden="true" className="absolute pointer-events-none" style={{backgroundImage: 'url(/friend-areas/transformforest-palette-6.png)', backgroundRepeat: 'no-repeat'}} />
       {EEVEELUTIONS.map(species => <button key={species} data-forest-pokemon={species} className="overworld-resident" type="button" aria-label={`Say hello to ${displayName(species)}`}>
         <span className="overworld-sprite" aria-hidden="true" /><span className="overworld-heart" hidden aria-hidden="true" />
       </button>)}

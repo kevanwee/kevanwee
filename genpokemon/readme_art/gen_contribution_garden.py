@@ -129,13 +129,13 @@ def render(data, theme, sky=None, friend_area="transformforest", friend_guests=N
     fx, fy, (cx, cy, cw, ch) = FOREST["x"], FOREST["y"], FOREST["cam"]
     parts.append(f'<clipPath id="fc"><rect x="{fx}" y="{fy}" width="{cw}" height="{ch}" rx="11"/></clipPath>')
     if friend_area == "transformforest":
-        bg = PUBLIC / "eevee-base/background.png"
+        bg = friend_areas.ASSETS / "transformforest.png"
         bw, bh = png_size(bg)
-        stone = PUBLIC / "eevee-base/stone-frames.png"
+        stone = friend_areas.ASSETS / "transformforest-palette-6.png"
         forest = [f'<svg x="{fx}" y="{fy}" width="{cw}" height="{ch}" viewBox="{cx} {cy} {cw} {ch}">',
                   f'<image href="{b64(bg)}" width="{bw}" height="{bh}"/>',
-                  f'<svg x="209" y="177" width="54" height="39" overflow="hidden"><g class="stone"><image href="{b64(stone)}" width="{54 * 32}" height="39"/></g></svg>']
-        css.append(".stone{animation:stone 3.84s steps(32) infinite}@keyframes stone{to{transform:translateX(-1728px)}}")
+                  f'<svg x="216" y="176" width="40" height="32" overflow="hidden"><g class="stone"><image href="{b64(stone)}" width="{40 * 32}" height="32"/></g></svg>']
+        css.append(".stone{animation:stone 3.2s steps(32) infinite}@keyframes stone{to{transform:translateX(-1280px)}}")
         # The forest residents roam the clearing (map coordinates), routed around the stone
         routes = [("vaporeon", [(176, 232), (190, 168), (290, 160), (322, 204), (252, 246)], 11, [2.5, 1.5, 3, 2, 1.5], 0),
                   ("jolteon", [(292, 182), (322, 246), (282, 292), (220, 282), (300, 232)], 15, [1.5, 2, 1, 2.5, 1], -6),

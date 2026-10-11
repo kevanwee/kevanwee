@@ -31,6 +31,7 @@ export default function FriendAreaScene({
     let disposed = false,
       raf = 0,
       last = 0,
+      sceneryTime = 0,
       visible = false;
     const media = matchMedia("(prefers-reduced-motion: reduce)");
     const images = new Map<string, HTMLImageElement>();
@@ -73,11 +74,19 @@ export default function FriendAreaScene({
       const dt = last ? Math.min(64, now - last) : 0;
       last = now;
       if (!quiet() && !paused && !covered())
-        stepResidents(area, population, dt);
+        { sceneryTime += dt; stepResidents(area, population, dt); }
       ctx.imageSmoothingEnabled = false;
       ctx.clearRect(0, 0, ...(area.size as [number, number]));
       const background = images.get(area.background);
       if (background) ctx.drawImage(background, 0, 0);
+      const sceneryFrames = (area.layers ?? []).map(layer => {
+        const sheet = images.get(layer.src);
+        const frame = frameAt({ ...layer, rows: 1, origins: [] }, quiet() ? 0 : sceneryTime);
+        if (sheet) ctx.drawImage(sheet, frame * layer.w, 0, layer.w, layer.h, layer.x, layer.y, layer.w, layer.h);
+        return frame;
+      });
+      element.dataset.sceneryFrames = JSON.stringify(sceneryFrames);
+      element.dataset.sceneryTime = String(sceneryTime);
       if (overlay) {
         for (const [polygons, color] of [
           [area.zones, "#62ffb0"],
@@ -140,6 +149,7 @@ export default function FriendAreaScene({
     });
     const paths = [
       area.background,
+      ...(area.layers ?? []).map(layer => layer.src),
       ...population.flatMap(({ id }) =>
         ["Idle", "Walk"].map((a) => catalog.sprites[id].animations[a].src),
       ),

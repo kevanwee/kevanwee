@@ -1,0 +1,128 @@
+{
+  "background": "decrepitlab.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [
+    {
+      "src": "decrepitlab-palette-0.png",
+      "x": 80,
+      "y": 8,
+      "w": 320,
+      "h": 40,
+      "frames": 15,
+      "durations": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "src": "decrepitlab-palette-7.png",
+      "x": 32,
+      "y": 152,
+      "w": 416,
+      "h": 128,
+      "frames": 32,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "src": "decrepitlab-palette-10.png",
+      "x": 0,
+      "y": 48,
+      "w": 480,
+      "h": 72,
+      "frames": 25,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H15P01.bpl",
+      "sha256": "cc07478b7ada3b99f00ec4029f5e7cb11ed821c2b2245692c51fa0938bc42c12"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H15P01c.bpc",
+      "sha256": "de4f65ab7c7f29e5dd35ddac9855d3c518949131c67eb24c0124883e9441ee19"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H15P01m.bma",
+      "sha256": "b6ea884d19af77e7c91c8daf752ba276d8b70ec59857e052b3e4748b4e72131e"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette frames and durations at 60 ticks/second; no BPA tile animations in this map.",
+  "collisionStatus": "Conservative authored foot zones, not game collision data."
+}

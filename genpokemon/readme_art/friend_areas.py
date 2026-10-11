@@ -25,6 +25,14 @@ def panel(area_id, x=12, y=14, width=280, height=224, guests=None):
     parts=[f'<svg x="{x}" y="{y}" width="{width}" height="{height}" viewBox="0 0 {w} {h}" preserveAspectRatio="xMidYMid meet">',
            f'<title>{area["name"]}</title><image width="{w}" height="{h}" href="{uri((ASSETS/area["background"]).read_bytes())}"/>']
     css=[]
+    for i,layer in enumerate(area.get('layers',[])):
+        fw,fh=layer['w'],layer['h'];name=f"scenery{area_id}{i}";total=sum(layer['durations']);elapsed=0;keys=[]
+        for frame,duration in enumerate(layer['durations']):
+            keys.append(f'{elapsed/total*100:.6f}%{{transform:translateX(-{frame*fw}px)}}');elapsed+=duration
+        keys.append('100%{transform:translateX(0)}')
+        css.append(f'.{name}{{animation:{name} {total/60:.6f}s step-end infinite}}@keyframes {name}{{{"".join(keys)}}}')
+        parts.append(f'<svg x="{layer["x"]}" y="{layer["y"]}" width="{fw}" height="{fh}" overflow="hidden"><g class="{name}"><image width="{fw*layer["frames"]}" height="{fh}" href="{uri((ASSETS/layer["src"]).read_bytes())}"/></g></svg>')
+
     chosen=area['roster']+(guests if guests is not None else [g['id'] for g in area.get('guests',[])][:area.get('guestLimit',0)])
     if len(chosen)!=len(SEATS[area_id]) or any(g not in [x['id'] for x in area.get('guests',[])] for g in chosen[len(area['roster']):]):
         raise ValueError('Invalid Friend Area guest selection')

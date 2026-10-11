@@ -250,15 +250,8 @@ export default function FriendAreas() {
                 : "Eevee · Vaporeon · Jolteon · Flareon · Umbreon · Sylveon"}
             </p>
             <p style={{ fontSize: 10, marginTop: 12, opacity: 0.7 }}>
-              Scenery: Pokémon Mystery Dungeon, ripped by Toastypk and
-              MYSTERY_DUNGEON; backgrounds via{" "}
-              <a
-                href="https://pamtre-berry.neocities.org/articles/friendareas"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Pamtre Berry
-              </a>
+              Scenery: Pokémon Mystery Dungeon: Red Rescue Team. Original game maps and animation from{' '}
+              <a href="https://github.com/pret/pmd-red/tree/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg" target="_blank" rel="noreferrer">pret/pmd-red</a>
               . Sprites:{" "}
               <a
                 href="https://github.com/PMDCollab/SpriteCollab"

@@ -1,0 +1,143 @@
+{
+  "background": "legendaryisland.png",
+  "size": [
+    480,
+    264
+  ],
+  "layers": [
+    {
+      "src": "legendaryisland-palette-0.png",
+      "x": 0,
+      "y": 0,
+      "w": 480,
+      "h": 136,
+      "frames": 9,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "src": "legendaryisland-palette-1.png",
+      "x": 8,
+      "y": 56,
+      "w": 56,
+      "h": 24,
+      "frames": 16,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "src": "legendaryisland-palette-6.png",
+      "x": 0,
+      "y": 48,
+      "w": 480,
+      "h": 216,
+      "frames": 16,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "src": "legendaryisland-palette-9.png",
+      "x": 32,
+      "y": 64,
+      "w": 16,
+      "h": 8,
+      "frames": 16,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "src": "legendaryisland-palette-10.png",
+      "x": 184,
+      "y": 240,
+      "w": 112,
+      "h": 24,
+      "frames": 10,
+      "durations": [
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P01.bpl",
+      "sha256": "a0b046e9d319e589f429d6cf5b8cfe79e89cd5085b26e6b3b9977a9cd8ce4e07"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P01c.bpc",
+      "sha256": "12d8627ddd08386328fb4f1998b0c910695466af546980df71608ff3256d285f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P01m.bma",
+      "sha256": "4d867ece31896fc8a3a1ab3ffb13cf04181e9585072dff0e46fbb4969f8b3dea"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette frames and durations at 60 ticks/second; no BPA tile animations in this map.",
+  "collisionStatus": "Conservative authored foot zones, not game collision data."
+}

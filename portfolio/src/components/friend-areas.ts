@@ -4,6 +4,7 @@ export type Area = {
   name: string;
   size: number[];
   background: string;
+  layers?: {src:string;x:number;y:number;w:number;h:number;frames:number;durations:number[]}[];
   description: string;
   roster: number[];
   guests?: { id: number; reason: string; basis: string }[];

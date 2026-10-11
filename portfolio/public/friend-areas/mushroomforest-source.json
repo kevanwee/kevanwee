@@ -1,0 +1,25 @@
+{
+  "background": "mushroomforest.png",
+  "size": [
+    456,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P05.bpl",
+      "sha256": "63ac0964949abbc1025154afff35e6c16c733ff63ff3f6f76eaf3a3089d3d477"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P05c.bpc",
+      "sha256": "462a72c8f9f3d1ca16d01bc910fbb83e316a11f4dcccbf7ae1d37e22b7de2554"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P05m.bma",
+      "sha256": "48721e371988fc3c217d31cdb2c318cd5efa424c6a93df4133c718df096c7bab"
+    }
+  ],
+  "sceneryAnimation": "Native map has no BPL palette or BPA tile animation.",
+  "collisionStatus": "Conservative authored foot zones, not game collision data."
+}

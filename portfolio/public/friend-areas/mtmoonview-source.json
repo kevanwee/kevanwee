@@ -1,0 +1,86 @@
+{
+  "background": "mtmoonview.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [
+    {
+      "src": "mtmoonview-palette-1.png",
+      "x": 0,
+      "y": 0,
+      "w": 480,
+      "h": 336,
+      "frames": 20,
+      "durations": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "src": "mtmoonview-palette-2.png",
+      "x": 200,
+      "y": 8,
+      "w": 48,
+      "h": 48,
+      "frames": 20,
+      "durations": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H05P01.bpl",
+      "sha256": "6ca95763e347ae6cf7b17238a21f5981470e87391d234a281bd741fd49069f05"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H05P01c.bpc",
+      "sha256": "f521888d785ece56b4361eb5d951d85ee94651c20dbdbec39183ee3fc65cf930"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H05P01m.bma",
+      "sha256": "359aebe2da01b3f5e888f6fd221a42155782e572810974dd116af9515f4cf144"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette frames and durations at 60 ticks/second; no BPA tile animations in this map.",
+  "collisionStatus": "Conservative authored foot zones, not game collision data."
+}
