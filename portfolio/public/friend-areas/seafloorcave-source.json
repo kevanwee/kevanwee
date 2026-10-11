@@ -1,0 +1,125 @@
+{
+  "background": "seafloorcave.png",
+  "size": [
+    360,
+    336
+  ],
+  "layers": [
+    {
+      "src": "seafloorcave-palette-2.png",
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 184,
+      "frames": 23,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "seafloorcave-palette-4.png",
+      "x": 112,
+      "y": 72,
+      "w": 136,
+      "h": 144,
+      "frames": 23,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "seafloorcave-palette-7.png",
+      "x": 104,
+      "y": 216,
+      "w": 152,
+      "h": 120,
+      "frames": 23,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H02P03.bpl",
+      "sha256": "9bf519a5bfac72e8b1cf4b1ad1c3e9490037d75747172a9065d61a421e1147d5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H02P03c.bpc",
+      "sha256": "d36285c8505c0d491ef1465c8aae60ead625868aeca4c748587fe7f7ad22b809"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H02P03m.bma",
+      "sha256": "99dc9d1b9f59512ee6f233d522e26994526d4b589eed3dc4672a89fd806c9787"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette frames and durations at 60 ticks/second; no BPA tile animations in this map.",
+  "collisionStatus": "Conservative authored foot zones, not game collision data."
+}

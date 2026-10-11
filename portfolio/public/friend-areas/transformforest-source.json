@@ -1,0 +1,68 @@
+{
+  "background": "transformforest.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [
+    {
+      "src": "transformforest-palette-6.png",
+      "x": 216,
+      "y": 176,
+      "w": 40,
+      "h": 32,
+      "frames": 32,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P07.bpl",
+      "sha256": "899fe9225dd7283a898e5e58ef039fdff82f4a2b7e4361310fdf3aa3a1204a19"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P07c.bpc",
+      "sha256": "c30ebb86c3f1a17a8dd7ee0f4dd9ee6ce00b76e53835178933b67f6b3ab5dc2a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P07m.bma",
+      "sha256": "d8d80ef0c94191d73296d06668090fbaabe5d7ab8263d1b17dbfd20bb5861cab"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette frames and durations at 60 ticks/second; no BPA tile animations in this map.",
+  "collisionStatus": "Conservative authored foot zones, not game collision data."
+}

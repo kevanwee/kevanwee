@@ -372,5 +372,236 @@
       "rest": 2050,
       "moving": false
     }
+  ],
+  "thundermeadow": [
+    {
+      "id": 179,
+      "x": 224,
+      "y": 288,
+      "target": [
+        224,
+        288
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 1200,
+      "moving": false
+    },
+    {
+      "id": 180,
+      "x": 96,
+      "y": 168,
+      "target": [
+        96,
+        168
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 2050,
+      "moving": false
+    },
+    {
+      "id": 181,
+      "x": 392,
+      "y": 248,
+      "target": [
+        392,
+        248
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 2900,
+      "moving": false
+    },
+    {
+      "id": 309,
+      "x": 256,
+      "y": 152,
+      "target": [
+        256,
+        152
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 3750,
+      "moving": false
+    },
+    {
+      "id": 310,
+      "x": 136,
+      "y": 256,
+      "target": [
+        136,
+        256
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 4600,
+      "moving": false
+    },
+    {
+      "id": 311,
+      "x": 296,
+      "y": 232,
+      "target": [
+        296,
+        232
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 5450,
+      "moving": false
+    },
+    {
+      "id": 312,
+      "x": 176,
+      "y": 184,
+      "target": [
+        176,
+        184
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 6300,
+      "moving": false
+    },
+    {
+      "id": 351,
+      "x": 336,
+      "y": 160,
+      "target": [
+        336,
+        160
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 7150,
+      "moving": false
+    }
+  ],
+  "rainbowpeak": [
+    {
+      "id": 250,
+      "x": 224,
+      "y": 192,
+      "target": [
+        224,
+        192
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 1200,
+      "moving": false
+    }
+  ],
+  "legendaryisland": [
+    {
+      "id": 144,
+      "x": 240,
+      "y": 208,
+      "target": [
+        240,
+        208
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 1200,
+      "moving": false
+    },
+    {
+      "id": 145,
+      "x": 448,
+      "y": 176,
+      "target": [
+        448,
+        176
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 2050,
+      "moving": false
+    },
+    {
+      "id": 146,
+      "x": 112,
+      "y": 208,
+      "target": [
+        112,
+        208
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 2900,
+      "moving": false
+    }
+  ],
+  "healingforest": [
+    {
+      "id": 251,
+      "x": 240,
+      "y": 272,
+      "target": [
+        240,
+        272
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 1200,
+      "moving": false
+    }
+  ],
+  "waterfalllake": [
+    {
+      "id": 129,
+      "x": 224,
+      "y": 248,
+      "target": [
+        224,
+        248
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 1200,
+      "moving": false
+    },
+    {
+      "id": 130,
+      "x": 120,
+      "y": 112,
+      "target": [
+        120,
+        112
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 2050,
+      "moving": false
+    },
+    {
+      "id": 349,
+      "x": 360,
+      "y": 144,
+      "target": [
+        360,
+        144
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 2900,
+      "moving": false
+    },
+    {
+      "id": 350,
+      "x": 240,
+      "y": 128,
+      "target": [
+        240,
+        128
+      ],
+      "direction": 0,
+      "elapsed": 0,
+      "rest": 3750,
+      "moving": false
+    }
   ]
 }
