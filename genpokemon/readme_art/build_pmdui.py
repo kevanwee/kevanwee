@@ -34,7 +34,7 @@ RANKS = [("Normal", 0, "td-Normal"), ("Bronze", 100, "td-Bronze"), ("Silver", 30
          ("Diamond", 3200, "td-Diamond"), ("Super", 5000, "td-Diamond"), ("Ultra", 7500, "td-Ultra"), ("Hyper", 10500, "td-Hyper"),
          ("Master", 13500, "td-Master"), ("Master ★", 17000, "eos-Master-1"), ("Master ★★", 21000, "eos-Master-2"),
          ("Master ★★★", 25000, "eos-Master-3"), ("Guildmaster", 100000, "eos-Guildmaster")]
-TEAM = [("charcadet", "Charcadet"), ("fuecoco", "Fuecoco")]  # a Mystery Dungeon pair: the leader, then the partner
+TEAM = [("squirtle", "Squirtle"), ("treecko", "Treecko")]  # non-shiny pair: the leader, then the partner
 
 
 def rank_of(points):

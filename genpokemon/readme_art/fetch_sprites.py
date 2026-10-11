@@ -17,7 +17,8 @@ PICKS = {
     "zacian-crowned": "0888/0001", "shiny-cyclizar": "0967/0000/0001", "shiny-goodra": "0706/0000/0001",
     "castform": "0351", "castform-sunny": "0351/0001", "castform-rainy": "0351/0002",  # the weather strip
     "shiny-castform": "0351/0000/0001", "shiny-castform-sunny": "0351/0001/0001", "shiny-castform-rainy": "0351/0002/0001",  # its company
-    "charcadet": "0935",  # the Explorer team leader
+    "charcadet": "0935",
+    "treecko": "0252",  # non-shiny Explorer team partner (Squirtle leads)
 }
 OUT = Path("sprites")
 

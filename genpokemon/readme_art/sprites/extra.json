@@ -2069,5 +2069,40 @@
    ],
    "rows": 1
   }
+ },
+ "treecko": {
+  "Walk": {
+   "src": "sprites/treecko/Walk-Anim.png",
+   "w": 32,
+   "h": 32,
+   "durations": [
+    6,
+    10,
+    6,
+    10
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/treecko/Idle-Anim.png",
+   "w": 32,
+   "h": 40,
+   "durations": [
+    40,
+    4,
+    2
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/treecko/Sleep-Anim.png",
+   "w": 32,
+   "h": 32,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
  }
 }
