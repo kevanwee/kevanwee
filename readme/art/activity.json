@@ -1,7 +1,67 @@
 {
- "generatedAt": "2026-10-11T15:49:07+00:00",
+ "generatedAt": "2026-10-11T17:10:51+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Happy",
+   "when": "2026-10-11T17:09:51+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " pushed new work to "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     " ("
+    ],
+    [
+     "number",
+     "\u00d73"
+    ],
+    [
+     "text",
+     ")"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-11T17:09:45+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request "
+    ],
+    [
+     "number",
+     "#56"
+    ],
+    [
+     "text",
+     " was merged into "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
   {
    "mood": "Joyous",
    "when": "2026-10-11T15:48:46+00:00",
@@ -55,66 +115,6 @@
     [
      "number",
      "\u00d75"
-    ],
-    [
-     "text",
-     ")"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-11T15:48:43+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request "
-    ],
-    [
-     "number",
-     "#57"
-    ],
-    [
-     "text",
-     " was merged into "
-    ],
-    [
-     "place",
-     "voracity"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Happy",
-   "when": "2026-10-11T13:00:01+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "pmd-agents"
-    ],
-    [
-     "text",
-     " ("
-    ],
-    [
-     "number",
-     "\u00d72"
     ],
     [
      "text",
