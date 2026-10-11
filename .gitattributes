@@ -1,0 +1,2 @@
+# Preserve verified PMD source hashes on every platform.
+portfolio/public/pokemon-pc/** -text -whitespace

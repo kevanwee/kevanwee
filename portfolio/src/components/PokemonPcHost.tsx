@@ -12,13 +12,16 @@ export default function PokemonPcHost(){
  useEffect(()=>declareForestSlots(EEVEELUTIONS,SPRITES),[]);
  return <PokemonPc namespace={'portfolio.pokemon-pc'} title="Kevanwee’s PC" cursor={{
   snapshot:{lineup:cursor.lineup,selected:cursor.selectedPokemon,mega:cursor.megaForms,fusion:cursor.fusion},allowed:ALL_CURSORS,max:LINEUP_MAX,
-  place:(index,id)=>{
+  forms:id=>[{id:'normal',label:'Normal'},...(MEGA_CAPABLE.includes(id as PokemonId)?[{id:'mega',label:'Mega'}]:[]),...(id==='ceruledge'?['armarouge','darkrai','zygarde'].map(id=>({id,label:'Soul Unison: '+id})):[])],
+  place:(index,id,form)=>{
    if(!ALL_CURSORS.includes(id as PokemonId))return;
    const lineup=[...cursor.lineup],from=lineup.indexOf(id as PokemonId);
    // A Pokémon already in the lineup swaps places rather than appearing twice.
    if(from>=0){if(index<lineup.length)[lineup[from],lineup[index]]=[lineup[index],lineup[from]];}
    else if(index<lineup.length)lineup[index]=id as PokemonId;else lineup.push(id as PokemonId);
    cursor.setLineup(lineup);cursor.setSelectedPokemon(id as PokemonId);
+   if(MEGA_CAPABLE.includes(id as PokemonId))cursor.setMega(form==='mega',id as PokemonId);
+   if(id==='ceruledge')cursor.setFusion(form==='normal'?null:form as FusionId);
   },
   restore:state=>{const lineup=cleanLineup(state.lineup);cursor.setLineup(lineup);cursor.setSelectedPokemon(lineup.includes(state.selected as PokemonId)?state.selected as PokemonId:lineup[0]);for(const id of MEGA_CAPABLE)cursor.setMega(state.mega.includes(id),id);cursor.setFusion(['armarouge','darkrai','zygarde'].includes(state.fusion||'')?state.fusion as FusionId:null);}
  }}/>

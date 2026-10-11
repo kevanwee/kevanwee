@@ -37,7 +37,7 @@ export default function PokemonOverworld() {
     const mapLabel = document.querySelector<HTMLElement>("[data-silvally-label]");
     const reactionTimers = new Map<string, ReturnType<typeof setTimeout>>();
     const nodes = new Map(world.residents.map(actor => {
-      const interactive = !["armarouge", "ceruledge"].includes(actor.species);
+      const interactive = !["armarouge", "ceruledge"].includes(actor.roleSpecies ?? actor.species);
       const node: HTMLElement = document.createElement(interactive ? "button" : "span");
       node.className = interactive ? "overworld-resident" : "overworld-resident overworld-battler";
       node.dataset.pokemon = actor.species;
@@ -210,7 +210,7 @@ export default function PokemonOverworld() {
           for (const key of ["Walk", "Idle", "Sleep", "Hop"]) {
             if (sprite.animations[key]) warm(sprite.animations[key].src);
           }
-          if (actor.species === "armarouge" || actor.species === "ceruledge") {
+          if (["armarouge", "ceruledge"].includes(actor.roleSpecies ?? actor.species)) {
             for (const key of ["Walk", "Idle", "Shoot", "Attack", "Hurt"]) warm(sprite.animations[key].src);
           }
           // Load only the animations of nearby residents (never all imported sheets).
@@ -225,7 +225,7 @@ export default function PokemonOverworld() {
           heart.hidden = actor.reaction <= 0;
           const bounds = anim.bounds[anim.rows === 1 ? 0 : actor.direction];
           heart.style.bottom = `${Math.max(28, (bounds[3] - bounds[1]) * sprite.scale + 4)}px`;
-          if (actor.species === "armarouge" || actor.species === "ceruledge") node.dataset.battlePhase = world.battle?.phase;
+          if (["armarouge", "ceruledge"].includes(actor.roleSpecies ?? actor.species)) node.dataset.battlePhase = world.battle?.phase;
         }
         const silvallyVisible = !!area && area.top > 0 && area.top < window.innerHeight + 64;
         button!.hidden = !silvallyVisible;
