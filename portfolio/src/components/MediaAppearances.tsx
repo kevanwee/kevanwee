@@ -1,7 +1,12 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useRef } from "react";
 import { mediaAppearances } from "@/data";
+import { useDragMarquee } from "@/lib/useDragMarquee";
 
 export default function MediaAppearances() {
+  const frame = useRef<HTMLDivElement>(null), track = useRef<HTMLDivElement>(null);
+  useDragMarquee(frame, track, mediaAppearances.length * 9);
   if (mediaAppearances.length === 0) return null;
 
   return (
@@ -17,15 +22,16 @@ export default function MediaAppearances() {
           Media & Appearances
         </h2>
 
-        {/* A slow strip of articles that pauses under the pointer or keyboard focus. Its frame stays put, so it
-            keeps the media card's resident perch; under reduced motion it is a plain row you scroll. */}
+        {/* A slow strip of articles: drag, flick or scroll sideways to move it; it pauses under the pointer or
+            keyboard focus. Its frame stays put, so it keeps the media card's resident perch; under reduced
+            motion it is a plain row you scroll (or drag). */}
         <div
+          ref={frame}
           className="media-marquee"
           data-overworld-surface="media-card"
           data-overworld-kind="media-card"
-          style={{ "--marquee-duration": `${mediaAppearances.length * 9}s` } as CSSProperties}
         >
-          <div className="media-marquee-track">
+          <div ref={track} className="media-marquee-track">
             {[false, true].map((copy) => (
               <ul key={String(copy)} className="media-marquee-list" aria-hidden={copy || undefined}>
                 {mediaAppearances.map((item, i) => (
@@ -35,6 +41,7 @@ export default function MediaAppearances() {
                       target="_blank"
                       rel="noopener noreferrer"
                       tabIndex={copy ? -1 : undefined}
+                      draggable={false}
                       className="group flex h-full w-[272px] flex-col justify-between gap-3 rounded-sm border border-cream-200 bg-white px-5 py-4 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:border-sage-200 hover:shadow-md focus-visible:border-sage-300"
                     >
                       <p className="line-clamp-3 text-sm font-medium leading-snug text-warm-800 transition-colors group-hover:text-sage-700">

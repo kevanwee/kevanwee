@@ -15,7 +15,8 @@
     "lint": "next lint",
     "test:terminal": "node scripts/test-terminal.cjs",
     "test:ssh:browser": "node scripts/test-ssh-browser.cjs",
-    "test:pokemon-pc:browser": "node scripts/test-pokemon-pc-browser.cjs"
+    "test:pokemon-pc:browser": "node scripts/test-pokemon-pc-browser.cjs",
+    "test:media-marquee:browser": "node scripts/test-media-marquee-browser.cjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
