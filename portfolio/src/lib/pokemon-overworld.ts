@@ -29,7 +29,7 @@ export type Surface = { id: string; width: number; divider: boolean; kind?: stri
 export type SurfaceRect = { left: number; right: number; top: number; width: number };
 export type Hop = { from: string; to: string; start: number; landing: number; elapsed: number; duration: number };
 export type Resident = {
-  id: string; species: string; surface: string; flying: boolean;
+  id: string; species: string; roleSpecies?: string; surface: string; flying: boolean;
   progress: number; target: number; direction: number; speed: number;
   rest: number; nap: boolean; untilNap: number; elapsed: number; age: number; animation: string;
   altitude: number; targetAltitude: number; reaction: number; held: boolean;
@@ -118,7 +118,7 @@ function animate(actor: Resident, animation: string, dt: number) {
 }
 
 export function greetResident(actor: Resident, random = Math.random) {
-  if (["armarouge", "ceruledge"].includes(actor.species)) return false;
+  if (["armarouge", "ceruledge"].includes(actor.roleSpecies ?? actor.species)) return false;
   if (actor.hop) { actor.surface = actor.hop.to; actor.progress = actor.hop.landing; actor.hop = null; }
   actor.hopTarget = null;
   actor.reaction = 1800; actor.nap = false; actor.rest = 2400;
@@ -161,7 +161,7 @@ export function stepOverworld(world: Overworld, delta: number, visibleWidths: Ma
       actor.hop = null; actor.hopTarget = null; actor.rest = 1000; animate(actor, "Idle", 0);
     }
     if (actor.hopTarget && !adjacentHopCards(actor.surface, rects).includes(actor.hopTarget)) actor.hopTarget = null;
-    if (!width || ["armarouge", "ceruledge"].includes(actor.species)) continue;
+    if (!width || ["armarouge", "ceruledge"].includes(actor.roleSpecies ?? actor.species)) continue;
     if (actor.hop) {
       if (!actor.held) actor.hop.elapsed += dt;
       animate(actor, "Hop", dt);
@@ -284,7 +284,7 @@ export function stepOverworld(world: Overworld, delta: number, visibleWidths: Ma
   const gap = b.gap * Math.min(1, Math.max(0, width - 80) / 166);
   const margin = 40 + Math.min(83, Math.max(0, width - 80) / 2);
   const center = Math.max(margin, Math.min(width - margin, width * b.center));
-  for (const actor of world.residents.filter(a => ["armarouge", "ceruledge"].includes(a.species))) {
+  for (const actor of world.residents.filter(a => ["armarouge", "ceruledge"].includes(a.roleSpecies ?? a.species))) {
     const left = actor.species === "armarouge";
     const attacking = b.phase === `${actor.species}-attacks`;
     const hit = b.phase.endsWith("attacks") && !attacking && t > .35;

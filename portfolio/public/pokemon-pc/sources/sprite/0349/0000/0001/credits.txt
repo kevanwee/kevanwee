@@ -1,0 +1,1 @@
+2020-10-07 17:58:44.434074	<@!95638225439166464>	CUR	PMDCollab_1	Walk,Attack,Strike,Shoot,FlapAround,Dance,Sleep,Hurt,Idle,Swing,Double,Hop,Charge,Rotate

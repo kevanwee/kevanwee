@@ -154,7 +154,7 @@ export default function FriendAreaScene({
               resolve();
             };
             img.onerror = () => reject(new Error(src));
-            img.src = "/friend-areas/" + src;
+            img.src = src.startsWith("/") ? src : "/friend-areas/" + src;
           });
     setError("");
     // PC choices change natives in place; their sheets are loaded before the change applies.

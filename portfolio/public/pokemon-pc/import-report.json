@@ -1,0 +1,4379 @@
+{
+  "revision": "47e5b9920bc5b2b491c53b18076300dc6813f103",
+  "species": 1025,
+  "availableForms": 3320,
+  "unavailable": [
+    {
+      "dex": 3,
+      "id": "venusaur-mega",
+      "path": "0003/0001",
+      "reason": "sprite/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 3,
+      "id": "venusaur-mega-shiny",
+      "path": "0003/0001/0001",
+      "reason": "sprite/0003/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 3,
+      "id": "venusaur-gigantamax",
+      "path": "0003/0002",
+      "reason": "sprite/0003/0002/AnimData.xml"
+    },
+    {
+      "dex": 3,
+      "id": "venusaur-gigantamax-shiny",
+      "path": "0003/0002/0001",
+      "reason": "sprite/0003/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 3,
+      "id": "venusaur-alternate-shiny",
+      "path": "0003/0003/0001",
+      "reason": "sprite/0003/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 6,
+      "id": "charizard-mega-y",
+      "path": "0006/0002",
+      "reason": "sprite/0006/0002/AnimData.xml"
+    },
+    {
+      "dex": 6,
+      "id": "charizard-mega-y-shiny",
+      "path": "0006/0002/0001",
+      "reason": "sprite/0006/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 12,
+      "id": "butterfree-gigantamax-shiny",
+      "path": "0012/0001/0001",
+      "reason": "sprite/0012/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 9,
+      "id": "blastoise-mega",
+      "path": "0009/0001",
+      "reason": "sprite/0009/0001/AnimData.xml"
+    },
+    {
+      "dex": 9,
+      "id": "blastoise-mega-shiny",
+      "path": "0009/0001/0001",
+      "reason": "sprite/0009/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 9,
+      "id": "blastoise-cutscene",
+      "path": "0009/0003",
+      "reason": "sprite/0009/0003/AnimData.xml"
+    },
+    {
+      "dex": 9,
+      "id": "blastoise-gigantamax",
+      "path": "0009/0002",
+      "reason": "sprite/0009/0002/AnimData.xml"
+    },
+    {
+      "dex": 9,
+      "id": "blastoise-cutscene-shiny",
+      "path": "0009/0003/0001",
+      "reason": "sprite/0009/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 9,
+      "id": "blastoise-gigantamax-shiny",
+      "path": "0009/0002/0001",
+      "reason": "sprite/0009/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 15,
+      "id": "beedrill-mega",
+      "path": "0015/0001",
+      "reason": "sprite/0015/0001/AnimData.xml"
+    },
+    {
+      "dex": 15,
+      "id": "beedrill-mega-shiny",
+      "path": "0015/0001/0001",
+      "reason": "sprite/0015/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 12,
+      "id": "butterfree-gigantamax",
+      "path": "0012/0001",
+      "reason": "sprite/0012/0001/AnimData.xml"
+    },
+    {
+      "dex": 18,
+      "id": "pidgeot-mega",
+      "path": "0018/0001",
+      "reason": "sprite/0018/0001/AnimData.xml"
+    },
+    {
+      "dex": 18,
+      "id": "pidgeot-mega-shiny",
+      "path": "0018/0001/0001",
+      "reason": "sprite/0018/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 19,
+      "id": "rattata-female",
+      "path": "0019/0000/0000/0002",
+      "reason": "sprite/0019/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 19,
+      "id": "rattata-shiny-female",
+      "path": "0019/0000/0001/0002",
+      "reason": "sprite/0019/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 19,
+      "id": "rattata-altcolor-shiny-female",
+      "path": "0019/0002/0001/0002",
+      "reason": "sprite/0019/0002/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 19,
+      "id": "rattata-altcolor-female",
+      "path": "0019/0002/0000/0002",
+      "reason": "sprite/0019/0002/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 20,
+      "id": "raticate-female",
+      "path": "0020/0000/0000/0002",
+      "reason": "sprite/0020/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 20,
+      "id": "raticate-shiny-female",
+      "path": "0020/0000/0001/0002",
+      "reason": "sprite/0020/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 20,
+      "id": "raticate-altcolor-female",
+      "path": "0020/0002/0000/0002",
+      "reason": "sprite/0020/0002/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 23,
+      "id": "ekans-cutscene",
+      "path": "0023/0001",
+      "reason": "sprite/0023/0001/AnimData.xml"
+    },
+    {
+      "dex": 23,
+      "id": "ekans-cutscene-shiny",
+      "path": "0023/0001/0001",
+      "reason": "sprite/0023/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 24,
+      "id": "arbok-circular",
+      "path": "0024/0003",
+      "reason": "sprite/0024/0003/AnimData.xml"
+    },
+    {
+      "dex": 24,
+      "id": "arbok-circular-shiny",
+      "path": "0024/0003/0001",
+      "reason": "sprite/0024/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-gigantamax",
+      "path": "0025/0001",
+      "reason": "sprite/0025/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-gigantamax-shiny",
+      "path": "0025/0001/0001",
+      "reason": "sprite/0025/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-rock-star",
+      "path": "0025/0002",
+      "reason": "sprite/0025/0002/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-rock-star-shiny",
+      "path": "0025/0002/0001",
+      "reason": "sprite/0025/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-belle",
+      "path": "0025/0003",
+      "reason": "sprite/0025/0003/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-pop-star",
+      "path": "0025/0004",
+      "reason": "sprite/0025/0004/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-pop-star-shiny",
+      "path": "0025/0004/0001",
+      "reason": "sprite/0025/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-ph-d",
+      "path": "0025/0005",
+      "reason": "sprite/0025/0005/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-ph-d-shiny",
+      "path": "0025/0005/0001",
+      "reason": "sprite/0025/0005/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-original-cap",
+      "path": "0025/0008",
+      "reason": "sprite/0025/0008/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-original-cap-shiny",
+      "path": "0025/0008/0001",
+      "reason": "sprite/0025/0008/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-hoenn-cap",
+      "path": "0025/0009",
+      "reason": "sprite/0025/0009/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-hoenn-cap-shiny",
+      "path": "0025/0009/0001",
+      "reason": "sprite/0025/0009/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-sinnoh-cap",
+      "path": "0025/0010",
+      "reason": "sprite/0025/0010/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-sinnoh-cap-shiny",
+      "path": "0025/0010/0001",
+      "reason": "sprite/0025/0010/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-unova-cap",
+      "path": "0025/0011",
+      "reason": "sprite/0025/0011/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-unova-cap-shiny",
+      "path": "0025/0011/0001",
+      "reason": "sprite/0025/0011/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-alola-cap",
+      "path": "0025/0013",
+      "reason": "sprite/0025/0013/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-kalos-cap",
+      "path": "0025/0012",
+      "reason": "sprite/0025/0012/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-alola-cap-shiny",
+      "path": "0025/0013/0001",
+      "reason": "sprite/0025/0013/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-kalos-cap-shiny",
+      "path": "0025/0012/0001",
+      "reason": "sprite/0025/0012/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-partner-cap",
+      "path": "0025/0014",
+      "reason": "sprite/0025/0014/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-world-cap",
+      "path": "0025/0015",
+      "reason": "sprite/0025/0015/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-partner-cap-shiny",
+      "path": "0025/0014/0001",
+      "reason": "sprite/0025/0014/0001/AnimData.xml"
+    },
+    {
+      "dex": 25,
+      "id": "pikachu-world-cap-shiny",
+      "path": "0025/0015/0001",
+      "reason": "sprite/0025/0015/0001/AnimData.xml"
+    },
+    {
+      "dex": 26,
+      "id": "raichu-mega-x",
+      "path": "0026/0002",
+      "reason": "sprite/0026/0002/AnimData.xml"
+    },
+    {
+      "dex": 26,
+      "id": "raichu-mega-y-shiny",
+      "path": "0026/0003/0001",
+      "reason": "sprite/0026/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 26,
+      "id": "raichu-altcolor",
+      "path": "0026/0004",
+      "reason": "sprite/0026/0004/AnimData.xml"
+    },
+    {
+      "dex": 26,
+      "id": "raichu-alternate",
+      "path": "0026/0005",
+      "reason": "sprite/0026/0005/AnimData.xml"
+    },
+    {
+      "dex": 26,
+      "id": "raichu-mega-y",
+      "path": "0026/0003",
+      "reason": "sprite/0026/0003/AnimData.xml"
+    },
+    {
+      "dex": 26,
+      "id": "raichu-alternate-shiny",
+      "path": "0026/0005/0001",
+      "reason": "sprite/0026/0005/0001/AnimData.xml"
+    },
+    {
+      "dex": 29,
+      "id": "nidoran-f-alternate",
+      "path": "0029/0001",
+      "reason": "sprite/0029/0001/AnimData.xml"
+    },
+    {
+      "dex": 29,
+      "id": "nidoran-f-alternate-shiny",
+      "path": "0029/0001/0001",
+      "reason": "sprite/0029/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 31,
+      "id": "nidoqueen-temp",
+      "path": "0031/0002",
+      "reason": "sprite/0031/0002/AnimData.xml"
+    },
+    {
+      "dex": 36,
+      "id": "clefable-mega-shiny",
+      "path": "0036/0001/0001",
+      "reason": "sprite/0036/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 36,
+      "id": "clefable-mega",
+      "path": "0036/0001",
+      "reason": "sprite/0036/0001/AnimData.xml"
+    },
+    {
+      "dex": 37,
+      "id": "vulpix-alola-alternate",
+      "path": "0037/0004",
+      "reason": "sprite/0037/0004/AnimData.xml"
+    },
+    {
+      "dex": 37,
+      "id": "vulpix-alternate-shiny",
+      "path": "0037/0003/0001",
+      "reason": "sprite/0037/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 37,
+      "id": "vulpix-alola-alternate-shiny",
+      "path": "0037/0004/0001",
+      "reason": "sprite/0037/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 39,
+      "id": "jigglypuff-alternate",
+      "path": "0039/0001",
+      "reason": "sprite/0039/0001/AnimData.xml"
+    },
+    {
+      "dex": 39,
+      "id": "jigglypuff-alternate-shiny",
+      "path": "0039/0001/0001",
+      "reason": "sprite/0039/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 40,
+      "id": "wigglytuff-mama",
+      "path": "0040/0001",
+      "reason": "sprite/0040/0001/AnimData.xml"
+    },
+    {
+      "dex": 40,
+      "id": "wigglytuff-mama-cutscene",
+      "path": "0040/0003",
+      "reason": "sprite/0040/0003/AnimData.xml"
+    },
+    {
+      "dex": 40,
+      "id": "wigglytuff-mama-cutscene-shiny",
+      "path": "0040/0003/0001",
+      "reason": "sprite/0040/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 41,
+      "id": "zubat-female",
+      "path": "0041/0000/0000/0002",
+      "reason": "sprite/0041/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 41,
+      "id": "zubat-shiny-female",
+      "path": "0041/0000/0001/0002",
+      "reason": "sprite/0041/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 41,
+      "id": "zubat-altcolor-female",
+      "path": "0041/0002/0000/0002",
+      "reason": "sprite/0041/0002/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 41,
+      "id": "zubat-alternate-female",
+      "path": "0041/0003/0000/0002",
+      "reason": "sprite/0041/0003/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 41,
+      "id": "zubat-alternate",
+      "path": "0041/0003",
+      "reason": "sprite/0041/0003/AnimData.xml"
+    },
+    {
+      "dex": 41,
+      "id": "zubat-alternate-shiny",
+      "path": "0041/0003/0001",
+      "reason": "sprite/0041/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 41,
+      "id": "zubat-alternate-shiny-female",
+      "path": "0041/0003/0001/0002",
+      "reason": "sprite/0041/0003/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 42,
+      "id": "golbat-female",
+      "path": "0042/0000/0000/0002",
+      "reason": "sprite/0042/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 42,
+      "id": "golbat-shiny-female",
+      "path": "0042/0000/0001/0002",
+      "reason": "sprite/0042/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 42,
+      "id": "golbat-alternate-female",
+      "path": "0042/0001/0000/0002",
+      "reason": "sprite/0042/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 42,
+      "id": "golbat-alternate-shiny-female",
+      "path": "0042/0001/0001/0002",
+      "reason": "sprite/0042/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 42,
+      "id": "golbat-altcolor-female",
+      "path": "0042/0002/0000/0002",
+      "reason": "sprite/0042/0002/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 45,
+      "id": "vileplume-alternate-shiny",
+      "path": "0045/0001/0001",
+      "reason": "sprite/0045/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 45,
+      "id": "vileplume-alternate-shiny-female",
+      "path": "0045/0001/0001/0002",
+      "reason": "sprite/0045/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 50,
+      "id": "diglett-alternate",
+      "path": "0050/0002",
+      "reason": "sprite/0050/0002/AnimData.xml"
+    },
+    {
+      "dex": 50,
+      "id": "diglett-alternate-shiny",
+      "path": "0050/0002/0001",
+      "reason": "sprite/0050/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 52,
+      "id": "meowth-gigantamax",
+      "path": "0052/0003",
+      "reason": "sprite/0052/0003/AnimData.xml"
+    },
+    {
+      "dex": 52,
+      "id": "meowth-gigantamax-shiny",
+      "path": "0052/0003/0001",
+      "reason": "sprite/0052/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 65,
+      "id": "alakazam-shiny-female",
+      "path": "0065/0000/0001/0002",
+      "reason": "sprite/0065/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 65,
+      "id": "alakazam-female",
+      "path": "0065/0000/0000/0002",
+      "reason": "sprite/0065/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 68,
+      "id": "machamp-gigantamax-shiny",
+      "path": "0068/0001/0001",
+      "reason": "sprite/0068/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 68,
+      "id": "machamp-alternate-shiny",
+      "path": "0068/0002/0001",
+      "reason": "sprite/0068/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 68,
+      "id": "machamp-alternate",
+      "path": "0068/0002",
+      "reason": "sprite/0068/0002/AnimData.xml"
+    },
+    {
+      "dex": 68,
+      "id": "machamp-gigantamax",
+      "path": "0068/0001",
+      "reason": "sprite/0068/0001/AnimData.xml"
+    },
+    {
+      "dex": 71,
+      "id": "victreebel-mega-shiny",
+      "path": "0071/0001/0001",
+      "reason": "sprite/0071/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 71,
+      "id": "victreebel-mega",
+      "path": "0071/0001",
+      "reason": "sprite/0071/0001/AnimData.xml"
+    },
+    {
+      "dex": 71,
+      "id": "victreebel-mega-altcolor",
+      "path": "0071/0003",
+      "reason": "sprite/0071/0003/AnimData.xml"
+    },
+    {
+      "dex": 79,
+      "id": "slowpoke-altcolor-shiny",
+      "path": "0079/0002/0001",
+      "reason": "sprite/0079/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 80,
+      "id": "slowbro-mega-altcolor-shiny",
+      "path": "0080/0004/0001",
+      "reason": "sprite/0080/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 80,
+      "id": "slowbro-galar-alternate-shiny",
+      "path": "0080/0005/0001",
+      "reason": "sprite/0080/0005/0001/AnimData.xml"
+    },
+    {
+      "dex": 80,
+      "id": "slowbro-alternate-shiny",
+      "path": "0080/0003/0001",
+      "reason": "sprite/0080/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 80,
+      "id": "slowbro-galar-alternate",
+      "path": "0080/0005",
+      "reason": "sprite/0080/0005/AnimData.xml"
+    },
+    {
+      "dex": 82,
+      "id": "magneton-alternate",
+      "path": "0082/0002",
+      "reason": "sprite/0082/0002/AnimData.xml"
+    },
+    {
+      "dex": 82,
+      "id": "magneton-alternate-shiny",
+      "path": "0082/0002/0001",
+      "reason": "sprite/0082/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 84,
+      "id": "doduo-alternate-shiny",
+      "path": "0084/0001/0001",
+      "reason": "sprite/0084/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 84,
+      "id": "doduo-alternate-shiny-female",
+      "path": "0084/0001/0001/0002",
+      "reason": "sprite/0084/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 88,
+      "id": "grimer-altcolor",
+      "path": "0088/0002",
+      "reason": "sprite/0088/0002/AnimData.xml"
+    },
+    {
+      "dex": 88,
+      "id": "grimer-altcolor-shiny",
+      "path": "0088/0002/0001",
+      "reason": "sprite/0088/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 89,
+      "id": "muk-altcolor",
+      "path": "0089/0002",
+      "reason": "sprite/0089/0002/AnimData.xml"
+    },
+    {
+      "dex": 92,
+      "id": "gastly-altcolor",
+      "path": "0092/0002",
+      "reason": "sprite/0092/0002/AnimData.xml"
+    },
+    {
+      "dex": 92,
+      "id": "gastly-alternate",
+      "path": "0092/0001",
+      "reason": "sprite/0092/0001/AnimData.xml"
+    },
+    {
+      "dex": 92,
+      "id": "gastly-altcolor-shiny",
+      "path": "0092/0002/0001",
+      "reason": "sprite/0092/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 94,
+      "id": "gengar-gigantamax",
+      "path": "0094/0002",
+      "reason": "sprite/0094/0002/AnimData.xml"
+    },
+    {
+      "dex": 94,
+      "id": "gengar-gigantamax-shiny",
+      "path": "0094/0002/0001",
+      "reason": "sprite/0094/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 97,
+      "id": "hypno-female",
+      "path": "0097/0000/0000/0002",
+      "reason": "sprite/0097/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 97,
+      "id": "hypno-shiny-female",
+      "path": "0097/0000/0001/0002",
+      "reason": "sprite/0097/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 99,
+      "id": "kingler-altcolor-shiny",
+      "path": "0099/0002/0001",
+      "reason": "sprite/0099/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 107,
+      "id": "hitmonchan-alternate",
+      "path": "0107/0001",
+      "reason": "sprite/0107/0001/AnimData.xml"
+    },
+    {
+      "dex": 107,
+      "id": "hitmonchan-alternate-shiny",
+      "path": "0107/0001/0001",
+      "reason": "sprite/0107/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 108,
+      "id": "lickitung-altcolor-shiny",
+      "path": "0108/0001/0001",
+      "reason": "sprite/0108/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 92,
+      "id": "gastly-alternate-shiny",
+      "path": "0092/0001/0001",
+      "reason": "sprite/0092/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 112,
+      "id": "rhydon-female",
+      "path": "0112/0000/0000/0002",
+      "reason": "sprite/0112/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 111,
+      "id": "rhyhorn-shiny-female",
+      "path": "0111/0000/0001/0002",
+      "reason": "sprite/0111/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 112,
+      "id": "rhydon-altcolor-female",
+      "path": "0112/0001/0000/0002",
+      "reason": "sprite/0112/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 112,
+      "id": "rhydon-shiny-female",
+      "path": "0112/0000/0001/0002",
+      "reason": "sprite/0112/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 112,
+      "id": "rhydon-altcolor-shiny-female",
+      "path": "0112/0001/0001/0002",
+      "reason": "sprite/0112/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 115,
+      "id": "kangaskhan-mega-baby",
+      "path": "0115/0002",
+      "reason": "sprite/0115/0002/AnimData.xml"
+    },
+    {
+      "dex": 115,
+      "id": "kangaskhan-mega-baby-shiny",
+      "path": "0115/0002/0001",
+      "reason": "sprite/0115/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 115,
+      "id": "kangaskhan-baby",
+      "path": "0115/0003",
+      "reason": "sprite/0115/0003/AnimData.xml"
+    },
+    {
+      "dex": 115,
+      "id": "kangaskhan-baby-shiny",
+      "path": "0115/0003/0001",
+      "reason": "sprite/0115/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 116,
+      "id": "horsea-altcolor-shiny",
+      "path": "0116/0001/0001",
+      "reason": "sprite/0116/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 118,
+      "id": "goldeen-female",
+      "path": "0118/0000/0000/0002",
+      "reason": "sprite/0118/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 118,
+      "id": "goldeen-shiny-female",
+      "path": "0118/0000/0001/0002",
+      "reason": "sprite/0118/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 118,
+      "id": "goldeen-altcolor-female",
+      "path": "0118/0001/0000/0002",
+      "reason": "sprite/0118/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 118,
+      "id": "goldeen-altcolor-shiny-female",
+      "path": "0118/0001/0001/0002",
+      "reason": "sprite/0118/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 118,
+      "id": "goldeen-altcolor-shiny",
+      "path": "0118/0001/0001",
+      "reason": "sprite/0118/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 119,
+      "id": "seaking-male",
+      "path": "0119/0000/0000/0001",
+      "reason": "sprite/0119/0000/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 119,
+      "id": "seaking-shiny-male",
+      "path": "0119/0000/0001/0001",
+      "reason": "sprite/0119/0000/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 119,
+      "id": "seaking-altcolor-male",
+      "path": "0119/0001/0000/0001",
+      "reason": "sprite/0119/0001/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 119,
+      "id": "seaking-altcolor-shiny",
+      "path": "0119/0001/0001",
+      "reason": "sprite/0119/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 119,
+      "id": "seaking-altcolor-shiny-male",
+      "path": "0119/0001/0001/0001",
+      "reason": "sprite/0119/0001/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 121,
+      "id": "starmie-mega-shiny",
+      "path": "0121/0001/0001",
+      "reason": "sprite/0121/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 121,
+      "id": "starmie-mega",
+      "path": "0121/0001",
+      "reason": "sprite/0121/0001/AnimData.xml"
+    },
+    {
+      "dex": 123,
+      "id": "scyther-altcolor-shiny",
+      "path": "0123/0001/0001",
+      "reason": "sprite/0123/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 123,
+      "id": "scyther-alternate",
+      "path": "0123/0002",
+      "reason": "sprite/0123/0002/AnimData.xml"
+    },
+    {
+      "dex": 123,
+      "id": "scyther-alternate-shiny",
+      "path": "0123/0002/0001",
+      "reason": "sprite/0123/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 124,
+      "id": "jynx-alternate-shiny",
+      "path": "0124/0001/0001",
+      "reason": "sprite/0124/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 127,
+      "id": "pinsir-mega-shiny",
+      "path": "0127/0001/0001",
+      "reason": "sprite/0127/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 127,
+      "id": "pinsir-mega",
+      "path": "0127/0001",
+      "reason": "sprite/0127/0001/AnimData.xml"
+    },
+    {
+      "dex": 129,
+      "id": "magikarp-altcolor-female",
+      "path": "0129/0001/0000/0002",
+      "reason": "sprite/0129/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 129,
+      "id": "magikarp-altcolor",
+      "path": "0129/0001",
+      "reason": "sprite/0129/0001/AnimData.xml"
+    },
+    {
+      "dex": 130,
+      "id": "gyarados-mega-shiny",
+      "path": "0130/0001/0001",
+      "reason": "sprite/0130/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 130,
+      "id": "gyarados-mega",
+      "path": "0130/0001",
+      "reason": "sprite/0130/0001/AnimData.xml"
+    },
+    {
+      "dex": 130,
+      "id": "gyarados-mega-altcolor",
+      "path": "0130/0003",
+      "reason": "sprite/0130/0003/AnimData.xml"
+    },
+    {
+      "dex": 131,
+      "id": "lapras-gigantamax",
+      "path": "0131/0001",
+      "reason": "sprite/0131/0001/AnimData.xml"
+    },
+    {
+      "dex": 131,
+      "id": "lapras-gigantamax-shiny",
+      "path": "0131/0001/0001",
+      "reason": "sprite/0131/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 131,
+      "id": "lapras-alternate-shiny",
+      "path": "0131/0002/0001",
+      "reason": "sprite/0131/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 133,
+      "id": "eevee-gigantamax",
+      "path": "0133/0001",
+      "reason": "sprite/0133/0001/AnimData.xml"
+    },
+    {
+      "dex": 133,
+      "id": "eevee-gigantamax-shiny",
+      "path": "0133/0001/0001",
+      "reason": "sprite/0133/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 133,
+      "id": "eevee-alternate-shiny",
+      "path": "0133/0002/0001",
+      "reason": "sprite/0133/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 133,
+      "id": "eevee-alternate2",
+      "path": "0133/0003",
+      "reason": "sprite/0133/0003/AnimData.xml"
+    },
+    {
+      "dex": 133,
+      "id": "eevee-alternate2-shiny",
+      "path": "0133/0003/0001",
+      "reason": "sprite/0133/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 143,
+      "id": "snorlax-gigantamax",
+      "path": "0143/0001",
+      "reason": "sprite/0143/0001/AnimData.xml"
+    },
+    {
+      "dex": 143,
+      "id": "snorlax-gigantamax-shiny",
+      "path": "0143/0001/0001",
+      "reason": "sprite/0143/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 146,
+      "id": "moltres-alternate-shiny",
+      "path": "0146/0003/0001",
+      "reason": "sprite/0146/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 149,
+      "id": "dragonite-mega",
+      "path": "0149/0001",
+      "reason": "sprite/0149/0001/AnimData.xml"
+    },
+    {
+      "dex": 148,
+      "id": "dragonair-altcolor-shiny",
+      "path": "0148/0001/0001",
+      "reason": "sprite/0148/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 150,
+      "id": "mewtwo-mega-x",
+      "path": "0150/0001",
+      "reason": "sprite/0150/0001/AnimData.xml"
+    },
+    {
+      "dex": 150,
+      "id": "mewtwo-mega-x-shiny",
+      "path": "0150/0001/0001",
+      "reason": "sprite/0150/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 150,
+      "id": "mewtwo-shadow-mega-x",
+      "path": "0150/0004",
+      "reason": "sprite/0150/0004/AnimData.xml"
+    },
+    {
+      "dex": 150,
+      "id": "mewtwo-altcolor",
+      "path": "0150/0005",
+      "reason": "sprite/0150/0005/AnimData.xml"
+    },
+    {
+      "dex": 151,
+      "id": "mew-alternate-shiny",
+      "path": "0151/0001/0001",
+      "reason": "sprite/0151/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 152,
+      "id": "chikorita-alternate",
+      "path": "0152/0001",
+      "reason": "sprite/0152/0001/AnimData.xml"
+    },
+    {
+      "dex": 153,
+      "id": "bayleef-alternate",
+      "path": "0153/0002",
+      "reason": "sprite/0153/0002/AnimData.xml"
+    },
+    {
+      "dex": 152,
+      "id": "chikorita-alternate-shiny",
+      "path": "0152/0001/0001",
+      "reason": "sprite/0152/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 154,
+      "id": "meganium-mega-shiny",
+      "path": "0154/0001/0001",
+      "reason": "sprite/0154/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 153,
+      "id": "bayleef-alternate-shiny",
+      "path": "0153/0002/0001",
+      "reason": "sprite/0153/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 154,
+      "id": "meganium-mega",
+      "path": "0154/0001",
+      "reason": "sprite/0154/0001/AnimData.xml"
+    },
+    {
+      "dex": 154,
+      "id": "meganium-alternate",
+      "path": "0154/0002",
+      "reason": "sprite/0154/0002/AnimData.xml"
+    },
+    {
+      "dex": 154,
+      "id": "meganium-alternate-shiny-female",
+      "path": "0154/0002/0001/0002",
+      "reason": "sprite/0154/0002/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 154,
+      "id": "meganium-alternate-shiny",
+      "path": "0154/0002/0001",
+      "reason": "sprite/0154/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 154,
+      "id": "meganium-alternate-female",
+      "path": "0154/0002/0000/0002",
+      "reason": "sprite/0154/0002/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 154,
+      "id": "meganium-alternate2-shiny-female",
+      "path": "0154/0003/0001/0002",
+      "reason": "sprite/0154/0003/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 154,
+      "id": "meganium-alternate2-shiny",
+      "path": "0154/0003/0001",
+      "reason": "sprite/0154/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 160,
+      "id": "feraligatr-mega",
+      "path": "0160/0001",
+      "reason": "sprite/0160/0001/AnimData.xml"
+    },
+    {
+      "dex": 160,
+      "id": "feraligatr-alternate-shiny",
+      "path": "0160/0002/0001",
+      "reason": "sprite/0160/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 160,
+      "id": "feraligatr-mega-shiny",
+      "path": "0160/0001/0001",
+      "reason": "sprite/0160/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 160,
+      "id": "feraligatr-alternate",
+      "path": "0160/0002",
+      "reason": "sprite/0160/0002/AnimData.xml"
+    },
+    {
+      "dex": 164,
+      "id": "noctowl-altcolor",
+      "path": "0164/0001",
+      "reason": "sprite/0164/0001/AnimData.xml"
+    },
+    {
+      "dex": 166,
+      "id": "ledian-alternate-shiny",
+      "path": "0166/0002/0001",
+      "reason": "sprite/0166/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 166,
+      "id": "ledian-alternate",
+      "path": "0166/0002",
+      "reason": "sprite/0166/0002/AnimData.xml"
+    },
+    {
+      "dex": 167,
+      "id": "spinarak-altcolor",
+      "path": "0167/0001",
+      "reason": "sprite/0167/0001/AnimData.xml"
+    },
+    {
+      "dex": 174,
+      "id": "igglybuff-altcolor",
+      "path": "0174/0002",
+      "reason": "sprite/0174/0002/AnimData.xml"
+    },
+    {
+      "dex": 181,
+      "id": "ampharos-mega",
+      "path": "0181/0001",
+      "reason": "sprite/0181/0001/AnimData.xml"
+    },
+    {
+      "dex": 181,
+      "id": "ampharos-mega-shiny",
+      "path": "0181/0001/0001",
+      "reason": "sprite/0181/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 183,
+      "id": "marill-cutscene",
+      "path": "0183/0001",
+      "reason": "sprite/0183/0001/AnimData.xml"
+    },
+    {
+      "dex": 184,
+      "id": "azumarill-alternate-shiny",
+      "path": "0184/0001/0001",
+      "reason": "sprite/0184/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 184,
+      "id": "azumarill-alternate",
+      "path": "0184/0001",
+      "reason": "sprite/0184/0001/AnimData.xml"
+    },
+    {
+      "dex": 183,
+      "id": "marill-cutscene-shiny",
+      "path": "0183/0001/0001",
+      "reason": "sprite/0183/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 185,
+      "id": "sudowoodo-alternate-shiny",
+      "path": "0185/0001/0001",
+      "reason": "sprite/0185/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 186,
+      "id": "politoed-altcolor",
+      "path": "0186/0001",
+      "reason": "sprite/0186/0001/AnimData.xml"
+    },
+    {
+      "dex": 186,
+      "id": "politoed-shiny-female",
+      "path": "0186/0000/0001/0002",
+      "reason": "sprite/0186/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 186,
+      "id": "politoed-altcolor-female",
+      "path": "0186/0001/0000/0002",
+      "reason": "sprite/0186/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 186,
+      "id": "politoed-altcolor-shiny",
+      "path": "0186/0001/0001",
+      "reason": "sprite/0186/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 186,
+      "id": "politoed-female",
+      "path": "0186/0000/0000/0002",
+      "reason": "sprite/0186/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 186,
+      "id": "politoed-altcolor-shiny-female",
+      "path": "0186/0001/0001/0002",
+      "reason": "sprite/0186/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 187,
+      "id": "hoppip-beta-shiny",
+      "path": "0187/0002/0001",
+      "reason": "sprite/0187/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 189,
+      "id": "jumpluff-cutscene",
+      "path": "0189/0001",
+      "reason": "sprite/0189/0001/AnimData.xml"
+    },
+    {
+      "dex": 189,
+      "id": "jumpluff-cutscene-shiny",
+      "path": "0189/0001/0001",
+      "reason": "sprite/0189/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 190,
+      "id": "aipom-altcolor",
+      "path": "0190/0001",
+      "reason": "sprite/0190/0001/AnimData.xml"
+    },
+    {
+      "dex": 190,
+      "id": "aipom-shiny-female",
+      "path": "0190/0000/0001/0002",
+      "reason": "sprite/0190/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 190,
+      "id": "aipom-female",
+      "path": "0190/0000/0000/0002",
+      "reason": "sprite/0190/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 190,
+      "id": "aipom-altcolor-female",
+      "path": "0190/0001/0000/0002",
+      "reason": "sprite/0190/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 190,
+      "id": "aipom-alternate",
+      "path": "0190/0002",
+      "reason": "sprite/0190/0002/AnimData.xml"
+    },
+    {
+      "dex": 190,
+      "id": "aipom-alternate-female",
+      "path": "0190/0002/0000/0002",
+      "reason": "sprite/0190/0002/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 190,
+      "id": "aipom-alternate-shiny",
+      "path": "0190/0002/0001",
+      "reason": "sprite/0190/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 190,
+      "id": "aipom-alternate-shiny-female",
+      "path": "0190/0002/0001/0002",
+      "reason": "sprite/0190/0002/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 193,
+      "id": "yanma-altcolor",
+      "path": "0193/0001",
+      "reason": "sprite/0193/0001/AnimData.xml"
+    },
+    {
+      "dex": 193,
+      "id": "yanma-altcolor-shiny",
+      "path": "0193/0001/0001",
+      "reason": "sprite/0193/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 194,
+      "id": "wooper-beta",
+      "path": "0194/0001",
+      "reason": "sprite/0194/0001/AnimData.xml"
+    },
+    {
+      "dex": 195,
+      "id": "quagsire-male",
+      "path": "0195/0000/0000/0001",
+      "reason": "sprite/0195/0000/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 195,
+      "id": "quagsire-altcolor-male",
+      "path": "0195/0001/0000/0001",
+      "reason": "sprite/0195/0001/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 195,
+      "id": "quagsire-shiny-male",
+      "path": "0195/0000/0001/0001",
+      "reason": "sprite/0195/0000/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 197,
+      "id": "umbreon-alternate",
+      "path": "0197/0002",
+      "reason": "sprite/0197/0002/AnimData.xml"
+    },
+    {
+      "dex": 197,
+      "id": "umbreon-alternate-shiny",
+      "path": "0197/0002/0001",
+      "reason": "sprite/0197/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 198,
+      "id": "murkrow-female",
+      "path": "0198/0000/0000/0002",
+      "reason": "sprite/0198/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 198,
+      "id": "murkrow-shiny-female",
+      "path": "0198/0000/0001/0002",
+      "reason": "sprite/0198/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 198,
+      "id": "murkrow-altcolor-female",
+      "path": "0198/0001/0000/0002",
+      "reason": "sprite/0198/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 198,
+      "id": "murkrow-altcolor-shiny-female",
+      "path": "0198/0001/0001/0002",
+      "reason": "sprite/0198/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 206,
+      "id": "dunsparce-cutscene-shiny",
+      "path": "0206/0001/0001",
+      "reason": "sprite/0206/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 206,
+      "id": "dunsparce-cutscene",
+      "path": "0206/0001",
+      "reason": "sprite/0206/0001/AnimData.xml"
+    },
+    {
+      "dex": 211,
+      "id": "qwilfish-alternate-shiny",
+      "path": "0211/0002/0001",
+      "reason": "sprite/0211/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 212,
+      "id": "scizor-beta",
+      "path": "0212/0004",
+      "reason": "sprite/0212/0004/AnimData.xml"
+    },
+    {
+      "dex": 212,
+      "id": "scizor-mega",
+      "path": "0212/0001",
+      "reason": "sprite/0212/0001/AnimData.xml"
+    },
+    {
+      "dex": 212,
+      "id": "scizor-altcolor",
+      "path": "0212/0002",
+      "reason": "sprite/0212/0002/AnimData.xml"
+    },
+    {
+      "dex": 212,
+      "id": "scizor-mega-shiny",
+      "path": "0212/0001/0001",
+      "reason": "sprite/0212/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 212,
+      "id": "scizor-alternate-shiny",
+      "path": "0212/0006/0001",
+      "reason": "sprite/0212/0006/0001/AnimData.xml"
+    },
+    {
+      "dex": 212,
+      "id": "scizor-alternate",
+      "path": "0212/0006",
+      "reason": "sprite/0212/0006/AnimData.xml"
+    },
+    {
+      "dex": 214,
+      "id": "heracross-mega-shiny",
+      "path": "0214/0001/0001",
+      "reason": "sprite/0214/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 215,
+      "id": "sneasel-female",
+      "path": "0215/0000/0000/0002",
+      "reason": "sprite/0215/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 214,
+      "id": "heracross-mega",
+      "path": "0214/0001",
+      "reason": "sprite/0214/0001/AnimData.xml"
+    },
+    {
+      "dex": 215,
+      "id": "sneasel-shiny-female",
+      "path": "0215/0000/0001/0002",
+      "reason": "sprite/0215/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 215,
+      "id": "sneasel-hisui-female",
+      "path": "0215/0001/0000/0002",
+      "reason": "sprite/0215/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 215,
+      "id": "sneasel-hisui-shiny-female",
+      "path": "0215/0001/0001/0002",
+      "reason": "sprite/0215/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 215,
+      "id": "sneasel-beta",
+      "path": "0215/0004",
+      "reason": "sprite/0215/0004/AnimData.xml"
+    },
+    {
+      "dex": 218,
+      "id": "slugma-cutscene",
+      "path": "0218/0001",
+      "reason": "sprite/0218/0001/AnimData.xml"
+    },
+    {
+      "dex": 218,
+      "id": "slugma-cutscene-shiny",
+      "path": "0218/0001/0001",
+      "reason": "sprite/0218/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 220,
+      "id": "swinub-alternate",
+      "path": "0220/0001",
+      "reason": "sprite/0220/0001/AnimData.xml"
+    },
+    {
+      "dex": 220,
+      "id": "swinub-alternate-shiny",
+      "path": "0220/0001/0001",
+      "reason": "sprite/0220/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 221,
+      "id": "piloswine-shiny-female",
+      "path": "0221/0000/0001/0002",
+      "reason": "sprite/0221/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 221,
+      "id": "piloswine-female",
+      "path": "0221/0000/0000/0002",
+      "reason": "sprite/0221/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 224,
+      "id": "octillery-shiny-female",
+      "path": "0224/0000/0001/0002",
+      "reason": "sprite/0224/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 224,
+      "id": "octillery-altcolor",
+      "path": "0224/0002",
+      "reason": "sprite/0224/0002/AnimData.xml"
+    },
+    {
+      "dex": 224,
+      "id": "octillery-altcolor-female",
+      "path": "0224/0002/0000/0002",
+      "reason": "sprite/0224/0002/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 224,
+      "id": "octillery-female",
+      "path": "0224/0000/0000/0002",
+      "reason": "sprite/0224/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 227,
+      "id": "skarmory-mega-shiny",
+      "path": "0227/0001/0001",
+      "reason": "sprite/0227/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 227,
+      "id": "skarmory-alternate-shiny",
+      "path": "0227/0003/0001",
+      "reason": "sprite/0227/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 227,
+      "id": "skarmory-alternate",
+      "path": "0227/0003",
+      "reason": "sprite/0227/0003/AnimData.xml"
+    },
+    {
+      "dex": 229,
+      "id": "houndoom-shiny-female",
+      "path": "0229/0000/0001/0002",
+      "reason": "sprite/0229/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 230,
+      "id": "kingdra-altcolor",
+      "path": "0230/0001",
+      "reason": "sprite/0230/0001/AnimData.xml"
+    },
+    {
+      "dex": 229,
+      "id": "houndoom-female",
+      "path": "0229/0000/0000/0002",
+      "reason": "sprite/0229/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 231,
+      "id": "phanpy-alternate-shiny",
+      "path": "0231/0001/0001",
+      "reason": "sprite/0231/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 233,
+      "id": "porygon2-beta-shiny",
+      "path": "0233/0001/0001",
+      "reason": "sprite/0233/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 235,
+      "id": "smeargle-alternate",
+      "path": "0235/0002",
+      "reason": "sprite/0235/0002/AnimData.xml"
+    },
+    {
+      "dex": 235,
+      "id": "smeargle-alternate-shiny",
+      "path": "0235/0002/0001",
+      "reason": "sprite/0235/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 237,
+      "id": "hitmontop-alternate",
+      "path": "0237/0001",
+      "reason": "sprite/0237/0001/AnimData.xml"
+    },
+    {
+      "dex": 237,
+      "id": "hitmontop-altcolor",
+      "path": "0237/0002",
+      "reason": "sprite/0237/0002/AnimData.xml"
+    },
+    {
+      "dex": 237,
+      "id": "hitmontop-alternate-shiny",
+      "path": "0237/0001/0001",
+      "reason": "sprite/0237/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 238,
+      "id": "smoochum-alternate",
+      "path": "0238/0001",
+      "reason": "sprite/0238/0001/AnimData.xml"
+    },
+    {
+      "dex": 238,
+      "id": "smoochum-alternate-shiny",
+      "path": "0238/0001/0001",
+      "reason": "sprite/0238/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 243,
+      "id": "raikou-altcolor",
+      "path": "0243/0002",
+      "reason": "sprite/0243/0002/AnimData.xml"
+    },
+    {
+      "dex": 248,
+      "id": "tyranitar-mega-shiny",
+      "path": "0248/0001/0001",
+      "reason": "sprite/0248/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 249,
+      "id": "lugia-alternate",
+      "path": "0249/0003",
+      "reason": "sprite/0249/0003/AnimData.xml"
+    },
+    {
+      "dex": 249,
+      "id": "lugia-shadow-alternate",
+      "path": "0249/0004",
+      "reason": "sprite/0249/0004/AnimData.xml"
+    },
+    {
+      "dex": 249,
+      "id": "lugia-alternate-shiny",
+      "path": "0249/0003/0001",
+      "reason": "sprite/0249/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 233,
+      "id": "porygon2-beta",
+      "path": "0233/0001",
+      "reason": "sprite/0233/0001/AnimData.xml"
+    },
+    {
+      "dex": 251,
+      "id": "celebi-alternate-shiny",
+      "path": "0251/0002/0001",
+      "reason": "sprite/0251/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 257,
+      "id": "blaziken-mega-shiny",
+      "path": "0257/0001/0001",
+      "reason": "sprite/0257/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 257,
+      "id": "blaziken-mega",
+      "path": "0257/0001",
+      "reason": "sprite/0257/0001/AnimData.xml"
+    },
+    {
+      "dex": 257,
+      "id": "blaziken-mega-alternate",
+      "path": "0257/0003",
+      "reason": "sprite/0257/0003/AnimData.xml"
+    },
+    {
+      "dex": 260,
+      "id": "swampert-mega",
+      "path": "0260/0001",
+      "reason": "sprite/0260/0001/AnimData.xml"
+    },
+    {
+      "dex": 260,
+      "id": "swampert-mega-shiny",
+      "path": "0260/0001/0001",
+      "reason": "sprite/0260/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 258,
+      "id": "mudkip-alternate-shiny",
+      "path": "0258/0001/0001",
+      "reason": "sprite/0258/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 263,
+      "id": "zigzagoon-galar-alternate",
+      "path": "0263/0003",
+      "reason": "sprite/0263/0003/AnimData.xml"
+    },
+    {
+      "dex": 263,
+      "id": "zigzagoon-alternate-shiny",
+      "path": "0263/0002/0001",
+      "reason": "sprite/0263/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 263,
+      "id": "zigzagoon-galar-alternate-shiny",
+      "path": "0263/0003/0001",
+      "reason": "sprite/0263/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 272,
+      "id": "ludicolo-female",
+      "path": "0272/0000/0000/0002",
+      "reason": "sprite/0272/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 272,
+      "id": "ludicolo-shiny-female",
+      "path": "0272/0000/0001/0002",
+      "reason": "sprite/0272/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 251,
+      "id": "celebi-alternate",
+      "path": "0251/0002",
+      "reason": "sprite/0251/0002/AnimData.xml"
+    },
+    {
+      "dex": 272,
+      "id": "ludicolo-altcolor-shiny",
+      "path": "0272/0002/0001",
+      "reason": "sprite/0272/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 250,
+      "id": "ho-oh-alternate-shiny",
+      "path": "0250/0001/0001",
+      "reason": "sprite/0250/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 274,
+      "id": "nuzleaf-alternate",
+      "path": "0274/0002",
+      "reason": "sprite/0274/0002/AnimData.xml"
+    },
+    {
+      "dex": 257,
+      "id": "blaziken-mega-alternate-shiny",
+      "path": "0257/0003/0001",
+      "reason": "sprite/0257/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 257,
+      "id": "blaziken-alternate-shiny",
+      "path": "0257/0002/0001",
+      "reason": "sprite/0257/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 278,
+      "id": "wingull-alternate",
+      "path": "0278/0001",
+      "reason": "sprite/0278/0001/AnimData.xml"
+    },
+    {
+      "dex": 280,
+      "id": "ralts-alternate-shiny",
+      "path": "0280/0001/0001",
+      "reason": "sprite/0280/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 280,
+      "id": "ralts-alternate",
+      "path": "0280/0001",
+      "reason": "sprite/0280/0001/AnimData.xml"
+    },
+    {
+      "dex": 282,
+      "id": "gardevoir-alternate-shiny",
+      "path": "0282/0003/0001",
+      "reason": "sprite/0282/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 282,
+      "id": "gardevoir-alternate",
+      "path": "0282/0003",
+      "reason": "sprite/0282/0003/AnimData.xml"
+    },
+    {
+      "dex": 295,
+      "id": "exploud-alternate-shiny",
+      "path": "0295/0001/0001",
+      "reason": "sprite/0295/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 300,
+      "id": "skitty-alternate-shiny",
+      "path": "0300/0001/0001",
+      "reason": "sprite/0300/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 272,
+      "id": "ludicolo-altcolor-female",
+      "path": "0272/0002/0000/0002",
+      "reason": "sprite/0272/0002/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 272,
+      "id": "ludicolo-altcolor-shiny-female",
+      "path": "0272/0002/0001/0002",
+      "reason": "sprite/0272/0002/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 302,
+      "id": "sableye-altcolor",
+      "path": "0302/0003",
+      "reason": "sprite/0302/0003/AnimData.xml"
+    },
+    {
+      "dex": 303,
+      "id": "mawile-cutscene",
+      "path": "0303/0002",
+      "reason": "sprite/0303/0002/AnimData.xml"
+    },
+    {
+      "dex": 303,
+      "id": "mawile-cutscene-shiny",
+      "path": "0303/0002/0001",
+      "reason": "sprite/0303/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 304,
+      "id": "aron-alternate-shiny",
+      "path": "0304/0001/0001",
+      "reason": "sprite/0304/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 304,
+      "id": "aron-alternate",
+      "path": "0304/0001",
+      "reason": "sprite/0304/0001/AnimData.xml"
+    },
+    {
+      "dex": 306,
+      "id": "aggron-mega",
+      "path": "0306/0001",
+      "reason": "sprite/0306/0001/AnimData.xml"
+    },
+    {
+      "dex": 306,
+      "id": "aggron-mega-shiny",
+      "path": "0306/0001/0001",
+      "reason": "sprite/0306/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 306,
+      "id": "aggron-altcolor-shiny",
+      "path": "0306/0003/0001",
+      "reason": "sprite/0306/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 307,
+      "id": "meditite-female",
+      "path": "0307/0000/0000/0002",
+      "reason": "sprite/0307/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 278,
+      "id": "wingull-alternate-shiny",
+      "path": "0278/0001/0001",
+      "reason": "sprite/0278/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 307,
+      "id": "meditite-shiny-female",
+      "path": "0307/0000/0001/0002",
+      "reason": "sprite/0307/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 308,
+      "id": "medicham-mega-shiny",
+      "path": "0308/0001/0001",
+      "reason": "sprite/0308/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 313,
+      "id": "volbeat-altcolor-shiny",
+      "path": "0313/0002/0001",
+      "reason": "sprite/0313/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 319,
+      "id": "sharpedo-mega-altcolor",
+      "path": "0319/0003",
+      "reason": "sprite/0319/0003/AnimData.xml"
+    },
+    {
+      "dex": 320,
+      "id": "wailmer-alternate-shiny",
+      "path": "0320/0001/0001",
+      "reason": "sprite/0320/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 322,
+      "id": "numel-alternate-shiny-female",
+      "path": "0322/0001/0001/0002",
+      "reason": "sprite/0322/0001/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 321,
+      "id": "wailord-alternate",
+      "path": "0321/0001",
+      "reason": "sprite/0321/0001/AnimData.xml"
+    },
+    {
+      "dex": 321,
+      "id": "wailord-alternate-shiny",
+      "path": "0321/0001/0001",
+      "reason": "sprite/0321/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 324,
+      "id": "torkoal-altcolor-shiny",
+      "path": "0324/0002/0001",
+      "reason": "sprite/0324/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 324,
+      "id": "torkoal-cutscene",
+      "path": "0324/0001",
+      "reason": "sprite/0324/0001/AnimData.xml"
+    },
+    {
+      "dex": 324,
+      "id": "torkoal-cutscene-shiny",
+      "path": "0324/0001/0001",
+      "reason": "sprite/0324/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 330,
+      "id": "flygon-alternate",
+      "path": "0330/0001",
+      "reason": "sprite/0330/0001/AnimData.xml"
+    },
+    {
+      "dex": 332,
+      "id": "cacturne-cutscene",
+      "path": "0332/0001",
+      "reason": "sprite/0332/0001/AnimData.xml"
+    },
+    {
+      "dex": 332,
+      "id": "cacturne-cutscene-shiny",
+      "path": "0332/0001/0001",
+      "reason": "sprite/0332/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 331,
+      "id": "cacnea-altcolor",
+      "path": "0331/0001",
+      "reason": "sprite/0331/0001/AnimData.xml"
+    },
+    {
+      "dex": 330,
+      "id": "flygon-alternate-shiny",
+      "path": "0330/0001/0001",
+      "reason": "sprite/0330/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 334,
+      "id": "altaria-altcolor",
+      "path": "0334/0002",
+      "reason": "sprite/0334/0002/AnimData.xml"
+    },
+    {
+      "dex": 338,
+      "id": "solrock-altcolor",
+      "path": "0338/0001",
+      "reason": "sprite/0338/0001/AnimData.xml"
+    },
+    {
+      "dex": 341,
+      "id": "corphish-altcolor",
+      "path": "0341/0002",
+      "reason": "sprite/0341/0002/AnimData.xml"
+    },
+    {
+      "dex": 342,
+      "id": "crawdaunt-alternate-shiny",
+      "path": "0342/0001/0001",
+      "reason": "sprite/0342/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 342,
+      "id": "crawdaunt-alternate",
+      "path": "0342/0001",
+      "reason": "sprite/0342/0001/AnimData.xml"
+    },
+    {
+      "dex": 351,
+      "id": "castform-altcolor",
+      "path": "0351/0004",
+      "reason": "sprite/0351/0004/AnimData.xml"
+    },
+    {
+      "dex": 333,
+      "id": "swablu-altcolor",
+      "path": "0333/0001",
+      "reason": "sprite/0333/0001/AnimData.xml"
+    },
+    {
+      "dex": 357,
+      "id": "tropius-altcolor-shiny",
+      "path": "0357/0001/0001",
+      "reason": "sprite/0357/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 359,
+      "id": "absol-alternate-shiny",
+      "path": "0359/0004/0001",
+      "reason": "sprite/0359/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 359,
+      "id": "absol-mega-z-altcolor",
+      "path": "0359/0006",
+      "reason": "sprite/0359/0006/AnimData.xml"
+    },
+    {
+      "dex": 359,
+      "id": "absol-mega-z",
+      "path": "0359/0002",
+      "reason": "sprite/0359/0002/AnimData.xml"
+    },
+    {
+      "dex": 359,
+      "id": "absol-mega-z-shiny",
+      "path": "0359/0002/0001",
+      "reason": "sprite/0359/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 359,
+      "id": "absol-mega-altcolor",
+      "path": "0359/0005",
+      "reason": "sprite/0359/0005/AnimData.xml"
+    },
+    {
+      "dex": 367,
+      "id": "huntail-altcolor-shiny",
+      "path": "0367/0001/0001",
+      "reason": "sprite/0367/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 367,
+      "id": "huntail-altcolor",
+      "path": "0367/0001",
+      "reason": "sprite/0367/0001/AnimData.xml"
+    },
+    {
+      "dex": 365,
+      "id": "walrein-alternate-shiny",
+      "path": "0365/0002/0001",
+      "reason": "sprite/0365/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 373,
+      "id": "salamence-mega",
+      "path": "0373/0001",
+      "reason": "sprite/0373/0001/AnimData.xml"
+    },
+    {
+      "dex": 376,
+      "id": "metagross-mega",
+      "path": "0376/0001",
+      "reason": "sprite/0376/0001/AnimData.xml"
+    },
+    {
+      "dex": 376,
+      "id": "metagross-mega-shiny",
+      "path": "0376/0001/0001",
+      "reason": "sprite/0376/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 373,
+      "id": "salamence-mega-shiny",
+      "path": "0373/0001/0001",
+      "reason": "sprite/0373/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 376,
+      "id": "metagross-mega-altcolor",
+      "path": "0376/0003",
+      "reason": "sprite/0376/0003/AnimData.xml"
+    },
+    {
+      "dex": 378,
+      "id": "regice-altcolor-shiny",
+      "path": "0378/0001/0001",
+      "reason": "sprite/0378/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 380,
+      "id": "latias-alternate-shiny",
+      "path": "0380/0003/0001",
+      "reason": "sprite/0380/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 381,
+      "id": "latios-alternate-shiny",
+      "path": "0381/0003/0001",
+      "reason": "sprite/0381/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 381,
+      "id": "latios-alternate",
+      "path": "0381/0003",
+      "reason": "sprite/0381/0003/AnimData.xml"
+    },
+    {
+      "dex": 380,
+      "id": "latias-alternate",
+      "path": "0380/0003",
+      "reason": "sprite/0380/0003/AnimData.xml"
+    },
+    {
+      "dex": 384,
+      "id": "rayquaza-alternate-shiny",
+      "path": "0384/0003/0001",
+      "reason": "sprite/0384/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 383,
+      "id": "groudon-altcolor",
+      "path": "0383/0003",
+      "reason": "sprite/0383/0003/AnimData.xml"
+    },
+    {
+      "dex": 384,
+      "id": "rayquaza-alternate",
+      "path": "0384/0003",
+      "reason": "sprite/0384/0003/AnimData.xml"
+    },
+    {
+      "dex": 391,
+      "id": "monferno-altcolor",
+      "path": "0391/0001",
+      "reason": "sprite/0391/0001/AnimData.xml"
+    },
+    {
+      "dex": 398,
+      "id": "staraptor-mega",
+      "path": "0398/0001",
+      "reason": "sprite/0398/0001/AnimData.xml"
+    },
+    {
+      "dex": 398,
+      "id": "staraptor-mega-shiny",
+      "path": "0398/0001/0001",
+      "reason": "sprite/0398/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 396,
+      "id": "starly-alternate",
+      "path": "0396/0001",
+      "reason": "sprite/0396/0001/AnimData.xml"
+    },
+    {
+      "dex": 401,
+      "id": "kricketot-shiny-female",
+      "path": "0401/0000/0001/0002",
+      "reason": "sprite/0401/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 401,
+      "id": "kricketot-female",
+      "path": "0401/0000/0000/0002",
+      "reason": "sprite/0401/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 402,
+      "id": "kricketune-shiny-female",
+      "path": "0402/0000/0001/0002",
+      "reason": "sprite/0402/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 402,
+      "id": "kricketune-female",
+      "path": "0402/0000/0000/0002",
+      "reason": "sprite/0402/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 407,
+      "id": "roserade-alternate-shiny",
+      "path": "0407/0001/0001",
+      "reason": "sprite/0407/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 408,
+      "id": "cranidos-alternate-shiny",
+      "path": "0408/0001/0001",
+      "reason": "sprite/0408/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 408,
+      "id": "cranidos-alternate",
+      "path": "0408/0001",
+      "reason": "sprite/0408/0001/AnimData.xml"
+    },
+    {
+      "dex": 409,
+      "id": "rampardos-alternate-shiny",
+      "path": "0409/0001/0001",
+      "reason": "sprite/0409/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 409,
+      "id": "rampardos-alternate",
+      "path": "0409/0001",
+      "reason": "sprite/0409/0001/AnimData.xml"
+    },
+    {
+      "dex": 407,
+      "id": "roserade-alternate",
+      "path": "0407/0001",
+      "reason": "sprite/0407/0001/AnimData.xml"
+    },
+    {
+      "dex": 412,
+      "id": "burmy-no-cloak-shiny",
+      "path": "0412/0003/0001",
+      "reason": "sprite/0412/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 412,
+      "id": "burmy-no-cloak",
+      "path": "0412/0003",
+      "reason": "sprite/0412/0003/AnimData.xml"
+    },
+    {
+      "dex": 416,
+      "id": "vespiquen-beta",
+      "path": "0416/0002",
+      "reason": "sprite/0416/0002/AnimData.xml"
+    },
+    {
+      "dex": 416,
+      "id": "vespiquen-alternate-shiny",
+      "path": "0416/0001/0001",
+      "reason": "sprite/0416/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 416,
+      "id": "vespiquen-alternate",
+      "path": "0416/0001",
+      "reason": "sprite/0416/0001/AnimData.xml"
+    },
+    {
+      "dex": 417,
+      "id": "pachirisu-male",
+      "path": "0417/0000/0000/0001",
+      "reason": "sprite/0417/0000/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 418,
+      "id": "buizel-alternate-shiny",
+      "path": "0418/0001/0001",
+      "reason": "sprite/0418/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 417,
+      "id": "pachirisu-shiny-male",
+      "path": "0417/0000/0001/0001",
+      "reason": "sprite/0417/0000/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 418,
+      "id": "buizel-alternate",
+      "path": "0418/0001",
+      "reason": "sprite/0418/0001/AnimData.xml"
+    },
+    {
+      "dex": 418,
+      "id": "buizel-alternate2",
+      "path": "0418/0002",
+      "reason": "sprite/0418/0002/AnimData.xml"
+    },
+    {
+      "dex": 418,
+      "id": "buizel-alternate2-shiny",
+      "path": "0418/0002/0001",
+      "reason": "sprite/0418/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 421,
+      "id": "cherrim-sunshine-alternate",
+      "path": "0421/0003",
+      "reason": "sprite/0421/0003/AnimData.xml"
+    },
+    {
+      "dex": 421,
+      "id": "cherrim-sunshine-alternate-shiny",
+      "path": "0421/0003/0001",
+      "reason": "sprite/0421/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 423,
+      "id": "gastrodon-altcolor",
+      "path": "0423/0002",
+      "reason": "sprite/0423/0002/AnimData.xml"
+    },
+    {
+      "dex": 423,
+      "id": "gastrodon-east-altcolor",
+      "path": "0423/0003",
+      "reason": "sprite/0423/0003/AnimData.xml"
+    },
+    {
+      "dex": 423,
+      "id": "gastrodon-east-altcolor-shiny",
+      "path": "0423/0003/0001",
+      "reason": "sprite/0423/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 423,
+      "id": "gastrodon-altcolor-shiny",
+      "path": "0423/0002/0001",
+      "reason": "sprite/0423/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 424,
+      "id": "ambipom-female",
+      "path": "0424/0000/0000/0002",
+      "reason": "sprite/0424/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 431,
+      "id": "glameow-alternate-shiny",
+      "path": "0431/0001/0001",
+      "reason": "sprite/0431/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 442,
+      "id": "spiritomb-altcolor",
+      "path": "0442/0002",
+      "reason": "sprite/0442/0002/AnimData.xml"
+    },
+    {
+      "dex": 445,
+      "id": "garchomp-mega",
+      "path": "0445/0001",
+      "reason": "sprite/0445/0001/AnimData.xml"
+    },
+    {
+      "dex": 445,
+      "id": "garchomp-mega-shiny",
+      "path": "0445/0001/0001",
+      "reason": "sprite/0445/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 442,
+      "id": "spiritomb-altcolor-shiny",
+      "path": "0442/0002/0001",
+      "reason": "sprite/0442/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 445,
+      "id": "garchomp-mega-z",
+      "path": "0445/0002",
+      "reason": "sprite/0445/0002/AnimData.xml"
+    },
+    {
+      "dex": 445,
+      "id": "garchomp-alternate-shiny",
+      "path": "0445/0004/0001",
+      "reason": "sprite/0445/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 447,
+      "id": "riolu-alternate-shiny",
+      "path": "0447/0001/0001",
+      "reason": "sprite/0447/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 445,
+      "id": "garchomp-mega-z-shiny",
+      "path": "0445/0002/0001",
+      "reason": "sprite/0445/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 445,
+      "id": "garchomp-alternate",
+      "path": "0445/0004",
+      "reason": "sprite/0445/0004/AnimData.xml"
+    },
+    {
+      "dex": 447,
+      "id": "riolu-alternate",
+      "path": "0447/0001",
+      "reason": "sprite/0447/0001/AnimData.xml"
+    },
+    {
+      "dex": 448,
+      "id": "lucario-mega-z",
+      "path": "0448/0002",
+      "reason": "sprite/0448/0002/AnimData.xml"
+    },
+    {
+      "dex": 450,
+      "id": "hippowdon-alternate",
+      "path": "0450/0001",
+      "reason": "sprite/0450/0001/AnimData.xml"
+    },
+    {
+      "dex": 448,
+      "id": "lucario-alternate-shiny",
+      "path": "0448/0003/0001",
+      "reason": "sprite/0448/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 450,
+      "id": "hippowdon-alternate-female",
+      "path": "0450/0001/0000/0002",
+      "reason": "sprite/0450/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 453,
+      "id": "croagunk-altcolor-shiny-female",
+      "path": "0453/0002/0001/0002",
+      "reason": "sprite/0453/0002/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 454,
+      "id": "toxicroak-female",
+      "path": "0454/0000/0000/0002",
+      "reason": "sprite/0454/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 454,
+      "id": "toxicroak-shiny-female",
+      "path": "0454/0000/0001/0002",
+      "reason": "sprite/0454/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 453,
+      "id": "croagunk-altcolor-shiny",
+      "path": "0453/0002/0001",
+      "reason": "sprite/0453/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 454,
+      "id": "toxicroak-altcolor-female",
+      "path": "0454/0001/0000/0002",
+      "reason": "sprite/0454/0001/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 456,
+      "id": "finneon-female",
+      "path": "0456/0000/0000/0002",
+      "reason": "sprite/0456/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 454,
+      "id": "toxicroak-altcolor",
+      "path": "0454/0001",
+      "reason": "sprite/0454/0001/AnimData.xml"
+    },
+    {
+      "dex": 456,
+      "id": "finneon-shiny-female",
+      "path": "0456/0000/0001/0002",
+      "reason": "sprite/0456/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 460,
+      "id": "abomasnow-female",
+      "path": "0460/0000/0000/0002",
+      "reason": "sprite/0460/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 460,
+      "id": "abomasnow-shiny-female",
+      "path": "0460/0000/0001/0002",
+      "reason": "sprite/0460/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 460,
+      "id": "abomasnow-mega",
+      "path": "0460/0001",
+      "reason": "sprite/0460/0001/AnimData.xml"
+    },
+    {
+      "dex": 460,
+      "id": "abomasnow-mega-shiny",
+      "path": "0460/0001/0001",
+      "reason": "sprite/0460/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 461,
+      "id": "weavile-altcolor",
+      "path": "0461/0002",
+      "reason": "sprite/0461/0002/AnimData.xml"
+    },
+    {
+      "dex": 464,
+      "id": "rhyperior-female",
+      "path": "0464/0000/0000/0002",
+      "reason": "sprite/0464/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 464,
+      "id": "rhyperior-shiny-female",
+      "path": "0464/0000/0001/0002",
+      "reason": "sprite/0464/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 467,
+      "id": "magmortar-cutscene-shiny",
+      "path": "0467/0001/0001",
+      "reason": "sprite/0467/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 468,
+      "id": "togekiss-alternate",
+      "path": "0468/0001",
+      "reason": "sprite/0468/0001/AnimData.xml"
+    },
+    {
+      "dex": 468,
+      "id": "togekiss-alternate-shiny",
+      "path": "0468/0001/0001",
+      "reason": "sprite/0468/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 470,
+      "id": "leafeon-alternate-shiny",
+      "path": "0470/0001/0001",
+      "reason": "sprite/0470/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 470,
+      "id": "leafeon-alternate",
+      "path": "0470/0001",
+      "reason": "sprite/0470/0001/AnimData.xml"
+    },
+    {
+      "dex": 467,
+      "id": "magmortar-cutscene",
+      "path": "0467/0001",
+      "reason": "sprite/0467/0001/AnimData.xml"
+    },
+    {
+      "dex": 471,
+      "id": "glaceon-alternate",
+      "path": "0471/0002",
+      "reason": "sprite/0471/0002/AnimData.xml"
+    },
+    {
+      "dex": 471,
+      "id": "glaceon-altcolor-shiny",
+      "path": "0471/0001/0001",
+      "reason": "sprite/0471/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 471,
+      "id": "glaceon-alternate-shiny",
+      "path": "0471/0002/0001",
+      "reason": "sprite/0471/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 473,
+      "id": "mamoswine-shiny-female",
+      "path": "0473/0000/0001/0002",
+      "reason": "sprite/0473/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 473,
+      "id": "mamoswine-female",
+      "path": "0473/0000/0000/0002",
+      "reason": "sprite/0473/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 478,
+      "id": "froslass-mega",
+      "path": "0478/0001",
+      "reason": "sprite/0478/0001/AnimData.xml"
+    },
+    {
+      "dex": 478,
+      "id": "froslass-mega-shiny",
+      "path": "0478/0001/0001",
+      "reason": "sprite/0478/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 460,
+      "id": "abomasnow-alternate",
+      "path": "0460/0002",
+      "reason": "sprite/0460/0002/AnimData.xml"
+    },
+    {
+      "dex": 479,
+      "id": "rotom-phone",
+      "path": "0479/0007",
+      "reason": "sprite/0479/0007/AnimData.xml"
+    },
+    {
+      "dex": 479,
+      "id": "rotom-beta",
+      "path": "0479/0010",
+      "reason": "sprite/0479/0010/AnimData.xml"
+    },
+    {
+      "dex": 479,
+      "id": "rotom-rotomi",
+      "path": "0479/0009",
+      "reason": "sprite/0479/0009/AnimData.xml"
+    },
+    {
+      "dex": 479,
+      "id": "rotom-dex",
+      "path": "0479/0006",
+      "reason": "sprite/0479/0006/AnimData.xml"
+    },
+    {
+      "dex": 483,
+      "id": "dialga-alternate",
+      "path": "0483/0004",
+      "reason": "sprite/0483/0004/AnimData.xml"
+    },
+    {
+      "dex": 483,
+      "id": "dialga-alternate-shiny",
+      "path": "0483/0004/0001",
+      "reason": "sprite/0483/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 486,
+      "id": "regigigas-beta",
+      "path": "0486/0001",
+      "reason": "sprite/0486/0001/AnimData.xml"
+    },
+    {
+      "dex": 486,
+      "id": "regigigas-beta-shiny",
+      "path": "0486/0001/0001",
+      "reason": "sprite/0486/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 484,
+      "id": "palkia-alternate",
+      "path": "0484/0003",
+      "reason": "sprite/0484/0003/AnimData.xml"
+    },
+    {
+      "dex": 485,
+      "id": "heatran-mega-shiny",
+      "path": "0485/0001/0001",
+      "reason": "sprite/0485/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 485,
+      "id": "heatran-mega",
+      "path": "0485/0001",
+      "reason": "sprite/0485/0001/AnimData.xml"
+    },
+    {
+      "dex": 491,
+      "id": "darkrai-mega-shiny",
+      "path": "0491/0002/0001",
+      "reason": "sprite/0491/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 491,
+      "id": "darkrai-mega-altcolor",
+      "path": "0491/0005",
+      "reason": "sprite/0491/0005/AnimData.xml"
+    },
+    {
+      "dex": 492,
+      "id": "shaymin-sky-alternate",
+      "path": "0492/0004",
+      "reason": "sprite/0492/0004/AnimData.xml"
+    },
+    {
+      "dex": 492,
+      "id": "shaymin-sky-alternate-shiny",
+      "path": "0492/0004/0001",
+      "reason": "sprite/0492/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 493,
+      "id": "arceus-alternate",
+      "path": "0493/0020",
+      "reason": "sprite/0493/0020/AnimData.xml"
+    },
+    {
+      "dex": 493,
+      "id": "arceus-alternate-shiny",
+      "path": "0493/0020/0001",
+      "reason": "sprite/0493/0020/0001/AnimData.xml"
+    },
+    {
+      "dex": 500,
+      "id": "emboar-mega-shiny",
+      "path": "0500/0001/0001",
+      "reason": "sprite/0500/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 500,
+      "id": "emboar-mega",
+      "path": "0500/0001",
+      "reason": "sprite/0500/0001/AnimData.xml"
+    },
+    {
+      "dex": 498,
+      "id": "tepig-alternate-shiny",
+      "path": "0498/0002/0001",
+      "reason": "sprite/0498/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 498,
+      "id": "tepig-alternate",
+      "path": "0498/0002",
+      "reason": "sprite/0498/0002/AnimData.xml"
+    },
+    {
+      "dex": 514,
+      "id": "simisear-shiny",
+      "path": "0514/0000/0001",
+      "reason": "sprite/0514/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 520,
+      "id": "tranquill",
+      "path": "0520",
+      "reason": "sprite/0520/AnimData.xml"
+    },
+    {
+      "dex": 520,
+      "id": "tranquill-shiny",
+      "path": "0520/0000/0001",
+      "reason": "sprite/0520/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 516,
+      "id": "simipour",
+      "path": "0516",
+      "reason": "sprite/0516/AnimData.xml"
+    },
+    {
+      "dex": 522,
+      "id": "blitzle",
+      "path": "0522",
+      "reason": "sprite/0522/AnimData.xml"
+    },
+    {
+      "dex": 514,
+      "id": "simisear",
+      "path": "0514",
+      "reason": "sprite/0514/AnimData.xml"
+    },
+    {
+      "dex": 523,
+      "id": "zebstrika-shiny",
+      "path": "0523/0000/0001",
+      "reason": "sprite/0523/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 523,
+      "id": "zebstrika",
+      "path": "0523",
+      "reason": "sprite/0523/AnimData.xml"
+    },
+    {
+      "dex": 516,
+      "id": "simipour-shiny",
+      "path": "0516/0000/0001",
+      "reason": "sprite/0516/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 522,
+      "id": "blitzle-shiny",
+      "path": "0522/0000/0001",
+      "reason": "sprite/0522/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 531,
+      "id": "audino-mega-shiny",
+      "path": "0531/0001/0001",
+      "reason": "sprite/0531/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 531,
+      "id": "audino-mega",
+      "path": "0531/0001",
+      "reason": "sprite/0531/0001/AnimData.xml"
+    },
+    {
+      "dex": 538,
+      "id": "throh",
+      "path": "0538",
+      "reason": "sprite/0538/AnimData.xml"
+    },
+    {
+      "dex": 551,
+      "id": "sandile-alternate-shiny",
+      "path": "0551/0001/0001",
+      "reason": "sprite/0551/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 551,
+      "id": "sandile-alternate",
+      "path": "0551/0001",
+      "reason": "sprite/0551/0001/AnimData.xml"
+    },
+    {
+      "dex": 545,
+      "id": "scolipede-mega",
+      "path": "0545/0001",
+      "reason": "sprite/0545/0001/AnimData.xml"
+    },
+    {
+      "dex": 554,
+      "id": "darumaka-galar-shiny",
+      "path": "0554/0001/0001",
+      "reason": "sprite/0554/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 555,
+      "id": "darmanitan-galar-zen",
+      "path": "0555/0003",
+      "reason": "sprite/0555/0003/AnimData.xml"
+    },
+    {
+      "dex": 558,
+      "id": "crustle",
+      "path": "0558",
+      "reason": "sprite/0558/AnimData.xml"
+    },
+    {
+      "dex": 558,
+      "id": "crustle-shiny",
+      "path": "0558/0000/0001",
+      "reason": "sprite/0558/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 555,
+      "id": "darmanitan-galar-zen-shiny",
+      "path": "0555/0003/0001",
+      "reason": "sprite/0555/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 564,
+      "id": "tirtouga",
+      "path": "0564",
+      "reason": "sprite/0564/AnimData.xml"
+    },
+    {
+      "dex": 565,
+      "id": "carracosta",
+      "path": "0565",
+      "reason": "sprite/0565/AnimData.xml"
+    },
+    {
+      "dex": 565,
+      "id": "carracosta-shiny",
+      "path": "0565/0000/0001",
+      "reason": "sprite/0565/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 564,
+      "id": "tirtouga-shiny",
+      "path": "0564/0000/0001",
+      "reason": "sprite/0564/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 538,
+      "id": "throh-shiny",
+      "path": "0538/0000/0001",
+      "reason": "sprite/0538/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 570,
+      "id": "zorua-alternate",
+      "path": "0570/0002",
+      "reason": "sprite/0570/0002/AnimData.xml"
+    },
+    {
+      "dex": 570,
+      "id": "zorua-alternate2",
+      "path": "0570/0003",
+      "reason": "sprite/0570/0003/AnimData.xml"
+    },
+    {
+      "dex": 570,
+      "id": "zorua-alternate2-shiny",
+      "path": "0570/0003/0001",
+      "reason": "sprite/0570/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 545,
+      "id": "scolipede-mega-shiny",
+      "path": "0545/0001/0001",
+      "reason": "sprite/0545/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 582,
+      "id": "vanillite-alternate-shiny",
+      "path": "0582/0001/0001",
+      "reason": "sprite/0582/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 582,
+      "id": "vanillite-alternate",
+      "path": "0582/0001",
+      "reason": "sprite/0582/0001/AnimData.xml"
+    },
+    {
+      "dex": 588,
+      "id": "karrablast-shiny",
+      "path": "0588/0000/0001",
+      "reason": "sprite/0588/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 591,
+      "id": "amoonguss-shiny",
+      "path": "0591/0000/0001",
+      "reason": "sprite/0591/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 592,
+      "id": "frillish-shiny",
+      "path": "0592/0000/0001",
+      "reason": "sprite/0592/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 592,
+      "id": "frillish-female",
+      "path": "0592/0000/0000/0002",
+      "reason": "sprite/0592/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 591,
+      "id": "amoonguss",
+      "path": "0591",
+      "reason": "sprite/0591/AnimData.xml"
+    },
+    {
+      "dex": 592,
+      "id": "frillish",
+      "path": "0592",
+      "reason": "sprite/0592/AnimData.xml"
+    },
+    {
+      "dex": 607,
+      "id": "litwick-alternate",
+      "path": "0607/0001",
+      "reason": "sprite/0607/0001/AnimData.xml"
+    },
+    {
+      "dex": 607,
+      "id": "litwick-alternate-shiny",
+      "path": "0607/0001/0001",
+      "reason": "sprite/0607/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 609,
+      "id": "chandelure-mega",
+      "path": "0609/0001",
+      "reason": "sprite/0609/0001/AnimData.xml"
+    },
+    {
+      "dex": 609,
+      "id": "chandelure-mega-shiny",
+      "path": "0609/0001/0001",
+      "reason": "sprite/0609/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 616,
+      "id": "shelmet",
+      "path": "0616",
+      "reason": "sprite/0616/AnimData.xml"
+    },
+    {
+      "dex": 616,
+      "id": "shelmet-shiny",
+      "path": "0616/0000/0001",
+      "reason": "sprite/0616/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 618,
+      "id": "stunfisk-galar",
+      "path": "0618/0001",
+      "reason": "sprite/0618/0001/AnimData.xml"
+    },
+    {
+      "dex": 619,
+      "id": "mienfoo-alternate",
+      "path": "0619/0001",
+      "reason": "sprite/0619/0001/AnimData.xml"
+    },
+    {
+      "dex": 619,
+      "id": "mienfoo-alternate-shiny",
+      "path": "0619/0001/0001",
+      "reason": "sprite/0619/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 618,
+      "id": "stunfisk-galar-shiny",
+      "path": "0618/0001/0001",
+      "reason": "sprite/0618/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 623,
+      "id": "golurk-mega-shiny",
+      "path": "0623/0001/0001",
+      "reason": "sprite/0623/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 623,
+      "id": "golurk-mega",
+      "path": "0623/0001",
+      "reason": "sprite/0623/0001/AnimData.xml"
+    },
+    {
+      "dex": 626,
+      "id": "bouffalant",
+      "path": "0626",
+      "reason": "sprite/0626/AnimData.xml"
+    },
+    {
+      "dex": 626,
+      "id": "bouffalant-shiny",
+      "path": "0626/0000/0001",
+      "reason": "sprite/0626/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 635,
+      "id": "hydreigon-alternate",
+      "path": "0635/0001",
+      "reason": "sprite/0635/0001/AnimData.xml"
+    },
+    {
+      "dex": 635,
+      "id": "hydreigon-alternate-shiny",
+      "path": "0635/0001/0001",
+      "reason": "sprite/0635/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 641,
+      "id": "tornadus-therian-shiny",
+      "path": "0641/0001/0001",
+      "reason": "sprite/0641/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 642,
+      "id": "thundurus-therian-shiny",
+      "path": "0642/0001/0001",
+      "reason": "sprite/0642/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 641,
+      "id": "tornadus-therian",
+      "path": "0641/0001",
+      "reason": "sprite/0641/0001/AnimData.xml"
+    },
+    {
+      "dex": 642,
+      "id": "thundurus-therian",
+      "path": "0642/0001",
+      "reason": "sprite/0642/0001/AnimData.xml"
+    },
+    {
+      "dex": 646,
+      "id": "kyurem-black-alternate",
+      "path": "0646/0004",
+      "reason": "sprite/0646/0004/AnimData.xml"
+    },
+    {
+      "dex": 646,
+      "id": "kyurem-alternate-shiny",
+      "path": "0646/0003/0001",
+      "reason": "sprite/0646/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 646,
+      "id": "kyurem-black-alternate-shiny",
+      "path": "0646/0004/0001",
+      "reason": "sprite/0646/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 646,
+      "id": "kyurem-white-alternate",
+      "path": "0646/0005",
+      "reason": "sprite/0646/0005/AnimData.xml"
+    },
+    {
+      "dex": 646,
+      "id": "kyurem-alternate",
+      "path": "0646/0003",
+      "reason": "sprite/0646/0003/AnimData.xml"
+    },
+    {
+      "dex": 646,
+      "id": "kyurem-white-alternate-shiny",
+      "path": "0646/0005/0001",
+      "reason": "sprite/0646/0005/0001/AnimData.xml"
+    },
+    {
+      "dex": 647,
+      "id": "keldeo-resolute-shiny",
+      "path": "0647/0001/0001",
+      "reason": "sprite/0647/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 647,
+      "id": "keldeo-resolute",
+      "path": "0647/0001",
+      "reason": "sprite/0647/0001/AnimData.xml"
+    },
+    {
+      "dex": 648,
+      "id": "meloetta-beta",
+      "path": "0648/0002",
+      "reason": "sprite/0648/0002/AnimData.xml"
+    },
+    {
+      "dex": 653,
+      "id": "fennekin-alternate",
+      "path": "0653/0001",
+      "reason": "sprite/0653/0001/AnimData.xml"
+    },
+    {
+      "dex": 655,
+      "id": "delphox-mega",
+      "path": "0655/0001",
+      "reason": "sprite/0655/0001/AnimData.xml"
+    },
+    {
+      "dex": 652,
+      "id": "chesnaught-mega",
+      "path": "0652/0001",
+      "reason": "sprite/0652/0001/AnimData.xml"
+    },
+    {
+      "dex": 653,
+      "id": "fennekin-alternate-shiny",
+      "path": "0653/0001/0001",
+      "reason": "sprite/0653/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 658,
+      "id": "greninja-ash",
+      "path": "0658/0001",
+      "reason": "sprite/0658/0001/AnimData.xml"
+    },
+    {
+      "dex": 658,
+      "id": "greninja-ash-shiny",
+      "path": "0658/0001/0001",
+      "reason": "sprite/0658/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 658,
+      "id": "greninja-mega",
+      "path": "0658/0002",
+      "reason": "sprite/0658/0002/AnimData.xml"
+    },
+    {
+      "dex": 655,
+      "id": "delphox-mega-shiny",
+      "path": "0655/0001/0001",
+      "reason": "sprite/0655/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 658,
+      "id": "greninja-mega-shiny",
+      "path": "0658/0002/0001",
+      "reason": "sprite/0658/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 668,
+      "id": "pyroar-mega",
+      "path": "0668/0001",
+      "reason": "sprite/0668/0001/AnimData.xml"
+    },
+    {
+      "dex": 668,
+      "id": "pyroar",
+      "path": "0668",
+      "reason": "sprite/0668/AnimData.xml"
+    },
+    {
+      "dex": 668,
+      "id": "pyroar-shiny",
+      "path": "0668/0000/0001",
+      "reason": "sprite/0668/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 668,
+      "id": "pyroar-mega-shiny",
+      "path": "0668/0001/0001",
+      "reason": "sprite/0668/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 673,
+      "id": "gogoat-alternate-shiny",
+      "path": "0673/0001/0001",
+      "reason": "sprite/0673/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 676,
+      "id": "furfrou-heart-shiny",
+      "path": "0676/0001/0001",
+      "reason": "sprite/0676/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 676,
+      "id": "furfrou-debutante",
+      "path": "0676/0004",
+      "reason": "sprite/0676/0004/AnimData.xml"
+    },
+    {
+      "dex": 676,
+      "id": "furfrou-debutante-shiny",
+      "path": "0676/0004/0001",
+      "reason": "sprite/0676/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 676,
+      "id": "furfrou-matron-shiny",
+      "path": "0676/0005/0001",
+      "reason": "sprite/0676/0005/0001/AnimData.xml"
+    },
+    {
+      "dex": 676,
+      "id": "furfrou-matron",
+      "path": "0676/0005",
+      "reason": "sprite/0676/0005/AnimData.xml"
+    },
+    {
+      "dex": 673,
+      "id": "gogoat-alternate",
+      "path": "0673/0001",
+      "reason": "sprite/0673/0001/AnimData.xml"
+    },
+    {
+      "dex": 678,
+      "id": "meowstic-mega",
+      "path": "0678/0001",
+      "reason": "sprite/0678/0001/AnimData.xml"
+    },
+    {
+      "dex": 676,
+      "id": "furfrou-heart",
+      "path": "0676/0001",
+      "reason": "sprite/0676/0001/AnimData.xml"
+    },
+    {
+      "dex": 678,
+      "id": "meowstic-mega-shiny",
+      "path": "0678/0001/0001",
+      "reason": "sprite/0678/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 678,
+      "id": "meowstic-female-alternate",
+      "path": "0678/0002",
+      "reason": "sprite/0678/0002/AnimData.xml"
+    },
+    {
+      "dex": 678,
+      "id": "meowstic-female-alternate-shiny",
+      "path": "0678/0002/0001",
+      "reason": "sprite/0678/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 679,
+      "id": "honedge-unsheathed",
+      "path": "0679/0001",
+      "reason": "sprite/0679/0001/AnimData.xml"
+    },
+    {
+      "dex": 679,
+      "id": "honedge-unsheathed-shiny",
+      "path": "0679/0001/0001",
+      "reason": "sprite/0679/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 689,
+      "id": "barbaracle-mega-shiny",
+      "path": "0689/0001/0001",
+      "reason": "sprite/0689/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 687,
+      "id": "malamar-mega",
+      "path": "0687/0001",
+      "reason": "sprite/0687/0001/AnimData.xml"
+    },
+    {
+      "dex": 689,
+      "id": "barbaracle-mega",
+      "path": "0689/0001",
+      "reason": "sprite/0689/0001/AnimData.xml"
+    },
+    {
+      "dex": 718,
+      "id": "zygarde-core",
+      "path": "0718/0003",
+      "reason": "sprite/0718/0003/AnimData.xml"
+    },
+    {
+      "dex": 718,
+      "id": "zygarde-cell-shiny",
+      "path": "0718/0004/0001",
+      "reason": "sprite/0718/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 718,
+      "id": "zygarde-cell",
+      "path": "0718/0004",
+      "reason": "sprite/0718/0004/AnimData.xml"
+    },
+    {
+      "dex": 720,
+      "id": "hoopa-unbound-alternate",
+      "path": "0720/0002",
+      "reason": "sprite/0720/0002/AnimData.xml"
+    },
+    {
+      "dex": 720,
+      "id": "hoopa-unbound-alternate-shiny",
+      "path": "0720/0002/0001",
+      "reason": "sprite/0720/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 722,
+      "id": "rowlet-alternate",
+      "path": "0722/0001",
+      "reason": "sprite/0722/0001/AnimData.xml"
+    },
+    {
+      "dex": 722,
+      "id": "rowlet-alternate-shiny",
+      "path": "0722/0001/0001",
+      "reason": "sprite/0722/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 735,
+      "id": "gumshoos-shiny",
+      "path": "0735/0000/0001",
+      "reason": "sprite/0735/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 735,
+      "id": "gumshoos",
+      "path": "0735",
+      "reason": "sprite/0735/AnimData.xml"
+    },
+    {
+      "dex": 732,
+      "id": "trumbeak-shiny",
+      "path": "0732/0000/0001",
+      "reason": "sprite/0732/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 740,
+      "id": "crabominable-mega",
+      "path": "0740/0001",
+      "reason": "sprite/0740/0001/AnimData.xml"
+    },
+    {
+      "dex": 732,
+      "id": "trumbeak",
+      "path": "0732",
+      "reason": "sprite/0732/AnimData.xml"
+    },
+    {
+      "dex": 741,
+      "id": "oricorio-pa-u-shiny",
+      "path": "0741/0002/0001",
+      "reason": "sprite/0741/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 741,
+      "id": "oricorio-sensu-shiny",
+      "path": "0741/0003/0001",
+      "reason": "sprite/0741/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 741,
+      "id": "oricorio-sensu",
+      "path": "0741/0003",
+      "reason": "sprite/0741/0003/AnimData.xml"
+    },
+    {
+      "dex": 748,
+      "id": "toxapex-alternate",
+      "path": "0748/0001",
+      "reason": "sprite/0748/0001/AnimData.xml"
+    },
+    {
+      "dex": 748,
+      "id": "toxapex-alternate-shiny",
+      "path": "0748/0001/0001",
+      "reason": "sprite/0748/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 756,
+      "id": "shiinotic",
+      "path": "0756",
+      "reason": "sprite/0756/AnimData.xml"
+    },
+    {
+      "dex": 756,
+      "id": "shiinotic-shiny",
+      "path": "0756/0000/0001",
+      "reason": "sprite/0756/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 762,
+      "id": "steenee-alternate",
+      "path": "0762/0001",
+      "reason": "sprite/0762/0001/AnimData.xml"
+    },
+    {
+      "dex": 765,
+      "id": "oranguru",
+      "path": "0765",
+      "reason": "sprite/0765/AnimData.xml"
+    },
+    {
+      "dex": 768,
+      "id": "golisopod-mega-shiny",
+      "path": "0768/0001/0001",
+      "reason": "sprite/0768/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 768,
+      "id": "golisopod-mega",
+      "path": "0768/0001",
+      "reason": "sprite/0768/0001/AnimData.xml"
+    },
+    {
+      "dex": 762,
+      "id": "steenee-alternate-shiny",
+      "path": "0762/0001/0001",
+      "reason": "sprite/0762/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 765,
+      "id": "oranguru-shiny",
+      "path": "0765/0000/0001",
+      "reason": "sprite/0765/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 800,
+      "id": "necrozma-dawn-wings",
+      "path": "0800/0002",
+      "reason": "sprite/0800/0002/AnimData.xml"
+    },
+    {
+      "dex": 800,
+      "id": "necrozma-dawn-wings-shiny",
+      "path": "0800/0002/0001",
+      "reason": "sprite/0800/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 800,
+      "id": "necrozma-dusk-mane",
+      "path": "0800/0001",
+      "reason": "sprite/0800/0001/AnimData.xml"
+    },
+    {
+      "dex": 801,
+      "id": "magearna-mega",
+      "path": "0801/0002",
+      "reason": "sprite/0801/0002/AnimData.xml"
+    },
+    {
+      "dex": 801,
+      "id": "magearna-mega-shiny",
+      "path": "0801/0002/0001",
+      "reason": "sprite/0801/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 800,
+      "id": "necrozma-dusk-mane-shiny",
+      "path": "0800/0001/0001",
+      "reason": "sprite/0800/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 801,
+      "id": "magearna-original-mega",
+      "path": "0801/0003",
+      "reason": "sprite/0801/0003/AnimData.xml"
+    },
+    {
+      "dex": 801,
+      "id": "magearna-original-mega-shiny",
+      "path": "0801/0003/0001",
+      "reason": "sprite/0801/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 809,
+      "id": "melmetal-gigantamax",
+      "path": "0809/0001",
+      "reason": "sprite/0809/0001/AnimData.xml"
+    },
+    {
+      "dex": 809,
+      "id": "melmetal-gigantamax-shiny",
+      "path": "0809/0001/0001",
+      "reason": "sprite/0809/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 820,
+      "id": "greedent-shiny",
+      "path": "0820/0000/0001",
+      "reason": "sprite/0820/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 837,
+      "id": "rolycoly",
+      "path": "0837",
+      "reason": "sprite/0837/AnimData.xml"
+    },
+    {
+      "dex": 838,
+      "id": "carkol-shiny",
+      "path": "0838/0000/0001",
+      "reason": "sprite/0838/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 841,
+      "id": "flapple-gigantamax-shiny",
+      "path": "0841/0001/0001",
+      "reason": "sprite/0841/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 844,
+      "id": "sandaconda-gigantamax-shiny",
+      "path": "0844/0001/0001",
+      "reason": "sprite/0844/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 844,
+      "id": "sandaconda-gigantamax",
+      "path": "0844/0001",
+      "reason": "sprite/0844/0001/AnimData.xml"
+    },
+    {
+      "dex": 839,
+      "id": "coalossal-shiny",
+      "path": "0839/0000/0001",
+      "reason": "sprite/0839/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 839,
+      "id": "coalossal",
+      "path": "0839",
+      "reason": "sprite/0839/AnimData.xml"
+    },
+    {
+      "dex": 838,
+      "id": "carkol",
+      "path": "0838",
+      "reason": "sprite/0838/AnimData.xml"
+    },
+    {
+      "dex": 837,
+      "id": "rolycoly-shiny",
+      "path": "0837/0000/0001",
+      "reason": "sprite/0837/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 841,
+      "id": "flapple-gigantamax",
+      "path": "0841/0001",
+      "reason": "sprite/0841/0001/AnimData.xml"
+    },
+    {
+      "dex": 849,
+      "id": "toxtricity-lowkey-alternate-shiny",
+      "path": "0849/0003/0001",
+      "reason": "sprite/0849/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 849,
+      "id": "toxtricity-lowkey-alternate",
+      "path": "0849/0003",
+      "reason": "sprite/0849/0003/AnimData.xml"
+    },
+    {
+      "dex": 847,
+      "id": "barraskewda-shiny",
+      "path": "0847/0000/0001",
+      "reason": "sprite/0847/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 857,
+      "id": "hattrem-alternate",
+      "path": "0857/0001",
+      "reason": "sprite/0857/0001/AnimData.xml"
+    },
+    {
+      "dex": 861,
+      "id": "grimmsnarl-gigantamax",
+      "path": "0861/0001",
+      "reason": "sprite/0861/0001/AnimData.xml"
+    },
+    {
+      "dex": 857,
+      "id": "hattrem-alternate-shiny",
+      "path": "0857/0001/0001",
+      "reason": "sprite/0857/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 866,
+      "id": "mr-rime-shiny",
+      "path": "0866/0000/0001",
+      "reason": "sprite/0866/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 868,
+      "id": "milcery-shiny",
+      "path": "0868/0000/0001",
+      "reason": "sprite/0868/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 870,
+      "id": "falinks",
+      "path": "0870",
+      "reason": "sprite/0870/AnimData.xml"
+    },
+    {
+      "dex": 870,
+      "id": "falinks-mega",
+      "path": "0870/0001",
+      "reason": "sprite/0870/0001/AnimData.xml"
+    },
+    {
+      "dex": 870,
+      "id": "falinks-shiny",
+      "path": "0870/0000/0001",
+      "reason": "sprite/0870/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 870,
+      "id": "falinks-mega-shiny",
+      "path": "0870/0001/0001",
+      "reason": "sprite/0870/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 876,
+      "id": "indeedee-alternate",
+      "path": "0876/0001",
+      "reason": "sprite/0876/0001/AnimData.xml"
+    },
+    {
+      "dex": 866,
+      "id": "mr-rime",
+      "path": "0866",
+      "reason": "sprite/0866/AnimData.xml"
+    },
+    {
+      "dex": 876,
+      "id": "indeedee-alternate-shiny",
+      "path": "0876/0001/0001",
+      "reason": "sprite/0876/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 878,
+      "id": "cufant-shiny",
+      "path": "0878/0000/0001",
+      "reason": "sprite/0878/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 878,
+      "id": "cufant",
+      "path": "0878",
+      "reason": "sprite/0878/AnimData.xml"
+    },
+    {
+      "dex": 884,
+      "id": "duraludon-gigantamax-shiny",
+      "path": "0884/0001/0001",
+      "reason": "sprite/0884/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 884,
+      "id": "duraludon-gigantamax",
+      "path": "0884/0001",
+      "reason": "sprite/0884/0001/AnimData.xml"
+    },
+    {
+      "dex": 890,
+      "id": "eternatus-eternamax-shiny",
+      "path": "0890/0001/0001",
+      "reason": "sprite/0890/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 893,
+      "id": "zarude",
+      "path": "0893",
+      "reason": "sprite/0893/AnimData.xml"
+    },
+    {
+      "dex": 893,
+      "id": "zarude-shiny",
+      "path": "0893/0000/0001",
+      "reason": "sprite/0893/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 893,
+      "id": "zarude-dada",
+      "path": "0893/0001",
+      "reason": "sprite/0893/0001/AnimData.xml"
+    },
+    {
+      "dex": 896,
+      "id": "glastrier-shiny",
+      "path": "0896/0000/0001",
+      "reason": "sprite/0896/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 893,
+      "id": "zarude-dada-shiny",
+      "path": "0893/0001/0001",
+      "reason": "sprite/0893/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 898,
+      "id": "calyrex-ice-rider",
+      "path": "0898/0001",
+      "reason": "sprite/0898/0001/AnimData.xml"
+    },
+    {
+      "dex": 901,
+      "id": "ursaluna-bloodmoon-alternate",
+      "path": "0901/0002",
+      "reason": "sprite/0901/0002/AnimData.xml"
+    },
+    {
+      "dex": 908,
+      "id": "meowscarada-alternate-shiny",
+      "path": "0908/0001/0001",
+      "reason": "sprite/0908/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 908,
+      "id": "meowscarada-alternate",
+      "path": "0908/0001",
+      "reason": "sprite/0908/0001/AnimData.xml"
+    },
+    {
+      "dex": 916,
+      "id": "oinkologne-female",
+      "path": "0916/0000/0000/0002",
+      "reason": "sprite/0916/0000/0000/0002/AnimData.xml"
+    },
+    {
+      "dex": 916,
+      "id": "oinkologne-shiny-female",
+      "path": "0916/0000/0001/0002",
+      "reason": "sprite/0916/0000/0001/0002/AnimData.xml"
+    },
+    {
+      "dex": 916,
+      "id": "oinkologne-shiny",
+      "path": "0916/0000/0001",
+      "reason": "sprite/0916/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 931,
+      "id": "squawkabilly-blue",
+      "path": "0931/0001",
+      "reason": "sprite/0931/0001/AnimData.xml"
+    },
+    {
+      "dex": 931,
+      "id": "squawkabilly-blue-shiny",
+      "path": "0931/0001/0001",
+      "reason": "sprite/0931/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 931,
+      "id": "squawkabilly-shiny",
+      "path": "0931/0000/0001",
+      "reason": "sprite/0931/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 931,
+      "id": "squawkabilly-yellow-shiny",
+      "path": "0931/0002/0001",
+      "reason": "sprite/0931/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 931,
+      "id": "squawkabilly",
+      "path": "0931",
+      "reason": "sprite/0931/AnimData.xml"
+    },
+    {
+      "dex": 931,
+      "id": "squawkabilly-yellow",
+      "path": "0931/0002",
+      "reason": "sprite/0931/0002/AnimData.xml"
+    },
+    {
+      "dex": 931,
+      "id": "squawkabilly-white",
+      "path": "0931/0003",
+      "reason": "sprite/0931/0003/AnimData.xml"
+    },
+    {
+      "dex": 931,
+      "id": "squawkabilly-white-shiny",
+      "path": "0931/0003/0001",
+      "reason": "sprite/0931/0003/0001/AnimData.xml"
+    },
+    {
+      "dex": 933,
+      "id": "naclstack-shiny",
+      "path": "0933/0000/0001",
+      "reason": "sprite/0933/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 942,
+      "id": "maschiff",
+      "path": "0942",
+      "reason": "sprite/0942/AnimData.xml"
+    },
+    {
+      "dex": 943,
+      "id": "mabosstiff",
+      "path": "0943",
+      "reason": "sprite/0943/AnimData.xml"
+    },
+    {
+      "dex": 944,
+      "id": "shroodle-shiny",
+      "path": "0944/0000/0001",
+      "reason": "sprite/0944/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 943,
+      "id": "mabosstiff-shiny",
+      "path": "0943/0000/0001",
+      "reason": "sprite/0943/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 947,
+      "id": "brambleghast-shiny",
+      "path": "0947/0000/0001",
+      "reason": "sprite/0947/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 942,
+      "id": "maschiff-shiny",
+      "path": "0942/0000/0001",
+      "reason": "sprite/0942/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 947,
+      "id": "brambleghast",
+      "path": "0947",
+      "reason": "sprite/0947/AnimData.xml"
+    },
+    {
+      "dex": 944,
+      "id": "shroodle",
+      "path": "0944",
+      "reason": "sprite/0944/AnimData.xml"
+    },
+    {
+      "dex": 949,
+      "id": "toedscruel",
+      "path": "0949",
+      "reason": "sprite/0949/AnimData.xml"
+    },
+    {
+      "dex": 950,
+      "id": "klawf",
+      "path": "0950",
+      "reason": "sprite/0950/AnimData.xml"
+    },
+    {
+      "dex": 949,
+      "id": "toedscruel-shiny",
+      "path": "0949/0000/0001",
+      "reason": "sprite/0949/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 950,
+      "id": "klawf-shiny",
+      "path": "0950/0000/0001",
+      "reason": "sprite/0950/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 952,
+      "id": "scovillain-mega-shiny",
+      "path": "0952/0001/0001",
+      "reason": "sprite/0952/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 954,
+      "id": "rabsca",
+      "path": "0954",
+      "reason": "sprite/0954/AnimData.xml"
+    },
+    {
+      "dex": 954,
+      "id": "rabsca-shiny",
+      "path": "0954/0000/0001",
+      "reason": "sprite/0954/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 952,
+      "id": "scovillain-mega",
+      "path": "0952/0001",
+      "reason": "sprite/0952/0001/AnimData.xml"
+    },
+    {
+      "dex": 956,
+      "id": "espathra-shiny",
+      "path": "0956/0000/0001",
+      "reason": "sprite/0956/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 956,
+      "id": "espathra",
+      "path": "0956",
+      "reason": "sprite/0956/AnimData.xml"
+    },
+    {
+      "dex": 962,
+      "id": "bombirdier",
+      "path": "0962",
+      "reason": "sprite/0962/AnimData.xml"
+    },
+    {
+      "dex": 962,
+      "id": "bombirdier-shiny",
+      "path": "0962/0000/0001",
+      "reason": "sprite/0962/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 970,
+      "id": "glimmora-mega",
+      "path": "0970/0001",
+      "reason": "sprite/0970/0001/AnimData.xml"
+    },
+    {
+      "dex": 970,
+      "id": "glimmora-mega-shiny",
+      "path": "0970/0001/0001",
+      "reason": "sprite/0970/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 973,
+      "id": "flamigo",
+      "path": "0973",
+      "reason": "sprite/0973/AnimData.xml"
+    },
+    {
+      "dex": 973,
+      "id": "flamigo-shiny",
+      "path": "0973/0000/0001",
+      "reason": "sprite/0973/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 978,
+      "id": "tatsugiri-stretchy-mega-shiny",
+      "path": "0978/0004/0001",
+      "reason": "sprite/0978/0004/0001/AnimData.xml"
+    },
+    {
+      "dex": 978,
+      "id": "tatsugiri-droopy-mega-shiny",
+      "path": "0978/0005/0001",
+      "reason": "sprite/0978/0005/0001/AnimData.xml"
+    },
+    {
+      "dex": 978,
+      "id": "tatsugiri-stretchy-mega",
+      "path": "0978/0004",
+      "reason": "sprite/0978/0004/AnimData.xml"
+    },
+    {
+      "dex": 978,
+      "id": "tatsugiri-droopy-mega",
+      "path": "0978/0005",
+      "reason": "sprite/0978/0005/AnimData.xml"
+    },
+    {
+      "dex": 982,
+      "id": "dudunsparce-three",
+      "path": "0982/0001",
+      "reason": "sprite/0982/0001/AnimData.xml"
+    },
+    {
+      "dex": 986,
+      "id": "brute-bonnet-shiny",
+      "path": "0986/0000/0001",
+      "reason": "sprite/0986/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 982,
+      "id": "dudunsparce-alternate-shiny",
+      "path": "0982/0002/0001",
+      "reason": "sprite/0982/0002/0001/AnimData.xml"
+    },
+    {
+      "dex": 982,
+      "id": "dudunsparce-alternate",
+      "path": "0982/0002",
+      "reason": "sprite/0982/0002/AnimData.xml"
+    },
+    {
+      "dex": 982,
+      "id": "dudunsparce-three-shiny",
+      "path": "0982/0001/0001",
+      "reason": "sprite/0982/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 986,
+      "id": "brute-bonnet",
+      "path": "0986",
+      "reason": "sprite/0986/AnimData.xml"
+    },
+    {
+      "dex": 993,
+      "id": "iron-jugulis",
+      "path": "0993",
+      "reason": "sprite/0993/AnimData.xml"
+    },
+    {
+      "dex": 993,
+      "id": "iron-jugulis-shiny",
+      "path": "0993/0000/0001",
+      "reason": "sprite/0993/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 998,
+      "id": "baxcalibur-mega-shiny",
+      "path": "0998/0001/0001",
+      "reason": "sprite/0998/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 1002,
+      "id": "chien-pao-shiny",
+      "path": "1002/0000/0001",
+      "reason": "sprite/1002/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 998,
+      "id": "baxcalibur-mega",
+      "path": "0998/0001",
+      "reason": "sprite/0998/0001/AnimData.xml"
+    },
+    {
+      "dex": 999,
+      "id": "gimmighoul",
+      "path": "0999",
+      "reason": "sprite/0999/AnimData.xml"
+    },
+    {
+      "dex": 999,
+      "id": "gimmighoul-shiny",
+      "path": "0999/0000/0001",
+      "reason": "sprite/0999/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 1001,
+      "id": "wo-chien",
+      "path": "1001",
+      "reason": "sprite/1001/AnimData.xml"
+    },
+    {
+      "dex": 1001,
+      "id": "wo-chien-shiny",
+      "path": "1001/0000/0001",
+      "reason": "sprite/1001/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 1002,
+      "id": "chien-pao",
+      "path": "1002",
+      "reason": "sprite/1002/AnimData.xml"
+    },
+    {
+      "dex": 1005,
+      "id": "roaring-moon-alternate",
+      "path": "1005/0001",
+      "reason": "sprite/1005/0001/AnimData.xml"
+    },
+    {
+      "dex": 1005,
+      "id": "roaring-moon-alternate-shiny",
+      "path": "1005/0001/0001",
+      "reason": "sprite/1005/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 1007,
+      "id": "koraidon-shiny",
+      "path": "1007/0000/0001",
+      "reason": "sprite/1007/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 1007,
+      "id": "koraidon-limited",
+      "path": "1007/0001",
+      "reason": "sprite/1007/0001/AnimData.xml"
+    },
+    {
+      "dex": 1007,
+      "id": "koraidon-limited-shiny",
+      "path": "1007/0001/0001",
+      "reason": "sprite/1007/0001/0001/AnimData.xml"
+    },
+    {
+      "dex": 1008,
+      "id": "miraidon",
+      "path": "1008",
+      "reason": "sprite/1008/AnimData.xml"
+    },
+    {
+      "dex": 1008,
+      "id": "miraidon-shiny",
+      "path": "1008/0000/0001",
+      "reason": "sprite/1008/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 1014,
+      "id": "okidogi-shiny",
+      "path": "1014/0000/0001",
+      "reason": "sprite/1014/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 1014,
+      "id": "okidogi",
+      "path": "1014",
+      "reason": "sprite/1014/AnimData.xml"
+    },
+    {
+      "dex": 1022,
+      "id": "iron-boulder-shiny",
+      "path": "1022/0000/0001",
+      "reason": "sprite/1022/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 1023,
+      "id": "iron-crown",
+      "path": "1023",
+      "reason": "sprite/1023/AnimData.xml"
+    },
+    {
+      "dex": 1022,
+      "id": "iron-boulder",
+      "path": "1022",
+      "reason": "sprite/1022/AnimData.xml"
+    },
+    {
+      "dex": 1023,
+      "id": "iron-crown-shiny",
+      "path": "1023/0000/0001",
+      "reason": "sprite/1023/0000/0001/AnimData.xml"
+    },
+    {
+      "dex": 1024,
+      "id": "terapagos-stellar",
+      "path": "1024/0002",
+      "reason": "sprite/1024/0002/AnimData.xml"
+    }
+  ],
+  "speciesWithoutSprites": [
+    {
+      "dex": 514,
+      "name": "Simisear"
+    },
+    {
+      "dex": 516,
+      "name": "Simipour"
+    },
+    {
+      "dex": 520,
+      "name": "Tranquill"
+    },
+    {
+      "dex": 522,
+      "name": "Blitzle"
+    },
+    {
+      "dex": 523,
+      "name": "Zebstrika"
+    },
+    {
+      "dex": 538,
+      "name": "Throh"
+    },
+    {
+      "dex": 558,
+      "name": "Crustle"
+    },
+    {
+      "dex": 564,
+      "name": "Tirtouga"
+    },
+    {
+      "dex": 565,
+      "name": "Carracosta"
+    },
+    {
+      "dex": 591,
+      "name": "Amoonguss"
+    },
+    {
+      "dex": 592,
+      "name": "Frillish"
+    },
+    {
+      "dex": 616,
+      "name": "Shelmet"
+    },
+    {
+      "dex": 626,
+      "name": "Bouffalant"
+    },
+    {
+      "dex": 732,
+      "name": "Trumbeak"
+    },
+    {
+      "dex": 735,
+      "name": "Gumshoos"
+    },
+    {
+      "dex": 756,
+      "name": "Shiinotic"
+    },
+    {
+      "dex": 765,
+      "name": "Oranguru"
+    },
+    {
+      "dex": 837,
+      "name": "Rolycoly"
+    },
+    {
+      "dex": 838,
+      "name": "Carkol"
+    },
+    {
+      "dex": 839,
+      "name": "Coalossal"
+    },
+    {
+      "dex": 866,
+      "name": "Mr Rime"
+    },
+    {
+      "dex": 878,
+      "name": "Cufant"
+    },
+    {
+      "dex": 893,
+      "name": "Zarude"
+    },
+    {
+      "dex": 931,
+      "name": "Squawkabilly"
+    },
+    {
+      "dex": 942,
+      "name": "Maschiff"
+    },
+    {
+      "dex": 943,
+      "name": "Mabosstiff"
+    },
+    {
+      "dex": 944,
+      "name": "Shroodle"
+    },
+    {
+      "dex": 947,
+      "name": "Brambleghast"
+    },
+    {
+      "dex": 949,
+      "name": "Toedscruel"
+    },
+    {
+      "dex": 950,
+      "name": "Klawf"
+    },
+    {
+      "dex": 954,
+      "name": "Rabsca"
+    },
+    {
+      "dex": 956,
+      "name": "Espathra"
+    },
+    {
+      "dex": 962,
+      "name": "Bombirdier"
+    },
+    {
+      "dex": 973,
+      "name": "Flamigo"
+    },
+    {
+      "dex": 986,
+      "name": "Brute Bonnet"
+    },
+    {
+      "dex": 993,
+      "name": "Iron Jugulis"
+    },
+    {
+      "dex": 1001,
+      "name": "Wo Chien"
+    },
+    {
+      "dex": 1002,
+      "name": "Chien Pao"
+    },
+    {
+      "dex": 1014,
+      "name": "Okidogi"
+    },
+    {
+      "dex": 1022,
+      "name": "Iron Boulder"
+    },
+    {
+      "dex": 1023,
+      "name": "Iron Crown"
+    }
+  ]
+}

@@ -43,3 +43,5 @@ welcome art.
 The portfolio's npm dependencies (listed in `portfolio/package.json` and pinned in
 `portfolio/package-lock.json`) are not bundled in this repository's source and remain under
 their own licences.
+
+Full PC residents retain SpriteCollab source sheets, XML, contributor credits and CC BY-NC 4.0 in `portfolio/public/pokemon-pc`; see `resident-forms.json`, `resident-receipts.json`, `SpriteCollab-LICENSE.md` and `import-report.json`. Timing is converted to renderer units; absent actions reuse native Idle/Walk. Original game artwork retains its owners' rights.
