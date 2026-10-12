@@ -395,32 +395,33 @@ html[data-theme="dark"] .pmd-bio-toggle[aria-pressed="true"], html[data-theme="d
   .media-marquee-list[aria-hidden] { display:none; }
 }
 
-/* Experience timeline (ExperienceTimeline.tsx, lib/useDragScroll.ts): every role on a line, oldest to newest, with
-   grey logo marks (public/logos/timeline) that darken when hovered or selected. A native scroller: drag, swipe or
-   scroll sideways. */
+/* Experience timeline (ExperienceTimeline.tsx, lib/useDragScroll.ts): every role as a bar on a time axis, its length
+   the role's duration, stacked into lanes where roles overlap. Grey logo marks (public/logos/timeline) darken when
+   hovered or selected. A native scroller: drag, swipe or scroll sideways. */
 .experience-timeline { position:relative; margin:-24px 0 36px; overflow-x:auto; overflow-y:hidden; cursor:grab; scrollbar-width:none;
-  overscroll-behavior-x:contain; mask-image:linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+  overscroll-behavior-x:contain; mask-image:linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
 .experience-timeline::-webkit-scrollbar { display:none; }
 .experience-timeline.is-dragging { cursor:grabbing; user-select:none; }
 .experience-timeline.is-dragging button { pointer-events:none; }
-.experience-timeline-track { position:relative; display:flex; width:max-content; padding:6px 40px 4px; }
-/* The line runs through every dot. */
-.experience-timeline-track::before { content:""; position:absolute; left:40px; right:40px; top:41px; height:1px; background:#e7e5e4; }
-.experience-timeline-stop { position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; min-width:148px;
-  padding:4px 14px 6px; border-radius:10px; color:#a8a29e; cursor:inherit; transition:color .2s ease, background-color .2s ease; }
-.experience-timeline-name { display:flex; align-items:center; gap:8px; height:22px; font-size:13px; font-weight:600; white-space:nowrap; }
-.experience-timeline-name img { height:20px; width:auto; max-width:48px; object-fit:contain; opacity:.45; transition:opacity .2s ease; }
-.experience-timeline-blank { display:inline-grid; place-items:center; width:20px; height:20px; border-radius:3px; border:1px solid #d6d3d1; font-size:11px; }
-.experience-timeline-dot { position:relative; z-index:1; width:9px; height:9px; border-radius:50%; background:#faf8f4; border:2px solid #d6d3d1;
-  transition:border-color .2s ease, background-color .2s ease, transform .2s ease; }
-.experience-timeline-date { font-size:11px; color:#c4bfb9; white-space:nowrap; }
+.experience-timeline-canvas { position:relative; }
+/* Year rules run the full height; the label sits at the top. */
+.experience-timeline-year { position:absolute; top:0; bottom:0; padding-left:6px; border-left:1px solid #ece9e4; font-size:11px; line-height:16px; color:#c4bfb9; }
+.experience-timeline-now { position:absolute; top:0; bottom:0; padding-left:6px; border-left:1px dashed #93bda7; font-size:11px; line-height:16px; color:#6b9f89; }
+.experience-timeline-stop { position:absolute; display:flex; flex-direction:column; align-items:flex-start; gap:6px; padding:0; color:#a8a29e; cursor:inherit;
+  text-align:left; transition:color .2s ease; }
+.experience-timeline-name { display:flex; align-items:center; gap:7px; height:22px; font-size:13px; font-weight:600; white-space:nowrap; }
+.experience-timeline-name img { height:18px; width:auto; max-width:44px; object-fit:contain; opacity:.45; transition:opacity .2s ease; }
+.experience-timeline-duration { font-size:11px; font-weight:500; color:#c4bfb9; }
+.experience-timeline-blank { display:inline-grid; place-items:center; width:18px; height:18px; border-radius:3px; border:1px solid #d6d3d1; font-size:11px; }
+.experience-timeline-bar { display:block; width:100%; min-width:6px; height:8px; border-radius:4px; background:#e3dfd9; transition:background-color .2s ease, box-shadow .2s ease; }
 .experience-timeline-stop:hover { color:#57534e; }
 .experience-timeline-stop:hover img { opacity:.75; }
+.experience-timeline-stop:hover .experience-timeline-bar { background:#cfc9c1; }
+.experience-timeline-stop[aria-pressed="true"] { color:#2c5244; }
 .experience-timeline-stop[aria-pressed="true"] img { opacity:1; }
-.experience-timeline-stop[aria-pressed="true"] { color:#2c5244; background:#f0f5f2; }
-.experience-timeline-stop[aria-pressed="true"] .experience-timeline-dot { background:#4e8570; border-color:#4e8570; transform:scale(1.3); }
-.experience-timeline-stop[aria-pressed="true"] .experience-timeline-date { color:#6b9f89; }
-.experience-timeline-stop:focus-visible { outline:2px solid #93bda7; outline-offset:-2px; }
+.experience-timeline-stop[aria-pressed="true"] .experience-timeline-duration { color:#6b9f89; }
+.experience-timeline-stop[aria-pressed="true"] .experience-timeline-bar { background:#4e8570; box-shadow:0 0 0 3px #e0ece5; }
+.experience-timeline-stop:focus-visible { outline:2px solid #93bda7; outline-offset:3px; border-radius:4px; }
 @media (prefers-reduced-motion: reduce) {
-  .experience-timeline-stop, .experience-timeline-name img, .experience-timeline-dot { transition:none; }
+  .experience-timeline-stop, .experience-timeline-name img, .experience-timeline-bar { transition:none; }
 }
