@@ -13,6 +13,7 @@
     "test:overworld:browser": "node scripts/test-overworld-browser.cjs",
     "test:yveltal:browser": "node scripts/test-yveltal-browser.cjs",
     "test:design:browser": "node scripts/test-design-refinements.cjs",
+    "test:responsive:browser": "node scripts/test-responsive-panel.cjs",
     "test:eevee-base:browser": "node scripts/test-eevee-base-browser.cjs",
     "lint": "next lint",
     "test:terminal": "node scripts/test-terminal.cjs",
