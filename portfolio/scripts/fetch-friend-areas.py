@@ -145,7 +145,6 @@ def expand():
     import re
     from friend_area_data import RESCUE, SKY, SKY_ZONES, VISITORS
     from rescue_maps import export as rescue_export
-    from rescue_scenery import palettes  # noqa: F401 (rescue_maps depends on it)
     entries = json.loads((ROOT.parent/'pokemon-pc/catalog.json').read_text(encoding='utf-8'))['entries']
     norm = lambda s: re.sub(r'[^a-z0-9]', '', s.lower().replace('é', 'e'))
     dex = {}
@@ -166,7 +165,8 @@ def expand():
         for monster in natives:
             if monster.get('friendArea') == 'FRIEND_AREA_' + key:
                 name = monster['name'].removeprefix('MonsterName')
-                hit = dex.get(norm({'Farfetch': "Farfetch'd", 'HoOh': 'Ho-Oh', 'MrMime': 'Mr. Mime', 'Nidoran_F': 'Nidoran♀', 'Nidoran_M': 'Nidoran♂'}.get(name, name)))                       or dex.get(norm(name.replace('_F', 'f').replace('_M', 'm')))
+                # monster_data names drop punctuation: Farfetch, HoOh, MrMime, Nidoran_F, Nidoran_M.
+                hit = dex.get(norm(name.replace('_F', 'f').replace('_M', 'm') + ('d' if name == 'Farfetch' else '')))
                 if hit and hit[0] not in seen: seen.add(hit[0]); roster.append(hit)
         if key.startswith('AGED_CHAMBER'): roster = roster * 4  # Unown fills its chambers.
         scenery = rescue_export(key, area, ROOT, cache)
@@ -211,7 +211,8 @@ def expand():
         scenery = entry['scenery']
         # Five natives stay on the map; the rest rotate into three more places with the visitors (eight per visit).
         roster, rotating = native[:5], list(dict.fromkeys(native[5:]))
-        guests = [dict(id=d, reason='Native resident in Red Rescue Team.', basis='pret/pmd-red monster_data.json') for d in rotating if d not in roster]
+        native_guest = dict(reason='Curated resident.', basis='Curated habitat inference') if entry.get('sky') else             dict(reason='Native resident in Red Rescue Team.', basis='pret/pmd-red monster_data.json')
+        guests = [dict(id=d, **native_guest) for d in rotating if d not in roster]
         guests += visitors(entry['id'], set(roster) | set(rotating))
         catalog['areas'].append(dict(id=entry['id'], name=entry['name'], size=scenery['size'], background=scenery['background'],
             layers=scenery['layers'], description=entry['description'], roster=roster, guests=guests,

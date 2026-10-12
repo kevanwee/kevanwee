@@ -51937,8 +51937,8 @@
       "guests": [
         {
           "id": 51,
-          "reason": "Native resident in Red Rescue Team.",
-          "basis": "pret/pmd-red monster_data.json"
+          "reason": "Curated resident.",
+          "basis": "Curated habitat inference"
         },
         {
           "id": 40,
