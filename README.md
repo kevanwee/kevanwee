@@ -259,9 +259,9 @@
 
 <p align="center"><sub>
   sprites by the <a href="https://sprites.pmdcollab.org/">PMD Sprite Collab</a> contributors (each artist credited on its sprite page), <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>, some cropped, recoloured or combined ·
-  Friend Area scenery ripped by Toastypk and MYSTERY_DUNGEON, backgrounds via <a href="https://pamtre-berry.neocities.org/articles/friendareas">Pamtre Berry</a> ?
+  Friend Area scenery decoded from the <a href="https://github.com/pret/pmd-red">pret/pmd-red</a> and <a href="https://github.com/pret/pmd-sky">pret/pmd-sky</a> decompilations; earlier backgrounds by Toastypk and MYSTERY_DUNGEON via <a href="https://pamtre-berry.neocities.org/articles/friendareas">Pamtre Berry</a> ·
   thunder meadow and rank badges via the <a href="https://mysterydungeon.fandom.com/">Mystery Dungeon Wiki</a> · item icons via <a href="https://github.com/PokeAPI/sprites">PokeAPI</a> ·
-  mega evolution symbol by pixelthecollector · drawn and regrown daily by <a href="./genpokemon/readme_art">genpokemon/readme_art</a><br />
+  mega evolution symbol by pixelthecollector · drawn and regrown daily by <a href="./genpokemon/readme_art">genpokemon/readme_art</a> · how it fits together: <a href="./ARCHITECTURE.md">ARCHITECTURE.md</a><br />
   a non-commercial fan project, not affiliated with or endorsed by Nintendo, Creatures, GAME FREAK or The Pokémon Company · Pokémon © their owners<br />
   © 2023–2026 Kevan Wee · all rights reserved: see <a href="./LICENSE">LICENSE</a>; third-party material in <a href="./NOTICE.md">NOTICE.md</a>
 </sub></p>

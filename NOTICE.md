@@ -20,6 +20,7 @@ welcome art.
 | --- | --- | --- |
 | Pokémon sprite sheets and portraits | [PMD SpriteCollab](https://sprites.pmdcollab.org/) contributors; each artist is credited on its sprite's page | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) for community sprites (some are cropped, recoloured or combined here); Chunsoft originals remain Nintendo / Chunsoft material |
 | Friend Area backgrounds (Transform Forest, Mushroom Forest, Mt. Moonview, Decrepit Lab, Seafloor Cave and Volcanic Pit) and stone frames | Toastypk and MYSTERY_DUNGEON / The Spriters Resource, via the [Pamtre Berry archive](https://pamtre-berry.neocities.org/articles/friendareas), which describes some scenery-layer reconstruction | Their owners' terms |
+| Friend Area scenery (all Red Rescue Team areas, Explorers of Sky areas and the 404 caves) | Decoded from the [pret/pmd-red](https://github.com/pret/pmd-red) and [pret/pmd-sky](https://github.com/pret/pmd-sky) decompilations' map data at pinned revisions (Explorers maps with [skytemple-files](https://github.com/SkyTemple/skytemple-files)); no ROM is used. Receipts with SHA-256 hashes sit beside each map in `portfolio/public/friend-areas/` and `portfolio/public/lost-cave/` | Original game artwork of Nintendo, Creatures, GAME FREAK and Spike Chunsoft |
 | Mega Evolution symbol pixel art | PixelTheCollector | Used with credit; the symbol itself is The Pokémon Company / Nintendo's |
 | Item sprites | [PokeAPI sprites](https://github.com/PokeAPI/sprites), WikiDex | Game assets of The Pokémon Company / Nintendo |
 
