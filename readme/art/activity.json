@@ -1,7 +1,37 @@
 {
- "generatedAt": "2026-10-12T02:20:18+00:00",
+ "generatedAt": "2026-10-12T02:50:12+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Joyous",
+   "when": "2026-10-12T02:49:48+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request "
+    ],
+    [
+     "number",
+     "#59"
+    ],
+    [
+     "text",
+     " was merged into "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
   {
    "mood": "Happy",
    "when": "2026-10-12T02:19:36+00:00",
@@ -73,36 +103,6 @@
     [
      "text",
      " was released!"
-    ]
-   ]
-  },
-  {
-   "mood": "Happy",
-   "when": "2026-10-11T22:42:34+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "pmd-agents"
-    ],
-    [
-     "text",
-     " ("
-    ],
-    [
-     "number",
-     "\u00d74"
-    ],
-    [
-     "text",
-     ")"
     ]
    ]
   }
