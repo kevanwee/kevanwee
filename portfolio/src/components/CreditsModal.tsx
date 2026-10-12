@@ -32,6 +32,12 @@ const CREDITS = [
     description: "Thunder Meadow (Red/Blue Rescue Team) and the Explorer Rank badges (Explorers of Time/Darkness and Sky), game assets",
   },
   {
+    category: "Explorers scenery",
+    name: "pret/pmd-sky · skytemple-files",
+    href: "https://github.com/pret/pmd-sky",
+    description: "Crystal Crossing (Explorers of Sky) with its native palette animation, decoded from the decompilation's map data with skytemple-files; used for its Friend Area and the 404 page",
+  },
+  {
     category: "Item sprites",
     name: "PokeAPI sprites · WikiDex",
     href: "https://github.com/PokeAPI/sprites",

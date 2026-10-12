@@ -2395,6 +2395,185 @@
       "collisionStatus": "Conservative authored foot zones, not game collision data.",
       "guests": [],
       "guestLimit": 0
+    },
+    {
+      "id": "crystalcrossing",
+      "name": "Crystal Crossing",
+      "size": [
+        600,
+        480
+      ],
+      "roster": [
+        719,
+        703,
+        703,
+        703
+      ],
+      "zones": [
+        [
+          [
+            128,
+            242
+          ],
+          [
+            200,
+            236
+          ],
+          [
+            200,
+            284
+          ],
+          [
+            400,
+            284
+          ],
+          [
+            400,
+            236
+          ],
+          [
+            472,
+            242
+          ],
+          [
+            472,
+            300
+          ],
+          [
+            440,
+            352
+          ],
+          [
+            402,
+            382
+          ],
+          [
+            370,
+            396
+          ],
+          [
+            370,
+            470
+          ],
+          [
+            230,
+            470
+          ],
+          [
+            230,
+            396
+          ],
+          [
+            198,
+            382
+          ],
+          [
+            160,
+            352
+          ],
+          [
+            128,
+            300
+          ]
+        ]
+      ],
+      "obstacles": [
+        [
+          [
+            146,
+            302
+          ],
+          [
+            178,
+            302
+          ],
+          [
+            178,
+            350
+          ],
+          [
+            146,
+            350
+          ]
+        ],
+        [
+          [
+            422,
+            302
+          ],
+          [
+            454,
+            302
+          ],
+          [
+            454,
+            350
+          ],
+          [
+            422,
+            350
+          ]
+        ]
+      ],
+      "footRadius": 8,
+      "guestLimit": 0,
+      "description": "Diancie and its Carbink keep the giant crystal at the heart of Crystal Cave.",
+      "background": "crystalcrossing.png",
+      "layers": [
+        {
+          "src": "crystalcrossing-animation.png",
+          "x": 87,
+          "y": 96,
+          "w": 426,
+          "h": 239,
+          "frames": 19,
+          "durations": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        }
+      ],
+      "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+      "map": "d17p11a",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+          "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bpl",
+          "sha256": "d1e65c1fe94efd2eded08b6adc7de2b6005b4890a1d0180cbfbd3336cfe2c689"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bpc",
+          "sha256": "dd610aae377766adfcc716d46eee17865c4385bc2aba2ec874bef3e43536927d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bma",
+          "sha256": "896b5fe03b0b896fc8c2e4dbbd0b0ce5d629713dce86a177e7b8deff7d96e241"
+        }
+      ],
+      "sceneryAnimation": "Native palette animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+      "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft.",
+      "guests": [],
+      "collisionStatus": "Conservative authored foot zones, not game collision data."
     }
   ],
   "sprites": {
@@ -9094,6 +9273,266 @@
             ]
           ],
           "sha256": "70d3d688cd7dda2164ed557653dd81f5a12571bacf20f8a38925f94cf8ca3e2f",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "703": {
+      "id": 703,
+      "name": "Carbink",
+      "animations": {
+        "Idle": {
+          "src": "sprites/703/Idle-Anim.png",
+          "w": 24,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            24,
+            8,
+            8,
+            24,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ]
+          ],
+          "sha256": "2cdeb8d18528a413b7aaf5beedac887c3112f4ece25ad6ef0298d9826942e48f",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/703/Walk-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 8,
+          "durations": [
+            4,
+            8,
+            8,
+            8,
+            8,
+            8,
+            4
+          ],
+          "origins": [
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ]
+          ],
+          "sha256": "6e1ee41d5d9034093367e34b1edd5e9f187d332ea2bbeb33ed25ddb511333429",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/703/Sleep-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            8,
+            8,
+            16,
+            8,
+            8,
+            8,
+            16,
+            8
+          ],
+          "origins": [
+            [
+              12.5,
+              20
+            ]
+          ],
+          "sha256": "17ea78fbe2b76f0195d17e51f8537e65da12f61ea8e0892327080175746800f1",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "719": {
+      "id": 719,
+      "name": "Diancie",
+      "animations": {
+        "Idle": {
+          "src": "sprites/719/Idle-Anim.png",
+          "w": 24,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            12,
+            12,
+            12,
+            12,
+            8,
+            8,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              11.5,
+              31
+            ],
+            [
+              12.5,
+              31
+            ],
+            [
+              12.5,
+              31
+            ],
+            [
+              12.5,
+              32
+            ],
+            [
+              11.5,
+              31
+            ],
+            [
+              11.5,
+              32
+            ],
+            [
+              10.5,
+              31
+            ],
+            [
+              12.5,
+              31
+            ]
+          ],
+          "sha256": "47e6dcdc32e60f3e3374c6cdf64e6fd9ae46309ff399999f7478fea29251d766",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/719/Walk-Anim.png",
+          "w": 32,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            8,
+            8,
+            10,
+            8,
+            10
+          ],
+          "origins": [
+            [
+              15.5,
+              33
+            ],
+            [
+              16.0,
+              33
+            ],
+            [
+              18.0,
+              31
+            ],
+            [
+              17.5,
+              32
+            ],
+            [
+              15.5,
+              34
+            ],
+            [
+              14.5,
+              32
+            ],
+            [
+              14.0,
+              31
+            ],
+            [
+              16.0,
+              33
+            ]
+          ],
+          "sha256": "2ac63b23e8f83b5beeedd56ee30af1931a572e04d711545f59fb72e8c2aa4a4c",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/719/Sleep-Anim.png",
+          "w": 24,
+          "h": 56,
+          "rows": 1,
+          "durations": [
+            16,
+            12,
+            16,
+            16,
+            12,
+            16
+          ],
+          "origins": [
+            [
+              12.0,
+              29
+            ]
+          ],
+          "sha256": "0c36051808d089709e1a6ac08aeae119b72c182ed265635a3a992b7433540c12",
           "sourceAnimation": "Sleep"
         }
       }
