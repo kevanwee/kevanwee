@@ -24,14 +24,26 @@ const sizes = [[320,568],[360,640],[390,844],[414,896],[568,320],[667,375],[844,
         const panel=document.querySelector('.left-panel-zoom'), frame=panel.parentElement;
         const controls=[...panel.querySelectorAll('.portfolio-actions .resume-launcher, [data-ssh-launcher], nav button, .portfolio-panel-footer a, .portfolio-panel-footer button')];
         const rect=panel.getBoundingClientRect(), offset=parseFloat(getComputedStyle(frame).top);
-        return {fits:rect.height+offset+24<=innerHeight,sticky:getComputedStyle(frame).position==='sticky',
-          overflow:document.documentElement.scrollWidth>innerWidth, zoom:getComputedStyle(panel).zoom,
+        return {fits:rect.height+offset+24<=innerHeight+1,sticky:getComputedStyle(frame).position==='sticky',
+          overflow:document.documentElement.scrollWidth>innerWidth, zoom:Number(getComputedStyle(panel).zoom),
+          innerScroll:frame.scrollHeight>frame.clientHeight+1&&getComputedStyle(frame).overflowY!=='visible',
+          dashes:[...panel.querySelectorAll('nav button > span:first-child')].every(s=>getComputedStyle(s).display!=='none'),
           heights:controls.map(e=>e.getBoundingClientRect().height)};
       });
       assert.equal(layout.overflow,false,`Horizontal overflow at ${width}x${height}`);
-      assert.equal(layout.zoom,'1','Do not shrink text or touch targets');
-      assert.ok(layout.heights.every(h=>h>=43.5),`Small controls at ${width}x${height}: ${layout.heights}`);
-      assert.equal(layout.sticky,width>=1024,`Incorrect sticky behavior at ${width}x${height}`);
+      assert.equal(layout.innerScroll,false,`The panel never scrolls inside itself (${width}x${height})`);
+      if(width<1024){
+        assert.equal(layout.zoom,1,'Stacked layouts keep text and touch targets at full size');
+        assert.ok(layout.heights.every(h=>h>=43.5),`Small controls at ${width}x${height}: ${layout.heights}`);
+        assert.equal(layout.sticky,false,`Stacked layouts scroll naturally at ${width}x${height}`);
+      }else{
+        // Desktop keeps one layout (stacked name, dashed section list) and scales to the window
+        // height, down to 60%; below that the panel scrolls with the page instead.
+        assert.ok(layout.zoom>=.6&&layout.zoom<=1,`Scale out of range at ${width}x${height}: ${layout.zoom}`);
+        assert.ok(layout.dashes,`Desktop keeps the dashed section list at ${width}x${height}`);
+        assert.ok(layout.heights.every(h=>h>=43.5*layout.zoom-.5),`Controls lost proportion at ${width}x${height}`);
+        assert.equal(layout.sticky,layout.fits,`Pinned exactly when it fits at ${width}x${height}`);
+      }
       layout.sticky ? sticky++ : flowing++;
       // Focusing each lower control must bring it entirely into the viewport.
       const controls=page.locator('.left-panel-zoom nav button, .portfolio-panel-footer a, .portfolio-panel-footer button');
@@ -47,13 +59,13 @@ const sizes = [[320,568],[360,640],[390,844],[414,896],[568,320],[667,375],[844,
       }
       assert.deepEqual(await page.locator('[data-pokemon]').evaluateAll(es=>es.map(e=>e.dataset.pokemon).sort()),roster,'Responsive reflow must preserve the visit roster');
     }
-    // Font growth must keep the laptop frame pinned and allow its contents to scroll.
+    // Font growth re-fits the pinned panel: it scales down rather than scrolling inside itself.
     await page.setViewportSize({width:1440,height:900});
-    await page.locator('.portfolio-intro').evaluate(e=>{e.style.fontSize='40px';e.style.lineHeight='2';});
-    await page.waitForFunction(()=>{const f=document.querySelector('.portfolio-panel-frame');return f.scrollHeight>f.clientHeight;});
+    const before=Number(await page.locator('.left-panel-zoom').evaluate(e=>getComputedStyle(e).zoom));
+    await page.locator('.portfolio-intro').evaluate(e=>{e.style.fontSize='22px';e.style.lineHeight='2';});
+    await page.waitForFunction(b=>Number(getComputedStyle(document.querySelector('.left-panel-zoom')).zoom)<b,before);
     assert.equal(await page.locator('.portfolio-panel-frame').evaluate(e=>getComputedStyle(e).position),'sticky');
     await page.locator('.portfolio-intro').evaluate(e=>{e.style.fontSize='';e.style.lineHeight='';});
-    await page.locator('.portfolio-panel-frame').evaluate(e=>e.scrollTop=0);
     await page.setViewportSize({width:390,height:844});
     await page.locator('.resume-launcher').click();
     assert.equal(await page.getByRole('dialog').isVisible(),true);
@@ -61,6 +73,6 @@ const sizes = [[320,568],[360,640],[390,844],[414,896],[568,320],[667,375],[844,
     await page.getByRole('navigation',{name:'Page sections'}).getByRole('button',{name:'Projects',exact:true}).click();
     const project=await page.locator('#projects h2').boundingBox();assert.ok(Math.abs(project.y-24)<2);
     assert.deepEqual(errors,[]);
-    console.log(`${sizes.length} viewport layouts passed: ${sticky} pinned, ${flowing} naturally scrolling; all lower controls focusable in view, >=44px targets, no overflow, roster preserved, font growth and modal/navigation passed.`);
+    console.log(`${sizes.length} viewport layouts passed: ${sticky} pinned, ${flowing} naturally scrolling; all lower controls focusable in view, no inner scroll, desktop scales to height, >=44px phone targets, no overflow, roster preserved, font growth and modal/navigation passed.`);
   } finally { await browser.close(); }
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { personal } from "@/data";
 import MusicPlayer from "@/components/MusicPlayer";
 import ResumeModal from "@/components/ResumeModal";
@@ -37,6 +37,50 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
     return () => clearTimeout(t);
   }, []);
 
+  // On desktop the panel keeps one layout and scales with the window height, so it always fits
+  // beside the page without its own scroll bar. Browser zoom changes the height too, so it
+  // scales the same way instead of switching layouts.
+  const frameRef = useRef<HTMLDivElement>(null);
+  const asideRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const frame = frameRef.current!, aside = asideRef.current!;
+    const desktop = matchMedia("(min-width: 1024px)");
+    let raf = 0;
+    const fit = () => {
+      raf = 0;
+      if (!desktop.matches) {
+        aside.style.zoom = aside.style.minHeight = "";
+        delete frame.dataset.fit;
+        return;
+      }
+      const style = getComputedStyle(frame);
+      const available = document.documentElement.clientHeight - (parseFloat(style.top) || 0) - 24
+        - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+      aside.style.zoom = "1";
+      aside.style.minHeight = "";
+      const natural = aside.getBoundingClientRect().height;
+      // Below 60% text gets too small; the panel then scrolls with the page instead.
+      const scale = Math.max(0.6, Math.min(1, available / natural));
+      const next = [String(Math.round(scale * 1000) / 1000), `${Math.floor(available / scale)}px`];
+      frame.dataset.fit = natural * scale > available + 1 ? "overflow" : "fit";
+      // Fitting panels fill the window height so the links sit at the bottom, as before.
+      [aside.style.zoom, aside.style.minHeight] = frame.dataset.fit === "fit" ? next : [next[0], ""];
+    };
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(fit); };
+    fit();
+    const observer = new ResizeObserver(schedule);
+    for (const child of Array.from(aside.children)) observer.observe(child);
+    addEventListener("resize", schedule);
+    desktop.addEventListener("change", schedule);
+    document.fonts?.ready.then(schedule);
+    return () => {
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+      removeEventListener("resize", schedule);
+      desktop.removeEventListener("change", schedule);
+    };
+  }, []);
+
   const fadeUp = (delay: string): React.CSSProperties => ({
     opacity: mounted ? 1 : 0,
     transform: mounted ? "none" : "translateY(16px)",
@@ -45,8 +89,8 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
 
   return (
     <>
-      <div className="portfolio-panel-frame">
-      <aside className="left-panel-zoom">
+      <div className="portfolio-panel-frame" ref={frameRef}>
+      <aside className="left-panel-zoom" ref={asideRef}>
         <div>
           <div style={fadeUp("0ms")}>
             <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">

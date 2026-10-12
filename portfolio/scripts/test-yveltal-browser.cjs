@@ -296,15 +296,15 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
     await hopping.waitForTimeout(200);
     assert.equal(await hopping.locator('[data-hopping="true"]').count(), 0, 'Stacked phone cards must stop hopping');
     console.log(`${onTiles.join(', ')} drew the project tiles; ${[...jumped].join(' and ')} visibly hopped; phone reflow stops cross-card hops.`);
-    // Short desktop layouts recompose at full size; a fitting sticky panel and
-    // its docked egg must still hold their position throughout wheel scrolling.
+    // Short desktop layouts keep their layout and scale to the window height; the sticky
+    // panel and its docked egg must still hold their position throughout wheel scrolling.
     const shortPage = await browser.newPage({viewport: {width: 1440, height: 700}, deviceScaleFactor: 1.25});
     shortPage.on('pageerror', e => errors.push(e.message));
     await shortPage.goto(base, {waitUntil: 'domcontentloaded'});
     await shortPage.waitForSelector('[data-yveltal-state="dormant"]');
     await shortPage.waitForTimeout(800);
-    assert.equal(await shortPage.evaluate(() => getComputedStyle(document.querySelector('.left-panel-zoom')).zoom), '1',
-      'The panel must keep its text and targets at full size');
+    const shortZoom = Number(await shortPage.evaluate(() => getComputedStyle(document.querySelector('.left-panel-zoom')).zoom));
+    assert.ok(shortZoom >= .6 && shortZoom < 1, `The panel scales to the window height (${shortZoom})`);
     assert.equal(await shortPage.locator('.portfolio-panel-frame').evaluate(e => getComputedStyle(e).position), 'sticky');
     await shortPage.evaluate(() => {
       window.__panel = [];

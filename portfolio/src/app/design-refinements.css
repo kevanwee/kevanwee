@@ -13,10 +13,11 @@
 .left-panel-zoom a[target="_blank"] { min-height: 36px; }
 .left-panel-zoom a[aria-label] { width: 44px; height: 44px; }
 .left-panel-zoom h1 { line-height: 1.12; letter-spacing: -.035em; }
-main #projects [data-overworld-kind="featured"] h3 { font-size: 23px; line-height: 1.3; }
-main #projects [data-overworld-kind="featured"] p.text-sm { font-size: 15px; line-height: 1.8; }
+/* Section rules stop at dialogs: a dialog opened from a section keeps its own type scale. */
+main #projects [data-overworld-kind="featured"] h3:not([role="dialog"] *) { font-size: 23px; line-height: 1.3; }
+main #projects [data-overworld-kind="featured"] p.text-sm:not([role="dialog"] *) { font-size: 15px; line-height: 1.8; }
 main #projects [data-overworld-kind="featured"] { padding: 28px; }
-main #about ul > li { line-height: 1.8; font-size: 13px; }
+main #about ul > li:not([role="dialog"] *) { line-height: 1.8; font-size: 13px; }
 main :is(#experience,#projects,#media,#contact) > div > h2 { font-size: 34px; }
 .portfolio-home button:focus-visible, .portfolio-home a:focus-visible { outline: 2px solid #3a6b59; outline-offset: 4px; }
 @media (min-width: 1024px) {
@@ -51,40 +52,32 @@ main :is(#experience,#projects,#media,#contact) > div > h2 { font-size: 34px; }
 .yveltal-roost { position: relative; flex: 0 0 64px; height: 64px; align-self: center; }
 .yveltal-ledge { position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: #e8e2d5; }
 .yveltal-roost .overworld-resident.yveltal-nested { bottom: 1px; }
-/* The awakening spreads above and below its original foot anchor. */
-.yveltal-roost[data-yveltal-mode="hatching"] { flex-basis: 172px; height: 184px; }
-.yveltal-roost[data-yveltal-mode="hatching"] .yveltal-ledge { bottom: 64px; }
-.yveltal-roost[data-yveltal-mode="hatching"] .yveltal-nested { bottom: 65px; }
-.yveltal-roost[data-yveltal-mode="perched"] { flex-basis: 96px; height: 84px; }
+/* The awakening spreads above and below its original foot anchor. On phones the roost grows to
+   keep it clear of the copy; on desktop the roost sits in the blank space at the end of the
+   action row, out of flow, so the awakening never moves the buttons. */
+@media (max-width: 1023px) {
+ .yveltal-roost[data-yveltal-mode="hatching"] .yveltal-ledge { bottom: 64px; }
+ .yveltal-roost[data-yveltal-mode="hatching"] .yveltal-nested { bottom: 65px; }
+ .yveltal-roost[data-yveltal-mode="hatching"] { flex-basis: 172px; height: 184px; }
+ .yveltal-roost[data-yveltal-mode="perched"] { flex-basis: 96px; height: 84px; }
+}
+@media (min-width: 1024px) {
+ .portfolio-actions { position: relative; }
+ .portfolio-actions .yveltal-roost { position: absolute; right: -24px; bottom: 0; width: 96px; height: 64px; }
+ .yveltal-roost .yveltal-nested { z-index: 40; }
+}
 #contact { min-height: calc(100svh + 6rem); }
 .experience-heading { flex-wrap: wrap; }
 .portfolio-panel-frame { top: var(--viewport-offset); }
 .portfolio-panel-footer button { min-width: 44px; min-height: 44px; }
+/* Desktop keeps one layout: the sticky frame stays outside the zoom (Chrome resolves a zoomed
+   sticky offset in zoomed units and snaps), and LeftPanel scales the aside to the window height.
+   No inner scroll bar; below the minimum scale the panel scrolls with the page instead. */
 @media (min-width: 1024px) {
- .portfolio-panel-frame {
-   position: sticky;
-   max-height: calc(100vh - var(--viewport-offset) - 24px);
-   max-height: calc(100dvh - var(--viewport-offset) - 24px);
-   overflow-y: auto;
-   scrollbar-width: thin;
-   padding: 4px;
- }
- .left-panel-zoom { display: flex; flex-direction: column; }
+ .portfolio-panel-frame { position: sticky; padding: 4px; }
+ .portfolio-panel-frame[data-fit="overflow"] { position: static; }
+ .left-panel-zoom { display: flex; flex-direction: column; justify-content: space-between; }
  .left-panel-zoom h1 { font-size: 52px; }
-}
-/* Compact laptop typography, while keeping controls at their full target size. */
-@media (min-width: 1024px) and (max-height: 1000px) {
- .left-panel-zoom h1 { display: flex; align-items: end; gap: 8px; font-size: 38px; }
- .left-panel-zoom h1 img { height: 48px; width: auto; margin-bottom: 2px; }
- .left-panel-zoom h1 > span:last-child { gap: 0; }
- .left-panel-zoom .intro-divider { margin-block: 12px; }
- .left-panel-zoom > div:first-child > .mt-5 { margin-top: 16px; }
- .left-panel-zoom nav { margin-top: 16px; }
- .left-panel-zoom nav ul { display: flex; flex-wrap: wrap; gap: 2px 12px; }
- .left-panel-zoom nav button { gap: 0; }
- .left-panel-zoom nav button > span:first-child { display: none; }
- .left-panel-zoom nav button > span:last-child { font-size: 11px; letter-spacing: .1em; }
- .portfolio-panel-footer { padding-top: 16px; }
 }
 @media (max-width: 360px) {
  .portfolio-actions { column-gap: 6px; }
