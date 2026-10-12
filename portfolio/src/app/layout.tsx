@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+import "./design-refinements.css";
 
 const inter = Inter({
   subsets: ["latin"],

@@ -23,7 +23,7 @@ export default function YveltalRoamer() {
     const perch = document.querySelector<HTMLElement>("[data-yveltal-perch]");
     if (!perch) return;
     const nest = document.querySelector<HTMLElement>("[data-yveltal-nest]") ?? perch.parentElement!;
-    // Anchored states ride the button in the DOM. A sticky panel is scrolled by the
+    // Anchored states ride their reserved roost in the DOM. A sticky panel is scrolled by the
     // compositor without waiting for script, so anything script positions lags it.
     let docked = "";
     const dock = (home: "nest" | "layer") => {
@@ -264,7 +264,16 @@ export default function YveltalRoamer() {
           if (!button.hidden) button.style.transform = `translate3d(${Math.round(flight.x - 22)}px,${Math.round(flight.y + 27 * size - 44)}px,0)`;
         } else button.hidden = false;
         if (!button.hidden) {
-          paintSprite(art, sprite, animation, motion.matches ? 0 : animation === "Special2" ? elapsed / 1.5 : elapsed, direction, 22, 44, size, animation === "Special0" ? 6 : undefined);
+          // The full awakening sheet is wider than the cocoon. Fit its ink inside
+          // the dedicated roost, including on phones; free flight keeps its scale.
+          const anim = sprite.animations[animation];
+          const ink = anim.bounds[anim.rows === 1 ? 0 : direction];
+          const dockedSize = Math.min(size,
+            (nest.clientWidth - 8) / (2 * Math.max(anim.w / 2 - ink[0], ink[2] - anim.w / 2) * sprite.scale),
+            (nest.clientHeight - 8) / ((ink[3] - ink[1]) * sprite.scale));
+          const paintSize = mode === "active" ? size : dockedSize;
+          const hatchFoot = animation === "Special0" ? (mode === "active" ? 6 : ink[3] - anim.h / 2) : undefined;
+          paintSprite(art, sprite, animation, motion.matches ? 0 : animation === "Special2" ? elapsed / 1.5 : elapsed, direction, 22, 44, paintSize, hatchFoot);
           button.dataset.animation = animation; button.dataset.frame = art.dataset.frame;
           heart.hidden = greeting <= 0;
           heart.style.bottom = `${54 * size + 7}px`;

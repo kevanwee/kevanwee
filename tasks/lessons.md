@@ -1,5 +1,11 @@
 # Lessons Learned
 
+## Approved design corrections (2026-10-12)
+
+- Resume/CV keeps its green prominence but must be the same height as SSH.
+- Yveltal's egg must not block text. This supersedes the earlier SSH-top placement: use a dedicated roost beside the actions and fit the complete docked awakening there.
+- Preserve the approved identity and Pokémon. Further drastic compositions stay proposals for owner review.
+
 ## Portfolio overworld corrections (2026-09-21)
 - Shared ledge residents must be able to pass each other. Mutual collision waits can deadlock walkers and bonded followers. Keep landing checks for hops, but do not block ordinary walking past another resident.
 - Bonded pairs must start with separate 44px tap targets; spawning both at one position makes one permanently inaccessible in reduced motion. Refresh event-only parent metadata when a sprite sheet finishes decoding.

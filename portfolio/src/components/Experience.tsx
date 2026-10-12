@@ -229,7 +229,7 @@ export default function ExperienceSection() {
     >
       <div>
         {/* Heading row — title left, filter buttons right */}
-        <div className="mb-12 flex items-end justify-between gap-4">
+        <div className="experience-heading mb-12 flex items-end justify-between gap-4">
           <h2 className="font-serif text-3xl font-bold text-warm-900">
             Experience
           </h2>
