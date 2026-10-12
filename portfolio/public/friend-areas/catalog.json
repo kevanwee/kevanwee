@@ -123,7 +123,7 @@
           "basis": "Curated habitat inference"
         }
       ],
-      "guestLimit": 2
+      "guestLimit": 1
     },
     {
       "id": "mtmoonview",
@@ -784,7 +784,7 @@
           "basis": "Curated habitat inference"
         }
       ],
-      "guestLimit": 2
+      "guestLimit": 1
     },
     {
       "id": "seafloorcave",
@@ -1617,49 +1617,8 @@
       ],
       "sceneryAnimation": "Native BPL palette frames and durations at 60 ticks/second; no BPA tile animations in this map.",
       "collisionStatus": "Conservative authored foot zones, not game collision data.",
-      "guests": [
-        {
-          "id": 403,
-          "reason": "Electric dogs and lions, like Electrike.",
-          "basis": "Curated habitat inference"
-        },
-        {
-          "id": 404,
-          "reason": "Electric dogs and lions, like Electrike.",
-          "basis": "Curated habitat inference"
-        },
-        {
-          "id": 405,
-          "reason": "Electric dogs and lions, like Electrike.",
-          "basis": "Curated habitat inference"
-        },
-        {
-          "id": 835,
-          "reason": "Electric dogs and lions, like Electrike.",
-          "basis": "Curated habitat inference"
-        },
-        {
-          "id": 836,
-          "reason": "Electric dogs and lions, like Electrike.",
-          "basis": "Curated habitat inference"
-        },
-        {
-          "id": 694,
-          "reason": "Meadow sun-chargers.",
-          "basis": "Curated habitat inference"
-        },
-        {
-          "id": 695,
-          "reason": "Meadow sun-chargers.",
-          "basis": "Curated habitat inference"
-        },
-        {
-          "id": 877,
-          "reason": "Meadow sun-chargers.",
-          "basis": "Curated habitat inference"
-        }
-      ],
-      "guestLimit": 2
+      "guests": [],
+      "guestLimit": 0
     },
     {
       "id": "rainbowpeak",
@@ -2247,7 +2206,7 @@
           "basis": "Curated habitat inference"
         }
       ],
-      "guestLimit": 2
+      "guestLimit": 1
     },
     {
       "id": "waterfalllake",
@@ -2614,7 +2573,7 @@
           "basis": "Curated habitat inference"
         }
       ],
-      "guestLimit": 2
+      "guestLimit": 1
     },
     {
       "id": "crystalcrossing",
@@ -2839,12 +2798,24 @@
         73,
         79,
         80,
-        90,
-        91,
-        120,
-        121
+        90
       ],
       "guests": [
+        {
+          "id": 91,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 120,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 121,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 199,
           "reason": "Native resident in Red Rescue Team.",
@@ -3255,12 +3226,24 @@
         117,
         223,
         224,
-        230,
-        318,
-        319,
-        347
+        230
       ],
       "guests": [
+        {
+          "id": 318,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 319,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 347,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 348,
           "reason": "Native resident in Red Rescue Team.",
@@ -6371,12 +6354,24 @@
         139,
         140,
         141,
-        170,
-        171,
-        345,
-        346
+        170
       ],
       "guests": [
+        {
+          "id": 171,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 345,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 346,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 366,
           "reason": "Native resident in Red Rescue Team.",
@@ -9296,12 +9291,24 @@
         75,
         76,
         104,
-        105,
-        207,
-        213,
-        216
+        105
       ],
       "guests": [
+        {
+          "id": 207,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 213,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 216,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 217,
           "reason": "Native resident in Red Rescue Team.",
@@ -10349,12 +10356,24 @@
         5,
         6,
         246,
-        247,
-        248,
-        304,
-        305
+        247
       ],
       "guests": [
+        {
+          "id": 248,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 304,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 305,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 306,
           "reason": "Native resident in Red Rescue Team.",
@@ -11610,12 +11629,24 @@
         20,
         23,
         24,
-        83,
-        96,
-        97,
-        261
+        83
       ],
       "guests": [
+        {
+          "id": 96,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 97,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 261,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 262,
           "reason": "Native resident in Red Rescue Team.",
@@ -11704,6 +11735,16 @@
         {
           "id": 862,
           "reason": "Linoone's Galarian evolution.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 835,
+          "reason": "Electric field dogs.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 836,
+          "reason": "Electric field dogs.",
           "basis": "Curated habitat inference"
         },
         {
@@ -12211,12 +12252,24 @@
         2,
         3,
         152,
-        153,
-        154,
-        187,
-        188
+        153
       ],
       "guests": [
+        {
+          "id": 154,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 187,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 188,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 189,
           "reason": "Native resident in Red Rescue Team.",
@@ -12837,12 +12890,24 @@
         40,
         108,
         113,
-        174,
-        203,
-        209,
-        210
+        174
       ],
       "guests": [
+        {
+          "id": 203,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 209,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 210,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 235,
           "reason": "Native resident in Red Rescue Team.",
@@ -13738,12 +13803,24 @@
         30,
         31,
         32,
-        33,
-        34,
-        84,
-        85
+        33
       ],
       "guests": [
+        {
+          "id": 34,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 84,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 85,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 111,
           "reason": "Native resident in Red Rescue Team.",
@@ -14757,12 +14834,24 @@
         59,
         77,
         78,
-        155,
-        156,
-        157,
-        255
+        155
       ],
       "guests": [
+        {
+          "id": 156,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 157,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 255,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 256,
           "reason": "Native resident in Red Rescue Team.",
@@ -16310,12 +16399,24 @@
         11,
         12,
         13,
-        14,
-        15,
-        165,
-        166
+        14
       ],
       "guests": [
+        {
+          "id": 15,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 165,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 166,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 193,
           "reason": "Native resident in Red Rescue Team.",
@@ -17421,12 +17522,24 @@
         17,
         18,
         163,
-        164,
-        175,
-        176,
-        177
+        164
       ],
       "guests": [
+        {
+          "id": 175,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 176,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 177,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 178,
           "reason": "Native resident in Red Rescue Team.",
@@ -18832,12 +18945,24 @@
         127,
         185,
         212,
-        214,
-        252,
-        253,
-        254
+        214
       ],
       "guests": [
+        {
+          "id": 252,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 253,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 254,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 352,
           "reason": "Native resident in Red Rescue Team.",
@@ -19360,12 +19485,24 @@
         26,
         52,
         53,
-        56,
-        57,
-        143,
-        172
+        56
       ],
       "guests": [
+        {
+          "id": 57,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 143,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 172,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 190,
           "reason": "Native resident in Red Rescue Team.",
@@ -19474,6 +19611,11 @@
         {
           "id": 775,
           "reason": "Lively jungle Pok\u00e9mon, like Mankey.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 877,
+          "reason": "A hungry electric rodent, like Pikachu.",
           "basis": "Curated habitat inference"
         },
         {
@@ -19984,12 +20126,24 @@
         49,
         167,
         168,
-        204,
-        205,
-        290,
-        291
+        204
       ],
       "guests": [
+        {
+          "id": 205,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 290,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 291,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 292,
           "reason": "Native resident in Red Rescue Team.",
@@ -20793,11 +20947,19 @@
         119,
         158,
         159,
-        160,
-        313,
-        314
+        160
       ],
       "guests": [
+        {
+          "id": 313,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 314,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 418,
           "reason": "River swimmers and builders.",
@@ -21969,12 +22131,24 @@
         61,
         62,
         186,
-        270,
-        271,
-        272,
-        283
+        270
       ],
       "guests": [
+        {
+          "id": 271,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 272,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 283,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 284,
           "reason": "Native resident in Red Rescue Team.",
@@ -23625,12 +23799,24 @@
         8,
         9,
         54,
-        55,
-        183,
-        184,
-        298
+        55
       ],
       "guests": [
+        {
+          "id": 183,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 184,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 298,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 341,
           "reason": "Native resident in Red Rescue Team.",
@@ -26255,11 +26441,19 @@
         195,
         258,
         259,
-        260,
-        339,
-        340
+        260
       ],
       "guests": [
+        {
+          "id": 339,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 340,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 980,
           "reason": "Wooper's Paldean evolution.",
@@ -27842,10 +28036,14 @@
         89,
         109,
         110,
-        316,
-        317
+        316
       ],
       "guests": [
+        {
+          "id": 317,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 453,
           "reason": "Poisonous swamp dwellers.",
@@ -29848,12 +30046,24 @@
         42,
         169,
         202,
-        206,
-        293,
-        294,
-        295
+        206
       ],
       "guests": [
+        {
+          "id": 293,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 294,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 295,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 299,
           "reason": "Native resident in Red Rescue Team.",
@@ -30830,7 +31040,7 @@
           "basis": "Curated habitat inference"
         }
       ],
-      "guestLimit": 3,
+      "guestLimit": 2,
       "zones": [
         [
           [
@@ -32942,12 +33152,24 @@
         44,
         45,
         69,
-        70,
-        71,
-        102,
-        103
+        70
       ],
       "guests": [
+        {
+          "id": 71,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 102,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 103,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 114,
           "reason": "Native resident in Red Rescue Team.",
@@ -34197,12 +34419,24 @@
         67,
         68,
         106,
-        107,
-        236,
-        237,
-        296
+        107
       ],
       "guests": [
+        {
+          "id": 236,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 237,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 296,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 297,
           "reason": "Native resident in Red Rescue Team.",
@@ -35097,10 +35331,14 @@
         82,
         100,
         101,
-        125,
-        239
+        125
       ],
       "guests": [
+        {
+          "id": 239,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 462,
           "reason": "Evolutions of Magneton and Electabuzz.",
@@ -35527,11 +35765,19 @@
         218,
         219,
         240,
-        322,
-        323,
-        324
+        322
       ],
       "guests": [
+        {
+          "id": 323,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 324,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 467,
           "reason": "Magmar's evolution.",
@@ -36137,11 +36383,19 @@
         28,
         328,
         329,
-        330,
-        331,
-        332
+        330
       ],
       "guests": [
+        {
+          "id": 331,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 332,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 449,
           "reason": "Desert dwellers, like Trapinch.",
@@ -36215,6 +36469,16 @@
         {
           "id": 563,
           "reason": "Sand-burrowers.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 694,
+          "reason": "Sun-charging desert lizards.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 695,
+          "reason": "Sun-charging desert lizards.",
           "basis": "Curated habitat inference"
         }
       ],
@@ -38934,10 +39198,14 @@
         343,
         344,
         377,
-        378,
-        379
+        378
       ],
       "guests": [
+        {
+          "id": 379,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 486,
           "reason": "The rest of the Regi family.",
@@ -39867,12 +40135,24 @@
         38,
         92,
         93,
-        94,
-        200,
-        215,
-        302
+        94
       ],
       "guests": [
+        {
+          "id": 200,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 215,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 302,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 353,
           "reason": "Native resident in Red Rescue Team.",
@@ -41003,11 +41283,19 @@
         220,
         221,
         225,
-        238,
-        361,
-        362
+        238
       ],
       "guests": [
+        {
+          "id": 361,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
+        {
+          "id": 362,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 473,
           "reason": "Evolutions of Piloswine and Snorunt.",
@@ -46113,7 +46401,7 @@
           "basis": "Curated habitat inference"
         }
       ],
-      "guestLimit": 2,
+      "guestLimit": 1,
       "zones": [
         [
           [
@@ -47462,7 +47750,7 @@
           "basis": "Curated habitat inference"
         }
       ],
-      "guestLimit": 3,
+      "guestLimit": 2,
       "zones": [
         [
           [
@@ -49040,7 +49328,12 @@
       "guests": [
         {
           "id": 856,
-          "reason": "Calm temple visitors.",
+          "reason": "Calm temple visitors and bells.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 433,
+          "reason": "Calm temple visitors and bells.",
           "basis": "Curated habitat inference"
         }
       ],
@@ -50843,8 +51136,19 @@
         403,
         396
       ],
-      "guests": [],
-      "guestLimit": 0,
+      "guests": [
+        {
+          "id": 404,
+          "reason": "Shinx's evolutions.",
+          "basis": "Curated habitat inference"
+        },
+        {
+          "id": 405,
+          "reason": "Shinx's evolutions.",
+          "basis": "Curated habitat inference"
+        }
+      ],
+      "guestLimit": 1,
       "zones": [
         [
           [
@@ -51548,7 +51852,7 @@
           "basis": "Curated habitat inference"
         }
       ],
-      "guestLimit": 2,
+      "guestLimit": 1,
       "zones": [
         [
           [
@@ -51628,10 +51932,14 @@
         294,
         192,
         399,
-        341,
-        51
+        341
       ],
       "guests": [
+        {
+          "id": 51,
+          "reason": "Native resident in Red Rescue Team.",
+          "basis": "pret/pmd-red monster_data.json"
+        },
         {
           "id": 40,
           "reason": "Guild members and shopkeepers of Treasure Town.",
@@ -113977,6 +114285,257 @@
         }
       }
     },
+    "835": {
+      "id": 835,
+      "name": "Yamper",
+      "animations": {
+        "Idle": {
+          "src": "sprites/835/Idle-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 8,
+          "durations": [
+            60,
+            16
+          ],
+          "origins": [
+            [
+              11.5,
+              23
+            ],
+            [
+              10.5,
+              23
+            ],
+            [
+              10.5,
+              22
+            ],
+            [
+              11.0,
+              23
+            ],
+            [
+              11.5,
+              24
+            ],
+            [
+              12.0,
+              23
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              23
+            ]
+          ],
+          "sha256": "287ac9c294e6eca1c67486c7945b6f9273219cb34b1cbe3a5b0cecd1f7520302",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/835/Walk-Anim.png",
+          "w": 32,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            6,
+            4,
+            6,
+            6,
+            4,
+            6,
+            4
+          ],
+          "origins": [
+            [
+              15.5,
+              35
+            ],
+            [
+              17.0,
+              35
+            ],
+            [
+              17.0,
+              30
+            ],
+            [
+              17.0,
+              31
+            ],
+            [
+              15.5,
+              32
+            ],
+            [
+              14.0,
+              31
+            ],
+            [
+              14.0,
+              30
+            ],
+            [
+              14.5,
+              35
+            ]
+          ],
+          "sha256": "3b0088e7cdc801061f8aac9ee3c5620d5db98de758da9f206d4ccc3b431f3e52",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/835/Sleep-Anim.png",
+          "w": 24,
+          "h": 16,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              12.0,
+              15
+            ]
+          ],
+          "sha256": "03981cb6d5e17c6a9abdd67b929a0f66367695a037c33c267fb1573201140e20",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "836": {
+      "id": 836,
+      "name": "Boltund",
+      "animations": {
+        "Idle": {
+          "src": "sprites/836/Idle-Anim.png",
+          "w": 48,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            60,
+            10,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            10
+          ],
+          "origins": [
+            [
+              23.5,
+              27
+            ],
+            [
+              22.0,
+              30
+            ],
+            [
+              21.5,
+              27
+            ],
+            [
+              21.5,
+              29
+            ],
+            [
+              24.5,
+              31
+            ],
+            [
+              27.0,
+              29
+            ],
+            [
+              26.5,
+              27
+            ],
+            [
+              26.0,
+              30
+            ]
+          ],
+          "sha256": "629730f345b3c7af0863be40e88b99d52a5a388c16e13167af98c851726994e9",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/836/Walk-Anim.png",
+          "w": 32,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            8,
+            10,
+            8,
+            10
+          ],
+          "origins": [
+            [
+              16.0,
+              29
+            ],
+            [
+              17.0,
+              30
+            ],
+            [
+              17.5,
+              26
+            ],
+            [
+              15.0,
+              30
+            ],
+            [
+              16.0,
+              30
+            ],
+            [
+              17.0,
+              30
+            ],
+            [
+              14.5,
+              26
+            ],
+            [
+              15.0,
+              30
+            ]
+          ],
+          "sha256": "0f8bd28829cad9fff79093956e297bf8707f24a5c4db07794d5a79de8fd57f49",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/836/Sleep-Anim.png",
+          "w": 24,
+          "h": 24,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              12.0,
+              20
+            ]
+          ],
+          "sha256": "760445ce2f7ce5bb809f4b4cfb4ef7da146867c09169aba8b468f75c939e22ba",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
     "915": {
       "id": 915,
       "name": "Lechonk",
@@ -133469,6 +134028,127 @@
         }
       }
     },
+    "877": {
+      "id": 877,
+      "name": "Morpeko",
+      "animations": {
+        "Idle": {
+          "src": "sprites/877/Idle-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 8,
+          "durations": [
+            36,
+            18
+          ],
+          "origins": [
+            [
+              12.5,
+              21
+            ],
+            [
+              13.5,
+              22
+            ],
+            [
+              12.0,
+              22
+            ],
+            [
+              13.5,
+              22
+            ],
+            [
+              12.5,
+              21
+            ],
+            [
+              11.5,
+              22
+            ],
+            [
+              12.0,
+              22
+            ],
+            [
+              11.5,
+              22
+            ]
+          ],
+          "sha256": "89ce3981c6962d4eb756cdd04fc892b2d3a89462a156ff5906e6b8e0fb367e6e",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/877/Walk-Anim.png",
+          "w": 40,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            6,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "origins": [
+            [
+              20.5,
+              35
+            ],
+            [
+              27.0,
+              33
+            ],
+            [
+              25.5,
+              26
+            ],
+            [
+              24.0,
+              25
+            ],
+            [
+              20.5,
+              26
+            ],
+            [
+              16.0,
+              25
+            ],
+            [
+              14.5,
+              26
+            ],
+            [
+              13.0,
+              33
+            ]
+          ],
+          "sha256": "4c171deaa0984dd00893f38f420b479c82990d92b4ead2b37d04a8bf9216a6c4",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/877/Sleep-Anim.png",
+          "w": 24,
+          "h": 16,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              12.0,
+              14
+            ]
+          ],
+          "sha256": "28949e4a1818a01b00f86143ba2596fd5d7a8525ba2bb9f5bebade03ecd09e25",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
     "819": {
       "id": 819,
       "name": "Skwovet",
@@ -151595,876 +152275,6 @@
         }
       }
     },
-    "404": {
-      "id": 404,
-      "name": "Luxio",
-      "animations": {
-        "Idle": {
-          "src": "sprites/404/Idle-Anim.png",
-          "w": 32,
-          "h": 40,
-          "rows": 8,
-          "durations": [
-            30,
-            12,
-            2,
-            2,
-            2,
-            2,
-            2,
-            12
-          ],
-          "origins": [
-            [
-              16.5,
-              29
-            ],
-            [
-              15.5,
-              29
-            ],
-            [
-              15.5,
-              27
-            ],
-            [
-              17.0,
-              28
-            ],
-            [
-              14.5,
-              27
-            ],
-            [
-              15.0,
-              28
-            ],
-            [
-              16.5,
-              27
-            ],
-            [
-              16.5,
-              29
-            ]
-          ],
-          "sha256": "82824c6a09a452b666366db047bc66276750d6bbf312a0187b92fc01f52d806e",
-          "sourceAnimation": "Idle"
-        },
-        "Walk": {
-          "src": "sprites/404/Walk-Anim.png",
-          "w": 32,
-          "h": 40,
-          "rows": 8,
-          "durations": [
-            8,
-            10,
-            8,
-            10
-          ],
-          "origins": [
-            [
-              16.0,
-              28
-            ],
-            [
-              14.5,
-              28
-            ],
-            [
-              14.0,
-              26
-            ],
-            [
-              15.0,
-              29
-            ],
-            [
-              15.5,
-              28
-            ],
-            [
-              17.0,
-              29
-            ],
-            [
-              18.0,
-              26
-            ],
-            [
-              17.5,
-              28
-            ]
-          ],
-          "sha256": "d6efbe6ede43423a7addce175b96da070220e8f6f2c57773626257d1ba79adb4",
-          "sourceAnimation": "Walk"
-        },
-        "Sleep": {
-          "src": "sprites/404/Sleep-Anim.png",
-          "w": 40,
-          "h": 32,
-          "rows": 1,
-          "durations": [
-            30,
-            35
-          ],
-          "origins": [
-            [
-              23.5,
-              24
-            ]
-          ],
-          "sha256": "b406091acfa0ec5a700c689ce0d388f1850a5bfdab8ed224f6273f3ab880976d",
-          "sourceAnimation": "Sleep"
-        }
-      }
-    },
-    "405": {
-      "id": 405,
-      "name": "Luxray",
-      "animations": {
-        "Idle": {
-          "src": "sprites/405/Idle-Anim.png",
-          "w": 40,
-          "h": 48,
-          "rows": 8,
-          "durations": [
-            30,
-            12,
-            2,
-            2,
-            2,
-            2,
-            2,
-            12
-          ],
-          "origins": [
-            [
-              19.5,
-              34
-            ],
-            [
-              21.0,
-              36
-            ],
-            [
-              20.0,
-              32
-            ],
-            [
-              20.0,
-              35
-            ],
-            [
-              19.5,
-              33
-            ],
-            [
-              20.0,
-              35
-            ],
-            [
-              20.0,
-              32
-            ],
-            [
-              19.0,
-              36
-            ]
-          ],
-          "sha256": "33e7ee09b03dad570eb63686f886989dc6e53afd60c975f890e6493f0b0664c9",
-          "sourceAnimation": "Idle"
-        },
-        "Walk": {
-          "src": "sprites/405/Walk-Anim.png",
-          "w": 40,
-          "h": 48,
-          "rows": 8,
-          "durations": [
-            10,
-            10,
-            10,
-            10
-          ],
-          "origins": [
-            [
-              20.0,
-              32
-            ],
-            [
-              19.0,
-              34
-            ],
-            [
-              19.0,
-              31
-            ],
-            [
-              18.5,
-              35
-            ],
-            [
-              21.0,
-              34
-            ],
-            [
-              21.5,
-              35
-            ],
-            [
-              21.0,
-              31
-            ],
-            [
-              21.0,
-              34
-            ]
-          ],
-          "sha256": "bea3aca46894e47fc92591f1daadc32085d79335a521c72fbc7d5b8b96b26a7f",
-          "sourceAnimation": "Walk"
-        },
-        "Sleep": {
-          "src": "sprites/405/Sleep-Anim.png",
-          "w": 32,
-          "h": 32,
-          "rows": 1,
-          "durations": [
-            30,
-            35
-          ],
-          "origins": [
-            [
-              17.5,
-              26
-            ]
-          ],
-          "sha256": "ffef607409f9338f191466476e2ebb09697f44157312fb446f7e15b1a8eaecca",
-          "sourceAnimation": "Sleep"
-        }
-      }
-    },
-    "835": {
-      "id": 835,
-      "name": "Yamper",
-      "animations": {
-        "Idle": {
-          "src": "sprites/835/Idle-Anim.png",
-          "w": 24,
-          "h": 32,
-          "rows": 8,
-          "durations": [
-            60,
-            16
-          ],
-          "origins": [
-            [
-              11.5,
-              23
-            ],
-            [
-              10.5,
-              23
-            ],
-            [
-              10.5,
-              22
-            ],
-            [
-              11.0,
-              23
-            ],
-            [
-              11.5,
-              24
-            ],
-            [
-              12.0,
-              23
-            ],
-            [
-              12.5,
-              22
-            ],
-            [
-              12.5,
-              23
-            ]
-          ],
-          "sha256": "287ac9c294e6eca1c67486c7945b6f9273219cb34b1cbe3a5b0cecd1f7520302",
-          "sourceAnimation": "Idle"
-        },
-        "Walk": {
-          "src": "sprites/835/Walk-Anim.png",
-          "w": 32,
-          "h": 48,
-          "rows": 8,
-          "durations": [
-            6,
-            4,
-            6,
-            6,
-            4,
-            6,
-            4
-          ],
-          "origins": [
-            [
-              15.5,
-              35
-            ],
-            [
-              17.0,
-              35
-            ],
-            [
-              17.0,
-              30
-            ],
-            [
-              17.0,
-              31
-            ],
-            [
-              15.5,
-              32
-            ],
-            [
-              14.0,
-              31
-            ],
-            [
-              14.0,
-              30
-            ],
-            [
-              14.5,
-              35
-            ]
-          ],
-          "sha256": "3b0088e7cdc801061f8aac9ee3c5620d5db98de758da9f206d4ccc3b431f3e52",
-          "sourceAnimation": "Walk"
-        },
-        "Sleep": {
-          "src": "sprites/835/Sleep-Anim.png",
-          "w": 24,
-          "h": 16,
-          "rows": 1,
-          "durations": [
-            30,
-            35
-          ],
-          "origins": [
-            [
-              12.0,
-              15
-            ]
-          ],
-          "sha256": "03981cb6d5e17c6a9abdd67b929a0f66367695a037c33c267fb1573201140e20",
-          "sourceAnimation": "Sleep"
-        }
-      }
-    },
-    "836": {
-      "id": 836,
-      "name": "Boltund",
-      "animations": {
-        "Idle": {
-          "src": "sprites/836/Idle-Anim.png",
-          "w": 48,
-          "h": 40,
-          "rows": 8,
-          "durations": [
-            60,
-            10,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            10
-          ],
-          "origins": [
-            [
-              23.5,
-              27
-            ],
-            [
-              22.0,
-              30
-            ],
-            [
-              21.5,
-              27
-            ],
-            [
-              21.5,
-              29
-            ],
-            [
-              24.5,
-              31
-            ],
-            [
-              27.0,
-              29
-            ],
-            [
-              26.5,
-              27
-            ],
-            [
-              26.0,
-              30
-            ]
-          ],
-          "sha256": "629730f345b3c7af0863be40e88b99d52a5a388c16e13167af98c851726994e9",
-          "sourceAnimation": "Idle"
-        },
-        "Walk": {
-          "src": "sprites/836/Walk-Anim.png",
-          "w": 32,
-          "h": 40,
-          "rows": 8,
-          "durations": [
-            8,
-            10,
-            8,
-            10
-          ],
-          "origins": [
-            [
-              16.0,
-              29
-            ],
-            [
-              17.0,
-              30
-            ],
-            [
-              17.5,
-              26
-            ],
-            [
-              15.0,
-              30
-            ],
-            [
-              16.0,
-              30
-            ],
-            [
-              17.0,
-              30
-            ],
-            [
-              14.5,
-              26
-            ],
-            [
-              15.0,
-              30
-            ]
-          ],
-          "sha256": "0f8bd28829cad9fff79093956e297bf8707f24a5c4db07794d5a79de8fd57f49",
-          "sourceAnimation": "Walk"
-        },
-        "Sleep": {
-          "src": "sprites/836/Sleep-Anim.png",
-          "w": 24,
-          "h": 24,
-          "rows": 1,
-          "durations": [
-            30,
-            35
-          ],
-          "origins": [
-            [
-              12.0,
-              20
-            ]
-          ],
-          "sha256": "760445ce2f7ce5bb809f4b4cfb4ef7da146867c09169aba8b468f75c939e22ba",
-          "sourceAnimation": "Sleep"
-        }
-      }
-    },
-    "694": {
-      "id": 694,
-      "name": "Helioptile",
-      "animations": {
-        "Idle": {
-          "src": "sprites/694/Idle-Anim.png",
-          "w": 24,
-          "h": 32,
-          "rows": 8,
-          "durations": [
-            40,
-            4,
-            4,
-            4
-          ],
-          "origins": [
-            [
-              11.5,
-              22
-            ],
-            [
-              11.5,
-              22
-            ],
-            [
-              11.5,
-              21
-            ],
-            [
-              12.0,
-              22
-            ],
-            [
-              11.5,
-              21
-            ],
-            [
-              12.0,
-              22
-            ],
-            [
-              12.5,
-              21
-            ],
-            [
-              12.5,
-              22
-            ]
-          ],
-          "sha256": "0ec09d93ad26dedf0220876e7b2d223dfbd978afa9b806bc5e0e510db2226a4d",
-          "sourceAnimation": "Idle"
-        },
-        "Walk": {
-          "src": "sprites/694/Walk-Anim.png",
-          "w": 24,
-          "h": 32,
-          "rows": 8,
-          "durations": [
-            6,
-            10,
-            6,
-            10
-          ],
-          "origins": [
-            [
-              11.5,
-              22
-            ],
-            [
-              11.5,
-              23
-            ],
-            [
-              11.5,
-              22
-            ],
-            [
-              12.5,
-              22
-            ],
-            [
-              11.5,
-              23
-            ],
-            [
-              11.5,
-              22
-            ],
-            [
-              12.5,
-              22
-            ],
-            [
-              12.5,
-              23
-            ]
-          ],
-          "sha256": "0559d13b2e3faf7000f1f7c5de1ca1502da609984e3ec8d275e112cd9d494d47",
-          "sourceAnimation": "Walk"
-        },
-        "Sleep": {
-          "src": "sprites/694/Sleep-Anim.png",
-          "w": 24,
-          "h": 24,
-          "rows": 1,
-          "durations": [
-            30,
-            35
-          ],
-          "origins": [
-            [
-              12.5,
-              18
-            ]
-          ],
-          "sha256": "a82819b495d7bf84fe48628e1bce004647cbce005c33ad3dfffebc123f25ff9e",
-          "sourceAnimation": "Sleep"
-        }
-      }
-    },
-    "695": {
-      "id": 695,
-      "name": "Heliolisk",
-      "animations": {
-        "Idle": {
-          "src": "sprites/695/Idle-Anim.png",
-          "w": 40,
-          "h": 48,
-          "rows": 8,
-          "durations": [
-            60,
-            10,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            2,
-            10
-          ],
-          "origins": [
-            [
-              19.0,
-              30
-            ],
-            [
-              19.5,
-              33
-            ],
-            [
-              19.5,
-              32
-            ],
-            [
-              19.5,
-              31
-            ],
-            [
-              19.0,
-              35
-            ],
-            [
-              19.5,
-              31
-            ],
-            [
-              20.0,
-              32
-            ],
-            [
-              20.0,
-              33
-            ]
-          ],
-          "sha256": "d1776b7e9e649239e8301d01728b6914f853cd687e80d723b763d37c98d49cd1",
-          "sourceAnimation": "Idle"
-        },
-        "Walk": {
-          "src": "sprites/695/Walk-Anim.png",
-          "w": 40,
-          "h": 40,
-          "rows": 8,
-          "durations": [
-            8,
-            12,
-            8,
-            12
-          ],
-          "origins": [
-            [
-              19.5,
-              27
-            ],
-            [
-              17.0,
-              29
-            ],
-            [
-              15.5,
-              26
-            ],
-            [
-              15.5,
-              30
-            ],
-            [
-              19.5,
-              31
-            ],
-            [
-              23.5,
-              30
-            ],
-            [
-              24.5,
-              26
-            ],
-            [
-              23.0,
-              29
-            ]
-          ],
-          "sha256": "6047276b292ec8ec4b588a7c0eeca1120c0157740b1dd00c045b79bc71434c9d",
-          "sourceAnimation": "Walk"
-        },
-        "Sleep": {
-          "src": "sprites/695/Sleep-Anim.png",
-          "w": 32,
-          "h": 32,
-          "rows": 1,
-          "durations": [
-            30,
-            35
-          ],
-          "origins": [
-            [
-              18.0,
-              25
-            ]
-          ],
-          "sha256": "d81f819ab81a2a8589c55a37a0a57b7c715f6ac3f7cb992f45d9f1f7ecddf575",
-          "sourceAnimation": "Sleep"
-        }
-      }
-    },
-    "877": {
-      "id": 877,
-      "name": "Morpeko",
-      "animations": {
-        "Idle": {
-          "src": "sprites/877/Idle-Anim.png",
-          "w": 24,
-          "h": 32,
-          "rows": 8,
-          "durations": [
-            36,
-            18
-          ],
-          "origins": [
-            [
-              12.5,
-              21
-            ],
-            [
-              13.5,
-              22
-            ],
-            [
-              12.0,
-              22
-            ],
-            [
-              13.5,
-              22
-            ],
-            [
-              12.5,
-              21
-            ],
-            [
-              11.5,
-              22
-            ],
-            [
-              12.0,
-              22
-            ],
-            [
-              11.5,
-              22
-            ]
-          ],
-          "sha256": "89ce3981c6962d4eb756cdd04fc892b2d3a89462a156ff5906e6b8e0fb367e6e",
-          "sourceAnimation": "Idle"
-        },
-        "Walk": {
-          "src": "sprites/877/Walk-Anim.png",
-          "w": 40,
-          "h": 40,
-          "rows": 8,
-          "durations": [
-            6,
-            4,
-            4,
-            4,
-            4,
-            4,
-            4
-          ],
-          "origins": [
-            [
-              20.5,
-              35
-            ],
-            [
-              27.0,
-              33
-            ],
-            [
-              25.5,
-              26
-            ],
-            [
-              24.0,
-              25
-            ],
-            [
-              20.5,
-              26
-            ],
-            [
-              16.0,
-              25
-            ],
-            [
-              14.5,
-              26
-            ],
-            [
-              13.0,
-              33
-            ]
-          ],
-          "sha256": "4c171deaa0984dd00893f38f420b479c82990d92b4ead2b37d04a8bf9216a6c4",
-          "sourceAnimation": "Walk"
-        },
-        "Sleep": {
-          "src": "sprites/877/Sleep-Anim.png",
-          "w": 24,
-          "h": 16,
-          "rows": 1,
-          "durations": [
-            30,
-            35
-          ],
-          "origins": [
-            [
-              12.0,
-              14
-            ]
-          ],
-          "sha256": "28949e4a1818a01b00f86143ba2596fd5d7a8525ba2bb9f5bebade03ecd09e25",
-          "sourceAnimation": "Sleep"
-        }
-      }
-    },
     "462": {
       "id": 462,
       "name": "Magnezone",
@@ -156180,6 +155990,256 @@
             ]
           ],
           "sha256": "c358214e1c73463f3695a84ff1d590e1b67718dd3a08f5254c4510fc1140ae28",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "694": {
+      "id": 694,
+      "name": "Helioptile",
+      "animations": {
+        "Idle": {
+          "src": "sprites/694/Idle-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 8,
+          "durations": [
+            40,
+            4,
+            4,
+            4
+          ],
+          "origins": [
+            [
+              11.5,
+              22
+            ],
+            [
+              11.5,
+              22
+            ],
+            [
+              11.5,
+              21
+            ],
+            [
+              12.0,
+              22
+            ],
+            [
+              11.5,
+              21
+            ],
+            [
+              12.0,
+              22
+            ],
+            [
+              12.5,
+              21
+            ],
+            [
+              12.5,
+              22
+            ]
+          ],
+          "sha256": "0ec09d93ad26dedf0220876e7b2d223dfbd978afa9b806bc5e0e510db2226a4d",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/694/Walk-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 8,
+          "durations": [
+            6,
+            10,
+            6,
+            10
+          ],
+          "origins": [
+            [
+              11.5,
+              22
+            ],
+            [
+              11.5,
+              23
+            ],
+            [
+              11.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              11.5,
+              23
+            ],
+            [
+              11.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              23
+            ]
+          ],
+          "sha256": "0559d13b2e3faf7000f1f7c5de1ca1502da609984e3ec8d275e112cd9d494d47",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/694/Sleep-Anim.png",
+          "w": 24,
+          "h": 24,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              12.5,
+              18
+            ]
+          ],
+          "sha256": "a82819b495d7bf84fe48628e1bce004647cbce005c33ad3dfffebc123f25ff9e",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "695": {
+      "id": 695,
+      "name": "Heliolisk",
+      "animations": {
+        "Idle": {
+          "src": "sprites/695/Idle-Anim.png",
+          "w": 40,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            60,
+            10,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            10
+          ],
+          "origins": [
+            [
+              19.0,
+              30
+            ],
+            [
+              19.5,
+              33
+            ],
+            [
+              19.5,
+              32
+            ],
+            [
+              19.5,
+              31
+            ],
+            [
+              19.0,
+              35
+            ],
+            [
+              19.5,
+              31
+            ],
+            [
+              20.0,
+              32
+            ],
+            [
+              20.0,
+              33
+            ]
+          ],
+          "sha256": "d1776b7e9e649239e8301d01728b6914f853cd687e80d723b763d37c98d49cd1",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/695/Walk-Anim.png",
+          "w": 40,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "origins": [
+            [
+              19.5,
+              27
+            ],
+            [
+              17.0,
+              29
+            ],
+            [
+              15.5,
+              26
+            ],
+            [
+              15.5,
+              30
+            ],
+            [
+              19.5,
+              31
+            ],
+            [
+              23.5,
+              30
+            ],
+            [
+              24.5,
+              26
+            ],
+            [
+              23.0,
+              29
+            ]
+          ],
+          "sha256": "6047276b292ec8ec4b588a7c0eeca1120c0157740b1dd00c045b79bc71434c9d",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/695/Sleep-Anim.png",
+          "w": 32,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              18.0,
+              25
+            ]
+          ],
+          "sha256": "d81f819ab81a2a8589c55a37a0a57b7c715f6ac3f7cb992f45d9f1f7ecddf575",
           "sourceAnimation": "Sleep"
         }
       }
@@ -172738,6 +172798,377 @@
             ]
           ],
           "sha256": "a5adb870a22503f9fe623e0a7c1f9cdf96bccd68be14b4dc9ee8f76c85f74f1b",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "404": {
+      "id": 404,
+      "name": "Luxio",
+      "animations": {
+        "Idle": {
+          "src": "sprites/404/Idle-Anim.png",
+          "w": 32,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            30,
+            12,
+            2,
+            2,
+            2,
+            2,
+            2,
+            12
+          ],
+          "origins": [
+            [
+              16.5,
+              29
+            ],
+            [
+              15.5,
+              29
+            ],
+            [
+              15.5,
+              27
+            ],
+            [
+              17.0,
+              28
+            ],
+            [
+              14.5,
+              27
+            ],
+            [
+              15.0,
+              28
+            ],
+            [
+              16.5,
+              27
+            ],
+            [
+              16.5,
+              29
+            ]
+          ],
+          "sha256": "82824c6a09a452b666366db047bc66276750d6bbf312a0187b92fc01f52d806e",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/404/Walk-Anim.png",
+          "w": 32,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            8,
+            10,
+            8,
+            10
+          ],
+          "origins": [
+            [
+              16.0,
+              28
+            ],
+            [
+              14.5,
+              28
+            ],
+            [
+              14.0,
+              26
+            ],
+            [
+              15.0,
+              29
+            ],
+            [
+              15.5,
+              28
+            ],
+            [
+              17.0,
+              29
+            ],
+            [
+              18.0,
+              26
+            ],
+            [
+              17.5,
+              28
+            ]
+          ],
+          "sha256": "d6efbe6ede43423a7addce175b96da070220e8f6f2c57773626257d1ba79adb4",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/404/Sleep-Anim.png",
+          "w": 40,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              23.5,
+              24
+            ]
+          ],
+          "sha256": "b406091acfa0ec5a700c689ce0d388f1850a5bfdab8ed224f6273f3ab880976d",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "405": {
+      "id": 405,
+      "name": "Luxray",
+      "animations": {
+        "Idle": {
+          "src": "sprites/405/Idle-Anim.png",
+          "w": 40,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            30,
+            12,
+            2,
+            2,
+            2,
+            2,
+            2,
+            12
+          ],
+          "origins": [
+            [
+              19.5,
+              34
+            ],
+            [
+              21.0,
+              36
+            ],
+            [
+              20.0,
+              32
+            ],
+            [
+              20.0,
+              35
+            ],
+            [
+              19.5,
+              33
+            ],
+            [
+              20.0,
+              35
+            ],
+            [
+              20.0,
+              32
+            ],
+            [
+              19.0,
+              36
+            ]
+          ],
+          "sha256": "33e7ee09b03dad570eb63686f886989dc6e53afd60c975f890e6493f0b0664c9",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/405/Walk-Anim.png",
+          "w": 40,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "origins": [
+            [
+              20.0,
+              32
+            ],
+            [
+              19.0,
+              34
+            ],
+            [
+              19.0,
+              31
+            ],
+            [
+              18.5,
+              35
+            ],
+            [
+              21.0,
+              34
+            ],
+            [
+              21.5,
+              35
+            ],
+            [
+              21.0,
+              31
+            ],
+            [
+              21.0,
+              34
+            ]
+          ],
+          "sha256": "bea3aca46894e47fc92591f1daadc32085d79335a521c72fbc7d5b8b96b26a7f",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/405/Sleep-Anim.png",
+          "w": 32,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              17.5,
+              26
+            ]
+          ],
+          "sha256": "ffef607409f9338f191466476e2ebb09697f44157312fb446f7e15b1a8eaecca",
+          "sourceAnimation": "Sleep"
+        }
+      }
+    },
+    "433": {
+      "id": 433,
+      "name": "Chingling",
+      "animations": {
+        "Idle": {
+          "src": "sprites/433/Idle-Anim.png",
+          "w": 32,
+          "h": 32,
+          "rows": 8,
+          "durations": [
+            30,
+            15
+          ],
+          "origins": [
+            [
+              16.0,
+              21
+            ],
+            [
+              13.0,
+              22
+            ],
+            [
+              12.0,
+              22
+            ],
+            [
+              13.5,
+              21
+            ],
+            [
+              16.0,
+              21
+            ],
+            [
+              18.5,
+              21
+            ],
+            [
+              20.0,
+              22
+            ],
+            [
+              19.0,
+              22
+            ]
+          ],
+          "sha256": "ba475b9340a850c133e8b3f3cc6bd60fe654a66ee2cf5b10f20d2d9cdfcc39ed",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/433/Walk-Anim.png",
+          "w": 40,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            5,
+            5,
+            7,
+            7,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "origins": [
+            [
+              20.0,
+              32
+            ],
+            [
+              16.0,
+              33
+            ],
+            [
+              15.5,
+              30
+            ],
+            [
+              17.0,
+              32
+            ],
+            [
+              20.0,
+              32
+            ],
+            [
+              23.0,
+              32
+            ],
+            [
+              24.5,
+              30
+            ],
+            [
+              24.0,
+              33
+            ]
+          ],
+          "sha256": "447a9b9f710ee9734d5a77dc5b6abe1a3754e8c9ee7162d0e64a18254bbc43d1",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/433/Sleep-Anim.png",
+          "w": 24,
+          "h": 16,
+          "rows": 1,
+          "durations": [
+            30,
+            35
+          ],
+          "origins": [
+            [
+              15.5,
+              14
+            ]
+          ],
+          "sha256": "969498b342ad6a788f98bf423434cc768f4c56239b195d68963bc3b12ebee72a",
           "sourceAnimation": "Sleep"
         }
       }

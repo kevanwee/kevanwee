@@ -203,17 +203,19 @@ def expand():
         extra = visitors(area['id'], set(area['roster']) | {g['id'] for g in area.get('guests', [])})
         if extra:
             area['guests'] = area.get('guests', []) + extra
-            area['guestLimit'] = max(area.get('guestLimit', 0), 2) if area['id'] != 'crystalcrossing' else area.get('guestLimit', 0)
+            # At most eight residents per visit keeps the panel legible; each draw leaves a visitor out so visits vary.
+            if area['id'] != 'crystalcrossing':
+                area['guestLimit'] = max(area.get('guestLimit', 0), min(2, len(area['guests']) - 1, 8 - len(area['roster'])))
     for entry in added:
         native = [d for d, _ in entry['native'] if have(d)]
         scenery = entry['scenery']
-        # Up to eight natives stay on the map; the rest rotate in with the visitors.
-        roster, rotating = native[:8], list(dict.fromkeys(native[8:]))
+        # Five natives stay on the map; the rest rotate into three more places with the visitors (eight per visit).
+        roster, rotating = native[:5], list(dict.fromkeys(native[5:]))
         guests = [dict(id=d, reason='Native resident in Red Rescue Team.', basis='pret/pmd-red monster_data.json') for d in rotating if d not in roster]
         guests += visitors(entry['id'], set(roster) | set(rotating))
         catalog['areas'].append(dict(id=entry['id'], name=entry['name'], size=scenery['size'], background=scenery['background'],
             layers=scenery['layers'], description=entry['description'], roster=roster, guests=guests,
-            guestLimit=min(3, len(guests)), zones=scenery['zones'] or SKY_ZONES[entry['id']], obstacles=[],
+            guestLimit=max(0, min(3, len(guests) - 1, 8 - len(roster))), zones=scenery['zones'] or SKY_ZONES[entry['id']], obstacles=[],
             sourceRevision=scenery['sourceRevision'], sources=scenery['sources'], sceneryAnimation=scenery.get('sceneryAnimation'),
             collisionStatus='Walk zones from the native collision layer (largest open region).' if scenery['zones'] else 'Conservative authored foot zones; this map has no collision layer.',
             **({'map': scenery['map'], 'credit': scenery.get('credit')} if entry.get('sky') else {})))

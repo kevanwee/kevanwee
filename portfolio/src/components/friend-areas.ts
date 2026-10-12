@@ -42,7 +42,21 @@ export type Resident = {
   moving: boolean;
 };
 
+// Bounding boxes let walk checks skip far zones (native collision maps have many small rectangles).
+const bounds = new WeakMap<Point[], number[]>();
+function box(polygon: Point[]) {
+  let b = bounds.get(polygon);
+  if (!b) {
+    const xs = polygon.map((p) => p[0]),
+      ys = polygon.map((p) => p[1]);
+    b = [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
+    bounds.set(polygon, b);
+  }
+  return b;
+}
 export function inside([x, y]: Point, polygon: Point[]) {
+  const [left, top, right, bottom] = box(polygon);
+  if (x < left || x > right || y < top || y > bottom) return false;
   let yes = false;
   for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
     const [xi, yi] = polygon[i],
