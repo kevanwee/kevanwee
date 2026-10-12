@@ -1,5 +1,5 @@
-"""The lost shiny Psyduck in the 404 page's Crystal Crossing scene (components/LostCave.tsx). Run explicitly; builds never fetch.
-Sheets come from the same pinned SpriteCollab revision as the Friend Areas; the scene is the Crystal Crossing Friend Area's (public/friend-areas)."""
+"""The lost shiny Psyduck and the 404 page's two Explorers of Sky scenes (components/LostCave.tsx). Run explicitly; builds never fetch.
+Sheets come from the same pinned SpriteCollab revision as the Friend Areas; scenes come from scripts/sky_scenery.py."""
 import hashlib, json, urllib.request, xml.etree.ElementTree as ET
 from pathlib import Path
 from PIL import Image
@@ -11,6 +11,13 @@ RAW = f'https://raw.githubusercontent.com/PMDCollab/SpriteCollab/{REV}/'
 # Only the lost Psyduck lives here; Diancie and Carbink belong to the Crystal Crossing Friend Area.
 SPECIES = {
     'shiny-psyduck': ('0054/0000/0001', 'Shiny Psyduck', ['Idle', 'Walk']),
+}
+
+# 404 scenes, exported by scripts/sky_scenery.py (d04p31a starlitlake, d17p31a crystallakeshore) into public/lost-cave.
+# One is chosen per visit; Psyduck walks the route (map pixels, feet on the floor) and looks around at each stop.
+SCENES = {
+    'starlitlake': dict(name='a starlit cave lake', route=[[255, 396], [250, 320], [214, 250], [262, 202], [306, 250], [266, 322]]),
+    'crystallakeshore': dict(name='a crystal lakeshore', route=[[60, 204], [150, 232], [250, 212], [312, 250], [200, 272], [110, 262]]),
 }
 
 def fetch(rel, path):
@@ -56,8 +63,10 @@ def species(key, path, name, wanted, names):
 if __name__ == '__main__':
     names = urllib.request.urlopen(RAW + 'spritebot_credits.txt', timeout=40).read().decode('utf-8')
     sprites = {key: species(key, *spec, names) for key, spec in SPECIES.items()}
-    # The scene is the Crystal Crossing Friend Area's own export (scripts/sky_scenery.py), shared rather than copied.
-    scene = json.loads((ROOT.parent / 'friend-areas' / 'crystalcrossing-source.json').read_text(encoding='utf-8'))
-    catalog = dict(version=1, spriteRevision=REV, scene=scene, sprites=sprites)
+    scenes = {}
+    for key, scene in SCENES.items():
+        source = json.loads((ROOT / f'{key}-source.json').read_text(encoding='utf-8'))
+        scenes[key] = dict(source, **scene)
+    catalog = dict(version=2, spriteRevision=REV, scenes=scenes, sprites=sprites)
     (ROOT / 'catalog.json').write_text(json.dumps(catalog, indent=2) + '\n', encoding='utf-8')
     print({k: (v['credits'], list(v['animations'])) for k, v in sprites.items()})

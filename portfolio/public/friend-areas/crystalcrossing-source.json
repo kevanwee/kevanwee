@@ -6,11 +6,40 @@
   ],
   "layers": [
     {
-      "src": "crystalcrossing-animation.png",
+      "src": "crystalcrossing-animation-p8.png",
       "x": 87,
       "y": 96,
       "w": 426,
       "h": 239,
+      "frames": 19,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "crystalcrossing-animation-p9.png",
+      "x": 240,
+      "y": 98,
+      "w": 5,
+      "h": 20,
       "frames": 19,
       "durations": [
         4,
@@ -55,6 +84,6 @@
       "sha256": "896b5fe03b0b896fc8c2e4dbbd0b0ce5d629713dce86a177e7b8deff7d96e241"
     }
   ],
-  "sceneryAnimation": "Native palette animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+  "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
   "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft."
 }

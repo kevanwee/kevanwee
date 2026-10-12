@@ -35,7 +35,7 @@ const CREDITS = [
     category: "Explorers scenery",
     name: "pret/pmd-sky · skytemple-files",
     href: "https://github.com/pret/pmd-sky",
-    description: "Crystal Crossing (Explorers of Sky) with its native palette animation, decoded from the decompilation's map data with skytemple-files; used for its Friend Area and the 404 page",
+    description: "Crystal Crossing (its Friend Area) and the 404 page's starlit cave lake and crystal lakeshore (Explorers of Sky), with their native palette and tile animation, decoded from the decompilation's map data with skytemple-files",
   },
   {
     category: "Item sprites",

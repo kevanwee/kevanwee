@@ -34,33 +34,46 @@ def export(map_name, area, out):
     bpc = load(FileType.BPC, f'MAP_BG/{entry.bpc_name.lower()}.bpc')
     bma = load(FileType.BMA, f'MAP_BG/{entry.bma_name.lower()}.bma')
     bpas = [load(FileType.BPA, f'MAP_BG/{n.lower()}.bpa') if n else None for n in entry.bpa_names]
-    # Palette animation: every animated palette advances together; the loop is the longest spec.
-    specs = [s for s in bpl.animation_specs if s.number_of_frames]
-    if specs:
-        ticks = specs[0].duration_per_frame
-        if any(s.duration_per_frame != ticks for s in specs): raise ValueError('Mixed palette animation speeds need separate layers')
-        frames = []
-        for step in range(max(s.number_of_frames for s in specs)):
-            frame_bpl = copy.deepcopy(bpl); frame_bpl.palettes = bpl.apply_palette_animations(step)
-            frames.append(bma.to_pil(bpc, frame_bpl, bpas, False, False, pal_ani=False, single_frame=True)[0].convert('RGBA'))
-    else:
-        frames = [f.convert('RGBA') for f in bma.to_pil(bpc, bpl, bpas, False, False, single_frame=False)]; ticks = 4
-    frames[0].save(out / f'{area}.png', optimize=True)
-    layers = []
-    if len(frames) > 1:
+    render = lambda pals: bma.to_pil(bpc, pals, bpas, False, False, pal_ani=False, single_frame=True)[0].convert('RGBA')
+    def with_palettes(palettes):
+        frame_bpl = copy.deepcopy(bpl); frame_bpl.palettes = palettes; return frame_bpl
+    def strip_layer(frames, durations, suffix):
+        """Layer only the pixels that change, cropped to their bounds, one frame per native step."""
         mask = Image.new('L', frames[0].size, 0)
         for frame in frames[1:]:
             mask = ImageChops.lighter(mask, ImageChops.difference(frames[0], frame).convert('L').point(lambda v: 255 if v else 0))
         bbox = mask.getbbox()
-        if bbox:
-            x, y, right, bottom = bbox; w, h = right - x, bottom - y
-            strip = Image.new('RGBA', (w * len(frames), h))
-            for i, frame in enumerate(frames):
-                piece = frame.crop(bbox); piece.putalpha(mask.crop(bbox)); strip.paste(piece, (i * w, 0))
-            strip.save(out / f'{area}-animation.png', optimize=True)
-            layers.append(dict(src=f'{area}-animation.png', x=x, y=y, w=w, h=h, frames=len(frames), durations=[ticks] * len(frames)))
+        if not bbox: return None
+        x, y, right, bottom = bbox; w, h = right - x, bottom - y
+        strip = Image.new('RGBA', (w * len(frames), h))
+        for i, frame in enumerate(frames):
+            piece = frame.crop(bbox); piece.putalpha(mask.crop(bbox)); strip.paste(piece, (i * w, 0))
+        src = f'{area}-animation{suffix}.png'; strip.save(out / src, optimize=True)
+        return dict(src=src, x=x, y=y, w=w, h=h, frames=len(frames), durations=durations)
+    layers = []
+    base_palettes = bpl.apply_palette_animations(0) if bpl.has_palette_animation else bpl.palettes
+    background = render(with_palettes(base_palettes))
+    # Palette animation: each animated palette cycles at its own native speed, so each gets its own layer.
+    for index, spec in enumerate(bpl.animation_specs or []):
+        if not spec.number_of_frames: continue
+        frames = []
+        for step in range(spec.number_of_frames):
+            palettes = [list(p) for p in base_palettes]; palettes[index] = bpl.apply_palette_animations(step)[index]
+            frames.append(render(with_palettes(palettes)))
+        layer = strip_layer(frames, [spec.duration_per_frame] * spec.number_of_frames, f'-p{index}')
+        if layer: layers.append(layer)
+    # Tile animation (BPA): the decoder steps every animated tile set together; use their native frame timing.
+    if any(bpas):
+        durations = {f.duration_per_frame for b in bpas if b for f in b.frame_info}
+        if len(durations) != 1: raise ValueError('Tile animations with mixed speeds need separate layers')
+        tile_frames = [f.convert('RGBA') for f in bma.to_pil(bpc, with_palettes(base_palettes), bpas, False, False, pal_ani=False, single_frame=False)]
+        if len(tile_frames) > 1:
+            layer = strip_layer(tile_frames, [durations.pop()] * len(tile_frames), '-tiles')
+            if layer: layers.append(layer)
+    background.save(out / f'{area}.png', optimize=True)
+    frames = [background]
     result = dict(background=f'{area}.png', size=list(frames[0].size), layers=layers, sourceRevision=REV, map=map_name, sources=sources,
-                  sceneryAnimation='Native palette animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.',
+                  sceneryAnimation='Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.',
                   credit='Pokémon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork © Nintendo, Creatures, GAME FREAK, Spike Chunsoft.')
     (out / f'{area}-source.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
     return result
