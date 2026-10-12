@@ -6,6 +6,8 @@ export type Area = {
   background: string;
   layers?: {src:string;x:number;y:number;w:number;h:number;frames:number;durations:number[]}[];
   description: string;
+  /** Explorers of Sky map code; absent for Red Rescue Team scenery. */
+  map?: string;
   roster: number[];
   guests?: { id: number; reason: string; basis: string }[];
   guestLimit?: number;

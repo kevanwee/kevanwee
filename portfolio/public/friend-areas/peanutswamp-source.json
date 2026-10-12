@@ -1,0 +1,48 @@
+{
+  "background": "peanutswamp.png",
+  "size": [
+    528,
+    336
+  ],
+  "layers": [
+    {
+      "src": "peanutswamp-palette-5.png",
+      "x": 0,
+      "y": 8,
+      "w": 528,
+      "h": 328,
+      "frames": 12,
+      "durations": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H11P01.bpl",
+      "sha256": "f0bef6f8353686ddf307bcd70f274d36cf23d1afef1ac52f3590668fe2928b98"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H11P01c.bpc",
+      "sha256": "225c515faa5aa5e9b9e8b35d271fa63eeeb162135aa68c40ce2f73fa62432f6c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H11P01m.bma",
+      "sha256": "9e3521fe902de07e6a6b4ee063fa0bd224af0e9457146fd4255eb917475c38d4"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

@@ -1,0 +1,165 @@
+{
+  "background": "icefloebeach.png",
+  "size": [
+    480,
+    288
+  ],
+  "layers": [
+    {
+      "src": "icefloebeach-palette-3.png",
+      "x": 32,
+      "y": 32,
+      "w": 416,
+      "h": 232,
+      "frames": 14,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "icefloebeach-palette-4.png",
+      "x": 152,
+      "y": 248,
+      "w": 80,
+      "h": 40,
+      "frames": 15,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "icefloebeach-palette-5.png",
+      "x": 72,
+      "y": 48,
+      "w": 72,
+      "h": 240,
+      "frames": 32,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "icefloebeach-palette-6.png",
+      "x": 104,
+      "y": 168,
+      "w": 320,
+      "h": 48,
+      "frames": 14,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "icefloebeach-palette-7.png",
+      "x": 0,
+      "y": 112,
+      "w": 480,
+      "h": 168,
+      "frames": 14,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H25P01.bpl",
+      "sha256": "7a0990447d3c349caffa332fb8318ac0d282595e542311c701fb61c8934cbf38"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H25P01c.bpc",
+      "sha256": "b3bdea44bec9aab27f13d5fe0af30e1b545be6945ea5fe6ef00e53917ba46bcc"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H25P01m.bma",
+      "sha256": "59872c3f17db60fa28b02c9f391301d41ee4b18f3de76765378c70e31fce6e59"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

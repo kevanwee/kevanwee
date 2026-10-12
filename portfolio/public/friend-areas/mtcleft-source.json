@@ -1,0 +1,25 @@
+{
+  "background": "mtcleft.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H04P02.bpl",
+      "sha256": "813ef9b342667fe3b2695256a0d7c27cafa106ae47fe0c538e4843a9b17d4d33"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H04P02c.bpc",
+      "sha256": "a7a6f317ad9c15aee3e0487cf4bdc7a1ed765396fb463bb913c70107963c8077"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H04P02m.bma",
+      "sha256": "695880aa0bc7e55ab1304a2fd761a63dbddd9b857b2a389e33ab18c9fbee97ac"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

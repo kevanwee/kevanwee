@@ -1,0 +1,106 @@
+{
+  "background": "stratoslookout.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [
+    {
+      "src": "stratoslookout-palette-4.png",
+      "x": 40,
+      "y": 16,
+      "w": 400,
+      "h": 152,
+      "frames": 6,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "stratoslookout-palette-5.png",
+      "x": 40,
+      "y": 40,
+      "w": 400,
+      "h": 136,
+      "frames": 6,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "stratoslookout-palette-6.png",
+      "x": 24,
+      "y": 168,
+      "w": 432,
+      "h": 136,
+      "frames": 38,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H27P01.bpl",
+      "sha256": "080b0809dd0207fafb8dd8f1499041e3bb5c876cfe30a8abeaa00575f7653910"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H27P01c.bpc",
+      "sha256": "0846ba0e4e38ae5f2aa6d84589b001331743423ab09e20fd61ed6f00f35273c5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H27P01m.bma",
+      "sha256": "c026393348e637759b41623b3130bc997db4929e409014043517b3a0da0fd172"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

@@ -72,7 +72,12 @@ def export(map_name, area, out):
             if layer: layers.append(layer)
     background.save(out / f'{area}.png', optimize=True)
     frames = [background]
-    result = dict(background=f'{area}.png', size=list(frames[0].size), layers=layers, sourceRevision=REV, map=map_name, sources=sources,
+    zones = None
+    if bma.collision:
+        from rescue_maps import zones_from_grid
+        w, h = bma.map_width_camera, bma.map_height_camera
+        zones = zones_from_grid([[bool(bma.collision[y * w + x]) for x in range(w)] for y in range(h)])
+    result = dict(background=f'{area}.png', size=list(frames[0].size), layers=layers, sourceRevision=REV, map=map_name, sources=sources, zones=zones,
                   sceneryAnimation='Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.',
                   credit='Pokémon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork © Nintendo, Creatures, GAME FREAK, Spike Chunsoft.')
     (out / f'{area}-source.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')

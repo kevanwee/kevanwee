@@ -1,0 +1,376 @@
+{
+  "background": "seasidecliff.png",
+  "size": [
+    504,
+    384
+  ],
+  "layers": [
+    {
+      "src": "seasidecliff-animation-p5.png",
+      "x": 0,
+      "y": 120,
+      "w": 160,
+      "h": 6,
+      "frames": 7,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "seasidecliff-animation-tiles.png",
+      "x": 0,
+      "y": 78,
+      "w": 488,
+      "h": 306,
+      "frames": 20,
+      "durations": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    }
+  ],
+  "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+  "map": "h01p99a",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+      "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/h01p99a.bpl",
+      "sha256": "5bbebb80d8166cbfa0837690e2bab4a018b47ee616d40e2f9984df03ddbf83d8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/h01p99a.bpc",
+      "sha256": "dd4140443371a1107dbd4d738778f40f351c6c1f320d38575ec1a7f51f9ea6f7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/h01p99a.bma",
+      "sha256": "62cab002ba2a7b0639204bf2691af51c38f4033963f1a4f483c0d1f714e64907"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/h01p99a1.bpa",
+      "sha256": "2bf69731a65bc9ab897e660b499bcbfc5c49671815b48015dfb553ed9bc6dfd3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/h01p99a5.bpa",
+      "sha256": "f5bb922d4854db7febe3292af53eb80408a2ee3638bb1d04ac3f4f4ee2afa514"
+    }
+  ],
+  "zones": [
+    [
+      [
+        160,
+        128
+      ],
+      [
+        232,
+        128
+      ],
+      [
+        232,
+        136
+      ],
+      [
+        160,
+        136
+      ]
+    ],
+    [
+      [
+        160,
+        136
+      ],
+      [
+        320,
+        136
+      ],
+      [
+        320,
+        152
+      ],
+      [
+        160,
+        152
+      ]
+    ],
+    [
+      [
+        168,
+        120
+      ],
+      [
+        224,
+        120
+      ],
+      [
+        224,
+        128
+      ],
+      [
+        168,
+        128
+      ]
+    ],
+    [
+      [
+        184,
+        152
+      ],
+      [
+        336,
+        152
+      ],
+      [
+        336,
+        160
+      ],
+      [
+        184,
+        160
+      ]
+    ],
+    [
+      [
+        184,
+        160
+      ],
+      [
+        408,
+        160
+      ],
+      [
+        408,
+        168
+      ],
+      [
+        184,
+        168
+      ]
+    ],
+    [
+      [
+        192,
+        112
+      ],
+      [
+        224,
+        112
+      ],
+      [
+        224,
+        120
+      ],
+      [
+        192,
+        120
+      ]
+    ],
+    [
+      [
+        192,
+        168
+      ],
+      [
+        496,
+        168
+      ],
+      [
+        496,
+        176
+      ],
+      [
+        192,
+        176
+      ]
+    ],
+    [
+      [
+        200,
+        176
+      ],
+      [
+        496,
+        176
+      ],
+      [
+        496,
+        184
+      ],
+      [
+        200,
+        184
+      ]
+    ],
+    [
+      [
+        216,
+        184
+      ],
+      [
+        496,
+        184
+      ],
+      [
+        496,
+        192
+      ],
+      [
+        216,
+        192
+      ]
+    ],
+    [
+      [
+        224,
+        192
+      ],
+      [
+        496,
+        192
+      ],
+      [
+        496,
+        216
+      ],
+      [
+        224,
+        216
+      ]
+    ],
+    [
+      [
+        264,
+        112
+      ],
+      [
+        320,
+        112
+      ],
+      [
+        320,
+        136
+      ],
+      [
+        264,
+        136
+      ]
+    ],
+    [
+      [
+        288,
+        216
+      ],
+      [
+        352,
+        216
+      ],
+      [
+        352,
+        232
+      ],
+      [
+        288,
+        232
+      ]
+    ],
+    [
+      [
+        296,
+        232
+      ],
+      [
+        352,
+        232
+      ],
+      [
+        352,
+        240
+      ],
+      [
+        296,
+        240
+      ]
+    ],
+    [
+      [
+        384,
+        152
+      ],
+      [
+        408,
+        152
+      ],
+      [
+        408,
+        160
+      ],
+      [
+        384,
+        160
+      ]
+    ],
+    [
+      [
+        408,
+        216
+      ],
+      [
+        432,
+        216
+      ],
+      [
+        432,
+        240
+      ],
+      [
+        408,
+        240
+      ]
+    ],
+    [
+      [
+        432,
+        152
+      ],
+      [
+        496,
+        152
+      ],
+      [
+        496,
+        168
+      ],
+      [
+        432,
+        168
+      ]
+    ]
+  ],
+  "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+  "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft."
+}

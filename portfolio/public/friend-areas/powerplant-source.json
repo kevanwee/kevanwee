@@ -1,0 +1,78 @@
+{
+  "background": "powerplant.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [
+    {
+      "src": "powerplant-palette-4.png",
+      "x": 328,
+      "y": 120,
+      "w": 32,
+      "h": 16,
+      "frames": 6,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "powerplant-palette-10.png",
+      "x": 24,
+      "y": 144,
+      "w": 432,
+      "h": 160,
+      "frames": 6,
+      "durations": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "src": "powerplant-tiles-0.png",
+      "x": 224,
+      "y": 128,
+      "w": 32,
+      "h": 24,
+      "frames": 6,
+      "durations": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H18P01.bpl",
+      "sha256": "02c3bbfe7fc5c6d4fc9165c6e591bb86f567881cfc6192e431d0895a08a4733b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H18P01c.bpc",
+      "sha256": "a19f6295f904a3bf1e65f96df8e7121d976e1a44746447db3407984c8929d040"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H18P01m.bma",
+      "sha256": "6bdd97342aa49d678ad12ec1b55ec85c5d8f32d799eb6e3d49a88b50290d6183"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H18P011.bpa",
+      "sha256": "cee26c62433c77089538123ef6e6371bce2b56f294ea6f6d6f276fb556860983"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

@@ -1,0 +1,25 @@
+{
+  "background": "ravagedfield.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H28P01.bpl",
+      "sha256": "4442342f662798e44f1a2a2771ee8bda1798e3536c3cad63e320a797ee7a3f0a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H28P01c.bpc",
+      "sha256": "5d4ca49290479f575266fdcedc0984064060b31feef0888135d0dd95646aff32"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H28P01m.bma",
+      "sha256": "dbe210b816540f4f5b309ac29661037e4401706474525ce05c688f4ebb2d8c01"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

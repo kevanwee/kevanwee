@@ -1,0 +1,82 @@
+{
+  "background": "ancientrelic.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [
+    {
+      "src": "ancientrelic-palette-0.png",
+      "x": 112,
+      "y": 216,
+      "w": 256,
+      "h": 40,
+      "frames": 18,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "ancientrelic-palette-5.png",
+      "x": 120,
+      "y": 224,
+      "w": 240,
+      "h": 32,
+      "frames": 18,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H22P01.bpl",
+      "sha256": "7ddee8801984a844bc13177c9b654ed372be26d96754fa4d1b2525f39bdd142d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H22P01c.bpc",
+      "sha256": "d4e1177d9e287044a06afadfbbf19e453691d5ab0b45f0acd645a94d1773c6ea"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H22P01m.bma",
+      "sha256": "e8f49e9f313333c30c86f7614d32611ccf07c189a9cb01096bcf404d250ecc45"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

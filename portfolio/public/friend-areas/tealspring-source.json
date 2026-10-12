@@ -1,0 +1,74 @@
+{
+  "background": "tealspring.png",
+  "size": [
+    312,
+    336
+  ],
+  "layers": [
+    {
+      "src": "tealspring-animation-p13.png",
+      "x": 0,
+      "y": 178,
+      "w": 312,
+      "h": 149,
+      "frames": 32,
+      "durations": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    }
+  ],
+  "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+  "map": "d56p12a",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+      "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d56p12a.bpl",
+      "sha256": "dc266c7495e8bb060a4e0f7d2d265cf83544d4efcd00d329878d6303a3af451c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d56p12a.bpc",
+      "sha256": "940fc11116188042bfc63bcccac94fff0a8e5e34614cc1467f954ed36a19ca3e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d56p12a.bma",
+      "sha256": "c6d07f526383bfd28cb78b1059bc122cbbe5048b5e9fac8a9d21945daab8a055"
+    }
+  ],
+  "zones": null,
+  "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+  "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft."
+}

@@ -1,0 +1,25 @@
+{
+  "background": "safari.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P04.bpl",
+      "sha256": "e0fe293267fb83ddaafeb7dc1cf9a1f0a77a08b644ab9a754c5976c5cd585885"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P04c.bpc",
+      "sha256": "b63aa280ed0c7cdf5d06376985f70bdf73dbabec0f5de34fd819ba8a7a3ad630"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P04m.bma",
+      "sha256": "d9085af52b96676377fa638230e57eb0ce5876b7cbf44d6d14f3709ff80ad646"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

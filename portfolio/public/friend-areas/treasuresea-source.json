@@ -1,0 +1,25 @@
+{
+  "background": "treasuresea.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P02.bpl",
+      "sha256": "a1cbfb5b8041e3b3bf2ec21c3bb8a365cc6622abce750dab73b113cf8ec2bbba"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P02c.bpc",
+      "sha256": "c53cffd3435f1a0be94dea3d92ecacfcba1bcef9fe7c541ea15c73587994aceb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P02m.bma",
+      "sha256": "0082f51d89986379633bc843d6cfee753352f3737ea58fc65b1ad8f867b72596"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

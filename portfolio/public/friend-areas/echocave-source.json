@@ -1,0 +1,44 @@
+{
+  "background": "echocave.png",
+  "size": [
+    504,
+    360
+  ],
+  "layers": [
+    {
+      "src": "echocave-tiles-0.png",
+      "x": 104,
+      "y": 136,
+      "w": 296,
+      "h": 200,
+      "frames": 4,
+      "durations": [
+        7,
+        7,
+        7,
+        7
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P01.bpl",
+      "sha256": "71dadf385bc6264c82f22d78b58c73fd3d8c8f336698fecd4786451bf0534087"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P01c.bpc",
+      "sha256": "735cb372dc1285a23f771ae0a032567dbf721ff3e7ccea81c2e83acd4881f320"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P01m.bma",
+      "sha256": "9a3bb649482b81410d6466396cafe924bcb9e1f0a9127cea9dc024b82e4b9400"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P011.bpa",
+      "sha256": "da66d06165682bb157181a55d5cfc8e94bb42481694eb12069867c65b2e3f9e3"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

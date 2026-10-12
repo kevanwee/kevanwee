@@ -1,0 +1,25 @@
+{
+  "background": "crypticcave.png",
+  "size": [
+    360,
+    312
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P02.bpl",
+      "sha256": "c37038d561bdeffc30abd57680fd1ad6a139be782bc1da7ce04a178a0f795627"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P02c.bpc",
+      "sha256": "fa1b47e98c5c4b236d421b7a40d094d6e8d138835f5fa83de079513eb1faf8f2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P02m.bma",
+      "sha256": "c31b8854ff734217a362955b7856d748303cbc4065183dd7aaaa6bbb92295c25"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

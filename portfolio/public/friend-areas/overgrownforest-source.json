@@ -1,0 +1,25 @@
+{
+  "background": "overgrownforest.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P03.bpl",
+      "sha256": "953943eca68881ea79e536699c4d19d32c6a20c150b8b16a3917e8e53bf24573"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P03c.bpc",
+      "sha256": "6a399be14b68bdf03b365c056aa5cee967804a142a6db46e0454761110ebc1bb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P03m.bma",
+      "sha256": "06e413db44b965c2fd9317e575a7a7970220dbb7eb83e83a21f5828462c80669"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

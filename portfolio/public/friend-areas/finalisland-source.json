@@ -1,0 +1,68 @@
+{
+  "background": "finalisland.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [
+    {
+      "src": "finalisland-palette-0.png",
+      "x": 0,
+      "y": 96,
+      "w": 480,
+      "h": 216,
+      "frames": 4,
+      "durations": [
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "finalisland-palette-5.png",
+      "x": 72,
+      "y": 216,
+      "w": 264,
+      "h": 96,
+      "frames": 18,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P04.bpl",
+      "sha256": "65150cac8ef7d7a87f1e5af8039562d96da058ef34d1da32a4fe3e22e36e03a9"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P04c.bpc",
+      "sha256": "8352c3346bbf98323f50267dec1a0b25931d6e916a8c8105f76a4c6533c23146"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P04m.bma",
+      "sha256": "4940025f287234958863cfa783562fe7670ada07a75d49e38c07bbe3b3088d9a"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

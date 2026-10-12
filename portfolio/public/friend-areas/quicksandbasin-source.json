@@ -1,0 +1,143 @@
+{
+  "background": "quicksandbasin.png",
+  "size": [
+    600,
+    600
+  ],
+  "layers": [
+    {
+      "src": "quicksandbasin-animation-p3.png",
+      "x": 69,
+      "y": 0,
+      "w": 462,
+      "h": 128,
+      "frames": 23,
+      "durations": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "src": "quicksandbasin-animation-p6.png",
+      "x": 200,
+      "y": 16,
+      "w": 200,
+      "h": 64,
+      "frames": 23,
+      "durations": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "src": "quicksandbasin-animation-p10.png",
+      "x": 146,
+      "y": 160,
+      "w": 308,
+      "h": 55,
+      "frames": 15,
+      "durations": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "src": "quicksandbasin-animation-p11.png",
+      "x": 32,
+      "y": 59,
+      "w": 552,
+      "h": 129,
+      "frames": 10,
+      "durations": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    }
+  ],
+  "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+  "map": "d15p41a",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+      "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d15p41a.bpl",
+      "sha256": "c6fb5ecfe44fcbbbcee40c9e9c3e434f8bb80f71d2dc191bf5ffade6b0b7440b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d15p41a.bpc",
+      "sha256": "0f22d7c157d06572a06a589dda984a306f94d5c4622b7298a4dc6d1eb2c6e19e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d15p41a.bma",
+      "sha256": "b6bef656e4b5614bcfa0c6f5c39cd34f7c91a985d1f76860a6369573994d04b8"
+    }
+  ],
+  "zones": null,
+  "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+  "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft."
+}

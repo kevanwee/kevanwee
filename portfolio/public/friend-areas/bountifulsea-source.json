@@ -1,0 +1,25 @@
+{
+  "background": "bountifulsea.png",
+  "size": [
+    456,
+    240
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P01.bpl",
+      "sha256": "18f233ebe4dbe13508a976c01317195c6051515456ab82301621a8fde4f9efc9"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P01c.bpc",
+      "sha256": "eaa641880950cf5d988dbadbdcd9874040aeef8261598bc0cea5c05a7975ee6e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P01m.bma",
+      "sha256": "dd3ac8e78f135040ed66c889c090ad87a87d1ee6523ef445174f7a1dfbbca2ac"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

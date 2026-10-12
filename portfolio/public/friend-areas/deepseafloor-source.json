@@ -1,0 +1,25 @@
+{
+  "background": "deepseafloor.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H02P01.bpl",
+      "sha256": "ca8e8052d183d408f9d29fb87f599ad286c301f803d7d22cc74f687f5468c373"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H02P01c.bpc",
+      "sha256": "c306d4bc08974a79ebd5627c7b61b249c788a5c1adb0826e62a6ac5134fac935"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H02P01m.bma",
+      "sha256": "78f236c08fb5be30b94130cad535b7f8392c32c3c6e56da2e3650f6d8d982ee9"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

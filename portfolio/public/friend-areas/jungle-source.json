@@ -1,0 +1,95 @@
+{
+  "background": "jungle.png",
+  "size": [
+    456,
+    336
+  ],
+  "layers": [
+    {
+      "src": "jungle-palette-2.png",
+      "x": 136,
+      "y": 40,
+      "w": 184,
+      "h": 88,
+      "frames": 13,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "jungle-palette-4.png",
+      "x": 112,
+      "y": 80,
+      "w": 232,
+      "h": 64,
+      "frames": 13,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "jungle-palette-8.png",
+      "x": 144,
+      "y": 128,
+      "w": 168,
+      "h": 16,
+      "frames": 13,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H14P01.bpl",
+      "sha256": "c99688532460059c99a53c646b6ccf4f3dd88cc629531c9f2c37435f25f82ee3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H14P01c.bpc",
+      "sha256": "1a4705544b451bf6d8cf8c053a5c879b1dc5899c8b5cc7c7f744df7fb5d4d22e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H14P01m.bma",
+      "sha256": "742872b345c6305f2ee4bf45381811102be4644dd684576bab41a333870da475"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

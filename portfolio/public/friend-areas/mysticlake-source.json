@@ -1,0 +1,65 @@
+{
+  "background": "mysticlake.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [
+    {
+      "src": "mysticlake-palette-1.png",
+      "x": 0,
+      "y": 0,
+      "w": 480,
+      "h": 176,
+      "frames": 8,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "mysticlake-palette-9.png",
+      "x": 24,
+      "y": 32,
+      "w": 432,
+      "h": 128,
+      "frames": 11,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H10P01.bpl",
+      "sha256": "48ef3cc2d2e149a1775807a15f0f9311a63bfa6836da3a1504b9f54d99380453"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H10P01c.bpc",
+      "sha256": "dfc91c624fdcd2ead2452be47341851b5593fd5b72cb18df016ef94529584090"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H10P01m.bma",
+      "sha256": "5692a37649164360619219902e92b6a1443f8c3e1ac194f3c9845e7d0ce26bc6"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

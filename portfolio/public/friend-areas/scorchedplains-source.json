@@ -1,0 +1,88 @@
+{
+  "background": "scorchedplains.png",
+  "size": [
+    456,
+    336
+  ],
+  "layers": [
+    {
+      "src": "scorchedplains-palette-5.png",
+      "x": 0,
+      "y": 120,
+      "w": 456,
+      "h": 216,
+      "frames": 9,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "scorchedplains-palette-6.png",
+      "x": 24,
+      "y": 128,
+      "w": 408,
+      "h": 200,
+      "frames": 9,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "scorchedplains-tiles-0.png",
+      "x": 0,
+      "y": 96,
+      "w": 456,
+      "h": 240,
+      "frames": 10,
+      "durations": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P05.bpl",
+      "sha256": "7d1c6ab3af3349c17c1b0818d2789253e5e69f12b4c9185b00764ffd2b015320"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P05c.bpc",
+      "sha256": "b1ccb1c92cdd683c3655ca8e8d174bc8b24abd889e43f8153a22dc36dfea90dd"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P05m.bma",
+      "sha256": "0546b3202f550f0a37a173fbc470fc33f67c8f509b000110747e08414fcd7856"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P051.bpa",
+      "sha256": "08df0e56f2d8924b659c758288178fe43610e931d7e132fb6101121cd4a98f3e"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}
