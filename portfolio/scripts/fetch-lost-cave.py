@@ -15,10 +15,24 @@ SPECIES = {
 
 # 404 scenes, exported by scripts/sky_scenery.py (d04p31a starlitlake, d17p31a crystallakeshore) into public/lost-cave.
 # One is chosen per visit; Psyduck walks the route (map pixels, feet on the floor) and looks around at each stop.
+# Diancie and its Carbink keep watch by the crystals (facing rows: 0 down, 1 down-right, 7 down-left); their sheets are
+# the Crystal Crossing Friend Area's (public/friend-areas/sprites), shared rather than copied.
 SCENES = {
-    'starlitlake': dict(name='a starlit cave lake', route=[[255, 396], [250, 320], [214, 250], [262, 202], [306, 250], [266, 322]]),
-    'crystallakeshore': dict(name='a crystal lakeshore', route=[[60, 204], [150, 232], [250, 212], [312, 250], [200, 272], [110, 262]]),
+    'starlitlake': dict(name='a starlit cave lake',
+        route=[[255, 396], [250, 322], [204, 266], [254, 244], [302, 266], [266, 322]],
+        residents=[dict(key='diancie', at=[262, 182], direction=0), dict(key='carbink', at=[204, 212], direction=1),
+                   dict(key='carbink', at=[318, 214], direction=7), dict(key='carbink', at=[226, 168], direction=1)]),
+    'crystallakeshore': dict(name='a crystal lakeshore',
+        route=[[60, 252], [150, 264], [250, 252], [312, 270], [200, 284], [110, 278]],
+        residents=[dict(key='diancie', at=[182, 186], direction=0), dict(key='carbink', at=[112, 182], direction=1),
+                   dict(key='carbink', at=[254, 180], direction=7), dict(key='carbink', at=[318, 206], direction=7)]),
 }
+# Crystal Crossing's scenery is the Friend Area's own export, read from public/friend-areas.
+SCENES['crystalcrossing'] = dict(name='Crystal Crossing', base='/friend-areas/',
+    route=[[214, 336], [300, 394], [392, 336], [352, 304], [248, 304]],
+    residents=[dict(key='diancie', at=[300, 274], direction=0), dict(key='carbink', at=[226, 264], direction=1),
+               dict(key='carbink', at=[378, 264], direction=7), dict(key='carbink', at=[158, 222], direction=1)])
+FRIEND_SPRITES = {'diancie': '719', 'carbink': '703'}
 
 def fetch(rel, path):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -65,8 +79,13 @@ if __name__ == '__main__':
     sprites = {key: species(key, *spec, names) for key, spec in SPECIES.items()}
     scenes = {}
     for key, scene in SCENES.items():
-        source = json.loads((ROOT / f'{key}-source.json').read_text(encoding='utf-8'))
+        folder = ROOT.parent / 'friend-areas' if scene.get('base') == '/friend-areas/' else ROOT
+        source = json.loads((folder / f'{key}-source.json').read_text(encoding='utf-8'))
         scenes[key] = dict(source, **scene)
-    catalog = dict(version=2, spriteRevision=REV, scenes=scenes, sprites=sprites)
+    for sprite in sprites.values(): sprite['base'] = '/lost-cave/'
+    friends = json.loads((ROOT.parent / 'friend-areas' / 'catalog.json').read_text(encoding='utf-8'))['sprites']
+    for key, dex in FRIEND_SPRITES.items():
+        sprites[key] = dict(friends[dex], base='/friend-areas/')
+    catalog = dict(version=3, spriteRevision=REV, scenes=scenes, sprites=sprites)
     (ROOT / 'catalog.json').write_text(json.dumps(catalog, indent=2) + '\n', encoding='utf-8')
-    print({k: (v['credits'], list(v['animations'])) for k, v in sprites.items()})
+    print({k: (v.get('credits', 'see friend-areas'), list(v['animations'])) for k, v in sprites.items()})

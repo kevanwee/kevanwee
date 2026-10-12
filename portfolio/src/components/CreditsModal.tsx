@@ -35,7 +35,7 @@ const CREDITS = [
     category: "Explorers scenery",
     name: "pret/pmd-sky · skytemple-files",
     href: "https://github.com/pret/pmd-sky",
-    description: "Crystal Crossing (its Friend Area) and the 404 page's starlit cave lake and crystal lakeshore (Explorers of Sky), with their native palette and tile animation, decoded from the decompilation's map data with skytemple-files",
+    description: "Crystal Crossing (its Friend Area) and the 404 page's starlit cave lake and crystal lakeshore (Explorers of Sky), with their native palette and tile animation, decoded from the decompilation's map data with skytemple-files. The 404 page's shiny Psyduck sprite is by ShyStarryRain and another SpriteCollab contributor",
   },
   {
     category: "Item sprites",
