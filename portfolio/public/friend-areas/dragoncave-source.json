@@ -1,0 +1,25 @@
+{
+  "background": "dragoncave.png",
+  "size": [
+    456,
+    312
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P03.bpl",
+      "sha256": "e721652d5999ac66aa08bb5659a71fa6026ee3e068b7cb43311a51a2b24a2c9e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P03c.bpc",
+      "sha256": "5f2d6b97884941d9db606e959229dbe9c788128b90dded6343831237b592c9e0"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P03m.bma",
+      "sha256": "a2a7f662dd515e996255b8b50bfd27c862090df52cd477dcc116401c96cc6a20"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

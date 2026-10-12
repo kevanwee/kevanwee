@@ -1,0 +1,25 @@
+{
+  "background": "mtdeepgreen.png",
+  "size": [
+    504,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H04P01.bpl",
+      "sha256": "08aeed52f82c34f9b1bcfc0c19263569b3d6ae26023c9fc3f641d24ee0861156"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H04P01c.bpc",
+      "sha256": "bfbaa79d614f7165f9d15e66054382e30f96f15961bb23b4b6ac10aed03f2426"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H04P01m.bma",
+      "sha256": "79a73f053e55d55280725942f31dcfc7f53f320af1d5a425807e8262511fb5eb"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

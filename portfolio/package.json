@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "test:world": "node scripts/test-world.cjs",
+    "test:friend-areas": "node scripts/test-friend-areas.mjs",
     "test:overworld": "node scripts/test-overworld.cjs",
     "test:overworld:browser": "node scripts/test-overworld-browser.cjs",
     "test:yveltal:browser": "node scripts/test-yveltal-browser.cjs",

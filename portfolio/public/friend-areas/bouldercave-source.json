@@ -1,0 +1,25 @@
+{
+  "background": "bouldercave.png",
+  "size": [
+    504,
+    360
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P04.bpl",
+      "sha256": "ea22df306da173ccc95c7e3d71fe540985a38e18459d32b35ef8a27721012316"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P04c.bpc",
+      "sha256": "dcd87367f44f9c34a065988a3eb3d6e08975291f1e3a14c6be05331e0f92341b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H13P04m.bma",
+      "sha256": "74b146f925f5cc325aec2a9da5d2da9b91103c14d60b62e25ac9dc1d8f1d0587"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

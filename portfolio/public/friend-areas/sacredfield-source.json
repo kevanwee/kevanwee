@@ -1,0 +1,25 @@
+{
+  "background": "sacredfield.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P06.bpl",
+      "sha256": "2b37129110e230461ed15622237b0a88913a91c24f1ebae238f829945f7e120c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P06c.bpc",
+      "sha256": "062059ffe17f6a454063858db0e06c90aec639f68b445bd0ac50bb4d47888856"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P06m.bma",
+      "sha256": "a58dce5c1a8e421acd83b8c0473aba433d418ec08e2594f2de08838ad6c39fb7"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

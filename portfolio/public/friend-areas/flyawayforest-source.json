@@ -1,0 +1,62 @@
+{
+  "background": "flyawayforest.png",
+  "size": [
+    456,
+    312
+  ],
+  "layers": [
+    {
+      "src": "flyawayforest-palette-3.png",
+      "x": 0,
+      "y": 8,
+      "w": 456,
+      "h": 288,
+      "frames": 8,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "flyawayforest-palette-4.png",
+      "x": 0,
+      "y": 104,
+      "w": 456,
+      "h": 208,
+      "frames": 8,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P02.bpl",
+      "sha256": "d3171144fb9f0e2e5863c90a287aaed590d10623b341f865b981a55ccb7cd466"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P02c.bpc",
+      "sha256": "b2c199cc209ecbac367797c803efa118b4f254bfc4f8a0e7e54a3937f4497a6c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P02m.bma",
+      "sha256": "ccc2bc82c4388e7bc7fb8ba897c441748f7479e56b765a1a246d3d8e13c47826"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

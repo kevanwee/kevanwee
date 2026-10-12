@@ -103,4 +103,9 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 
 - PC forms (11 October 2026): select a left-panel place, click a right-panel species, then pick its form; remove Use cursor/Choose. Import every available PMD form for residents. Usable here only applies to the supported custom cursors. Keep the native pointer visible over the PC and prevent sidebar clipping. Review, merge and redeploy both sites; skip Voracity CI for this release because private Actions minutes are exhausted.
 - Explorer team (11 October 2026): the README card and Voracity show a non-shiny Mystery Dungeon pair, Squirtle leading and Treecko partnering (previously Charcadet and Fuecoco). Keep both surfaces identical.
-- 12 October 2026: Crystal Crossing (Explorers of Sky map d17p11a, native palette animation via pret/pmd-sky + skytemple-files) is a Friend Area with Diancie and Carbink; the 404 page shows the same cave with only a lost shiny Psyduck. Never source a ROM online; decompilation data or the owner's own dump only.
+- 12 October 2026: Crystal Crossing (Explorers of Sky map d17p11a, native palette animation via pret/pmd-sky + skytemple-files) is a Friend Area with Diancie and Carbink. The 404 page is just "404 / Looks like we're lost / map / Back home", no credits: a random one of Crystal Crossing, the starlit cave lake or the crystal lakeshore, with Diancie, three Carbink and a lost shiny Psyduck. Never source a ROM online; decompilation data or the owner's own dump only.
+
+## Friend Area expansion (2026-10-12)
+- Adding Friend Areas never removes or rewrites the Red Rescue Team ones the owner built; existing areas may only gain visitors.
+- Voracity mirrors the portfolio's Friend Areas (same catalog and scripts); keep both on even footing in matching PRs.
+- Later-generation Pokémon fill areas by family and habitat; species without a SpriteCollab sprite are kept in data and skipped.

@@ -1,0 +1,98 @@
+{
+  "background": "tadpolepond.png",
+  "size": [
+    504,
+    336
+  ],
+  "layers": [
+    {
+      "src": "tadpolepond-palette-6.png",
+      "x": 0,
+      "y": 88,
+      "w": 296,
+      "h": 176,
+      "frames": 10,
+      "durations": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "src": "tadpolepond-palette-10.png",
+      "x": 32,
+      "y": 32,
+      "w": 440,
+      "h": 136,
+      "frames": 16,
+      "durations": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "src": "tadpolepond-palette-11.png",
+      "x": 0,
+      "y": 96,
+      "w": 504,
+      "h": 208,
+      "frames": 16,
+      "durations": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H09P01.bpl",
+      "sha256": "c4f05c8dc5286f0c8d10d38e284e56f80ae7685ffdb31ed2fbb09cfc59d8b794"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H09P01c.bpc",
+      "sha256": "48fb305df1edbd493a733b01983c40a4fbce134dc42f4a76bfe57fe50f31d80d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H09P01m.bma",
+      "sha256": "f264fd07a837916ab74797dafb7d41eaf6335a5dbf9af671fea97d0be4df6c46"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

@@ -1,0 +1,69 @@
+{
+  "background": "darknessridge.png",
+  "size": [
+    456,
+    312
+  ],
+  "layers": [
+    {
+      "src": "darknessridge-tiles-0.png",
+      "x": 0,
+      "y": 0,
+      "w": 456,
+      "h": 32,
+      "frames": 29,
+      "durations": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H23P01.bpl",
+      "sha256": "293f655e773bee463ad23dff4abdea5c6854300c9b9007622781a7705a23abeb"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H23P01c.bpc",
+      "sha256": "99e3049fcdba20d363489321e1d784b28e8d338c2722eeb6d6a2ff5febe2ed92"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H23P01m.bma",
+      "sha256": "7a6f5674984b2f655e37249233b64fee932755a3c03673918ba3b748724f41b4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H23P011.bpa",
+      "sha256": "9ec82c4c17c5182519558083875230622c7b930edf65a09310c295d08d47e3a0"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

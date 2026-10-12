@@ -1,0 +1,130 @@
+{
+  "background": "rubadubriver.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [
+    {
+      "src": "rubadubriver-palette-2.png",
+      "x": 48,
+      "y": 0,
+      "w": 376,
+      "h": 120,
+      "frames": 11,
+      "durations": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "src": "rubadubriver-palette-6.png",
+      "x": 48,
+      "y": 48,
+      "w": 376,
+      "h": 88,
+      "frames": 12,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "rubadubriver-palette-9.png",
+      "x": 120,
+      "y": 128,
+      "w": 264,
+      "h": 152,
+      "frames": 14,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "rubadubriver-palette-10.png",
+      "x": 0,
+      "y": 48,
+      "w": 480,
+      "h": 288,
+      "frames": 7,
+      "durations": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "src": "rubadubriver-tiles-0.png",
+      "x": 320,
+      "y": 104,
+      "w": 40,
+      "h": 40,
+      "frames": 6,
+      "durations": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H08P01.bpl",
+      "sha256": "ce23f35466c7d31ed11d7fc45735a46795f204c70ace05f81bd624d584c6c98c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H08P01c.bpc",
+      "sha256": "7d1181e561cb53cfb210a2d09c086ac186a139ef830d019381af3830122decd2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H08P01m.bma",
+      "sha256": "bb972e4be8ea6a6bd9d89d5ccb030459a3b96f693f289a464cb4c88ae6d5c678"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H08P011.bpa",
+      "sha256": "1800d7bb9a2ee6148da120a0f202f74f63bdd456c088077b53e77ec8891fd0e1"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

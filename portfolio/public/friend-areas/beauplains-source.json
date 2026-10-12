@@ -1,0 +1,66 @@
+{
+  "background": "beauplains.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [
+    {
+      "src": "beauplains-palette-7.png",
+      "x": 160,
+      "y": 96,
+      "w": 160,
+      "h": 24,
+      "frames": 10,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "src": "beauplains-palette-8.png",
+      "x": 192,
+      "y": 104,
+      "w": 40,
+      "h": 16,
+      "frames": 10,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P02.bpl",
+      "sha256": "955533b6624a69d4d0104218d63299bcf0045117d5fd145491083e9cdfa39374"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P02c.bpc",
+      "sha256": "4694b3af16aa35bcdfbbe978d7847f5f69679178e016962100aa663f657bf29d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P02m.bma",
+      "sha256": "9d5c4058b45490e6124e3428c8976c44e73a7f282d5f46b8f710a51f836becc5"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

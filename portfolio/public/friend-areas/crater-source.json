@@ -1,0 +1,147 @@
+{
+  "background": "crater.png",
+  "size": [
+    456,
+    312
+  ],
+  "layers": [
+    {
+      "src": "crater-palette-3.png",
+      "x": 0,
+      "y": 56,
+      "w": 456,
+      "h": 256,
+      "frames": 20,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "crater-palette-7.png",
+      "x": 56,
+      "y": 72,
+      "w": 344,
+      "h": 240,
+      "frames": 23,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "crater-palette-8.png",
+      "x": 216,
+      "y": 152,
+      "w": 24,
+      "h": 24,
+      "frames": 27,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "crater-tiles-0.png",
+      "x": 72,
+      "y": 144,
+      "w": 312,
+      "h": 48,
+      "frames": 7,
+      "durations": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        31
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H19P01.bpl",
+      "sha256": "c785e4435427cccb5c618791a591ca75e3a5622ed430e4bb122e22f202979249"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H19P01c.bpc",
+      "sha256": "b74780cdd21c6b844b1936935de5d6e0d0401e36f0eb68c0dd62a511ce4cf143"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H19P01m.bma",
+      "sha256": "84baa67e7ca0c9c5b425ac22bfbe7c8eff6fd9d33188a147e2c3821e224ba87a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H19P011.bpa",
+      "sha256": "f64c7a9b660434ebbe917155665a5a5c1ab7ba566d8cbbd5df019fb882342bfa"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

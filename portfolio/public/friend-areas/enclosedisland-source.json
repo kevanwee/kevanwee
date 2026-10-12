@@ -1,0 +1,116 @@
+{
+  "background": "enclosedisland.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [
+    {
+      "src": "enclosedisland-palette-1.png",
+      "x": 120,
+      "y": 80,
+      "w": 240,
+      "h": 128,
+      "frames": 12,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "enclosedisland-palette-7.png",
+      "x": 88,
+      "y": 32,
+      "w": 304,
+      "h": 288,
+      "frames": 12,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "enclosedisland-palette-8.png",
+      "x": 112,
+      "y": 56,
+      "w": 256,
+      "h": 152,
+      "frames": 12,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "enclosedisland-palette-9.png",
+      "x": 0,
+      "y": 8,
+      "w": 480,
+      "h": 328,
+      "frames": 14,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P03.bpl",
+      "sha256": "4f1b327c2028b71253fac0723517c12fd8eaf3cd7cb75591947b43be3e616fe0"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P03c.bpc",
+      "sha256": "28cc22d4707c51f2461809e2506d0a0f48a2f8bae4ac20f39d9346c98123d0b4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P03m.bma",
+      "sha256": "85a7e625c1812d859e6b5c507a791af5a0d57c394eb2069103ac337e8f431648"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

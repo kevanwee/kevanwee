@@ -1,0 +1,25 @@
+{
+  "background": "energeticforest.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P04.bpl",
+      "sha256": "6587ba134b136a8984151fa33ec80f27282843cf8257ad72f26a60048f4572e0"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P04c.bpc",
+      "sha256": "70645c2bec0fa1c28d84586dc70ec5cbd66784790d3092c3ddc98022ceaf0349"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P04m.bma",
+      "sha256": "06d98c70444fa2bb157824cd104c9280737596d5039f7176dafe4746cdcd7fd5"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

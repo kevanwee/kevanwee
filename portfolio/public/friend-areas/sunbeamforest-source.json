@@ -1,0 +1,75 @@
+{
+  "background": "sunbeamforest.png",
+  "size": [
+    600,
+    600
+  ],
+  "layers": [
+    {
+      "src": "sunbeamforest-animation-p13.png",
+      "x": 241,
+      "y": 282,
+      "w": 118,
+      "h": 20,
+      "frames": 16,
+      "durations": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "src": "sunbeamforest-animation-tiles.png",
+      "x": 145,
+      "y": 39,
+      "w": 310,
+      "h": 271,
+      "frames": 3,
+      "durations": [
+        10,
+        10,
+        10
+      ]
+    }
+  ],
+  "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+  "map": "p14p01a",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+      "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/p14p01a.bpl",
+      "sha256": "cfbf2218a7ab591c951e7eeeaa4fe610a8597384754d810870e33038a72e8d6e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/p14p01a.bpc",
+      "sha256": "1dd6c6d93c7d0582ad4efc096666f25091771ea4416967b9723fd80575a685d2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/p14p01a.bma",
+      "sha256": "1e9a352ed4ee89beb8231a14934db6b2d05cdd293b1cfe59b08dc66bd57ab3ac"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/p14p01a1.bpa",
+      "sha256": "0474b0d1815390b68735c1c7adb9b63b9edc3ec9d831c4defa9cec8459fb3b96"
+    }
+  ],
+  "zones": null,
+  "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+  "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft."
+}

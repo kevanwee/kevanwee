@@ -1,0 +1,67 @@
+{
+  "background": "poisonswamp.png",
+  "size": [
+    456,
+    336
+  ],
+  "layers": [
+    {
+      "src": "poisonswamp-palette-3.png",
+      "x": 8,
+      "y": 0,
+      "w": 432,
+      "h": 336,
+      "frames": 8,
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "src": "poisonswamp-tiles-0.png",
+      "x": 8,
+      "y": 8,
+      "w": 416,
+      "h": 320,
+      "frames": 9,
+      "durations": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H12P01.bpl",
+      "sha256": "463b2268e267a78ed5ac92fe0d68111d729a889938095f70ed12dada22be5210"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H12P01c.bpc",
+      "sha256": "ea55a92c219cc135a64b23eca1cd40b998e92b283c681c670d51d8a47bb566db"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H12P01m.bma",
+      "sha256": "d2b35e9a45569d9e29e0fdf88b120cdf010c061d5c9aa18a4c636f03c8bd1d8f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H12P011.bpa",
+      "sha256": "b450f22e765a0ed9c1fb3463732c5e27097aa0a74721ecfb988e3b8fa315ba34"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

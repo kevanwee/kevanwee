@@ -1,0 +1,71 @@
+{
+  "background": "mistriseforest.png",
+  "size": [
+    456,
+    312
+  ],
+  "layers": [
+    {
+      "src": "mistriseforest-palette-7.png",
+      "x": 192,
+      "y": 96,
+      "w": 88,
+      "h": 104,
+      "frames": 10,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "mistriseforest-palette-8.png",
+      "x": 176,
+      "y": 80,
+      "w": 104,
+      "h": 112,
+      "frames": 15,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P01.bpl",
+      "sha256": "07dd3c8a83a642bf150201de43bd70354486a99ce68d117df179a59258e0fc68"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P01c.bpc",
+      "sha256": "5de385ed2c1483f6a23010689cdf24aab1a8db7ef9f71702373322227800413a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H07P01m.bma",
+      "sha256": "137666ad92eae1a94a77c59e7a9ce1017018e1aa3f8df64f7d4aa3b2ab782a55"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

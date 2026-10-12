@@ -1,0 +1,25 @@
+{
+  "background": "magneticquarry.png",
+  "size": [
+    480,
+    312
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H28P02.bpl",
+      "sha256": "e5de65e4108bc91bdf4c385b5ded3ef044dfe505b23e887b00e0381b69b6934c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H28P02c.bpc",
+      "sha256": "a2128221b0a5e5d6680a26a4202e24cd1b9e4d0435261f1a01b98c33815b7e15"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H28P02m.bma",
+      "sha256": "fb5805b6e55d20c39bcd009ffddec72fa806d7fa0b64f24366e1f57dfe64b32d"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

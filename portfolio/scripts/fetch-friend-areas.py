@@ -133,10 +133,102 @@ def add_sky_areas():
     (ROOT/'catalog.json').write_text(json.dumps(catalog, indent=2)+'\n', encoding='utf-8')
     print(f'Merged {len(SKY_AREAS)} Explorers area(s) and {len(items)} species.')
 
+def available(item):
+    """species(), or None when SpriteCollab has no usable Idle sheet at the pinned revision."""
+    try: return species(item)
+    except Exception as error:
+        print('  skipped', item, type(error).__name__); return None
+
+def expand():
+    """Add every remaining Rescue Team area, the Explorers shortlist and later-generation visitors.
+    Existing areas keep their scenery, zones and natives; they only gain visitors."""
+    import re
+    from friend_area_data import RESCUE, SKY, SKY_ZONES, VISITORS
+    from rescue_maps import export as rescue_export
+    entries = json.loads((ROOT.parent/'pokemon-pc/catalog.json').read_text(encoding='utf-8'))['entries']
+    norm = lambda s: re.sub(r'[^a-z0-9]', '', s.lower().replace('é', 'e'))
+    dex = {}
+    for e in entries:
+        if e['form'] == 'Normal': dex.setdefault(norm(e['name']), (e['dex'], e['name']))
+    natives = json.loads(urllib.request.urlopen(
+        'https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/monster/monster_data.json', timeout=60).read())
+    catalog = json.loads((ROOT/'catalog.json').read_text(encoding='utf-8'))
+    known = {a['id'] for a in catalog['areas']}
+    cache = ROOT.parent.parent/'artifacts/scenery-sources'
+    names = {'MT_DEEPGREEN': 'Mt. Deepgreen', 'MT_CLEFT': 'Mt. Cleft', 'MT_DISCIPLINE': 'Mt. Discipline', 'RUB_A_DUB_RIVER': 'Rub-a-Dub River',
+             'MIST_RISE_FOREST': 'Mist-Rise Forest', 'AGED_CHAMBER_AN': 'Aged Chamber A-N', 'AGED_CHAMBER_O_EXCLAIM': 'Aged Chamber O-?'}
+    added = []
+    for key, description in RESCUE.items():
+        area = key.lower().replace('_', '')
+        if area in known: continue
+        seen, roster = set(), []
+        for monster in natives:
+            if monster.get('friendArea') == 'FRIEND_AREA_' + key:
+                name = monster['name'].removeprefix('MonsterName')
+                # monster_data names drop punctuation: Farfetch, HoOh, MrMime, Nidoran_F, Nidoran_M.
+                hit = dex.get(norm(name.replace('_F', 'f').replace('_M', 'm') + ('d' if name == 'Farfetch' else '')))
+                if hit and hit[0] not in seen: seen.add(hit[0]); roster.append(hit)
+        if key.startswith('AGED_CHAMBER'): roster = roster * 4  # Unown fills its chambers.
+        scenery = rescue_export(key, area, ROOT, cache)
+        added.append(dict(id=area, name=names.get(key, key.replace('_', ' ').title()), size=scenery['size'], description=description,
+                          native=roster, scenery=scenery))
+        print(area, len(roster), 'natives', len(scenery['layers']), 'layers', len(scenery['zones']), 'zones', flush=True)
+    for code, area, title, mons, description in SKY:
+        if area in known: continue
+        from sky_scenery import export as sky_export
+        source = ROOT/f'{area}-source.json'
+        scenery = json.loads(source.read_text(encoding='utf-8')) if source.exists() else sky_export(code, area, ROOT)
+        added.append(dict(id=area, name=title, size=scenery['size'], description=description,
+                          native=[dex[norm(n)] for n in mons], scenery=scenery, sky=True))
+        print(area, len(mons), 'curated', len(scenery['layers']), 'layers', len(scenery['zones'] or []), 'zones', flush=True)
+    wanted = {}
+    for entry in added:
+        for item in entry['native']: wanted[item[0]] = item
+    for groups in VISITORS.values():
+        for group, _ in groups:
+            for n in group: wanted[dex[norm(n)][0]] = dex[norm(n)]
+    missing = [item for item in wanted.values() if str(item[0]) not in catalog['sprites']]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+        for sprite in pool.map(available, missing):
+            if sprite: catalog['sprites'][str(sprite['id'])] = sprite
+    have = lambda d: str(d) in catalog['sprites']
+    def visitors(area, existing):
+        out = []
+        for group, reason in VISITORS.get(area, []):
+            for n in group:
+                d = dex[norm(n)][0]
+                if have(d) and d not in existing and d not in [g['id'] for g in out]: out.append(dict(id=d, reason=reason, basis='Curated habitat inference'))
+        return out
+    for area in catalog['areas']:
+        extra = visitors(area['id'], set(area['roster']) | {g['id'] for g in area.get('guests', [])})
+        if extra:
+            area['guests'] = area.get('guests', []) + extra
+            # At most eight residents per visit keeps the panel legible; each draw leaves a visitor out so visits vary.
+            if area['id'] != 'crystalcrossing':
+                area['guestLimit'] = max(area.get('guestLimit', 0), min(2, len(area['guests']) - 1, 8 - len(area['roster'])))
+    for entry in added:
+        native = [d for d, _ in entry['native'] if have(d)]
+        scenery = entry['scenery']
+        # Five natives stay on the map; the rest rotate into three more places with the visitors (eight per visit).
+        roster, rotating = native[:5], list(dict.fromkeys(native[5:]))
+        native_guest = dict(reason='Curated resident.', basis='Curated habitat inference') if entry.get('sky') else             dict(reason='Native resident in Red Rescue Team.', basis='pret/pmd-red monster_data.json')
+        guests = [dict(id=d, **native_guest) for d in rotating if d not in roster]
+        guests += visitors(entry['id'], set(roster) | set(rotating))
+        catalog['areas'].append(dict(id=entry['id'], name=entry['name'], size=scenery['size'], background=scenery['background'],
+            layers=scenery['layers'], description=entry['description'], roster=roster, guests=guests,
+            guestLimit=max(0, min(3, len(guests) - 1, 8 - len(roster))), zones=scenery['zones'] or SKY_ZONES[entry['id']], obstacles=[],
+            sourceRevision=scenery['sourceRevision'], sources=scenery['sources'], sceneryAnimation=scenery.get('sceneryAnimation'),
+            collisionStatus='Walk zones from the native collision layer (largest open region).' if scenery['zones'] else 'Conservative authored foot zones; this map has no collision layer.',
+            **({'map': scenery['map'], 'credit': scenery.get('credit')} if entry.get('sky') else {})))
+    (ROOT/'catalog.json').write_text(json.dumps(catalog, indent=2)+'\n', encoding='utf-8')
+    print(f"Catalog: {len(catalog['areas'])} areas, {len(catalog['sprites'])} species.")
+
 if __name__ == '__main__':
     import sys
     if '--sky-only' in sys.argv:
         add_sky_areas(); raise SystemExit
+    if '--expand' in sys.argv:
+        expand(); raise SystemExit
     ROOT.mkdir(parents=True, exist_ok=True)
     for area in AREAS:
         area.update(export(area['id'], ROOT, ROOT.parent.parent / 'artifacts/scenery-sources'))

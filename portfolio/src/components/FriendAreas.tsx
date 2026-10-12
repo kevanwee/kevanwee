@@ -179,12 +179,22 @@ export default function FriendAreas() {
                     padding: "5px 0",
                   }}
                 >
-                  <option value="transformforest">Transform Forest</option>
-                  {catalog?.areas.map((a) => (
-                    <option key={a.id} value={a.id}>
-                      {a.name}
-                    </option>
-                  ))}
+                  {/* Grouped by the game whose scenery each area uses. */}
+                  <optgroup label="Red Rescue Team">
+                    <option value="transformforest">Transform Forest</option>
+                    {catalog?.areas.filter((a) => !a.map).map((a) => (
+                      <option key={a.id} value={a.id}>
+                        {a.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Explorers of Sky">
+                    {catalog?.areas.filter((a) => a.map).map((a) => (
+                      <option key={a.id} value={a.id}>
+                        {a.name}
+                      </option>
+                    ))}
+                  </optgroup>
                 </select>
               </label>
               <button
@@ -250,8 +260,17 @@ export default function FriendAreas() {
                 : "Eevee · Vaporeon · Jolteon · Flareon · Umbreon · Sylveon"}
             </p>
             <p style={{ fontSize: 10, marginTop: 12, opacity: 0.7 }}>
-              Scenery: Pokémon Mystery Dungeon: Red Rescue Team. Original game maps and animation from{' '}
-              <a href="https://github.com/pret/pmd-red/tree/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg" target="_blank" rel="noreferrer">pret/pmd-red</a>
+              {area?.map ? (
+                <>
+                  Scenery: Pokémon Mystery Dungeon: Explorers of Sky. Original game map and animation from{" "}
+                  <a href="https://github.com/pret/pmd-sky/tree/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG" target="_blank" rel="noreferrer">pret/pmd-sky</a>
+                </>
+              ) : (
+                <>
+                  Scenery: Pokémon Mystery Dungeon: Red Rescue Team. Original game maps and animation from{" "}
+                  <a href="https://github.com/pret/pmd-red/tree/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg" target="_blank" rel="noreferrer">pret/pmd-red</a>
+                </>
+              )}
               . Sprites:{" "}
               <a
                 href="https://github.com/PMDCollab/SpriteCollab"

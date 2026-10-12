@@ -1,0 +1,67 @@
+{
+  "background": "furnacedesert.png",
+  "size": [
+    456,
+    336
+  ],
+  "layers": [
+    {
+      "src": "furnacedesert-palette-8.png",
+      "x": 24,
+      "y": 0,
+      "w": 408,
+      "h": 128,
+      "frames": 12,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "furnacedesert-palette-9.png",
+      "x": 192,
+      "y": 112,
+      "w": 112,
+      "h": 104,
+      "frames": 9,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H20P01.bpl",
+      "sha256": "796b4ebf40533226c13f47677ff760742695230f7939a6afb6afe18048a198f4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H20P01c.bpc",
+      "sha256": "fa3d0f25100873443a9db1662df04e67489ee3888232c90cb028b801218d74c2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H20P01m.bma",
+      "sha256": "f166b8c04bddee04318035e2ca585c926183cec74b02d202d76fcad1244a0600"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

@@ -1,0 +1,98 @@
+{
+  "background": "turtleshellpond.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [
+    {
+      "src": "turtleshellpond-palette-0.png",
+      "x": 104,
+      "y": 88,
+      "w": 264,
+      "h": 168,
+      "frames": 8,
+      "durations": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "src": "turtleshellpond-palette-10.png",
+      "x": 80,
+      "y": 56,
+      "w": 320,
+      "h": 216,
+      "frames": 17,
+      "durations": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "src": "turtleshellpond-palette-11.png",
+      "x": 208,
+      "y": 136,
+      "w": 120,
+      "h": 64,
+      "frames": 17,
+      "durations": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H09P02.bpl",
+      "sha256": "1aae0f96465d8d354335acf6ad525c20254ad23a1f457b4537676c6ae1ab5047"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H09P02c.bpc",
+      "sha256": "a0e7fd701bab7b1d501e7187b55e09d3398ec64bff4c1a4131c847961b214a4a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H09P02m.bma",
+      "sha256": "8622930dcb6b73d1c949747a36d7a9eec705ef8bf67d66542b7ba8ae7a55c497"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

@@ -1,0 +1,25 @@
+{
+  "background": "serenesea.png",
+  "size": [
+    528,
+    360
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P03.bpl",
+      "sha256": "df92949a2b57aeff9fc39b1562c4ed2c4dfb034c7961c94b8bdfcefda8f585a7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P03c.bpc",
+      "sha256": "cad799584a7800e097be6951c7cc10cd18256a5d5e83a22eea8a9de9713c5583"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H01P03m.bma",
+      "sha256": "a4c7edbae015122f39b5302f1daf65ba5e6379bf67b6818f87c7086cc17610af"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

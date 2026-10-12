@@ -1,0 +1,25 @@
+{
+  "background": "skyblueplains.png",
+  "size": [
+    456,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P03.bpl",
+      "sha256": "17ff40580d3707cc64084bdec2aa9816a00fb23d4c7ad75920f20e9e5faa2fe7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P03c.bpc",
+      "sha256": "e7d83d24aebce612ff368a83bc27eda7dd3c98cef8b751247fcae0bfd9203bcc"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P03m.bma",
+      "sha256": "ca1de988956a7b1f568bf601ab432ccf09132ac21638360af3b7bd7c87ae29e4"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

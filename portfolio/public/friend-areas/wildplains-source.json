@@ -1,0 +1,102 @@
+{
+  "background": "wildplains.png",
+  "size": [
+    456,
+    336
+  ],
+  "layers": [
+    {
+      "src": "wildplains-palette-0.png",
+      "x": 0,
+      "y": 64,
+      "w": 456,
+      "h": 24,
+      "frames": 10,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "wildplains-palette-1.png",
+      "x": 0,
+      "y": 40,
+      "w": 456,
+      "h": 32,
+      "frames": 18,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "wildplains-palette-7.png",
+      "x": 0,
+      "y": 0,
+      "w": 456,
+      "h": 72,
+      "frames": 18,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P01.bpl",
+      "sha256": "7eac13e452cbd267bb112f17a02645fcc84714637e8b2fa5901c130e54a31784"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P01c.bpc",
+      "sha256": "217b42c2f54aff2a204c2ee945d8da2f31b238dd39543161bb1dc4d8176dca80"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H06P01m.bma",
+      "sha256": "1902080940e1f8bac0402cef107db8a8f5359d3b11845647d34ff6780de5dce1"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

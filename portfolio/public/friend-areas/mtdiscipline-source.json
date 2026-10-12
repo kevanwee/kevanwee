@@ -1,0 +1,25 @@
+{
+  "background": "mtdiscipline.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H16P01.bpl",
+      "sha256": "54c28470094ae6e76b5969f123f6aaa30964d3def9be6cd886e5173acbd61186"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H16P01c.bpc",
+      "sha256": "4a3a2aec1191ef39c743b8fab429b98fee3546dae8fe8319e00878322f9f24f5"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H16P01m.bma",
+      "sha256": "65ced3bf5a4edd542d2d221127c37f309ae59af789944325b030f8acd77d7b5a"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

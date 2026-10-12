@@ -1,0 +1,25 @@
+{
+  "background": "frigidcavern.png",
+  "size": [
+    480,
+    360
+  ],
+  "layers": [],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H24P01.bpl",
+      "sha256": "d73f8474fbb8153eb5a17b3d4af128d15855641c96aed29e4117a81a9095d9af"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H24P01c.bpc",
+      "sha256": "0da52f9f218fdb0cc6eb03da4cb06dc35eaa14c1f5ffed305b76d21d962b32ed"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H24P01m.bma",
+      "sha256": "6c14d141fae5da704b5d1dd47f165addf665ada464e4bbb31bb595f19440424e"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}

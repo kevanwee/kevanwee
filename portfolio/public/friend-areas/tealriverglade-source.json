@@ -1,0 +1,74 @@
+{
+  "background": "tealriverglade.png",
+  "size": [
+    312,
+    336
+  ],
+  "layers": [
+    {
+      "src": "tealriverglade-animation-p9.png",
+      "x": 0,
+      "y": 85,
+      "w": 312,
+      "h": 251,
+      "frames": 32,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    }
+  ],
+  "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+  "map": "v03p07a",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+      "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/v03p07a.bpl",
+      "sha256": "503cfaa001dfcd980be7b6f15a46f171d1101f0a0992e795d3f67d2a11421d60"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/v03p07a.bpc",
+      "sha256": "92919400d2a20831ef15a15415ccec765006af8733be613375e35673f411cb42"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/v03p07a.bma",
+      "sha256": "31c19832efb27472d9045040c6bcdc21bebca33389a4ba7d551e83cde86840d8"
+    }
+  ],
+  "zones": null,
+  "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+  "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft."
+}

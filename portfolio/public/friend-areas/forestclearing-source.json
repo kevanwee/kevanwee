@@ -1,0 +1,188 @@
+{
+  "background": "forestclearing.png",
+  "size": [
+    504,
+    408
+  ],
+  "layers": [
+    {
+      "src": "forestclearing-animation-p13.png",
+      "x": 167,
+      "y": 140,
+      "w": 186,
+      "h": 144,
+      "frames": 19,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    }
+  ],
+  "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+  "map": "p02p01a",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+      "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/p02p01a.bpl",
+      "sha256": "e864b0ec1e090c5716121c314a612e37cba574d364900091e0d13b122a189205"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/p02p01a.bpc",
+      "sha256": "8e633300a734885e5da9a92051bb1a9481c2278e50db6514cd801f7bbf90e06f"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/p02p01a.bma",
+      "sha256": "8937cbac15a2f6b00ab44c87cb3e90d91282d09aea640a225370507641427669"
+    }
+  ],
+  "zones": [
+    [
+      [
+        192,
+        200
+      ],
+      [
+        320,
+        200
+      ],
+      [
+        320,
+        232
+      ],
+      [
+        192,
+        232
+      ]
+    ],
+    [
+      [
+        200,
+        192
+      ],
+      [
+        312,
+        192
+      ],
+      [
+        312,
+        200
+      ],
+      [
+        200,
+        200
+      ]
+    ],
+    [
+      [
+        200,
+        232
+      ],
+      [
+        312,
+        232
+      ],
+      [
+        312,
+        248
+      ],
+      [
+        200,
+        248
+      ]
+    ],
+    [
+      [
+        208,
+        184
+      ],
+      [
+        304,
+        184
+      ],
+      [
+        304,
+        192
+      ],
+      [
+        208,
+        192
+      ]
+    ],
+    [
+      [
+        208,
+        248
+      ],
+      [
+        304,
+        248
+      ],
+      [
+        304,
+        256
+      ],
+      [
+        208,
+        256
+      ]
+    ],
+    [
+      [
+        216,
+        176
+      ],
+      [
+        296,
+        176
+      ],
+      [
+        296,
+        184
+      ],
+      [
+        216,
+        184
+      ]
+    ],
+    [
+      [
+        224,
+        256
+      ],
+      [
+        288,
+        256
+      ],
+      [
+        288,
+        280
+      ],
+      [
+        224,
+        280
+      ]
+    ]
+  ],
+  "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+  "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft."
+}

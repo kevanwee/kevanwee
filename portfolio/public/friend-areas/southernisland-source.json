@@ -1,0 +1,96 @@
+{
+  "background": "southernisland.png",
+  "size": [
+    480,
+    336
+  ],
+  "layers": [
+    {
+      "src": "southernisland-palette-0.png",
+      "x": 0,
+      "y": 0,
+      "w": 480,
+      "h": 336,
+      "frames": 9,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "src": "southernisland-palette-10.png",
+      "x": 88,
+      "y": 200,
+      "w": 272,
+      "h": 136,
+      "frames": 20,
+      "durations": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    {
+      "src": "southernisland-tiles-0.png",
+      "x": 216,
+      "y": 104,
+      "w": 152,
+      "h": 48,
+      "frames": 7,
+      "durations": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    }
+  ],
+  "sourceRevision": "013475aa04f5be3191e5527c186d9bfceae7cae0",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P02.bpl",
+      "sha256": "713361dab1b739f90c2d28a6182734a20789c47ee3f1b1e368a804bcf56b48b2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P02c.bpc",
+      "sha256": "2f50f4aad6197d66d753dea086067a8187b47692c43c13bba702371668f5fbae"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P02m.bma",
+      "sha256": "3e0521c4845ad2cde4f242a39d0b476f72f1ab0289688ed16b039483a387c74c"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-red/013475aa04f5be3191e5527c186d9bfceae7cae0/data/map_bg/H29P021.bpa",
+      "sha256": "869a5f56d52cdec1aba1955d12c5460d3ca2d6492c6580726b89d5ead7bcf2ad"
+    }
+  ],
+  "sceneryAnimation": "Native BPL palette and BPA tile animation at 60 ticks/second; only changing pixels are layered.",
+  "collisionStatus": "Walk zones from the native BMA collision layer (largest open region)."
+}
