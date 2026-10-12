@@ -1,0 +1,32 @@
+name: Make sure the portfolio deploys
+
+# Vercel's GitHub integration occasionally drops or delays a push (git_info_fail, no deployment).
+# Five minutes after a push that changes the portfolio, deploy through a Vercel deploy hook if
+# Vercel has not created a deployment for that commit. The project's ignore step compares with
+# the last successful deployment, so the hook's build of main includes these changes.
+on:
+  push:
+    branches: [main]
+    paths: ["portfolio/**"]
+  workflow_dispatch:
+
+permissions:
+  deployments: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Wait for Vercel
+        run: sleep 300
+      - name: Deploy if Vercel missed this commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          count=$(gh api "repos/${{ github.repository }}/deployments?sha=${{ github.sha }}" --jq length)
+          if [ "$count" -gt 0 ]; then echo "Vercel created $count deployment(s) for this commit."; exit 0; fi
+          if [ -z "$HOOK" ]; then echo "::error::No VERCEL_DEPLOY_HOOK secret"; exit 1; fi
+          curl -fsS -X POST "$HOOK" > /dev/null
+          echo "::notice::Vercel had not deployed ${{ github.sha }}; triggered the deploy hook."

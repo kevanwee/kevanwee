@@ -52,4 +52,5 @@ jobs:
           git config user.name "kevanwee"
           git config user.email "16420323+kevanwee@users.noreply.github.com"
           git add readme/art
-          git diff --cached --quiet || (git commit -m "Regrow the README garden" && git push)
+          # Diancie's workflow may have pushed since checkout (same trigger), so rebase first.
+          git diff --cached --quiet || (git commit -m "Regrow the README garden" && git pull --rebase origin main && git push)
