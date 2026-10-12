@@ -1,5 +1,12 @@
 # Lessons Learned
 
+## Classic left panel, scaled to height; Yveltal removed (2026-10-13)
+
+- Desktop keeps the classic left panel from late September: stacked name, 11px section links 16px apart, 36px social icons directly under the links (not pinned to the window bottom). Keep the green Resume action.
+- Never switch layouts on short windows or browser zoom, and no inner scroll bar: the pinned panel scales to the window height (50–100%) and stays pinned. This supersedes the 12 Oct "compact typography / scrollable pinned frame" approach below.
+- Yveltal and his egg are removed from the site: the awakening was too clunky.
+- Dialogs keep their own type scale; section CSS rules exclude `[role="dialog"]` descendants.
+
 ## Laptop pinning, Yveltal and section landing correction (2026-10-12)
 
 - Keep the left panel frozen on laptop/desktop views at 100% zoom. The owner rejected fit-based unpinning: it feels broken. Use slightly smaller type/spacing and a scrollable pinned frame only when contents genuinely exceed the available height.

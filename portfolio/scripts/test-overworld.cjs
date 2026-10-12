@@ -190,28 +190,6 @@ assert.ok(visited.size > 2, `Only ${[...visited.keys()]} ever took a project til
 for (const [species, seen] of visited) assert.ok(seen.size >= 2, `${species} never left its tile`);
 assert.equal(new Set([...visited.values()].flatMap(seen => [...seen])).size, 3, 'the three cards should all see use');
 
-const flightSource = readFileSync(resolve(__dirname, '../src/lib/yveltal-flight.ts'), 'utf8');
-const flightApi = {};
-new Function('exports', 'require', ts.transpileModule(flightSource, {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020}}).outputText)(flightApi, () => api);
-const flight = flightApi.createFlight(300, 300), random = seeded(42), flightDirections = new Set();
-for (let i = 0; i < 20000; i++) {
-  const bounds = i % 300 < 150 ? {left: 40, right: 280, top: 75, bottom: 490} : {left: 50, right: 1390, top: 80, bottom: 900};
-  flightApi.stepFlight(flight, 40, bounds, false, random);
-  assert.ok(flight.x >= bounds.left && flight.x <= bounds.right && flight.y >= bounds.top && flight.y <= bounds.bottom);
-  flightDirections.add(flight.direction);
-}
-assert.equal(flightDirections.size, 8);
-const wall = [{left: 40, right: 60, top: 0, bottom: 100}];
-assert.equal(flightApi.clearFlightPath(10, 50, 90, 50, wall), false, 'Clear destinations must not permit crossing text in between');
-assert.equal(flightApi.clearFlightPath(10, 120, 90, 120, wall), true);
-const blockedFlight = flightApi.createFlight(50, 50), arena = {left: 0, right: 100, top: 0, bottom: 160};
-assert.equal(flightApi.settleFlight(blockedFlight, arena, wall), true);
-for (let i = 0; i < 15000; i++) {
-  const before = {x: blockedFlight.x, y: blockedFlight.y};
-  flightApi.stepFlight(blockedFlight, 64, arena, false, random, wall);
-  assert.ok(flightApi.clearFlightPath(before.x, before.y, blockedFlight.x, blockedFlight.y, wall), 'Each movement segment must avoid obstacles');
-}
-assert.equal(flightApi.settleFlight(blockedFlight, arena, [{left: -1, right: 101, top: -1, bottom: 161}]), false, 'No space means hide, not overlap');
 assert.ok(GROUND_SPECIES.includes('giratina') && !FLYING_SPECIES.includes('giratina') && !assets.giratina.flying);
 // Two walkers heading into each other must keep their distance and must not freeze:
 // they give way and go somewhere else rather than passing through or waiting forever.
@@ -252,7 +230,7 @@ for (let seed = 1; seed <= 8; seed++) {
 }
 assert.equal(forestNaps.size, 6);
 for (const [species, regions] of quadrants) assert.equal(regions.size, 4, `${species} cannot explore the whole forest`);
-console.log(`Overworld passed: populations ${[...population].sort((a,b)=>a-b).join('/')}; ${files} source hashes, ${GROUND_SPECIES.length} ground and ${FLYING_SPECIES.length} flying species, bonded pairs travelling together, any species hopping any project row, responsive hop cancellation, bounded Yveltal flight, naps, greetings, forms and random battles.`);
+console.log(`Overworld passed: populations ${[...population].sort((a,b)=>a-b).join('/')}; ${files} source hashes, ${GROUND_SPECIES.length} ground and ${FLYING_SPECIES.length} flying species, bonded pairs travelling together, any species hopping any project row, responsive hop cancellation, naps, greetings, forms and random battles.`);
 console.log('Forest passed: six residents, all quadrants reachable, stone/roots excluded throughout 40 minutes of simulation; natural naps and wake-on-click.');
 
 (async () => {

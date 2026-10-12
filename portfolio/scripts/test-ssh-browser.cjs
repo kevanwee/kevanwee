@@ -10,10 +10,9 @@ const base = process.env.BASE_URL || 'http://localhost:3005';
   const errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto(base + '/');
   const ssh = page.locator('[data-ssh-launcher]');
-  // The SSH button replaces 3D, and Yveltal's egg docks on it
+  // The SSH button replaces 3D
   assert.equal((await ssh.innerText()).replace(/\s+/g, ' ').trim(), '>_ SSH');
   assert.equal(await page.getByTitle('View 3D portfolio').count(), 0);
-  assert.ok(await ssh.getAttribute('data-yveltal-perch') !== null);
   const win = page.getByRole('dialog', { name: /guest@kevanwee/ });
   const command = page.getByLabel('Terminal command');
   const run = async c => { await command.fill(c); await command.press('Enter'); };
