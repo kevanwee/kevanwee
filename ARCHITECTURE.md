@@ -35,7 +35,7 @@ flowchart TB
     site -->|activity.json, stars| gh
     site --> contrib & nea
     site -.-> meteo
-    voracity -.->|reads activity.json;<br/>mirrors Friend Areas| readme
+    voracity -.->|"reads activity.json, mirrors Friend Areas"| readme
 ```
 
 Nothing runs on a server the owner operates. Vercel builds and serves the site and runs one small
