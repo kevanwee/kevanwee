@@ -54,7 +54,7 @@ export default function Home() {
     <PokemonCursorProvider>
     <PokemonPcHost />
     <div
-      className="relative min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
+      className="portfolio-home relative min-h-screen bg-cream-50 selection:bg-sage-200 selection:text-sage-900"
       style={{ "--viewport-offset": "clamp(4rem, 12vh, 9rem)" } as CSSProperties}
     >
       <SmoothScroll />
@@ -65,7 +65,7 @@ export default function Home() {
       <PokemonOverworld />
       <YveltalRoamer />
 
-      <div className="relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
+      <div className="portfolio-shell relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">
           <div id="teddiursa-panel" className="pb-8 lg:w-[45%]">
             <LeftPanel

@@ -79,16 +79,16 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
             <PokeballRow />
           </div>
 
-          <div className="my-7 h-px w-12 bg-cream-200" style={fadeUp("210ms")} />
+          <div className="intro-divider my-7 h-px w-12 bg-cream-200" style={fadeUp("210ms")} />
 
-          <p className="max-w-[238px] text-sm leading-7 text-warm-400" style={fadeUp("260ms")}>
+          <p className="portfolio-intro max-w-[238px] text-sm leading-7 text-warm-400" style={fadeUp("260ms")}>
             {personal.description}
           </p>
 
-          <div className="mt-5 flex items-center gap-2" style={fadeUp("330ms")}>
+          <div className="portfolio-actions mt-5 flex items-center gap-2" style={fadeUp("330ms")}>
             <button
               onClick={() => setShowResume(true)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
+              className="resume-launcher inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600"
               title="View my one-page resume or full academic and professional CV"
               aria-haspopup="dialog"
             >
@@ -103,7 +103,10 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
               </svg>
               Resume / CV
             </button>
-            <SshLauncher className="inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600" />
+            <SshLauncher className="ssh-launcher inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600" />
+            <span className="yveltal-roost" data-yveltal-nest>
+              <span className="yveltal-ledge" data-yveltal-perch />
+            </span>
           </div>
 
           {/* Opens either assistant with a question about this portfolio already typed in */}

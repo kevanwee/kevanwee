@@ -125,12 +125,10 @@ export default function SshLauncher({ className }: { className: string }) {
   const style = box && !max ? { left: box.x, top: box.y, width: box.w, height: box.h } : undefined;
 
   return <>
-    {/* Yveltal's cocoon docks on this button, so the browser keeps him on it. */}
-    <span className="relative inline-flex" data-yveltal-nest>
+    <span className="relative inline-flex">
       <button
         ref={button}
         type="button"
-        data-yveltal-perch
         data-ssh-launcher
         onClick={() => (state === "open" ? void minimise() : open())}
         className={className}
