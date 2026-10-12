@@ -1,5 +1,27 @@
 # Responsive portfolio panel — 12 October 2026
 
+## Follow-up correction: always pinned laptops
+
+The owner rejected fit-based unpinning at 100% zoom. The final behavior supersedes
+the original approach below: the desktop frame is always sticky, with modestly
+smaller type and gaps. Extreme short heights or enlarged text scroll within that
+frame; normal laptop sizes fit without an inner scrollbar. No measurement hook
+can switch the panel back to document flow. Mobile still scrolls with the page.
+
+The awakening no longer scales its full sheet into the 64px cocoon perch. Its roost
+reserves 172×184px during the animation, and 96×84px for a perched awake resident,
+then returns to the small dormant/empty perch. Sprite scale stays consistent.
+
+All five navigation links target the visible heading with a 24px breathing gap,
+falling back to About's content start when its desktop heading is hidden. Contact
+retains enough document height to reach the same alignment at the page end.
+
+Regression coverage now asserts unconditional desktop pinning, accessible internal
+overflow at extreme heights, unchanged sprite scale throughout awakening, and
+heading landing positions for all links under both motion preferences.
+
+## Original implementation history (superseded where noted above)
+
 The owner rejected the further composition studies and requested a responsive
 review of the existing design, particularly lower left-panel buttons cut off in
 short windows. Keep the existing section order, content and Pokémon identity.

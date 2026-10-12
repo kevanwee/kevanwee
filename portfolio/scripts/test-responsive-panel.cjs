@@ -11,7 +11,7 @@ const sizes = [[320,568],[360,640],[390,844],[414,896],[568,320],[667,375],[844,
     const page = await browser.newPage({reducedMotion:'reduce'}), errors=[];
     page.on('pageerror', e => errors.push(e.message));
     await page.goto(process.env.BASE_URL || 'http://localhost:3005', {waitUntil:'domcontentloaded'});
-    await page.waitForSelector('.portfolio-panel-frame[data-fits]');
+    await page.waitForSelector('.portfolio-panel-frame');
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(900);
     const roster = await page.locator('[data-pokemon]').evaluateAll(es=>es.map(e=>e.dataset.pokemon).sort());
@@ -31,7 +31,7 @@ const sizes = [[320,568],[360,640],[390,844],[414,896],[568,320],[667,375],[844,
       assert.equal(layout.overflow,false,`Horizontal overflow at ${width}x${height}`);
       assert.equal(layout.zoom,'1','Do not shrink text or touch targets');
       assert.ok(layout.heights.every(h=>h>=43.5),`Small controls at ${width}x${height}: ${layout.heights}`);
-      assert.equal(layout.sticky,width>=1024&&layout.fits,`Incorrect sticky behavior at ${width}x${height}`);
+      assert.equal(layout.sticky,width>=1024,`Incorrect sticky behavior at ${width}x${height}`);
       layout.sticky ? sticky++ : flowing++;
       // Focusing each lower control must bring it entirely into the viewport.
       const controls=page.locator('.left-panel-zoom nav button, .portfolio-panel-footer a, .portfolio-panel-footer button');
@@ -42,24 +42,24 @@ const sizes = [[320,568],[360,640],[390,844],[414,896],[568,320],[667,375],[844,
       }
       await page.evaluate(()=>scrollTo(0,1200));await page.waitForTimeout(80);
       if(layout.sticky){
-        const r=await page.locator('.left-panel-zoom').boundingBox();
+        const r=await page.locator('.portfolio-panel-frame').boundingBox();
         assert.ok(r.y>=0&&r.y+r.height<=height-20,`Pinned content clips at ${width}x${height}`);
       }
       assert.deepEqual(await page.locator('[data-pokemon]').evaluateAll(es=>es.map(e=>e.dataset.pokemon).sort()),roster,'Responsive reflow must preserve the visit roster');
     }
-    // A font/content-height change without a window resize must also unpin safely.
+    // Font growth must keep the laptop frame pinned and allow its contents to scroll.
     await page.setViewportSize({width:1440,height:900});
     await page.locator('.portfolio-intro').evaluate(e=>{e.style.fontSize='40px';e.style.lineHeight='2';});
-    await page.waitForFunction(()=>document.querySelector('.portfolio-panel-frame').dataset.fits==='false');
-    assert.equal(await page.locator('.portfolio-panel-frame').evaluate(e=>getComputedStyle(e).position),'static');
+    await page.waitForFunction(()=>{const f=document.querySelector('.portfolio-panel-frame');return f.scrollHeight>f.clientHeight;});
+    assert.equal(await page.locator('.portfolio-panel-frame').evaluate(e=>getComputedStyle(e).position),'sticky');
     await page.locator('.portfolio-intro').evaluate(e=>{e.style.fontSize='';e.style.lineHeight='';});
-    await page.waitForFunction(()=>document.querySelector('.portfolio-panel-frame').dataset.fits==='true');
+    await page.locator('.portfolio-panel-frame').evaluate(e=>e.scrollTop=0);
     await page.setViewportSize({width:390,height:844});
     await page.locator('.resume-launcher').click();
     assert.equal(await page.getByRole('dialog').isVisible(),true);
     await page.keyboard.press('Escape');
     await page.getByRole('navigation',{name:'Page sections'}).getByRole('button',{name:'Projects',exact:true}).click();
-    const project=await page.locator('#projects').boundingBox();assert.ok(project.y>=0&&project.y<200);
+    const project=await page.locator('#projects h2').boundingBox();assert.ok(Math.abs(project.y-24)<2);
     assert.deepEqual(errors,[]);
     console.log(`${sizes.length} viewport layouts passed: ${sticky} pinned, ${flowing} naturally scrolling; all lower controls focusable in view, >=44px targets, no overflow, roster preserved, font growth and modal/navigation passed.`);
   } finally { await browser.close(); }

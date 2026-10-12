@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { paintSprite, SPRITES } from "@/lib/overworld-sprites";
+import { paintSprite, preloadSpriteSheet, SPRITES } from "@/lib/overworld-sprites";
 import { clearFlightPath, createFlight, settleFlight, stepFlight, type FlightBounds } from "@/lib/yveltal-flight";
 import { directionFromMotion } from "@/lib/pokemon-overworld";
 
@@ -70,14 +70,12 @@ export default function YveltalRoamer() {
     };
     const label = () => {
       button.dataset.yveltalState = mode;
+      nest.dataset.yveltalMode = mode;
       button.setAttribute("aria-label", mode === "dormant" ? "Awaken Yveltal" : mode === "hatching" ? "Yveltal is awakening" : "Say hello to Yveltal");
       button.title = mode === "dormant" ? "Awaken Yveltal" : mode === "hatching" ? "Yveltal is awakening" : "Say hello to Yveltal";
       button.setAttribute("aria-busy", String(mode === "hatching" || loading));
     };
     label();
-    const preload = (src: string) => new Promise<void>((resolve, reject) => {
-      const image = new Image(); image.onload = () => resolve(); image.onerror = reject; image.src = src;
-    });
     const awaken = async () => {
       if (loading || mode === "hatching") return;
       if (mode === "active" || mode === "perched") {
@@ -89,7 +87,7 @@ export default function YveltalRoamer() {
       }
       loading = true; label();
       try {
-        await Promise.all([preload(sprite.animations.Special0.src), preload(sprite.animations.Walk.src), preload(sprite.animations.Idle.src)]);
+        await Promise.all([preloadSpriteSheet(sprite.animations.Special0.src), preloadSpriteSheet(sprite.animations.Walk.src), preloadSpriteSheet(sprite.animations.Idle.src)]);
         if (disposed) return;
         elapsed = 0; mode = motion.matches ? (canFly() ? "active" : "perched") : "hatching";
         flight = createFlight(...anchor());
@@ -264,16 +262,9 @@ export default function YveltalRoamer() {
           if (!button.hidden) button.style.transform = `translate3d(${Math.round(flight.x - 22)}px,${Math.round(flight.y + 27 * size - 44)}px,0)`;
         } else button.hidden = false;
         if (!button.hidden) {
-          // The full awakening sheet is wider than the cocoon. Fit its ink inside
-          // the dedicated roost, including on phones; free flight keeps its scale.
-          const anim = sprite.animations[animation];
-          const ink = anim.bounds[anim.rows === 1 ? 0 : direction];
-          const dockedSize = Math.min(size,
-            (nest.clientWidth - 8) / (2 * Math.max(anim.w / 2 - ink[0], ink[2] - anim.w / 2) * sprite.scale),
-            (nest.clientHeight - 8) / ((ink[3] - ink[1]) * sprite.scale));
-          const paintSize = mode === "active" ? size : dockedSize;
-          const hatchFoot = animation === "Special0" ? (mode === "active" ? 6 : ink[3] - anim.h / 2) : undefined;
-          paintSprite(art, sprite, animation, motion.matches ? 0 : animation === "Special2" ? elapsed / 1.5 : elapsed, direction, 22, 44, paintSize, hatchFoot);
+          // Reserve room for the animation instead of shrinking the entire sheet:
+          // the cocoon keeps the same scale when Special2 becomes Special0.
+          paintSprite(art, sprite, animation, motion.matches ? 0 : animation === "Special2" ? elapsed / 1.5 : elapsed, direction, 22, 44, size, animation === "Special0" ? 6 : undefined);
           button.dataset.animation = animation; button.dataset.frame = art.dataset.frame;
           heart.hidden = greeting <= 0;
           heart.style.bottom = `${54 * size + 7}px`;
