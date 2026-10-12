@@ -26,6 +26,10 @@ for (const area of catalog.areas) {
     for (const a of actors) assert.ok(walkable(area, [a.x, a.y]), `${area.id}: ${a.id} left the floor`);
   }
 }
+// The README garden seats residents from seats.json: one seat per resident of every area.
+const seats = JSON.parse(fs.readFileSync(root + "seats.json", "utf8"));
+for (const area of catalog.areas)
+  assert.equal(seats[area.id]?.length, area.roster.length + (area.guestLimit ?? 0), `${area.id}: seats.json is stale (node scripts/friend-area-layouts.mjs)`);
 const original = ["mushroomforest", "mtmoonview", "decrepitlab", "seafloorcave", "volcanicpit", "thundermeadow", "rainbowpeak", "legendaryisland", "healingforest", "waterfalllake", "crystalcrossing"];
 assert.deepEqual(catalog.areas.slice(0, original.length).map((a) => a.id), original, "original areas keep their place");
 console.log(`Friend Areas passed: ${catalog.areas.length} areas, ${Object.keys(catalog.sprites).length} species, three ten-minute visits each.`);
