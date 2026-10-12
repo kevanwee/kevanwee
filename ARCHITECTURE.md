@@ -59,10 +59,12 @@ and skips builds when nothing changed (`vercel.json`); pull requests get preview
 
 ### Page composition
 
-`LeftPanel` keeps its intrinsic height and full-size controls. On shorter desktop
-windows its name and section index reflow horizontally. A ResizeObserver plus
-font/window/visual-viewport updates enables sticky positioning only when the
-whole panel fits with bottom clearance; otherwise it scrolls in normal page flow.
+`LeftPanel` is always sticky at laptop/desktop widths (1024px and above). Compact
+typography and spacing keep ordinary laptop views within the viewport; unusually
+short windows or enlarged text scroll inside the pinned frame. Controls keep
+their 44px targets. Phones retain normal document flow. Section navigation targets
+the visible heading, skipping decorative top padding. Yveltal's roost reserves
+the full awakening footprint while it plays instead of scaling down the sprite.
 See [tasks/responsive-panel.md](tasks/responsive-panel.md) for the viewport review
 and regression matrix. The retained `left-panel-zoom` selector no longer scales
 the interface.

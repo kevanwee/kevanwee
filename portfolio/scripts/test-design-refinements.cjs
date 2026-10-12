@@ -12,6 +12,7 @@ const sprite = require('../src/data/overworld-sprites.json').yveltal;
       await page.waitForTimeout(800);
       const errors = await page.evaluate(async sprite => {
         const issues = new Set();
+        const rendered = new Set();
         const action = document.querySelector('.resume-launcher').getBoundingClientRect();
         const ssh = document.querySelector('[data-ssh-launcher]').getBoundingClientRect();
         if (Math.abs(action.height - ssh.height) > .5) issues.add('action heights differ');
@@ -20,9 +21,14 @@ const sprite = require('../src/data/overworld-sprites.json').yveltal;
         const inspect = () => {
           if (actor.hidden || actor.dataset.yveltalState === 'active') return;
           const art = actor.querySelector('.overworld-sprite'), r = art.getBoundingClientRect();
-          const animation = sprite.animations[actor.dataset.animation];
+          // The renderer retains the prior complete pose while a new sheet loads.
+          const name = art.dataset.animation;
+          const animation = sprite.animations[name];
           if (!animation) return;
+          rendered.add(name);
           const b = animation.bounds[Number(art.dataset.direction) || 0], scale = r.width / animation.w;
+          const expected = sprite.scale * (innerWidth < 640 ? .78 : 1);
+          if (Math.abs(scale - expected) > .01) issues.add('Yveltal animation unexpectedly shrank');
           const ink = {left:r.left+b[0]*scale,right:r.left+b[2]*scale,top:r.top+b[1]*scale,bottom:r.top+b[3]*scale};
           for (const el of document.querySelectorAll('.portfolio-intro, .portfolio-actions .resume-launcher, [data-ssh-launcher]')) {
             const box = el.getBoundingClientRect();
@@ -32,6 +38,7 @@ const sprite = require('../src/data/overworld-sprites.json').yveltal;
         inspect(); actor.click();
         await new Promise(resolve => { const until = performance.now() + 6500; const tick = () => { inspect(); if (performance.now() < until) requestAnimationFrame(tick); else resolve(); }; tick(); });
         if (!['active','perched'].includes(actor.dataset.yveltalState)) issues.add('awakening did not finish');
+        if (!rendered.has('Special0')) issues.add('awakening sheet was never rendered');
         return [...issues];
       }, sprite);
       assert.deepEqual(errors, [], `${width}px`);

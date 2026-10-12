@@ -1,9 +1,15 @@
 # Lessons Learned
 
+## Laptop pinning, Yveltal and section landing correction (2026-10-12)
+
+- Keep the left panel frozen on laptop/desktop views at 100% zoom. The owner rejected fit-based unpinning: it feels broken. Use slightly smaller type/spacing and a scrollable pinned frame only when contents genuinely exceed the available height.
+- Never shrink Yveltal's whole awakening sheet into the egg-sized roost. Keep the authentic animation scale and reserve its required space during awakening.
+- Section links must land on the visible heading, not the divider, resident ledge or padding above it. Apply this consistently to every section.
+
 ## Responsive panel correction (2026-10-12)
 
 - The owner declined the further project-first / rearranged-page proposals. Preserve the approved composition and improve adaptation within it.
-- Short viewports must never strand the lower left-panel controls below a sticky viewport. Measure whether the whole panel fits, then use natural page scrolling when it does not.
+- Short viewports must never strand the lower left-panel controls. The initial fit-based unpinning approach was superseded by the laptop-pinning correction above.
 - Do not use CSS zoom to squeeze the panel: it shrinks text and touch targets. Recompose the name/navigation and spacing for short desktop layouts instead.
 - The owner explicitly requested Firebase deployment of the already merged Voracity refinements; a GitHub merge alone does not publish Voracity.
 
