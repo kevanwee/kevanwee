@@ -73,7 +73,7 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
 });
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, ...(process.env.CHROMIUM_EXECUTABLE_PATH ? {executablePath: process.env.CHROMIUM_EXECUTABLE_PATH} : {}) });
   const errors = [], missing = [];
   try {
     for (const width of [1440, 390, 320]) {
@@ -296,16 +296,17 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
     await hopping.waitForTimeout(200);
     assert.equal(await hopping.locator('[data-hopping="true"]').count(), 0, 'Stacked phone cards must stop hopping');
     console.log(`${onTiles.join(', ')} drew the project tiles; ${[...jumped].join(' and ')} visibly hopped; phone reflow stops cross-card hops.`);
-    // zoom and position:sticky on one element make Chrome resolve the sticky offset in
-    // zoomed units, so the whole panel snaps mid-scroll and takes the egg with it.
-    const zoomed = await browser.newPage({viewport: {width: 1440, height: 700}, deviceScaleFactor: 1.25});
-    zoomed.on('pageerror', e => errors.push(e.message));
-    await zoomed.goto(base, {waitUntil: 'domcontentloaded'});
-    await zoomed.waitForSelector('[data-yveltal-state="dormant"]');
-    await zoomed.waitForTimeout(800);
-    assert.notEqual(await zoomed.evaluate(() => getComputedStyle(document.querySelector('.left-panel-zoom')).zoom), '1',
-      'This viewport is meant to zoom the panel, or the check proves nothing');
-    await zoomed.evaluate(() => {
+    // Short desktop layouts recompose at full size; a fitting sticky panel and
+    // its docked egg must still hold their position throughout wheel scrolling.
+    const shortPage = await browser.newPage({viewport: {width: 1440, height: 700}, deviceScaleFactor: 1.25});
+    shortPage.on('pageerror', e => errors.push(e.message));
+    await shortPage.goto(base, {waitUntil: 'domcontentloaded'});
+    await shortPage.waitForSelector('[data-yveltal-state="dormant"]');
+    await shortPage.waitForTimeout(800);
+    assert.equal(await shortPage.evaluate(() => getComputedStyle(document.querySelector('.left-panel-zoom')).zoom), '1',
+      'The panel must keep its text and targets at full size');
+    assert.equal(await shortPage.locator('.portfolio-panel-frame').evaluate(e => getComputedStyle(e).position), 'sticky');
+    await shortPage.evaluate(() => {
       window.__panel = [];
       const tick = () => {
         const heading = document.querySelector('#teddiursa-panel h1'), egg = document.querySelector('[data-yveltal-state]');
@@ -314,17 +315,17 @@ const onLedge = page => page.locator('[data-yveltal-state]').evaluate(e => {
       };
       tick();
     });
-    await zoomed.mouse.move(700, 400);
-    for (let i = 0; i < 20; i++) { await zoomed.mouse.wheel(0, 117); await zoomed.waitForTimeout(20); }
-    await zoomed.waitForTimeout(300);
-    const held = await zoomed.evaluate(() => { cancelAnimationFrame(window.__panelRaf); return window.__panel; });
-    assert.ok(held.length > 30, `Only ${held.length} frames sampled the zoomed panel`);
+    await shortPage.mouse.move(700, 400);
+    for (let i = 0; i < 20; i++) { await shortPage.mouse.wheel(0, 117); await shortPage.waitForTimeout(20); }
+    await shortPage.waitForTimeout(300);
+    const held = await shortPage.evaluate(() => { cancelAnimationFrame(window.__panelRaf); return window.__panel; });
+    assert.ok(held.length > 30, `Only ${held.length} frames sampled the short panel`);
     [[0, 'heading'], [1, 'egg']].forEach(([column, name]) => {
       const seen = held.map(r => r[column]), swing = Math.max(...seen) - Math.min(...seen);
-      assert.ok(swing < 1, `The ${name} shifted ${swing.toFixed(1)}px while scrolling a zoomed sticky panel`);
+      assert.ok(swing < 1, `The ${name} shifted ${swing.toFixed(1)}px while scrolling a fitting sticky panel`);
     });
-    await zoomed.close();
-    console.log('A zoomed sticky panel, and the egg riding it, hold still through a scroll.');
+    await shortPage.close();
+    console.log('A fitting full-size sticky panel, and the egg riding it, hold still through a scroll.');
     assert.deepEqual(errors, []); assert.deepEqual(missing, []);
     console.log('Reduced motion passed; no browser exceptions or broken sprite requests.');
   } finally { await browser.close(); }

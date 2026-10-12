@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { personal } from "@/data";
 import MusicPlayer from "@/components/MusicPlayer";
 import ResumeModal from "@/components/ResumeModal";
@@ -31,6 +31,33 @@ interface LeftPanelProps {
 export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps) {
   const [showResume, setShowResume] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const panelRef = useRef<HTMLElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const panel = panelRef.current!, frame = frameRef.current!;
+    let disposed = false;
+    const measure = () => {
+      if (disposed) return;
+      const offset = parseFloat(getComputedStyle(frame).top) || 0;
+      const available = Math.min(innerHeight, window.visualViewport?.height ?? innerHeight);
+      // Oversized panels belong in normal document flow: every lower control
+      // remains reachable without an inner scrollbar or shrinking touch targets.
+      frame.dataset.fits = String(panel.getBoundingClientRect().height + offset + 24 <= available);
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(panel);
+    window.addEventListener("resize", measure);
+    window.visualViewport?.addEventListener("resize", measure);
+    void document.fonts.ready.then(measure);
+    measure();
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+      window.visualViewport?.removeEventListener("resize", measure);
+    };
+  }, []);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -45,10 +72,8 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
 
   return (
     <>
-      {/* Sticky sits outside the zoom: on one element, Chrome resolves the sticky
-          offset in zoomed units and the whole panel snaps ~20px as you scroll. */}
-      <div className="lg:sticky lg:top-[var(--viewport-offset)]">
-      <aside className="left-panel-zoom lg:flex lg:max-h-[calc(100vh-var(--viewport-offset))] lg:flex-col lg:justify-between lg:pb-24">
+      <div ref={frameRef} className="portfolio-panel-frame">
+      <aside ref={panelRef} className="left-panel-zoom">
         <div>
           <div style={fadeUp("0ms")}>
             <h1 className="font-serif text-[3.35rem] font-bold leading-[1.02] tracking-tight text-warm-900 xl:text-[3.75rem]">
@@ -161,7 +186,7 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
           </nav>
         </div>
 
-        <div className="pt-6" style={fadeUp("510ms")}>
+        <div className="portfolio-panel-footer pt-6" style={fadeUp("510ms")}>
           <div className="flex flex-wrap items-center gap-2">
             <a
               href={personal.linkedin}

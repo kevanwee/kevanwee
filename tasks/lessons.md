@@ -1,5 +1,12 @@
 # Lessons Learned
 
+## Responsive panel correction (2026-10-12)
+
+- The owner declined the further project-first / rearranged-page proposals. Preserve the approved composition and improve adaptation within it.
+- Short viewports must never strand the lower left-panel controls below a sticky viewport. Measure whether the whole panel fits, then use natural page scrolling when it does not.
+- Do not use CSS zoom to squeeze the panel: it shrinks text and touch targets. Recompose the name/navigation and spacing for short desktop layouts instead.
+- The owner explicitly requested Firebase deployment of the already merged Voracity refinements; a GitHub merge alone does not publish Voracity.
+
 ## Approved design corrections (2026-10-12)
 
 - Resume/CV keeps its green prominence but must be the same height as SSH.
