@@ -11,15 +11,15 @@ const TECH_SKILLS = [
   },
   {
     category: "Frameworks & Libraries",
-    skills: ["Next.js", "FastAPI", "Office.js", "pandas", "SetFit", "BeautifulSoup4", "ChromaDB", "python-docx", "openpyxl"],
+    skills: ["React", "Next.js", "FastAPI", "Office.js", "pandas", "SetFit", "BeautifulSoup4", "ChromaDB", "python-docx", "openpyxl"],
   },
   {
     category: "Infrastructure & Tools",
-    skills: ["AWS", "Linux", "Docker / CI-CD", "WAMP", "JIRA", "Atlassian Suite", "GDB", "RelativityOne"],
+    skills: ["AWS", "Firebase", "Vercel", "Linux", "Docker / CI-CD", "Playwright", "WAMP", "JIRA", "Atlassian Suite", "GDB", "RelativityOne"],
   },
   {
     category: "AI / ML",
-    skills: ["NLP", "RAG", "PostgresML"],
+    skills: ["NLP", "RAG", "Local LLMs (Ollama)", "PostgresML"],
   },
   {
     category: "Security",
