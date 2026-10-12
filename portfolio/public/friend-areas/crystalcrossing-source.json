@@ -1,0 +1,89 @@
+{
+  "background": "crystalcrossing.png",
+  "size": [
+    600,
+    480
+  ],
+  "layers": [
+    {
+      "src": "crystalcrossing-animation-p8.png",
+      "x": 87,
+      "y": 96,
+      "w": 426,
+      "h": 239,
+      "frames": 19,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "src": "crystalcrossing-animation-p9.png",
+      "x": 240,
+      "y": 98,
+      "w": 5,
+      "h": 20,
+      "frames": 19,
+      "durations": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    }
+  ],
+  "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+  "map": "d17p11a",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+      "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bpl",
+      "sha256": "d1e65c1fe94efd2eded08b6adc7de2b6005b4890a1d0180cbfbd3336cfe2c689"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bpc",
+      "sha256": "dd610aae377766adfcc716d46eee17865c4385bc2aba2ec874bef3e43536927d"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bma",
+      "sha256": "896b5fe03b0b896fc8c2e4dbbd0b0ce5d629713dce86a177e7b8deff7d96e241"
+    }
+  ],
+  "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+  "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft."
+}

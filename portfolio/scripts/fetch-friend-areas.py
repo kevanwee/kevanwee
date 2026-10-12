@@ -55,6 +55,23 @@ AREAS += [
       obstacles=[[[201,163],[236,163],[251,184],[237,201],[202,201],[189,183]]],footRadius=10,separation=44,description='Water-dwelling residents circle the island beneath a flowing waterfall.'),
 ]
 
+# Explorers of Sky areas: scenery decoded from pret/pmd-sky by scripts/sky_scenery.py (re-exporting needs
+# skytemple-files on Python 3.10-3.13; the committed export is reused otherwise). Residents are curated.
+SKY_AREAS = [
+ dict(id='crystalcrossing',name='Crystal Crossing',map='d17p11a',size=[600,480],
+      roster=[(719,'Diancie'),(703,'Carbink'),(703,'Carbink'),(703,'Carbink')],
+      zones=[[[128,242],[200,236],[200,284],[400,284],[400,236],[472,242],[472,300],[440,352],[402,382],[370,396],[370,470],[230,470],[230,396],[198,382],[160,352],[128,300]]],
+      obstacles=[[[146,302],[178,302],[178,350],[146,350]],[[422,302],[454,302],[454,350],[422,350]]],
+      footRadius=8,guestLimit=0,
+      description='Diancie and its Carbink keep the giant crystal at the heart of Crystal Cave.'),
+]
+
+def sky_scenery(area):
+    source = ROOT / f"{area['id']}-source.json"
+    if source.exists(): return json.loads(source.read_text(encoding='utf-8'))
+    from sky_scenery import export
+    return export(area['map'], area['id'], ROOT)
+
 # Explicit curation, not canonical Red/Blue assignments or a type-only classifier.
 GUESTS = {
  'mushroomforest': [(590,'Foongus','Fungal body; follows Paras and Shroomish.'),(755,'Morelull','Forest mushroom ecology; follows the existing fungal residents.')],
@@ -103,7 +120,23 @@ def species(item):
         result['animations'][requested]=dict(src=f'sprites/{dex}/{filename}', w=w,h=h,rows=rows,durations=durations,origins=origins,sha256=digest,sourceAnimation=actual)
     return result
 
+def add_sky_areas():
+    """Merge only the Explorers areas into the existing catalog, leaving the Rescue Team areas untouched."""
+    catalog = json.loads((ROOT/'catalog.json').read_text(encoding='utf-8'))
+    items = sorted({item for area in SKY_AREAS for item in area['roster']})
+    for sprite in map(species, items): catalog['sprites'][str(sprite['id'])] = sprite
+    for area in SKY_AREAS:
+        entry = {k: v for k, v in area.items() if k != 'map'} | sky_scenery(area)
+        entry['roster'] = [dex for dex, _ in area['roster']]; entry.setdefault('guests', [])
+        entry['collisionStatus'] = 'Conservative authored foot zones, not game collision data.'
+        catalog['areas'] = [a for a in catalog['areas'] if a['id'] != area['id']] + [entry]
+    (ROOT/'catalog.json').write_text(json.dumps(catalog, indent=2)+'\n', encoding='utf-8')
+    print(f'Merged {len(SKY_AREAS)} Explorers area(s) and {len(items)} species.')
+
 if __name__ == '__main__':
+    import sys
+    if '--sky-only' in sys.argv:
+        add_sky_areas(); raise SystemExit
     ROOT.mkdir(parents=True, exist_ok=True)
     for area in AREAS:
         area.update(export(area['id'], ROOT, ROOT.parent.parent / 'artifacts/scenery-sources'))
@@ -115,6 +148,10 @@ if __name__ == '__main__':
         area['roster']=[dex for dex,_ in area['roster']]
         area['guests']=[dict(id=dex,reason=reason,basis='Rescue Team DX' if dex==474 else 'Curated habitat inference') for dex,_,reason in GUESTS.get(area['id'], [])]
         area.setdefault('guestLimit', min(2, len(area['guests']), 8-len(area['roster'])))
+    for area in SKY_AREAS:
+        entry = {k: v for k, v in area.items() if k != 'map'} | sky_scenery(area)
+        entry['roster'] = [dex for dex, _ in area['roster']]; entry.setdefault('guests', [])
+        AREAS.append(entry); sprites += [species(item) for item in sorted(set(area['roster']))]
     data=dict(version=3, spriteRevision=REV, areas=AREAS, sprites={str(s['id']):s for s in sprites})
     (ROOT/'catalog.json').write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8')
     print(f'Downloaded {len(sprites)} species across {len(AREAS)} areas.')

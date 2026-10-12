@@ -1,16 +1,15 @@
 import Link from "next/link";
+import LostCave from "@/components/LostCave";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <p className="font-mono text-xs text-slate-600">404</p>
-      <h1 className="mt-2 text-2xl font-bold text-slate-200">Page not found</h1>
-      <Link
-        href="/"
-        className="mt-6 text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
-      >
+    <main className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6 py-16">
+      <p className="font-mono text-xs uppercase tracking-widest text-warm-400">404</p>
+      <h1 className="mt-2 font-serif text-4xl font-bold text-warm-900">Looks like we&apos;re lost</h1>
+      <LostCave />
+      <Link href="/" className="mt-8 self-start text-sm font-medium text-sage-600 underline-offset-4 transition-colors hover:text-sage-700 hover:underline">
         ← Back home
       </Link>
-    </div>
+    </main>
   );
 }

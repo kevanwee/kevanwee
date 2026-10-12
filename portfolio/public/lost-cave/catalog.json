@@ -1,0 +1,933 @@
+{
+  "version": 3,
+  "spriteRevision": "6cec0a7f7ed48390a2d22d9e11fd96079e6f406e",
+  "scenes": {
+    "starlitlake": {
+      "background": "starlitlake.png",
+      "size": [
+        504,
+        432
+      ],
+      "layers": [
+        {
+          "src": "starlitlake-animation-p1.png",
+          "x": 125,
+          "y": 80,
+          "w": 271,
+          "h": 204,
+          "frames": 21,
+          "durations": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ]
+        },
+        {
+          "src": "starlitlake-animation-p2.png",
+          "x": 77,
+          "y": 69,
+          "w": 350,
+          "h": 51,
+          "frames": 21,
+          "durations": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "src": "starlitlake-animation-p3.png",
+          "x": 144,
+          "y": 119,
+          "w": 216,
+          "h": 161,
+          "frames": 21,
+          "durations": [
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6,
+            6
+          ]
+        },
+        {
+          "src": "starlitlake-animation-p5.png",
+          "x": 185,
+          "y": 88,
+          "w": 127,
+          "h": 192,
+          "frames": 21,
+          "durations": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "src": "starlitlake-animation-p6.png",
+          "x": 184,
+          "y": 71,
+          "w": 127,
+          "h": 181,
+          "frames": 21,
+          "durations": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ]
+        },
+        {
+          "src": "starlitlake-animation-p9.png",
+          "x": 0,
+          "y": 149,
+          "w": 504,
+          "h": 115,
+          "frames": 15,
+          "durations": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ]
+        },
+        {
+          "src": "starlitlake-animation-p10.png",
+          "x": 40,
+          "y": 256,
+          "w": 424,
+          "h": 13,
+          "frames": 15,
+          "durations": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ]
+        }
+      ],
+      "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+      "map": "d04p31a",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+          "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d04p31a.bpl",
+          "sha256": "3afde66799559eb169740434b2aaa427ea424b36fb22b82467b421acad93b7c6"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d04p31a.bpc",
+          "sha256": "66b73190aae19b3d6e269c93ce7d88065b46ac424438923e1a495d1ebc74b8ca"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d04p31a.bma",
+          "sha256": "5715d618fa2493549c9dfe051d2ed0c8b14aab67875616c6aeb95bfa33fab589"
+        }
+      ],
+      "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+      "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft.",
+      "name": "a starlit cave lake",
+      "route": [
+        [
+          255,
+          396
+        ],
+        [
+          250,
+          322
+        ],
+        [
+          204,
+          266
+        ],
+        [
+          254,
+          244
+        ],
+        [
+          302,
+          266
+        ],
+        [
+          266,
+          322
+        ]
+      ],
+      "residents": [
+        {
+          "key": "diancie",
+          "at": [
+            262,
+            182
+          ],
+          "direction": 0
+        },
+        {
+          "key": "carbink",
+          "at": [
+            204,
+            212
+          ],
+          "direction": 1
+        },
+        {
+          "key": "carbink",
+          "at": [
+            318,
+            214
+          ],
+          "direction": 7
+        },
+        {
+          "key": "carbink",
+          "at": [
+            226,
+            168
+          ],
+          "direction": 1
+        }
+      ]
+    },
+    "crystallakeshore": {
+      "background": "crystallakeshore.png",
+      "size": [
+        360,
+        408
+      ],
+      "layers": [
+        {
+          "src": "crystallakeshore-animation-tiles.png",
+          "x": 0,
+          "y": 0,
+          "w": 330,
+          "h": 174,
+          "frames": 4,
+          "durations": [
+            10,
+            10,
+            10,
+            10
+          ]
+        }
+      ],
+      "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+      "map": "d17p31a",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+          "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p31a.bpl",
+          "sha256": "a980879cdf44d07f647c3646a8b181e3e242d5173f759579d50168d49a5b3a9e"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p31a.bpc",
+          "sha256": "a25285b7c271809734aabb5435d57325ec405bb11584670943748c13cbc635b1"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p31a.bma",
+          "sha256": "9f18896ce8b48253a49be297b6ce3ce7fe2b5f200c31f3ba0428d41b9e00e4af"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p31a1.bpa",
+          "sha256": "6a3ab02bfd06ba63f0ecb1187cbfc178697e4247d330ae96e778288bbc4d48f7"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p31a5.bpa",
+          "sha256": "8bf1fa0f9d859754b404ea03d03bbf092261e6b4d1787f42e03ce7cde9b68d13"
+        }
+      ],
+      "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+      "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft.",
+      "name": "a crystal lakeshore",
+      "route": [
+        [
+          60,
+          252
+        ],
+        [
+          150,
+          264
+        ],
+        [
+          250,
+          252
+        ],
+        [
+          312,
+          270
+        ],
+        [
+          200,
+          284
+        ],
+        [
+          110,
+          278
+        ]
+      ],
+      "residents": [
+        {
+          "key": "diancie",
+          "at": [
+            182,
+            186
+          ],
+          "direction": 0
+        },
+        {
+          "key": "carbink",
+          "at": [
+            112,
+            182
+          ],
+          "direction": 1
+        },
+        {
+          "key": "carbink",
+          "at": [
+            254,
+            180
+          ],
+          "direction": 7
+        },
+        {
+          "key": "carbink",
+          "at": [
+            318,
+            206
+          ],
+          "direction": 7
+        }
+      ]
+    },
+    "crystalcrossing": {
+      "background": "crystalcrossing.png",
+      "size": [
+        600,
+        480
+      ],
+      "layers": [
+        {
+          "src": "crystalcrossing-animation-p8.png",
+          "x": 87,
+          "y": 96,
+          "w": 426,
+          "h": 239,
+          "frames": 19,
+          "durations": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "src": "crystalcrossing-animation-p9.png",
+          "x": 240,
+          "y": 98,
+          "w": 5,
+          "h": 20,
+          "frames": 19,
+          "durations": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        }
+      ],
+      "sourceRevision": "fc85040831b248ecb690a71898010fe837091613",
+      "map": "d17p11a",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/language-specific/US/MAP_BG/bg_list.dat",
+          "sha256": "81f68a7e9316765f2605beacab54f9cba862d3de03891e911d8561b5de1bb025"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bpl",
+          "sha256": "d1e65c1fe94efd2eded08b6adc7de2b6005b4890a1d0180cbfbd3336cfe2c689"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bpc",
+          "sha256": "dd610aae377766adfcc716d46eee17865c4385bc2aba2ec874bef3e43536927d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pmd-sky/fc85040831b248ecb690a71898010fe837091613/files/MAP_BG/d17p11a.bma",
+          "sha256": "896b5fe03b0b896fc8c2e4dbbd0b0ce5d629713dce86a177e7b8deff7d96e241"
+        }
+      ],
+      "sceneryAnimation": "Native palette (one layer per palette) and tile animation at 60 ticks/second, decoded with skytemple-files; only changing pixels are layered.",
+      "credit": "Pok\u00e9mon Mystery Dungeon: Explorers of Sky map data via pret/pmd-sky; artwork \u00a9 Nintendo, Creatures, GAME FREAK, Spike Chunsoft.",
+      "name": "Crystal Crossing",
+      "base": "/friend-areas/",
+      "route": [
+        [
+          214,
+          336
+        ],
+        [
+          300,
+          394
+        ],
+        [
+          392,
+          336
+        ],
+        [
+          352,
+          304
+        ],
+        [
+          248,
+          304
+        ]
+      ],
+      "residents": [
+        {
+          "key": "diancie",
+          "at": [
+            300,
+            274
+          ],
+          "direction": 0
+        },
+        {
+          "key": "carbink",
+          "at": [
+            226,
+            264
+          ],
+          "direction": 1
+        },
+        {
+          "key": "carbink",
+          "at": [
+            378,
+            264
+          ],
+          "direction": 7
+        },
+        {
+          "key": "carbink",
+          "at": [
+            158,
+            222
+          ],
+          "direction": 1
+        }
+      ]
+    }
+  },
+  "sprites": {
+    "shiny-psyduck": {
+      "name": "Shiny Psyduck",
+      "source": "https://raw.githubusercontent.com/PMDCollab/SpriteCollab/6cec0a7f7ed48390a2d22d9e11fd96079e6f406e/sprite/0054/0000/0001/",
+      "credits": [
+        "Discord:<@!195280695009083392>",
+        "ShyStarryRain"
+      ],
+      "animations": {
+        "Idle": {
+          "src": "sprites/shiny-psyduck/Idle-Anim.png",
+          "w": 24,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            16,
+            20,
+            16,
+            20
+          ],
+          "origins": [
+            [
+              11.5,
+              27
+            ],
+            [
+              11.5,
+              28
+            ],
+            [
+              11.0,
+              27
+            ],
+            [
+              12.0,
+              28
+            ],
+            [
+              11.5,
+              27
+            ],
+            [
+              11.0,
+              28
+            ],
+            [
+              12.0,
+              27
+            ],
+            [
+              11.5,
+              28
+            ]
+          ],
+          "sha256": "a499c4907aee59419367399be93f310eecf894bb60feab7be1cf62ef3f5a3017"
+        },
+        "Walk": {
+          "src": "sprites/shiny-psyduck/Walk-Anim.png",
+          "w": 24,
+          "h": 40,
+          "rows": 8,
+          "durations": [
+            8,
+            12,
+            8,
+            12
+          ],
+          "origins": [
+            [
+              11.5,
+              27
+            ],
+            [
+              11.5,
+              28
+            ],
+            [
+              11.0,
+              27
+            ],
+            [
+              12.0,
+              28
+            ],
+            [
+              11.5,
+              27
+            ],
+            [
+              11.0,
+              28
+            ],
+            [
+              12.0,
+              27
+            ],
+            [
+              11.5,
+              28
+            ]
+          ],
+          "sha256": "a499c4907aee59419367399be93f310eecf894bb60feab7be1cf62ef3f5a3017"
+        }
+      },
+      "base": "/lost-cave/"
+    },
+    "diancie": {
+      "id": 719,
+      "name": "Diancie",
+      "animations": {
+        "Idle": {
+          "src": "sprites/719/Idle-Anim.png",
+          "w": 24,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            12,
+            12,
+            12,
+            12,
+            8,
+            8,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              11.5,
+              31
+            ],
+            [
+              12.5,
+              31
+            ],
+            [
+              12.5,
+              31
+            ],
+            [
+              12.5,
+              32
+            ],
+            [
+              11.5,
+              31
+            ],
+            [
+              11.5,
+              32
+            ],
+            [
+              10.5,
+              31
+            ],
+            [
+              12.5,
+              31
+            ]
+          ],
+          "sha256": "47e6dcdc32e60f3e3374c6cdf64e6fd9ae46309ff399999f7478fea29251d766",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/719/Walk-Anim.png",
+          "w": 32,
+          "h": 56,
+          "rows": 8,
+          "durations": [
+            8,
+            8,
+            10,
+            8,
+            10
+          ],
+          "origins": [
+            [
+              15.5,
+              33
+            ],
+            [
+              16.0,
+              33
+            ],
+            [
+              18.0,
+              31
+            ],
+            [
+              17.5,
+              32
+            ],
+            [
+              15.5,
+              34
+            ],
+            [
+              14.5,
+              32
+            ],
+            [
+              14.0,
+              31
+            ],
+            [
+              16.0,
+              33
+            ]
+          ],
+          "sha256": "2ac63b23e8f83b5beeedd56ee30af1931a572e04d711545f59fb72e8c2aa4a4c",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/719/Sleep-Anim.png",
+          "w": 24,
+          "h": 56,
+          "rows": 1,
+          "durations": [
+            16,
+            12,
+            16,
+            16,
+            12,
+            16
+          ],
+          "origins": [
+            [
+              12.0,
+              29
+            ]
+          ],
+          "sha256": "0c36051808d089709e1a6ac08aeae119b72c182ed265635a3a992b7433540c12",
+          "sourceAnimation": "Sleep"
+        }
+      },
+      "base": "/friend-areas/"
+    },
+    "carbink": {
+      "id": 703,
+      "name": "Carbink",
+      "animations": {
+        "Idle": {
+          "src": "sprites/703/Idle-Anim.png",
+          "w": 24,
+          "h": 48,
+          "rows": 8,
+          "durations": [
+            24,
+            8,
+            8,
+            24,
+            8,
+            8
+          ],
+          "origins": [
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ],
+            [
+              12.5,
+              27
+            ]
+          ],
+          "sha256": "2cdeb8d18528a413b7aaf5beedac887c3112f4ece25ad6ef0298d9826942e48f",
+          "sourceAnimation": "Idle"
+        },
+        "Walk": {
+          "src": "sprites/703/Walk-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 8,
+          "durations": [
+            4,
+            8,
+            8,
+            8,
+            8,
+            8,
+            4
+          ],
+          "origins": [
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ],
+            [
+              12.5,
+              22
+            ]
+          ],
+          "sha256": "6e1ee41d5d9034093367e34b1edd5e9f187d332ea2bbeb33ed25ddb511333429",
+          "sourceAnimation": "Walk"
+        },
+        "Sleep": {
+          "src": "sprites/703/Sleep-Anim.png",
+          "w": 24,
+          "h": 32,
+          "rows": 1,
+          "durations": [
+            8,
+            8,
+            16,
+            8,
+            8,
+            8,
+            16,
+            8
+          ],
+          "origins": [
+            [
+              12.5,
+              20
+            ]
+          ],
+          "sha256": "17ea78fbe2b76f0195d17e51f8537e65da12f61ea8e0892327080175746800f1",
+          "sourceAnimation": "Sleep"
+        }
+      },
+      "base": "/friend-areas/"
+    }
+  }
+}

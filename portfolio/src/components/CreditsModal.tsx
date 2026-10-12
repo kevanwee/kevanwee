@@ -32,6 +32,12 @@ const CREDITS = [
     description: "Thunder Meadow (Red/Blue Rescue Team) and the Explorer Rank badges (Explorers of Time/Darkness and Sky), game assets",
   },
   {
+    category: "Explorers scenery",
+    name: "pret/pmd-sky · skytemple-files",
+    href: "https://github.com/pret/pmd-sky",
+    description: "Crystal Crossing (its Friend Area) and the 404 page's starlit cave lake and crystal lakeshore (Explorers of Sky), with their native palette and tile animation, decoded from the decompilation's map data with skytemple-files. The 404 page's shiny Psyduck sprite is by ShyStarryRain and another SpriteCollab contributor",
+  },
+  {
     category: "Item sprites",
     name: "PokeAPI sprites · WikiDex",
     href: "https://github.com/PokeAPI/sprites",
