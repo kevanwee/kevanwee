@@ -18,7 +18,6 @@ import PokemonPcHost from "@/components/PokemonPcHost";
 import { PokemonCursorProvider } from "@/components/PokemonCursorContext";
 
 const PokemonOverworld = dynamic(() => import("@/components/PokemonOverworld"), { ssr: false });
-const YveltalRoamer = dynamic(() => import("@/components/YveltalRoamer"), { ssr: false });
 
 const SECTIONS = ["about", "experience", "projects", "media", "contact"] as const;
 
@@ -70,7 +69,6 @@ export default function Home() {
       <FusionWheel />
       <TeddiursaRoamer />
       <PokemonOverworld />
-      <YveltalRoamer />
 
       <div className="portfolio-shell relative z-10 mx-auto max-w-screen-xl px-6 pt-[var(--viewport-offset)] md:px-12 lg:px-24">
         <div className="lg:flex lg:gap-16 xl:gap-20">

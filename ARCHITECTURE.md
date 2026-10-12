@@ -59,22 +59,20 @@ and skips builds when nothing changed (`vercel.json`); pull requests get preview
 
 ### Page composition
 
-`LeftPanel` is always sticky at laptop/desktop widths (1024px and above). Compact
-typography and spacing keep ordinary laptop views within the viewport; unusually
-short windows or enlarged text scroll inside the pinned frame. Controls keep
-their 44px targets. Phones retain normal document flow. Section navigation targets
-the visible heading, skipping decorative top padding. Yveltal's roost reserves
-the full awakening footprint while it plays instead of scaling down the sprite.
-See [tasks/responsive-panel.md](tasks/responsive-panel.md) for the viewport review
-and regression matrix. The retained `left-panel-zoom` selector no longer scales
-the interface.
+`LeftPanel` is always sticky at laptop/desktop widths (1024px and above) and keeps the
+classic layout: stacked name, 11px dashed section links, social icons directly under them, and
+the green Resume action. It scales continuously to the window height (CSS zoom on
+`.left-panel-zoom`, 50–100%), so browser zoom rescales rather than recomposing; only below the
+50% floor does the pinned frame scroll inside itself. Phones and tablets stack the columns with
+44px targets. Section navigation targets the visible heading, skipping decorative top padding.
+See `scripts/test-responsive-panel.cjs` for the viewport matrix.
 
 ```mermaid
 flowchart LR
     page["page.tsx"]
     subgraph overlay["Page-wide layers"]
         cursor["PokemonCursor<br/>FusionWheel"]
-        roam["PokemonOverworld<br/>YveltalRoamer<br/>TeddiursaRoamer"]
+        roam["PokemonOverworld<br/>TeddiursaRoamer"]
         pc["PokemonPcHost<br/><i>storage system</i>"]
     end
     subgraph left["LeftPanel"]
@@ -92,7 +90,7 @@ flowchart LR
 ```
 
 - **Pokémon layers.** The cursor companion, roaming overworld (Route 111 and Mauville maps in
-  `public/worlds`), Yveltal and Teddiursa sit above the page. `lib/motion.ts` and
+  `public/worlds`) and Teddiursa sit above the page. `lib/motion.ts` and
   `useAnimationVisibility` pause animation when it's offscreen, in a hidden tab or under reduced motion.
 - **Pokémon PC** (`components/pc/`). One storage system: the left bar lists boxes (cursor
   companion, Transform Forest, one per Friend Area, free roaming). Choices persist in

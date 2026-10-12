@@ -49,7 +49,7 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
     const fit = () => {
       raf = 0;
       if (!desktop.matches) {
-        aside.style.zoom = aside.style.minHeight = "";
+        aside.style.zoom = "";
         delete frame.dataset.fit;
         return;
       }
@@ -57,14 +57,11 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
       const available = document.documentElement.clientHeight - (parseFloat(style.top) || 0) - 24
         - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
       aside.style.zoom = "1";
-      aside.style.minHeight = "";
       const natural = aside.getBoundingClientRect().height;
-      // Below 60% text gets too small; the panel then scrolls with the page instead.
-      const scale = Math.max(0.6, Math.min(1, available / natural));
-      const next = [String(Math.round(scale * 1000) / 1000), `${Math.floor(available / scale)}px`];
+      // Below 50% text gets too small; only then does the pinned panel scroll inside itself.
+      const scale = Math.max(0.5, Math.min(1, available / natural));
+      aside.style.zoom = String(Math.round(scale * 1000) / 1000);
       frame.dataset.fit = natural * scale > available + 1 ? "overflow" : "fit";
-      // Fitting panels fill the window height so the links sit at the bottom, as before.
-      [aside.style.zoom, aside.style.minHeight] = frame.dataset.fit === "fit" ? next : [next[0], ""];
     };
     const schedule = () => { if (!raf) raf = requestAnimationFrame(fit); };
     fit();
@@ -146,9 +143,6 @@ export default function LeftPanel({ activeSection, onNavClick }: LeftPanelProps)
               Resume / CV
             </button>
             <SshLauncher className="ssh-launcher inline-flex items-center gap-1.5 rounded-full border border-cream-200 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-400 transition-all duration-200 hover:border-sage-300 hover:text-sage-600" />
-            <span className="yveltal-roost" data-yveltal-nest>
-              <span className="yveltal-ledge" data-yveltal-perch />
-            </span>
           </div>
 
           {/* Opens either assistant with a question about this portfolio already typed in */}

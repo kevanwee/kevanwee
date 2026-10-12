@@ -11,7 +11,6 @@
     "test:friend-areas": "node scripts/test-friend-areas.mjs",
     "test:overworld": "node scripts/test-overworld.cjs",
     "test:overworld:browser": "node scripts/test-overworld-browser.cjs",
-    "test:yveltal:browser": "node scripts/test-yveltal-browser.cjs",
     "test:design:browser": "node scripts/test-design-refinements.cjs",
     "test:responsive:browser": "node scripts/test-responsive-panel.cjs",
     "test:navigation:browser": "node scripts/test-section-navigation.cjs",

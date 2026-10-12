@@ -4,14 +4,9 @@
 .portfolio-home .text-warm-500 { color: #65574c; }
 .left-panel-zoom > div:first-child > p { color: var(--portfolio-muted); }
 .left-panel-zoom .portfolio-intro { max-width: 320px; font-size: 14px; line-height: 1.75; }
-.left-panel-zoom nav button { min-height: 44px; }
-.left-panel-zoom nav ul { display: grid; gap: 2px; }
-.left-panel-zoom nav ul > li { margin: 0 !important; }
-.left-panel-zoom nav button > span:last-child { font-size: 12px; letter-spacing: .12em; }
 .left-panel-zoom .resume-launcher { background: #3a6b59; color: #fff; border-color: #3a6b59; min-height: 40px; padding-inline: 16px; }
 .left-panel-zoom .resume-launcher:hover { background: #2c5244; }
 .left-panel-zoom a[target="_blank"] { min-height: 36px; }
-.left-panel-zoom a[aria-label] { width: 44px; height: 44px; }
 .left-panel-zoom h1 { line-height: 1.12; letter-spacing: -.035em; }
 /* Section rules stop at dialogs: a dialog opened from a section keeps its own type scale. */
 main #projects [data-overworld-kind="featured"] h3:not([role="dialog"] *) { font-size: 23px; line-height: 1.3; }
@@ -23,7 +18,6 @@ main :is(#experience,#projects,#media,#contact) > div > h2 { font-size: 34px; }
 @media (min-width: 1024px) {
  .portfolio-shell { padding-inline: 64px; }
  .portfolio-home { --viewport-offset: clamp(24px, 6vh, 80px) !important; }
- .left-panel-zoom nav { margin-top: 24px; }
  .left-panel-zoom .intro-divider { margin-block: 20px; }
 }
 @media (max-width: 1023px) {
@@ -35,6 +29,8 @@ main :is(#experience,#projects,#media,#contact) > div > h2 { font-size: 34px; }
  .left-panel-zoom .intro-divider { margin-block: 20px; }
  .left-panel-zoom nav { display: block; margin-top: 24px; }
  .left-panel-zoom nav ul { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+ .left-panel-zoom nav ul > li { margin: 0 !important; }
+ .left-panel-zoom a[aria-label], .portfolio-panel-footer button { width: 44px; height: 44px; }
  .left-panel-zoom nav button { min-height: 44px; gap: 0; }
  .left-panel-zoom nav button > span:first-child { display: none; }
  .left-panel-zoom nav button > span:last-child { font-size: 11px; letter-spacing: .1em; }
@@ -45,42 +41,23 @@ main :is(#experience,#projects,#media,#contact) > div > h2 { font-size: 34px; }
  main #projects [data-overworld-kind="featured"] h3 { font-size: 22px; }
 }
 
-/* Both actions share one geometry; the cocoon has its own reserved space. */
+/* Both actions share one geometry. */
 .portfolio-actions { flex-wrap: wrap; }
 .portfolio-actions .resume-launcher,
 .portfolio-actions [data-ssh-launcher] { height: 44px; min-height: 44px; white-space: nowrap; }
-.yveltal-roost { position: relative; flex: 0 0 64px; height: 64px; align-self: center; }
-.yveltal-ledge { position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: #e8e2d5; }
-.yveltal-roost .overworld-resident.yveltal-nested { bottom: 1px; }
-/* The awakening spreads above and below its original foot anchor. On phones the roost grows to
-   keep it clear of the copy; on desktop the roost sits in the blank space at the end of the
-   action row, out of flow, so the awakening never moves the buttons. */
-@media (max-width: 1023px) {
- .yveltal-roost[data-yveltal-mode="hatching"] .yveltal-ledge { bottom: 64px; }
- .yveltal-roost[data-yveltal-mode="hatching"] .yveltal-nested { bottom: 65px; }
- .yveltal-roost[data-yveltal-mode="hatching"] { flex-basis: 172px; height: 184px; }
- .yveltal-roost[data-yveltal-mode="perched"] { flex-basis: 96px; height: 84px; }
-}
-@media (min-width: 1024px) {
- .portfolio-actions { position: relative; }
- .portfolio-actions .yveltal-roost { position: absolute; right: -24px; bottom: 0; width: 96px; height: 64px; }
- .yveltal-roost .yveltal-nested { z-index: 40; }
-}
 #contact { min-height: calc(100svh + 6rem); }
 .experience-heading { flex-wrap: wrap; }
 .portfolio-panel-frame { top: var(--viewport-offset); }
-.portfolio-panel-footer button { min-width: 44px; min-height: 44px; }
-/* Desktop keeps one layout: the sticky frame stays outside the zoom (Chrome resolves a zoomed
-   sticky offset in zoomed units and snaps), and LeftPanel scales the aside to the window height.
-   No inner scroll bar; below the minimum scale the panel scrolls with the page instead. */
+/* Desktop keeps the classic panel (11px section links 16px apart, 36px social icons directly
+   under them). The sticky frame stays outside the zoom (Chrome resolves a zoomed sticky offset in
+   zoomed units and snaps), and LeftPanel scales the aside to the window height. It always stays
+   pinned; only below the 50% floor does it scroll inside itself. */
 @media (min-width: 1024px) {
  .portfolio-panel-frame { position: sticky; padding: 4px; }
- .portfolio-panel-frame[data-fit="overflow"] { position: static; }
- .left-panel-zoom { display: flex; flex-direction: column; justify-content: space-between; }
+ .portfolio-panel-frame[data-fit="overflow"] { max-height: calc(100dvh - var(--viewport-offset) - 24px); overflow-y: auto; scrollbar-width: thin; }
  .left-panel-zoom h1 { font-size: 52px; }
 }
 @media (max-width: 360px) {
  .portfolio-actions { column-gap: 6px; }
  .portfolio-actions .resume-launcher { padding-inline: 10px; letter-spacing: .12em; }
- .yveltal-roost { flex-basis: 52px; }
 }

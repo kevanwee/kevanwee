@@ -83,7 +83,7 @@ async function scrollSurface(page, id) {
           // The existing Experience filters overflow at 320px. Verify this feature
           // adds no document width, without silently changing unrelated page layout.
           const widthWithResidents = document.documentElement.scrollWidth;
-          const overlays = [document.querySelector('.pokemon-overworld'), document.querySelector('.silvally-resident'), document.querySelector('.yveltal-layer')];
+          const overlays = [document.querySelector('.pokemon-overworld'), document.querySelector('.silvally-resident')].filter(Boolean);
           overlays.forEach(e => { e.style.display = 'none'; });
           const baselineWidth = document.documentElement.scrollWidth;
           overlays.forEach(e => e.style.removeProperty('display'));
