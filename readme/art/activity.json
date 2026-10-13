@@ -1,32 +1,10 @@
 {
- "generatedAt": "2026-10-13T05:23:42+00:00",
+ "generatedAt": "2026-10-13T06:07:42+00:00",
  "speaker": "Diancie",
  "lines": [
   {
-   "mood": "Happy",
-   "when": "2026-10-13T05:22:53+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "kevanwee"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
    "mood": "Joyous",
-   "when": "2026-10-13T05:22:52+00:00",
+   "when": "2026-10-13T06:07:20+00:00",
    "parts": [
     [
      "name",
@@ -38,7 +16,7 @@
     ],
     [
      "number",
-     "#70"
+     "#61"
     ],
     [
      "text",
@@ -46,7 +24,7 @@
     ],
     [
      "place",
-     "kevanwee"
+     "voracity"
     ],
     [
      "text",
@@ -56,7 +34,7 @@
   },
   {
    "mood": "Normal",
-   "when": "2026-10-13T04:56:48+00:00",
+   "when": "2026-10-13T06:07:01+00:00",
    "parts": [
     [
      "name",
@@ -64,11 +42,19 @@
     ],
     [
      "text",
-     " starred "
+     " opened pull request "
+    ],
+    [
+     "number",
+     "#71"
+    ],
+    [
+     "text",
+     " on "
     ],
     [
      "place",
-     "latent-spaces/brag"
+     "kevanwee"
     ],
     [
      "text",
@@ -78,11 +64,11 @@
   },
   {
    "mood": "Joyous",
-   "when": "2026-10-13T04:49:00+00:00",
+   "when": "2026-10-13T05:54:18+00:00",
    "parts": [
     [
      "place",
-     "scrum-skill"
+     "pmd-agents"
     ],
     [
      "text",
@@ -90,11 +76,41 @@
     ],
     [
      "number",
-     "v0.5.1"
+     "v0.7.1"
     ],
     [
      "text",
      " was released!"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-13T05:53:18+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request "
+    ],
+    [
+     "number",
+     "#16"
+    ],
+    [
+     "text",
+     " was merged into "
+    ],
+    [
+     "place",
+     "pmd-agents"
+    ],
+    [
+     "text",
+     "!"
     ]
    ]
   }
