@@ -144,6 +144,8 @@
 <a href="https://kevanwee.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-bart-dark.svg" /><img src="./readme/art/card-bart-light.svg" alt="bart" width="49%" /></picture></a>
 <br>
 <a href="https://www.legalbenchmarks.ai/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legalbenchmarks-dark.svg" /><img src="./readme/art/card-legalbenchmarks-light.svg" alt="legalbenchmarks.ai" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/scrum-skill"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-scrum-skill-dark.svg" /><img src="./readme/art/card-scrum-skill-light.svg" alt="scrum skill" width="49%" /></picture></a>
+<br>
 <a href="https://kevanwee.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-voracity-dark.svg" /><img src="./readme/art/card-voracity-light.svg" alt="voracity" width="49%" /></picture></a>
 </p>
 
@@ -206,12 +208,13 @@
 <a href="https://github.com/kevanwee/voracity-watcher"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-voracity-watcher-dark.svg" /><img src="./readme/art/card-voracity-watcher-light.svg" alt="voracity watcher" width="49%" /></picture></a>
 <a href="https://github.com/kevanwee/theoffice"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-theoffice-dark.svg" /><img src="./readme/art/card-theoffice-light.svg" alt="the office" width="49%" /></picture></a>
 <br>
+<a href="https://github.com/kevanwee/pmd-agents"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-pmd-agents-dark.svg" /><img src="./readme/art/card-pmd-agents-light.svg" alt="pmd agents" width="49%" /></picture></a>
 <a href="https://github.com/kevanwee/pmdsvgworld"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-pmdsvgworld-dark.svg" /><img src="./readme/art/card-pmdsvgworld-light.svg" alt="pmd svg world" width="49%" /></picture></a>
+<br>
 <a href="https://github.com/kevanwee/kevanwee"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-kevanwee-dark.svg" /><img src="./readme/art/card-kevanwee-light.svg" alt="kevanwee portfolio" width="49%" /></picture></a>
-<br>
 <a href="https://github.com/kevanwee/kevanweeportfolio"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-kevanweeportfolio-dark.svg" /><img src="./readme/art/card-kevanweeportfolio-light.svg" alt="3d portfolio" width="49%" /></picture></a>
-<a href="https://github.com/kevanwee/bookworm"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-bookworm-dark.svg" /><img src="./readme/art/card-bookworm-light.svg" alt="book worm" width="49%" /></picture></a>
 <br>
+<a href="https://github.com/kevanwee/bookworm"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-bookworm-dark.svg" /><img src="./readme/art/card-bookworm-light.svg" alt="book worm" width="49%" /></picture></a>
 <a href="https://github.com/kevanwee/HUHH"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-huhh-dark.svg" /><img src="./readme/art/card-huhh-light.svg" alt="huhh" width="49%" /></picture></a>
 </p>
 

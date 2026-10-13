@@ -19,6 +19,7 @@ PICKS = {
     "shiny-castform": "0351/0000/0001", "shiny-castform-sunny": "0351/0001/0001", "shiny-castform-rainy": "0351/0002/0001",  # its company
     "charcadet": "0935",
     "treecko": "0252",  # non-shiny Explorer team partner (Squirtle leads)
+    "riolu": "0447",  # PMD Agents' default guild spawn, on its README card
 }
 OUT = Path("sprites")
 
