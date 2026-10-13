@@ -173,10 +173,9 @@ export default function FriendAreas() {
                   value={selected}
                   onChange={(event) => choose(event.target.value)}
                   style={{
-                    fontSize: 20,
-                    background: "transparent",
+                    fontSize: 17,
                     maxWidth: "60vw",
-                    padding: "5px 0",
+                    marginTop: 4,
                   }}
                 >
                   {/* Grouped by the game whose scenery each area uses. */}

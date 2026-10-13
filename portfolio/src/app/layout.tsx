@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import "./design-refinements.css";
+import "./dropdowns.css";
 
 const inter = Inter({
   subsets: ["latin"],
