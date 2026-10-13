@@ -39,6 +39,17 @@
     "label": "legalbenchmarks.ai"
    },
    {
+    "slug": "scrum-skill",
+    "title": "scrum skill",
+    "desc": "scrum for codex and claude code: ai teammates plan sprints, verify outcomes and hand off reliably",
+    "who": "oshawott",
+    "mode": "walk",
+    "repo": "scrum-skill",
+    "url": "https://github.com/kevanwee/scrum-skill",
+    "tags": [],
+    "label": "github"
+   },
+   {
     "slug": "voracity",
     "title": "voracity",
     "desc": "my pokémon home base: notes, reminders, legal and tech tools, a second brain, and the eevee garden",
@@ -374,6 +385,17 @@
     "mode": "walk",
     "repo": "theoffice",
     "url": "https://github.com/kevanwee/theoffice",
+    "tags": [],
+    "label": "github"
+   },
+   {
+    "slug": "pmd-agents",
+    "title": "pmd agents",
+    "desc": "vs code extension: your coding agents as a pokémon mystery dungeon guild, in every friend area",
+    "who": "riolu",
+    "mode": "walk",
+    "repo": "pmd-agents",
+    "url": "https://github.com/kevanwee/pmd-agents",
     "tags": [],
     "label": "github"
    },

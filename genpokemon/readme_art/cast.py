@@ -24,7 +24,7 @@ EXCLUDED = {"vaporeon", "jolteon", "flareon", "umbreon", "sylveon", "teddiursa",
             "mega-diancie", "ceruledge", "greninja", "mega-greninja", "dragonite", "shiny-mega-dragonite", "ironvaliant", "yveltal",
             "darkrai", "zygarde", "armarouge", "mega-rayquaza", "primal-kyogre"}
 CARDS = {
-    "lq-plugins": ("kleavor", "walk"), "bart": ("solgaleo", "idle"), "legalbenchmarks": ("silvally", "walk"), "voracity": ("eevee", "walk"),
+    "lq-plugins": ("kleavor", "walk"), "bart": ("solgaleo", "idle"), "legalbenchmarks": ("silvally", "walk"), "voracity": ("eevee", "walk"), "scrum-skill": ("oshawott", "walk"), "pmd-agents": ("riolu", "walk"),
     "sg-legal-corpus": ("goomy", "walk"), "sg-deadline": ("rowlet", "idle"), "citecheck": ("mega-absol", "walk"), "chronology": ("shiny-trapinch", "walk"),
     "oblig-register": ("fidough", "sleep"), "bundlebuild": ("corphish", "walk"), "playbook-as-code": ("entei", "idle"), "ipatlas": ("tyrunt", "walk"),
     "copycat": ("skitty", "walk"), "sightstone": ("shiny-cranidos", "sleep"), "sal-citation-generator": ("shiny-treecko", "walk"), "apac-lateral-tracker": ("breloom", "walk"),

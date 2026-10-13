@@ -250,5 +250,13 @@ null,
 "potential-conflict-identifier": [
 "HTML",
 0
+],
+"scrum-skill": [
+"Python",
+0
+],
+"pmd-agents": [
+"TypeScript",
+0
 ]
 }

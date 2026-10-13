@@ -2104,5 +2104,41 @@
    ],
    "rows": 1
   }
+ },
+ "riolu": {
+  "Walk": {
+   "src": "sprites/riolu/Walk-Anim.png",
+   "w": 24,
+   "h": 40,
+   "durations": [
+    6,
+    6,
+    6,
+    6
+   ],
+   "rows": 8
+  },
+  "Idle": {
+   "src": "sprites/riolu/Idle-Anim.png",
+   "w": 32,
+   "h": 40,
+   "durations": [
+    40,
+    16,
+    12,
+    16
+   ],
+   "rows": 8
+  },
+  "Sleep": {
+   "src": "sprites/riolu/Sleep-Anim.png",
+   "w": 24,
+   "h": 32,
+   "durations": [
+    30,
+    35
+   ],
+   "rows": 1
+  }
  }
 }

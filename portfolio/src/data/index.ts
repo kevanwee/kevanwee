@@ -474,6 +474,18 @@ export const featuredProjects: FeaturedProject[] = [
     ],
   },
   {
+    id: "scrum-skill",
+    title: "scrum-skill",
+    role: "Creator",
+    description:
+      "Scrum coordination for Codex and Claude Code. Invoke it to create or resume a Scrum workspace, refine a backlog, plan and deliver a bounded slice, verify outcomes and leave a reliable handoff, with engineering, QA, design and domain reviewers chosen per project and a human Product Owner accountable for decisions. Ships as a plugin for both hosts, with a project dashboard skill.",
+    tags: ["AI Agents", "Claude Code", "Codex", "Scrum", "Python"],
+    github: "https://github.com/kevanwee/scrum-skill",
+    external: null,
+    isPrivate: false,
+    collab: null,
+  },
+  {
     id: "bart",
     title: "BART",
     description:
@@ -512,6 +524,14 @@ export const featuredProjects: FeaturedProject[] = [
 ];
 
 export const otherProjects: OtherProject[] = [
+  {
+    title: "pmd-agents",
+    description:
+      "VS Code extension that shows your Codex and Claude Code sessions as Pokémon in a Mystery Dungeon guild, across 73 animated Friend Areas.",
+    tags: ["TypeScript", "VS Code", "AI Agents"],
+    github: "https://github.com/kevanwee/pmd-agents",
+    external: null,
+  },
   {
     title: "copycat",
     description:

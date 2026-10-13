@@ -14,6 +14,7 @@ projects = [
         P("lq-plugins", "legalquants plugins", "open-source legal plugins launched with openai's astra for law; my part: the $cite-check and playbook skills", "mega-gallade", "walk", repo="lq-plugin-oss", url="https://github.com/LegalQuants/lq-plugin-oss"),
         P("bart", "bart", "word add-in that verifies statutory citations against sso with hybrid retrieval and version-accurate matching, with a&o shearman", "mega-gardevoir", "walk", repo="-", url="https://kevanwee.vercel.app/", tags=["private"], label="portfolio"),
         P("legalbenchmarks", "legalbenchmarks.ai", "open-access benchmarks for legal ai tools; steering committee member", "silvally", "walk", repo="-", url="https://www.legalbenchmarks.ai/", label="legalbenchmarks.ai"),
+        P("scrum-skill", "scrum skill", "scrum for codex and claude code: ai teammates plan sprints, verify outcomes and hand off reliably", "oshawott", "walk"),
         P("voracity", "voracity", "my pokémon home base: notes, reminders, legal and tech tools, a second brain, and the eevee garden", "eevee", "walk", repo="voracity", url="https://kevanwee.vercel.app/", tags=["private"], label="portfolio"),
     ]),
     G("legal engineering toolkit", "fuecoco", [
@@ -51,6 +52,7 @@ projects = [
     G("others", "jirachi", [
         P("voracity-watcher", "voracity watcher", "polite site watcher: obeys robots.txt and sends changes to telegram via ica", "growlithe", "idle"),
         P("theoffice", "the office", "vs code extension: animated pokémon that follow your ai agents as they code", "froakie", "walk"),
+        P("pmd-agents", "pmd agents", "vs code extension: your coding agents as a pokémon mystery dungeon guild, in every friend area", "riolu", "walk"),
         P("pmdsvgworld", "pmd svg world", "a pokémon mystery dungeon-style world as one self-contained, github-embeddable svg", "dratini", "walk"),
         P("kevanwee", "kevanwee portfolio", "this portfolio site", "fuecoco", "walk"),
         P("kevanweeportfolio", "3d portfolio", "javascript-based website that displays 3d objects", "shiny-dratini", "idle"),
