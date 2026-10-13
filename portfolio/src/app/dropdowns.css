@@ -1,0 +1,97 @@
+/* Dropdowns: one look for every <select>. Chromium's customizable select (appearance:
+   base-select) styles the open list as well as the control; other browsers keep their native
+   list. Keyboard, screen reader and option-group behaviour stay native. Shared with Voracity. */
+:root {
+  --dd-line: #e8e2d5;
+  --dd-accent: #3a6b59;
+  --dd-muted: #6e5f53;
+  --dd-bg: #fffdf9;
+  --dd-text: #2b2520;
+  --dd-hover: #f3efe6;
+  --dd-selected: #e5efe8;
+  --dd-shadow: 0 14px 34px rgb(43 37 32 / 16%), 0 2px 6px rgb(43 37 32 / 8%);
+}
+
+/* The closed control. Plain element specificity: it overrides Tailwind's reset (loaded earlier),
+   while any component's class-based select styles still win. */
+select {
+  min-height: 36px;
+  padding: 6px 12px;
+  color: inherit;
+  font: inherit;
+  background: var(--dd-bg);
+  border: 1px solid var(--dd-line);
+  border-radius: 10px;
+  cursor: pointer;
+}
+select:hover { border-color: color-mix(in srgb, var(--dd-accent) 45%, var(--dd-line)); }
+select:focus-visible { outline: 2px solid var(--dd-accent); outline-offset: 2px; }
+select:disabled { cursor: default; opacity: .6; }
+
+@supports (appearance: base-select) {
+  select,
+  ::picker(select) { appearance: base-select; }
+
+  select { display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; }
+  select::picker-icon {
+    content: "";
+    width: 7px;
+    height: 7px;
+    margin-right: 2px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    opacity: .55;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform .16s ease;
+  }
+  select:open::picker-icon { transform: translateY(2px) rotate(225deg); }
+
+  ::picker(select) {
+    min-width: anchor-size(width);
+    max-height: min(360px, 60dvh);
+    margin-block: 6px;
+    padding: 6px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    color: var(--dd-text);
+    background: var(--dd-bg);
+    border: 1px solid var(--dd-line);
+    border-radius: 12px;
+    box-shadow: var(--dd-shadow);
+  }
+
+  option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 400;
+    cursor: pointer;
+  }
+  option::checkmark { order: 1; margin-left: auto; content: "✓"; color: var(--dd-accent); }
+  option:hover,
+  option:focus-visible { background: var(--dd-hover); outline: none; }
+  option:checked { background: var(--dd-selected); color: var(--dd-accent); font-weight: 600; }
+  option:disabled { opacity: .45; cursor: default; }
+
+  /* Group headings are small caps labels; their options keep the list's own type. */
+  optgroup {
+    padding: 0;
+    color: var(--dd-muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  optgroup::before, optgroup legend { display: block; padding: 8px 10px 4px; }
+  optgroup option { color: var(--dd-text); letter-spacing: normal; text-transform: none; }
+  optgroup option:checked { color: var(--dd-accent); }
+  optgroup + optgroup { margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--dd-line); }
+
+  @media (prefers-reduced-motion: reduce) {
+    select::picker-icon { transition: none; }
+  }
+}
