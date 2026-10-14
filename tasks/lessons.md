@@ -132,6 +132,8 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - 12 October 2026: Crystal Crossing (Explorers of Sky map d17p11a, native palette animation via pret/pmd-sky + skytemple-files) is a Friend Area with Diancie and Carbink. The 404 page is just "404 / Looks like we're lost / map / Back home", no credits: a random one of Crystal Crossing, the starlit cave lake or the crystal lakeshore, with Diancie, three Carbink and a lost shiny Psyduck. Never source a ROM online; decompilation data or the owner's own dump only.
 
 ## Friend Area expansion (2026-10-12)
+
+- Media design (15 October 2026): the owner disliked the image-washed glass cards. Start from the pre-glass compact editorial layout; preserve its character and apply restrained glass principles, with photos confined to the hover preview. Review, merge and verify the Vercel production deployment.
 - Adding Friend Areas never removes or rewrites the Red Rescue Team ones the owner built; existing areas may only gain visitors.
 - Voracity mirrors the portfolio's Friend Areas (same catalog and scripts); keep both on even footing in matching PRs.
 - Later-generation Pokémon fill areas by family and habitat; species without a SpriteCollab sprite are kept in data and skipped.

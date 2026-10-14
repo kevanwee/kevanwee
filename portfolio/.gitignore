@@ -35,3 +35,4 @@ next-env.d.ts
 artifacts/
 
 __pycache__/
+.env*

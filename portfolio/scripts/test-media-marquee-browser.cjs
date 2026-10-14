@@ -31,7 +31,10 @@ const assert = require('node:assert/strict');
   const dragged=await moved(a,b);assert.ok(dragged>250&&dragged<400,`drag moved ${dragged}px`);
   await page.waitForTimeout(300);assert.equal(opened,0,'a drag never opens a card');
   // A plain click still opens the card. Some outlets (LinkedIn) take over a second to open their tab.
-  await page.waitForTimeout(1600);await page.mouse.click(box.x+box.width/2,box.y+box.height/2);
+  await page.waitForTimeout(1600);
+  const clickIndex=await frame.locator('a').evaluateAll(nodes=>{const f=nodes[0].closest('.media-marquee').getBoundingClientRect();return nodes.findIndex(n=>{const r=n.getBoundingClientRect();return r.left>=f.left+12&&r.right<=f.right-12&&r.top>=0&&r.bottom<=innerHeight;});});
+  assert.ok(clickIndex>=0,'there is a fully visible link');
+  await frame.locator('a').nth(clickIndex).click();
   for(let i=0;i<40&&opened<1;i++)await page.waitForTimeout(100);
   assert.equal(opened,1,'a click opens the card');
   // Sideways scrolling moves the strip without scrolling the page.
@@ -39,19 +42,23 @@ const assert = require('node:assert/strict');
   assert.ok(Math.abs(await moved(a,b)-150)<20,'horizontal wheel moves the strip');assert.equal(await page.evaluate(()=>scrollY),scrollY);
   // Hovering a card opens a glass preview beside it, on screen and inside its own bounds; leaving closes it.
   {
+   const first=frame.locator('ul:not([aria-hidden]) a').first();
+   await page.mouse.move(0,0);
+   await first.focus();await first.hover();
    const f0=await frame.boundingBox(),cy=f0.y+f0.height/2;
-   await page.mouse.move(f0.x+f0.width/2,f0.y-200);await page.mouse.move(f0.x+f0.width/2,cy,{steps:6});await page.waitForTimeout(400);
-   // Hover the middle of whichever card is now paused under the pointer (never the gap between two).
-   const c=await page.evaluate(([x,y])=>{const a=document.elementFromPoint(x,y)?.closest('a')||document.elementFromPoint(x+24,y)?.closest('a');const r=a.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height};},[f0.x+f0.width/2,cy]);
-   const cx=Math.min(Math.max(c.x+c.width/2,f0.x+20),f0.x+f0.width-20);
-   await page.mouse.move(cx,cy,{steps:4});await page.waitForTimeout(600);
+   await first.hover();await page.waitForTimeout(400);
+   const c=await first.boundingBox();const cx=c.x+c.width/2;
+   await first.hover();await page.waitForTimeout(300);
    const preview=page.locator('.media-preview');assert.equal(await preview.count(),1,'hover opens a preview');
    const p=await preview.boundingBox(),vp=page.viewportSize();
    assert.ok(p.y>=0&&p.y+p.height<=vp.height&&p.x>=0&&p.x+p.width<=vp.width,'the preview stays on screen');
    assert.ok(p.y+p.height<=c.y+1||p.y>=c.y+c.height-1,'the preview does not cover its card');
    assert.ok(await preview.evaluate(e=>[...e.querySelectorAll('*')].every(n=>n.getBoundingClientRect().right<=e.getBoundingClientRect().right+1)),'preview content fits the panel');
    assert.ok(await preview.locator('img').evaluate(i=>i.complete&&i.naturalWidth>0),'the featured image loads');
-   await page.mouse.move(cx,f0.y-200);await page.waitForTimeout(200);assert.equal(await preview.count(),0,'leaving closes the preview');
+   await preview.hover();await first.evaluate(e=>e.blur());
+   a=await offset();await page.waitForTimeout(700);b=await offset();
+   assert.ok(Math.abs(b-a)<1,'hovering the preview pauses the source strip');
+   await page.mouse.move(cx,f0.y-200);await page.waitForTimeout(250);assert.equal(await preview.count(),0,'leaving closes the preview');
   }
   // Keyboard focus brings the focused card into the frame.
   await page.mouse.move(box.x+box.width/2,box.y-200);

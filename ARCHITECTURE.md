@@ -45,7 +45,9 @@ public APIs in the browser.
 ## Portfolio website (`portfolio/`)
 
 Next.js 16 (App Router), React 19, TypeScript and Tailwind. Vercel deploys `main` automatically
-and skips builds when nothing changed (`vercel.json`); pull requests get preview deployments.
+and skips builds only when a known previous deployment commit confirms no portfolio changes
+(`scripts/ignore-vercel-build.cjs`, configured in `vercel.json`). Missing baseline commits in
+shallow clones safely trigger a build; pull requests get preview deployments.
 
 ### Routes
 
@@ -101,6 +103,15 @@ flowchart LR
   `lib/contributions.ts` reads the contribution calendar; `lib/forecast.ts` reads NEA's
   forecast for Castform and the forest sky (`lib/forest-sky.ts`), with Open-Meteo as fallback.
   Each is cached in `localStorage` and refreshed while the tab is visible.
+
+### Media previews
+
+Media & Appearances retains the original compact article strip and static resident perch.
+Source cards use a neutral translucent surface; article photographs appear only in the
+floating preview. Hover or keyboard focus opens an accessible, dismissible tooltip outside
+the strip mask. It stays open while hovered, pauses the strip, and adapts above/below the
+link with a compact layout when space is limited. Touch links open directly. Reduced motion
+uses a plain scroll row; reduced transparency uses opaque surfaces.
 
 ### Friend Areas pipeline
 
