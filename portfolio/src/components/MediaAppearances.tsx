@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { mediaAppearances, type MediaAppearance } from "@/data";
 import { useDragMarquee } from "@/lib/useDragMarquee";
@@ -25,102 +25,92 @@ const ExternalIcon = ({ className }: { className: string }) => (
 
 const host = (url: string) => new URL(url).hostname.replace(/^www\./, "");
 
-/** A glass preview of the hovered (or keyboard-focused) card, portalled out of the marquee so its mask and overflow
- *  don't clip it. It sits above the card, or below when the nav would cover it, and follows the card every frame so
- *  page scrolls and sideways wheels never leave it behind. Purely visual: the card itself stays the link. */
-function MediaPreview({ item, anchor }: { item: MediaAppearance; anchor: HTMLElement }) {
+/** Portalled outside the strip's clipping mask. Geometry updates only on layout/scroll changes. */
+function MediaPreview({ item, anchor, id, onEnter, onLeave, onDismiss }: {
+  item: MediaAppearance; anchor: HTMLElement; id: string;
+  onEnter: () => void; onLeave: () => void; onDismiss: () => void;
+}) {
   const panel = useRef<HTMLDivElement>(null);
-
   useLayoutEffect(() => {
     let raf = 0;
     const place = () => {
+      raf = 0;
       const el = panel.current;
-      if (el && anchor.isConnected) {
-        const card = anchor.getBoundingClientRect(), gap = 12, edge = 16, navClearance = 72, h = el.offsetHeight;
-        const above = card.top - gap - navClearance, under = innerHeight - edge - card.bottom - gap;
-        // Above when it fits, else below when that fits, else the roomier side, kept on screen.
-        const below = h > above && (h <= under || under > above);
-        const top = below ? card.bottom + gap : card.top - gap - h;
-        const left = Math.min(Math.max(card.left + card.width / 2 - el.offsetWidth / 2, edge), innerWidth - edge - el.offsetWidth);
-        el.style.left = `${left}px`;
-        el.style.top = `${Math.min(Math.max(top, navClearance), innerHeight - edge - h)}px`;
-        el.style.setProperty("--origin-x", `${card.left + card.width / 2 - left}px`);
-        el.dataset.side = below ? "bottom" : "top";
-      }
-      raf = requestAnimationFrame(place);
+      if (!el || !anchor.isConnected) { onDismiss(); return; }
+      const card = anchor.getBoundingClientRect(), gap = 12, edge = 16, clearance = 72;
+      if (card.bottom <= clearance || card.top >= innerHeight || card.right <= 0 || card.left >= innerWidth) { onDismiss(); return; }
+      const above = Math.max(0, card.top - gap - clearance), under = Math.max(0, innerHeight - edge - card.bottom - gap);
+      el.dataset.compact = String(Math.max(above, under) < 280);
+      el.style.maxHeight = `${Math.max(above, under)}px`;
+      const h = el.offsetHeight;
+      const below = h > above && (h <= under || under > above);
+      const left = Math.max(edge, Math.min(card.left + card.width / 2 - el.offsetWidth / 2, innerWidth - edge - el.offsetWidth));
+      el.style.left = `${left}px`;
+      el.style.top = `${below ? card.bottom + gap : card.top - gap - h}px`;
+      el.style.setProperty('--origin-x', `${card.left + card.width / 2 - left}px`);
+      el.dataset.side = below ? 'bottom' : 'top';
+      el.style.visibility = 'visible';
     };
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(place); };
+    const observer = new ResizeObserver(schedule);
+    observer.observe(panel.current!); observer.observe(anchor); observer.observe(document.documentElement);
+    const previousDescription = anchor.getAttribute('aria-describedby');
+    anchor.setAttribute('aria-describedby', id);
+    window.addEventListener('scroll', schedule, true);
+    window.addEventListener('resize', schedule);
     place();
-    return () => cancelAnimationFrame(raf);
-  }, [anchor]);
-
-  return (
-    <div ref={panel} className={item.image ? "media-preview has-image" : "media-preview"} aria-hidden="true" data-side="top">
-      {item.image && (
-        <div className="media-preview-figure">
-          <img src={item.image.src} alt={item.image.alt} decoding="async" style={{ objectPosition: item.image.position ?? "center" }} />
-        </div>
-      )}
-      <div className="media-preview-body">
-        <p className="media-preview-eyebrow">
-          <span className="media-preview-chip">Preview</span>
-          <span>{item.type}</span>
-        </p>
-        <p className="line-clamp-4 font-serif text-[17px] font-bold leading-snug text-warm-900">{item.title}</p>
-        {item.description && <p className="media-preview-excerpt">{item.description}</p>}
-        <p className="media-preview-footer">
-          <span className="truncate">{item.outlet} · {item.date}</span>
-          <span className="flex flex-shrink-0 items-center gap-1 text-sage-600">
-            {host(item.url)}
-            <ExternalIcon className="h-3 w-3" />
-          </span>
-        </p>
-      </div>
+    return () => {
+      cancelAnimationFrame(raf); observer.disconnect();
+      window.removeEventListener('scroll', schedule, true); window.removeEventListener('resize', schedule);
+      if (previousDescription) anchor.setAttribute('aria-describedby', previousDescription); else anchor.removeAttribute('aria-describedby');
+    };
+  }, [anchor, id, onDismiss]);
+  return <div ref={panel} id={id} role="tooltip" className={item.image ? 'media-preview has-image' : 'media-preview'} data-side="top"
+    data-lenis-prevent onPointerEnter={onEnter} onPointerLeave={onLeave}>
+    {item.image && <div className="media-preview-figure"><img src={item.image.src} alt={item.image.alt} decoding="async"
+      style={{ objectPosition: item.image.position ?? 'center' }} /></div>}
+    <div className="media-preview-body">
+      <p className="media-preview-source">{item.outlet} <span>{item.type} · {item.date}</span></p>
+      <p className="media-preview-title font-serif">{item.title}</p>
+      {item.description && <p className="media-preview-excerpt">{item.description}</p>}
+      <p className="media-preview-footer"><span>{host(item.url)}</span><ExternalIcon className="h-3 w-3" /></p>
     </div>
-  );
+  </div>;
 }
 
 export default function MediaAppearances() {
   const frame = useRef<HTMLDivElement>(null), track = useRef<HTMLDivElement>(null);
-  useDragMarquee(frame, track, mediaAppearances.length * 9);
-
   const [preview, setPreview] = useState<{ index: number; anchor: HTMLElement } | null>(null);
-  const openTimer = useRef(0), closedAt = useRef(0), warmed = useRef(false);
-
-  // Hover intent: wait a beat before the first preview, then hand off quickly while moving card to card.
+  useDragMarquee(frame, track, mediaAppearances.length * 9, !!preview);
+  const previewId = useId();
+  const openTimer = useRef(0), closeTimer = useRef(0), closedAt = useRef(0), inPreview = useRef(false);
+  const current = useRef(preview); current.current = preview;
+  const hide = useCallback(() => {
+    clearTimeout(openTimer.current); clearTimeout(closeTimer.current);
+    if (current.current) closedAt.current = performance.now();
+    inPreview.current = false; setPreview(null);
+  }, []);
+  const leave = useCallback(() => {
+    clearTimeout(openTimer.current); clearTimeout(closeTimer.current);
+    closeTimer.current = window.setTimeout(hide, 180);
+  }, [hide]);
   const show = (index: number, anchor: HTMLElement, delay?: number) => {
-    clearTimeout(openTimer.current);
-    const wait = delay ?? (performance.now() - closedAt.current < 400 ? 60 : 260);
+    clearTimeout(openTimer.current); clearTimeout(closeTimer.current);
+    inPreview.current = false;
+    const wait = delay ?? (current.current || performance.now() - closedAt.current < 400 ? 60 : 240);
     openTimer.current = window.setTimeout(() => setPreview({ index, anchor }), wait);
   };
-  const hide = () => {
-    clearTimeout(openTimer.current);
-    setPreview((open) => {
-      if (open) closedAt.current = performance.now();
-      return null;
-    });
-  };
-
-  useEffect(() => () => clearTimeout(openTimer.current), []);
+  const hold = () => { inPreview.current = true; clearTimeout(closeTimer.current); };
+  const leavePanel = () => { inPreview.current = false; leave(); };
   useEffect(() => {
-    if (!preview) return;
-    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") hide(); };
-    document.addEventListener("keydown", escape);
-    return () => document.removeEventListener("keydown", escape);
-  }, [preview]);
-
-  // Fetch the preview images once the pointer first reaches the strip, so the first preview opens complete.
-  const warm = () => {
-    if (warmed.current) return;
-    warmed.current = true;
-    for (const item of mediaAppearances) if (item.image) new Image().src = item.image.src;
-  };
-
-  // The rim light follows the pointer across the glass.
-  const tilt = (event: ReactPointerEvent<HTMLAnchorElement>) => {
-    const card = event.currentTarget, box = card.getBoundingClientRect();
-    card.style.setProperty("--mx", `${event.clientX - box.left}px`);
-    card.style.setProperty("--my", `${event.clientY - box.top}px`);
-  };
+    const escape = (event: KeyboardEvent) => { if (event.key === 'Escape') hide(); };
+    const visibility = () => { if (document.hidden) hide(); };
+    document.addEventListener('keydown', escape); document.addEventListener('visibilitychange', visibility);
+    return () => {
+      clearTimeout(openTimer.current); clearTimeout(closeTimer.current);
+      document.removeEventListener('keydown', escape); document.removeEventListener('visibilitychange', visibility);
+    };
+  }, [hide]);
 
   if (mediaAppearances.length === 0) return null;
   const active = preview && mediaAppearances[preview.index];
@@ -146,7 +136,6 @@ export default function MediaAppearances() {
           className="media-marquee"
           data-overworld-surface="media-card"
           data-overworld-kind="media-card"
-          onPointerEnter={warm}
           onPointerDown={hide}
           onWheel={hide}
         >
@@ -162,15 +151,13 @@ export default function MediaAppearances() {
                       tabIndex={copy ? -1 : undefined}
                       draggable={false}
                       className="media-card group flex h-full w-[272px] flex-col justify-between gap-3 px-5 py-4"
-                      style={item.image ? ({ "--media-wash": `url(${item.image.src})` } as CSSProperties) : undefined}
                       onPointerEnter={(event) => {
                         if (event.pointerType === "touch" || frame.current?.classList.contains("is-dragging")) return;
                         show(i, event.currentTarget);
                       }}
-                      onPointerMove={tilt}
-                      onPointerLeave={hide}
+                      onPointerLeave={leave}
                       onFocus={(event) => { if (event.currentTarget.matches(":focus-visible")) show(i, event.currentTarget, 0); }}
-                      onBlur={hide}
+                      onBlur={() => { if (!inPreview.current) leave(); }}
                     >
                       <p className="line-clamp-3 text-sm font-medium leading-snug text-warm-800 transition-colors group-hover:text-sage-700">
                         {item.title}
@@ -201,7 +188,7 @@ export default function MediaAppearances() {
         </p>
       </div>
 
-      {active && createPortal(<MediaPreview key={preview.index} item={active} anchor={preview.anchor} />, document.body)}
+      {active && createPortal(<MediaPreview key={preview.index} id={previewId} item={active} anchor={preview.anchor} onEnter={hold} onLeave={leavePanel} onDismiss={hide} />, document.body)}
     </section>
   );
 }

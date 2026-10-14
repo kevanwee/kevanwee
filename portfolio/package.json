@@ -19,6 +19,8 @@
     "test:terminal": "node scripts/test-terminal.cjs",
     "test:ssh:browser": "node scripts/test-ssh-browser.cjs",
     "test:pokemon-pc:browser": "node scripts/test-pokemon-pc-browser.cjs",
+    "test:media-preview:browser": "node scripts/test-media-preview-browser.cjs",
+    "test:vercel-ignore": "node --test scripts/test-ignore-vercel-build.cjs",
     "test:media-marquee:browser": "node scripts/test-media-marquee-browser.cjs",
     "test:experience-timeline:browser": "node scripts/test-experience-timeline-browser.cjs",
     "build:timeline-logos": "node scripts/build-timeline-logos.mjs"

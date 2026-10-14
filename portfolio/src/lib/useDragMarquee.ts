@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 
 /** A looping strip that drifts on its own and can be dragged, flicked or scrolled sideways.
  *  `track` holds two identical copies of the content; the first copy's width is one loop.
@@ -9,7 +9,10 @@ import { useEffect, type RefObject } from "react";
  *  - Horizontal wheel/trackpad scrolling moves it; vertical scrolling stays with the page.
  *  - Keyboard focus brings the focused item into view.
  *  - Under reduced motion there is no drift: the frame is a normal scroller that a mouse can also drag. */
-export function useDragMarquee(frame: RefObject<HTMLElement | null>, track: RefObject<HTMLElement | null>, secondsPerLoop: number) {
+export function useDragMarquee(frame: RefObject<HTMLElement | null>, track: RefObject<HTMLElement | null>, secondsPerLoop: number, paused = false) {
+  const pausedRef = useRef(paused); pausedRef.current = paused;
+  const wakeRef = useRef<() => void>(() => {});
+  useEffect(() => { wakeRef.current(); }, [paused]);
   useEffect(() => {
     const root = frame.current, strip = track.current;
     if (!root || !strip) return;
@@ -21,12 +24,13 @@ export function useDragMarquee(frame: RefObject<HTMLElement | null>, track: RefO
     const measure = () => { loop = (strip.firstElementChild as HTMLElement | null)?.offsetWidth ?? 0; };
     const wrap = (value: number) => (loop ? ((value % loop) + loop) % loop : 0);
     const paint = () => { strip.style.transform = motion.matches ? "" : `translate3d(${-offset}px,0,0)`; };
-    const drifting = () => !motion.matches && !hovering && !focused && !drag && !document.hidden && visible;
+    const drifting = () => !pausedRef.current && !motion.matches && !hovering && !focused && !drag && !document.hidden && visible;
 
     function frameStep(now: number) {
       raf = 0;
       const dt = last ? Math.min(64, now - last) : 0;
       last = now;
+      if (pausedRef.current) velocity = 0;
       if (Math.abs(velocity) > 0.02 && !drag) {
         // A flick glides, losing about 5% of its speed every 16ms.
         offset = wrap(offset + velocity * dt);
@@ -40,6 +44,8 @@ export function useDragMarquee(frame: RefObject<HTMLElement | null>, track: RefO
       else last = 0;
     }
     const wake = () => { if (!raf) { last = 0; raf = requestAnimationFrame(frameStep); } };
+
+    wakeRef.current = wake;
 
     function down(event: PointerEvent) {
       if (event.button !== 0) return;
@@ -94,10 +100,10 @@ export function useDragMarquee(frame: RefObject<HTMLElement | null>, track: RefO
       focused = true;
       const item = (event.target as HTMLElement).closest("li");
       if (!item || motion.matches) return;
-      // Bring the focused card fully inside the frame.
-      const box = root!.getBoundingClientRect(), card = item.getBoundingClientRect(), margin = 24;
-      if (card.left < box.left + margin) offset = wrap(offset - (box.left + margin - card.left));
-      else if (card.right > box.right - margin) offset = wrap(offset + (card.right - (box.right - margin)));
+      // Focus must reveal the actual accessible copy, never its aria-hidden clone.
+      // Wrapping a negative offset would put the clone on screen instead.
+      root!.scrollLeft = 0;
+      offset = Math.max(0, Math.min(item.offsetLeft - 24, Math.max(0, loop - root!.clientWidth + 24)));
       velocity = 0; paint();
     }
     const focusOut = (event: FocusEvent) => { if (!root.contains(event.relatedTarget as Node)) { focused = false; wake(); } };
@@ -123,6 +129,7 @@ export function useDragMarquee(frame: RefObject<HTMLElement | null>, track: RefO
     motion.addEventListener("change", motionChange);
     document.addEventListener("visibilitychange", visibility);
     return () => {
+      wakeRef.current = () => {};
       cancelAnimationFrame(raf);
       resize.disconnect(); seen.disconnect();
       root.removeEventListener("pointerdown", down);
