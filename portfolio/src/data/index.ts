@@ -398,28 +398,46 @@ export interface OtherProject {
 export interface MediaAppearance {
   outlet: string;
   title: string;
+  /** Excerpt shown in the card's hover preview; empty when the source can't be quoted (e.g. Instagram). */
   description: string;
   date: string;
   url: string;
   type: "Profile" | "Interview" | "Article" | "Feature";
+  /** Featured image for the preview and the card's glass tint, self-hosted in public/media.
+   *  `position` is the object-position used to crop it to the preview's frame. */
+  image?: { src: string; alt: string; position?: string };
 }
 
 export const mediaAppearances: MediaAppearance[] = [
   {
     outlet: "Channel News Asia",
     title: "The Big Read: With AI doing the grunt work in law firms, where does this leave junior lawyers and fresh grads?",
-    description: "",
+    description:
+      "Grunt work “trained important habits of reading closely, spotting fine distinctions, understanding how judges reason, and developing the instinct to verify rather than accept things at face value”.",
     date: "2026",
     url: "https://www.channelnewsasia.com/today/big-read/ai-junior-lawyers-job-relevance-new-skills-6005796",
     type: "Article",
+    image: { src: "/media/cna-ai-junior-lawyers.webp", alt: "Kevan Wee outside the Yong Pung How School of Law", position: "62% 30%" },
+  },
+  {
+    outlet: "SMU – School of Computing and Information Systems",
+    title: "With AI doing the grunt work in law firms, where does this leave junior lawyers and fresh grads?",
+    description:
+      "While repetitive, AI-aided legal tasks can be dull, they build vital skills like careful reading, recognising nuances and verifying information. Future training should emphasise deep, critical thinking even as AI streamlines low-value work.",
+    date: "2026",
+    url: "https://computing.smu.edu.sg/news/2026/mar/23/ai-doing-grunt-work-law-firms-where-does-leave-junior-lawyers-and-fresh-grads",
+    type: "Article",
+    image: { src: "/media/smu-scis-ai-junior-lawyers.webp", alt: "Kevan Wee outside the Yong Pung How School of Law", position: "63% 20%" },
   },
   {
     outlet: "Singapore Management University",
     title: "Which SMU Tech Degree Is Right for You? What to Consider Before Choosing",
-    description: "",
+    description:
+      "“SMU’s Computing & Law programme has shaped how I approach challenges, not simply as a developer or a law student, but as someone focused on building responsible, practical, and impactful solutions.”",
     date: "2024",
     url: "https://blog.smu.edu.sg/story/which-smu-tech-degree-consider-before-choosing",
     type: "Feature",
+    image: { src: "/media/smu-which-tech-degree.webp", alt: "Kevan Wee by the sea, featured in SMU's Computing & Law programme story", position: "center 66%" },
   },
   {
     outlet: "SMU – School of Computing and Information Systems",
@@ -432,10 +450,12 @@ export const mediaAppearances: MediaAppearance[] = [
   {
     outlet: "Rajah & Tann Asia",
     title: "Rajah & Tann wins Most Innovative award at the DBS x SG Courts Hackathon for a Better World 2024",
-    description: "",
+    description:
+      "Associates from Rajah & Tann Singapore's TMT Practice and interns from Rajah & Tann Technologies, Kevan Wee among them, won the Most Innovative Award at the DBS Bank x SG Courts Hackathon for A Better World 2024.",
     date: "2024",
     url: "https://www.linkedin.com/posts/rajah-%26-tann_technology-digitaltransformation-legalclinic-activity-7259376381191479299-xrQx?utm_source=li_share&utm_content=feedcontent&utm_medium=g_dt_web&utm_campaign=copy",
     type: "Feature",
+    image: { src: "/media/rajah-tann-hackathon.webp", alt: "Rajah & Tann team receiving the Most Innovative Award", position: "center 78%" },
   },
   {
     outlet: "SMU – School of Computing and Information Systems",
