@@ -137,3 +137,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - Adding Friend Areas never removes or rewrites the Red Rescue Team ones the owner built; existing areas may only gain visitors.
 - Voracity mirrors the portfolio's Friend Areas (same catalog and scripts); keep both on even footing in matching PRs.
 - Later-generation Pokémon fill areas by family and habitat; species without a SpriteCollab sprite are kept in data and skipped.
+
+- Media previews (15 October 2026): retrieve the actual Instagram post images using public embed metadata when needed. The Also featured on LegalQuants link should preview the owner's profile page and include the official LQ logo. Keep images local so previews do not depend on expiring CDN URLs.

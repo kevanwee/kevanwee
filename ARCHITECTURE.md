@@ -112,6 +112,10 @@ floating preview. Hover or keyboard focus opens an accessible, dismissible toolt
 the strip mask. It stays open while hovered, pauses the strip, and adapts above/below the
 link with a compact layout when space is limited. Touch links open directly. Reduced motion
 uses a plain scroll row; reduced transparency uses opaque surfaces.
+Instagram previews use optimized copies of the public posts' embed images, avoiding
+expiring CDN URLs. The inline LegalQuants link shares the preview behavior and shows a
+dated page capture with the site's own LQ icon. These assets are snapshots, not live embeds;
+their original sources are recorded in `portfolio/public/media/SOURCES.md`.
 
 ### Friend Areas pipeline
 

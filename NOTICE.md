@@ -24,6 +24,13 @@ welcome art.
 | Mega Evolution symbol pixel art | PixelTheCollector | Used with credit; the symbol itself is The Pokémon Company / Nintendo's |
 | Item sprites | [PokeAPI sprites](https://github.com/PokeAPI/sprites), WikiDex | Game assets of The Pokémon Company / Nintendo |
 
+## Media previews
+
+SMU SCIS's Instagram internship photographs and the LegalQuants profile capture and
+LQ icon illustrate the owner's linked appearances/profile. Original photography,
+page design and branding retain their owners' rights. Source URLs and retrieval date
+are recorded in `portfolio/public/media/SOURCES.md`.
+
 ## Fonts
 
 | Font | Terms |
