@@ -1,7 +1,29 @@
 {
- "generatedAt": "2026-10-14T05:29:55+00:00",
+ "generatedAt": "2026-10-14T10:27:39+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Normal",
+   "when": "2026-10-14T09:03:07+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " starred "
+    ],
+    [
+     "place",
+     "cathrynlavery/diagram-design"
+    ],
+    [
+     "text",
+     "."
+    ]
+   ]
+  },
   {
    "mood": "Joyous",
    "when": "2026-10-14T01:31:21+00:00",
@@ -81,36 +103,6 @@
     [
      "text",
      "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Happy",
-   "when": "2026-10-13T16:18:05+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "verina"
-    ],
-    [
-     "text",
-     " ("
-    ],
-    [
-     "number",
-     "\u00d711"
-    ],
-    [
-     "text",
-     ")"
     ]
    ]
   }
