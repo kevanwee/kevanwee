@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { mediaAppearances, type MediaAppearance } from "@/data";
+import { legalQuantsProfile, mediaAppearances, type MediaAppearance } from "@/data";
 import { useDragMarquee } from "@/lib/useDragMarquee";
 
 const ExternalIcon = ({ className }: { className: string }) => (
@@ -65,12 +65,15 @@ function MediaPreview({ item, anchor, id, onEnter, onLeave, onDismiss }: {
       if (previousDescription) anchor.setAttribute('aria-describedby', previousDescription); else anchor.removeAttribute('aria-describedby');
     };
   }, [anchor, id, onDismiss]);
-  return <div ref={panel} id={id} role="tooltip" className={item.image ? 'media-preview has-image' : 'media-preview'} data-side="top"
+  return <div ref={panel} id={id} role="tooltip" className={`media-preview${item.image ? ' has-image' : ''}${item.type === 'Profile' ? ' is-profile' : ''}`} data-side="top"
     data-lenis-prevent onPointerEnter={onEnter} onPointerLeave={onLeave}>
     {item.image && <div className="media-preview-figure"><img src={item.image.src} alt={item.image.alt} decoding="async"
-      style={{ objectPosition: item.image.position ?? 'center' }} /></div>}
+      style={{ objectPosition: item.image.position ?? 'center', objectFit: item.image.fit ?? 'cover' }} /></div>}
     <div className="media-preview-body">
-      <p className="media-preview-source">{item.outlet} <span>{item.type} · {item.date}</span></p>
+      <p className="media-preview-source">
+        <span className="media-preview-brand">{item.logo && <img src={item.logo.src} alt={item.logo.alt} width={20} height={20} />}{item.outlet}</span>
+        <span>{item.type}{item.date && ` · ${item.date}`}</span>
+      </p>
       <p className="media-preview-title font-serif">{item.title}</p>
       {item.description && <p className="media-preview-excerpt">{item.description}</p>}
       <p className="media-preview-footer"><span>{host(item.url)}</span><ExternalIcon className="h-3 w-3" /></p>
@@ -113,7 +116,7 @@ export default function MediaAppearances() {
   }, [hide]);
 
   if (mediaAppearances.length === 0) return null;
-  const active = preview && mediaAppearances[preview.index];
+  const active = preview && (preview.index === mediaAppearances.length ? legalQuantsProfile : mediaAppearances[preview.index]);
 
   return (
     <section
@@ -177,10 +180,15 @@ export default function MediaAppearances() {
         <p className="mt-4 text-xs text-warm-400">
           Also featured on{" "}
           <a
-            href="https://www.legalquants.com/lawyers/kevan-wee"
+            href={legalQuantsProfile.url}
             target="_blank"
             rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-warm-600 transition-colors"
+            onPointerEnter={(event) => { if (event.pointerType !== "touch") show(mediaAppearances.length, event.currentTarget); }}
+            onPointerLeave={leave}
+            onFocus={(event) => { if (event.currentTarget.matches(":focus-visible")) show(mediaAppearances.length, event.currentTarget, 0); }}
+            onBlur={() => { if (!inPreview.current) leave(); }}
+            onPointerDown={hide}
           >
             LegalQuants
           </a>

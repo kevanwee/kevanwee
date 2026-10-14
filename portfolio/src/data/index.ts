@@ -398,14 +398,14 @@ export interface OtherProject {
 export interface MediaAppearance {
   outlet: string;
   title: string;
-  /** Excerpt shown in the card's hover preview; empty when the source can't be quoted (e.g. Instagram). */
+  /** Excerpt shown in the card's hover preview. */
   description: string;
   date: string;
   url: string;
   type: "Profile" | "Interview" | "Article" | "Feature";
-  /** Featured image for the preview and the card's glass tint, self-hosted in public/media.
-   *  `position` is the object-position used to crop it to the preview's frame. */
-  image?: { src: string; alt: string; position?: string };
+  /** Self-hosted preview image; contain keeps group photos and page captures intact. */
+  image?: { src: string; alt: string; position?: string; fit?: "cover" | "contain" };
+  logo?: { src: string; alt: string };
 }
 
 export const mediaAppearances: MediaAppearance[] = [
@@ -446,6 +446,7 @@ export const mediaAppearances: MediaAppearance[] = [
     date: "2025",
     url: "https://www.instagram.com/p/DNR2Nr7P-Ni/",
     type: "Feature",
+    image: { src: "/media/smu-pwc-instagram.webp", alt: "Kevan Wee at PwC Singapore, from SMU SCIS's internship post", fit: "contain" },
   },
   {
     outlet: "Rajah & Tann Asia",
@@ -464,6 +465,7 @@ export const mediaAppearances: MediaAppearance[] = [
     date: "2024",
     url: "https://www.instagram.com/p/DB7tIbtTl3_/",
     type: "Feature",
+    image: { src: "/media/smu-rtt-instagram.webp", alt: "Kevan Wee and colleagues at the DBS and SG Courts Hackathon awards, from SMU SCIS's post", fit: "contain" },
   },
   {
     outlet: "SMU – School of Computing and Information Systems",
@@ -472,8 +474,20 @@ export const mediaAppearances: MediaAppearance[] = [
     date: "2024",
     url: "https://www.instagram.com/p/C_cFPGryaLW/",
     type: "Feature",
+    image: { src: "/media/smu-internship-instagram.webp", alt: "Rajah & Tann Technologies colleagues gathered around a table, from SMU SCIS's internship post", fit: "contain" },
   },
 ];
+
+export const legalQuantsProfile: MediaAppearance = {
+  outlet: "LegalQuants",
+  title: "Kevan Wee on LegalQuants",
+  description: "Final-Year BSc (Computing & Law) | Legal AI & Platform IP",
+  date: "",
+  url: "https://www.legalquants.com/lawyers/kevan-wee",
+  type: "Profile",
+  image: { src: "/media/legalquants-profile.webp", alt: "Preview of Kevan Wee's LegalQuants profile page, including his photo and About section", fit: "contain" },
+  logo: { src: "/media/legalquants-logo.png", alt: "LegalQuants logo" },
+};
 
 export const featuredProjects: FeaturedProject[] = [
   {
