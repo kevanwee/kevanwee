@@ -194,3 +194,31 @@ Changes to any of these should land in both repositories.
 ## Licensing
 
 Original code and content are all rights reserved (`LICENSE`). Third-party material and its terms are listed in `NOTICE.md`; Pokémon artwork remains its owners'.
+
+## C4: maintained portfolio components (16 October 2026)
+
+```mermaid
+C4Component
+  title Portfolio - active components after dead-code cleanup
+  Container_Boundary(web, "Next.js portfolio") {
+    Component(page, "Page and LeftPanel", "React", "Current composition, navigation and owner identity")
+    Component(cursor, "PokemonCursor", "React", "Single configurable cursor and forms")
+    Component(overworld, "PokemonOverworld", "React / TypeScript", "Visit roster and DOM surface lifecycle")
+    Component(simulation, "pokemon-overworld / pokemon-world", "Runtime-neutral TypeScript", "Pure state transitions, movement and collision")
+    Component(areas, "FriendAreas / FriendAreaScene", "React", "Friend Area scenery and residents")
+    Component(pc, "PokemonPcHost / PokemonPc", "React", "Owner-selected cursor and resident forms")
+    Component(data, "Public data modules", "TypeScript", "Forecast, contributions and activity caching")
+  }
+  Container(tests, "Simulation checks", "Node", "Execute the same simulation logic without a browser")
+  Rel(page, cursor, "Mounts")
+  Rel(page, overworld, "Mounts")
+  Rel(page, areas, "Mounts")
+  Rel(page, pc, "Mounts")
+  Rel(page, data, "Displays public data")
+  Rel(overworld, simulation, "Advances the visit")
+  Rel(tests, simulation, "Checks movement and roster invariants")
+```
+
+Removed the unreachable `ClientWidgets`, `DiancieCursor`, `Hero`, `IcaCanvas`, `IcaFloat`, `Nav`, `PokemonWalker` and `PortfolioModal` components. `PokemonCursor`, `LeftPanel`, the current overworld and the existing dialogs remain the active implementations. Their exclusively used React Three Fiber/Drei/Three dependencies were removed too. Historical root HTML/CSS, artwork and generator sources remain available.
+
+The simulation modules already provide runtime isomorphism: browser components and Node checks execute the same logic. They are functions over explicit state; an inheritance hierarchy would add indirection without useful substitutability here. No new classes are claimed in this diagram. See [the review and remaining work](docs/CODE-QUALITY-REVIEW-2026-10-16.md).
