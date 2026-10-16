@@ -139,3 +139,7 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - Later-generation Pokémon fill areas by family and habitat; species without a SpriteCollab sprite are kept in data and skipped.
 
 - Media previews (15 October 2026): retrieve the actual Instagram post images using public embed metadata when needed. The Also featured on LegalQuants link should preview the owner's profile page and include the official LQ logo. Keep images local so previews do not depend on expiring CDN URLs.
+
+- Architecture review (16 October 2026): run Fallow and verify its findings before cleanup; implement polymorphic classes where behaviour warrants a shared contract, retain runtime-neutral logic, and show implemented classes in C4/component and code-level diagrams. Distinguish completed refactors, remaining findings and validation failures.
+
+- Refactor constraint (16 October 2026): preserve the existing user-facing appearance and interactions during code-quality cleanup; verify affected behaviour against the pre-refactor implementation and browser checks.

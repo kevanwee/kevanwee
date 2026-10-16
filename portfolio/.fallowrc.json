@@ -1,0 +1,8 @@
+{
+  "entry": [
+    "scripts/**/*.{mjs,cjs}"
+  ],
+  "ignorePatterns": [
+    "artifacts/**"
+  ]
+}
