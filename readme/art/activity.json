@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-17T11:35:48+00:00",
+ "generatedAt": "2026-10-17T14:23:10+00:00",
  "speaker": "Diancie",
  "lines": [
   {
    "mood": "Happy",
-   "when": "2026-10-16T15:54:32+00:00",
+   "when": "2026-10-16T16:21:27+00:00",
    "parts": [
     [
      "name",
@@ -20,7 +20,45 @@
     ],
     [
      "text",
-     "!"
+     " ("
+    ],
+    [
+     "number",
+     "\u00d72"
+    ],
+    [
+     "text",
+     ")"
+    ]
+   ]
+  },
+  {
+   "mood": "Happy",
+   "when": "2026-10-16T09:49:14+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " pushed new work to "
+    ],
+    [
+     "place",
+     "voracity"
+    ],
+    [
+     "text",
+     " ("
+    ],
+    [
+     "number",
+     "\u00d74"
+    ],
+    [
+     "text",
+     ")"
     ]
    ]
   },
@@ -81,36 +119,6 @@
     [
      "text",
      "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Happy",
-   "when": "2026-10-16T09:32:48+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "voracity"
-    ],
-    [
-     "text",
-     " ("
-    ],
-    [
-     "number",
-     "\u00d72"
-    ],
-    [
-     "text",
-     ")"
     ]
    ]
   }
