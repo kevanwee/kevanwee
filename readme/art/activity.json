@@ -1,7 +1,29 @@
 {
- "generatedAt": "2026-10-17T02:47:01+00:00",
+ "generatedAt": "2026-10-17T11:35:48+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Happy",
+   "when": "2026-10-16T15:54:32+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " pushed new work to "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
   {
    "mood": "Joyous",
    "when": "2026-10-16T09:49:12+00:00",
@@ -89,36 +111,6 @@
     [
      "text",
      ")"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-16T08:48:25+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request "
-    ],
-    [
-     "number",
-     "#65"
-    ],
-    [
-     "text",
-     " was merged into "
-    ],
-    [
-     "place",
-     "voracity"
-    ],
-    [
-     "text",
-     "!"
     ]
    ]
   }
