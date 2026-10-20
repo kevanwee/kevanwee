@@ -47,6 +47,7 @@ const TAB_LABELS: Record<string, string> = {
   "smu-scis":      "SMU SCIS",
   "osborne":       "Osborne Clarke",
   "pwc":           "PwC",
+  "pwc-newlaw":    "PwC / NewLaw",
   "imda":          "IMDA",
   "smu-law":       "SMU YPHSOL",
   "cjc":           "The State Courts",

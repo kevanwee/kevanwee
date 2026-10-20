@@ -143,3 +143,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - Architecture review (16 October 2026): run Fallow and verify its findings before cleanup; implement polymorphic classes where behaviour warrants a shared contract, retain runtime-neutral logic, and show implemented classes in C4/component and code-level diagrams. Distinguish completed refactors, remaining findings and validation failures.
 
 - Refactor constraint (16 October 2026): preserve the existing user-facing appearance and interactions during code-quality cleanup; verify affected behaviour against the pre-refactor implementation and browser checks.
+
+- Portfolio content (20 October 2026): current experience is PwC / NewLaw; retain the unconfirmed role/type and Something is brewing details. Keep Highlights curated, then group projects as Legal systems & data, Agent skills & workflows, and Other experiments. The Legal Engineering section opens the manifesto in a reader; allow embedding only from the production portfolio origin. Private skill repositories stay private and link to public guide descriptions.

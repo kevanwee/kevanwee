@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback, type CSSProperties } from "react";
 import dynamic from "next/dynamic";
 import About from "@/components/About";
+import LegalEngineering from "@/components/LegalEngineering";
+import { portfolioSections } from "@/data";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import MediaAppearances from "@/components/MediaAppearances";
@@ -19,7 +21,7 @@ import { PokemonCursorProvider } from "@/components/PokemonCursorContext";
 
 const PokemonOverworld = dynamic(() => import("@/components/PokemonOverworld"), { ssr: false });
 
-const SECTIONS = ["about", "experience", "projects", "media", "contact"] as const;
+const SECTIONS = portfolioSections.map(section => section.id);
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("about");
@@ -82,6 +84,7 @@ export default function Home() {
           <main className="lg:w-[55%] lg:pb-24">
             <About />
             <Experience />
+            <LegalEngineering />
             <Projects />
             {/* The section above owns a full section gap, which it earns because the next section opens
                 with a rule. This has no rule, so it pulls up to the panel's own 64px rhythm. */}

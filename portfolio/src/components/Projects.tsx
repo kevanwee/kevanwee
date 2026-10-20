@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { featuredProjects, otherProjects } from "@/data";
+import { featuredProjects, otherProjects, projectGroups } from "@/data";
 import Skills from "@/components/Skills";
 import BartCaseStudyModal from "@/components/BartCaseStudyModal";
 import GitHubStars from "@/components/GitHubStars";
@@ -32,6 +32,7 @@ export default function Projects() {
           <ContributionGarden />
         </div>
 
+        <h3 className="mb-6 font-serif text-xl font-semibold text-warm-900">Highlights</h3>
         {/* Featured */}
         <ol className="space-y-6">
           {featuredProjects.map((project) => (
@@ -157,14 +158,14 @@ export default function Projects() {
 
         {/* Other projects */}
         <div className="mt-16">
-          <p className="mb-6 text-xs font-bold uppercase tracking-widest text-warm-400">
-            Other noteworthy projects
-          </p>
+          {projectGroups.map(group => <section key={group.id} className="mb-12" aria-labelledby={`projects-${group.id}`}>
+          <h3 id={`projects-${group.id}`} className="mb-2 font-serif text-xl font-semibold text-warm-900">{group.title}</h3>
+          <p className="mb-6 text-sm leading-relaxed text-warm-500">{group.description}</p>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {otherProjects.map((project, index) => (
+            {otherProjects.filter(project => project.category === group.id).map(project => (
               <li
                 key={project.title}
-                data-overworld-surface={`other-project-${index}`}
+                data-overworld-surface={`other-project-${otherProjects.indexOf(project)}`}
                 data-overworld-kind="other-project"
                 className="group flex flex-col justify-between rounded-2xl border border-cream-200 border-t-2 border-t-sage-100 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:border-t-sage-300 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-1"
               >
@@ -230,6 +231,7 @@ export default function Projects() {
               </li>
             ))}
           </ul>
+          </section>)}
         </div>
 
         {/* Castform's forecast, above the skills card */}

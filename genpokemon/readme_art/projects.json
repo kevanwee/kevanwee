@@ -65,7 +65,7 @@
   ]
  },
  {
-  "title": "legal engineering toolkit",
+  "title": "legal systems &amp; data",
   "mascot": "fuecoco",
   "items": [
    {
@@ -201,13 +201,7 @@
     "url": "https://github.com/kevanwee/apac-lateral-tracker",
     "tags": [],
     "label": "github"
-   }
-  ]
- },
- {
-  "title": "legal data &amp; analytics",
-  "mascot": "fuecoco",
-  "items": [
+   },
    {
     "slug": "pdpcscraper",
     "title": "pdpc scraper",
@@ -318,8 +312,86 @@
   ]
  },
  {
-  "title": "intelligence analysis tools",
+  "title": "agent skills &amp; workflows",
   "mascot": "froakie",
+  "items": [
+   {
+    "slug": "legal-engineering-manifesto",
+    "title": "legal engineering manifesto",
+    "desc": "my proposed framework: legal understanding, process design and delivery, tested through working systems",
+    "who": "?",
+    "mode": "idle",
+    "repo": "-",
+    "url": "https://legal-engineering-manifesto.vercel.app/",
+    "tags": [],
+    "label": "read the guide"
+   },
+   {
+    "slug": "sg-legalresearch-skill",
+    "title": "singapore legal research",
+    "desc": "primary-source research and citation checks, with evidence records and version checks",
+    "who": "?",
+    "mode": "idle",
+    "repo": "sg-legalresearch-skill",
+    "url": "https://github.com/kevanwee/sg-legalresearch-skill",
+    "tags": [],
+    "label": "github"
+   },
+   {
+    "slug": "legal-extraction-skill",
+    "title": "source-span extraction",
+    "desc": "every extracted value tied to exact source text, with a deterministic span check",
+    "who": "?",
+    "mode": "idle",
+    "repo": "legal-extraction-skill",
+    "url": "https://github.com/kevanwee/legal-extraction-skill",
+    "tags": [],
+    "label": "github"
+   },
+   {
+    "slug": "legal-process-modelling",
+    "title": "process modelling & runner",
+    "desc": "inspectable legal processes, released workflows, recorded state and human decision gates",
+    "who": "?",
+    "mode": "idle",
+    "repo": "-",
+    "url": "https://legal-engineering-manifesto.vercel.app/toolkit",
+    "tags": [
+     "private source"
+    ],
+    "label": "public guide"
+   },
+   {
+    "slug": "sg-drafting-skill",
+    "title": "singapore clause drafting",
+    "desc": "drafts from supplied research and retains approved clauses as precedents",
+    "who": "?",
+    "mode": "idle",
+    "repo": "-",
+    "url": "https://legal-engineering-manifesto.vercel.app/toolkit",
+    "tags": [
+     "private source"
+    ],
+    "label": "public guide"
+   },
+   {
+    "slug": "sg-pdpa-skill",
+    "title": "pdpa assessment",
+    "desc": "obligation-by-obligation assessment against provision text retrieved for the activity",
+    "who": "?",
+    "mode": "idle",
+    "repo": "-",
+    "url": "https://legal-engineering-manifesto.vercel.app/toolkit",
+    "tags": [
+     "private source"
+    ],
+    "label": "public guide"
+   }
+  ]
+ },
+ {
+  "title": "other experiments",
+  "mascot": "jirachi",
   "items": [
    {
     "slug": "hawkshot",
@@ -342,13 +414,7 @@
     "url": "https://github.com/kevanwee/mapmole",
     "tags": [],
     "label": "github"
-   }
-  ]
- },
- {
-  "title": "art",
-  "mascot": "teddiursa",
-  "items": [
+   },
    {
     "slug": "lolpixelart",
     "title": "lol pixel art",
@@ -359,13 +425,7 @@
     "url": "https://github.com/kevanwee/lolpixelart",
     "tags": [],
     "label": "github"
-   }
-  ]
- },
- {
-  "title": "others",
-  "mascot": "jirachi",
-  "items": [
+   },
    {
     "slug": "voracity-watcher",
     "title": "voracity watcher",

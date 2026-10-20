@@ -24,7 +24,8 @@
     "test:vercel-ignore": "node --test scripts/test-ignore-vercel-build.cjs",
     "test:media-marquee:browser": "node scripts/test-media-marquee-browser.cjs",
     "test:experience-timeline:browser": "node scripts/test-experience-timeline-browser.cjs",
-    "build:timeline-logos": "node scripts/build-timeline-logos.mjs"
+    "build:timeline-logos": "node scripts/build-timeline-logos.mjs",
+    "test:legal-engineering:browser": "node scripts/test-legal-engineering-browser.cjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
