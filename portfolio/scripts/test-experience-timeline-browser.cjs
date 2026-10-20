@@ -24,9 +24,9 @@ const assert = require('node:assert/strict');
   const pressed=()=>timeline.locator('[aria-pressed=true]').getAttribute('data-timeline-id');
   const centred=async id=>{const s=await timeline.locator(`[data-timeline-id="${id}"]`).boundingBox(),f=await timeline.boundingBox();return Math.abs(s.x+s.width/2-(f.x+f.width/2));};
   // The newest role starts selected in both.
-  assert.equal(await pressed(),'brewing');
+  assert.equal(await pressed(),'pwc-newlaw');
   // A tab centres the matching stop.
-  await section.getByRole('tab',{name:/PwC/}).click();await page.waitForTimeout(700);
+  await section.getByRole('tab',{name:'PwC',exact:true}).click();await page.waitForTimeout(700);
   assert.equal(await pressed(),'pwc');assert.ok(await centred('pwc')<4,'the chosen stop is centred');
   // A stop selects the matching tab and panel.
   await timeline.locator('[data-timeline-id="osborne"]').click();await page.waitForTimeout(700);

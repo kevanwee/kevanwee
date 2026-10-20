@@ -83,6 +83,7 @@ flowchart LR
     subgraph main["Main column"]
         about["About"]
         exp["Experience<br/><i>ExperienceTimeline</i>"]
+        legal["LegalEngineering<br/><i>manifesto reader modal</i>"]
         proj["Projects<br/><i>garden · message log ·<br/>forecast</i>"]
         fa["FriendAreas<br/><i>EeveeBase · FriendAreaScene</i>"]
         media["MediaAppearances"]
@@ -222,3 +223,37 @@ C4Component
 Removed the unreachable `ClientWidgets`, `DiancieCursor`, `Hero`, `IcaCanvas`, `IcaFloat`, `Nav`, `PokemonWalker` and `PortfolioModal` components. `PokemonCursor`, `LeftPanel`, the current overworld and the existing dialogs remain the active implementations. Their exclusively used React Three Fiber/Drei/Three dependencies were removed too. Historical root HTML/CSS, artwork and generator sources remain available.
 
 The simulation modules already provide runtime isomorphism: browser components and Node checks execute the same logic. They are functions over explicit state; an inheritance hierarchy would add indirection without useful substitutability here. No new classes are claimed in this diagram. See [the review and remaining work](docs/CODE-QUALITY-REVIEW-2026-10-16.md).
+
+
+### Legal Engineering and project catalogue (20 October 2026)
+
+The six section links come from `portfolioSections` in `src/data/index.ts`, shared
+by the page and left panel. `LegalEngineering` renders its copy from that module
+and opens the existing `Modal` with a sandboxed iframe. The manifesto is a separately
+deployed external site: the portfolio has no source import or build dependency on
+its repository. Its CSP allows framing only by `https://kevanwee.vercel.app`;
+localhost and preview deployments use the Open original link. Automated local reader
+checks use an explicitly synthetic frame fixture.
+
+Projects retain their curated Highlights, followed by Legal systems & data,
+Agent skills & workflows, and Other experiments. The original project array order
+and corresponding `other-project-N` resident surface IDs are preserved. Private
+skills link to their public guide descriptions. The terminal derives the new
+`legal-engineering/manifesto.txt` folder from the same data. README categories and
+cards are generated from `genpokemon/readme_art/data.py`, with cast assignments in
+`cast.py`; light/dark SVG assets are committed under `readme/art`.
+
+```mermaid
+flowchart LR
+    data["Portfolio data / section catalogue"] --> section["LegalEngineering"]
+    data --> projects["Projects / grouped cards"]
+    data --> terminal["Terminal filesystem"]
+    section --> modal["Existing Modal / native dialog"]
+    modal -->|sandboxed HTTPS iframe| manifesto["External manifesto site / portfolio-only frame ancestors"]
+```
+
+Validation: production build; terminal data checks; six-section navigation at desktop
+and mobile widths with normal/reduced motion; experience timeline; responsive panel
+matrix (24 layouts); reader close/Escape/focus/overflow checks at 1440px and 390px.
+The manifesto repository separately checks its actual CSP: production portfolio
+origin allowed, unrelated and preview origins blocked.

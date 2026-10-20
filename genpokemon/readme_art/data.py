@@ -61,6 +61,22 @@ projects = [
     ]),
 ]
 
+# The public index groups work by what a visitor can use; Highlights stays curated.
+_earlier_groups = projects
+projects = [
+    G("highlights", "diancie", _earlier_groups[0]["items"]),
+    G("legal systems &amp; data", "fuecoco", _earlier_groups[1]["items"] + _earlier_groups[2]["items"]),
+    G("agent skills &amp; workflows", "froakie", [
+        P("legal-engineering-manifesto", "legal engineering manifesto", "my proposed framework: legal understanding, process design and delivery, tested through working systems", "?", "idle", repo="-", url="https://legal-engineering-manifesto.vercel.app/", label="read the guide"),
+        P("sg-legalresearch-skill", "singapore legal research", "primary-source research and citation checks, with evidence records and version checks", "?", "idle"),
+        P("legal-extraction-skill", "source-span extraction", "every extracted value tied to exact source text, with a deterministic span check", "?", "idle"),
+        P("legal-process-modelling", "process modelling & runner", "inspectable legal processes, released workflows, recorded state and human decision gates", "?", "idle", repo="-", url="https://legal-engineering-manifesto.vercel.app/toolkit", tags=["private source"], label="public guide"),
+        P("sg-drafting-skill", "singapore clause drafting", "drafts from supplied research and retains approved clauses as precedents", "?", "idle", repo="-", url="https://legal-engineering-manifesto.vercel.app/toolkit", tags=["private source"], label="public guide"),
+        P("sg-pdpa-skill", "pdpa assessment", "obligation-by-obligation assessment against provision text retrieved for the activity", "?", "idle", repo="-", url="https://legal-engineering-manifesto.vercel.app/toolkit", tags=["private source"], label="public guide"),
+    ]),
+    G("other experiments", "jirachi", [p for group in _earlier_groups[3:] for p in group["items"]]),
+]
+
 trees = [
     ["tech tree", [["legal engineering", "rules as data, deterministic engines with derivation traces, mcp servers, claude skills"],
                    ["ai", "rag, hybrid retrieval (bm25 + dense + reranking), llm evaluation, local models (ollama)"],

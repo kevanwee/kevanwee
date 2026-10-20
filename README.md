@@ -149,7 +149,7 @@
 <a href="https://kevanwee.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-voracity-dark.svg" /><img src="./readme/art/card-voracity-light.svg" alt="voracity" width="49%" /></picture></a>
 </p>
 
-<h3 align="center"><img src="./readme/art/mascot-fuecoco.svg" height="26" /> &nbsp;legal engineering toolkit</h3>
+<h3 align="center"><img src="./readme/art/mascot-fuecoco.svg" height="26" /> &nbsp;legal systems &amp; data</h3>
 
 <p align="center">
 <a href="https://github.com/kevanwee/sg-legal-corpus"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-legal-corpus-dark.svg" /><img src="./readme/art/card-sg-legal-corpus-light.svg" alt="sg legal corpus" width="49%" /></picture></a>
@@ -169,11 +169,7 @@
 <br>
 <a href="https://github.com/kevanwee/sal-citation-generator"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sal-citation-generator-dark.svg" /><img src="./readme/art/card-sal-citation-generator-light.svg" alt="sal citation generator" width="49%" /></picture></a>
 <a href="https://github.com/kevanwee/apac-lateral-tracker"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-apac-lateral-tracker-dark.svg" /><img src="./readme/art/card-apac-lateral-tracker-light.svg" alt="apac lateral tracker" width="49%" /></picture></a>
-</p>
-
-<h3 align="center"><img src="./readme/art/mascot-fuecoco.svg" height="26" /> &nbsp;legal data &amp; analytics</h3>
-
-<p align="center">
+<br>
 <a href="https://github.com/kevanwee/pdpcscraper"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-pdpcscraper-dark.svg" /><img src="./readme/art/card-pdpcscraper-light.svg" alt="pdpc scraper" width="49%" /></picture></a>
 <a href="https://github.com/kevanwee/elitiscraper"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-elitiscraper-dark.svg" /><img src="./readme/art/card-elitiscraper-light.svg" alt="eliti scraper" width="49%" /></picture></a>
 <br>
@@ -189,37 +185,41 @@
 <a href="https://github.com/kevanwee/tortrat"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-tortrat-dark.svg" /><img src="./readme/art/card-tortrat-light.svg" alt="tort rat" width="49%" /></picture></a>
 </p>
 
-<h3 align="center"><img src="./readme/art/mascot-froakie.svg" height="26" /> &nbsp;intelligence analysis tools</h3>
+<h3 align="center"><img src="./readme/art/mascot-froakie.svg" height="26" /> &nbsp;agent skills &amp; workflows</h3>
+
+<p align="center">Scrum coordination is featured in Highlights above. Private skills are described in the public guide.</p>
+
+<p align="center">
+<a href="https://legal-engineering-manifesto.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-engineering-manifesto-dark.svg" /><img src="./readme/art/card-legal-engineering-manifesto-light.svg" alt="legal engineering manifesto" width="49%" /></picture></a>
+<a href="https://github.com/kevanwee/sg-legalresearch-skill"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-legalresearch-skill-dark.svg" /><img src="./readme/art/card-sg-legalresearch-skill-light.svg" alt="singapore legal research" width="49%" /></picture></a>
+<br>
+<a href="https://github.com/kevanwee/legal-extraction-skill"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-extraction-skill-dark.svg" /><img src="./readme/art/card-legal-extraction-skill-light.svg" alt="source-span extraction" width="49%" /></picture></a>
+<a href="https://legal-engineering-manifesto.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-process-modelling-dark.svg" /><img src="./readme/art/card-legal-process-modelling-light.svg" alt="process modelling & runner" width="49%" /></picture></a>
+<br>
+<a href="https://legal-engineering-manifesto.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-drafting-skill-dark.svg" /><img src="./readme/art/card-sg-drafting-skill-light.svg" alt="singapore clause drafting" width="49%" /></picture></a>
+<a href="https://legal-engineering-manifesto.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-pdpa-skill-dark.svg" /><img src="./readme/art/card-sg-pdpa-skill-light.svg" alt="pdpa assessment" width="49%" /></picture></a>
+</p>
+
+<h3 align="center"><img src="./readme/art/mascot-jirachi.svg" height="26" /> &nbsp;other experiments</h3>
 
 <p align="center">
 <a href="https://github.com/kevanwee/hawkshot"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-hawkshot-dark.svg" /><img src="./readme/art/card-hawkshot-light.svg" alt="hawk shot" width="49%" /></picture></a>
 <a href="https://github.com/kevanwee/mapmole"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-mapmole-dark.svg" /><img src="./readme/art/card-mapmole-light.svg" alt="map mole" width="49%" /></picture></a>
-</p>
-
-<h3 align="center"><img src="./readme/art/mascot-teddiursa.svg" height="26" /> &nbsp;art</h3>
-
-<p align="center">
+<br>
 <a href="https://github.com/kevanwee/lolpixelart"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-lolpixelart-dark.svg" /><img src="./readme/art/card-lolpixelart-light.svg" alt="lol pixel art" width="49%" /></picture></a>
-</p>
-
-<h3 align="center"><img src="./readme/art/mascot-jirachi.svg" height="26" /> &nbsp;others</h3>
-
-<p align="center">
 <a href="https://github.com/kevanwee/voracity-watcher"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-voracity-watcher-dark.svg" /><img src="./readme/art/card-voracity-watcher-light.svg" alt="voracity watcher" width="49%" /></picture></a>
+<br>
 <a href="https://github.com/kevanwee/theoffice"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-theoffice-dark.svg" /><img src="./readme/art/card-theoffice-light.svg" alt="the office" width="49%" /></picture></a>
-<br>
 <a href="https://github.com/kevanwee/pmd-agents"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-pmd-agents-dark.svg" /><img src="./readme/art/card-pmd-agents-light.svg" alt="pmd agents" width="49%" /></picture></a>
+<br>
 <a href="https://github.com/kevanwee/pmdsvgworld"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-pmdsvgworld-dark.svg" /><img src="./readme/art/card-pmdsvgworld-light.svg" alt="pmd svg world" width="49%" /></picture></a>
-<br>
 <a href="https://github.com/kevanwee/kevanwee"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-kevanwee-dark.svg" /><img src="./readme/art/card-kevanwee-light.svg" alt="kevanwee portfolio" width="49%" /></picture></a>
-<a href="https://github.com/kevanwee/kevanweeportfolio"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-kevanweeportfolio-dark.svg" /><img src="./readme/art/card-kevanweeportfolio-light.svg" alt="3d portfolio" width="49%" /></picture></a>
 <br>
+<a href="https://github.com/kevanwee/kevanweeportfolio"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-kevanweeportfolio-dark.svg" /><img src="./readme/art/card-kevanweeportfolio-light.svg" alt="3d portfolio" width="49%" /></picture></a>
 <a href="https://github.com/kevanwee/bookworm"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-bookworm-dark.svg" /><img src="./readme/art/card-bookworm-light.svg" alt="book worm" width="49%" /></picture></a>
+<br>
 <a href="https://github.com/kevanwee/HUHH"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-huhh-dark.svg" /><img src="./readme/art/card-huhh-light.svg" alt="huhh" width="49%" /></picture></a>
 </p>
-
-
-  <br>
 
 </details>
 

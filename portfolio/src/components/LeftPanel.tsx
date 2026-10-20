@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { personal } from "@/data";
+import { personal, portfolioSections } from "@/data";
 import MusicPlayer from "@/components/MusicPlayer";
 import ResumeModal from "@/components/ResumeModal";
 import SshLauncher from "@/components/SshLauncher";
@@ -15,13 +15,7 @@ const ASSISTANTS = [
   { name: "ChatGPT", url: "https://chatgpt.com/?q=" },
 ];
 
-const NAV_ITEMS = [
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "media", label: "Media" },
-  { id: "contact", label: "Contact" },
-];
+const NAV_ITEMS = portfolioSections;
 
 interface LeftPanelProps {
   activeSection: string;
