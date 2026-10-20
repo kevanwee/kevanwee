@@ -145,3 +145,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - Refactor constraint (16 October 2026): preserve the existing user-facing appearance and interactions during code-quality cleanup; verify affected behaviour against the pre-refactor implementation and browser checks.
 
 - Portfolio content (20 October 2026): current experience is PwC / NewLaw; retain the unconfirmed role/type and Something is brewing details. Keep Highlights curated, then group projects as Legal systems & data, Agent skills & workflows, and Other experiments. The Legal Engineering section opens the manifesto in a reader; allow embedding only from the production portfolio origin. Private skill repositories stay private and link to public guide descriptions.
+
+- Experience label correction (20 October 2026): the current-role tab reads only PwC, without / NewLaw. Keep NewLaw in the experience details. Both PwC roles use the PwC tab label.

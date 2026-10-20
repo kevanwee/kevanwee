@@ -26,7 +26,7 @@ const assert = require('node:assert/strict');
   // The newest role starts selected in both.
   assert.equal(await pressed(),'pwc-newlaw');
   // A tab centres the matching stop.
-  await section.getByRole('tab',{name:'PwC',exact:true}).click();await page.waitForTimeout(700);
+  await section.getByRole('tab',{name:'PwC',exact:true}).last().click();await page.waitForTimeout(700);
   assert.equal(await pressed(),'pwc');assert.ok(await centred('pwc')<4,'the chosen stop is centred');
   // A stop selects the matching tab and panel.
   await timeline.locator('[data-timeline-id="osborne"]').click();await page.waitForTimeout(700);
