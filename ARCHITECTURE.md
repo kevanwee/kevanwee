@@ -66,7 +66,7 @@ classic layout: stacked name, 11px dashed section links, social icons directly u
 the green Resume action. It scales continuously to the window height (CSS zoom on
 `.left-panel-zoom`, 50–100%), so browser zoom rescales rather than recomposing; only below the
 50% floor does the pinned frame scroll inside itself. Phones and tablets stack the columns with
-44px targets. Section navigation targets the visible heading, skipping decorative top padding.
+44px targets. Section navigation targets the visible heading (or an explicitly marked content card), skipping decorative top padding.
 See `scripts/test-responsive-panel.cjs` for the viewport matrix.
 
 ```mermaid
@@ -229,6 +229,7 @@ The simulation modules already provide runtime isomorphism: browser components a
 
 The six section links come from `portfolioSections` in `src/data/index.ts`, shared
 by the page and left panel. `LegalEngineering` renders its copy from that module
+including a call to action inside the Legal Engineer? critique card,
 and opens the existing `Modal` with a sandboxed iframe. The manifesto is a separately
 deployed external site: the portfolio has no source import or build dependency on
 its repository. Its CSP allows framing only by `https://kevanwee.vercel.app`;

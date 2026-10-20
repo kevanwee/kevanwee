@@ -38,7 +38,7 @@ CARDS = {
 
 # New card residents are selected from the existing, credited sprite pool.
 CARDS.update({slug: ("?", "idle") for slug in [
-    "legal-engineering-manifesto", "sg-legalresearch-skill", "legal-extraction-skill",
+    "legal-engineering-defined", "sg-legalresearch-skill", "legal-extraction-skill",
     "legal-process-modelling", "sg-drafting-skill", "sg-pdpa-skill",
 ]})
 

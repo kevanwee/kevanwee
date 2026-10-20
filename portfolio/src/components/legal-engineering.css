@@ -1,13 +1,13 @@
-.legal-engineering > h2 { font-size: 34px; }
-.manifesto-launcher { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; margin-top: 28px; padding: 10px 18px; border-radius: 8px; background: #3a6b59; color: #fff; font-size: 13px; font-weight: 600; transition: background-color .2s; }
-.manifesto-launcher:hover { background: #2c5244; }
-.manifesto-reader { display: flex; flex-direction: column; width: min(1180px, 100%); height: min(880px, 90dvh); min-height: 0; overflow: hidden; border-radius: 14px; background: #faf8f4; box-shadow: 0 18px 64px rgb(26 21 18 / .22); }
-.manifesto-reader-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding: 12px 16px; border-bottom: 1px solid #e8dece; }
-.manifesto-reader-header h3 { margin: 0; }
-.manifesto-reader-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
-.manifesto-reader-actions a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: #2c5244; font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
-.manifesto-reader-actions button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 6px; color: #53473c; }
-.manifesto-reader-actions button:hover { background: #eee9e0; }
-.manifesto-reader iframe { flex: 1; min-height: 0; width: 100%; border: 0; background: #fff; }
-@media (max-width: 480px) { .manifesto-reader { height: 92dvh; } .manifesto-reader-header { padding: 8px 12px; } .manifesto-reader-header h3 { max-width: 100%; font-size: 17px; } }
-@media (prefers-reduced-motion: reduce) { .manifesto-launcher { transition: none; } }
+.legal-engineering-card > h2 { font-size: 34px; }
+.legal-engineering-launcher { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; margin-top: 28px; padding: 10px 18px; border-radius: 8px; background: #3a6b59; color: #fff; font-size: 13px; font-weight: 600; transition: background-color .2s; }
+.legal-engineering-launcher:hover { background: #2c5244; }
+.legal-engineering-reader { display: flex; flex-direction: column; width: min(1180px, 100%); height: min(880px, 90dvh); min-height: 0; overflow: hidden; border-radius: 14px; background: #faf8f4; box-shadow: 0 18px 64px rgb(26 21 18 / .22); }
+.legal-engineering-reader-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; padding: 12px 16px; border-bottom: 1px solid #e8dece; }
+.legal-engineering-reader-header h3 { margin: 0; }
+.legal-engineering-reader-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.legal-engineering-reader-actions a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: #2c5244; font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
+.legal-engineering-reader-actions button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 6px; color: #53473c; }
+.legal-engineering-reader-actions button:hover { background: #eee9e0; }
+.legal-engineering-reader iframe { flex: 1; min-height: 0; width: 100%; border: 0; background: #fff; }
+@media (max-width: 480px) { .legal-engineering-reader { height: 92dvh; } .legal-engineering-reader-header { padding: 8px 12px; } .legal-engineering-reader-header h3 { max-width: 100%; font-size: 17px; } }
+@media (prefers-reduced-motion: reduce) { .legal-engineering-launcher { transition: none; } }

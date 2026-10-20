@@ -190,14 +190,14 @@
 <p align="center">Scrum coordination is featured in Highlights above. Private skills are described in the public guide.</p>
 
 <p align="center">
-<a href="https://legal-engineering-manifesto.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-engineering-manifesto-dark.svg" /><img src="./readme/art/card-legal-engineering-manifesto-light.svg" alt="legal engineering as a discipline" width="49%" /></picture></a>
+<a href="https://legal-engineering-defined.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-engineering-defined-dark.svg" /><img src="./readme/art/card-legal-engineering-defined-light.svg" alt="legal engineering defined" width="49%" /></picture></a>
 <a href="https://github.com/kevanwee/sg-legalresearch-skill"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-legalresearch-skill-dark.svg" /><img src="./readme/art/card-sg-legalresearch-skill-light.svg" alt="singapore legal research" width="49%" /></picture></a>
 <br>
 <a href="https://github.com/kevanwee/legal-extraction-skill"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-extraction-skill-dark.svg" /><img src="./readme/art/card-legal-extraction-skill-light.svg" alt="source-span extraction" width="49%" /></picture></a>
-<a href="https://legal-engineering-manifesto.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-process-modelling-dark.svg" /><img src="./readme/art/card-legal-process-modelling-light.svg" alt="process modelling & runner" width="49%" /></picture></a>
+<a href="https://legal-engineering-defined.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-process-modelling-dark.svg" /><img src="./readme/art/card-legal-process-modelling-light.svg" alt="process modelling & runner" width="49%" /></picture></a>
 <br>
-<a href="https://legal-engineering-manifesto.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-drafting-skill-dark.svg" /><img src="./readme/art/card-sg-drafting-skill-light.svg" alt="singapore clause drafting" width="49%" /></picture></a>
-<a href="https://legal-engineering-manifesto.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-pdpa-skill-dark.svg" /><img src="./readme/art/card-sg-pdpa-skill-light.svg" alt="pdpa assessment" width="49%" /></picture></a>
+<a href="https://legal-engineering-defined.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-drafting-skill-dark.svg" /><img src="./readme/art/card-sg-drafting-skill-light.svg" alt="singapore clause drafting" width="49%" /></picture></a>
+<a href="https://legal-engineering-defined.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-pdpa-skill-dark.svg" /><img src="./readme/art/card-sg-pdpa-skill-light.svg" alt="pdpa assessment" width="49%" /></picture></a>
 </p>
 
 <h3 align="center"><img src="./readme/art/mascot-jirachi.svg" height="26" /> &nbsp;other experiments</h3>

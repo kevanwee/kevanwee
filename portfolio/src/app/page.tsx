@@ -50,9 +50,9 @@ export default function Home() {
   const scrollToSection = useCallback((id: string) => {
     const section = document.getElementById(id);
     if (!section) return;
-    const heading = section.querySelector("h2");
+    const heading = section.querySelector("[data-section-scroll-target], h2");
     // Section boxes include the decorative divider, resident ledge and top
-    // padding. Navigation should land on the visible heading, not that space.
+    // padding. Navigation lands on the visible heading or an explicitly marked content card.
     const target = heading && heading.getClientRects().length ? heading : section;
     window.scrollTo({ top: Math.max(0, window.scrollY + target.getBoundingClientRect().top - 24),
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? "instant" : "smooth" });

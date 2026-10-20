@@ -150,3 +150,6 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 
 - Legal Engineering copy (20 October 2026): use the working paper discourse: open entry with substantive competence, engineering beyond a go-to-market role, and more than a lawyer with an interest in AI. Avoid manifesto in portfolio and README display labels; use Legal Engineering as a Discipline and Read more.
 - Qualification clarification (20 October 2026): the entry barrier point concerns an LL.B. law degree, not an LL.M. or a large language model.
+
+- Legal Engineer critique (20 October 2026): section heading Legal Engineer? and opening What is a legal engineer? Use academic, lawyerly prose: open entry without PQE/title gatekeeping, substantial competence beyond either profession's curiosity, and responsibility beyond adoption. Add a call to define the role beyond market forces to prevent dilution, and enclose the whole section content and button in one card.
+- Guide rebrand (20 October 2026): the user chose Legal Engineering Defined for the guide, GitHub repository and public site address, with formal third-person prose and no biography or certification anecdote. Portfolio links and reader labels must follow the renamed guide.
