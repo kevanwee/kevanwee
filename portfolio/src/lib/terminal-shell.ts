@@ -80,7 +80,7 @@ export function buildTree(d: PortfolioData): Dir {
     file('instagram.lnk', [p.instagram], [], p.instagram),
     ...d.careerDocuments.filter(c => c.available).map(c => file(c.filename.toLowerCase().replace(/_/g, '-'), [c.description], [], c.href)),
   ]);
-  return { kind: 'dir', name: '~', children: [about, experience, ...(d.legalEngineering ? [dir('legal-engineering', [file('legal-engineering.txt', [d.legalEngineering.title, '', ...d.legalEngineering.paragraphs, ...(d.legalEngineering.callToAction ? ['', d.legalEngineering.callToAction] : [])], [{label: 'Read more', url: d.legalEngineering.readerUrl}])])] : []), projects, media, contact] };
+  return { kind: 'dir', name: '~', children: [about, experience, projects, ...(d.legalEngineering ? [dir('legal-engineering', [file('legal-engineering.txt', [d.legalEngineering.title, '', ...d.legalEngineering.paragraphs, ...(d.legalEngineering.callToAction ? ['', d.legalEngineering.callToAction] : [])], [{label: 'Read more', url: d.legalEngineering.readerUrl}])])] : []), media, contact] };
 }
 
 // ---------------------------------------------------------------------------------------------- the shell

@@ -771,8 +771,8 @@ export const legalEngineering = {
 export const portfolioSections = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
-  { id: "legal-engineering", label: "Legal Engineering" },
   { id: "projects", label: "Projects" },
+  { id: "legal-engineering", label: "Legal Engineering" },
   { id: "media", label: "Media" },
   { id: "contact", label: "Contact" },
 ];

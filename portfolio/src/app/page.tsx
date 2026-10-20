@@ -84,13 +84,13 @@ export default function Home() {
           <main className="lg:w-[55%] lg:pb-24">
             <About />
             <Experience />
-            <LegalEngineering />
             <Projects />
             {/* The section above owns a full section gap, which it earns because the next section opens
                 with a rule. This has no rule, so it pulls up to the panel's own 64px rhythm. */}
             <div className="-mt-8 mb-24 grid gap-4 lg:-mt-20 lg:mb-36">
               <EeveeBase />
             </div>
+            <LegalEngineering />
             <MediaAppearances />
             <Contact />
           </main>
