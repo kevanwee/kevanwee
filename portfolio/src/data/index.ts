@@ -155,7 +155,7 @@ export const experiences: Experience[] = [
   {
     id: "pwc-newlaw",
     logo: "/logos/pwc.jpg",
-    company: "PwC",
+    company: "PricewaterhouseCoopers LLP",
     role: "???",
     subtitle: "NewLaw",
     period: "Oct 2026 – Present",
