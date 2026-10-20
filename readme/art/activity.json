@@ -1,7 +1,81 @@
 {
- "generatedAt": "2026-10-20T12:59:37+00:00",
+ "generatedAt": "2026-10-20T13:37:54+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Normal",
+   "when": "2026-10-20T13:37:45+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " opened a pull request on "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     "."
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-20T13:36:47+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request "
+    ],
+    [
+     "number",
+     "#79"
+    ],
+    [
+     "text",
+     " was merged into "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-20T13:35:37+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request was merged into "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
   {
    "mood": "Happy",
    "when": "2026-10-20T12:58:43+00:00",
@@ -13,96 +87,6 @@
     [
      "text",
      " pushed new work to "
-    ],
-    [
-     "place",
-     "kevanwee"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-20T12:58:41+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request "
-    ],
-    [
-     "number",
-     "#78"
-    ],
-    [
-     "text",
-     " was merged into "
-    ],
-    [
-     "place",
-     "kevanwee"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-20T12:41:01+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request "
-    ],
-    [
-     "number",
-     "#77"
-    ],
-    [
-     "text",
-     " was merged into "
-    ],
-    [
-     "place",
-     "kevanwee"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-20T12:27:33+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request "
-    ],
-    [
-     "number",
-     "#76"
-    ],
-    [
-     "text",
-     " was merged into "
     ],
     [
      "place",
