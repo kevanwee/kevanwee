@@ -730,7 +730,7 @@ export const otherProjects: OtherProject[] = [
     description: "Models legal work as inspectable steps and runs released workflows with recorded state and human decision gates. Private source; described in the public guide.",
     tags: ["Process design", "Workflows"],
     github: null,
-    external: "https://legal-engineering-manifesto.vercel.app/toolkit",
+    external: "https://legal-engineering-defined.vercel.app/toolkit",
   },
   {
     title: "Singapore clause drafting",
@@ -738,7 +738,7 @@ export const otherProjects: OtherProject[] = [
     description: "Drafts from supplied research and records the drafting rationale; approved clauses can be retained as precedents. Private source; described in the public guide.",
     tags: ["Agent skills", "Drafting"],
     github: null,
-    external: "https://legal-engineering-manifesto.vercel.app/toolkit",
+    external: "https://legal-engineering-defined.vercel.app/toolkit",
   },
   {
     title: "PDPA assessment",
@@ -746,7 +746,7 @@ export const otherProjects: OtherProject[] = [
     description: "Assesses an activity obligation by obligation against retrieved provision text. Private source; described in the public guide.",
     tags: ["Agent skills", "Review"],
     github: null,
-    external: "https://legal-engineering-manifesto.vercel.app/toolkit",
+    external: "https://legal-engineering-defined.vercel.app/toolkit",
   },
 ];
 
@@ -758,13 +758,14 @@ export const projectGroups: { id: ProjectCategory; title: string; description: s
 ];
 
 export const legalEngineering = {
-  title: "Legal Engineering",
-  manifestoTitle: "Legal Engineering as a Discipline",
-  manifestoUrl: "https://legal-engineering-manifesto.vercel.app/",
+  title: "Legal Engineer?",
+  readerTitle: "Legal Engineering Defined",
+  readerUrl: "https://legal-engineering-defined.vercel.app/",
   paragraphs: [
-    "What makes the design of a system for legal work an exercise in legal engineering? Calling the practitioner a bridge between law and technology identifies a relationship, but leaves the responsibilities unclear. The emerging title \"Legal Engineer\" should mean more than a go-to-market role: the ability to design, implement, test and maintain systems for legal work, and explain the choices behind them.",
-    "Entry should be open to lawyers, engineers and people trained across both fields, rather than gated by an LL.B. or a particular professional title. But openness should not mean a low bar. Being a lawyer with an \"interest in AI\" is not enough; the work calls for substantive legal understanding, technical competence and responsibility for how a system behaves after the demo.",
+    "What is a legal engineer? Describing the practitioner as a bridge between law and technology identifies a relationship, but leaves its constituent responsibilities unspecified. The emerging title should denote more than a go-to-market function: the capacity to specify, implement, evaluate and maintain systems for legal work, and to account for the consequential choices made in their design.",
+    "The reality, in practice, is that neither professional status nor interdisciplinary curiosity establishes competence. Entry can and should be open to lawyers, engineers and those trained across both fields, rather than gated by post-qualification experience (PQE) or a particular professional title. A lawyer's interest in AI, like a technologist's interest in law, is insufficient on its own. The work requires substantive legal understanding, technical competence and continuing responsibility for system behaviour beyond demonstration and adoption.",
   ],
+  callToAction: "Market forces alone should not determine the scope and standards of the role. A clearer account of its competencies and responsibilities is needed to guard against dilution of the title and to distinguish engineering practice from commercial positioning.",
 };
 
 export const portfolioSections = [

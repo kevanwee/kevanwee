@@ -9,7 +9,7 @@ const assert=require('node:assert/strict');
    for(const name of ['Experience','Legal Engineering','Projects','Media','Contact','About']){
     const id=name.toLowerCase().replaceAll(' ','-'),link=page.getByRole('navigation',{name:'Page sections'}).getByRole('button',{name,exact:true});
     await link.click();
-    await page.waitForFunction(id=>{const section=document.getElementById(id),h=section.querySelector('h2'),target=h.getClientRects().length?h:section;return Math.abs(target.getBoundingClientRect().top-24)<2;},id,{timeout:5000});
+    await page.waitForFunction(id=>{const section=document.getElementById(id),h=section.querySelector('[data-section-scroll-target], h2'),target=h.getClientRects().length?h:section;return Math.abs(target.getBoundingClientRect().top-24)<2;},id,{timeout:5000});
     if(width>=1024) assert.equal(await page.locator('.portfolio-panel-frame').evaluate(e=>getComputedStyle(e).position),'sticky');
    }
    console.log(`${width}px ${reducedMotion}: all six links land on content at 24px`);await page.close();

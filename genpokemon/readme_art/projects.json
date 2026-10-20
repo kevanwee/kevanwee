@@ -316,13 +316,13 @@
   "mascot": "froakie",
   "items": [
    {
-    "slug": "legal-engineering-manifesto",
-    "title": "legal engineering as a discipline",
+    "slug": "legal-engineering-defined",
+    "title": "legal engineering defined",
     "desc": "open entry, substantive competence and accountability beyond product adoption",
     "who": "?",
     "mode": "idle",
     "repo": "-",
-    "url": "https://legal-engineering-manifesto.vercel.app/",
+    "url": "https://legal-engineering-defined.vercel.app/",
     "tags": [],
     "label": "read the guide"
    },
@@ -355,7 +355,7 @@
     "who": "?",
     "mode": "idle",
     "repo": "-",
-    "url": "https://legal-engineering-manifesto.vercel.app/toolkit",
+    "url": "https://legal-engineering-defined.vercel.app/toolkit",
     "tags": [
      "private source"
     ],
@@ -368,7 +368,7 @@
     "who": "?",
     "mode": "idle",
     "repo": "-",
-    "url": "https://legal-engineering-manifesto.vercel.app/toolkit",
+    "url": "https://legal-engineering-defined.vercel.app/toolkit",
     "tags": [
      "private source"
     ],
@@ -381,7 +381,7 @@
     "who": "?",
     "mode": "idle",
     "repo": "-",
-    "url": "https://legal-engineering-manifesto.vercel.app/toolkit",
+    "url": "https://legal-engineering-defined.vercel.app/toolkit",
     "tags": [
      "private source"
     ],
