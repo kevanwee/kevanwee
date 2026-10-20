@@ -15,7 +15,7 @@ const {mkdirSync}=require('node:fs');
    await page.getByRole('navigation',{name:'Page sections'}).getByRole('button',{name:'Legal Engineering',exact:true}).click();
    await page.waitForFunction(()=>Math.abs(document.querySelector('#legal-engineering h2').getBoundingClientRect().top-24)<2);
    assert.equal(await page.locator('#legal-engineering p').count(),2);
-   assert.equal(await page.locator('#experience').getByRole('tab',{name:'PwC / NewLaw',exact:true}).count(),1);
+   assert.equal(await page.locator('#experience').getByRole('tab',{name:'PwC',exact:true}).count(),2);
    assert.ok(await page.locator('#experience').getByText(/Something is brewing/).isVisible());
    for(const title of ['Highlights','Legal systems & data','Agent skills & workflows','Other experiments']) assert.equal(await page.locator('#projects').getByRole('heading',{name:title,exact:true}).count(),1);
    assert.equal(await page.locator('#projects a[href="https://github.com/kevanwee/sg-legalresearch-skill"]').count(),1);
