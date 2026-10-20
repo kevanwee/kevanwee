@@ -155,3 +155,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - Guide rebrand (20 October 2026): the user chose Legal Engineering Defined for the guide, GitHub repository and public site address, with formal third-person prose and no biography or certification anecdote. Portfolio links and reader labels must follow the renamed guide.
 
 - Section order (20 October 2026): Projects precedes the Legal Engineer? critique card. Keep the Friend Areas with Projects and match the left navigation and terminal folder order.
+
+- PwC naming (20 October 2026): the current experience panel uses PricewaterhouseCoopers LLP in full; the tab remains PwC.
