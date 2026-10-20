@@ -67,7 +67,7 @@ projects = [
     G("highlights", "diancie", _earlier_groups[0]["items"]),
     G("legal systems &amp; data", "fuecoco", _earlier_groups[1]["items"] + _earlier_groups[2]["items"]),
     G("agent skills &amp; workflows", "froakie", [
-        P("legal-engineering-manifesto", "legal engineering manifesto", "my proposed framework: legal understanding, process design and delivery, tested through working systems", "?", "idle", repo="-", url="https://legal-engineering-manifesto.vercel.app/", label="read the guide"),
+        P("legal-engineering-manifesto", "legal engineering as a discipline", "open entry, substantive competence and accountability beyond product adoption", "?", "idle", repo="-", url="https://legal-engineering-manifesto.vercel.app/", label="read the guide"),
         P("sg-legalresearch-skill", "singapore legal research", "primary-source research and citation checks, with evidence records and version checks", "?", "idle"),
         P("legal-extraction-skill", "source-span extraction", "every extracted value tied to exact source text, with a deterministic span check", "?", "idle"),
         P("legal-process-modelling", "process modelling & runner", "inspectable legal processes, released workflows, recorded state and human decision gates", "?", "idle", repo="-", url="https://legal-engineering-manifesto.vercel.app/toolkit", tags=["private source"], label="public guide"),

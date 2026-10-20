@@ -239,7 +239,7 @@ Projects retain their curated Highlights, followed by Legal systems & data,
 Agent skills & workflows, and Other experiments. The original project array order
 and corresponding `other-project-N` resident surface IDs are preserved. Private
 skills link to their public guide descriptions. The terminal derives the new
-`legal-engineering/manifesto.txt` folder from the same data. README categories and
+`legal-engineering/legal-engineering.txt` folder from the same data. README categories and
 cards are generated from `genpokemon/readme_art/data.py`, with cast assignments in
 `cast.py`; light/dark SVG assets are committed under `readme/art`.
 
