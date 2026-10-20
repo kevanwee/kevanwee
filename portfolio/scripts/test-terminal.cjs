@@ -16,7 +16,7 @@ const text = r => r.lines.map(l => l.map(p => p.text).join('')).join('\n');
 const names = d => d.children.map(c => c.name);
 
 // The page's sections are the folders
-assert.deepEqual(names(root), ['about', 'experience', 'legal-engineering', 'projects', 'media', 'contact']);
+assert.deepEqual(names(root), ['about', 'experience', 'projects', 'legal-engineering', 'media', 'contact']);
 // Everything in the data module shows up, so nothing needs updating separately
 const all = []; (function walk(d, at) { for (const c of d.children) c.kind === 'dir' ? walk(c, [...at, c.name]) : all.push(c); })(root, []);
 const body = all.map(f => f.lines.join('\n') + (f.links ?? []).map(l => l.url).join('\n') + (f.open ?? '')).join('\n');
@@ -34,7 +34,7 @@ assert.equal(sh.resolve(root, [], 'contact').node.children.filter(c => c.name.en
 
 // Commands
 let r = sh.run(root, [], 'ls');
-assert.equal(text(r), 'about/  experience/  legal-engineering/  projects/  media/  contact/');
+assert.equal(text(r), 'about/  experience/  projects/  legal-engineering/  media/  contact/');
 assert.equal(r.lines[0][0].run, 'cd ~/about');
 assert.deepEqual(sh.run(root, [], 'dir').lines, r.lines, 'dir is ls');
 r = sh.run(root, [], 'cd projects/featured'); assert.deepEqual(r.cwd, ['projects', 'featured']);

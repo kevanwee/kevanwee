@@ -153,3 +153,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 
 - Legal Engineer critique (20 October 2026): section heading Legal Engineer? and opening What is a legal engineer? Use academic, lawyerly prose: open entry without PQE/title gatekeeping, substantial competence beyond either profession's curiosity, and responsibility beyond adoption. Add a call to define the role beyond market forces to prevent dilution, and enclose the whole section content and button in one card.
 - Guide rebrand (20 October 2026): the user chose Legal Engineering Defined for the guide, GitHub repository and public site address, with formal third-person prose and no biography or certification anecdote. Portfolio links and reader labels must follow the renamed guide.
+
+- Section order (20 October 2026): Projects precedes the Legal Engineer? critique card. Keep the Friend Areas with Projects and match the left navigation and terminal folder order.
