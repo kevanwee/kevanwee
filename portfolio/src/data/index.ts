@@ -759,11 +759,11 @@ export const projectGroups: { id: ProjectCategory; title: string; description: s
 
 export const legalEngineering = {
   title: "Legal Engineering",
-  manifestoTitle: "The Legal Engineering Manifesto",
+  manifestoTitle: "Legal Engineering as a Discipline",
   manifestoUrl: "https://legal-engineering-manifesto.vercel.app/",
   paragraphs: [
-    "I see legal engineering taking shape around a practical question: how do we turn legal requirements into systems people can depend on? For me, that starts with understanding the work, its people and its decisions, before choosing what to automate.",
-    "My interest is in connecting legal reasoning, process design and software delivery. The result should be inspectable, tested and maintainable, with people responsible for checking the evidence and making decisions. I'm developing that view through the skills and tools below, and in my Legal Engineering Manifesto."
+    "What makes the design of a system for legal work an exercise in legal engineering? Calling the practitioner a bridge between law and technology identifies a relationship, but leaves the responsibilities unclear. The emerging title \"Legal Engineer\" should mean more than a go-to-market role: the ability to design, implement, test and maintain systems for legal work, and explain the choices behind them.",
+    "Entry should be open to lawyers, engineers and people trained across both fields, rather than gated by an LL.B. or a particular professional title. But openness should not mean a low bar. Being a lawyer with an \"interest in AI\" is not enough; the work calls for substantive legal understanding, technical competence and responsibility for how a system behaves after the demo.",
   ],
 };
 

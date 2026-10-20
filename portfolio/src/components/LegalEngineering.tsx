@@ -13,7 +13,7 @@ export default function LegalEngineering() {
       {legalEngineering.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
     </div>
     <button type="button" className="manifesto-launcher" onClick={() => setReading(true)} aria-haspopup="dialog">
-      Read the manifesto
+      Read more
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
     </button>
     {reading && <Modal label={legalEngineering.manifestoTitle} onClose={() => setReading(false)}>
@@ -22,7 +22,7 @@ export default function LegalEngineering() {
           <h3 className="font-serif text-lg font-semibold text-warm-900">{legalEngineering.manifestoTitle}</h3>
           <div className="manifesto-reader-actions">
             <a href={legalEngineering.manifestoUrl} target="_blank" rel="noopener noreferrer">Open original <span aria-hidden="true">&#8599;</span></a>
-            <button type="button" onClick={() => setReading(false)} aria-label="Close manifesto reader">
+            <button type="button" onClick={() => setReading(false)} aria-label="Close legal engineering reader">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6" /></svg>
             </button>
           </div>

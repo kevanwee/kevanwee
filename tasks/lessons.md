@@ -147,3 +147,6 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - Portfolio content (20 October 2026): current experience is PwC / NewLaw; retain the unconfirmed role/type and Something is brewing details. Keep Highlights curated, then group projects as Legal systems & data, Agent skills & workflows, and Other experiments. The Legal Engineering section opens the manifesto in a reader; allow embedding only from the production portfolio origin. Private skill repositories stay private and link to public guide descriptions.
 
 - Experience label correction (20 October 2026): the current-role tab reads only PwC, without / NewLaw. Keep NewLaw in the experience details. Both PwC roles use the PwC tab label.
+
+- Legal Engineering copy (20 October 2026): use the working paper discourse: open entry with substantive competence, engineering beyond a go-to-market role, and more than a lawyer with an interest in AI. Avoid manifesto in portfolio and README display labels; use Legal Engineering as a Discipline and Read more.
+- Qualification clarification (20 October 2026): the entry barrier point concerns an LL.B. law degree, not an LL.M. or a large language model.
