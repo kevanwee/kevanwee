@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-22T02:25:39+00:00",
+ "generatedAt": "2026-10-22T06:36:03+00:00",
  "speaker": "Diancie",
  "lines": [
   {
-   "mood": "Normal",
-   "when": "2026-10-22T02:24:28+00:00",
+   "mood": "Joyous",
+   "when": "2026-10-22T02:41:55+00:00",
    "parts": [
     [
      "name",
@@ -12,7 +12,81 @@
     ],
     [
      "text",
-     " opened pull request "
+     "'s pull request was merged into "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
+  {
+   "mood": "Happy",
+   "when": "2026-10-22T02:41:42+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " pushed new work to "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     " ("
+    ],
+    [
+     "number",
+     "\u00d74"
+    ],
+    [
+     "text",
+     ")"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-22T02:41:41+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request was merged into "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-22T02:24:41+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request "
     ],
     [
      "number",
@@ -20,77 +94,11 @@
     ],
     [
      "text",
-     " on "
+     " was merged into "
     ],
     [
      "place",
      "kevanwee"
-    ],
-    [
-     "text",
-     "."
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-22T01:31:47+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request was merged into "
-    ],
-    [
-     "place",
-     "a hidden dungeon"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-22T01:31:41+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request was merged into "
-    ],
-    [
-     "place",
-     "a hidden dungeon"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-22T01:22:11+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request was merged into "
-    ],
-    [
-     "place",
-     "a hidden dungeon"
     ],
     [
      "text",
