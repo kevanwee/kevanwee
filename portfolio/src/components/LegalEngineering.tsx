@@ -14,6 +14,7 @@ export default function LegalEngineering() {
       {legalEngineering.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
     </div>
     <p className="mt-6 text-sm leading-8 text-warm-600">{legalEngineering.callToAction}</p>
+    <p className="mt-6 border-t border-cream-200 pt-6 text-sm leading-8 text-warm-700">{legalEngineering.conviction}</p>
     <button type="button" className="legal-engineering-launcher" onClick={() => setReading(true)} aria-haspopup="dialog">
       Read more
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>

@@ -766,6 +766,7 @@ export const legalEngineering = {
     "The reality, in practice, is that neither professional status nor interdisciplinary curiosity establishes competence. Entry can and should be open to lawyers, engineers and those trained across both fields, rather than gated by post-qualification experience (PQE) or a particular professional title. A lawyer's interest in AI, like a technologist's interest in law, is insufficient on its own. The work requires substantive legal understanding, technical competence and continuing responsibility for system behaviour beyond demonstration and adoption.",
   ],
   callToAction: "Market forces alone should not determine the scope and standards of the role. A clearer account of its competencies and responsibilities is needed to guard against dilution of the title and to distinguish engineering practice from commercial positioning.",
+  conviction: "Am I a “legal engineer”? Maybe. But I think the title should be earned before it is claimed. Read more for my work in progress: an attempt to reconcile what I have learnt across law and technology, and to define what a legal engineer is.",
 };
 
 export const portfolioSections = [
