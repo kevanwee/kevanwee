@@ -1,7 +1,37 @@
 {
- "generatedAt": "2026-10-22T01:45:08+00:00",
+ "generatedAt": "2026-10-22T02:25:39+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Normal",
+   "when": "2026-10-22T02:24:28+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " opened pull request "
+    ],
+    [
+     "number",
+     "#82"
+    ],
+    [
+     "text",
+     " on "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     "."
+    ]
+   ]
+  },
   {
    "mood": "Joyous",
    "when": "2026-10-22T01:31:47+00:00",
@@ -49,28 +79,6 @@
   {
    "mood": "Joyous",
    "when": "2026-10-22T01:22:11+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request was merged into "
-    ],
-    [
-     "place",
-     "a hidden dungeon"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-22T01:22:05+00:00",
    "parts": [
     [
      "name",
