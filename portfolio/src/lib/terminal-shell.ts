@@ -9,7 +9,7 @@ export type Node = File | Dir;
 
 /** The shapes the terminal reads from src/data (structurally, so the data module stays the source). */
 export interface PortfolioData {
-  legalEngineering?: { title: string; paragraphs: string[]; callToAction?: string; readerUrl: string };
+  legalEngineering?: { title: string; paragraphs: string[]; callToAction?: string; conviction?: string; readerUrl: string };
   personal: { name: string; fullName: string; title: string; institution: string; description: string; tagline: string;
     email: string; linkedin: string; github: string; instagram: string };
   aboutParagraphs: readonly string[];
@@ -80,7 +80,7 @@ export function buildTree(d: PortfolioData): Dir {
     file('instagram.lnk', [p.instagram], [], p.instagram),
     ...d.careerDocuments.filter(c => c.available).map(c => file(c.filename.toLowerCase().replace(/_/g, '-'), [c.description], [], c.href)),
   ]);
-  return { kind: 'dir', name: '~', children: [about, experience, projects, ...(d.legalEngineering ? [dir('legal-engineering', [file('legal-engineering.txt', [d.legalEngineering.title, '', ...d.legalEngineering.paragraphs, ...(d.legalEngineering.callToAction ? ['', d.legalEngineering.callToAction] : [])], [{label: 'Read more', url: d.legalEngineering.readerUrl}])])] : []), media, contact] };
+  return { kind: 'dir', name: '~', children: [about, experience, projects, ...(d.legalEngineering ? [dir('legal-engineering', [file('legal-engineering.txt', [d.legalEngineering.title, '', ...d.legalEngineering.paragraphs, ...(d.legalEngineering.callToAction ? ['', d.legalEngineering.callToAction] : []), ...(d.legalEngineering.conviction ? ['', d.legalEngineering.conviction] : [])], [{label: 'Read more', url: d.legalEngineering.readerUrl}])])] : []), media, contact] };
 }
 
 // ---------------------------------------------------------------------------------------------- the shell

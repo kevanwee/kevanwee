@@ -157,3 +157,5 @@ Preserve the complete existing map rosters (32 Route 111, 12 Mauville) when chan
 - Section order (20 October 2026): Projects precedes the Legal Engineer? critique card. Keep the Friend Areas with Projects and match the left navigation and terminal folder order.
 
 - PwC naming (20 October 2026): the current experience panel uses PricewaterhouseCoopers LLP in full; the tab remains PwC.
+
+- Legal Engineer? conviction (22 October 2026): after the academic critique, a short first-person line (Am I a “legal engineer”? Maybe. ...) introduces Read more as the owner's work-in-progress attempt to reconcile law and technology and define the role. It sits inside the card above the button and in the terminal file.
