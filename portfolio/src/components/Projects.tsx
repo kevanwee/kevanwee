@@ -8,50 +8,7 @@ import GitHubStars from "@/components/GitHubStars";
 import ContributionGarden from "@/components/ContributionGarden";
 import MessageLog from "@/components/MessageLog";
 import WeatherForecast from "@/components/WeatherForecast";
-
-const projectSummaries: Record<string, string> = {
-  "LegalQuants Plugins": "Citation and playbook skills.",
-  "scrum-skill": "Plan, deliver and review work.",
-  "BART": "Check statutes inside Word.",
-  "SAL Citation Generator": "Format legal citations.",
-  "LegalBenchmarks.ai": "Benchmarks for legal AI.",
-  "pmd-agents": "See coding agents at work.",
-  "copycat": "Compare copyright evidence.",
-  "bundlebuild": "Build indexed PDF bundles.",
-  "playbook-as-code": "Apply contract playbooks.",
-  "crimewatch": "Map locations in judgments.",
-  "sightstone": "Reconcile contract clauses.",
-  "eliti scraper": "Collect court decisions.",
-  "sg statute scraper": "Retrieve Singapore statutes.",
-  "hansard scraper": "Collect parliamentary debates.",
-  "tort rat": "Explore Singapore tort law.",
-  "sg-legal-corpus": "Index Singapore legal sources.",
-  "sg-deadline": "Calculate legal deadlines.",
-  "citecheck": "Check citation identities.",
-  "chronology": "Build sourced timelines.",
-  "oblig-register": "Track contract obligations.",
-  "ipatlas": "Explore IP decisions.",
-  "pdpcscraper": "Collect PDPC decisions.",
-  "sg-legalresearch-skill": "Research primary authorities.",
-  "legal-extraction-skill": "Extract source-linked fields.",
-  "Process modelling & runner": "Model and run legal workflows.",
-  "Singapore clause drafting": "Draft with research evidence.",
-  "PDPA assessment": "Review PDPA obligations.",
-  "codeoflaw": "Analyse Singapore judgments.",
-  "justicegap": "Explore access to justice.",
-  "BPMN Workflow Skill": "Model processes in bpmn.io.",
-  "Voracity": "A private personal workspace.",
-  "voracity watcher": "Monitor website changes.",
-  "apac lateral tracker": "Track legal-market moves.",
-  "Legal Engineering Defined": "A legal engineering framework.",
-  "hawk shot": "Analyse terrain sightlines.",
-  "map mole": "Compare geospatial imagery.",
-  "lol pixel art": "Explore pixel artwork.",
-  "3d portfolio": "An interactive 3D portfolio.",
-  "book worm": "A personal reading companion.",
-  "huhh": "Creative experiments.",
-  "lex lynx": "Explore legal information."
-};
+import { useProjectPreview } from "@/components/ProjectPreview";
 
 function skillRank(title: string) {
   const order = ["sg-legalresearch-skill", "legal-extraction-skill", "Singapore clause drafting", "PDPA assessment", "sg-deadline"];
@@ -63,6 +20,7 @@ function featuredGroup(id: string) { return id === "scrum" || id === "scrum-skil
 
 export default function Projects() {
   const [showBart, setShowBart] = useState(false);
+  const { bind, panel } = useProjectPreview();
   return (
     <section
       id="projects"
@@ -97,6 +55,7 @@ export default function Projects() {
               data-overworld-kind="featured"
               className={`group rounded-2xl border border-cream-200 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5 ${project.hasCaseStudy ? "cursor-pointer" : ""}`}
               onClick={project.hasCaseStudy ? () => setShowBart(true) : undefined}
+              {...bind(project.title, project.preview)}
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0 flex-1">
@@ -111,8 +70,8 @@ export default function Projects() {
                       </span>
                     )}
                   </div>
-                  <p className="truncate text-xs leading-relaxed text-warm-500" title={projectSummaries[project.title] ?? project.description}>
-                    {projectSummaries[project.title] ?? project.description}
+                  <p className="text-xs leading-relaxed text-warm-500">
+                    {project.summary}
                   </p>
                   <ul className="mt-4 flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
@@ -178,6 +137,7 @@ export default function Projects() {
                 key={project.title}
                 data-overworld-surface={`other-project-${otherProjects.indexOf(project)}`}
                 data-overworld-kind="other-project"
+                {...bind(project.title, project.preview)}
                 className="group min-w-0 flex flex-col justify-between rounded-2xl border border-cream-200 border-t-2 border-t-sage-100 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:border-t-sage-300 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-1"
               >
                 <div>
@@ -222,11 +182,12 @@ export default function Projects() {
                       )}
                     </div>
                   </div>
-                  <h4 className="mb-1.5 text-sm font-semibold text-warm-800 group-hover:text-sage-700 transition-colors">
+                  <h4 className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold text-warm-800 group-hover:text-sage-700 transition-colors">
                     {project.title}
+                    {project.preview && <span className="project-preview-badge">▶ preview</span>}
                   </h4>
-                  <p className="truncate text-xs leading-relaxed text-warm-500" title={projectSummaries[project.title] ?? project.description}>
-                    {projectSummaries[project.title] ?? project.description}
+                  <p className="text-xs leading-relaxed text-warm-500">
+                    {project.summary}
                   </p>
                 </div>
                 <ul className="mt-4 flex flex-wrap gap-1.5">
@@ -245,6 +206,7 @@ export default function Projects() {
 </div></section>)}
         </div>
         <div className="mt-6"><MessageLog /></div>
+        {panel}
         {showBart && <BartCaseStudyModal onClose={() => setShowBart(false)} />}
 
         {/* Castform's forecast, above the skills card */}

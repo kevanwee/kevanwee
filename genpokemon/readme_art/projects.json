@@ -7,7 +7,7 @@
    {
     "slug": "lq-plugins",
     "title": "LegalQuants Plugins",
-    "desc": "Reusable legal workflows built by the LegalQuants community. My contributions focus on citation checking and contract playbook workflows.",
+    "desc": "Open-source plugins of reusable legal workflows for litigators and transactional lawyers, launched with ChatGPT Enterprise for Astra for Law; I built the citation-check and playbook skills.",
     "url": "https://github.com/LegalQuants/lq-plugin-oss",
     "who": "mega-gallade",
     "mode": "walk",
@@ -20,7 +20,7 @@
    {
     "slug": "sg-legalresearch-skill",
     "title": "Singapore Legal Research",
-    "desc": "Research from retrieved authorities, with version records, pinpoints, contrary authorities and explicit gaps.",
+    "desc": "Codex and Claude Code skill for Singapore lawyers that researches and cite-checks from primary authorities, recording versions, pinpoints, contrary authority and gaps.",
     "url": "https://github.com/kevanwee/sg-legalresearch-skill",
     "who": "rowlet",
     "mode": "walk",
@@ -33,7 +33,7 @@
    {
     "slug": "legal-extraction-skill",
     "title": "Source-span Extraction",
-    "desc": "Bind extracted fields to exact source characters in a saved, hashed document.",
+    "desc": "Codex and Claude Code skill that extracts fields from legal documents with every value bound to its exact source span, so reviewers verify instead of re-reading.",
     "url": "https://github.com/kevanwee/legal-extraction-skill",
     "who": "squirtle",
     "mode": "walk",
@@ -46,7 +46,7 @@
    {
     "slug": "sg-drafting-skill",
     "title": "Singapore Clause Drafting",
-    "desc": "Draft from supplied research, preserve the reasoning and capture approved clauses for reuse.",
+    "desc": "Private agent skill that drafts Singapore-law contract clauses from checked research, keeping a traceable drafting note and a precedent library of approved clauses.",
     "url": "https://legal-engineering-defined.vercel.app/toolkit",
     "who": "growlithe",
     "mode": "walk",
@@ -61,7 +61,7 @@
    {
     "slug": "sg-pdpa-skill",
     "title": "PDPA Assessment",
-    "desc": "Review activities obligation by obligation against retrieved provision text and recorded evidence.",
+    "desc": "Codex and Claude Code skill that assesses activities against Singapore's PDPA obligation by obligation, refusing any finding not tied to provision text actually retrieved.",
     "url": "https://github.com/kevanwee/sg-pdpa-skill",
     "who": "goomy",
     "mode": "walk",
@@ -74,7 +74,7 @@
    {
     "slug": "sg-deadline",
     "title": "Singapore Deadlines",
-    "desc": "Compute declared periods with an explicit rule, calendar assumptions and a derivation trace.",
+    "desc": "Python library, CLI and MCP server that compute Singapore court and contract deadlines from rules as data, with a derivation trace lawyers and AI assistants can check.",
     "url": "https://github.com/kevanwee/sg-deadline",
     "who": "oshawott",
     "mode": "walk",
@@ -87,7 +87,7 @@
    {
     "slug": "sal-citation-generator",
     "title": "SAL Citation",
-    "desc": "Build academic footnotes, reuse sources and export a manuscript-ordered citation list.",
+    "desc": "Next.js workspace for Singapore legal writers that formats SAL-style footnotes, looks up cases on eLitigation and keeps every citation in manuscript order.",
     "url": "https://sal-citation-generator.vercel.app",
     "who": "rowlet",
     "mode": "walk",
@@ -100,7 +100,7 @@
    {
     "slug": "copycat",
     "title": "Copycat",
-    "desc": "Compare works and preserve evidence for Singapore copyright triage and human legal assessment.",
+    "desc": "Copyright triage workspace for Singapore practitioners: deterministic text and image matching plus 13 evidence-backed legal questions, exported as a report for human review.",
     "url": "https://copycat-mu.vercel.app",
     "who": "goomy",
     "mode": "walk",
@@ -113,7 +113,7 @@
    {
     "slug": "bart",
     "title": "BART",
-    "desc": "A Word add-in for checking statutory references against Singapore legislation, built as a collaborative final-year project.",
+    "desc": "Word add-in for lawyers that checks statutory citations against Singapore Statutes Online using hybrid BM25 and dense retrieval, built with Allen & Overy Shearman.",
     "url": "https://kevanwee.vercel.app/#projects",
     "who": "solgaleo",
     "mode": "walk",
@@ -128,7 +128,7 @@
    {
     "slug": "legalbenchmarks",
     "title": "LegalBenchmarks.ai",
-    "desc": "Contributing to a community framework for evaluating legal AI tools.",
+    "desc": "Open-access community benchmark giving legal teams evidence on how AI tools perform at drafting, extraction and workflows; I sit on its Steering Committee.",
     "url": "https://www.legalbenchmarks.ai/",
     "who": "silvally",
     "mode": "walk",
@@ -141,7 +141,7 @@
    {
     "slug": "sg-legal-corpus",
     "title": "sg legal corpus",
-    "desc": "statutes, case law, pdpc enforcement and hansard as one point-in-time corpus, with provenance and an mcp server",
+    "desc": "Point-in-time corpus and MCP server that bring Singapore statutes, judgments, PDPC decisions and Hansard under one record shape with provenance; Hansard is live.",
     "url": "https://github.com/kevanwee/sg-legal-corpus",
     "who": "goomy",
     "mode": "walk",
@@ -154,7 +154,7 @@
    {
     "slug": "citecheck",
     "title": "citecheck",
-    "desc": "audits every citation in a draft: does the authority exist, and does it support the proposition?",
+    "desc": "Python CLI and Claude skill that audit every citation in a legal draft: extract it deterministically, confirm the authority exists, then check it supports the proposition.",
     "url": "https://github.com/kevanwee/citecheck",
     "who": "growlithe",
     "mode": "walk",
@@ -167,7 +167,7 @@
    {
     "slug": "chronology",
     "title": "chronology",
-    "desc": "litigation chronologies as data, with pincites, provenance and evidential-gap detection",
+    "desc": "Python CLI and Claude skill that turn litigation chronologies into data with mandatory pincites, flagging date conflicts and evidential gaps hand-built tables miss.",
     "url": "https://github.com/kevanwee/chronology",
     "who": "squirtle",
     "mode": "walk",
@@ -180,7 +180,7 @@
    {
     "slug": "oblig-register",
     "title": "oblig register",
-    "desc": "turns an executed contract into a dated obligations register with .ics reminders",
+    "desc": "Python CLI and Claude skill that turn an executed contract into a dated obligations register with traced deadlines and .ics reminders, so notice windows are not missed.",
     "url": "https://github.com/kevanwee/oblig-register",
     "who": "fidough",
     "mode": "walk",
@@ -193,7 +193,7 @@
    {
     "slug": "bundlebuild",
     "title": "bundlebuild",
-    "desc": "court bundles from a yaml index: merged pdfs, page numbers, hyperlinked index, bookmarks",
+    "desc": "Python CLI and MCP server that builds court bundles from a YAML index, with merged PDFs, page stamps, a hyperlinked index and checks that catch missing exhibits before filing.",
     "url": "https://github.com/kevanwee/bundlebuild",
     "who": "corphish",
     "mode": "walk",
@@ -206,7 +206,7 @@
    {
     "slug": "playbook-as-code",
     "title": "playbook as code",
-    "desc": "an open schema for negotiation playbooks, with clause locator, memo and redline-ready changeset",
+    "desc": "Open YAML schema and Claude skill that turn a legal team's negotiation playbook into data, then review contracts against it to produce a memo and redline-ready changes.",
     "url": "https://github.com/kevanwee/playbook-as-code",
     "who": "armarouge",
     "mode": "walk",
@@ -219,7 +219,7 @@
    {
     "slug": "ipatlas",
     "title": "ip atlas",
-    "desc": "cross-border ip protection as cited, versioned data, answered as at a chosen date",
+    "desc": "Python CLI that models cross-border IP protection as cited, versioned data, letting practitioners compare jurisdictions under the law in force at a chosen date.",
     "url": "https://github.com/kevanwee/ipatlas",
     "who": "tyrunt",
     "mode": "walk",
@@ -232,7 +232,7 @@
    {
     "slug": "sightstone",
     "title": "sightstone",
-    "desc": "contract playbook harmonisation tool",
+    "desc": "Next.js platform using Llama 3.3 70B that helps legal teams compare clauses across many contracts and harmonise them into one unified negotiation playbook.",
     "url": "https://github.com/kevanwee/sightstone",
     "who": "umbreon",
     "mode": "walk",
@@ -245,7 +245,7 @@
    {
     "slug": "pdpcscraper",
     "title": "pdpc scraper",
-    "desc": "pdpc enforcement decisions on the protection obligation, with trend analysis",
+    "desc": "Python toolkit that scrapes PDPC Protection Obligation decisions into Excel and charts penalties and trends for data-protection practitioners.",
     "url": "https://github.com/kevanwee/pdpcscraper",
     "who": "appletun",
     "mode": "walk",
@@ -258,7 +258,7 @@
    {
     "slug": "elitiscraper",
     "title": "eliti scraper",
-    "desc": "elitigation sghc/sgca judgment scraper using beautifulsoup4",
+    "desc": "BeautifulSoup scraper that collects reported Singapore Supreme Court judgments from eLitigation into structured data for statistical research on case trends.",
     "url": "https://github.com/kevanwee/elitiscraper",
     "who": "flareon",
     "mode": "walk",
@@ -271,7 +271,7 @@
    {
     "slug": "sgstatutescraper",
     "title": "sg statute scraper",
-    "desc": "singapore statutes online scraper",
+    "desc": "Polite Python scraper of Singapore Statutes Online that exports every current Act and its provisions to CSV for legal researchers and NLP pipelines.",
     "url": "https://github.com/kevanwee/sgstatutescraper",
     "who": "vaporeon",
     "mode": "walk",
@@ -284,7 +284,7 @@
    {
     "slug": "hansardscraper",
     "title": "hansard scraper",
-    "desc": "singapore parliamentary debate scraper",
+    "desc": "Python scraper of Singapore Parliament's Hansard API that builds an incremental Excel index and full debate texts for legislative-history research.",
     "url": "https://github.com/kevanwee/hansardscraper",
     "who": "sylveon",
     "mode": "walk",
@@ -297,7 +297,7 @@
    {
     "slug": "codeoflaw",
     "title": "codeoflaw",
-    "desc": "statistical analysis on all reported sghc and sgca judgments",
+    "desc": "Python scraper and analysis pipeline that charts reported Singapore Supreme Court judgments by year, judge and catchword for empirical legal research.",
     "url": "https://github.com/kevanwee/codeoflaw",
     "who": "charcadet",
     "mode": "walk",
@@ -310,7 +310,7 @@
    {
     "slug": "crimewatch",
     "title": "crimewatch",
-    "desc": "heatmap of locations mentioned in sg criminal law judgments",
+    "desc": "Flask and Leaflet app that scrapes Singapore criminal judgments, scores the locations they mention and maps weighted crime hotspots for legal and policy research.",
     "url": "https://github.com/kevanwee/crimewatch",
     "who": "zorua",
     "mode": "walk",
@@ -323,7 +323,7 @@
    {
     "slug": "justicegap",
     "title": "justicegap",
-    "desc": "how far people are from legal help, by location and legal problem",
+    "desc": "Leaflet map prototype showing how far Singapore residents are from courts, legal aid and CJCs by legal problem and travel time, to surface access-to-justice gaps.",
     "url": "https://github.com/kevanwee/justicegap",
     "who": "hisuian-zorua",
     "mode": "walk",
@@ -336,7 +336,7 @@
    {
     "slug": "lexlynx",
     "title": "lex lynx",
-    "desc": "openai wrapper that summarizes case law",
+    "desc": "Python tool that summarises case-law PDFs with OpenAI or a local Ollama model into Facts, Issues, Holding and Reasoning for faster case reading.",
     "url": "https://github.com/kevanwee/lexlynx",
     "who": "arcanine",
     "mode": "walk",
@@ -349,7 +349,7 @@
    {
     "slug": "tortrat",
     "title": "tort rat",
-    "desc": "rag-powered discord chatbot for sg tort law",
+    "desc": "RAG Discord chatbot built on PostgresML and OpenAI that answers Singapore tort law questions from curated case summaries, made for SMU Law of Torts students.",
     "url": "https://github.com/kevanwee/tortrat",
     "who": "pawmi",
     "mode": "walk",
@@ -369,7 +369,7 @@
    {
     "slug": "bpmn-workflow-skill",
     "title": "BPMN Workflow Skill",
-    "desc": "Model roles, systems, decisions and handoffs; inspect and edit the result in bpmn.io.",
+    "desc": "Domain-neutral agent skill that generates readable BPMN from a process description and opens it in a local bpmn.io editor to inspect, edit and export.",
     "url": "https://github.com/kevanwee/bpmn-workflow-skill",
     "who": "riolu",
     "mode": "walk",
@@ -382,7 +382,7 @@
    {
     "slug": "scrum-skill",
     "title": "Scrum Skill",
-    "desc": "Plan bounded work, coordinate AI teammates, inspect outcomes and leave a reliable handoff.",
+    "desc": "Codex and Claude Code skill that runs Scrum with AI teammates, from backlog to review and handoff, so a human product owner can deliver bounded work and resume it reliably.",
     "url": "https://github.com/kevanwee/scrum-skill",
     "who": "oshawott",
     "mode": "walk",
@@ -395,7 +395,7 @@
    {
     "slug": "legal-engineering-defined",
     "title": "Legal Engineering Defined",
-    "desc": "Connect process design, capability delivery and reusable matter execution in a three-layer workspace.",
+    "desc": "Competence framework and public guide defining what a legal engineer is, demonstrated by a three-layer platform linking process design, capability delivery and matter execution.",
     "url": "https://legal-engineering-defined.vercel.app/",
     "who": "mega-gardevoir",
     "mode": "walk",
@@ -408,7 +408,7 @@
    {
     "slug": "legal-process-modelling",
     "title": "process modelling & runner",
-    "desc": "inspectable legal processes, released workflows, recorded state and human decision gates",
+    "desc": "Private engine that turns a lawyer's workflow narrative into an inspectable process model and runs released workflows with recorded state and human sign-off gates.",
     "url": "https://legal-engineering-defined.vercel.app/toolkit",
     "who": "riolu",
     "mode": "walk",
@@ -430,7 +430,7 @@
    {
     "slug": "pmd-agents",
     "title": "PMD Agents",
-    "desc": "See local coding-agent activity as a Pokémon Mystery Dungeon exploration team.",
+    "desc": "VS Code extension that shows developers their running Codex, Claude Code and terminal sessions as Pokémon Mystery Dungeon characters, so agent activity is visible at a glance.",
     "url": "https://github.com/kevanwee/pmd-agents",
     "who": "riolu",
     "mode": "walk",
@@ -443,7 +443,7 @@
    {
     "slug": "voracity",
     "title": "Voracity",
-    "desc": "A personal workspace for notes, reminders, research tools and a connected assistant.",
+    "desc": "Private React and Firebase workspace that brings my notes, reminders, research tools and a Telegram assistant into one place for daily work.",
     "url": null,
     "who": "eevee",
     "mode": "walk",
@@ -458,7 +458,7 @@
    {
     "slug": "voracity-watcher",
     "title": "voracity watcher",
-    "desc": "polite site watcher: obeys robots.txt and sends changes to telegram via ica",
+    "desc": "Scheduled GitHub Actions runner for Voracity that watches pages politely, honouring robots.txt, and sends change alerts and briefings to Telegram via Ica.",
     "url": "https://github.com/kevanwee/voracity-watcher",
     "who": "growlithe",
     "mode": "walk",
@@ -478,7 +478,7 @@
    {
     "slug": "apac-lateral-tracker",
     "title": "apac lateral tracker",
-    "desc": "partner lateral-movement intelligence for apac legal markets",
+    "desc": "Zero-cost Python pipeline that extracts partner moves from legal trade press with span-level provenance, giving APAC market analysts precise lateral-hiring trends.",
     "url": "https://github.com/kevanwee/apac-lateral-tracker",
     "who": "breloom",
     "mode": "walk",
@@ -491,7 +491,7 @@
    {
     "slug": "hawkshot",
     "title": "hawk shot",
-    "desc": "line-of-sight / viewshed analysis tool",
+    "desc": "Python and Streamlit line-of-sight tool that checks whether a target is visible from an observer across DEM terrain, with curvature and refraction correction.",
     "url": "https://github.com/kevanwee/hawkshot",
     "who": "rowlet",
     "mode": "walk",
@@ -504,7 +504,7 @@
    {
     "slug": "mapmole",
     "title": "map mole",
-    "desc": "satellite imagery change detection",
+    "desc": "Python and Streamlit change-detection tool that aligns two GeoTIFF satellite images and maps what changed, for disaster assessment and map revision.",
     "url": "https://github.com/kevanwee/mapmole",
     "who": "gible",
     "mode": "walk",
@@ -517,7 +517,7 @@
    {
     "slug": "lolpixelart",
     "title": "lol pixel art",
-    "desc": "pixel art for league of legends skins",
+    "desc": "Hand-drawn animated pixel-art renditions of League of Legends skins, including Ashen Knight Pyke, T1 Bard and Fae Dragon Ashe.",
     "url": "https://github.com/kevanwee/lolpixelart",
     "who": "teddiursa",
     "mode": "walk",
@@ -530,7 +530,7 @@
    {
     "slug": "kevanwee",
     "title": "kevanwee portfolio",
-    "desc": "this portfolio site",
+    "desc": "Next.js portfolio with a playable Pokémon overworld, plus this README garden of Python-rendered animated SVG cards.",
     "url": "https://github.com/kevanwee/kevanwee",
     "who": "fuecoco",
     "mode": "walk",
@@ -543,7 +543,7 @@
    {
     "slug": "kevanweeportfolio",
     "title": "3d portfolio",
-    "desc": "javascript-based website that displays 3d objects",
+    "desc": "three.js portfolio that tours my hobbies and interests through a 3D desk scene full of hidden artefacts to discover.",
     "url": "https://github.com/kevanwee/kevanweeportfolio",
     "who": "shiny-dratini",
     "mode": "walk",
@@ -556,7 +556,7 @@
    {
     "slug": "bookworm",
     "title": "book worm",
-    "desc": "book price scraper: amazon, kinokuniya, thryft",
+    "desc": "Selenium scraper that looks up book prices by ISBN across Amazon, Kinokuniya and Thryft from a spreadsheet, for comparing prices in bulk.",
     "url": "https://github.com/kevanwee/bookworm",
     "who": "eevee",
     "mode": "walk",
@@ -569,7 +569,7 @@
    {
     "slug": "huhh",
     "title": "huhh",
-    "desc": "an april fools joke",
+    "desc": "A deliberately misleading portfolio site, built as an April Fools' joke.",
     "url": "https://github.com/kevanwee/HUHH",
     "who": "hisuian-zorua",
     "mode": "walk",

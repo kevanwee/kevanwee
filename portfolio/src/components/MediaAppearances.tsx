@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { legalQuantsProfile, mediaAppearances, type MediaAppearance } from "@/data";
 import { useDragMarquee } from "@/lib/useDragMarquee";
+import { usePreviewPlacement } from "@/lib/usePreviewPlacement";
 
 const ExternalIcon = ({ className }: { className: string }) => (
   <svg
@@ -25,46 +26,13 @@ const ExternalIcon = ({ className }: { className: string }) => (
 
 const host = (url: string) => new URL(url).hostname.replace(/^www\./, "");
 
-/** Portalled outside the strip's clipping mask. Geometry updates only on layout/scroll changes. */
+/** Portalled outside the strip's clipping mask. */
 function MediaPreview({ item, anchor, id, onEnter, onLeave, onDismiss }: {
   item: MediaAppearance; anchor: HTMLElement; id: string;
   onEnter: () => void; onLeave: () => void; onDismiss: () => void;
 }) {
   const panel = useRef<HTMLDivElement>(null);
-  useLayoutEffect(() => {
-    let raf = 0;
-    const place = () => {
-      raf = 0;
-      const el = panel.current;
-      if (!el || !anchor.isConnected) { onDismiss(); return; }
-      const card = anchor.getBoundingClientRect(), gap = 12, edge = 16, clearance = 72;
-      if (card.bottom <= clearance || card.top >= innerHeight || card.right <= 0 || card.left >= innerWidth) { onDismiss(); return; }
-      const above = Math.max(0, card.top - gap - clearance), under = Math.max(0, innerHeight - edge - card.bottom - gap);
-      el.dataset.compact = String(Math.max(above, under) < 280);
-      el.style.maxHeight = `${Math.max(above, under)}px`;
-      const h = el.offsetHeight;
-      const below = h > above && (h <= under || under > above);
-      const left = Math.max(edge, Math.min(card.left + card.width / 2 - el.offsetWidth / 2, innerWidth - edge - el.offsetWidth));
-      el.style.left = `${left}px`;
-      el.style.top = `${below ? card.bottom + gap : card.top - gap - h}px`;
-      el.style.setProperty('--origin-x', `${card.left + card.width / 2 - left}px`);
-      el.dataset.side = below ? 'bottom' : 'top';
-      el.style.visibility = 'visible';
-    };
-    const schedule = () => { if (!raf) raf = requestAnimationFrame(place); };
-    const observer = new ResizeObserver(schedule);
-    observer.observe(panel.current!); observer.observe(anchor); observer.observe(document.documentElement);
-    const previousDescription = anchor.getAttribute('aria-describedby');
-    anchor.setAttribute('aria-describedby', id);
-    window.addEventListener('scroll', schedule, true);
-    window.addEventListener('resize', schedule);
-    place();
-    return () => {
-      cancelAnimationFrame(raf); observer.disconnect();
-      window.removeEventListener('scroll', schedule, true); window.removeEventListener('resize', schedule);
-      if (previousDescription) anchor.setAttribute('aria-describedby', previousDescription); else anchor.removeAttribute('aria-describedby');
-    };
-  }, [anchor, id, onDismiss]);
+  usePreviewPlacement(panel, anchor, id, onDismiss);
   return <div ref={panel} id={id} role="tooltip" className={`media-preview${item.image ? ' has-image' : ''}${item.type === 'Profile' ? ' is-profile' : ''}`} data-side="top"
     data-lenis-prevent onPointerEnter={onEnter} onPointerLeave={onLeave}>
     {item.image && <div className="media-preview-figure"><img src={item.image.src} alt={item.image.alt} decoding="async"

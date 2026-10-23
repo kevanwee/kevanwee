@@ -47,6 +47,14 @@ def wrap(text, size, max_w, lines=2, font="sans"):
     return out
 
 
+def fit(text, size, max_w, lines):
+    """Wrap copy that must show in full: too long fails the build rather than gaining an ellipsis."""
+    out = wrap(text, size, max_w, lines=lines + 1)
+    if len(out) > lines:
+        raise ValueError(f"needs more than {lines} lines: {text}")
+    return out
+
+
 def fit_scale(species, anim="Walk", room=LANE - 6, row=2):
     sheet = Sheet(species, anim)
     l, t, r, b = sheet.bounds(row)
@@ -67,8 +75,8 @@ def resident(sc, species, mode, x0, x1, feet, period):
 
 
 def card(theme, title, desc, href_label, lang, tags, who, hue=None):
-    """440 × (LANE + 104) project card; the resident stands on the card's top edge."""
-    T, W, CH = tint(theme, hue), 440, 104
+    """440 × (LANE + 121) project card; the resident stands on the card's top edge."""
+    T, W, CH = tint(theme, hue), 440, 121
     H = LANE + CH
     sc = Scene(W, H)
     sc.body.append(f'<rect x=".5" y="{LANE + .5}" width="{W - 1}" height="{CH - 1}" rx="11" fill="{T["panel"]}" stroke="{T["border"]}"/>')
@@ -80,12 +88,12 @@ def card(theme, title, desc, href_label, lang, tags, who, hue=None):
         sc.body.append(f'<rect x="{px:.0f}" y="{LANE + 17}" width="{tw:.0f}" height="17" rx="8.5" fill="{T["soft"]}"/>'
                        f'<text x="{px + 6:.0f}" y="{LANE + 29}" font-size="10" fill="{T["muted"]}">{esc(tag)}</text>')
         px += tw + 6
-    for i, line in enumerate(wrap(desc, 12.5, W - 36)):
+    for i, line in enumerate(fit(desc, 12.5, W - 36, 3)):
         sc.body.append(f'<text x="{tx}" y="{LANE + 52 + i * 17}" font-size="12.5" fill="{T["muted"]}">{esc(line)}</text>')
     if lang:
-        sc.body.append(f'<circle cx="{tx + 5}" cy="{LANE + 88}" r="5" fill="{LANG_COLOUR.get(lang, T["faint"])}"/>'
-                       f'<text x="{tx + 15}" y="{LANE + 92}" font-size="11" fill="{T["faint"]}">{esc(lang)}</text>')
-    sc.body.append(f'<text x="{W - 18}" y="{LANE + 92}" text-anchor="end" font-size="11" fill="{T["faint"]}">{esc(href_label)} ↗</text>')
+        sc.body.append(f'<circle cx="{tx + 5}" cy="{LANE + 105}" r="5" fill="{LANG_COLOUR.get(lang, T["faint"])}"/>'
+                       f'<text x="{tx + 15}" y="{LANE + 109}" font-size="11" fill="{T["faint"]}">{esc(lang)}</text>')
+    sc.body.append(f'<text x="{W - 18}" y="{LANE + 109}" text-anchor="end" font-size="11" fill="{T["faint"]}">{esc(href_label)} ↗</text>')
     species, mode = who
     sc.body.append(resident(sc, species, mode, 60 if mode == "walk" else W - 70, W - 60, LANE + 1, 22))
     return sc.svg(f"{title}: {desc}")
@@ -189,7 +197,7 @@ def wide_card(p,theme):
  sc.body.append(f'<rect x=".5" y="{L+.5}" width="909" height="141" rx="11" fill="{T["panel"]}" stroke="{T["border"]}"/>')
  sc.body.append(f'<text class="serif" x="24" y="{L+34}" font-size="23" fill="{T["accent"]}">{html.escape(p["title"])}</text>')
  sc.body.append(f'<text x="886" y="{L+32}" text-anchor="end" font-size="12" fill="{T["muted"]}">{html.escape(p["role"])}</text>')
- for i,line in enumerate(wrap(p['desc'],14,850,lines=2)):
+ for i,line in enumerate(fit(p['desc'],14,850,2)):
   sc.body.append(f'<text x="24" y="{L+61+i*21}" font-size="14" fill="{T["muted"]}">{html.escape(line)}</text>')
  scope='Citation checking | Contract playbooks | Community contribution' if p['slug']=='lq-plugins' else 'Public framework and walkthrough | Private operational source | Simulated rehearsal'
  sc.body.append(f'<text x="24" y="{L+119}" font-size="12" fill="{T["muted"]}">{html.escape(scope)}</text>')
