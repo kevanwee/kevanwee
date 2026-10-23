@@ -453,6 +453,18 @@ html[data-theme="dark"] .media-preview :is(.media-preview-source > span, .media-
   .media-card { background:#fffdf9; backdrop-filter:none; -webkit-backdrop-filter:none; }
   html[data-theme="dark"] .media-card { background:#2b2b2b; }
 }
+/* Project launch videos: the media preview's glass panel, holding a muted 16:9 loop. The pointer passes
+   through it, so leaving the card closes it. */
+.media-preview.project-preview { width:min(480px, calc(100vw - 32px)); padding:8px; pointer-events:none; overflow:hidden; }
+.media-preview.project-preview[data-compact="true"] { width:min(320px, calc(100vw - 32px)); }
+.project-preview-figure { aspect-ratio:16 / 9; overflow:hidden; border-radius:10px; background:#0f141c; }
+.project-preview-figure :is(video, img) { display:block; width:100%; height:100%; object-fit:cover; }
+.project-preview-caption { display:flex; justify-content:space-between; gap:12px; padding:8px 4px 2px; font-size:11px; color:#596257; }
+.project-preview-caption > span:first-child { font-weight:600; color:#3a6b59; }
+html[data-theme="dark"] .project-preview-caption { color:#c5c5c5; }
+html[data-theme="dark"] .project-preview-caption > span:first-child { color:#aec4b5; }
+.project-preview-badge { white-space:nowrap; border-radius:999px; background:#eef4ef; padding:1px 7px; font-size:10px; font-weight:500; color:#3a6b59; }
+html[data-theme="dark"] .project-preview-badge { background:#ffffff14; color:#aec4b5; }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
   .media-preview { background:#faf8f4; }
   html[data-theme="dark"] .media-preview { background:#282828; }
