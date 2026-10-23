@@ -1,7 +1,37 @@
 {
- "generatedAt": "2026-10-23T04:45:18+00:00",
+ "generatedAt": "2026-10-23T04:58:42+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Joyous",
+   "when": "2026-10-23T04:57:49+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request "
+    ],
+    [
+     "number",
+     "#86"
+    ],
+    [
+     "text",
+     " was merged into "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
   {
    "mood": "Joyous",
    "when": "2026-10-23T04:44:21+00:00",
@@ -81,36 +111,6 @@
     [
      "text",
      "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Normal",
-   "when": "2026-10-23T03:54:24+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " opened pull request "
-    ],
-    [
-     "number",
-     "#83"
-    ],
-    [
-     "text",
-     " on "
-    ],
-    [
-     "place",
-     "kevanwee"
-    ],
-    [
-     "text",
-     "."
     ]
    ]
   }
