@@ -19,7 +19,7 @@ function Panel({ title, video, anchor, onDismiss }: { title: string; video: Proj
         ? <img src={video.poster} alt={`${title} launch video still`} decoding="async" />
         : <video src={video.src} poster={video.poster} autoPlay muted loop playsInline preload="auto" aria-label={`${title} launch video`} />}
     </div>
-    <p className="project-preview-caption"><span>{title}</span><span>launch video · made with /brag</span></p>
+    <p className="project-preview-caption"><span>{title}</span></p>
   </div>;
 }
 
