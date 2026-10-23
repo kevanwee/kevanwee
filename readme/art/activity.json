@@ -1,92 +1,10 @@
 {
- "generatedAt": "2026-10-23T17:30:40+00:00",
+ "generatedAt": "2026-10-23T19:59:56+00:00",
  "speaker": "Diancie",
  "lines": [
   {
-   "mood": "Normal",
-   "when": "2026-10-23T17:29:38+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " opened pull request "
-    ],
-    [
-     "number",
-     "#97"
-    ],
-    [
-     "text",
-     " on "
-    ],
-    [
-     "place",
-     "kevanwee"
-    ],
-    [
-     "text",
-     "."
-    ]
-   ]
-  },
-  {
-   "mood": "Normal",
-   "when": "2026-10-23T17:07:19+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " opened pull request "
-    ],
-    [
-     "number",
-     "#96"
-    ],
-    [
-     "text",
-     " on "
-    ],
-    [
-     "place",
-     "kevanwee"
-    ],
-    [
-     "text",
-     "."
-    ]
-   ]
-  },
-  {
-   "mood": "Normal",
-   "when": "2026-10-23T17:05:01+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " opened a pull request on "
-    ],
-    [
-     "place",
-     "a hidden dungeon"
-    ],
-    [
-     "text",
-     "."
-    ]
-   ]
-  },
-  {
    "mood": "Joyous",
-   "when": "2026-10-23T17:04:53+00:00",
+   "when": "2026-10-23T17:29:41+00:00",
    "parts": [
     [
      "name",
@@ -98,7 +16,7 @@
     ],
     [
      "number",
-     "#20"
+     "#97"
     ],
     [
      "text",
@@ -106,7 +24,89 @@
     ],
     [
      "place",
-     "sg-legalresearch-skill"
+     "kevanwee"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-23T17:07:22+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request "
+    ],
+    [
+     "number",
+     "#96"
+    ],
+    [
+     "text",
+     " was merged into "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
+  {
+   "mood": "Happy",
+   "when": "2026-10-23T17:05:06+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " pushed new work to "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     " ("
+    ],
+    [
+     "number",
+     "\u00d72"
+    ],
+    [
+     "text",
+     ")"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-23T17:05:04+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request was merged into "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
     ],
     [
      "text",
