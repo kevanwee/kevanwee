@@ -388,7 +388,7 @@ export interface FeaturedProject {
   publications?: { label: string; url: string }[];
 }
 
-export type ProjectCategory = "legal-systems" | "agent-skills" | "other-experiments";
+export type ProjectCategory = "legal" | "process" | "agents" | "other";
 
 export interface OtherProject {
   category: ProjectCategory;
@@ -564,7 +564,7 @@ export const featuredProjects: FeaturedProject[] = [
 export const otherProjects: OtherProject[] = [
   {
     title: "pmd-agents",
-    category: "other-experiments",
+    category: "agents",
     description:
       "VS Code extension that shows your Codex and Claude Code sessions as Pokémon in a Mystery Dungeon guild, across 73 animated Friend Areas.",
     tags: ["TypeScript", "VS Code", "AI Agents"],
@@ -573,7 +573,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "copycat",
-    category: "legal-systems",
+    category: "legal",
     description:
       "Copyright infringement triage for Singapore law, with deterministic similarity scoring.",
     tags: ["Python", "NLP", "LegalTech", "IP Law"],
@@ -582,7 +582,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "bundlebuild",
-    category: "legal-systems",
+    category: "legal",
     description:
       "Builds court bundles from a YAML index, with PDF merging, page numbering, bookmarks, and input checks.",
     tags: ["Python", "PDF", "LegalTech"],
@@ -591,7 +591,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "playbook-as-code",
-    category: "legal-systems",
+    category: "legal",
     description:
       "Structured contract negotiation playbooks with clause matching, review memos, and proposed amendments.",
     tags: ["Python", "YAML", "Contract Law"],
@@ -600,7 +600,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "crimewatch",
-    category: "legal-systems",
+    category: "legal",
     description:
       "Maps likely incident locations from Singapore criminal judgments using contextual extraction and weighted heatmaps.",
     tags: ["Python", "Flask", "Legal Data"],
@@ -609,7 +609,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "sightstone",
-    category: "legal-systems",
+    category: "legal",
     description:
       "Contract playbook harmonisation tool that identifies and reconciles conflicting clauses across multiple contract versions for M&A due diligence.",
     tags: ["Python", "NLP", "Contract Law"],
@@ -618,7 +618,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "eliti scraper",
-    category: "legal-systems",
+    category: "legal",
     description:
       "BeautifulSoup4 scraper extracting Singapore court case data from the eLitigation portal.",
     tags: ["Python", "BeautifulSoup", "Legal Data"],
@@ -627,7 +627,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "sg statute scraper",
-    category: "legal-systems",
+    category: "legal",
     description:
       "Scraper for Singapore Statutes Online (sso.agc.gov.sg) extracting legislative text for NLP pipelines. (WIP)",
     tags: ["Python", "BeautifulSoup", "Legal Data"],
@@ -636,7 +636,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "hansard scraper",
-    category: "legal-systems",
+    category: "legal",
     description:
       "Parliamentary debate scraper extracting Singapore Hansard records for legislative history research. (WIP)",
     tags: ["Python", "BeautifulSoup", "Legal Data"],
@@ -645,7 +645,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "tort rat",
-    category: "legal-systems",
+    category: "legal",
     description:
       "RAG-powered Discord chatbot for Singapore tort law using PostgresML and GPT-3.5 Turbo, deployed on AWS.",
     tags: ["Python", "RAG", "PostgresML", "AWS"],
@@ -654,7 +654,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "sg-legal-corpus",
-    category: "legal-systems",
+    category: "legal",
     description: "Singapore legal sources as a point-in-time corpus, with provenance for each record.",
     tags: ["Python", "Legal data"],
     github: "https://github.com/kevanwee/sg-legal-corpus",
@@ -662,7 +662,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "sg-deadline",
-    category: "legal-systems",
+    category: "legal",
     description: "Deterministic Singapore deadline calculations, with an explicit rule and a derivation trace.",
     tags: ["Python", "Rules as data"],
     github: "https://github.com/kevanwee/sg-deadline",
@@ -670,7 +670,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "citecheck",
-    category: "legal-systems",
+    category: "legal",
     description: "Checks that cited authorities exist and support the propositions they are used for.",
     tags: ["Python", "Citations"],
     github: "https://github.com/kevanwee/citecheck",
@@ -678,7 +678,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "chronology",
-    category: "legal-systems",
+    category: "legal",
     description: "Litigation chronologies with source pincites, preserved provenance and evidential-gap checks.",
     tags: ["Python", "Litigation"],
     github: "https://github.com/kevanwee/chronology",
@@ -686,7 +686,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "oblig-register",
-    category: "legal-systems",
+    category: "legal",
     description: "Turns executed contracts into dated obligations registers and calendar reminders.",
     tags: ["Python", "Contracts"],
     github: "https://github.com/kevanwee/oblig-register",
@@ -694,7 +694,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "ipatlas",
-    category: "legal-systems",
+    category: "legal",
     description: "Cross-border intellectual property protection as cited, versioned data.",
     tags: ["Python", "IP law"],
     github: "https://github.com/kevanwee/ipatlas",
@@ -702,7 +702,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "pdpcscraper",
-    category: "legal-systems",
+    category: "legal",
     description: "Structured PDPC Protection Obligation decisions, penalties and trends.",
     tags: ["Python", "Legal data"],
     github: "https://github.com/kevanwee/pdpcscraper",
@@ -710,7 +710,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "sg-legalresearch-skill",
-    category: "agent-skills",
+    category: "legal",
     description: "Singapore legal research and citation checking from primary sources, with evidence and version records.",
     tags: ["Agent skills", "Research"],
     github: "https://github.com/kevanwee/sg-legalresearch-skill",
@@ -718,7 +718,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "legal-extraction-skill",
-    category: "agent-skills",
+    category: "legal",
     description: "Extracts document fields with every value bound to its exact source text and checked span.",
     tags: ["Agent skills", "Extraction"],
     github: "https://github.com/kevanwee/legal-extraction-skill",
@@ -726,7 +726,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "Process modelling & runner",
-    category: "agent-skills",
+    category: "process",
     description: "Models legal work as inspectable steps and runs released workflows with recorded state and human decision gates. Private source; described in the public guide.",
     tags: ["Process design", "Workflows"],
     github: null,
@@ -734,7 +734,7 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "Singapore clause drafting",
-    category: "agent-skills",
+    category: "legal",
     description: "Drafts from supplied research and records the drafting rationale; approved clauses can be retained as precedents. Private source; described in the public guide.",
     tags: ["Agent skills", "Drafting"],
     github: null,
@@ -742,19 +742,65 @@ export const otherProjects: OtherProject[] = [
   },
   {
     title: "PDPA assessment",
-    category: "agent-skills",
-    description: "Assesses an activity obligation by obligation against retrieved provision text. Private source; described in the public guide.",
+    category: "legal",
+    description: "Assesses an activity obligation by obligation against retrieved provision text and recorded evidence. Public skill; legal conclusions require review.",
     tags: ["Agent skills", "Review"],
-    github: null,
-    external: "https://legal-engineering-defined.vercel.app/toolkit",
+    github: "https://github.com/kevanwee/sg-pdpa-skill",
+    external: null,
   },
+  {"category": "legal", "title": "codeoflaw", "description": "statistical analysis on all reported sghc and sgca judgments", "tags": ["Project"], "github": "https://github.com/kevanwee/codeoflaw", "external": null},
+
+  {"category": "legal", "title": "justicegap", "description": "how far people are from legal help, by location and legal problem", "tags": ["Project"], "github": "https://github.com/kevanwee/justicegap", "external": null},
+
+  {"category": "legal", "title": "lex lynx", "description": "openai wrapper that summarizes case law", "tags": ["Project"], "github": "https://github.com/kevanwee/lexlynx", "external": null},
+
+  {"category": "process", "title": "BPMN Workflow Skill", "description": "Model roles, systems, decisions and handoffs; inspect and edit the result in bpmn.io.", "tags": ["Skill"], "github": "https://github.com/kevanwee/bpmn-workflow-skill", "external": null},
+
+  {"category": "agents", "title": "Voracity", "description": "A personal workspace for notes, reminders, research tools and a connected assistant.", "tags": ["Private source"], "github": null, "external": null},
+
+  {"category": "agents", "title": "voracity watcher", "description": "polite site watcher: obeys robots.txt and sends changes to telegram via ica", "tags": ["Project"], "github": "https://github.com/kevanwee/voracity-watcher", "external": null},
+
+
+
+  {"category": "other", "title": "apac lateral tracker", "description": "partner lateral-movement intelligence for apac legal markets", "tags": ["Project"], "github": "https://github.com/kevanwee/apac-lateral-tracker", "external": null},
+
+  {"category": "process", "title": "Legal Engineering Defined", "description": "A competence framework and three-layer demonstrator connecting process design, capability delivery and reusable matter execution. Public guide; private operational platform.", "tags": ["Public guide"], "github": null, "external": "https://legal-engineering-defined.vercel.app/"},
+
+  {"category": "other", "title": "hawk shot", "description": "line-of-sight / viewshed analysis tool", "tags": ["Project"], "github": "https://github.com/kevanwee/hawkshot", "external": null},
+
+  {"category": "other", "title": "map mole", "description": "satellite imagery change detection", "tags": ["Project"], "github": "https://github.com/kevanwee/mapmole", "external": null},
+
+  {"category": "other", "title": "lol pixel art", "description": "pixel art for league of legends skins", "tags": ["Project"], "github": "https://github.com/kevanwee/lolpixelart", "external": null},
+
+  {"category": "other", "title": "3d portfolio", "description": "javascript-based website that displays 3d objects", "tags": ["Project"], "github": "https://github.com/kevanwee/kevanweeportfolio", "external": null},
+
+  {"category": "other", "title": "book worm", "description": "book price scraper: amazon, kinokuniya, thryft", "tags": ["Project"], "github": "https://github.com/kevanwee/bookworm", "external": null},
+
+  {"category": "other", "title": "huhh", "description": "an april fools joke", "tags": ["Project"], "github": "https://github.com/kevanwee/HUHH", "external": null},
 ];
 
 
 export const projectGroups: { id: ProjectCategory; title: string; description: string }[] = [
-  { id: "legal-systems", title: "Legal systems & data", description: "Source-backed tools, rules as data and legal information pipelines." },
-  { id: "agent-skills", title: "Agent skills & workflows", description: "Reusable research, drafting and review capabilities. Scrum coordination is featured in Highlights above." },
-  { id: "other-experiments", title: "Other experiments", description: "Tools and side projects beyond the legal toolkit." },
+  {
+    "id": "legal",
+    "title": "LegalTech",
+    "description": "Legal skills, community contributions, applications and legal data."
+  },
+  {
+    "id": "process",
+    "title": "Process modelling & Scrum",
+    "description": "Model processes, organise delivery and connect reusable capabilities."
+  },
+  {
+    "id": "agents",
+    "title": "Agents & personal systems",
+    "description": "Make agent work visible and build personal working environments."
+  },
+  {
+    "id": "other",
+    "title": "Other projects",
+    "description": "Geospatial tools, creative work and earlier experiments."
+  }
 ];
 
 export const legalEngineering = {

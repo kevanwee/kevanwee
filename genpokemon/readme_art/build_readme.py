@@ -23,13 +23,15 @@ def path(name, alt=None):
 
 
 def recipes():
-    out = []
+    from html import escape
+    out = ['<h2 align="center">skills &amp; projects</h2>']
     for group in projects:
-        out.append(f'<h3 align="center"><img src="{ART}/mascot-{group["mascot"]}.svg" height="26" /> &nbsp;{group["title"]}</h3>\n')
-        items = group["items"]
-        # One paragraph per group: rows split by <br>, so the residents' lane is the only gap
-        rows = ["\n".join(themed(f'card-{p["slug"]}', p["title"], "49%", p["url"]) for p in items[i:i + 2]) for i in range(0, len(items), 2)]
-        out.append('<p align="center">\n' + "\n<br>\n".join(rows) + '\n</p>\n')
+        out.append('<table width="100%"><tr><td>')
+        out.append(f'<h3>{escape(group["title"])}</h3>')
+        out.append(f'<p>{escape(group.get("description", ""))}</p>')
+        cards = [themed(f'card-{p["slug"]}', escape(p["title"], quote=True), "804" if p.get("wide") else "400", p.get("url")) for p in group["items"]]
+        out.append('<p align="center">' + "\n".join(cards) + '</p>')
+        out.append('</td></tr></table>')
     return "\n".join(out)
 
 

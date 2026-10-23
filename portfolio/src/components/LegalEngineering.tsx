@@ -8,7 +8,7 @@ import "./legal-engineering.css";
 export default function LegalEngineering() {
   const [reading, setReading] = useState(false);
   return <section id="legal-engineering" className="legal-engineering mb-24 scroll-mt-24 border-t border-cream-200 pt-24 lg:mb-36" aria-labelledby="legal-engineering-heading">
-    <div data-section-scroll-target className="legal-engineering-card rounded-2xl border border-cream-200 bg-white p-6 sm:p-8">
+    <div data-section-scroll-target className="legal-engineering-content">
     <h2 id="legal-engineering-heading" className="mb-6 font-serif text-3xl font-bold text-warm-900">{legalEngineering.title}</h2>
     <div className="space-y-5 text-sm leading-8 text-warm-500">
       {legalEngineering.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
