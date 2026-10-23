@@ -758,7 +758,7 @@ export const otherProjects: OtherProject[] = [
     tags: ["Agent skills", "Research"],
     github: "https://github.com/kevanwee/sg-legalresearch-skill",
     external: null,
-    preview: { src: "/previews/sg-legalresearch-skill.mp4", poster: "/previews/sg-legalresearch-skill.jpg" },
+    preview: { src: "/previews/sg-legalresearch-skill-v2.mp4", poster: "/previews/sg-legalresearch-skill-v2.jpg" },
   },
   {
     title: "legal-extraction-skill",
