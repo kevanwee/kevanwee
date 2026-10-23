@@ -652,7 +652,7 @@ export const otherProjects: OtherProject[] = [
     tags: ["Python", "BeautifulSoup", "Legal Data"],
     github: "https://github.com/kevanwee/elitiscraper",
     external: null,
-    preview: { src: "/previews/elitiscraper.mp4", poster: "/previews/elitiscraper.jpg" },
+    preview: { src: "/previews/elitiscraper-v2.mp4", poster: "/previews/elitiscraper-v2.jpg" },
   },
   {
     title: "sg statute scraper",
@@ -673,7 +673,7 @@ export const otherProjects: OtherProject[] = [
     tags: ["Python", "BeautifulSoup", "Legal Data"],
     github: "https://github.com/kevanwee/hansardscraper",
     external: null,
-    preview: { src: "/previews/hansardscraper.mp4", poster: "/previews/hansardscraper.jpg" },
+    preview: { src: "/previews/hansardscraper-v2.mp4", poster: "/previews/hansardscraper-v2.jpg" },
   },
   {
     title: "tort rat",
@@ -748,7 +748,7 @@ export const otherProjects: OtherProject[] = [
     tags: ["Python", "Legal data"],
     github: "https://github.com/kevanwee/pdpcscraper",
     external: null,
-    preview: { src: "/previews/pdpcscraper.mp4", poster: "/previews/pdpcscraper.jpg" },
+    preview: { src: "/previews/pdpcscraper-v2.mp4", poster: "/previews/pdpcscraper-v2.jpg" },
   },
   {
     title: "sg-legalresearch-skill",
