@@ -814,7 +814,7 @@ export const otherProjects: OtherProject[] = [
 
   {"category": "other", "title": "hawk shot", "summary": "Python and Streamlit line-of-sight tool that checks whether a target is visible from an observer across DEM terrain, with curvature and refraction correction.", "description": "line-of-sight / viewshed analysis tool", "tags": ["Project"], "github": "https://github.com/kevanwee/hawkshot", "external": null, "preview": { "src": "/previews/hawkshot.mp4", "poster": "/previews/hawkshot.jpg" }},
 
-  {"category": "other", "title": "map mole", "summary": "Python and Streamlit change-detection tool that aligns two GeoTIFF satellite images and maps what changed, for disaster assessment and map revision.", "description": "satellite imagery change detection", "tags": ["Project"], "github": "https://github.com/kevanwee/mapmole", "external": null},
+  {"category": "other", "title": "map mole", "summary": "Python and Streamlit change-detection tool that aligns two GeoTIFF satellite images and maps what changed, for disaster assessment and map revision.", "description": "satellite imagery change detection", "tags": ["Project"], "github": "https://github.com/kevanwee/mapmole", "external": null, "preview": { "src": "/previews/mapmole.mp4", "poster": "/previews/mapmole.jpg" }},
 
   {"category": "other", "title": "lol pixel art", "summary": "Hand-drawn animated pixel-art renditions of League of Legends skins, including Ashen Knight Pyke, T1 Bard and Fae Dragon Ashe.", "description": "pixel art for league of legends skins", "tags": ["Project"], "github": "https://github.com/kevanwee/lolpixelart", "external": null},
 
