@@ -7,7 +7,7 @@
    {
     "slug": "lq-plugins",
     "title": "LegalQuants Plugins",
-    "desc": "Open-source plugins of reusable legal workflows for litigators and transactional lawyers, launched with ChatGPT Enterprise for Astra for Law; I built the citation-check and playbook skills.",
+    "desc": "Open-source plugins of reusable legal workflows for litigators and transactional lawyers, launched with ChatGPT Enterprise for Astra for Law; I reviewed and contributed to the citation-check and playbook skills.",
     "url": "https://github.com/LegalQuants/lq-plugin-oss",
     "who": "mega-gallade",
     "mode": "walk",

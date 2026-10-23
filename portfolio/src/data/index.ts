@@ -508,7 +508,7 @@ export const featuredProjects: FeaturedProject[] = [
   {
     id: "legalquants",
     title: "LegalQuants Plugins",
-    summary: "Open-source plugins of reusable legal workflows for litigators and transactional lawyers, launched with ChatGPT Enterprise for Astra for Law; I built the citation-check and playbook skills.",
+    summary: "Open-source plugins of reusable legal workflows for litigators and transactional lawyers, launched with ChatGPT Enterprise for Astra for Law; I reviewed and contributed to the citation-check and playbook skills.",
     role: "Contributor · Citation checking & playbooks",
     description:
       "Three open-source plugins for litigation, transactional work, and AI learning, published for OpenAI's ChatGPT Enterprise as part of the Astra for Law launch. Built by the LegalQuants community, they turn legal workflows such as citation checking, document review, and contract analysis into reusable skills. My contributions focused on the $cite-check and playbook skills.",
