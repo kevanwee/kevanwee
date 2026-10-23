@@ -37,8 +37,9 @@ for group in json.loads(Path("projects.json").read_text(encoding="utf-8")):
         if p["slug"] not in open_spots: continue
         species, mode = cast.CARDS[p["slug"]]
         lang = build_cards.LANGS.get(p["repo"].lower(), (None, 0))[0] if p.get("repo") else None
+        p["who"], p["mode"] = species, mode
         for theme in THEMES:
-            (out / f'card-{p["slug"]}-{theme}.svg').write_text(build_cards.card(theme, p["title"], p["desc"], p.get("label", "github"), lang, p.get("tags", []), (species, mode), group["mascot"]), encoding="utf-8")
+            (out / f'card-{p["slug"]}-{theme}.svg').write_text(build_cards.project_card(p, theme, group["mascot"]), encoding="utf-8")
 if len(sys.argv) > 4:  # the message log
     events = json.loads(Path(sys.argv[4]).read_text(encoding="utf-8"))
     now_utc = dt.datetime.now(dt.timezone.utc)

@@ -9,6 +9,58 @@ import ContributionGarden from "@/components/ContributionGarden";
 import MessageLog from "@/components/MessageLog";
 import WeatherForecast from "@/components/WeatherForecast";
 
+const projectSummaries: Record<string, string> = {
+  "LegalQuants Plugins": "Citation and playbook skills.",
+  "scrum-skill": "Plan, deliver and review work.",
+  "BART": "Check statutes inside Word.",
+  "SAL Citation Generator": "Format legal citations.",
+  "LegalBenchmarks.ai": "Benchmarks for legal AI.",
+  "pmd-agents": "See coding agents at work.",
+  "copycat": "Compare copyright evidence.",
+  "bundlebuild": "Build indexed PDF bundles.",
+  "playbook-as-code": "Apply contract playbooks.",
+  "crimewatch": "Map locations in judgments.",
+  "sightstone": "Reconcile contract clauses.",
+  "eliti scraper": "Collect court decisions.",
+  "sg statute scraper": "Retrieve Singapore statutes.",
+  "hansard scraper": "Collect parliamentary debates.",
+  "tort rat": "Explore Singapore tort law.",
+  "sg-legal-corpus": "Index Singapore legal sources.",
+  "sg-deadline": "Calculate legal deadlines.",
+  "citecheck": "Check citation identities.",
+  "chronology": "Build sourced timelines.",
+  "oblig-register": "Track contract obligations.",
+  "ipatlas": "Explore IP decisions.",
+  "pdpcscraper": "Collect PDPC decisions.",
+  "sg-legalresearch-skill": "Research primary authorities.",
+  "legal-extraction-skill": "Extract source-linked fields.",
+  "Process modelling & runner": "Model and run legal workflows.",
+  "Singapore clause drafting": "Draft with research evidence.",
+  "PDPA assessment": "Review PDPA obligations.",
+  "codeoflaw": "Analyse Singapore judgments.",
+  "justicegap": "Explore access to justice.",
+  "BPMN Workflow Skill": "Model processes in bpmn.io.",
+  "Voracity": "A private personal workspace.",
+  "voracity watcher": "Monitor website changes.",
+  "apac lateral tracker": "Track legal-market moves.",
+  "Legal Engineering Defined": "A legal engineering framework.",
+  "hawk shot": "Analyse terrain sightlines.",
+  "map mole": "Compare geospatial imagery.",
+  "lol pixel art": "Explore pixel artwork.",
+  "3d portfolio": "An interactive 3D portfolio.",
+  "book worm": "A personal reading companion.",
+  "huhh": "Creative experiments.",
+  "lex lynx": "Explore legal information."
+};
+
+function skillRank(title: string) {
+  const order = ["sg-legalresearch-skill", "legal-extraction-skill", "Singapore clause drafting", "PDPA assessment", "sg-deadline"];
+  const rank = order.indexOf(title);
+  return rank < 0 ? order.length : rank;
+}
+
+function featuredGroup(id: string) { return id === "scrum" || id === "scrum-skill" ? "process" : "legal"; }
+
 export default function Projects() {
   const [showBart, setShowBart] = useState(false);
   return (
@@ -32,22 +84,25 @@ export default function Projects() {
           <ContributionGarden />
         </div>
 
-        <h3 className="mb-6 font-serif text-xl font-semibold text-warm-900">Highlights</h3>
-        {/* Featured */}
+        {/* Individual project cards grouped inside larger category panels. */}
+        <div className="space-y-10">
+          {projectGroups.map(group => <section key={group.id} data-project-group={group.id} className="rounded-3xl border border-cream-200 bg-cream-50 p-4 sm:p-6" aria-labelledby={`projects-${group.id}`}>
+          <h3 id={`projects-${group.id}`} className="mb-2 font-serif text-2xl font-semibold text-warm-900">{group.title}</h3>
+          <p className="mb-8 text-sm leading-relaxed text-warm-600">{group.description}</p>
         <ol className="space-y-6">
-          {featuredProjects.map((project) => (
+          {featuredProjects.filter(project => featuredGroup(project.id) === group.id).map((project) => (
             <li
               key={project.id}
               data-overworld-surface={`project-${project.id}`}
               data-overworld-kind="featured"
-              className={`group rounded-2xl border border-cream-200 bg-white p-6 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5 ${project.hasCaseStudy ? "cursor-pointer" : ""}`}
+              className={`group rounded-2xl border border-cream-200 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5 ${project.hasCaseStudy ? "cursor-pointer" : ""}`}
               onClick={project.hasCaseStudy ? () => setShowBart(true) : undefined}
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                   {/* Title row */}
                   <div className="flex flex-wrap items-center gap-2.5 mb-1">
-                    <h3 className="font-serif text-lg font-bold text-warm-900 group-hover:text-sage-700 transition-colors">
+                    <h3 className="text-sm font-semibold text-warm-800 group-hover:text-sage-700 transition-colors">
                       {project.title}
                     </h3>
                     {project.isPrivate && (
@@ -56,41 +111,9 @@ export default function Projects() {
                       </span>
                     )}
                   </div>
-                  {project.collab && (
-                    <div className="mb-3 flex items-center gap-2">
-                      <p className="text-xs text-warm-400">
-                        In collaboration with{" "}
-                        <span className="font-medium text-warm-600">
-                          {project.collab}
-                        </span>
-                      </p>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      {project.collabLogo && (
-                        <img
-                          src={project.collabLogo}
-                          alt={project.collab ?? ""}
-                          className="h-5 w-auto flex-shrink-0 rounded object-cover"
-                        />
-                      )}
-                    </div>
-                  )}
-                  {project.role && (
-                    <p className="mb-3 text-xs text-warm-400">{project.role}</p>
-                  )}
-                  <p className="text-sm leading-relaxed text-warm-500">
-                    {project.description}
+                  <p className="truncate text-xs leading-relaxed text-warm-500" title={projectSummaries[project.title] ?? project.description}>
+                    {projectSummaries[project.title] ?? project.description}
                   </p>
-                  {project.publications && (
-                    <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-sage-700">
-                      {project.publications.map(publication => (
-                        <li key={publication.url}>
-                          <a href={publication.url} target="_blank" rel="noopener noreferrer" className="underline decoration-sage-200 underline-offset-4 hover:decoration-sage-600">
-                            {publication.label} <span aria-hidden="true">↗</span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                   <ul className="mt-4 flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
                       <li key={tag} className="tag">
@@ -149,25 +172,13 @@ export default function Projects() {
           ))}
         </ol>
 
-        {/* Diancie's dialogue box, under the last featured project */}
-        <div className="mt-6">
-          <MessageLog />
-        </div>
-
-        {showBart && <BartCaseStudyModal onClose={() => setShowBart(false)} />}
-
-        {/* Other projects */}
-        <div className="mt-16">
-          {projectGroups.map(group => <section key={group.id} className="mb-12" aria-labelledby={`projects-${group.id}`}>
-          <h3 id={`projects-${group.id}`} className="mb-2 font-serif text-xl font-semibold text-warm-900">{group.title}</h3>
-          <p className="mb-6 text-sm leading-relaxed text-warm-500">{group.description}</p>
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {otherProjects.filter(project => project.category === group.id).map(project => (
+<div className="mt-6">          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {otherProjects.filter(project => project.category === group.id).sort((a, b) => skillRank(a.title) - skillRank(b.title)).map(project => (
               <li
                 key={project.title}
                 data-overworld-surface={`other-project-${otherProjects.indexOf(project)}`}
                 data-overworld-kind="other-project"
-                className="group flex flex-col justify-between rounded-2xl border border-cream-200 border-t-2 border-t-sage-100 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:border-t-sage-300 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-1"
+                className="group min-w-0 flex flex-col justify-between rounded-2xl border border-cream-200 border-t-2 border-t-sage-100 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:border-t-sage-300 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-1"
               >
                 <div>
                   <div className="mb-4 flex items-center justify-between">
@@ -214,8 +225,8 @@ export default function Projects() {
                   <h4 className="mb-1.5 text-sm font-semibold text-warm-800 group-hover:text-sage-700 transition-colors">
                     {project.title}
                   </h4>
-                  <p className="text-xs leading-relaxed text-warm-500">
-                    {project.description}
+                  <p className="truncate text-xs leading-relaxed text-warm-500" title={projectSummaries[project.title] ?? project.description}>
+                    {projectSummaries[project.title] ?? project.description}
                   </p>
                 </div>
                 <ul className="mt-4 flex flex-wrap gap-1.5">
@@ -231,8 +242,10 @@ export default function Projects() {
               </li>
             ))}
           </ul>
-          </section>)}
+</div></section>)}
         </div>
+        <div className="mt-6"><MessageLog /></div>
+        {showBart && <BartCaseStudyModal onClose={() => setShowBart(false)} />}
 
         {/* Castform's forecast, above the skills card */}
         <div className="mt-16">

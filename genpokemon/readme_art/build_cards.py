@@ -184,6 +184,24 @@ def write(name, text):
     (OUT / name).write_text(text, encoding="utf-8")
 
 
+def wide_card(p,theme):
+ T=tint(theme,'diancie');W=910;L=LANE;sc=Scene(W,L+142)
+ sc.body.append(f'<rect x=".5" y="{L+.5}" width="909" height="141" rx="11" fill="{T["panel"]}" stroke="{T["border"]}"/>')
+ sc.body.append(f'<text class="serif" x="24" y="{L+34}" font-size="23" fill="{T["accent"]}">{html.escape(p["title"])}</text>')
+ sc.body.append(f'<text x="886" y="{L+32}" text-anchor="end" font-size="12" fill="{T["muted"]}">{html.escape(p["role"])}</text>')
+ for i,line in enumerate(wrap(p['desc'],14,850,lines=2)):
+  sc.body.append(f'<text x="24" y="{L+61+i*21}" font-size="14" fill="{T["muted"]}">{html.escape(line)}</text>')
+ scope='Citation checking | Contract playbooks | Community contribution' if p['slug']=='lq-plugins' else 'Public framework and walkthrough | Private operational source | Simulated rehearsal'
+ sc.body.append(f'<text x="24" y="{L+119}" font-size="12" fill="{T["muted"]}">{html.escape(scope)}</text>')
+ sc.body.append(resident(sc,p['who'],'walk',60,850,L+1,32))
+ return sc.svg(p['title']+': '+p['desc'])
+
+def project_card(p, theme, hue):
+    if p.get("wide"):
+        return wide_card(p, theme)
+    svg = card(theme, p["title"], p["desc"], p.get("label", "view project"), None, p.get("tags", []), (p["who"], p["mode"]), hue)
+    return svg.replace("private project \u2197", "private project") if not p.get("url") else svg
+
 if __name__ == "__main__":
     OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "out"); OUT.mkdir(parents=True, exist_ok=True)
     now = dt.date.today()
@@ -191,10 +209,10 @@ if __name__ == "__main__":
     cast.fill_open_spots()
     for group in projects:
         for p in group["items"]:
-            p["who"], p["mode"] = cast.CARDS[p["slug"]]
+            p["who"], p["mode"] = cast.CARDS.get(p["slug"], (p["who"], p["mode"]))
             lang = LANGS.get(p["repo"].lower(), (None, 0))[0] if p.get("repo") else None
             for theme in THEMES:
-                write(f'card-{p["slug"]}-{theme}.svg', card(theme, p["title"], p["desc"], p.get("label", "github"), lang, p.get("tags", []), (p["who"], p["mode"]), group["mascot"]))
+                write(f'card-{p["slug"]}-{theme}.svg', project_card(p, theme, group["mascot"]))
     for name, (pair, flyer) in cast.PATHS.items():
         write(f"path-{name}.svg", divider(pair, flyer))
     trees = json.loads(Path("trees.json").read_text(encoding="utf-8"))

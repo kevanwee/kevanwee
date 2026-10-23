@@ -9,11 +9,11 @@
 .left-panel-zoom a[target="_blank"] { min-height: 36px; }
 .left-panel-zoom h1 { line-height: 1.12; letter-spacing: -.035em; }
 /* Section rules stop at dialogs: a dialog opened from a section keeps its own type scale. */
-main #projects [data-overworld-kind="featured"] h3:not([role="dialog"] *) { font-size: 23px; line-height: 1.3; }
+main #projects [data-overworld-kind="featured"] h3:not([role="dialog"] *) { font-size: 14px; line-height: 1.4; }
 main #projects [data-overworld-kind="featured"] p.text-sm:not([role="dialog"] *) { font-size: 15px; line-height: 1.8; }
 main #projects [data-overworld-kind="featured"] { padding: 28px; }
 main #about ul > li:not([role="dialog"] *) { line-height: 1.8; font-size: 13px; }
-main :is(#experience,#projects,#media,#contact) > div > h2 { font-size: 34px; }
+main :is(#experience,#projects,#legal-engineering,#media,#contact) > div > h2 { font-size: 34px; }
 .portfolio-home button:focus-visible, .portfolio-home a:focus-visible { outline: 2px solid #3a6b59; outline-offset: 4px; }
 @media (min-width: 1024px) {
  .portfolio-shell { padding-inline: 64px; }
@@ -38,7 +38,7 @@ main :is(#experience,#projects,#media,#contact) > div > h2 { font-size: 34px; }
  #teddiursa-panel { padding-bottom: 40px; }
  main #about > h2 { margin-bottom: 32px; }
  main #projects [data-overworld-kind="featured"] { padding: 20px; }
- main #projects [data-overworld-kind="featured"] h3 { font-size: 22px; }
+ main #projects [data-overworld-kind="featured"] h3 { font-size: 14px; }
 }
 
 /* Both actions share one geometry. */

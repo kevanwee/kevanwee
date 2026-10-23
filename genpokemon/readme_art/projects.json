@@ -1,518 +1,583 @@
 [
  {
-  "title": "highlights",
-  "mascot": "diancie",
+  "title": "LegalTech",
+  "description": "Legal skills, community contributions, applications and legal data.",
+  "mascot": "fuecoco",
   "items": [
    {
     "slug": "lq-plugins",
-    "title": "legalquants plugins",
-    "desc": "open-source legal plugins launched with openai's astra for law; my part: the $cite-check and playbook skills",
+    "title": "LegalQuants Plugins",
+    "desc": "Reusable legal workflows built by the LegalQuants community. My contributions focus on citation checking and contract playbook workflows.",
+    "url": "https://github.com/LegalQuants/lq-plugin-oss",
     "who": "mega-gallade",
     "mode": "walk",
-    "repo": "lq-plugin-oss",
-    "url": "https://github.com/LegalQuants/lq-plugin-oss",
+    "repo": "lq-plugins",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": true,
+    "role": "Contributor"
+   },
+   {
+    "slug": "sg-legalresearch-skill",
+    "title": "Singapore Legal Research",
+    "desc": "Research from retrieved authorities, with version records, pinpoints, contrary authorities and explicit gaps.",
+    "url": "https://github.com/kevanwee/sg-legalresearch-skill",
+    "who": "rowlet",
+    "mode": "walk",
+    "repo": "sg-legalresearch-skill",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
+   },
+   {
+    "slug": "legal-extraction-skill",
+    "title": "Source-span Extraction",
+    "desc": "Bind extracted fields to exact source characters in a saved, hashed document.",
+    "url": "https://github.com/kevanwee/legal-extraction-skill",
+    "who": "squirtle",
+    "mode": "walk",
+    "repo": "legal-extraction-skill",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
+   },
+   {
+    "slug": "sg-drafting-skill",
+    "title": "Singapore Clause Drafting",
+    "desc": "Draft from supplied research, preserve the reasoning and capture approved clauses for reuse.",
+    "url": "https://legal-engineering-defined.vercel.app/toolkit",
+    "who": "growlithe",
+    "mode": "walk",
+    "repo": "sg-drafting-skill",
+    "tags": [
+     "private"
+    ],
+    "label": "public guide",
+    "wide": false,
+    "role": "Creator"
+   },
+   {
+    "slug": "sg-pdpa-skill",
+    "title": "PDPA Assessment",
+    "desc": "Review activities obligation by obligation against retrieved provision text and recorded evidence.",
+    "url": "https://github.com/kevanwee/sg-pdpa-skill",
+    "who": "goomy",
+    "mode": "walk",
+    "repo": "sg-pdpa-skill",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
+   },
+   {
+    "slug": "sg-deadline",
+    "title": "Singapore Deadlines",
+    "desc": "Compute declared periods with an explicit rule, calendar assumptions and a derivation trace.",
+    "url": "https://github.com/kevanwee/sg-deadline",
+    "who": "oshawott",
+    "mode": "walk",
+    "repo": "sg-deadline",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
+   },
+   {
+    "slug": "sal-citation-generator",
+    "title": "SAL Citation",
+    "desc": "Build academic footnotes, reuse sources and export a manuscript-ordered citation list.",
+    "url": "https://sal-citation-generator.vercel.app",
+    "who": "rowlet",
+    "mode": "walk",
+    "repo": "sal-citation-generator",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
+   },
+   {
+    "slug": "copycat",
+    "title": "Copycat",
+    "desc": "Compare works and preserve evidence for Singapore copyright triage and human legal assessment.",
+    "url": "https://copycat-mu.vercel.app",
+    "who": "goomy",
+    "mode": "walk",
+    "repo": "copycat",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "bart",
-    "title": "bart",
-    "desc": "word add-in that verifies statutory citations against sso with hybrid retrieval and version-accurate matching, with a&o shearman",
-    "who": "mega-gardevoir",
+    "title": "BART",
+    "desc": "A Word add-in for checking statutory references against Singapore legislation, built as a collaborative final-year project.",
+    "url": "https://kevanwee.vercel.app/#projects",
+    "who": "solgaleo",
     "mode": "walk",
-    "repo": "-",
-    "url": "https://kevanwee.vercel.app/",
+    "repo": "bart",
     "tags": [
      "private"
     ],
-    "label": "portfolio"
+    "label": "view project",
+    "wide": false,
+    "role": "Team Lead · Scrum Master · Software Developer"
    },
    {
     "slug": "legalbenchmarks",
-    "title": "legalbenchmarks.ai",
-    "desc": "open-access benchmarks for legal ai tools; steering committee member",
+    "title": "LegalBenchmarks.ai",
+    "desc": "Contributing to a community framework for evaluating legal AI tools.",
+    "url": "https://www.legalbenchmarks.ai/",
     "who": "silvally",
     "mode": "walk",
-    "repo": "-",
-    "url": "https://www.legalbenchmarks.ai/",
+    "repo": "legalbenchmarks",
     "tags": [],
-    "label": "legalbenchmarks.ai"
+    "label": "view project",
+    "wide": false,
+    "role": "Steering Committee member"
    },
-   {
-    "slug": "scrum-skill",
-    "title": "scrum skill",
-    "desc": "scrum for codex and claude code: ai teammates plan sprints, verify outcomes and hand off reliably",
-    "who": "oshawott",
-    "mode": "walk",
-    "repo": "scrum-skill",
-    "url": "https://github.com/kevanwee/scrum-skill",
-    "tags": [],
-    "label": "github"
-   },
-   {
-    "slug": "voracity",
-    "title": "voracity",
-    "desc": "my pokémon home base: notes, reminders, legal and tech tools, a second brain, and the eevee garden",
-    "who": "eevee",
-    "mode": "walk",
-    "repo": "voracity",
-    "url": "https://kevanwee.vercel.app/",
-    "tags": [
-     "private"
-    ],
-    "label": "portfolio"
-   }
-  ]
- },
- {
-  "title": "legal systems &amp; data",
-  "mascot": "fuecoco",
-  "items": [
    {
     "slug": "sg-legal-corpus",
     "title": "sg legal corpus",
     "desc": "statutes, case law, pdpc enforcement and hansard as one point-in-time corpus, with provenance and an mcp server",
+    "url": "https://github.com/kevanwee/sg-legal-corpus",
     "who": "goomy",
     "mode": "walk",
     "repo": "sg-legal-corpus",
-    "url": "https://github.com/kevanwee/sg-legal-corpus",
     "tags": [],
-    "label": "github"
-   },
-   {
-    "slug": "sg-deadline",
-    "title": "sg deadline",
-    "desc": "deterministic deadline engine: rules of court 2021, limitation act, deemed receipt, every answer traced",
-    "who": "rowlet",
-    "mode": "idle",
-    "repo": "sg-deadline",
-    "url": "https://github.com/kevanwee/sg-deadline",
-    "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "citecheck",
     "title": "citecheck",
     "desc": "audits every citation in a draft: does the authority exist, and does it support the proposition?",
+    "url": "https://github.com/kevanwee/citecheck",
     "who": "growlithe",
     "mode": "walk",
     "repo": "citecheck",
-    "url": "https://github.com/kevanwee/citecheck",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "chronology",
     "title": "chronology",
     "desc": "litigation chronologies as data, with pincites, provenance and evidential-gap detection",
+    "url": "https://github.com/kevanwee/chronology",
     "who": "squirtle",
     "mode": "walk",
     "repo": "chronology",
-    "url": "https://github.com/kevanwee/chronology",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "oblig-register",
     "title": "oblig register",
     "desc": "turns an executed contract into a dated obligations register with .ics reminders",
-    "who": "fidough",
-    "mode": "sleep",
-    "repo": "oblig-register",
     "url": "https://github.com/kevanwee/oblig-register",
+    "who": "fidough",
+    "mode": "walk",
+    "repo": "oblig-register",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "bundlebuild",
     "title": "bundlebuild",
     "desc": "court bundles from a yaml index: merged pdfs, page numbers, hyperlinked index, bookmarks",
+    "url": "https://github.com/kevanwee/bundlebuild",
     "who": "corphish",
     "mode": "walk",
     "repo": "bundlebuild",
-    "url": "https://github.com/kevanwee/bundlebuild",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "playbook-as-code",
     "title": "playbook as code",
     "desc": "an open schema for negotiation playbooks, with clause locator, memo and redline-ready changeset",
-    "who": "armarouge",
-    "mode": "idle",
-    "repo": "playbook-as-code",
     "url": "https://github.com/kevanwee/playbook-as-code",
+    "who": "armarouge",
+    "mode": "walk",
+    "repo": "playbook-as-code",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "ipatlas",
     "title": "ip atlas",
     "desc": "cross-border ip protection as cited, versioned data, answered as at a chosen date",
+    "url": "https://github.com/kevanwee/ipatlas",
     "who": "tyrunt",
     "mode": "walk",
     "repo": "ipatlas",
-    "url": "https://github.com/kevanwee/ipatlas",
     "tags": [],
-    "label": "github"
-   },
-   {
-    "slug": "copycat",
-    "title": "copycat",
-    "desc": "singapore-first copyright infringement triage tool with deterministic similarity scoring",
-    "who": "skitty",
-    "mode": "walk",
-    "repo": "copycat",
-    "url": "https://github.com/kevanwee/copycat",
-    "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "sightstone",
     "title": "sightstone",
     "desc": "contract playbook harmonisation tool",
-    "who": "umbreon",
-    "mode": "sleep",
-    "repo": "sightstone",
     "url": "https://github.com/kevanwee/sightstone",
-    "tags": [],
-    "label": "github"
-   },
-   {
-    "slug": "sal-citation-generator",
-    "title": "sal citation generator",
-    "desc": "footnote generator using the sal style guide",
-    "who": "jolteon",
+    "who": "umbreon",
     "mode": "walk",
-    "repo": "sal-citation-generator",
-    "url": "https://github.com/kevanwee/sal-citation-generator",
-    "tags": [
-     "wip"
-    ],
-    "label": "github"
-   },
-   {
-    "slug": "apac-lateral-tracker",
-    "title": "apac lateral tracker",
-    "desc": "partner lateral-movement intelligence for apac legal markets",
-    "who": "breloom",
-    "mode": "walk",
-    "repo": "apac-lateral-tracker",
-    "url": "https://github.com/kevanwee/apac-lateral-tracker",
+    "repo": "sightstone",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "pdpcscraper",
     "title": "pdpc scraper",
     "desc": "pdpc enforcement decisions on the protection obligation, with trend analysis",
-    "who": "appletun",
-    "mode": "idle",
-    "repo": "pdpcscraper",
     "url": "https://github.com/kevanwee/pdpcscraper",
+    "who": "appletun",
+    "mode": "walk",
+    "repo": "pdpcscraper",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "elitiscraper",
     "title": "eliti scraper",
     "desc": "elitigation sghc/sgca judgment scraper using beautifulsoup4",
+    "url": "https://github.com/kevanwee/elitiscraper",
     "who": "flareon",
     "mode": "walk",
     "repo": "elitiscraper",
-    "url": "https://github.com/kevanwee/elitiscraper",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "sgstatutescraper",
     "title": "sg statute scraper",
     "desc": "singapore statutes online scraper",
+    "url": "https://github.com/kevanwee/sgstatutescraper",
     "who": "vaporeon",
     "mode": "walk",
     "repo": "sgstatutescraper",
-    "url": "https://github.com/kevanwee/sgstatutescraper",
-    "tags": [
-     "wip"
-    ],
-    "label": "github"
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "hansardscraper",
     "title": "hansard scraper",
     "desc": "singapore parliamentary debate scraper",
-    "who": "sylveon",
-    "mode": "sleep",
-    "repo": "hansardscraper",
     "url": "https://github.com/kevanwee/hansardscraper",
-    "tags": [
-     "wip"
-    ],
-    "label": "github"
+    "who": "sylveon",
+    "mode": "walk",
+    "repo": "hansardscraper",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "codeoflaw",
     "title": "codeoflaw",
     "desc": "statistical analysis on all reported sghc and sgca judgments",
+    "url": "https://github.com/kevanwee/codeoflaw",
     "who": "charcadet",
     "mode": "walk",
     "repo": "codeoflaw",
-    "url": "https://github.com/kevanwee/codeoflaw",
-    "tags": [
-     "wip"
-    ],
-    "label": "github"
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "crimewatch",
     "title": "crimewatch",
     "desc": "heatmap of locations mentioned in sg criminal law judgments",
+    "url": "https://github.com/kevanwee/crimewatch",
     "who": "zorua",
     "mode": "walk",
     "repo": "crimewatch",
-    "url": "https://github.com/kevanwee/crimewatch",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "justicegap",
     "title": "justicegap",
     "desc": "how far people are from legal help, by location and legal problem",
-    "who": "hisuian-zorua",
-    "mode": "idle",
-    "repo": "justicegap",
     "url": "https://github.com/kevanwee/justicegap",
-    "tags": [
-     "wip"
-    ],
-    "label": "github"
+    "who": "hisuian-zorua",
+    "mode": "walk",
+    "repo": "justicegap",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "lexlynx",
     "title": "lex lynx",
     "desc": "openai wrapper that summarizes case law",
-    "who": "arcanine",
-    "mode": "sleep",
-    "repo": "lexlynx",
     "url": "https://github.com/kevanwee/lexlynx",
+    "who": "arcanine",
+    "mode": "walk",
+    "repo": "lexlynx",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "tortrat",
     "title": "tort rat",
     "desc": "rag-powered discord chatbot for sg tort law",
+    "url": "https://github.com/kevanwee/tortrat",
     "who": "pawmi",
     "mode": "walk",
     "repo": "tortrat",
-    "url": "https://github.com/kevanwee/tortrat",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    }
   ]
  },
  {
-  "title": "agent skills &amp; workflows",
-  "mascot": "froakie",
+  "title": "Process modelling & Scrum",
+  "description": "Model processes, organise delivery and connect reusable capabilities.",
+  "mascot": "fuecoco",
   "items": [
    {
+    "slug": "bpmn-workflow-skill",
+    "title": "BPMN Workflow Skill",
+    "desc": "Model roles, systems, decisions and handoffs; inspect and edit the result in bpmn.io.",
+    "url": "https://github.com/kevanwee/bpmn-workflow-skill",
+    "who": "riolu",
+    "mode": "walk",
+    "repo": "bpmn-workflow-skill",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
+   },
+   {
+    "slug": "scrum-skill",
+    "title": "Scrum Skill",
+    "desc": "Plan bounded work, coordinate AI teammates, inspect outcomes and leave a reliable handoff.",
+    "url": "https://github.com/kevanwee/scrum-skill",
+    "who": "oshawott",
+    "mode": "walk",
+    "repo": "scrum-skill",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
+   },
+   {
     "slug": "legal-engineering-defined",
-    "title": "legal engineering defined",
-    "desc": "open entry, substantive competence and accountability beyond product adoption",
-    "who": "?",
-    "mode": "idle",
-    "repo": "-",
+    "title": "Legal Engineering Defined",
+    "desc": "Connect process design, capability delivery and reusable matter execution in a three-layer workspace.",
     "url": "https://legal-engineering-defined.vercel.app/",
+    "who": "mega-gardevoir",
+    "mode": "walk",
+    "repo": "legal-engineering-defined",
     "tags": [],
-    "label": "read the guide"
-   },
-   {
-    "slug": "sg-legalresearch-skill",
-    "title": "singapore legal research",
-    "desc": "primary-source research and citation checks, with evidence records and version checks",
-    "who": "?",
-    "mode": "idle",
-    "repo": "sg-legalresearch-skill",
-    "url": "https://github.com/kevanwee/sg-legalresearch-skill",
-    "tags": [],
-    "label": "github"
-   },
-   {
-    "slug": "legal-extraction-skill",
-    "title": "source-span extraction",
-    "desc": "every extracted value tied to exact source text, with a deterministic span check",
-    "who": "?",
-    "mode": "idle",
-    "repo": "legal-extraction-skill",
-    "url": "https://github.com/kevanwee/legal-extraction-skill",
-    "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": true,
+    "role": "Framework and implementation"
    },
    {
     "slug": "legal-process-modelling",
     "title": "process modelling & runner",
     "desc": "inspectable legal processes, released workflows, recorded state and human decision gates",
-    "who": "?",
-    "mode": "idle",
-    "repo": "-",
     "url": "https://legal-engineering-defined.vercel.app/toolkit",
+    "who": "riolu",
+    "mode": "walk",
+    "repo": "legal-process-modelling",
     "tags": [
-     "private source"
+     "private"
     ],
-    "label": "public guide"
-   },
-   {
-    "slug": "sg-drafting-skill",
-    "title": "singapore clause drafting",
-    "desc": "drafts from supplied research and retains approved clauses as precedents",
-    "who": "?",
-    "mode": "idle",
-    "repo": "-",
-    "url": "https://legal-engineering-defined.vercel.app/toolkit",
-    "tags": [
-     "private source"
-    ],
-    "label": "public guide"
-   },
-   {
-    "slug": "sg-pdpa-skill",
-    "title": "pdpa assessment",
-    "desc": "obligation-by-obligation assessment against provision text retrieved for the activity",
-    "who": "?",
-    "mode": "idle",
-    "repo": "-",
-    "url": "https://legal-engineering-defined.vercel.app/toolkit",
-    "tags": [
-     "private source"
-    ],
-    "label": "public guide"
+    "label": "public guide",
+    "wide": false,
+    "role": "Creator"
    }
   ]
  },
  {
-  "title": "other experiments",
-  "mascot": "jirachi",
+  "title": "Agents & personal systems",
+  "description": "Make agent work visible and build personal working environments.",
+  "mascot": "fuecoco",
   "items": [
    {
-    "slug": "hawkshot",
-    "title": "hawk shot",
-    "desc": "line-of-sight / viewshed analysis tool",
-    "who": "rowlet",
+    "slug": "pmd-agents",
+    "title": "PMD Agents",
+    "desc": "See local coding-agent activity as a Pokémon Mystery Dungeon exploration team.",
+    "url": "https://github.com/kevanwee/pmd-agents",
+    "who": "riolu",
     "mode": "walk",
-    "repo": "hawkshot",
-    "url": "https://github.com/kevanwee/hawkshot",
+    "repo": "pmd-agents",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
-    "slug": "mapmole",
-    "title": "map mole",
-    "desc": "satellite imagery change detection",
-    "who": "gible",
+    "slug": "voracity",
+    "title": "Voracity",
+    "desc": "A personal workspace for notes, reminders, research tools and a connected assistant.",
+    "url": null,
+    "who": "eevee",
     "mode": "walk",
-    "repo": "mapmole",
-    "url": "https://github.com/kevanwee/mapmole",
-    "tags": [],
-    "label": "github"
-   },
-   {
-    "slug": "lolpixelart",
-    "title": "lol pixel art",
-    "desc": "pixel art for league of legends skins",
-    "who": "teddiursa",
-    "mode": "walk",
-    "repo": "lolpixelart",
-    "url": "https://github.com/kevanwee/lolpixelart",
-    "tags": [],
-    "label": "github"
+    "repo": "voracity",
+    "tags": [
+     "private"
+    ],
+    "label": "private project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "voracity-watcher",
     "title": "voracity watcher",
     "desc": "polite site watcher: obeys robots.txt and sends changes to telegram via ica",
-    "who": "growlithe",
-    "mode": "idle",
-    "repo": "voracity-watcher",
     "url": "https://github.com/kevanwee/voracity-watcher",
+    "who": "growlithe",
+    "mode": "walk",
+    "repo": "voracity-watcher",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
+   }
+  ]
+ },
+ {
+  "title": "Other projects",
+  "description": "Geospatial tools, creative work and earlier experiments.",
+  "mascot": "fuecoco",
+  "items": [
+   {
+    "slug": "apac-lateral-tracker",
+    "title": "apac lateral tracker",
+    "desc": "partner lateral-movement intelligence for apac legal markets",
+    "url": "https://github.com/kevanwee/apac-lateral-tracker",
+    "who": "breloom",
+    "mode": "walk",
+    "repo": "apac-lateral-tracker",
+    "tags": [],
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
-    "slug": "theoffice",
-    "title": "the office",
-    "desc": "vs code extension: animated pokémon that follow your ai agents as they code",
-    "who": "froakie",
+    "slug": "hawkshot",
+    "title": "hawk shot",
+    "desc": "line-of-sight / viewshed analysis tool",
+    "url": "https://github.com/kevanwee/hawkshot",
+    "who": "rowlet",
     "mode": "walk",
-    "repo": "theoffice",
-    "url": "https://github.com/kevanwee/theoffice",
+    "repo": "hawkshot",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
-    "slug": "pmd-agents",
-    "title": "pmd agents",
-    "desc": "vs code extension: your coding agents as a pokémon mystery dungeon guild, in every friend area",
-    "who": "riolu",
+    "slug": "mapmole",
+    "title": "map mole",
+    "desc": "satellite imagery change detection",
+    "url": "https://github.com/kevanwee/mapmole",
+    "who": "gible",
     "mode": "walk",
-    "repo": "pmd-agents",
-    "url": "https://github.com/kevanwee/pmd-agents",
+    "repo": "mapmole",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
-    "slug": "pmdsvgworld",
-    "title": "pmd svg world",
-    "desc": "a pokémon mystery dungeon-style world as one self-contained, github-embeddable svg",
-    "who": "dratini",
+    "slug": "lolpixelart",
+    "title": "lol pixel art",
+    "desc": "pixel art for league of legends skins",
+    "url": "https://github.com/kevanwee/lolpixelart",
+    "who": "teddiursa",
     "mode": "walk",
-    "repo": "pmdsvgworld",
-    "url": "https://github.com/kevanwee/pmdsvgworld",
+    "repo": "lolpixelart",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "kevanwee",
     "title": "kevanwee portfolio",
     "desc": "this portfolio site",
+    "url": "https://github.com/kevanwee/kevanwee",
     "who": "fuecoco",
     "mode": "walk",
     "repo": "kevanwee",
-    "url": "https://github.com/kevanwee/kevanwee",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "kevanweeportfolio",
     "title": "3d portfolio",
     "desc": "javascript-based website that displays 3d objects",
-    "who": "shiny-dratini",
-    "mode": "idle",
-    "repo": "kevanweeportfolio",
     "url": "https://github.com/kevanwee/kevanweeportfolio",
+    "who": "shiny-dratini",
+    "mode": "walk",
+    "repo": "kevanweeportfolio",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "bookworm",
     "title": "book worm",
     "desc": "book price scraper: amazon, kinokuniya, thryft",
-    "who": "eevee",
-    "mode": "sleep",
-    "repo": "bookworm",
     "url": "https://github.com/kevanwee/bookworm",
+    "who": "eevee",
+    "mode": "walk",
+    "repo": "bookworm",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    },
    {
     "slug": "huhh",
     "title": "huhh",
     "desc": "an april fools joke",
+    "url": "https://github.com/kevanwee/HUHH",
     "who": "hisuian-zorua",
     "mode": "walk",
-    "repo": "HUHH",
-    "url": "https://github.com/kevanwee/HUHH",
+    "repo": "huhh",
     "tags": [],
-    "label": "github"
+    "label": "view project",
+    "wide": false,
+    "role": "Creator"
    }
   ]
  }
