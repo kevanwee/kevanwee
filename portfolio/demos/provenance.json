@@ -1,0 +1,9 @@
+{
+  "fictional_inputs": true,
+  "semantic_rows": "explicit demonstration model judgments, not independent lawyer verification",
+  "lq_source_commit": "fa5a6681dc3cc9a08fa9ed48a5fd213057edafa0",
+  "sal_source_commit": "588f6b154baac942eace5795551c3d8c7dbd7438",
+  "bart_material": "existing portfolio/public/projects/bart/image3.png and image5.png; recorded case-study material",
+  "hyperframes_version": "0.8.186",
+  "voice": false
+}

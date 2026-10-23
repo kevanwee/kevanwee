@@ -1,0 +1,16 @@
+{
+  "artifactType": "term-adapted-drafting",
+  "schemaVersion": "1.0",
+  "status": "blocked",
+  "originalProposedText": "Liability is capped at annual Fees.",
+  "adaptedProposedText": "Liability is capped at annual Fees.",
+  "substitutions": [],
+  "definitionInsertions": [],
+  "hardStops": [
+    {
+      "houseTerm": "Fees",
+      "relation": "defined-differently",
+      "reason": "The counterparty term excludes variable charges and changes the time window."
+    }
+  ]
+}

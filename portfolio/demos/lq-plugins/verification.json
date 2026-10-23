@@ -1,0 +1,32 @@
+{
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0
+  }
+}

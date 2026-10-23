@@ -1,0 +1,36 @@
+{
+  "previews": [
+    {
+      "id": "legalquants",
+      "src": "/previews/lq-plugins-story.mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration": 25,
+      "muted": true,
+      "time": 0.53102
+    },
+    {
+      "id": "bart",
+      "src": "/previews/bart-story.mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration": 22,
+      "muted": true,
+      "time": 0.509539
+    },
+    {
+      "id": "sal-citation-generator",
+      "src": "/previews/sal-citation-story.mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration": 22,
+      "muted": true,
+      "time": 0.534036
+    }
+  ],
+  "spriteFramesChanged": 7,
+  "spriteSheetsLoaded": 8,
+  "errors": [],
+  "reducedMotionPoster": true,
+  "touchDoesNotHover": true
+}

@@ -1,0 +1,7 @@
+*/assets/
+*/.hyperframes/
+*/renders/
+*/node_modules/
+*.mp4
+!fixtures/sal-flow.mp4
+__pycache__/
