@@ -533,7 +533,7 @@ export const featuredProjects: FeaturedProject[] = [
     tags: ["AI Agents", "Claude Code", "Codex", "Scrum", "Python"],
     github: "https://github.com/kevanwee/scrum-skill",
     external: null,
-    preview: { src: "/previews/scrum-skill.mp4", poster: "/previews/scrum-skill.jpg" },
+    preview: { src: "/previews/scrum-skill-v2.mp4", poster: "/previews/scrum-skill-v2.jpg" },
     isPrivate: false,
     collab: null,
   },
@@ -799,7 +799,7 @@ export const otherProjects: OtherProject[] = [
 
   {"category": "process", "title": "BPMN Workflow Skill", "summary": "Domain-neutral agent skill that generates readable BPMN from a process description and opens it in a local bpmn.io editor to inspect, edit and export.", "description": "Model roles, systems, decisions and handoffs; inspect and edit the result in bpmn.io.", "tags": ["Skill"], "github": "https://github.com/kevanwee/bpmn-workflow-skill", "external": null},
 
-  {"category": "agents", "title": "Voracity", "summary": "Private React and Firebase workspace that brings my notes, reminders, research tools and a Telegram assistant into one place for daily work.", "description": "A personal workspace for notes, reminders, research tools and a connected assistant.", "tags": ["Private source"], "github": null, "external": null},
+  {"category": "agents", "title": "Voracity", "summary": "Private React and Firebase workspace that brings my notes, reminders, research tools and a Telegram assistant into one place for daily work.", "description": "A personal workspace for notes, reminders, research tools and a connected assistant.", "tags": ["Private source"], "github": null, "external": null, "preview": { "src": "/previews/voracity.mp4", "poster": "/previews/voracity.jpg" }},
 
   {"category": "agents", "title": "voracity watcher", "summary": "Scheduled GitHub Actions runner for Voracity that watches pages politely, honouring robots.txt, and sends change alerts and briefings to Telegram via Ica.", "description": "polite site watcher: obeys robots.txt and sends changes to telegram via ica", "tags": ["Project"], "github": "https://github.com/kevanwee/voracity-watcher", "external": null},
 
