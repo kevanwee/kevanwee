@@ -533,6 +533,7 @@ export const featuredProjects: FeaturedProject[] = [
     tags: ["AI Agents", "Claude Code", "Codex", "Scrum", "Python"],
     github: "https://github.com/kevanwee/scrum-skill",
     external: null,
+    preview: { src: "/previews/scrum-skill.mp4", poster: "/previews/scrum-skill.jpg" },
     isPrivate: false,
     collab: null,
   },
@@ -587,7 +588,7 @@ export const otherProjects: OtherProject[] = [
     tags: ["TypeScript", "VS Code", "AI Agents"],
     github: "https://github.com/kevanwee/pmd-agents",
     external: null,
-    preview: { src: "/previews/pmd-agents.mp4", poster: "/previews/pmd-agents.jpg" },
+    preview: { src: "/previews/pmd-agents-v2.mp4", poster: "/previews/pmd-agents-v2.jpg" },
   },
   {
     title: "copycat",
@@ -760,6 +761,7 @@ export const otherProjects: OtherProject[] = [
     tags: ["Agent skills", "Extraction"],
     github: "https://github.com/kevanwee/legal-extraction-skill",
     external: null,
+    preview: { src: "/previews/legal-extraction-skill.mp4", poster: "/previews/legal-extraction-skill.jpg" },
   },
   {
     title: "Process modelling & runner",
@@ -787,6 +789,7 @@ export const otherProjects: OtherProject[] = [
     tags: ["Agent skills", "Review"],
     github: "https://github.com/kevanwee/sg-pdpa-skill",
     external: null,
+    preview: { src: "/previews/sg-pdpa-skill.mp4", poster: "/previews/sg-pdpa-skill.jpg" },
   },
   {"category": "legal", "title": "codeoflaw", "summary": "Python scraper and analysis pipeline that charts reported Singapore Supreme Court judgments by year, judge and catchword for empirical legal research.", "description": "statistical analysis on all reported sghc and sgca judgments", "tags": ["Project"], "github": "https://github.com/kevanwee/codeoflaw", "external": null},
 

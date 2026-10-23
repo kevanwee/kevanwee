@@ -69,6 +69,7 @@ export default function Projects() {
                         private
                       </span>
                     )}
+                    {project.preview && <span className="project-preview-badge">▶ preview</span>}
                   </div>
                   <p className="text-xs leading-relaxed text-warm-500">
                     {project.summary}
