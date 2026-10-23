@@ -1,0 +1,37 @@
+{
+  "artifactType": "term-map",
+  "schemaVersion": "1.0",
+  "runId": "illustrative-demo-equivalent",
+  "playbookId": "saas-customer",
+  "playbookVersion": "1.0.0",
+  "playbookSourceManifestSha256": "fee01bfd9657bb159c95b07a9488233ff36d81c2b880affeb4a44b1719ea0b7f",
+  "contractSourceManifestSha256": "e567f8fa082934ff3d8dbafcb0f749562a6a37b3d08d326ee455e95ba3f53ddb",
+  "entries": [
+    {
+      "entryId": "term-map-7df4332a41041685",
+      "houseDefinition": {
+        "termId": "term-7f708b830f1ed2da",
+        "term": "Fees",
+        "normalizedTerm": "fees",
+        "definitionText": "\"Fees\" means charges paid or payable under this Agreement.",
+        "documentSha256": "e95dcb0ddbfbbd23ac0b0523c6b5a8631e732d6bd08597ffe4466675d4e171b1",
+        "elementId": "el-4991f652300193d1",
+        "clauseRef": null
+      },
+      "contractDefinition": {
+        "termId": "term-60391613d2be71b7",
+        "term": "Charges",
+        "normalizedTerm": "charges",
+        "definitionText": "\"Charges\" means charges paid or payable under this Agreement.",
+        "documentSha256": "636f842cf90fb5b22575f39f80b242561ab859add416318dc8e15f0083c6121e",
+        "elementId": "el-7bfa908b16a46a20",
+        "clauseRef": null
+      },
+      "relation": "equivalent",
+      "decisionBasis": "model-cited",
+      "draftingAction": "use-contract-term",
+      "rationale": "Both definitions cover the same payment obligation.",
+      "lawyerReview": "pending"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "lq-plugins": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_frames": "750"
+      },
+      {
+        "codec_name": "aac",
+        "r_frame_rate": "0/0",
+        "nb_frames": "1173"
+      }
+    ],
+    "format": {
+      "duration": "25.000000",
+      "size": "1377969"
+    }
+  },
+  "bart": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_frames": "660"
+      },
+      {
+        "codec_name": "aac",
+        "r_frame_rate": "0/0",
+        "nb_frames": "1033"
+      }
+    ],
+    "format": {
+      "duration": "22.000000",
+      "size": "1637429"
+    }
+  },
+  "sal-citation": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "30/1",
+        "nb_frames": "660"
+      },
+      {
+        "codec_name": "aac",
+        "r_frame_rate": "0/0",
+        "nb_frames": "1033"
+      }
+    ],
+    "format": {
+      "duration": "22.000000",
+      "size": "1535788"
+    }
+  }
+}

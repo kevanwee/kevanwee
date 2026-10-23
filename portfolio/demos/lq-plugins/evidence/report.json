@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "cite-check.report.v2",
+  "runId": "v2-report-run",
+  "status": "complete",
+  "target": {
+    "path": "input/brief.md",
+    "displayName": "Illustrative brief - fictional authorities",
+    "intendedUse": null,
+    "tribunal": null,
+    "jurisdiction": null,
+    "proceduralPosture": null,
+    "asOfDate": null
+  },
+  "authoritySources": [
+    {
+      "sourceId": "A0001",
+      "path": "authorities/example.md",
+      "identityLabel": "Example v. Smith",
+      "readability": "readable"
+    }
+  ],
+  "execution": {
+    "provider": "unknown",
+    "surface": "unknown",
+    "model": "unknown",
+    "reasoningEffort": "unknown"
+  },
+  "unitResults": [
+    {
+      "unitId": "P0001",
+      "disposition": "citations_found",
+      "citations": [
+        {
+          "citation_as_written_in_unit": "Example v. Smith, 1 F.4th 2",
+          "matched_citation": "Example v. Smith, 1 F.4th 2",
+          "proposition": "The tribunal must extend time.",
+          "matched_source_id": "A0001",
+          "source_excerpt": "The tribunal may extend time for good cause.",
+          "source_locator": "p. 4",
+          "citation_kind": "case",
+          "source_resolution": "matched_supplied_source",
+          "fabrication_indicators": [],
+          "accuracy_of_source_characterization": "objectively_false_or_unreasonable_characterization_of_source",
+          "pincite_accuracy": "pincite_confirmed_accurate",
+          "accuracy_of_direct_quotation": "NA_no_direct_quotation_for_this_citation",
+          "recommended_changes": "Replace must with may and preserve the good-cause qualification.",
+          "validation_flags": [
+            "characterization_issue"
+          ],
+          "severity": "red",
+          "aggregator_flags": [],
+          "severity_reason": "Contradicts the cited source"
+        }
+      ],
+      "validation": {
+        "warnings": [],
+        "potential_issues": [
+          {
+            "code": "characterization_issue",
+            "message": "The worker identified a potentially unfair or objectively unreasonable source characterization; consider repairing or escalating this citation.",
+            "repairable": true,
+            "unitId": "P0001",
+            "citationIndex": 0
+          }
+        ],
+        "hard_errors": []
+      },
+      "severity": "red"
+    },
+    {
+      "unitId": "P0002",
+      "disposition": "citations_found",
+      "citations": [
+        {
+          "citation_as_written_in_unit": "Example Act, section 12",
+          "matched_citation": "Example Act, section 12",
+          "proposition": "An extension is automatic.",
+          "matched_source_id": null,
+          "source_excerpt": null,
+          "source_locator": null,
+          "citation_kind": "statute",
+          "source_resolution": "not_supplied_search_unavailable",
+          "fabrication_indicators": [],
+          "accuracy_of_source_characterization": "source_not_found_unable_to_characterize",
+          "pincite_accuracy": "source_not_found_unable_to_check_pincite",
+          "accuracy_of_direct_quotation": "NA_no_direct_quotation_for_this_citation",
+          "recommended_changes": "Obtain the operative statutory text before relying on this proposition.",
+          "validation_flags": [
+            "source_not_found"
+          ],
+          "severity": "amber",
+          "severity_bucket": "reference_material_not_checked",
+          "aggregator_flags": [],
+          "severity_reason": "The environment could not search"
+        }
+      ],
+      "validation": {
+        "warnings": [
+          {
+            "code": "source_not_found",
+            "message": "The source could not be verified from the supplied authority universe; consider repairing the source receipt or leave it claimed but unverified.",
+            "repairable": true,
+            "unitId": "P0002",
+            "citationIndex": 0
+          }
+        ],
+        "potential_issues": [],
+        "hard_errors": []
+      },
+      "severity": "amber"
+    }
+  ],
+  "unusedAuthorities": [],
+  "triage": {
+    "worst": "red",
+    "headline": "1 citation contradict their cited sources.",
+    "counts": {
+      "red": 1,
+      "amber": 1,
+      "yellow": 0,
+      "green": 0
+    },
+    "referenceMaterialCount": 1,
+    "findings": [
+      {
+        "unitId": "P0001",
+        "citation": "Example v. Smith, 1 F.4th 2",
+        "caseName": "Example v. Smith",
+        "severity": "red",
+        "reason": "Contradicts the cited source",
+        "recommended_changes": "Replace must with may and preserve the good-cause qualification.",
+        "aggregator_colliding_source_id": null,
+        "citation_kind": "case",
+        "source_resolution": "matched_supplied_source"
+      }
+    ]
+  },
+  "authorityRollup": [
+    {
+      "sourceId": "A0001",
+      "identityLabel": "Example v. Smith",
+      "citation_kind": "case",
+      "worst": "red",
+      "timesCited": 1,
+      "unitIds": [
+        "P0001"
+      ]
+    }
+  ],
+  "coverage": {
+    "schemaVersion": "cite-check.coverage.v2",
+    "runId": "v2-report-run",
+    "phase": "final",
+    "unitStates": [
+      {
+        "unitId": "P0001",
+        "state": "complete"
+      },
+      {
+        "unitId": "P0002",
+        "state": "complete"
+      }
+    ],
+    "retriedUnitIds": [],
+    "status": "complete",
+    "isComplete": true
+  },
+  "limitations": [
+    {
+      "code": "characterization_issue",
+      "message": "The worker identified a potentially unfair or objectively unreasonable source characterization; consider repairing or escalating this citation.",
+      "unitId": "P0001",
+      "citationIndex": 0
+    },
+    {
+      "code": "source_not_found",
+      "message": "The source could not be verified from the supplied authority universe; consider repairing the source receipt or leave it claimed but unverified.",
+      "unitId": "P0002",
+      "citationIndex": 0
+    }
+  ],
+  "generatedAt": null,
+  "notes": [],
+  "senseCheck": {
+    "performed": true,
+    "passCount": 1,
+    "maxRetryRoundCount": 1,
+    "maxTargetedRepairCount": 1,
+    "retryRoundCount": 0,
+    "targetedRepairCount": 0,
+    "issues": [],
+    "unresolvedIssueCount": 0
+  }
+}

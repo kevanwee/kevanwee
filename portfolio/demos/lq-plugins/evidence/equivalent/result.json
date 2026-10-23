@@ -1,0 +1,15 @@
+{
+  "artifactType": "term-adapted-drafting",
+  "schemaVersion": "1.0",
+  "status": "ready",
+  "originalProposedText": "Liability is capped at annual Fees.",
+  "adaptedProposedText": "Liability is capped at annual Charges.",
+  "substitutions": [
+    {
+      "houseTerm": "Fees",
+      "contractTerm": "Charges"
+    }
+  ],
+  "definitionInsertions": [],
+  "hardStops": []
+}

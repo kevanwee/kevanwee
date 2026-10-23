@@ -1,0 +1,37 @@
+{
+  "artifactType": "term-map",
+  "schemaVersion": "1.0",
+  "runId": "illustrative-demo-scope-diff",
+  "playbookId": "saas-customer",
+  "playbookVersion": "1.0.0",
+  "playbookSourceManifestSha256": "64e91febdf9c4aa59c54ec0195b27f664a3589eeb033217ccf6e16f33f836e3e",
+  "contractSourceManifestSha256": "f7f57c110c622e6d208bac1f5ed0d8cce787693cdd4e610ba19284fbc366acf3",
+  "entries": [
+    {
+      "entryId": "term-map-7df4332a41041685",
+      "houseDefinition": {
+        "termId": "term-831553bb0d7cdd9c",
+        "term": "Fees",
+        "normalizedTerm": "fees",
+        "definitionText": "\"Fees\" means all charges paid or payable under this Agreement.",
+        "documentSha256": "52e8116f62570001aea39d1dee5eb0d88ea80d0a1069d4ab906eeac5c2600eea",
+        "elementId": "el-10198fdb24562906",
+        "clauseRef": null
+      },
+      "contractDefinition": {
+        "termId": "term-541b49415e0ef77c",
+        "term": "Fees",
+        "normalizedTerm": "fees",
+        "definitionText": "\"Fees\" means fixed subscription charges paid in the last month.",
+        "documentSha256": "c14f90821140e43e0335959952e17e4240cc2b4397795924ed62f7e08edbdc43",
+        "elementId": "el-06e12c96f9f4abd2",
+        "clauseRef": null
+      },
+      "relation": "defined-differently",
+      "decisionBasis": "model-cited",
+      "draftingAction": "hard-stop",
+      "rationale": "The counterparty term excludes variable charges and changes the time window.",
+      "lawyerReview": "pending"
+    }
+  ]
+}
