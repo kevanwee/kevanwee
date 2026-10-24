@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, type CSSProperties } from "react";
 import dynamic from "next/dynamic";
 import About from "@/components/About";
-import LegalEngineering from "@/components/LegalEngineering";
 import { portfolioSections } from "@/data";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
@@ -90,7 +89,6 @@ export default function Home() {
             <div className="-mt-8 mb-24 grid gap-4 lg:-mt-20 lg:mb-36">
               <EeveeBase />
             </div>
-            <LegalEngineering />
             <MediaAppearances />
             <Contact />
           </main>

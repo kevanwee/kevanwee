@@ -11,9 +11,18 @@ import WeatherForecast from "@/components/WeatherForecast";
 import { useProjectPreview } from "@/components/ProjectPreview";
 
 function skillRank(title: string) {
-  const order = ["sg-legalresearch-skill", "legal-extraction-skill", "Singapore clause drafting", "PDPA assessment", "sg-deadline"];
+  const order = ["Legal engineering workflow", "sg-legalresearch-skill", "legal-extraction-skill", "Singapore clause drafting", "PDPA assessment", "sg-deadline"];
   const rank = order.indexOf(title);
   return rank < 0 ? order.length : rank;
+}
+
+/** The project's main link. Its title anchor stretches over the whole card, so a click anywhere on the
+ *  card opens it; icon links and buttons sit above the stretch so they still act on their own. */
+function primaryLink(project: { github: string | null; external: string | null }) { return project.github ?? project.external; }
+
+function CardTitleLink({ title, href }: { title: string; href: string | null }) {
+  if (!href) return <>{title}</>;
+  return <a href={href} target="_blank" rel="noopener noreferrer" className="card-link">{title}</a>;
 }
 
 function featuredGroup(id: string) { return id === "scrum" || id === "scrum-skill" ? "process" : "legal"; }
@@ -53,7 +62,7 @@ export default function Projects() {
               key={project.id}
               data-overworld-surface={`project-${project.id}`}
               data-overworld-kind="featured"
-              className={`group rounded-2xl border border-cream-200 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5 ${project.hasCaseStudy ? "cursor-pointer" : ""}`}
+              className={`group relative rounded-2xl border border-cream-200 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-0.5 ${project.hasCaseStudy ? "cursor-pointer" : ""}`}
               onClick={project.hasCaseStudy ? () => setShowBart(true) : undefined}
               {...bind(project.title, project.preview)}
             >
@@ -62,7 +71,7 @@ export default function Projects() {
                   {/* Title row */}
                   <div className="flex flex-wrap items-center gap-2.5 mb-1">
                     <h3 className="text-sm font-semibold text-warm-800 group-hover:text-sage-700 transition-colors">
-                      {project.title}
+                      <CardTitleLink title={project.title} href={project.hasCaseStudy ? null : primaryLink(project)} />
                     </h3>
                     {project.isPrivate && (
                       <span className="rounded-sm border border-warm-200 px-1.5 py-0.5 font-mono text-[10px] text-warm-400">
@@ -82,14 +91,14 @@ export default function Projects() {
                     ))}
                   </ul>
                   {project.showGithubStars && project.github && (
-                    <div className="mt-4">
+                    <div className="relative z-10 mt-4">
                       <GitHubStars href={project.github} title={project.title} />
                     </div>
                   )}
                 </div>
 
                 {/* Links */}
-                <div className="flex shrink-0 items-center gap-3">
+                <div className="relative z-10 flex shrink-0 items-center gap-3">
                   {project.hasCaseStudy && (
                     <button
                       onClick={e => { e.stopPropagation(); setShowBart(true); }}
@@ -139,7 +148,7 @@ export default function Projects() {
                 data-overworld-surface={`other-project-${otherProjects.indexOf(project)}`}
                 data-overworld-kind="other-project"
                 {...bind(project.title, project.preview)}
-                className="group min-w-0 flex flex-col justify-between rounded-2xl border border-cream-200 border-t-2 border-t-sage-100 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:border-t-sage-300 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-1"
+                className="group relative min-w-0 flex flex-col justify-between rounded-2xl border border-cream-200 border-t-2 border-t-sage-100 bg-white p-5 transition-all duration-300 ease-out hover:border-sage-200 hover:border-t-sage-300 hover:shadow-lg hover:shadow-sage-100/60 hover:-translate-y-1"
               >
                 <div>
                   <div className="mb-4 flex items-center justify-between">
@@ -158,7 +167,7 @@ export default function Projects() {
                         d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
                       />
                     </svg>
-                    <div className="flex items-center gap-2">
+                    <div className="relative z-10 flex items-center gap-2">
                       {project.github && (
                         <a
                           href={project.github}
@@ -184,7 +193,9 @@ export default function Projects() {
                     </div>
                   </div>
                   <h4 className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold text-warm-800 group-hover:text-sage-700 transition-colors">
-                    {project.title}
+                    <CardTitleLink title={project.title} href={primaryLink(project)} />
+                    {project.isPrivate && <span className="rounded-sm border border-warm-200 px-1.5 py-0.5 font-mono text-[10px] font-normal text-warm-400">private</span>}
+                    {project.wip && <span className="rounded-sm border border-amber-200 bg-amber-50 px-1.5 py-0.5 font-mono text-[10px] font-normal text-amber-700">wip</span>}
                     {project.preview && <span className="project-preview-badge">▶ preview</span>}
                   </h4>
                   <p className="text-xs leading-relaxed text-warm-500">
