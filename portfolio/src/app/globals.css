@@ -500,3 +500,9 @@ html[data-theme="dark"] .project-preview-badge { background:#ffffff14; color:#ae
 @media (prefers-reduced-motion: reduce) {
   .experience-timeline-stop, .experience-timeline-name img, .experience-timeline-bar { transition:none; }
 }
+
+/* Project cards: the title link covers the whole card (see CardTitleLink in Projects.tsx). */
+.card-link { color: inherit; }
+.card-link::after { content: ""; position: absolute; inset: 0; border-radius: 1rem; }
+.card-link:focus-visible { outline: none; }
+.card-link:focus-visible::after { box-shadow: 0 0 0 2px #9cc3ad; }

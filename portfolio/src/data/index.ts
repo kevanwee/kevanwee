@@ -408,6 +408,9 @@ export interface OtherProject {
   github: string | null;
   external: string | null;
   preview?: ProjectVideo;
+  isPrivate?: boolean;
+  /** Work in progress: shown with a "wip" badge on the card. */
+  wip?: boolean;
 }
 
 export interface MediaAppearance {
@@ -582,6 +585,17 @@ export const featuredProjects: FeaturedProject[] = [
 ];
 
 export const otherProjects: OtherProject[] = [
+  {
+    title: "Legal engineering workflow",
+    category: "legal",
+    summary: "Private three-layer platform and local Studio that takes a practice group's process from consultation to BPMN, matches each step to existing legal skills, builds the missing ones and runs matters with human sign-off gates.",
+    description: "The private operational platform behind Legal Engineering Defined: a process modeller, compiler and runner (Layer 3), capability delivery and release (Layer 2) and Singapore legal methods (Layer 1), coordinated through a local Workflow Studio. Work in progress; the public guide describes it.",
+    tags: ["Process design", "BPMN", "Agent skills"],
+    github: null,
+    external: "https://legal-engineering-defined.vercel.app/",
+    isPrivate: true,
+    wip: true,
+  },
   {
     title: "pmd-agents",
     summary: "VS Code extension that shows developers their running Codex, Claude Code and terminal sessions as Pokémon Mystery Dungeon characters, so agent activity is visible at a glance.",
@@ -814,8 +828,6 @@ export const otherProjects: OtherProject[] = [
 
   {"category": "other", "title": "apac lateral tracker", "summary": "Zero-cost Python pipeline that extracts partner moves from legal trade press with span-level provenance, giving APAC market analysts precise lateral-hiring trends.", "description": "partner lateral-movement intelligence for apac legal markets", "tags": ["Project"], "github": "https://github.com/kevanwee/apac-lateral-tracker", "external": null},
 
-  {"category": "process", "title": "Legal Engineering Defined", "summary": "Competence framework and public guide defining what a legal engineer is, demonstrated by a three-layer platform linking process design, capability delivery and matter execution.", "description": "A competence framework and three-layer demonstrator connecting process design, capability delivery and reusable matter execution. Public guide; private operational platform.", "tags": ["Public guide"], "github": null, "external": "https://legal-engineering-defined.vercel.app/"},
-
   {"category": "other", "title": "hawk shot", "summary": "Python and Streamlit line-of-sight tool that checks whether a target is visible from an observer across DEM terrain, with curvature and refraction correction.", "description": "line-of-sight / viewshed analysis tool", "tags": ["Project"], "github": "https://github.com/kevanwee/hawkshot", "external": null, "preview": { "src": "/previews/hawkshot.mp4", "poster": "/previews/hawkshot.jpg" }},
 
   {"category": "other", "title": "map mole", "summary": "Python and Streamlit change-detection tool that aligns two GeoTIFF satellite images and maps what changed, for disaster assessment and map revision.", "description": "satellite imagery change detection", "tags": ["Project"], "github": "https://github.com/kevanwee/mapmole", "external": null, "preview": { "src": "/previews/mapmole.mp4", "poster": "/previews/mapmole.jpg" }},
@@ -853,23 +865,10 @@ export const projectGroups: { id: ProjectCategory; title: string; description: s
   }
 ];
 
-export const legalEngineering = {
-  title: "Legal Engineer?",
-  readerTitle: "Legal Engineering Defined",
-  readerUrl: "https://legal-engineering-defined.vercel.app/",
-  paragraphs: [
-    "What is a legal engineer? Describing the practitioner as a bridge between law and technology identifies a relationship, but leaves its constituent responsibilities unspecified. The emerging title should denote more than a go-to-market function: the capacity to specify, implement, evaluate and maintain systems for legal work, and to account for the consequential choices made in their design.",
-    "The reality, in practice, is that neither professional status nor interdisciplinary curiosity establishes competence. Entry can and should be open to lawyers, engineers and those trained across both fields, rather than gated by post-qualification experience (PQE) or a particular professional title. A lawyer's interest in AI, like a technologist's interest in law, is insufficient on its own. The work requires substantive legal understanding, technical competence and continuing responsibility for system behaviour beyond demonstration and adoption.",
-  ],
-  callToAction: "Market forces alone should not determine the scope and standards of the role. A clearer account of its competencies and responsibilities is needed to guard against dilution of the title and to distinguish engineering practice from commercial positioning.",
-  conviction: "Am I a “legal engineer”? Maybe. But I think the title should be earned before it is claimed. Read more for my work in progress: an attempt to reconcile what I have learnt across law and technology, and to define what a legal engineer is.",
-};
-
 export const portfolioSections = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
-  { id: "legal-engineering", label: "Legal Engineering" },
   { id: "media", label: "Media" },
   { id: "contact", label: "Contact" },
 ];
