@@ -595,6 +595,7 @@ export const otherProjects: OtherProject[] = [
     external: "https://legal-engineering-defined.vercel.app/",
     isPrivate: true,
     wip: true,
+    preview: { src: "/previews/legal-engineering-workflow.mp4", poster: "/previews/legal-engineering-workflow.jpg" },
   },
   {
     title: "pmd-agents",
