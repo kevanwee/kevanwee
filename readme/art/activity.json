@@ -1,7 +1,59 @@
 {
- "generatedAt": "2026-10-24T05:54:31+00:00",
+ "generatedAt": "2026-10-24T09:38:22+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Happy",
+   "when": "2026-10-24T09:37:55+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " pushed new work to "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-24T09:37:54+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request "
+    ],
+    [
+     "number",
+     "#98"
+    ],
+    [
+     "text",
+     " was merged into "
+    ],
+    [
+     "place",
+     "kevanwee"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
   {
    "mood": "Happy",
    "when": "2026-10-23T17:29:43+00:00",
@@ -24,7 +76,7 @@
     ],
     [
      "number",
-     "\u00d79"
+     "\u00d76"
     ],
     [
      "text",
@@ -59,66 +111,6 @@
     [
      "text",
      "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-23T17:07:22+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request "
-    ],
-    [
-     "number",
-     "#96"
-    ],
-    [
-     "text",
-     " was merged into "
-    ],
-    [
-     "place",
-     "kevanwee"
-    ],
-    [
-     "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Happy",
-   "when": "2026-10-23T17:05:06+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "a hidden dungeon"
-    ],
-    [
-     "text",
-     " ("
-    ],
-    [
-     "number",
-     "\u00d74"
-    ],
-    [
-     "text",
-     ")"
     ]
    ]
   }
