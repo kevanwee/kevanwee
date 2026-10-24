@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T13:39:41+00:00",
+ "generatedAt": "2026-10-24T16:56:29+00:00",
  "speaker": "Diancie",
  "lines": [
   {
@@ -21,6 +21,36 @@
     [
      "text",
      "!"
+    ]
+   ]
+  },
+  {
+   "mood": "Happy",
+   "when": "2026-10-24T13:07:04+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " pushed new work to "
+    ],
+    [
+     "place",
+     "sg-deadline"
+    ],
+    [
+     "text",
+     " ("
+    ],
+    [
+     "number",
+     "\u00d73"
+    ],
+    [
+     "text",
+     ")"
     ]
    ]
   },
@@ -55,8 +85,8 @@
    ]
   },
   {
-   "mood": "Joyous",
-   "when": "2026-10-24T11:18:32+00:00",
+   "mood": "Happy",
+   "when": "2026-10-24T11:18:33+00:00",
    "parts": [
     [
      "name",
@@ -64,7 +94,7 @@
     ],
     [
      "text",
-     "'s pull request was merged into "
+     " pushed new work to "
     ],
     [
      "place",
@@ -72,37 +102,15 @@
     ],
     [
      "text",
-     "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Joyous",
-   "when": "2026-10-24T11:09:31+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     "'s pull request "
+     " ("
     ],
     [
      "number",
-     "#5"
+     "\u00d73"
     ],
     [
      "text",
-     " was merged into "
-    ],
-    [
-     "place",
-     "sg-deadline"
-    ],
-    [
-     "text",
-     "!"
+     ")"
     ]
    ]
   }
