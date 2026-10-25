@@ -124,6 +124,11 @@
 
 <p align="center"><img src="./readme/art/path-growlithe.svg" alt="growlithe and arcanine on the path" /></p>
 
+<details>
+  <summary align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/sign-recipes-dark.svg" /><img src="./readme/art/sign-recipes-light.svg" alt="what recipes have you come up with?" /></picture></summary>
+
+<br>
+
 <h2 align="center">skills &amp; projects</h2>
 <table width="100%"><tr><td>
 <h3>LegalTech</h3>
@@ -196,6 +201,8 @@
 </td></tr></table>
 
 <p>Drafting remains private and links to the public guide. PDPA assessment is now public. BART is a team case study; LegalBenchmarks.ai is a Steering Committee contribution. Engineering checks do not certify legal conclusions.</p>
+
+</details>
 
 <p align="center"><img src="./readme/art/path-starters.svg" alt="charmander and quilava on the path" /></p>
 
