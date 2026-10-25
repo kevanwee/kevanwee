@@ -1,10 +1,54 @@
 {
- "generatedAt": "2026-10-25T00:53:25+00:00",
+ "generatedAt": "2026-10-25T01:34:45+00:00",
  "speaker": "Diancie",
  "lines": [
   {
    "mood": "Joyous",
-   "when": "2026-10-25T00:52:39+00:00",
+   "when": "2026-10-25T01:29:37+00:00",
+   "parts": [
+    [
+     "place",
+     "lease-plan-check"
+    ],
+    [
+     "text",
+     " "
+    ],
+    [
+     "number",
+     "v0.1.0"
+    ],
+    [
+     "text",
+     " was released!"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-25T01:29:36+00:00",
+   "parts": [
+    [
+     "place",
+     "licence-diff"
+    ],
+    [
+     "text",
+     " "
+    ],
+    [
+     "number",
+     "v0.1.0"
+    ],
+    [
+     "text",
+     " was released!"
+    ]
+   ]
+  },
+  {
+   "mood": "Joyous",
+   "when": "2026-10-25T01:29:27+00:00",
    "parts": [
     [
      "name",
@@ -16,7 +60,7 @@
     ],
     [
      "number",
-     "#100"
+     "#1"
     ],
     [
      "text",
@@ -24,7 +68,7 @@
     ],
     [
      "place",
-     "kevanwee"
+     "lease-plan-check"
     ],
     [
      "text",
@@ -34,7 +78,7 @@
   },
   {
    "mood": "Joyous",
-   "when": "2026-10-25T00:44:48+00:00",
+   "when": "2026-10-25T01:29:27+00:00",
    "parts": [
     [
      "name",
@@ -42,75 +86,23 @@
     ],
     [
      "text",
-     "'s pull request was merged into "
+     "'s pull request "
+    ],
+    [
+     "number",
+     "#1"
+    ],
+    [
+     "text",
+     " was merged into "
     ],
     [
      "place",
-     "a hidden dungeon"
+     "licence-diff"
     ],
     [
      "text",
      "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Happy",
-   "when": "2026-10-24T17:43:17+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "a hidden dungeon"
-    ],
-    [
-     "text",
-     " ("
-    ],
-    [
-     "number",
-     "\u00d76"
-    ],
-    [
-     "text",
-     ")"
-    ]
-   ]
-  },
-  {
-   "mood": "Happy",
-   "when": "2026-10-24T17:40:02+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " pushed new work to "
-    ],
-    [
-     "place",
-     "oblig-register"
-    ],
-    [
-     "text",
-     " ("
-    ],
-    [
-     "number",
-     "\u00d73"
-    ],
-    [
-     "text",
-     ")"
     ]
    ]
   }
