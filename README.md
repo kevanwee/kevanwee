@@ -129,10 +129,17 @@
 
 <br>
 
-<h2 align="center">skills &amp; projects</h2>
+<!-- section-type:projects:start -->
+<h2 align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/heading-projects-dark.svg" /><img src="./readme/art/heading-projects-light.svg" alt="skills &amp; projects" /></picture></h2>
+<!-- section-type:projects:end -->
 <table width="100%"><tr><td>
-<h3>LegalTech</h3>
-<p>Legal skills, community contributions, applications and legal data.</p>
+<!-- section-type:legaltech:start -->
+<h3><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/heading-legaltech-dark.svg" /><img src="./readme/art/heading-legaltech-light.svg" alt="LegalTech" /></picture></h3>
+<p>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-legaltech-1-dark.svg" /><img src="./readme/art/copy-legaltech-1-light.svg" alt="Legal skills, community contributions," /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-legaltech-2-dark.svg" /><img src="./readme/art/copy-legaltech-2-light.svg" alt="applications and legal data." /></picture>
+</p>
+<!-- section-type:legaltech:end -->
 <p align="center">
 <a href="https://github.com/LegalQuants/lq-plugin-oss"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-lq-plugins-dark.svg"><img src="./readme/art/card-lq-plugins-light.svg" width="804" alt="LegalQuants Plugins: Reusable legal workflows built by the LegalQuants community. My contributions focus on citation checking and contract playbook workflows. Public community source" /></picture></a>
 <a href="https://github.com/kevanwee/sg-legalresearch-skill"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-sg-legalresearch-skill-dark.svg"><img src="./readme/art/card-sg-legalresearch-skill-light.svg" width="400" alt="Singapore Legal Research: Research from retrieved authorities, with version records, pinpoints, contrary authorities and explicit gaps. Public skill" /></picture></a>
@@ -165,8 +172,13 @@
 </td></tr></table>
 
 <table width="100%"><tr><td>
-<h3>Process modelling &amp; Scrum</h3>
-<p>Model processes, organise delivery and connect reusable capabilities.</p>
+<!-- section-type:process-scrum:start -->
+<h3><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/heading-process-scrum-dark.svg" /><img src="./readme/art/heading-process-scrum-light.svg" alt="Process modelling &amp; Scrum" /></picture></h3>
+<p>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-process-scrum-1-dark.svg" /><img src="./readme/art/copy-process-scrum-1-light.svg" alt="Model processes, organise delivery and" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-process-scrum-2-dark.svg" /><img src="./readme/art/copy-process-scrum-2-light.svg" alt="connect reusable capabilities." /></picture>
+</p>
+<!-- section-type:process-scrum:end -->
 <p align="center">
 <a href="https://github.com/kevanwee/bpmn-workflow-skill"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-bpmn-workflow-skill-dark.svg"><img src="./readme/art/card-bpmn-workflow-skill-light.svg" width="400" alt="BPMN Workflow Skill: Model roles, systems, decisions and handoffs; inspect and edit the result in bpmn.io. Public skill" /></picture></a>
 <a href="https://github.com/kevanwee/scrum-skill"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-scrum-skill-dark.svg"><img src="./readme/art/card-scrum-skill-light.svg" width="400" alt="Scrum Skill: Plan bounded work, coordinate AI teammates, inspect outcomes and leave a reliable handoff. Public skill + plugin" /></picture></a>
@@ -175,8 +187,13 @@
 </td></tr></table>
 
 <table width="100%"><tr><td>
-<h3>Agents &amp; personal systems</h3>
-<p>Make agent work visible and build personal working environments.</p>
+<!-- section-type:agents-systems:start -->
+<h3><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/heading-agents-systems-dark.svg" /><img src="./readme/art/heading-agents-systems-light.svg" alt="Agents &amp; personal systems" /></picture></h3>
+<p>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-agents-systems-1-dark.svg" /><img src="./readme/art/copy-agents-systems-1-light.svg" alt="Make agent work visible and build personal" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-agents-systems-2-dark.svg" /><img src="./readme/art/copy-agents-systems-2-light.svg" alt="working environments." /></picture>
+</p>
+<!-- section-type:agents-systems:end -->
 <p align="center">
 <a href="https://github.com/kevanwee/pmd-agents"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-pmd-agents-dark.svg"><img src="./readme/art/card-pmd-agents-light.svg" width="400" alt="PMD Agents: See local coding-agent activity as a Pokémon Mystery Dungeon exploration team. Public source · Windows release" /></picture></a>
 <picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-voracity-dark.svg"><img src="./readme/art/card-voracity-light.svg" width="400" alt="Voracity: A personal workspace for notes, reminders, research tools and a connected assistant. Private source · public preview" /></picture>
@@ -185,8 +202,13 @@
 </td></tr></table>
 
 <table width="100%"><tr><td>
-<h3>Other projects</h3>
-<p>Geospatial tools, creative work and earlier experiments.</p>
+<!-- section-type:other-projects:start -->
+<h3><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/heading-other-projects-dark.svg" /><img src="./readme/art/heading-other-projects-light.svg" alt="Other projects" /></picture></h3>
+<p>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-other-projects-1-dark.svg" /><img src="./readme/art/copy-other-projects-1-light.svg" alt="Geospatial tools, creative work and earlier" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-other-projects-2-dark.svg" /><img src="./readme/art/copy-other-projects-2-light.svg" alt="experiments." /></picture>
+</p>
+<!-- section-type:other-projects:end -->
 <p align="center">
 <a href="https://github.com/kevanwee/apac-lateral-tracker"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-apac-lateral-tracker-dark.svg"><img src="./readme/art/card-apac-lateral-tracker-light.svg" width="400" alt="apac lateral tracker: partner lateral-movement intelligence for apac legal markets Public project" /></picture></a>
 <a href="https://legal-engineering-defined.vercel.app/toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/card-legal-process-modelling-dark.svg"><img src="./readme/art/card-legal-process-modelling-light.svg" width="400" alt="process modelling &amp; runner: inspectable legal processes, released workflows, recorded state and human decision gates Public project" /></picture></a>
@@ -200,7 +222,15 @@
 </p>
 </td></tr></table>
 
-<p>Drafting remains private and links to the public guide. PDPA assessment is now public. BART is a team case study; LegalBenchmarks.ai is a Steering Committee contribution. Engineering checks do not certify legal conclusions.</p>
+<!-- section-type:notes:start -->
+<p>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-project-notes-1-dark.svg" /><img src="./readme/art/copy-project-notes-1-light.svg" alt="Drafting remains private and links to the public" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-project-notes-2-dark.svg" /><img src="./readme/art/copy-project-notes-2-light.svg" alt="guide. PDPA assessment is now public. BART" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-project-notes-3-dark.svg" /><img src="./readme/art/copy-project-notes-3-light.svg" alt="is a team case study; LegalBenchmarks.ai is a" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-project-notes-4-dark.svg" /><img src="./readme/art/copy-project-notes-4-light.svg" alt="Steering Committee contribution. Engineering" /></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="./readme/art/copy-project-notes-5-dark.svg" /><img src="./readme/art/copy-project-notes-5-light.svg" alt="checks do not certify legal conclusions." /></picture>
+</p>
+<!-- section-type:notes:end -->
 
 </details>
 

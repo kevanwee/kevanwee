@@ -172,6 +172,7 @@ flowchart LR
 ```
 
 - `build_readme.py` drafted the layout (`more.md`); `README.md` is the edited result and is edited directly. The SVGs it points to are regenerated, so change their scripts rather than the files in `readme/art/`.
+- `build_section_type.py` renders the project section's themed headings, descriptions and notes. Run `python build_section_type.py ../../readme/art --update-readme` from `genpokemon/readme_art/` after changing that copy in `projects.json`. It updates only its marked typography blocks, preserving the drawer, project cards and links. Inline text fragments wrap at mobile widths; both themes retain accessible text colours. The daily garden job leaves these assets intact.
 - Both workflows share one concurrency group so their commits never race. They commit as the
   owner's noreply address, so regrows show on the contribution graph.
 - `genpokemon/readme_art/README.md` lists each script; `cast.py` keeps each Pokémon to one appearance.
