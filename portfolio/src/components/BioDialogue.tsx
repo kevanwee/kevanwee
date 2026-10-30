@@ -10,7 +10,7 @@ const TICK_MS = 16;
 
 /** What the game would colour: names, roles and subjects in yellow, places and organisations in blue. */
 const EMPHASIS: [string, "name" | "place"][] = [
-  ["LegalTech builder", "name"], ["Computing & Law", "name"], ["Singapore Management University", "place"],
+  ["LegalTech & Legal Transformation consultant", "name"], ["Computing & Law", "name"], ["Singapore Management University", "place"],
   ["Computing Studies (Cybersecurity)", "name"], ["BigLaw", "place"], ["intellectual property and brand protection", "name"],
   ["Singapore's first open quantitative legal database", "name"], ["SMU's Centre for Digital Law", "place"],
   ["DeFi security research", "name"], ["School of Computing & Information Systems", "place"],
