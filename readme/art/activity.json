@@ -1,7 +1,29 @@
 {
- "generatedAt": "2026-11-18T00:03:39+00:00",
+ "generatedAt": "2026-11-18T07:08:31+00:00",
  "speaker": "Diancie",
  "lines": [
+  {
+   "mood": "Joyous",
+   "when": "2026-11-18T03:32:55+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     "'s pull request was merged into "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     "!"
+    ]
+   ]
+  },
   {
    "mood": "Normal",
    "when": "2026-11-07T13:21:06+00:00",
@@ -73,28 +95,6 @@
     [
      "text",
      "!"
-    ]
-   ]
-  },
-  {
-   "mood": "Normal",
-   "when": "2026-10-28T16:22:28+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " forked "
-    ],
-    [
-     "place",
-     "General-Legal/legal-templates"
-    ],
-    [
-     "text",
-     "."
     ]
    ]
   }
