@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-19T03:58:03+00:00",
+ "generatedAt": "2026-11-19T12:26:38+00:00",
  "speaker": "Diancie",
  "lines": [
   {
@@ -21,6 +21,36 @@
     [
      "text",
      "!"
+    ]
+   ]
+  },
+  {
+   "mood": "Happy",
+   "when": "2026-11-18T03:32:57+00:00",
+   "parts": [
+    [
+     "name",
+     "Kevan"
+    ],
+    [
+     "text",
+     " pushed new work to "
+    ],
+    [
+     "place",
+     "a hidden dungeon"
+    ],
+    [
+     "text",
+     " ("
+    ],
+    [
+     "number",
+     "\u00d72"
+    ],
+    [
+     "text",
+     ")"
     ]
    ]
   },
@@ -69,28 +99,6 @@
     [
      "place",
      "voracity"
-    ],
-    [
-     "text",
-     "."
-    ]
-   ]
-  },
-  {
-   "mood": "Normal",
-   "when": "2026-11-06T02:05:44+00:00",
-   "parts": [
-    [
-     "name",
-     "Kevan"
-    ],
-    [
-     "text",
-     " starred "
-    ],
-    [
-     "place",
-     "0xProbabillity/claudeberry"
     ],
     [
      "text",
