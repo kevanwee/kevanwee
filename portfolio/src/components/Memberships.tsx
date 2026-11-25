@@ -1,7 +1,7 @@
 const memberships = [
   {
     org: "LegalBenchmarks.ai",
-    role: "Steering Committee",
+    role: "Steering Committee (until Mar 2026)",
     url: "https://www.legalbenchmarks.ai/",
   },
   {

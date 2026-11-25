@@ -156,13 +156,18 @@ export const experiences: Experience[] = [
     id: "pwc-newlaw",
     logo: "/logos/pwc.jpg",
     company: "PricewaterhouseCoopers LLP",
-    role: "???",
-    subtitle: "NewLaw",
+    role: "NewLaw Analyst",
+    subtitle: "LegalTech & Legal Transformation Consulting",
     period: "Oct 2026 – Present",
-    type: "???",
+    type: "Full-time",
     url: "https://www.pwc.com/sg/",
     bullets: [
-      "Something is brewing here ☕",
+      "Delivering legal department transformation engagements across operating strategy, process optimisation and practice management, mapping business and functional requirements to technology and process recommendations.",
+      "Driving the evaluation and implementation of legal technology solutions, including CLM and agentic AI platforms, for NewLaw engagements.",
+    ],
+    bulletTags: [
+      ["tech", "legal"],
+      ["tech", "legal"],
     ],
   },
   {
@@ -573,9 +578,9 @@ export const featuredProjects: FeaturedProject[] = [
   {
     id: "legalbenchmarks",
     title: "LegalBenchmarks.ai",
-    summary: "Open-access community benchmark giving legal teams evidence on how AI tools perform at drafting, extraction and workflows; I sit on its Steering Committee.",
+    summary: "Open-access community benchmark giving legal teams evidence on how AI tools perform at drafting, extraction and workflows; I sat on its Steering Committee until Mar 2026.",
     description:
-      "An independent open-access benchmarking platform for legal AI tools built by the global legal community. Provides structured evaluation frameworks with 100+ assessment factors across contract drafting, information extraction, and legal workflows. Contributing as a Steering Committee member alongside practitioners from Google, PayPal, Netflix, and Stripe.",
+      "An independent open-access benchmarking platform for legal AI tools built by the global legal community. Provides structured evaluation frameworks with 100+ assessment factors across contract drafting, information extraction, and legal workflows. Contributed as a Steering Committee member (until Mar 2026) alongside practitioners from Google, PayPal, Netflix, and Stripe.",
     tags: ["Legal AI", "Evaluation", "LegalTech", "Research"],
     github: null,
     external: "https://www.legalbenchmarks.ai/",
