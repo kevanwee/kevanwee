@@ -30,7 +30,8 @@ export default function PokemonOverworld() {
       elements.set(el.dataset.overworldSurface || `platform-${i}`, el);
     });
     const surfaces = [...elements].map(([id, el]) => ({ id, width: el.getBoundingClientRect().width,
-      divider: el.dataset.overworldKind === "divider", kind: el.dataset.overworldKind }));
+      divider: el.dataset.overworldKind === "divider", kind: el.dataset.overworldKind,
+      group: el.closest<HTMLElement>("[data-project-group]")?.dataset.projectGroup }));
     const world = createOverworld(surfaces);
     const wanderer = createWanderer();
     const habitat = document.querySelector<HTMLElement>("[data-silvally-surface]");

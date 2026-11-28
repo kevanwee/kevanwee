@@ -12,8 +12,9 @@ export const EEVEELUTIONS = ["eevee", "vaporeon", "jolteon", "flareon", "umbreon
 export const PAIRS: readonly (readonly [string, string])[] = [
   ["zorua", "hisuian-zorua"], ["mega-gardevoir", "mega-gallade"],
   ["dratini", "shiny-dratini"], ["growlithe", "arcanine"]];
-/** How many project tiles get a resident. Lower this first to thin the crowd. */
-export const TILE_RESIDENTS = 5;
+/** How many project tiles get a resident, dealt evenly across project groups.
+ *  Lower this first to thin the crowd. */
+export const TILE_RESIDENTS = 6;
 /** Personal space on a shared ledge, in pixels. */
 export const SHOULDER = 34;
 /** A long divider or card carries two residents; a narrow ledge gets one.
@@ -25,7 +26,8 @@ export const displayName = (species: string) =>
 export const SILVALLY_FORMS = ["bug", "dark", "dragon", "electric", "fairy", "fighting", "fire", "flying", "ghost", "grass", "ground", "ice", "poison", "psychic", "rock", "steel", "water"];
 /** Every tile in the "other noteworthy projects" grid, on any row. */
 export const HOP_CARD = /^other-project-\d+$/;
-export type Surface = { id: string; width: number; divider: boolean; kind?: string };
+/** `group` is the project section a card sits in, so residents can be spread across sections. */
+export type Surface = { id: string; width: number; divider: boolean; kind?: string; group?: string };
 export type SurfaceRect = { left: number; right: number; top: number; width: number };
 export type Hop = { from: string; to: string; start: number; landing: number; elapsed: number; duration: number };
 export type Resident = {
@@ -50,6 +52,19 @@ export function shuffle<T>(items: readonly T[], random = Math.random): T[] {
   return result;
 }
 
+/** Shuffle within each group, then deal one from each group in turn so no section hoards residents. */
+export function spread(surfaces: readonly Surface[], random = Math.random): Surface[] {
+  const groups = new Map<string, Surface[]>();
+  for (const s of shuffle(surfaces, random)) {
+    const key = s.group ?? "";
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(s);
+  }
+  const queues = [...groups.values()], dealt: Surface[] = [];
+  while (queues.some(q => q.length)) for (const q of queues) if (q.length) dealt.push(q.shift()!);
+  return dealt;
+}
+
 export function createOverworld(surfaces: Surface[], random = Math.random): Overworld {
   const battleSurface = shuffle(surfaces.filter(s => s.divider && s.width >= 240), random)[0];
   const hopCards = surfaces.filter(s => HOP_CARD.test(s.id));
@@ -60,7 +75,8 @@ export function createOverworld(surfaces: Surface[], random = Math.random): Over
     const index = available.findIndex(s => (s.kind ?? (s.divider ? "divider" : "")) === kind);
     if (index >= 0) platforms.push(...available.splice(index, 1));
   }
-  platforms.push(...available.filter(s => !s.divider));
+  // Featured cards stack in one column, so they are dealt across groups and hold one each.
+  platforms.push(...spread(available.filter(s => !s.divider), random));
   const residents: Resident[] = [];
   const add = (species: string, surface: string, flying: boolean, leader: string | null = null, lane = 0) => {
     // Sharing a ledge means sharing its length, and for flyers its headroom too.
@@ -95,9 +111,10 @@ export function createOverworld(surfaces: Surface[], random = Math.random): Over
   for (const ledge of platforms) {
     if (taken.has(ledge.id)) continue;
     taken.add(ledge.id);
-    for (let lane = 0; lane < capacity(ledge.width) && roster[next]; lane++) add(roster[next++], ledge.id, false, null, lane);
+    const room = ledge.kind === "featured" ? 1 : capacity(ledge.width);
+    for (let lane = 0; lane < room && roster[next]; lane++) add(roster[next++], ledge.id, false, null, lane);
   }
-  for (const card of shuffle(hopCards, random).slice(0, TILE_RESIDENTS)) if (roster[next]) add(roster[next++], card.id, false);
+  for (const card of spread(hopCards, random).slice(0, TILE_RESIDENTS)) if (roster[next]) add(roster[next++], card.id, false);
   const occupied = new Set(residents.map(a => a.surface));
   // Dividers and the footer sky only: the About section used to carry an air strip,
   // which put two flyers over the heading before a reader had read a word.

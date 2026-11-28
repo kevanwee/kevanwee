@@ -230,6 +230,32 @@ for (let seed = 1; seed <= 8; seed++) {
 }
 assert.equal(forestNaps.size, 6);
 for (const [species, regions] of quadrants) assert.equal(regions.size, 4, `${species} cannot explore the whole forest`);
+// Residents spread across project sections instead of piling into the biggest one.
+// Layout mirrors the live page: LegalTech 4 featured + 12 tiles, Process 2 + 2, Agents 3 tiles.
+{
+  const page = [
+    { id: 'sky-footer', width: 550, divider: false, kind: 'air' },
+    ...['experience-divider', 'projects-divider', 'media-divider', 'contact-divider'].map(id => ({ id, width: 900, divider: true, kind: 'divider' })),
+    { id: 'skills-card', width: 900, divider: false, kind: 'skills' },
+    { id: 'media-card', width: 280, divider: false, kind: 'media-card' },
+    ...['lq', 'bart', 'sal', 'lb'].map(id => ({ id: `project-${id}`, width: 820, divider: false, kind: 'featured', group: 'legal' })),
+    ...['scrum', 'scrum-skill'].map(id => ({ id: `project-${id}`, width: 820, divider: false, kind: 'featured', group: 'process' })),
+    ...Array.from({ length: 17 }, (_, i) => ({ id: `other-project-${i}`, width: 260, divider: false, kind: 'other-project', group: i < 12 ? 'legal' : i < 14 ? 'process' : 'agents' })),
+  ];
+  const group = new Map(page.map(s => [s.id, s.group]));
+  for (let seed = 1; seed <= 64; seed++) {
+    const world = createOverworld(page, seeded(seed));
+    const ground = world.residents.filter(a => !a.flying && !['armarouge', 'ceruledge'].includes(a.species));
+    const count = g => ground.filter(a => group.get(a.surface) === g).length;
+    for (const g of ['legal', 'process', 'agents']) assert.ok(count(g) >= 2, `seed ${seed}: ${g} section has only ${count(g)} residents`);
+    assert.ok(count('legal') <= 7, `seed ${seed}: LegalTech hoards ${count('legal')} residents`);
+    for (const card of page.filter(s => s.kind === 'featured')) {
+      const on = ground.filter(a => a.surface === card.id);
+      assert.ok(on.length <= 1 || on.some(a => a.leader), `seed ${seed}: ${card.id} holds ${on.length} unrelated residents`);
+    }
+  }
+  console.log('Section spread passed: every project section populated, no featured-card pile-ups.');
+}
 console.log(`Overworld passed: populations ${[...population].sort((a,b)=>a-b).join('/')}; ${files} source hashes, ${GROUND_SPECIES.length} ground and ${FLYING_SPECIES.length} flying species, bonded pairs travelling together, any species hopping any project row, responsive hop cancellation, naps, greetings, forms and random battles.`);
 console.log('Forest passed: six residents, all quadrants reachable, stone/roots excluded throughout 40 minutes of simulation; natural naps and wake-on-click.');
 

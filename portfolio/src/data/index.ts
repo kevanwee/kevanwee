@@ -37,7 +37,7 @@ export const personal = {
 };
 
 export const aboutParagraphs = [
-  "I am a LegalTech & Legal Transformation consultant, completing my BSc (Computing & Law) with a second major in Computing Studies (Cybersecurity) at Singapore Management University. I build tools that help legal teams turn manual, document-heavy work into structured, reliable systems.",
+  "I am a LegalTech & transformation consultant, completing my BSc (Computing & Law) with a second major in Computing Studies (Cybersecurity) at Singapore Management University. I build tools that help legal teams turn manual, document-heavy work into structured, reliable systems.",
   "I've primarily worked on legal technology in BigLaw and in consulting for law firms and in-house legal teams. On the strictly legal side of things, my domain experience is concentrated in intellectual property and brand protection in e-commerce, handling cross-border IP enforcement and trademark and copyright escalations with global brand partners and teams across Legal, Operations, and Product. I currently contribute to Singapore's first open quantitative legal database at SMU's Centre for Digital Law, alongside DeFi security research with the School of Computing & Information Systems.",
   "I work between legal users, product teams, and AI systems: understanding how lawyers actually work, identifying where technology adds value, and turning legal requirements into working tools. That increasingly includes evaluating AI output against source material, testing it on real legal tasks, and feeding what breaks back to the people building the product.",
 ];
